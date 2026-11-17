@@ -1,0 +1,621 @@
+{
+  "note": "Whole-catalogue formalization update batch-033: independent source review by analysis_formalization of algebra_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "infinite-product-complex",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/InfiniteSum/Defs.lean",
+          "declarations": "HasProd:106; Multipliable:114",
+          "note": "Defines filtered products; specialize explicitly to conditional ℕ."
+        },
+        {
+          "path": "Mathlib/Topology/Algebra/InfiniteSum/SummationFilter.lean",
+          "declarations": "SummationFilter.conditional:217; conditional_filter_eq_map_range:247",
+          "note": "Exact ordered finite-prefix filter, with checked equality proof."
+        },
+        {
+          "path": "Mathlib/Topology/UniformSpace/LocallyUniformConvergence.lean",
+          "declarations": "TendstoLocallyUniformlyOn:52",
+          "note": "Specifies local uniform convergence of the partial-product functions."
+        },
+        {
+          "path": "Mathlib/RingTheory/PowerSeries/Basic.lean",
+          "declarations": "PowerSeries.coeff:76",
+          "note": "Exact coefficients for eventual stabilization; no analytic topology is substituted."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. HasProd (InfiniteSum/Defs:106) accepts a SummationFilter; conditional ℕ (SummationFilter:217,247) is exactly products over range N. Apply it to n↦a(n+1), so this is the catalogue ORDERED product, not unconditional Multipliable. Function products use TendstoLocallyUniformlyOn:52 of those finite products when that is the specified mode. Formal products have the literal predicate ∀k, ∀ᶠN in atTop, PowerSeries.coeff k (partialProduct N)=PowerSeries.coeff k P, using coeff:76. No assertion that a general product converges.\nSearch and boundary notes: Inspected definitions/filter proof. Default tprod is unconditional and can differ from ordered convergence; never identify them. Exclude Novikov-specific products and modular product applications.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "infinite-product-complex",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Ring/InfiniteProd.lean",
+          "declarations": "TauCeti.norm_tprod_one_add_le_exp_tsum:32; norm_tprod_one_add_sub_one_le:47",
+          "note": "Native elementary norm estimates for infinite products; whole ordered/formal definition supplied by checked dependency constructors."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. HasProd (InfiniteSum/Defs:107) accepts a SummationFilter; conditional ℕ (SummationFilter:217,247) is exactly products over range N. Apply it to n↦a(n+1), so this is the catalogue ORDERED product, not unconditional Multipliable. Function products use TendstoLocallyUniformlyOn:52 of those finite products when that is the specified mode. Formal products have the literal predicate ∀k, ∀ᶠN in atTop, PowerSeries.coeff k (partialProduct N)=PowerSeries.coeff k P, using coeff:77. No assertion that a general product converges. Native InfiniteProd:32,47 proves direct norm and distance-to-one estimates for products of 1+f with summable norms. In its Multipliable branch the actual limit proof passes finite-product bounds to HasProd; the other branch explicitly handles the totalized tprod value 1. This is ordinary product API under its stated stronger summability/unconditional hypotheses, not a claim those exhaust ordered convergence. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Dependency product/filter, coefficient and locally-uniform definitions checked. Exclude product formulas for theta/Siegel functions and valuation-specific Novikov constructions.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "infinitesimally-finite-smooth-function",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Generic Lie algebras, universal enveloping algebras, their centers and finite spans are available, but I did not certify the specific complexified differentiated RIGHT-translation action on smooth complex functions and its extension to U(g⊗ℂ). Tau InfinitesimalAction:83 instead supplies a real Lie algebra antihomomorphism into smooth tangent vector fields; its bracket has an explicit minus sign. That is not by itself the required function-module representation.\nSearch and boundary notes: Searched manifold/vector-field, Lie/enveloping and continuous-representation sources for right translation, differentiating actions, locally finite/Z-finite functions. Read Tau Geometry/Manifold/VectorField/InfinitesimalAction:78–107; it remains a Tau-only prerequisite when judging independent Mathlib. No absence claim and no invented passage from vector-field antihomomorphisms to the required complex U-module.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "infinitesimally-finite-smooth-function",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Generic Lie algebras, universal enveloping algebras, their centers and finite spans are available, but I did not certify the specific complexified differentiated RIGHT-translation action on smooth complex functions and its extension to U(g⊗ℂ). Tau InfinitesimalAction:83 instead supplies a real Lie algebra antihomomorphism into smooth tangent vector fields; its bracket has an explicit minus sign. That is not by itself the required function-module representation. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Searched manifold/vector-field, Lie/enveloping and continuous-representation sources for right translation, differentiating actions, locally finite/Z-finite functions. Read Tau Geometry/Manifold/VectorField/InfinitesimalAction:78–107; it remains a Tau-only prerequisite when judging independent Mathlib. No absence claim and no invented passage from vector-field antihomomorphisms to the required complex U-module.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "integral-basis-number-field",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/NumberField/Basic.lean",
+          "declarations": "NumberField.RingOfIntegers.basis:327; Free instance:318; IsNoetherian instance:299",
+          "note": "Defines actual ring-of-integers ℤ-basis and supplies finiteness/free-module facts."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/Basis/Defs.lean",
+          "declarations": "Module.Basis:88; repr_self:131; repr_symm_apply:138; linearCombination_repr:155",
+          "note": "Finite-support coordinate equivalence implements existence and uniqueness of integer expansion."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. NumberField.RingOfIntegers.basis:327 is an actual ℤ-basis of O_K, with Free:318 and finite/Noetherian module evidence:299–303. Basis is a linear equivalence to finitely supported coordinates (Basis.Defs:88); repr/sum identities give unique integer expansions. Finite generation makes this basis index finite. The later NumberField.integralBasis:398 is a ℚ-basis of K, and is not being confused with the defining ℤ-basis.\nSearch and boundary notes: Read basis construction, finite module and coordinate declarations. Exclude discriminant formulas and Minkowski reduced-basis endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "integral-basis-number-field",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Basis/Basic.lean",
+          "declarations": "Module.Basis.eq_smul_of_repr_support_subset_singleton:61; repr_map_eq_of_map_basis:69",
+          "note": "Native basis-coordinate normal forms and naturality over arbitrary semirings, including integral bases."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. NumberField.RingOfIntegers.basis:327 is an actual ℤ-basis of O_K, with Free:318 and finite/Noetherian module evidence:299–303. Basis is a linear equivalence to finitely supported coordinates (Basis.Defs:89); repr/sum identities give unique integer expansions. Finite generation makes this basis index finite. The later NumberField.integralBasis:398 is a ℚ-basis of K, and is not being confused with the defining ℤ-basis. Native Module.Basis.repr_map_eq_of_map_basis:69 proves coordinate preservation along maps carrying one basis to another; eq_smul_of_repr_support_subset_singleton:61 proves the single-coordinate normal form. These apply over ℤ and are ordinary coordinate API of an integral basis, with no extra field hypothesis. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Actual dependency number-field/basis constructors checked. Exclude OfIntegralBasis discriminant formula as a separate endpoint; no new integral-basis existence proof attributed to Tau.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "integral-element-ring-extension",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/IntegralClosure/IsIntegral/Defs.lean",
+          "declarations": "RingHom.IsIntegralElem:39; IsIntegral:53",
+          "note": "Defines the exact monic-polynomial-root predicate for a ring map/algebra."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. RingHom.IsIntegralElem:39 is precisely ∃p, p.Monic ∧ eval₂ f x p=0; IsIntegral:53 specializes f to algebraMap. A ring inclusion is a special injective algebraMap, not an additional condition in the more general formal definition.\nSearch and boundary notes: Read actual existential and evaluation predicate. Noninjective maps generalize, rather than weaken, inclusion specialization.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "integral-element-ring-extension",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/IntegralClosure/IsIntegral/Basic.lean",
+          "declarations": "TauCeti.isIntegral_trans_common:102",
+          "note": "Native generalized integrality transitivity, not an unrelated integral-closure application."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. RingHom.IsIntegralElem:39 is precisely ∃p, p.Monic ∧ eval₂ f x p=0; IsIntegral:53 specializes f to algebraMap. A ring inclusion is a special injective algebraMap, not an additional condition in the more general formal definition. TauCeti.isIntegral_trans_common:102 proves transitivity for compatible images from two commutative rings into a common ring. Its completed proof constructs an integral adjoin subalgebra, the intermediate algebra map/tower and uses integral transitivity; this is direct core integrality API. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Read common-image transitivity proof through its final tower/transitivity line. Exclude denominator-clearing and polynomial divisibility endpoints in the same file from the declared API boundary.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "integral-heisenberg-group-jacobi",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Tau has an actual HeisenbergGroup:72, multiplication:109 and Group:123, but its law is z+z′+x*y′ on triples of scalars. The catalogue requires vector coordinates and the ALTERNATING cocycle λ·μ′−μ·λ′ over ℤ. The existing commutator formula:130 does not identify the multiplication laws, and division by 2 is not legitimate over ℤ without checking an integral convention change. I did not certify an existing alternating-cocycle group constructor giving exactly this normalization.\nSearch and boundary notes: Inspected Tau GroupTheory/SpecificGroups/Heisenberg:68–130 including associativity/inverse proofs. Searched both project group-extension/cocycle and symplectic/Jacobi sources. Tau candidate is separate project ownership for Mathlib, and is not counted merely because of its name. No false negative claim.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "integral-heisenberg-group-jacobi",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Tau has an actual HeisenbergGroup:72, multiplication:109 and Group:123, but its law is z+z′+x*y′ on triples of scalars. The catalogue requires vector coordinates and the ALTERNATING cocycle λ·μ′−μ·λ′ over ℤ. The existing commutator formula:130 does not identify the multiplication laws, and division by 2 is not legitimate over ℤ without checking an integral convention change. I did not certify an existing alternating-cocycle group constructor giving exactly this normalization. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Inspected Tau GroupTheory/SpecificGroups/Heisenberg:68–130 including associativity/inverse proofs. Searched both project group-extension/cocycle and symplectic/Jacobi sources. Tau candidate is separate project ownership for Mathlib, and is not counted merely because of its name. No false negative claim.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "integral-jacobi-group",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Generic semidirect products and symplectic groups exist, but the specific integral alternating-cocycle Heisenberg group and compatible symplectic automorphism action were not certified; nor was the stated action on Siegel H_g×ℂ^g. The Tau scalar Heisenberg group has a different integral cocycle, so it cannot silently supply this group.\nSearch and boundary notes: Searched Jacobi, Heisenberg, semidirect, symplectic and Siegel action candidates in both snapshots. Read Tau Heisenberg:72/109/123; no exact integral normalization/action bridge checked. Modular forms and genus-one upper-half-plane actions are prerequisites/special cases, not the required higher-genus Jacobi action.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "integral-jacobi-group",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Generic semidirect products and symplectic groups exist, but the specific integral alternating-cocycle Heisenberg group and compatible symplectic automorphism action were not certified; nor was the stated action on Siegel H_g×ℂ^g. The Tau scalar Heisenberg group has a different integral cocycle, so it cannot silently supply this group. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Searched Jacobi, Heisenberg, semidirect, symplectic and Siegel action candidates in both snapshots. Read Tau Heisenberg:72/109/123; no exact integral normalization/action bridge checked. Modular forms and genus-one upper-half-plane actions are prerequisites/special cases, not the required higher-genus Jacobi action.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "integral-operator-kernel",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+          "declarations": "MeasureTheory.integral:157",
+          "note": "Defining integral in the kernel representation, with integrability explicitly imposed."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/LpSpace/Basic.lean",
+          "declarations": "MeasureTheory.Lp:89; MemLp.toLp:109; L² notation:103",
+          "note": "Exact product-measure L² kernel class and AE quotient."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The literal scalar-kernel representation is a measurable K:α×α→ℂ, a stated input class D, and ∀f∈D, (Tf)x=∫y,K(x,y)*f(y), on points/classes with the stated integrability. Bochner.integral:157 provides that exact integral; the integrability condition is explicit, so totalized junk integrals are not substituted for existence. A square-integrable kernel is exactly Lp ℂ 2 (μ.prod μ), using LpSpace.Basic:89/103/109, modulo AE equality. This is a bare definition, not an assertion of boundedness for arbitrary measurable kernels.\nSearch and boundary notes: Checked actual integral and Lp finite-norm/AEEqFun constructors. No Hilbert–Schmidt compactness or universal pointwise integrability claim.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "integral-operator-kernel",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Function/Lp/Operator/Integral/Basic.lean",
+          "declarations": "TauCeti.ae_integrable_apply_of_memLp:95; integralOperatorLp:166; coeFn_integralOperatorLp:201; integralOperatorLp_eq_iff:207",
+          "note": "Native bounded integral-kernel constructor and actual defining AE formula under explicit Schur/SFinite hypotheses."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The literal scalar-kernel representation is a measurable K:α×α→ℂ, a stated input class D, and ∀f∈D, (Tf)x=∫y,K(x,y)*f(y), on points/classes with the stated integrability. Bochner.integral:158 provides that exact integral; the integrability condition is explicit, so totalized junk integrals are not substituted for existence. A square-integrable kernel is exactly Lp ℂ 2 (μ.prod μ), using LpSpace.Basic:89/103/109, modulo AE equality. This is a bare definition, not an assertion of boundedness for arbitrary measurable kernels. Native integralOperatorLp:166 and coeFn_integralOperatorLp:201 build the genuine bounded integral operator and prove its defining formula AE under SFinite measures, measurable operator kernel and finite Schur row/column bounds (1≤p). Scalar multiplication kernels are the scalar case. Completed constructor uses AE integrability and Lp.ext; these stated restrictions are direct core implementation/API, not requirements imposed on all kernels. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Read hypotheses, AE-integrability argument, constructor linearity proof and defining formula. Product L² definition remains checked dependency-supplied; exclude compactness and specialized application theorems.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "integrated-unitary-representation",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Continuous.Basic:55 supplies representations by continuous linear operators, Lp supplies L¹ weights and Bochner integration exists. I did not certify an existing standalone bounded integrated operator constructor for arbitrary strongly continuous unitary representations, with orbit integrability and the required weak formula. Merely writing a totalized integral would not certify its boundedness or weak identity.\nSearch and boundary notes: Searched independent Mathlib RepresentationTheory for integrated/integral unitary/representation and inspected ContRepresentation:55. Tau Continuous/Integrated/Basic:144/175/382 is a checked Tau-native positive candidate, not standalone Mathlib ownership. UniformBoundedness and generic Bochner machinery alone were not treated as a completed proof of this endpoint.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "integrated-unitary-representation",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RepresentationTheory/Continuous/Integrated/Basic.lean",
+          "declarations": "ContRepresentation.integratedOperatorL1:144; integratedOperatorL1_apply:175; norm_integratedOperatorL1_le:198; inner_integratedOperatorL1_apply:382",
+          "note": "Native bounded integrated L¹ operator, pointwise Bochner construction and weak identity."
+        },
+        {
+          "path": "TauCeti/RepresentationTheory/Continuous/Unitary/Basic.lean",
+          "declarations": "ContRepresentation.IsUnitary:51; IsUnitary.norm_le_one:86; IsUnitary.exists_norm_le:91",
+          "note": "Defines unitarity and supplies the uniform bound needed by integration."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. ContRepresentation.integratedOperatorL1:144 is a bounded linear map L¹(G)→(E→L E), with actual Bochner formula:175 and norm bound:198. It assumes continuous vector orbits and a uniform operator bound; IsUnitary:51/exists_norm_le:91 gives bound 1. G is written additively without commutativity, so Additive of any original group works. Haar is an InnerRegularCompactLTTop measure; no global σ-finiteness or operator-norm continuity assumption is inserted. The integrability proof uses L¹ AE finite strong measurability and continuous orbits. For complex Hilbert E, inner_integratedOperatorL1_apply:382 is ⟪w,π(f)v⟫_Mathlib=∫f(g)⟪w,π(g)v⟫_Mathlib. Swap the argument convention (catalogue inner linear FIRST) to obtain the exact stated weak formula. CompleteSpace E is used in the Hilbert weak-formula section. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Read actual strong-orbit integrability, completed bilinear mkContinuous₂ construction and inner formula. Exclude convolution algebra, adjoints, approximate identity and compact-group-specific integrated representation endpoints. Strong continuity is the usual continuous-unitary-representation convention; a merely discontinuous abstract action would not satisfy the integration hypothesis.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "invariant-gauge-form-algebraic-group",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Kähler modules and exterior powers are available, and Tau Bialgebra.leftInvariantDerivation:79 constructs genuine left-invariant DERIVATIONS with counit evaluation:111. I did not certify the exact top-degree form/nonvanishing-at-every-geometric-point predicate with left-invariant pullbacks, together with the asserted F× uniqueness of invariant choices for an arbitrary smooth affine algebraic group. Invariant tangent derivations alone do not implement that differential-form result.\nSearch and boundary notes: Searched algebraic-group tangent, invariant derivation/form, exterior, torus differential and smooth sources. Read Tau Tangent/InvariantDerivation:74–112 including its actual comodule contraction and Lie-hom proof. Representation.InvariantForm is a bilinear invariant form, not an algebraic gauge form; torus logarithmic differentials are restricted examples. Tau candidates are explicitly separate ownership when judging Mathlib.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "invariant-gauge-form-algebraic-group",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Kähler modules and exterior powers are available, and Tau Bialgebra.leftInvariantDerivation:79 constructs genuine left-invariant DERIVATIONS with counit evaluation:111. I did not certify the exact top-degree form/nonvanishing-at-every-geometric-point predicate with left-invariant pullbacks, together with the asserted F× uniqueness of invariant choices for an arbitrary smooth affine algebraic group. Invariant tangent derivations alone do not implement that differential-form result. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Searched algebraic-group tangent, invariant derivation/form, exterior, torus differential and smooth sources. Read Tau Tangent/InvariantDerivation:74–112 including its actual comodule contraction and Lie-hom proof. Representation.InvariantForm is a bilinear invariant form, not an algebraic gauge form; torus logarithmic differentials are restricted examples. Tau candidates are explicitly separate ownership when judging Mathlib.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "irreducible-unitary-representation",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/RepresentationTheory/Continuous/Basic.lean",
+          "declarations": "ContRepresentation:55",
+          "note": "Actual group representation by continuous linear operators; unitarity imposed by the explicit inner-preservation predicate."
+        },
+        {
+          "path": "Mathlib/Topology/Algebra/Module/ClosedSubmodule.lean",
+          "declarations": "ClosedSubmodule:39",
+          "note": "Exact closed linear subspaces quantified in the irreducibility condition."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. An exact generic defining predicate is: H is a nontrivial complete complex inner-product space; π:ContRepresentation ℂ G H; ∀g v w, inner(πg v)(πg w)=inner v w; and ∀W:ClosedSubmodule ℂ H, (∀g∀v∈W,πg v∈W)→W=⊥∨W=⊤. ContRepresentation:55 gives the actual group homomorphism into continuous linear operators (it does not itself assume continuity in G). ClosedSubmodule:39 bundles the actual closed linear subspace. This uses closed invariant subspaces, not the stronger algebraic irreducibility predicate; nontrivial H rules out the zero representation.\nSearch and boundary notes: Bare definition uses checked generic constructors/quantification; no named irreducible-unitary alias or existence/classification theorem required. Infinite-dimensional algebraic irreducibility is deliberately not substituted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "irreducible-unitary-representation",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RepresentationTheory/Continuous/Unitary/Basic.lean",
+          "declarations": "ContRepresentation.IsUnitary:51; isUnitary_iff_norm_map:55; IsUnitary.subrepresentation:108",
+          "note": "Native unitarity definition/equivalences and restriction to invariant subspaces; closed irreducibility predicate uses dependency ClosedSubmodule."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. An exact generic defining predicate is: H is a nontrivial complete complex inner-product space; π:ContRepresentation ℂ G H; ∀g v w, inner(πg v)(πg w)=inner v w; and ∀W:ClosedSubmodule ℂ H, (∀g∀v∈W,πg v∈W)→W=⊥∨W=⊤. ContRepresentation:55 gives the actual group homomorphism into continuous linear operators (it does not itself assume continuity in G). ClosedSubmodule:39 bundles the actual closed linear subspace. This uses closed invariant subspaces, not the stronger algebraic irreducibility predicate; nontrivial H rules out the zero representation. Native IsUnitary:51 is exactly the inner-preservation predicate; IsUnitary.subrepresentation:108 proves invariant-submodule restrictions remain unitary by actual subtype norm comparison. Applied to closed W, this is the ordinary restriction API used in this definition; it does not assert every invariant subspace is closed or that every unitary representation is irreducible. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Read unitary equivalence and invariant-subrepresentation proof. Exclude Peter–Weyl decomposition and finite-dimensional Schur/classification theorems.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "jacobi-theta-characteristic",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/JacobiTheta/TwoVariable.lean",
+          "declarations": "jacobiTheta₂_term:46; summable_jacobiTheta₂_term_iff:124; jacobiTheta₂:252; hasSum_jacobiTheta₂_term:262",
+          "note": "Actual convergent arbitrary-complex-shift Jacobi series supplying real characteristics via the explicit prefactor/shift presentation."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact generic presentation is exp(π i a² τ+2π i a(z+b)) * jacobiTheta₂(z+b+aτ,τ), where Mathlib jacobiTheta₂ is the TWO-variable sum (not standard θ₂). Its term:46 and sum:252, with summability iff Im τ>0:124, provide the full series. Expanding (n+a)² identifies each catalogue summand as that fixed prefactor times jacobiTheta₂_term n (z+b+aτ) τ; Complex.exp_add:110 and tsum_mul_left:115 are actual available identities. Thus arbitrary real a,b are handled, not just rational characteristics. Substituting (1/2,0),(0,0),(0,1/2) fixes θ₂,θ₃,θ₄ conventions. This is the bare function definition via checked generic composition; no modular transformation theorem is claimed.\nSearch and boundary notes: Read convergence proof and defining series; exp_add and tsum_mul_left checked as generic identity suppliers, not charged as theta-specific API. No named characteristic alias is assumed; notation jacobiTheta₂ is explicitly not standard theta-two.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "jacobi-theta-characteristic",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/ModularForms/JacobiTheta/OneVariable.lean",
+          "declarations": "TauCeti.jacobiTheta_sub_natCast_div_two:43; norm_jacobiTheta₂_sub_one_le:141",
+          "note": "Native theta half-period and elementary bound API; arbitrary characteristics supplied by the checked shifted-series presentation."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact generic presentation is exp(π i a² τ+2π i a(z+b)) * jacobiTheta₂(z+b+aτ,τ), where Mathlib jacobiTheta₂ is the TWO-variable sum (not standard θ₂). Its term:46 and sum:252, with summability iff Im τ>0:124, provide the full series. Expanding (n+a)² identifies each catalogue summand as that fixed prefactor times jacobiTheta₂_term n (z+b+aτ) τ; Complex.exp_add:111 and tsum_mul_left:115 are actual available identities. Thus arbitrary real a,b are handled, not just rational characteristics. Substituting (1/2,0),(0,0),(0,1/2) fixes θ₂,θ₃,θ₄ conventions. This is the bare function definition via checked generic composition; no modular transformation theorem is claimed. Native jacobiTheta_sub_natCast_div_two:43 proves a direct theta half-period shift identity by actual even/odd term splitting and exponential phases, and norm_jacobiTheta₂_sub_one_le:141 supplies an elementary two-variable estimate for real z. These are ordinary theta shift/bound API, not a separately claimed full modular transformation classification. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Read term splitting/exponential identities and actual restricted real-z estimate; exclude cubic theta and lattice Gauss-sum modularity endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "k-finite-function-group",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Span/Defs.lean",
+          "declarations": "Submodule.span:45; mem_span:70",
+          "note": "The generated vector subspace of right-translate functions."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/FiniteDimensional/Defs.lean",
+          "declarations": "FiniteDimensional:74; Module.Basis.finiteDimensional_of_finite:105; FiniteDimensional.fintypeBasisIndex:111",
+          "note": "Finite-dimensional predicate on that actual span, with field specialization ℂ."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact literal predicate is FiniteDimensional ℂ (Submodule.span ℂ (Set.range (fun k:K => fun x:G => f(x*(k:G))))). Submodule.span:45 and finite-dimensional definition and finite-basis interfaces (FiniteDimensional.Defs:74/105/111) are actual constructors. Finite coordinate expansions represent precisely the span of RIGHT translates. No compactness is needed for the definition; compact K is an application input.\nSearch and boundary notes: Checked constructors from batch027 and actual current paragraphs. Literal generic definition needs no dedicated K-finite alias. Arbitrary f has no continuity assumption here.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "k-finite-function-group",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact literal predicate is FiniteDimensional ℂ (Submodule.span ℂ (Set.range (fun k:K => fun x:G => f(x*(k:G))))). Submodule.span:46 and finite-dimensional definition and finite-basis interfaces (FiniteDimensional.Defs:74/105/111) are actual constructors. Finite coordinate expansions represent precisely the span of RIGHT translates. No compactness is needed for the definition; compact K is an application input. These checked dependency constructors fully express the definition. Native Representative:107 instead defines continuous functions spanned by finite-dimensional matrix coefficients, while MatrixCoefficient has translation identities; I did not count those as generic K-finite orbit-span API for arbitrary f and subgroup K. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Searched native Continuous representation, Representative and MatrixCoefficient sources for finite orbit/right translation. Exclude unrelated generic span API, topological locally finite families, quantum-group locally finite modules and Peter–Weyl results from native allocation.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "kahler-differentials-algebra",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Kaehler/Basic.lean",
+          "declarations": "KaehlerDifferential:148; KaehlerDifferential.D:226; span_range_derivation:251; Derivation.liftKaehlerDifferential:285; liftKaehlerDifferential_unique:317",
+          "note": "Defines the differential module, generating universal derivation and exact universal relations."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. KaehlerDifferential:148 defines the cotangent I/I² module; D:226 is a derivation with actual additive/linear/Leibniz construction. D_apply:246 gives 1⊗a−a⊗1, and span_range_derivation:251 proves the da generate. Derivation.liftKaehlerDifferential:285, its composition identity:303 and uniqueness:317 give the universal property, certifying exactly the stated generator relations rather than an arbitrary further quotient. All commutative F-algebras are a specialization of the commutative-ring formulation.\nSearch and boundary notes: Read derivation construction, span induction and quotient-lift proof. Exclude smoothness/cotangent exact-sequence applications and completed differential modules.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "kahler-differentials-algebra",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Kaehler/MapSemilinear.lean",
+          "declarations": "KaehlerDifferential.mapSemilinear:76; mapSemilinear_D:88; mapSemilinear_smul:100; mapSemilinear_comp:116",
+          "note": "Native induced-map semilinearity and generator/functoriality laws for Kähler modules."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. KaehlerDifferential:148 defines the cotangent I/I² module; D:226 is a derivation with actual additive/linear/Leibniz construction. D_apply:246 gives 1⊗a−a⊗1, and span_range_derivation:251 proves the da generate. Derivation.liftKaehlerDifferential:285, its composition identity:303 and uniqueness:317 give the universal property, certifying exactly the stated generator relations rather than an arbitrary further quotient. All commutative F-algebras are a specialization of the commutative-ring formulation. Native mapSemilinear:76 defines the induced differential map along an arbitrary algebra homomorphism; mapSemilinear_D:88, smul:100, id:105 and comp:116 prove generator compatibility/semilinearity/functoriality. The completed proofs use the actual induced Algebra structure and generator spanning, so this is immediate natural-map API. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Checked actual induced algebra/tower and identity/composition proofs. No extra smoothness or finite-presentation hypotheses imposed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "kronecker-symbol-denominator-two",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/LegendreSymbol/ZModChar.lean",
+          "declarations": "ZMod.χ₈:118; χ₈_int_mod_eight:138; χ₈_int_eq_if_mod_eight:142",
+          "note": "Exact mod-eight quadratic character and integer Kronecker-denominator-two table."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. ZMod.χ₈:118 on ZMod 8 is exactly 0 on even residues, 1 on 1/7 and −1 on 3/5. χ₈_int_mod_eight:138 and χ₈_int_eq_if_mod_eight:142 give the actual integer residue-table formula; its proof reduces emod to the eight cases. This is the paragraph’s explicit equivalent residue definition, so no unverified exponent-of-negative-one convention is substituted.\nSearch and boundary notes: Read actual table/multiplicativity and integer table proof; explicit 0 even includes negative integers via emod.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "kronecker-symbol-denominator-two",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. ZMod.χ₈:118 on ZMod 8 is exactly 0 on even residues, 1 on 1/7 and −1 on 3/5. χ₈_int_mod_eight:138 and χ₈_int_eq_if_mod_eight:142 give the actual integer residue-table formula; its proof reduces emod to the eight cases. This is the paragraph’s explicit equivalent residue definition, so no unverified exponent-of-negative-one convention is substituted. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Checked actual dependency character/table source. Native searches χ₈/Kronecker/denominator-two in NumberTheory found no verified direct native API; cusp gcd and quadratic-symbol applications are not counted as definitions/core laws.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "krull-topology-galois-group",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/FieldTheory/KrullTopology.lean",
+          "declarations": "krullTopology:134; krullTopology_mem_nhds_one_iff:144; IntermediateField.fixingSubgroup_isOpen:170",
+          "note": "Actual Krull topology and precise finite-fixer neighborhood basis/open-subgroup law."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. krullTopology:134 is the group-filter-basis topology. krullTopology_mem_nhds_one_iff:144 is exactly containment of a fixing subgroup of some finite-dimensional intermediate E; fixingSubgroup_isOpen:170 proves those fixers open. GroupFilterBasis translation supplies their cosets as neighborhood bases. The definition works for any field extension, so L=F^sep is a direct specialization; no algebraic-closure/separable-closure identification is being assumed.\nSearch and boundary notes: Read filter definition, iff proof and open-subgroup proof. Profinite inverse limits and Galois correspondence are separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "krull-topology-galois-group",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/KrullTopology.lean",
+          "declarations": "Units.stabilizer_isOpen_of_isIntegral:99; AlgHom.stabilizer_isOpen:109",
+          "note": "Native open-stabilizer/finite-fixer API and locally constant algebraic evaluation."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. krullTopology:134 is the group-filter-basis topology. krullTopology_mem_nhds_one_iff:144 is exactly containment of a fixing subgroup of some finite-dimensional intermediate E; fixingSubgroup_isOpen:170 proves those fixers open. GroupFilterBasis translation supplies their cosets as neighborhood bases. The definition works for any field extension, so L=F^sep is a direct specialization; no algebraic-closure/separable-closure identification is being assumed. Native AlgHom.stabilizer_isOpen:109 proves an algebra-valued point stabilizer open by adjoining the finite image of a spanning set, proving that intermediate field finite-dimensional, then containing its fixing subgroup. Units.stabilizer_isOpen_of_isIntegral:99 is the corresponding one-element API. These are direct finite-fixer/stabilizer consequences, with actual integrality hypotheses retained even for transcendental ambient L. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Read finite spanning-set/adjoin argument and subgroup inclusion. Exclude further arithmetic inertia/decomposition applications.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "l2-space-automorphic-quotient",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/LpSpace/Basic.lean",
+          "declarations": "MeasureTheory.Lp:89; L² notation:103; MemLp.toLp:109",
+          "note": "Native exact square-integrable AE quotient constructor, instantiated on the left orbit quotient with its supplied Haar measure."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/L2Space.lean",
+          "declarations": "MeasureTheory.L2 inner instance:133; inner_def:136",
+          "note": "Native actual integral Hilbert pairing, with the explicit catalogue linear-first slot convention."
+        }
+      ],
+      "evidence": "Take Q := MulAction.orbitRel.Quotient Γ G, where Γ acts on G by LEFT multiplication. The actual orbitRel (GroupTheory/GroupAction/Defs.lean:286; quotient:348) identifies x and y precisely when x=γ*y for some γ∈Γ, so its classes are Γ*y, EXACTLY Γ\\G. Use its quotient topology/Borel measurable space and let μ be the quotient Haar measure SUPPLIED in the paragraph. Lp ℂ 2 μ (LpSpace/Basic.lean:89, L² notation:103, MemLp.toLp:109) is exactly square-integrable functions modulo AE equality. L2Space.lean:133/136 constructs the actual inner product by integration; with catalogue convention linear FIRST, set B(f,h)=inner_Mathlib(h,f), which is ∫conj(h)*f=∫f*conj(h), as required. All these constructors and inner integrability proofs work for arbitrary μ, so no second-countability, normality, finite-covolume or sigma-finiteness condition is imposed on this supplied-measure definition. A general existence/identification theorem for quotient Haar measure is a separate unclaimed endpoint; the previously reported uncertainty about that theorem does not obstruct the actual L² constructor on this exact supplied left quotient. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual quotient relation, Lp carrier, inner definition and relevant completed proofs inspected.\nSearch and boundary notes: Independently checked left orbit relation, not the native G/Γ coset side. Supplied quotient Haar measure is an input to the definition; no general measure existence theorem claimed. No extra topology/measure hypothesis comes from Lp or inner constructors. Quotient-action construction is a checked supplier, not an extra allocated prerequisite file. Integral-operator compactness, spectral decomposition and general quotient-measure disintegration/existence endpoints excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "l2-space-automorphic-quotient",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Function/L2Space.lean",
+          "declarations": "MeasureTheory.MemLp.integrable_inner:71; MeasureTheory.L2.inner_toLp:194",
+          "note": "Native direct L² pairing integrability and AE representative formula, valid for the supplied quotient measure without extra measure hypotheses."
+        }
+      ],
+      "evidence": "Take Q := MulAction.orbitRel.Quotient Γ G, where Γ acts on G by LEFT multiplication. The actual orbitRel (GroupTheory/GroupAction/Defs.lean:286; quotient:348) identifies x and y precisely when x=γ*y for some γ∈Γ, so its classes are Γ*y, EXACTLY Γ\\G. Use its quotient topology/Borel measurable space and let μ be the quotient Haar measure SUPPLIED in the paragraph. Lp ℂ 2 μ (LpSpace/Basic.lean:89, L² notation:103, MemLp.toLp:109) is exactly square-integrable functions modulo AE equality. L2Space.lean:133/136 constructs the actual inner product by integration; with catalogue convention linear FIRST, set B(f,h)=inner_Mathlib(h,f), which is ∫conj(h)*f=∫f*conj(h), as required. All these constructors and inner integrability proofs work for arbitrary μ, so no second-countability, normality, finite-covolume or sigma-finiteness condition is imposed on this supplied-measure definition. A general existence/identification theorem for quotient Haar measure is a separate unclaimed endpoint; the previously reported uncertainty about that theorem does not obstruct the actual L² constructor on this exact supplied left quotient. Native MeasureTheory.MemLp.integrable_inner:71 proves the pointwise pairing integrable for any two MemLp2 functions, via actual AE representative proof73-75. Native L2.inner_toLp:194 proves the exact pairing with the class of a given square-integrable representative, using its AE equality. These are ordinary core L² pairing/representative laws and specialize directly to Q and μ. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Lp carrier/inner bodies agree; GroupAction source anchors are287/349 because of a preceding documentation newline. The later L2 positive-semidefinite intersection theorem changed a finite-index hypothesis, outside the selected constructor/inner supplier. Actual relevant proofs inspected.\nSearch and boundary notes: Independently checked left orbit relation, not the native G/Γ coset side. Supplied quotient Haar measure is an input to the definition; no general measure existence theorem claimed. No extra topology/measure hypothesis comes from Lp or inner constructors. Quotient-action construction is a checked supplier, not an extra allocated prerequisite file. Integral-operator compactness, spectral decomposition and general quotient-measure disintegration/existence endpoints excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "least-common-multiple-integers",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/GCDMonoid/Finset.lean",
+          "declarations": "Finset.lcm:48; lcm_dvd_iff:61; dvd_lcm:69; normalize_lcm:85; lcm_eq_zero_iff:110",
+          "note": "Finite lcm and exact common-divisibility/minimality/nonzero API."
+        },
+        {
+          "path": "Mathlib/Algebra/GCDMonoid/Nat.lean",
+          "declarations": "Int.nonneg_iff_normalize_eq_self:98; integer GCDMonoid instance:109; Int.coe_lcm:130; Int.lcm_nonneg:140",
+          "note": "Positive integer normalization, not lcm only up to associates."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Finset.lcm:48 is normalized finite-family lcm, with lcm_dvd_iff:61, dvd_lcm:69, normalization:85 and nonzero iff all entries nonzero:110/113. The Int normalized GCD instance (GCDMonoid/Nat:111–125) uses the nonnegative integer lcm; normalize_eq_self iff nonnegative:98 makes Finset.lcm on ℤ nonnegative, and nonzero inputs make it strictly positive. Its divisibility universal property gives the least positive common multiple. The empty family is 1 by lcm_empty:57.\nSearch and boundary notes: Read finite fold/universal property and integer normalization. No distinct finite-family implementation is needed; positivity follows by existing nonzero/normalization facts.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "least-common-multiple-integers",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Finset.lcm:48 is normalized finite-family lcm, with lcm_dvd_iff:61, dvd_lcm:69, normalization:85 and nonzero iff all entries nonzero:110/113. The Int normalized GCD instance (GCDMonoid/Nat:111–125) uses the nonnegative integer lcm; normalize_eq_self iff nonnegative:98 makes Finset.lcm on ℤ nonnegative, and nonzero inputs make it strictly positive. Its divisibility universal property gives the least positive common multiple. The empty family is 1 by lcm_empty:57. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Checked dependency finite lcm and Int normalization. Native Algebra/GCDMonoid/Finset:36 proves gcd Bézout, Data/Int/GCD handles cusp congruences, and LcmUpto concerns an arithmetic sequence endpoint; none is generic finite-integer lcm definition/core API.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "lie-algebra",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Lie/Basic.lean",
+          "declarations": "LieRing:61; LieAlgebra:73; self LieModule instance:184; lie_jacobi:229",
+          "note": "Actual alternating Lie-ring/algebra hierarchy and elementary bilinearity/Jacobi API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. LieRing:61 includes biadditivity, alternation lie_self and Leibniz; LieAlgebra:73 adds scalar compatibility. First-slot scalar compatibility follows in the actual self LieModule construction:184, and lie_jacobi:229 proves the cyclic Jacobi identity by lie_skew/leibniz and abelian-group algebra. Specializing the commutative base ring to a field gives precisely a vector space with bilinear alternating Jacobi bracket, including characteristic 2 (alternation is explicit).\nSearch and boundary notes: Read class axioms, self-action scalar proof and cyclic Jacobi proof. Exclude nilpotence/Engel/representational classification endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    },
+    {
+      "concept": "lie-algebra",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Lie/Basic.lean",
+          "declarations": "LieAlgebra.ad_eq_toEnd:119; Module.Basis.repr_lie_eq_sum:538",
+          "note": "Native ordinary adjoint identification and finite-coordinate bilinearity formula."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. LieRing:61 includes biadditivity, alternation lie_self and Leibniz; LieAlgebra:73 adds scalar compatibility. First-slot scalar compatibility follows in the actual self LieModule construction:184, and lie_jacobi:229 proves the cyclic Jacobi identity by lie_skew/leibniz and abelian-group algebra. Specializing the commutative base ring to a field gives precisely a vector space with bilinear alternating Jacobi bracket, including characteristic 2 (alternation is explicit). Native LieAlgebra.ad_eq_toEnd:119 identifies adjoint and self-action, and Module.Basis.repr_lie_eq_sum:538 proves the bracket’s coordinate expansion by b.sum_repr, sum_lie and smul_lie. These are ordinary adjoint/bracket coordinate API; the latter has an explicit finite-basis hypothesis, not an assertion every Lie algebra is finite-dimensional. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.\nSearch and boundary notes: Read actual rfl adjoint identification and completed coordinate proof. Do not allocate all downstream Lie-module applications or enveloping-algebra theory.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-033.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/GCDMonoid/Finset.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 304,
+      "sha256": "c297943709da1d59b127cd9e246cc7a3d16df373744a8d2f47924dfe309dc3a2",
+      "measured_at": "2026-11-13T01:55:36.354773+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/GCDMonoid/Nat.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 175,
+      "sha256": "ddc0b302d771dfe0bc959be9399bfc0a9d3237cbcef08ee538d0fc0f2fc9ebfe",
+      "measured_at": "2026-11-13T01:55:36.359050+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Lie/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1021,
+      "sha256": "87509a292da9e811689848af7fd1fefda0a4a60198ac29e4f48629df170ede97",
+      "measured_at": "2026-11-13T01:55:36.362421+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Function/L2Space.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 302,
+      "sha256": "6e5fc93c9336e8c6f4f76d5338b972efb34e0f4db71f833adb370ec06b62877c",
+      "measured_at": "2026-11-13T01:55:36.380408+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/NumberTheory/LegendreSymbol/ZModChar.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 195,
+      "sha256": "900e4a4f324135a0e29994b9d95605fa10bea14c5ab34b510d1d356a80c4aeaa",
+      "measured_at": "2026-11-13T01:55:36.391859+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/NumberTheory/ModularForms/JacobiTheta/TwoVariable.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 529,
+      "sha256": "1e1918e5dac2b81f082ee17bfa8fd04d8624926ad30a0a28678b6ce6fda9cb8a",
+      "measured_at": "2026-11-13T01:55:36.395762+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RepresentationTheory/Continuous/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 660,
+      "sha256": "a3138468b8c9e8e4afcc8bbdea4dfafc4d83e5a7657b1b8206afb302c334b955",
+      "measured_at": "2026-11-13T01:55:36.403720+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/IntegralClosure/IsIntegral/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 56,
+      "sha256": "a5e0943b3a24caf651234968e24ae8951268df2d78be53c6af83d3f1156f2056",
+      "measured_at": "2026-11-13T01:55:36.408540+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/Kaehler/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 878,
+      "sha256": "cbfb114629cfd6a34f0b4c5be733a5fb4e2bcb90abae47004d0ffd235591f344",
+      "measured_at": "2026-11-13T01:55:36.411722+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Algebra/Module/ClosedSubmodule.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 386,
+      "sha256": "6ef4dc685173a50029b484d890a565cc26a292bfbc2cad60733fbbe8a8e3d2fd",
+      "measured_at": "2026-11-13T01:55:36.426145+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/UniformSpace/LocallyUniformConvergence.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 355,
+      "sha256": "13312e361135898e0f53ac829718ec5387c2650894efa9a28afe0355e7d559d9",
+      "measured_at": "2026-11-13T01:55:36.429944+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/Lie/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 612,
+      "sha256": "4f8521a4830ad906287dfaa0f3b241aee0dd9bcdc78d70ab2b33d8e7fcc519fc",
+      "measured_at": "2026-11-13T01:55:36.436272+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Normed/Ring/InfiniteProd.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 56,
+      "sha256": "c1e9b56df6fb4732343c630653a6f5241ad3d0037cd0facfebdb75aa36615719",
+      "measured_at": "2026-11-13T01:55:36.441554+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/FieldTheory/KrullTopology.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 176,
+      "sha256": "781080b3981321982b979cb88f7ecf20b710392670e7e22c4d1d3f28cc02f2a8",
+      "measured_at": "2026-11-13T01:55:36.446103+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Function/L2Space.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 331,
+      "sha256": "6d69362b806b1fc90e12b60034eec7c69199fd711d8991e34e1409dfd17ae559",
+      "measured_at": "2026-11-13T01:55:36.455178+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Function/Lp/Operator/Integral/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 257,
+      "sha256": "dbf287c1eb12fafd092d908b71e1152af105af3781b4ae0c950b6d1d59c612b0",
+      "measured_at": "2026-11-13T01:55:36.460422+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/NumberTheory/ModularForms/JacobiTheta/OneVariable.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 187,
+      "sha256": "d16464bd16ea0a00c56e885894b176c7bd74f113efcfe2daf431e0a46e00a5ab",
+      "measured_at": "2026-11-13T01:55:36.465673+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RepresentationTheory/Continuous/Integrated/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 483,
+      "sha256": "30704269f142ec08ef5c7ffcc7c183ffe9b23a9450c73ffb7f86dde242e7172e",
+      "measured_at": "2026-11-13T01:55:36.470904+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RepresentationTheory/Continuous/Unitary/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 261,
+      "sha256": "33e82a30aceeac65c4a978b12ee3d87673b16f3bfa46bbae7571bf49ffc48a6e",
+      "measured_at": "2026-11-13T01:55:36.475343+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RingTheory/IntegralClosure/IsIntegral/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 184,
+      "sha256": "2ded0ee1c131f7c880be57b8a2168a62c100bc05d3cce5e05f2aa6f7d58533e5",
+      "measured_at": "2026-11-13T01:55:36.480786+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RingTheory/Kaehler/MapSemilinear.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 181,
+      "sha256": "1fac892761dae3e482accbd4cd2f893d761e9f48552cf002f5a371305a631889",
+      "measured_at": "2026-11-13T01:55:36.485428+00:00"
+    }
+  ]
+}

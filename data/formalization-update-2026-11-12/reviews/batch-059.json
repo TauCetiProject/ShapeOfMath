@@ -1,0 +1,295 @@
+{
+  "batch_id": "batch-059",
+  "reviewer": "algebra_formalization",
+  "proposal_sha256": "b67e5cfd371befbd71db0c914f39f775e6aca2f1137be6b5cf55ee6d6db525ab",
+  "decisions": [
+    {
+      "concept": "generator-finite-markov-chain",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Read Deriv.Basic123 actual right-filter derivative and native Generator.Basic90–132 actual right quotient/domain additivity/linearity. With supplied P0=I the entrywise quotient is exactly Q; offdiagonal positivity/row sums are explicit defining predicates. Native operator contribution has strong continuity and finite row-action specialization stated; no finite Markov generation theorem fabricated. Evidence-only ownership clarification: the symmetric quadratic-form candidate is Tau-owned, not a standalone Mathlib native file.",
+      "replacement": {
+        "concept": "generator-finite-markov-chain",
+        "concept_id": "3e0d7b0a-598a-5e3c-930b-16147a31802e",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For supplied finite-state transition semigroup P with P0=I, use the literal real matrix Q and HasDerivWithinAt (fun h => P h x y) (Q x y) (Ioi0)0 for every x,y, together with ∀x≠y,0≤Qxy and ∀x,ΣyQxy=0. Deriv/Basic.HasDerivWithinAt:123 is the actual right-difference-quotient limit constructor. Since P0xy=δxy, it is precisely the catalogue formula. Jump rates are the off-diagonal values; no existence theorem for exp(tQ) is asserted.  Actual relevant statements, hypotheses and completed source bodies inspected; bounded review without new proof development or transitive axiom audit.",
+        "files": [
+          {
+            "path": "Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+            "declarations": "HasDerivWithinAt:123",
+            "note": "Actual entrywise right-derivative constructor in the exact finite-generator predicate."
+          }
+        ],
+        "search_notes": "Searched finite Markov generator/jump-rate/row-sum and matrix kernel directories. Tau-owned TauCeti/LinearAlgebra/Matrix/Symmetric.IsSymm.mul_sum_sq_le150 is a separately stronger symmetric quadratic-form estimate and is excluded; no claim that this by itself constructs a Markov semigroup."
+      }
+    },
+    {
+      "concept": "generator-finite-markov-chain",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Deriv.Basic123 actual right-filter derivative and native Generator.Basic90–132 actual right quotient/domain additivity/linearity. With supplied P0=I the entrywise quotient is exactly Q; offdiagonal positivity/row sums are explicit defining predicates. Native operator contribution has strong continuity and finite row-action specialization stated; no finite Markov generation theorem fabricated."
+    },
+    {
+      "concept": "geometric-brownian-motion",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read native Geometric.Basic77/86/93, complete Gaussian pushforward proof186–203, moment206/mean217, and explicit source disclaimer that the SDE identification requires Ito and is not proved. Exact formula/positivity is real coverage; the asserted SDE equivalence remains a substantive partial frontier in both libraries."
+    },
+    {
+      "concept": "geometric-brownian-motion",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native Geometric.Basic77/86/93, complete Gaussian pushforward proof186–203, moment206/mean217, and explicit source disclaimer that the SDE identification requires Ito and is not proved. Exact formula/positivity is real coverage; the asserted SDE equivalence remains a substantive partial frontier in both libraries."
+    },
+    {
+      "concept": "geometric-distribution",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read actual failure-count geometricMeasure52/71/75 and normalization85–98, finite geometric sum165 and pushforward/complement formulas. Successor pushforward gives trials starting1, tail Pr(G>k)=(1-p)^k including p=1,k=0. Native Basic177/189/208 actual sums/complement/memorylessness checked; p=0 totalization kept outside catalogue."
+    },
+    {
+      "concept": "geometric-distribution",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Read actual failure-count geometricMeasure52/71/75 and normalization85–98, finite geometric sum165 and pushforward/complement formulas. Successor pushforward gives trials starting1, tail Pr(G>k)=(1-p)^k including p=1,k=0. Native Basic177/189/208 actual sums/complement/memorylessness checked; p=0 totalization kept outside catalogue. Change adds four actually checked native ordinary support/parameter/CDF/lower-quantile API files; status unchanged. Author agrees this exact quantile normal form belongs, while a separate sampling algorithm remains excluded.",
+      "replacement": {
+        "concept": "geometric-distribution",
+        "concept_id": "9405148f-aeb8-5961-95c6-f78a5288b4ac",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency2ddf59c8f14245864e6c0ed227a2dab76b9efea2. geometricMeasure:52 in Mathlib counts FAILURES on Nat, with singleton71/75 mass p(1-p)^n and completed probability normalization91. The exact catalogue trial count is its pushforward by Nat.succ, with p!=0 and p≤1; it has no mass at0 and mass p(1-p)^(k-1) for k≥1. Measure.map95/apply168 certifies this shift, not a relabeling that loses the off-by-one convention. For the tail, G>k is exactly failure-count≥k: finite singleton summation and the completed geom_sum_mul_of_le_one:165 at x=1-p give lower-tail1-(1-p)^k, and probReal_compl_eq_one_sub:483 gives the displayed upper tail. These actual generic formulas include p=1 and k=0; the library p=0 Dirac totalization is outside the paragraph. Native geometricMeasure_real_Iic177 and geometricMeasure_real_Ici189 explicitly prove those cumulative/tail formulas by finite sums and complements; memoryless208 is direct associated law API, not merely a use.  Exact dependency comparison: Deriv/Basic, Geometric, Quiver/Path, Graph/Basic, Bounds/Defs, Gronwall, GeomSum, Measure/Real and Gaussian-process/covariance defining files are byte-identical. PMF Constructions, Measure TotalVariation/Defs, HittingTime and SubGaussian have one preceding header line in D (normalize247/254, tvDist62, hittingAfter66/141, Hoeffding833). ENat/Lattice41/74 become42/75; its other change is the equivalent natCast_sInf binder spelling. SimpleGraph Metric54 becomes55; Girth30 becomes31, with an unrelated complete-graph example changed later. Real exponential82/279 become83/280, with later unrelated convexity material absent.  Actual relevant statements, hypotheses and completed source bodies inspected; bounded review without new proof development or transitive axiom audit. Independent review additionally inspected complete native Geometric/Support:36–63 (exact Nat and real-cast support), Measurability:24–29 (parameter-measurable family by measurable countable weighted Diracs), Cdf:45–58 (floor partial-sum formula), and Quantile:45–135 (logarithmic lower-quantile normal form with u∈(0,1), 0<p<1, plus explicit p=1 and totalized p=0 cases and support endpoints). These are direct ordinary distribution API, not a separate inverse-CDF sampling algorithm. They are selected consistently with the bounded mass/cumulative/support/parameter/quantile normal-form boundary. All formulas are on the native FAILURE-count carrier; trial-count presentation uses the already checked successor pushforward, so the zero endpoint for failure count means one trial, never zero trials.",
+        "files": [
+          {
+            "path": "TauCeti/Probability/Distributions/Geometric/Basic.lean",
+            "declarations": "TauCeti.Probability.geometricMeasure_real_Iic:177; geometricMeasure_real_Ici:189; geometricMeasure_memoryless:208",
+            "note": "Native complete cumulative/tail and memoryless law API; successor pushforward translates failure count to trials."
+          },
+          {
+            "path": "TauCeti/Probability/Distributions/Geometric/Support.lean",
+            "declarations": "TauCeti.Probability.support_geometricMeasure:36; support_map_cast_geometricMeasure:56",
+            "note": "Native exact support and its real-cast normal form, with parameter1 and totalized0 boundaries explicit."
+          },
+          {
+            "path": "TauCeti/Probability/Distributions/Geometric/Measurability.lean",
+            "declarations": "TauCeti.Probability.measurable_geometricMeasure:24",
+            "note": "Native parameter-measurable geometric family and actual weighted-Dirac proof."
+          },
+          {
+            "path": "TauCeti/Probability/Distributions/Geometric/Cdf.lean",
+            "declarations": "TauCeti.Probability.cdf_map_cast_geometricMeasure:45; cdf_map_cast_geometricMeasure_zero:54",
+            "note": "Native exact cumulative distribution/floor normal form, supported by the selected Basic finite sums."
+          },
+          {
+            "path": "TauCeti/Probability/Distributions/Geometric/Quantile.lean",
+            "declarations": "TauCeti.Probability.quantile_map_cast_geometricMeasure:45; quantile_map_cast_geometricMeasure_one:82; tendsto_quantile_map_cast_geometricMeasure_nhdsGT_zero:90",
+            "note": "Native exact lower-quantile inverse-CDF expression and endpoints; includes actual strict interior p,u hypotheses, distinct from a sampling algorithm."
+          }
+        ],
+        "search_notes": "Independent review enumerated and read all Geometric Basic/Cdf/Support/Measurability/Quantile siblings. Keep actual law, tail/memoryless, support, parameter and cumulative/lower-quantile normal forms. The inverse-CDF EXPRESSION is ordinary distribution API and has completed logarithmic/ceil/CDF proofs; no separately implemented sampling algorithm is claimed. Exclude other distributions and stochastic-comparison/concentration endpoints. Failure-count to trial-count successor convention and p=1/u interior hypotheses are preserved."
+      }
+    },
+    {
+      "concept": "gerencser-hendrickx-rewired-cycle-gap",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independent bounded searches for Gerencser/Hendrickx/rewired/geometric arc gap and actual GomoryHu.rewire82 show the cited candidate is deterministic cut-tree rewriting. Neither it nor geometric laws proves the specified gamma>4, joint k/L scaling, arbitrary polynomial exceptional exponents or conditioned-size comparison. Unknown accurately preserves these concrete proof frontiers, without absence claim."
+    },
+    {
+      "concept": "gerencser-hendrickx-rewired-cycle-gap",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independent bounded searches for Gerencser/Hendrickx/rewired/geometric arc gap and actual GomoryHu.rewire82 show the cited candidate is deterministic cut-tree rewriting. Neither it nor geometric laws proves the specified gamma>4, joint k/L scaling, arbitrary polynomial exceptional exponents or conditioned-size comparison. Unknown accurately preserves these concrete proof frontiers, without absence claim."
+    },
+    {
+      "concept": "gibbs-boundary-influence-decay-tree",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read native Distributions/HardCore.hardCorePMF70 positive independent-set weights, hard-core detailed_balance115 and Action/Gibbs.gibbsState61 quantum matrix functional. These do not certify a compatible ALL-boundary rooted factor-tree conditional-marginal family or limiting uniqueness. Scoped unknown appropriate; generic TV and finite normalization alone do not supply that bridge."
+    },
+    {
+      "concept": "gibbs-boundary-influence-decay-tree",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native Distributions/HardCore.hardCorePMF70 positive independent-set weights, hard-core detailed_balance115 and Action/Gibbs.gibbsState61 quantum matrix functional. These do not certify a compatible ALL-boundary rooted factor-tree conditional-marginal family or limiting uniqueness. Scoped unknown appropriate; generic TV and finite normalization alone do not supply that bridge."
+    },
+    {
+      "concept": "gibbs-distribution-finite",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read PMF.normalize246–254 actual probability-total-mass proof and exact pointwise formula; Real.exp82/279 supplies positive finite weights. Nonempty finite Omega ensures Z>0 and finite; beta>=0 is permitted without stronger hypotheses. D normalize247/254 identical. Native hard-core/quantum models are separate structures, so inherited Tau and bounded native exclusion accepted."
+    },
+    {
+      "concept": "gibbs-distribution-finite",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read PMF.normalize246–254 actual probability-total-mass proof and exact pointwise formula; Real.exp82/279 supplies positive finite weights. Nonempty finite Omega ensures Z>0 and finite; beta>=0 is permitted without stronger hypotheses. D normalize247/254 identical. Native hard-core/quantum models are separate structures, so inherited Tau and bounded native exclusion accepted."
+    },
+    {
+      "concept": "girsanov-constant-brownian-drift",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read terminal density ExponentialMartingale170–178, full tilted increment/event factorization47–100, centered law126/independence139 and complete Girsanov123–184 before/after/across-horizon assembly/path continuity. theta=-nu gives exact minus-density/plus-process signs on [0,T]. Native proof is Tau-only; standalone Gaussian tilt primitives do not prove whole Brownian process change."
+    },
+    {
+      "concept": "girsanov-constant-brownian-drift",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read terminal density ExponentialMartingale170–178, full tilted increment/event factorization47–100, centered law126/independence139 and complete Girsanov123–184 before/after/across-horizon assembly/path continuity. theta=-nu gives exact minus-density/plus-process signs on [0,T]. Native proof is Tau-only; standalone Gaussian tilt primitives do not prove whole Brownian process change."
+    },
+    {
+      "concept": "graph-path",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read actual Quiver.Path cons witnesses and reverse vertex toList; v::p.toList indeed records all endpoints and Nodup gives simple paths. Native Walk36/length103/support108/edges113/IsPath492 retain labelled edges including loops/parallel edges. Restricting vertices to V(G) prevents ambient nil paths at nonvertices. Generic/native equivalent presentations and stated exclusions accepted."
+    },
+    {
+      "concept": "graph-path",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read actual Quiver.Path cons witnesses and reverse vertex toList; v::p.toList indeed records all endpoints and Nodup gives simple paths. Native Walk36/length103/support108/edges113/IsPath492 retain labelled edges including loops/parallel edges. Restricting vertices to V(G) prevents ambient nil paths at nonvertices. Generic/native equivalent presentations and stated exclusions accepted."
+    },
+    {
+      "concept": "graph-distance",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Quiver.Path35/length66/toList209 and ENat41/74 exact no-path infinity/attained minimum; SimpleGraph.edist54/61/69 actual extended shortest-walk definition. Native Serre.dist43/53/70/82 proofs explicitly have Nat fallback0, used only on joined pairs. Full disconnected meaning comes from exact generic ENat infimum, never the Nat fallback."
+    },
+    {
+      "concept": "graph-distance",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Quiver.Path35/length66/toList209 and ENat41/74 exact no-path infinity/attained minimum; SimpleGraph.edist54/61/69 actual extended shortest-walk definition. Native Serre.dist43/53/70/82 proofs explicitly have Nat fallback0, used only on joined pairs. Full disconnected meaning comes from exact generic ENat infimum, never the Nat fallback."
+    },
+    {
+      "concept": "graph-girth",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read SimpleGraph.egirth30/54/61/70: actual minimum/infinity and girth>=3 give only simple-case partial. Native Graph.Walk36/103/108/113 and IsCycle495 require nonempty closed trail with distinct edges and no repeated tail vertices. A loop has support[v,v]/one edge; two distinct parallel edges have tail[y,x]/two edges, so both catalogue short-cycle conventions survive. ENat exact infimum supplies infinity/attained minima without a girth alias."
+    },
+    {
+      "concept": "graph-girth",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read SimpleGraph.egirth30/54/61/70: actual minimum/infinity and girth>=3 give only simple-case partial. Native Graph.Walk36/103/108/113 and IsCycle495 require nonempty closed trail with distinct edges and no repeated tail vertices. A loop has support[v,v]/one edge; two distinct parallel edges have tail[y,x]/two edges, so both catalogue short-cycle conventions survive. ENat exact infimum supplies infinity/attained minima without a girth alias."
+    },
+    {
+      "concept": "greatest-lower-bound",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Order.Bounds.Defs37/48/54 actual to_dual generated lowerBounds/IsGreatest/IsGLB; literal lower-bound then maximal-lower-bound definition, no global existence assumption. Native CompleteLattice.Basic85–91 proves finite-initial-infimum equals entire infimum under dominated tail with complete-lattice hypothesis explicit; direct ordinary infimum API."
+    },
+    {
+      "concept": "greatest-lower-bound",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Order.Bounds.Defs37/48/54 actual to_dual generated lowerBounds/IsGreatest/IsGLB; literal lower-bound then maximal-lower-bound definition, no global existence assumption. Native CompleteLattice.Basic85–91 proves finite-initial-infimum equals entire infimum under dominated tail with complete-lattice hypothesis explicit; direct ordinary infimum API."
+    },
+    {
+      "concept": "gronwall-inequality",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read M Gronwall112–130 constant differential comparison and epsilon0:78, and Tau integral75–109 actual primitive argument. Native variable-k116 is a monotone LOWER bound k*g<=gprime, whereas catalogue needs UPPER integral inequality for arbitrary integrable nonnegative b. Inspected TwoSided/Interior remain constant-rate derivative bounds. Partials preserve the exact unresolved scope."
+    },
+    {
+      "concept": "gronwall-inequality",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read M Gronwall112–130 constant differential comparison and epsilon0:78, and Tau integral75–109 actual primitive argument. Native variable-k116 is a monotone LOWER bound k*g<=gprime, whereas catalogue needs UPPER integral inequality for arbitrary integrable nonnegative b. Inspected TwoSided/Interior remain constant-rate derivative bounds. Partials preserve the exact unresolved scope."
+    },
+    {
+      "concept": "halting-set-total-variation",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read hittingAfter65 explicit else-top and never-hit140; TVDefs61 uses full signed variation, correctly halved. Exact literal supplied-chain/target predicate imposes the desired bound for every t without asserting arbitrary sets satisfy it or stationary target existence. Generic native hitting/TV refinements are input API; no native halting-specific result selected. D +1 suppliers checked."
+    },
+    {
+      "concept": "halting-set-total-variation",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read hittingAfter65 explicit else-top and never-hit140; TVDefs61 uses full signed variation, correctly halved. Exact literal supplied-chain/target predicate imposes the desired bound for every t without asserting arbitrary sets satisfy it or stationary target existence. Generic native hitting/TV refinements are input API; no native halting-specific result selected. D +1 suppliers checked."
+    },
+    {
+      "concept": "heilmann-lieb-matching-polynomial-roots",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Read matching67/218 exact edge incidence/support, and native Analysis/Polynomial/RealRoots/Descent43 actual hypotheses assume a preexisting complete complex root labeling and persistent collisions. It cannot prove weighted matching-polynomial real-rootedness or imaginary-axis partition zeros. Unknown proof frontier sound; clarify actual Tau-owned candidate path in replacement. Evidence-only correction names the actual source path/declaration rather than nonexistent Basic/Descent path.",
+      "replacement": {
+        "concept": "heilmann-lieb-matching-polynomial-roots",
+        "concept_id": "5d8cca89-3c67-52b5-89e0-0d4692889510",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "unknown",
+        "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No completed existing proof was certified that the NONNEGATIVE EDGE-WEIGHT matching polynomial has all real zeros, or that the positive-activity monomer partition polynomial has imaginary zeros. Matching carriers and generic root regularity are available, but neither proves this universal real-rootedness/interlacing theorem.  Actual relevant statements, hypotheses and completed source bodies inspected; bounded review without new proof development or transitive axiom audit.",
+        "files": [],
+        "search_notes": "Searched Heilmann/Lieb, matchingPolynomial/matching polynomial, monomer/dimer, weighted matching and real-rootedness in graph/polynomial sources. Read Mathlib SimpleGraph.Subgraph.IsMatching67 exact matching incidence predicate, and Tau-owned TauCeti/Analysis/Polynomial/RealRoots/Descent.exists_analyticAt_real_roots_of_persistent_collisions:43: the latter assumes an already supplied complete real/complex root labelling/persistent collisions, not a matching-polynomial real-rootedness proof. Tau-owned root-family APIs are not credited to standalone Mathlib. Bounded unknown retains the specific root-location theorem frontier."
+      }
+    },
+    {
+      "concept": "heilmann-lieb-matching-polynomial-roots",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Read matching67/218 exact edge incidence/support, and native Analysis/Polynomial/RealRoots/Descent43 actual hypotheses assume a preexisting complete complex root labeling and persistent collisions. It cannot prove weighted matching-polynomial real-rootedness or imaginary-axis partition zeros. Unknown proof frontier sound; clarify actual Tau-owned candidate path in replacement. Evidence-only correction names the actual source path/declaration rather than nonexistent Basic/Descent path.",
+      "replacement": {
+        "concept": "heilmann-lieb-matching-polynomial-roots",
+        "concept_id": "5d8cca89-3c67-52b5-89e0-0d4692889510",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "unknown",
+        "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No completed existing proof was certified that the NONNEGATIVE EDGE-WEIGHT matching polynomial has all real zeros, or that the positive-activity monomer partition polynomial has imaginary zeros. Matching carriers and generic root regularity are available, but neither proves this universal real-rootedness/interlacing theorem.  Exact dependency comparison: Deriv/Basic, Geometric, Quiver/Path, Graph/Basic, Bounds/Defs, Gronwall, GeomSum, Measure/Real and Gaussian-process/covariance defining files are byte-identical. PMF Constructions, Measure TotalVariation/Defs, HittingTime and SubGaussian have one preceding header line in D (normalize247/254, tvDist62, hittingAfter66/141, Hoeffding833). ENat/Lattice41/74 become42/75; its other change is the equivalent natCast_sInf binder spelling. SimpleGraph Metric54 becomes55; Girth30 becomes31, with an unrelated complete-graph example changed later. Real exponential82/279 become83/280, with later unrelated convexity material absent.  Actual relevant statements, hypotheses and completed source bodies inspected; bounded review without new proof development or transitive axiom audit.",
+        "files": [],
+        "search_notes": "Searched Heilmann/Lieb, matchingPolynomial/matching polynomial, monomer/dimer, weighted matching and real-rootedness in graph/polynomial sources. Read Mathlib SimpleGraph.Subgraph.IsMatching67 exact matching incidence predicate, and Tau-owned TauCeti/Analysis/Polynomial/RealRoots/Descent.exists_analyticAt_real_roots_of_persistent_collisions:43: the latter assumes an already supplied complete real/complex root labelling/persistent collisions, not a matching-polynomial real-rootedness proof. Tau-owned root-family APIs are not credited to standalone Mathlib. Bounded unknown retains the specific root-location theorem frontier."
+      }
+    },
+    {
+      "concept": "hilbert-valued-q-wiener-process",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read actual IsGaussianProcess.Def30 finite-Gaussian-law structure, CovarianceBilin51/69 and Multivariate31 explicit infinite-dimensional trace-class generalization frontier; native OperatorIdeal/Family/TraceClass59 is a nuclear operator-ideal gauge. These do not certify the continuous independent-increment trace-Q process and eigenbasis Brownian-series realization. Scoped unknown remains honest in both projects."
+    },
+    {
+      "concept": "hilbert-valued-q-wiener-process",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read actual IsGaussianProcess.Def30 finite-Gaussian-law structure, CovarianceBilin51/69 and Multivariate31 explicit infinite-dimensional trace-class generalization frontier; native OperatorIdeal/Family/TraceClass59 is a nuclear operator-ideal gauge. These do not certify the continuous independent-increment trace-Q process and eigenbasis Brownian-series realization. Scoped unknown remains honest in both projects."
+    },
+    {
+      "concept": "hille-yosida-contraction-generator",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read complete native Generation79–109/177–235 generator identification/general iff, Contraction54–82 first-power/all-powers specialization, actual Laplace operator Basic113–160, two-sided inverse Identity154–183, sharp power266/283 and closed graph91–105. Also read RestrictScalars91–108, dependency norm_restrictScalars448 and ComplexLinear276–306 plus closedness248: real restriction preserves positive-real resolvents/norms and actual proof restores complex linearity/generator. M=1,omega=0 exactly matches dense closed contraction Hille–Yosida and Laplace formula. No new scalar extension proof or transitive proof audit required; standalone M lacks a certified whole endpoint."
+    },
+    {
+      "concept": "hille-yosida-contraction-generator",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read complete native Generation79–109/177–235 generator identification/general iff, Contraction54–82 first-power/all-powers specialization, actual Laplace operator Basic113–160, two-sided inverse Identity154–183, sharp power266/283 and closed graph91–105. Also read RestrictScalars91–108, dependency norm_restrictScalars448 and ComplexLinear276–306 plus closedness248: real restriction preserves positive-real resolvents/norms and actual proof restores complex linearity/generator. M=1,omega=0 exactly matches dense closed contraction Hille–Yosida and Laplace formula. No new scalar extension proof or transitive proof audit required; standalone M lacks a certified whole endpoint."
+    },
+    {
+      "concept": "hitting-time-markov-chain",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read actual hittingAfter65/140/217 definition and never-hit branch. It is exact extended first entrance at start0 for Nat or nonnegative real order, with initial law independent. Native Countable43–54 proves extended iInf including empty hits, IsClosed.exists_hittingAfter_eq45–54 and le_iff59–66 prove attainment/event equivalence under actual continuity/closed-target assumptions. Those assumptions are retained as API conditions, not imposed on definition."
+    },
+    {
+      "concept": "hitting-time-markov-chain",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read actual hittingAfter65/140/217 definition and never-hit branch. It is exact extended first entrance at start0 for Nat or nonnegative real order, with initial law independent. Native Countable43–54 proves extended iInf including empty hits, IsClosed.exists_hittingAfter_eq45–54 and le_iff59–66 prove attainment/event equivalence under actual continuity/closed-target assumptions. Those assumptions are retained as API conditions, not imposed on definition."
+    },
+    {
+      "concept": "hoeffding-lemma",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read completed M positive-t CGF/tilted variance812–827 and all-real negation832–847: width parameter gives precisely t²(b-a)²/8. Native Azuma65–94 proves oscillation interval version for every real t; conditional99–133 actually uses conditional-kernel mean/boundedness and rational extension, with StandardBorel explicitly stronger. Neither native proof is merely a later Azuma tail application."
+    },
+    {
+      "concept": "hoeffding-lemma",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read completed M positive-t CGF/tilted variance812–827 and all-real negation832–847: width parameter gives precisely t²(b-a)²/8. Native Azuma65–94 proves oscillation interval version for every real t; conditional99–133 actually uses conditional-kernel mean/boundedness and rational extension, with StandardBorel explicitly stronger. Neither native proof is merely a later Azuma tail application."
+    }
+  ]
+}

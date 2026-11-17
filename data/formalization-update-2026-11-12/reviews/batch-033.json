@@ -1,0 +1,366 @@
+{
+  "batch_id": "batch-033",
+  "reviewer": "analysis_formalization",
+  "proposal_sha256": "c3f21c3bd2c11873fe6a5060d6687d1f4ee3591a243c42fd944ca47cc5ab02e1",
+  "decisions": [
+    {
+      "concept": "infinite-product-complex",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "HasProd106 is filter-parametric and conditional-range247 was checked in both directions, so ordered partial products are exact after n+1 reindex. Local uniform52 and formal coeff76 use the requested distinct modes. Native norm estimates32/47 explicitly split Multipliable and totalized fallback; their stronger hypothesis does not replace ordered convergence."
+    },
+    {
+      "concept": "infinite-product-complex",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "HasProd106 is filter-parametric and conditional-range247 was checked in both directions, so ordered partial products are exact after n+1 reindex. Local uniform52 and formal coeff76 use the requested distinct modes. Native norm estimates32/47 explicitly split Multipliable and totalized fallback; their stronger hypothesis does not replace ordered convergence.",
+      "replacement": {
+        "concept": "infinite-product-complex",
+        "concept_id": "fc561bc1-7598-5c1f-b6fc-465c0c8349be",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. HasProd (InfiniteSum/Defs:107) accepts a SummationFilter; conditional ℕ (SummationFilter:217,247) is exactly products over range N. Apply it to n↦a(n+1), so this is the catalogue ORDERED product, not unconditional Multipliable. Function products use TendstoLocallyUniformlyOn:52 of those finite products when that is the specified mode. Formal products have the literal predicate ∀k, ∀ᶠN in atTop, PowerSeries.coeff k (partialProduct N)=PowerSeries.coeff k P, using coeff:77. No assertion that a general product converges. Native InfiniteProd:32,47 proves direct norm and distance-to-one estimates for products of 1+f with summable norms. In its Multipliable branch the actual limit proof passes finite-product bounds to HasProd; the other branch explicitly handles the totalized tprod value 1. This is ordinary product API under its stated stronger summability/unconditional hypotheses, not a claim those exhaust ordered convergence. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.",
+        "files": [
+          {
+            "path": "TauCeti/Analysis/Normed/Ring/InfiniteProd.lean",
+            "declarations": "TauCeti.norm_tprod_one_add_le_exp_tsum:32; norm_tprod_one_add_sub_one_le:47",
+            "note": "Native elementary norm estimates for infinite products; whole ordered/formal definition supplied by checked dependency constructors."
+          }
+        ],
+        "search_notes": "Dependency product/filter, coefficient and locally-uniform definitions checked. Exclude product formulas for theta/Siegel functions and valuation-specific Novikov constructions."
+      }
+    },
+    {
+      "concept": "infinitesimally-finite-smooth-function",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Actual InfinitesimalAction83 is a REAL linear vector-field antihomomorphism with explicit minus bracket. It is not already the complexified RIGHT-translation representation on smooth scalar functions, nor its center-enveloping locally finite span. Concrete unresolved action/extension frontier accurately recorded; Tau ownership preserved for M."
+    },
+    {
+      "concept": "infinitesimally-finite-smooth-function",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Actual InfinitesimalAction83 is a REAL linear vector-field antihomomorphism with explicit minus bracket. It is not already the complexified RIGHT-translation representation on smooth scalar functions, nor its center-enveloping locally finite span. Concrete unresolved action/extension frontier accurately recorded; Tau ownership preserved for M."
+    },
+    {
+      "concept": "integral-basis-number-field",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "RingOfIntegers299 finite/Noetherian,318free and actual Z-basis327 give unique finite integer expansions through Basis88/131/138/155. The later rational integralBasis is a different carrier and correctly excluded. Native basis-coordinate61/69 applies over semirings including Z, no hidden field hypothesis."
+    },
+    {
+      "concept": "integral-basis-number-field",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "RingOfIntegers299 finite/Noetherian,318free and actual Z-basis327 give unique finite integer expansions through Basis88/131/138/155. The later rational integralBasis is a different carrier and correctly excluded. Native basis-coordinate61/69 applies over semirings including Z, no hidden field hypothesis.",
+      "replacement": {
+        "concept": "integral-basis-number-field",
+        "concept_id": "adcf4aa9-8fc2-57a4-958a-2758241731a8",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. NumberField.RingOfIntegers.basis:327 is an actual ℤ-basis of O_K, with Free:318 and finite/Noetherian module evidence:299–303. Basis is a linear equivalence to finitely supported coordinates (Basis.Defs:89); repr/sum identities give unique integer expansions. Finite generation makes this basis index finite. The later NumberField.integralBasis:398 is a ℚ-basis of K, and is not being confused with the defining ℤ-basis. Native Module.Basis.repr_map_eq_of_map_basis:69 proves coordinate preservation along maps carrying one basis to another; eq_smul_of_repr_support_subset_singleton:61 proves the single-coordinate normal form. These apply over ℤ and are ordinary coordinate API of an integral basis, with no extra field hypothesis. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.",
+        "files": [
+          {
+            "path": "TauCeti/LinearAlgebra/Basis/Basic.lean",
+            "declarations": "Module.Basis.eq_smul_of_repr_support_subset_singleton:61; repr_map_eq_of_map_basis:69",
+            "note": "Native basis-coordinate normal forms and naturality over arbitrary semirings, including integral bases."
+          }
+        ],
+        "search_notes": "Actual dependency number-field/basis constructors checked. Exclude OfIntegralBasis discriminant formula as a separate endpoint; no new integral-basis existence proof attributed to Tau."
+      }
+    },
+    {
+      "concept": "integral-element-ring-extension",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "IntegralElem39 is exactly a monic polynomial with eval2 zero and IsIntegral53 uses the given algebra map; injective inclusion is a direct specialization. Native compatible-map transitivity102 constructs actual integral adjoin and tower110-119, so direct core API rather than a mere import."
+    },
+    {
+      "concept": "integral-element-ring-extension",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "IntegralElem39 is exactly a monic polynomial with eval2 zero and IsIntegral53 uses the given algebra map; injective inclusion is a direct specialization. Native compatible-map transitivity102 constructs actual integral adjoin and tower110-119, so direct core API rather than a mere import."
+    },
+    {
+      "concept": "integral-heisenberg-group-jacobi",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Native scalar Heisenberg72 has actual multiplication109 z+zprime+x*yprime and completed group proof123. Its commutator130 gives an alternating expression but does not change the multiplication law to the specified integral alternating vector cocycle. No division by2 or unverified integral equivalence silently asserted; bounded generic-cocycle frontier remains unknown."
+    },
+    {
+      "concept": "integral-heisenberg-group-jacobi",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native scalar Heisenberg72 has actual multiplication109 z+zprime+x*yprime and completed group proof123. Its commutator130 gives an alternating expression but does not change the multiplication law to the specified integral alternating vector cocycle. No division by2 or unverified integral equivalence silently asserted; bounded generic-cocycle frontier remains unknown."
+    },
+    {
+      "concept": "integral-jacobi-group",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Even a generic semidirect-product supplier needs the exact symplectic action on the specified integral alternating Heisenberg group and the Siegel-domain action. Scalar one-sided cocycle group does not certify those inputs. Specific unresolved group/action frontier is retained, rather than inferring absence."
+    },
+    {
+      "concept": "integral-jacobi-group",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Even a generic semidirect-product supplier needs the exact symplectic action on the specified integral alternating Heisenberg group and the Siegel-domain action. Scalar one-sided cocycle group does not certify those inputs. Specific unresolved group/action frontier is retained, rather than inferring absence."
+    },
+    {
+      "concept": "integral-operator-kernel",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Actual Bochner157 and Lp89/109 give the exact supplied-integrability kernel predicate and product L2 AE class. Native integralOperatorLp166 checks linearity against AE representatives,95 actual AE integrability and201/207 output formula. Its SFinite/Schur/1<=p hypotheses remain explicit only on that bounded constructor."
+    },
+    {
+      "concept": "integral-operator-kernel",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Actual Bochner157 and Lp89/109 give the exact supplied-integrability kernel predicate and product L2 AE class. Native integralOperatorLp166 checks linearity against AE representatives,95 actual AE integrability and201/207 output formula. Its SFinite/Schur/1<=p hypotheses remain explicit only on that bounded constructor.",
+      "replacement": {
+        "concept": "integral-operator-kernel",
+        "concept_id": "04c82ac4-3168-5292-8013-3f5d4cd8ae52",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The literal scalar-kernel representation is a measurable K:α×α→ℂ, a stated input class D, and ∀f∈D, (Tf)x=∫y,K(x,y)*f(y), on points/classes with the stated integrability. Bochner.integral:158 provides that exact integral; the integrability condition is explicit, so totalized junk integrals are not substituted for existence. A square-integrable kernel is exactly Lp ℂ 2 (μ.prod μ), using LpSpace.Basic:89/103/109, modulo AE equality. This is a bare definition, not an assertion of boundedness for arbitrary measurable kernels. Native integralOperatorLp:166 and coeFn_integralOperatorLp:201 build the genuine bounded integral operator and prove its defining formula AE under SFinite measures, measurable operator kernel and finite Schur row/column bounds (1≤p). Scalar multiplication kernels are the scalar case. Completed constructor uses AE integrability and Lp.ext; these stated restrictions are direct core implementation/API, not requirements imposed on all kernels. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.",
+        "files": [
+          {
+            "path": "TauCeti/MeasureTheory/Function/Lp/Operator/Integral/Basic.lean",
+            "declarations": "TauCeti.ae_integrable_apply_of_memLp:95; integralOperatorLp:166; coeFn_integralOperatorLp:201; integralOperatorLp_eq_iff:207",
+            "note": "Native bounded integral-kernel constructor and actual defining AE formula under explicit Schur/SFinite hypotheses."
+          }
+        ],
+        "search_notes": "Read hypotheses, AE-integrability argument, constructor linearity proof and defining formula. Product L² definition remains checked dependency-supplied; exclude compactness and specialized application theorems."
+      }
+    },
+    {
+      "concept": "integrated-unitary-representation",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Native integrated144 uses continuous vector ORBITS and uniform bound, not operator-norm continuity. Full integrability116 and bilinear bound129 proofs read; unitarity51/86/91 gives C=1. Hilbert completeness and inner382 give the exact weak formula after swapping conjugate-first convention. No SFinite assumption in this section. Standalone M bounded operator/weak identity remains a specifically unverified endpoint."
+    },
+    {
+      "concept": "integrated-unitary-representation",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native integrated144 uses continuous vector ORBITS and uniform bound, not operator-norm continuity. Full integrability116 and bilinear bound129 proofs read; unitarity51/86/91 gives C=1. Hilbert completeness and inner382 give the exact weak formula after swapping conjugate-first convention. No SFinite assumption in this section. Standalone M bounded operator/weak identity remains a specifically unverified endpoint."
+    },
+    {
+      "concept": "invariant-gauge-form-algebraic-group",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Native invariant derivation79 is actual counit/comultiplication contraction with Lie proof and counit111; it has tangent DERIVATION values. It does not prove top-degree cotangent nonvanishing at every geometric point or Ftimes uniqueness of invariant forms. Source-scoped uncertainty remains sound."
+    },
+    {
+      "concept": "invariant-gauge-form-algebraic-group",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native invariant derivation79 is actual counit/comultiplication contraction with Lie proof and counit111; it has tangent DERIVATION values. It does not prove top-degree cotangent nonvanishing at every geometric point or Ftimes uniqueness of invariant forms. Source-scoped uncertainty remains sound."
+    },
+    {
+      "concept": "irreducible-unitary-representation",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "ContRepresentation55 is a monoid hom into continuous linear operators, without inserting continuity in group parameter. Unitary inner-preservation plus ClosedSubmodule39 quantification is the literal nonzero Hilbert-space irreducibility predicate in this paragraph. Native invariant restriction108 has explicit inner/norm subtype proof; no algebraic irreducibility or finite dimension substituted."
+    },
+    {
+      "concept": "irreducible-unitary-representation",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "ContRepresentation55 is a monoid hom into continuous linear operators, without inserting continuity in group parameter. Unitary inner-preservation plus ClosedSubmodule39 quantification is the literal nonzero Hilbert-space irreducibility predicate in this paragraph. Native invariant restriction108 has explicit inner/norm subtype proof; no algebraic irreducibility or finite dimension substituted."
+    },
+    {
+      "concept": "jacobi-theta-characteristic",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Exp prefactor with shifted argument z+b+a*tau gives every real-characteristic summand by expanding (n+a)^2; two-variable theta term46 and upper-half summability124/128 are exact suppliers. Existing exp-add and tsum-scalar laws justify fixed-prefactor composition, no new transformation proof. Native half-period43 and elementary norm141 completed proofs checked."
+    },
+    {
+      "concept": "jacobi-theta-characteristic",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Exp prefactor with shifted argument z+b+a*tau gives every real-characteristic summand by expanding (n+a)^2; two-variable theta term46 and upper-half summability124/128 are exact suppliers. Existing exp-add and tsum-scalar laws justify fixed-prefactor composition, no new transformation proof. Native half-period43 and elementary norm141 completed proofs checked.",
+      "replacement": {
+        "concept": "jacobi-theta-characteristic",
+        "concept_id": "901cd8df-db5f-5e25-b2ac-72a8914f6565",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact generic presentation is exp(π i a² τ+2π i a(z+b)) * jacobiTheta₂(z+b+aτ,τ), where Mathlib jacobiTheta₂ is the TWO-variable sum (not standard θ₂). Its term:46 and sum:252, with summability iff Im τ>0:124, provide the full series. Expanding (n+a)² identifies each catalogue summand as that fixed prefactor times jacobiTheta₂_term n (z+b+aτ) τ; Complex.exp_add:111 and tsum_mul_left:115 are actual available identities. Thus arbitrary real a,b are handled, not just rational characteristics. Substituting (1/2,0),(0,0),(0,1/2) fixes θ₂,θ₃,θ₄ conventions. This is the bare function definition via checked generic composition; no modular transformation theorem is claimed. Native jacobiTheta_sub_natCast_div_two:43 proves a direct theta half-period shift identity by actual even/odd term splitting and exponential phases, and norm_jacobiTheta₂_sub_one_le:141 supplies an elementary two-variable estimate for real z. These are ordinary theta shift/bound API, not a separately claimed full modular transformation classification. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.",
+        "files": [
+          {
+            "path": "TauCeti/NumberTheory/ModularForms/JacobiTheta/OneVariable.lean",
+            "declarations": "TauCeti.jacobiTheta_sub_natCast_div_two:43; norm_jacobiTheta₂_sub_one_le:141",
+            "note": "Native theta half-period and elementary bound API; arbitrary characteristics supplied by the checked shifted-series presentation."
+          }
+        ],
+        "search_notes": "Read term splitting/exponential identities and actual restricted real-z estimate; exclude cubic theta and lattice Gauss-sum modularity endpoints."
+      }
+    },
+    {
+      "concept": "k-finite-function-group",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Literal finite-dimensional span of RIGHT translates x->f(xk) matches exactly, including arbitrary noncontinuous f. Actual span45/mem70 and finite-dimension fields checked. Native representative107 is a finite-dimensional matrix-coefficient notion with extra continuity; translation identities alone do not prove a generic orbit-span equivalence. Inherited Tau boundary retained."
+    },
+    {
+      "concept": "k-finite-function-group",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Literal finite-dimensional span of RIGHT translates x->f(xk) matches exactly, including arbitrary noncontinuous f. Actual span45/mem70 and finite-dimension fields checked. Native representative107 is a finite-dimensional matrix-coefficient notion with extra continuity; translation identities alone do not prove a generic orbit-span equivalence. Inherited Tau boundary retained.",
+      "replacement": {
+        "concept": "k-finite-function-group",
+        "concept_id": "161c9800-41d2-539a-8961-a9b752f66d56",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "inherited",
+        "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact literal predicate is FiniteDimensional ℂ (Submodule.span ℂ (Set.range (fun k:K => fun x:G => f(x*(k:G))))). Submodule.span:46 and finite-dimensional definition and finite-basis interfaces (FiniteDimensional.Defs:74/105/111) are actual constructors. Finite coordinate expansions represent precisely the span of RIGHT translates. No compactness is needed for the definition; compact K is an application input. These checked dependency constructors fully express the definition. Native Representative:107 instead defines continuous functions spanned by finite-dimensional matrix coefficients, while MatrixCoefficient has translation identities; I did not count those as generic K-finite orbit-span API for arbitrary f and subgroup K. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.",
+        "files": [],
+        "search_notes": "Searched native Continuous representation, Representative and MatrixCoefficient sources for finite orbit/right translation. Exclude unrelated generic span API, topological locally finite families, quantum-group locally finite modules and Peter–Weyl results from native allocation."
+      }
+    },
+    {
+      "concept": "kahler-differentials-algebra",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Kaehler148 actual I/I2 module, derivation226 with Leibniz232-244, generator span251 and lift285/comp303/unique317 certify exactly the universal generator relations. Native semilinear map76 actually supplies induced algebra/tower action and88/100/105/116 prove generator/identity/composition laws, direct natural API."
+    },
+    {
+      "concept": "kahler-differentials-algebra",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Kaehler148 actual I/I2 module, derivation226 with Leibniz232-244, generator span251 and lift285/comp303/unique317 certify exactly the universal generator relations. Native semilinear map76 actually supplies induced algebra/tower action and88/100/105/116 prove generator/identity/composition laws, direct natural API."
+    },
+    {
+      "concept": "kronecker-symbol-denominator-two",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Actual chi8 table118 is precisely0 on even residues, +1 on1/7 and -1 on3/5, and integer emod138/142 proves negative inputs as well. The paragraph explicitly allows this equivalent residue description; no unchecked division/exponent convention is needed."
+    },
+    {
+      "concept": "kronecker-symbol-denominator-two",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Actual chi8 table118 is precisely0 on even residues, +1 on1/7 and -1 on3/5, and integer emod138/142 proves negative inputs as well. The paragraph explicitly allows this equivalent residue description; no unchecked division/exponent convention is needed."
+    },
+    {
+      "concept": "krull-topology-galois-group",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Krull134/filter-neighborhood144/open-fixer170 completed proofs checked for arbitrary field extensions. Finite-dimensional intermediate fields, not just finite normal ones, generate the stated basis; normal refinement155 is optional. Native finite-algebra stabilizer109 explicitly constructs finite generated image field and uses its open fixer, with integrality justified."
+    },
+    {
+      "concept": "krull-topology-galois-group",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Krull134/filter-neighborhood144/open-fixer170 completed proofs checked for arbitrary field extensions. Finite-dimensional intermediate fields, not just finite normal ones, generate the stated basis; normal refinement155 is optional. Native finite-algebra stabilizer109 explicitly constructs finite generated image field and uses its open fixer, with integrality justified."
+    },
+    {
+      "concept": "l2-space-automorphic-quotient",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Changed: the paragraph defines L2 using its quotient Haar measure as supplied mathematical input; it does not require proving a general measure-existence theorem. Exact LEFT quotient is orbitRel.Quotient Gamma G for Gamma acting by LEFT multiplication (Defs286/348), whose orbit is Gamma*x. Lp89 and L2.inner_def136 then give the exact AE Hilbert object and linear-first pairing after swapping slots. Native MemLp.integrable_inner71 and L2.inner_toLp194 are direct ordinary pairing/representative API for ANY measure, including this supplied one. General quotient-measure construction remains explicitly outside claim.",
+      "replacement": {
+        "concept": "l2-space-automorphic-quotient",
+        "concept_id": "ebc1a82d-9461-5e2f-8a28-40a0d0028f36",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Take Q := MulAction.orbitRel.Quotient Γ G, where Γ acts on G by LEFT multiplication. The actual orbitRel (GroupTheory/GroupAction/Defs.lean:286; quotient:348) identifies x and y precisely when x=γ*y for some γ∈Γ, so its classes are Γ*y, EXACTLY Γ\\G. Use its quotient topology/Borel measurable space and let μ be the quotient Haar measure SUPPLIED in the paragraph. Lp ℂ 2 μ (LpSpace/Basic.lean:89, L² notation:103, MemLp.toLp:109) is exactly square-integrable functions modulo AE equality. L2Space.lean:133/136 constructs the actual inner product by integration; with catalogue convention linear FIRST, set B(f,h)=inner_Mathlib(h,f), which is ∫conj(h)*f=∫f*conj(h), as required. All these constructors and inner integrability proofs work for arbitrary μ, so no second-countability, normality, finite-covolume or sigma-finiteness condition is imposed on this supplied-measure definition. A general existence/identification theorem for quotient Haar measure is a separate unclaimed endpoint; the previously reported uncertainty about that theorem does not obstruct the actual L² constructor on this exact supplied left quotient. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual quotient relation, Lp carrier, inner definition and relevant completed proofs inspected.",
+        "files": [
+          {
+            "path": "Mathlib/MeasureTheory/Function/LpSpace/Basic.lean",
+            "declarations": "MeasureTheory.Lp:89; L² notation:103; MemLp.toLp:109",
+            "note": "Native exact square-integrable AE quotient constructor, instantiated on the left orbit quotient with its supplied Haar measure."
+          },
+          {
+            "path": "Mathlib/MeasureTheory/Function/L2Space.lean",
+            "declarations": "MeasureTheory.L2 inner instance:133; inner_def:136",
+            "note": "Native actual integral Hilbert pairing, with the explicit catalogue linear-first slot convention."
+          }
+        ],
+        "search_notes": "Independently checked left orbit relation, not the native G/Γ coset side. Supplied quotient Haar measure is an input to the definition; no general measure existence theorem claimed. No extra topology/measure hypothesis comes from Lp or inner constructors. Quotient-action construction is a checked supplier, not an extra allocated prerequisite file. Integral-operator compactness, spectral decomposition and general quotient-measure disintegration/existence endpoints excluded."
+      }
+    },
+    {
+      "concept": "l2-space-automorphic-quotient",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Changed: the paragraph defines L2 using its quotient Haar measure as supplied mathematical input; it does not require proving a general measure-existence theorem. Exact LEFT quotient is orbitRel.Quotient Gamma G for Gamma acting by LEFT multiplication (Defs286/348), whose orbit is Gamma*x. Lp89 and L2.inner_def136 then give the exact AE Hilbert object and linear-first pairing after swapping slots. Native MemLp.integrable_inner71 and L2.inner_toLp194 are direct ordinary pairing/representative API for ANY measure, including this supplied one. General quotient-measure construction remains explicitly outside claim.",
+      "replacement": {
+        "concept": "l2-space-automorphic-quotient",
+        "concept_id": "ebc1a82d-9461-5e2f-8a28-40a0d0028f36",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Take Q := MulAction.orbitRel.Quotient Γ G, where Γ acts on G by LEFT multiplication. The actual orbitRel (GroupTheory/GroupAction/Defs.lean:286; quotient:348) identifies x and y precisely when x=γ*y for some γ∈Γ, so its classes are Γ*y, EXACTLY Γ\\G. Use its quotient topology/Borel measurable space and let μ be the quotient Haar measure SUPPLIED in the paragraph. Lp ℂ 2 μ (LpSpace/Basic.lean:89, L² notation:103, MemLp.toLp:109) is exactly square-integrable functions modulo AE equality. L2Space.lean:133/136 constructs the actual inner product by integration; with catalogue convention linear FIRST, set B(f,h)=inner_Mathlib(h,f), which is ∫conj(h)*f=∫f*conj(h), as required. All these constructors and inner integrability proofs work for arbitrary μ, so no second-countability, normality, finite-covolume or sigma-finiteness condition is imposed on this supplied-measure definition. A general existence/identification theorem for quotient Haar measure is a separate unclaimed endpoint; the previously reported uncertainty about that theorem does not obstruct the actual L² constructor on this exact supplied left quotient. Native MeasureTheory.MemLp.integrable_inner:71 proves the pointwise pairing integrable for any two MemLp2 functions, via actual AE representative proof73-75. Native L2.inner_toLp:194 proves the exact pairing with the class of a given square-integrable representative, using its AE equality. These are ordinary core L² pairing/representative laws and specialize directly to Q and μ. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Lp carrier/inner bodies agree; GroupAction source anchors are287/349 because of a preceding documentation newline. The later L2 positive-semidefinite intersection theorem changed a finite-index hypothesis, outside the selected constructor/inner supplier. Actual relevant proofs inspected.",
+        "files": [
+          {
+            "path": "TauCeti/MeasureTheory/Function/L2Space.lean",
+            "declarations": "MeasureTheory.MemLp.integrable_inner:71; MeasureTheory.L2.inner_toLp:194",
+            "note": "Native direct L² pairing integrability and AE representative formula, valid for the supplied quotient measure without extra measure hypotheses."
+          }
+        ],
+        "search_notes": "Independently checked left orbit relation, not the native G/Γ coset side. Supplied quotient Haar measure is an input to the definition; no general measure existence theorem claimed. No extra topology/measure hypothesis comes from Lp or inner constructors. Quotient-action construction is a checked supplier, not an extra allocated prerequisite file. Integral-operator compactness, spectral decomposition and general quotient-measure disintegration/existence endpoints excluded."
+      }
+    },
+    {
+      "concept": "least-common-multiple-integers",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Finite lcm48/61/69/85 and nonzero110/113 give exact common-divisor universal/minimality criterion. Integer normalized GCD109/121 and normalize nonnegative98, lcm_nonnegative140 force the least POSITIVE representative, including negative inputs. Empty-family fold1 handled. No infinite-family or associates-only answer substituted."
+    },
+    {
+      "concept": "least-common-multiple-integers",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Finite lcm48/61/69/85 and nonzero110/113 give exact common-divisor universal/minimality criterion. Integer normalized GCD109/121 and normalize nonnegative98, lcm_nonnegative140 force the least POSITIVE representative, including negative inputs. Empty-family fold1 handled. No infinite-family or associates-only answer substituted."
+    },
+    {
+      "concept": "lie-algebra",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "LieRing61 explicitly requires alternation (valid in characteristic2), LieAlgebra73 adds second-slot scalar law, and self-module184 proves first-slot scalar compatibility. Cyclic Jacobi229 follows by actual skew/Leibniz algebra. Native adjoint119 plus finite-coordinate bracket538 actual sum_repr/smul proof is ordinary core API.",
+      "replacement": {
+        "concept": "lie-algebra",
+        "concept_id": "d53d4abd-f9bc-5f6d-bf7c-e27d93cab6d7",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. LieRing:61 includes biadditivity, alternation lie_self and Leibniz; LieAlgebra:73 adds scalar compatibility. First-slot scalar compatibility follows in the actual self LieModule construction:184, and lie_jacobi:229 proves the cyclic Jacobi identity by lie_skew/leibniz and abelian-group algebra. Specializing the commutative base ring to a field gives precisely a vector space with bilinear alternating Jacobi bracket, including characteristic 2 (alternation is explicit).",
+        "files": [
+          {
+            "path": "Mathlib/Algebra/Lie/Basic.lean",
+            "declarations": "LieRing:61; LieAlgebra:73; self LieModule instance:184; lie_jacobi:229",
+            "note": "Actual alternating Lie-ring/algebra hierarchy and elementary bilinearity/Jacobi API."
+          }
+        ],
+        "search_notes": "Read class axioms, self-action scalar proof and cyclic Jacobi proof. Exclude nilpotence/Engel/representational classification endpoints."
+      }
+    },
+    {
+      "concept": "lie-algebra",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "LieRing61 explicitly requires alternation (valid in characteristic2), LieAlgebra73 adds second-slot scalar law, and self-module184 proves first-slot scalar compatibility. Cyclic Jacobi229 follows by actual skew/Leibniz algebra. Native adjoint119 plus finite-coordinate bracket538 actual sum_repr/smul proof is ordinary core API.",
+      "replacement": {
+        "concept": "lie-algebra",
+        "concept_id": "d53d4abd-f9bc-5f6d-bf7c-e27d93cab6d7",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. LieRing:61 includes biadditivity, alternation lie_self and Leibniz; LieAlgebra:73 adds scalar compatibility. First-slot scalar compatibility follows in the actual self LieModule construction:184, and lie_jacobi:229 proves the cyclic Jacobi identity by lie_skew/leibniz and abelian-group algebra. Specializing the commutative base ring to a field gives precisely a vector space with bilinear alternating Jacobi bracket, including characteristic 2 (alternation is explicit). Native LieAlgebra.ad_eq_toEnd:119 identifies adjoint and self-action, and Module.Basis.repr_lie_eq_sum:538 proves the bracket’s coordinate expansion by b.sum_repr, sum_lie and smul_lie. These are ordinary adjoint/bracket coordinate API; the latter has an explicit finite-basis hypothesis, not an assertion every Lie algebra is finite-dimensional. Dependency comparison: selected product definitions, coefficient, Basis/Span and Bochner files differ only by a preceding documentation newline (+1 at their listed defining anchors); selected supplier bodies match. Complex.exp_add is dependency:111 (standalone:110); its later real exponential inequalities differ irrelevantly. InfiniteSum/Ring tsum_mul_left:115 matches, with only later antidiagonal proof-tactic changes.",
+        "files": [
+          {
+            "path": "TauCeti/Algebra/Lie/Basic.lean",
+            "declarations": "LieAlgebra.ad_eq_toEnd:119; Module.Basis.repr_lie_eq_sum:538",
+            "note": "Native ordinary adjoint identification and finite-coordinate bilinearity formula."
+          }
+        ],
+        "search_notes": "Read actual rfl adjoint identification and completed coordinate proof. Do not allocate all downstream Lie-module applications or enveloping-algebra theory."
+      }
+    }
+  ]
+}

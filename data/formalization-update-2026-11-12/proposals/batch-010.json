@@ -1,0 +1,588 @@
+{
+  "batch_id": "batch-010",
+  "author": "analysis_formalization",
+  "reviews": [
+    {
+      "concept": "convolution-euclidean",
+      "concept_id": "df2b6c37-4c80-52fb-998f-07174e0d0a02",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Convolution:401 defines the bilinear integral with f(t),g(x\u2212t); convolution_eq_swap rewrites it to the catalogue order. Fourier/Convolution:144 constructs Schwartz convolution as a continuous bilinear operator and :176 proves agreement with the integral. TemperedDistribution:53 is the continuous Schwartz dual. The checked generic constructors also give the exact dual definition: for fixed \u03c8, compose u with \u03c6\u21a6\u03c8\u0303*\u03c6, where \u03c8\u0303(x)=\u03c8(\u2212x) is compCLMOfContinuousLinearEquiv(\u2212id). Thus (u*\u03c8)(\u03c6)=u(\u03c8\u0303*\u03c6), without requiring an additional named alias or assuming u is an ordinary function. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Convolution.lean",
+          "declarations": "convolution L401; convolution_def L419; convolution_eq_swap",
+          "note": "Native integral convolution and elementary linearity/swap API."
+        },
+        {
+          "path": "Mathlib/Analysis/Fourier/Convolution.lean",
+          "declarations": "SchwartzMap.convolution L144; convolution_apply L176",
+          "note": "Actual continuous Schwartz convolution constructor and its integral formula."
+        },
+        {
+          "path": "Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean",
+          "declarations": "SchwartzMap.compCLMOfContinuousLinearEquiv L1008; apply L1012",
+          "note": "Direct checked reflection map on Schwartz test functions, supplying the dual-convolution input."
+        },
+        {
+          "path": "Mathlib/Analysis/Distribution/TemperedDistribution.lean",
+          "declarations": "TemperedDistribution L53",
+          "note": "Native continuous Schwartz-dual definition used in the exact generic dual composition."
+        }
+      ],
+      "search_notes": "Specialize Euclidean real finite-dimensional E, volume, scalar multiplication pairing. Composition defines a continuous functional, not a claimed unproved smoothing theorem. Exclude Young inequalities, Bernstein estimates and multiplier mapping endpoints as additional theorems."
+    },
+    {
+      "concept": "convolution-euclidean",
+      "concept_id": "df2b6c37-4c80-52fb-998f-07174e0d0a02",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency integral and tempered-dual definitions are byte-identical. Its Schwartz convolution differs only by a comment blank line; actual reflection constructor is at SchwartzSpace/Basic:995 and still explicitly f\u2218g, so the same generic dual composition supplies arbitrary tempered u. Native SchwartzSpace/Convolution:95\u2013110 proves the multiplier/convolution integral identity; native TemperedDistribution/Convolution:129\u2013153 proves agreement of the distribution pairing with integral convolution for Lp inputs by an actual Fubini/integrability argument. These are direct compatibility API, not merely convolution uses. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Distribution/SchwartzSpace/Convolution.lean",
+          "declarations": "SchwartzMap Fourier-multiplier/convolution identity L95; integral evaluation L110",
+          "note": "Native equivalent Fourier/integral presentation on Schwartz functions."
+        },
+        {
+          "path": "TauCeti/Analysis/Distribution/TemperedDistribution/Convolution.lean",
+          "declarations": "fourierMultiplierCLM_toTemperedDistribution_apply L129",
+          "note": "Native distributional pairing compatibility with the ordinary convolution integral; complete generic definition supplied by checked dependency."
+        }
+      ],
+      "search_notes": "Arbitrary tempered convolution comes from the checked dual constructor, not from the Lp-only lemma. Native later Young/LP estimates add endpoints and are not the reason for file attribution; do not add their transitive imports."
+    },
+    {
+      "concept": "counting-measure",
+      "concept_id": "1e5c3cd2-a8fb-50c5-9a98-0be9eaaf7c14",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Measure.count is the sum of Dirac masses and count_apply identifies its value with set extended cardinality. Specialize the measurable space to \u22a4 to obtain the catalogue measure on ALL subsets: finite sets have their natural cardinal, infinite sets have \u221e. The actual infinite-set proof uses arbitrarily large finite subsets, without a countability hypothesis. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Count.lean",
+          "declarations": "MeasureTheory.Measure.count L34; count_apply; count_apply_infinite",
+          "note": "Native counting-measure definition, finite-cardinality and infinite-cardinality evaluations."
+        }
+      ],
+      "search_notes": "Inspected Count definition/evaluation proof and native Count/Topology. The latter proves positivity on opens, compact finiteness and Haar/regularity under added topology/discreteness; these extra structures are outside bare counting measure, so not selected."
+    },
+    {
+      "concept": "counting-measure",
+      "concept_id": "1e5c3cd2-a8fb-50c5-9a98-0be9eaaf7c14",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Actual dependency Count.lean is byte-identical, including the full all-subsets specialization to measurable space \u22a4 and the finite/infinite cardinality evaluations. No native implementing file selected under the bare measure boundary. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected native Measure/Count/Topology: it adds topological positivity/regularity/Haar properties with extra hypotheses. These do not define or evaluate the unrestricted counting measure; other count occurrences in integration/atomic decomposition are applications."
+    },
+    {
+      "concept": "covariant-derivative-surface",
+      "concept_id": "b72d38f4-c8cf-5ff5-8b11-ab5344805a64",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "CovariantDerivative.leviCivitaConnection:359 constructs the intrinsic metric connection and isLeviCivitaConnection_leviCivitaConnection:408 proves metric compatibility and zero torsion under the actual finite-dimensional Riemannian-manifold hypotheses. It specializes to an embedded surface with induced metric. This pass did not verify a native ambient-derivative/orthogonal-projection comparison, which is explicit scope in this paragraph, so intrinsic existence is only partial coverage. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/LeviCivita.lean",
+          "declarations": "CovariantDerivative.leviCivitaConnection L359; isLeviCivitaConnection_leviCivitaConnection L408",
+          "note": "Actual intrinsic Levi-Civita construction and correctness; ambient projection identity remains unchecked."
+        }
+      ],
+      "search_notes": "Searched immersion/Levi-Civita/Gauss/projection in manifold/vector-bundle sources. Generic orthogonal projections alone are not a proof of the embedded derivative formula. Native Tau comparison is not attributed to standalone Mathlib."
+    },
+    {
+      "concept": "covariant-derivative-surface",
+      "concept_id": "b72d38f4-c8cf-5ff5-8b11-ab5344805a64",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency supplies the intrinsic Levi-Civita constructor. Native Immersion:65 proves inner(cov_X Y,w)=inner(D_X(df\u00b7Y),df\u00b7w) for a C\u00b2 isometric immersion with C\u00b9 induced metric; the checked proof uses Koszul and differentiated inner products/brackets. For an embedded surface in \u211d\u00b3, df identifies its finite-dimensional closed tangent plane isometrically, and this all-w characterization is precisely tangential orthogonal projection of the ambient derivative. No Euclidean coordinate formula or independent named surface alias is needed. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Manifold/VectorBundle/CovariantDerivative/LeviCivita/Immersion.lean",
+          "declarations": "IsLeviCivitaConnection.inner_apply_eq_inner_mvfderiv L65",
+          "note": "Native isometric-immersion Gauss/tangential-component formula, exact embedded-surface specialization."
+        }
+      ],
+      "search_notes": "Actual C\u00b2 immersion/regular induced-metric hypotheses retained; no claim for a nonsmooth surface. Exclude curvature tensors, second fundamental form endpoint theorems and Koszul import tree; selected file proves the target comparison itself."
+    },
+    {
+      "concept": "crouzeix-functional-calculus",
+      "concept_id": "c9273660-bec3-5a12-a4a6-2133b7d0386c",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "The inspected native holomorphic functional calculus builds an algebra homomorphism for germs holomorphic near spectrum using contour integrals. Neither that construction nor the checked CStar calculus supplies the uniform absolute-constant bound by the supremum over numerical range W(T). The numerical-range-specific inequality for arbitrary bounded Hilbert operators remains unverified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped Crouzeix/numericalRange/numerical-radius searches in complex/operator/CStar sources; inspected Tau HolomorphicFunctionalCalculus/Basic and its contour domain. Spectrum containment/contour norm bounds would not alone prove the stated universal W(T) endpoint; unknown is an unresolved bridge, not absence."
+    },
+    {
+      "concept": "crouzeix-functional-calculus",
+      "concept_id": "c9273660-bec3-5a12-a4a6-2133b7d0386c",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "The inspected native holomorphic functional calculus builds an algebra homomorphism for germs holomorphic near spectrum using contour integrals. Neither that construction nor the checked CStar calculus supplies the uniform absolute-constant bound by the supremum over numerical range W(T). The numerical-range-specific inequality for arbitrary bounded Hilbert operators remains unverified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped Crouzeix/numericalRange/numerical-radius searches in complex/operator/CStar sources; inspected Tau HolomorphicFunctionalCalculus/Basic and its contour domain. Spectrum containment/contour norm bounds would not alone prove the stated universal W(T) endpoint; unknown is an unresolved bridge, not absence."
+    },
+    {
+      "concept": "cstar-algebra",
+      "concept_id": "3f62e6af-af34-5aab-baf1-96cbbc8a4337",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "NonUnitalCStarAlgebra:29 explicitly combines the complex normed algebra, star and CompleteSpace without requiring a unit. Basic CStarRing:109 stores the reverse C*-inequality; its normed-star derivation and norm_star_mul_self:141 prove equality using submultiplicativity. Thus the possibly nonunital complex complete catalogue definition is exact, not the narrower unital class. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/Classes.lean",
+          "declarations": "NonUnitalCStarAlgebra L29; CStarAlgebra L37",
+          "note": "Native complete complex (possibly nonunital) CStar algebra hierarchy."
+        },
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/Basic.lean",
+          "declarations": "CStarRing L109; CStarRing.norm_star_mul_self L141",
+          "note": "Native CStar identity/star-isometry and ordinary algebra/norm API."
+        }
+      ],
+      "search_notes": "Unital class is an optional subclass. Exclude representations, continuous functional calculus and spectral theorems as extra endpoints; do not mistake CStarRing, which assumes a genuine norm, for a possibly degenerate seminorm."
+    },
+    {
+      "concept": "cstar-algebra",
+      "concept_id": "3f62e6af-af34-5aab-baf1-96cbbc8a4337",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency has the same NonUnitalCStarAlgebra definition (comment-only shift) and CStar identity proof (only unrelated scope/comment changes). Native CStarAlgebra/Hom:31 proves closed kernels for nonunital star-algebra morphisms by their continuity; :42 constructs StarAlgEquiv.toContinuousLinearEquiv from isometry/continuity and proves inverse compatibility. These are direct natural-map API of CStar algebras. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/CStarAlgebra/Hom.lean",
+          "declarations": "NonUnitalStarAlgHom.isClosed_ker L31; StarAlgEquiv.toContinuousLinearEquiv L42; symm L57",
+          "note": "Native automatic topological behavior of CStar algebra maps and equivalences; definition inherited."
+        }
+      ],
+      "search_notes": "Selected genuine homomorphism/equivalence API. Native CStarAlgebra/Basic only installs a NormedStarGroup on star-stable additive subgroups and is a prerequisite superclass construction, not a reason to charge the whole file here. Spectral/crossed-product constructions excluded."
+    },
+    {
+      "concept": "cstar-seminorm",
+      "concept_id": "2922695c-928b-53b4-9448-9cf26fcaa98a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "CStarRing:109 requires NonUnitalNormedRing, hence cannot itself represent a seminorm vanishing on nonzero elements. RingSeminorm.toSeminormedRing:154 supplies a possibly degenerate submultiplicative norm structure, but this pass did not verify a complete complex scalar-compatible CStar-seminorm interface/equivalent generic presentation retaining both the star identity and degeneration. A genuine norm CStar class is not silently substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected CStarAlgebra/Basic class hypotheses and Unbundled/RingSeminorm constructor/proof. Generic scalar seminorm and ring seminorm objects are candidate data; their exact complex/star compatibility assembly remains unresolved. Not a claim that a separately named alias is required or that no representation is possible."
+    },
+    {
+      "concept": "cstar-seminorm",
+      "concept_id": "2922695c-928b-53b4-9448-9cf26fcaa98a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Native Completion.cstarRing:51 explicitly assumes only NonUnitalSeminormedRing, StarRing and isometric star, and \u2200x,\u2016x\u2016\u00b2\u2264\u2016star x*x\u2016; its closure-induction proof gives a CStarRing on the separated completion. This is genuine degenerate-seminorm core API without completeness on the input. The explicit general complex scalar-seminorm bundle/equivalence of all catalogue axioms was not checked, so keep partial rather than importing the genuine-norm CStarRing class as the full definition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/CStarAlgebra/Completion.lean",
+          "declarations": "UniformSpace.Completion.instNormedStarGroup L40; Completion.cstarRing L51",
+          "note": "Native extension/completion of degenerate CStar-seminorm data, with the missing general complex-interface check stated."
+        }
+      ],
+      "search_notes": "Inspected full short completion proof and FullSeminorm:109/160/169/178 for crossed products. The latter is a particular integrated-operator seminorm with extra action/L1 data, so exclude that application file. Do not add a new proof of scalar/star equivalence in this coverage pass."
+    },
+    {
+      "concept": "curvature-function-convex-body",
+      "concept_id": "40ab2233-0c77-57b1-9f91-e0a8861d9005",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected the actual ConvexBody definition/Minkowski API and generic Radon\u2013Nikodym density infrastructure. The surface area measure S_K on the sphere, its normalization and its relation to K were not verified, so a generic rnDeriv alone does not establish this particular curvature density. The unresolved step is the supplying convex-geometric measure, not the abstract existence of Radon\u2013Nikodym derivatives. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped surfaceAreaMeasure/curvature/support searches in convex, manifold and measure code. Generic body volume/Hausdorff measures are not automatically the spherical surface area measure S_K; unknown after the checked bounded search, not a no-formalization assertion."
+    },
+    {
+      "concept": "curvature-function-convex-body",
+      "concept_id": "40ab2233-0c77-57b1-9f91-e0a8861d9005",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected the actual ConvexBody definition/Minkowski API and generic Radon\u2013Nikodym density infrastructure. The surface area measure S_K on the sphere, its normalization and its relation to K were not verified, so a generic rnDeriv alone does not establish this particular curvature density. The unresolved step is the supplying convex-geometric measure, not the abstract existence of Radon\u2013Nikodym derivatives. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped surfaceAreaMeasure/curvature/support searches in convex, manifold and measure code. Generic body volume/Hausdorff measures are not automatically the spherical surface area measure S_K; unknown after the checked bounded search, not a no-formalization assertion."
+    },
+    {
+      "concept": "curvature-matrix-support-function",
+      "concept_id": "dd0f2e35-33d3-5e18-a3f7-c43ffea9bd5f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Actual generic manifold Hessian/metric and the native isometric-immersion derivative comparison do not certify the full support-function construction. This pass did not verify the 1-homogeneous extension, restriction of its Euclidean Hessian to u\u22a5, and the exact spherical identity Hess_S(h)+hI together with the positive-definite support interpretation. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped support-function/curvature-matrix/Hessian searches in convex and manifold sources, inspecting ConvexBody and LeviCivita/Immersion rather than inferring an endpoint from a Hessian name. Generic differentiation/projection ingredients are excluded as prerequisites; exact geometric bridge unresolved."
+    },
+    {
+      "concept": "curvature-matrix-support-function",
+      "concept_id": "dd0f2e35-33d3-5e18-a3f7-c43ffea9bd5f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Actual generic manifold Hessian/metric and the native isometric-immersion derivative comparison do not certify the full support-function construction. This pass did not verify the 1-homogeneous extension, restriction of its Euclidean Hessian to u\u22a5, and the exact spherical identity Hess_S(h)+hI together with the positive-definite support interpretation. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped support-function/curvature-matrix/Hessian searches in convex and manifold sources, inspecting ConvexBody and LeviCivita/Immersion rather than inferring an endpoint from a Hessian name. Generic differentiation/projection ingredients are excluded as prerequisites; exact geometric bridge unresolved."
+    },
+    {
+      "concept": "de-branges-rovnyak-space",
+      "concept_id": "9faa5c64-1663-5b84-bc12-b579c74a9287",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Native Hardy/ReproducingKernel constructs evaluation and the ordinary Hardy Szeg\u0151 kernel (1\u2212conj(w)z)\u207b\u00b9. Its checked reproducing/norm context does not supply the Schur defect factor 1\u2212b(z)conj(b(w)), positive-definite kernel Hilbert space H(b), or the induced-norm range of sqrt(I\u2212TbTb*). Those exact constructions/equivalence remain unverified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped Branges/Rovnyak/defect-kernel/operator-range searches and inspected Hardy kernel/evaluation and Hardy multiplier preservation. Ordinary H\u00b2 kernels and a generic positive square root do not by themselves establish the defect range Hilbert topology or kernel equivalence. No absence claim."
+    },
+    {
+      "concept": "de-branges-rovnyak-space",
+      "concept_id": "9faa5c64-1663-5b84-bc12-b579c74a9287",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Native Hardy/ReproducingKernel constructs evaluation and the ordinary Hardy Szeg\u0151 kernel (1\u2212conj(w)z)\u207b\u00b9. Its checked reproducing/norm context does not supply the Schur defect factor 1\u2212b(z)conj(b(w)), positive-definite kernel Hilbert space H(b), or the induced-norm range of sqrt(I\u2212TbTb*). Those exact constructions/equivalence remain unverified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped Branges/Rovnyak/defect-kernel/operator-range searches and inspected Hardy kernel/evaluation and Hardy multiplier preservation. Ordinary H\u00b2 kernels and a generic positive square root do not by themselves establish the defect range Hilbert topology or kernel equivalence. No absence claim."
+    },
+    {
+      "concept": "dense-subset-topological-space",
+      "concept_id": "202c7bf5-bf46-5109-8e64-afb5cca3a268",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Dense:149 is \u2200x,x\u2208closure s, and dense_iff_closure_eq:400 proves its exact equivalence to closure s=univ by set extensionality. There are no nonemptiness, separation or metrizability requirements. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Defs/Basic.lean",
+          "declarations": "Dense L149",
+          "note": "Native dense-set predicate in arbitrary topological spaces."
+        },
+        {
+          "path": "Mathlib/Topology/Closure.lean",
+          "declarations": "dense_iff_closure_eq L400",
+          "note": "Exact closure=whole-space characterization and ordinary closure/density API."
+        }
+      ],
+      "search_notes": "Bare arbitrary-space predicate and its ordinary closure/uniqueness API; exclude Baire category and density of particular arithmetic sets as additional theorems."
+    },
+    {
+      "concept": "dense-subset-topological-space",
+      "concept_id": "202c7bf5-bf46-5109-8e64-afb5cca3a268",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency Dense definition is byte-identical and its dense_iff_closure_eq proof unchanged (only an unrelated empty-closure proof differs). Native ContinuousOn/Dense:26 proves local agreement of continuous Hausdorff-valued maps extends through closure; with dense s, closure s=univ, giving the ordinary uniqueness-on-a-dense-set API. The proof uses closure neighborhoods and uniqueness of limits directly. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/ContinuousOn/Dense.lean",
+          "declarations": "Filter.EventuallyEq.eventuallyEq_nhds_of_closure_mem_nhds L26",
+          "note": "Native local extension of continuous equalities from a dense subset, ordinary density API with explicit Hausdorff hypothesis."
+        }
+      ],
+      "search_notes": "Hausdorff is on the uniqueness corollary, not on Dense itself. Native Topology/Closure deals with other interior/closed-set operations and is not selected merely by import. Baire endpoints and particular dense embeddings excluded."
+    },
+    {
+      "concept": "diagonal-operator-schauder-basis",
+      "concept_id": "9dd9bccb-de45-5802-a9d5-5a16dd6946eb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "GeneralSchauderBasis:104 stores coordinates and expansion; SchauderBasis:120 uses the conditional initial-segment summation filter on \u2115. For the catalogue bounded D: X\u2192L[\ud835\udd5c]X, instantiate \u2200n,HasEigenvector D.toLinearMap (\u03bb n) (b n). Eigenspace/Basic:435/438/467 identifies this precisely with D(b n)=\u03bbn\u2022b n and nonzero b n; basis coordinate orthogonality guarantees the latter. This is a checked exact generic representation, not an assertion that arbitrary bounded \u03bb works for a conditional basis. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Module/Bases.lean",
+          "declarations": "GeneralSchauderBasis L104; SchauderBasis L120",
+          "note": "Actual topological Schauder basis with conditional ordered expansion."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/Eigenspace/Basic.lean",
+          "declarations": "Module.End.HasEigenvector L435; hasEigenvector_iff L438; mem_eigenspace_iff L467",
+          "note": "Native scalar-eigenvector predicate giving the exact diagonal equations for the fixed basis and bounded operator."
+        }
+      ],
+      "search_notes": "No extra unconditionality assumption imposed on the definition. Exclude compactness/spectral classification/ideal membership for diagonal operators and prerequisite generic CLM import trees."
+    },
+    {
+      "concept": "diagonal-operator-schauder-basis",
+      "concept_id": "9dd9bccb-de45-5802-a9d5-5a16dd6946eb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency basis and eigenvector definitions retain the same declarations (Bases differs only a comment line). Native UnconditionalSchauderBasis.multiplier:178 constructs bounded diagonal operators from bounded scalar families for unconditional bases in Banach spaces. multiplier_apply_basis:226 proves the exact diagonal equation and multiplier_eq_iff:233 characterizes this operator by those equations using dense basis span. This is direct constructor/uniqueness API for an explicitly narrower subclass, with complete general definition inherited. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Module/Bases/Unconditional.lean",
+          "declarations": "UnconditionalSchauderBasis.multiplier L178; multiplier_apply_basis L226; multiplier_eq_iff L233",
+          "note": "Native diagonal multiplier construction, coordinate formula, uniqueness and product API under stated unconditional-basis hypotheses."
+        }
+      ],
+      "search_notes": "Actual series/CLM construction and basis evaluation/uniqueness proofs inspected. Do not claim bounded scalar multipliers on EVERY conditional Schauder basis are bounded. Conditional definition inherited; compact diagonal/spectral endpoints excluded."
+    },
+    {
+      "concept": "diffeomorphism-euclidean",
+      "concept_id": "d1775b34-cebb-5679-82d6-43b67dd98ced",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Diffeomorph:82 extends Equiv with ContMDiff n of the map and inverse. Choose n=\u221e, real Euclidean model spaces and the inherited open-subset manifold structures. ContMDiff/NormedSpace:62/68 identifies manifold smoothness with ordinary ContDiff in Euclidean charts, yielding exactly smooth bijections with smooth inverse between open sets. No analyticity or isometry condition is added. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Geometry/Manifold/Diffeomorph.lean",
+          "declarations": "Diffeomorph L82; symm/trans basic API",
+          "note": "Native two-sided smooth equivalence and inverse/composition calculus."
+        },
+        {
+          "path": "Mathlib/Geometry/Manifold/ContMDiff/NormedSpace.lean",
+          "declarations": "contMDiffOn_iff_contDiffOn L62; contMDiff_iff_contDiff L68",
+          "note": "Checked exact ordinary Euclidean smoothness interpretation of the generic manifold constructor."
+        }
+      ],
+      "search_notes": "Specialize open subsets, not arbitrary subsets where smoothness-within can differ. Tangent bundle lifts, Lie groups and global inverse-function endpoints are extra structures/theorems."
+    },
+    {
+      "concept": "diffeomorphism-euclidean",
+      "concept_id": "d1775b34-cebb-5679-82d6-43b67dd98ced",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency Diffeomorph is byte-identical, and its NormedSpace smoothness equivalence differs only by a comment. Native Diffeomorph/NormedSpace:48 proves fderiv f (f\u207b\u00b9x) applied to fderiv f\u207b\u00b9 x is identity, by the checked manifold inverse-derivative law and chart identification. subLeft:61 constructs an elementary affine diffeomorphism. These are direct ordinary derivative/example API; the general open-subset definition remains inherited. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Manifold/Diffeomorph/NormedSpace.lean",
+          "declarations": "Diffeomorph.differentiable L40; fderiv_apply_fderiv_symm_apply L48; subLeft L61",
+          "note": "Native ordinary Euclidean inverse-derivative identity and elementary smooth equivalence constructors."
+        }
+      ],
+      "search_notes": "Whole-space corollaries do not narrow the inherited open-set definition. Native Tangent file constructs a further tangent-bundle equivalence and is excluded as an additional object, along with inverse-function existence endpoints."
+    },
+    {
+      "concept": "difference-body",
+      "concept_id": "173949ed-5798-562e-86e3-5b09b3067d71",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Set pointwise subtraction is image2 (\u00b7\u2212\u00b7), with mem_sub recording x\u2212y for x,y\u2208K; the pointwise group identities give K\u2212K=K+(\u2212K), and negation exchanges the two witnesses, hence origin symmetry. ConvexBody:44 supplies the actual compact nonempty convex carrier and its Add:110/coercion:127 implement Minkowski sum. Apply negation as a continuous linear map (or its compact/convex image constructor) to form \u2212K; the resulting sum is the exact unnormalized difference body. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Pointwise/Set/Basic.lean",
+          "declarations": "Set.sub (generated from div) L447; mem_sub; pointwise subtraction/group identities",
+          "note": "Native exact set difference-by-subtraction, negative sets and Minkowski algebra; not set-theoretic setminus."
+        },
+        {
+          "path": "Mathlib/Analysis/Convex/Body.lean",
+          "declarations": "ConvexBody L44; Add instance L110; coe_add L127",
+          "note": "Actual compact nonempty convex body type and Minkowski sum constructor."
+        }
+      ],
+      "search_notes": "No factor 1/2 is silently inserted; the normalized variant is a separate scalar rescaling. ConvexBody itself allows empty interior; the construction applies in particular to full-dimensional catalogue bodies. Exclude Rogers\u2013Shephard/volume inequalities and symmetrization endpoints."
+    },
+    {
+      "concept": "difference-body",
+      "concept_id": "173949ed-5798-562e-86e3-5b09b3067d71",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency ConvexBody is byte-identical and the pointwise set subtraction/group formulas unchanged (only inversion-instance scoping differs). Native ConvexBody.map:51 explicitly constructs fK as a convex body using linear-image convexity, compactness and nonemptiness, with coe_map:58. Specializing f=\u2212id supplies \u2212K and inherited Minkowski addition gives K\u2212K; this is exact ordinary image/operation API, not an unrelated application. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/Body.lean",
+          "declarations": "ConvexBody.map L51; coe_map L58; mem_map L61; map_comp L69",
+          "note": "Native continuous-linear image constructor, in particular negation, and exact carrier/naturality API used by the difference body."
+        }
+      ],
+      "search_notes": "Carrier and witness symmetry as in the checked pointwise set constructor; no new mathematical proof is being added to the library. Exclude native gauge/John ellipsoid/volume endpoints; full-dimensionality does not affect the inherited operation."
+    },
+    {
+      "concept": "discrete-fourier-transform-vector-valued",
+      "concept_id": "b6facc6d-0be1-5504-89e8-698b51595833",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "ZMod.auxDFT:50 and dft:87 operate on arbitrary complex modules, with dft_apply:106 the sum \u2211j,stdAddChar(\u2212jk)\u2022\u03a6j. CircleAddChar.stdAddChar_coe:86 proves stdAddChar j=exp(2\u03c0 i j/N), so this is exactly the catalogue negative-exponent vector-valued DFT for positive N. The actual dft\u00b2/inverse proof uses finite character orthogonality; dft_symm_apply:115 inserts N\u207b\u00b9 only in the inverse. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Fourier/ZMod.lean",
+          "declarations": "ZMod.auxDFT L50; dft L87; dft_apply L106; dft_symm_apply L115",
+          "note": "Native finite vector-valued Fourier transform, inversion and elementary finite-transform API."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Complex/CircleAddChar.lean",
+          "declarations": "ZMod.stdAddChar L83; stdAddChar_coe L86",
+          "note": "Exact complex exponential kernel and sign/normalization identification."
+        }
+      ],
+      "search_notes": "N>0 is explicit via NeZero N, as usual for a list of N Fourier components. Exclude Gauss-sum evaluation and number-theoretic applications, continuous Fourier analysis and implementation complexity."
+    },
+    {
+      "concept": "discrete-fourier-transform-vector-valued",
+      "concept_id": "b6facc6d-0be1-5504-89e8-698b51595833",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency finite DFT file is byte-identical. Native Fourier/ZMod proves explicit exponential/character comparisons and dft_comp_natCast_val:79 for vector-valued functions under modular reduction/repetition, using the actual grouped sum calculation. This is ordinary finite-DFT reindexing/kernel API with the exact negative exponent inherited. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Fourier/ZMod.lean",
+          "declarations": "ZMod.stdAddChar_intCast_natCast_mul L48; fourier_val_div_eq_stdAddChar L60; dft_comp_natCast_val L79",
+          "note": "Native modular reindexing/explicit character identity for the vector-valued finite transform."
+        }
+      ],
+      "search_notes": "Read scalar character proof and vector-valued regrouped-sum proof context. No scalar-only substitution for the vector case. Other finite Fourier number-theoretic evaluations and continuous circle transform endpoints excluded."
+    },
+    {
+      "concept": "disk-algebra",
+      "concept_id": "e5a5afba-d80a-5d94-afa9-c4f5477d896b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib DiffContOnCl:31 exactly supplies individual functions holomorphic on the open disk and continuous on its closure; native Tau holomorphicFunctionsSubalgebra concerns C(U,\u2102) with compact-open topology on OPEN U, while Bounded concerns H\u221e on U. This pass did not certify an exact closed-disk continuous-map subalgebra with the inherited supremum norm and boundary restriction/extension equivalence. The boundary-continuous Banach algebra assembly, rather than the holomorphic predicate alone, remains unresolved. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped diskAlgebra/DiscAlgebra/DiffContOnCl/holomorphic-subalgebra searches, inspected actual DiffContOnCl fields/closure/add/scalar laws and Tau HolomorphicFunctions/Basic carrier. H\u221e allows boundary discontinuity, so it cannot replace A(D). Unknown does not demand a dedicated alias; a checked generic closed-disk subalgebra constructor could resolve the frontier."
+    },
+    {
+      "concept": "disk-algebra",
+      "concept_id": "e5a5afba-d80a-5d94-afa9-c4f5477d896b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Mathlib DiffContOnCl:31 exactly supplies individual functions holomorphic on the open disk and continuous on its closure; native Tau holomorphicFunctionsSubalgebra concerns C(U,\u2102) with compact-open topology on OPEN U, while Bounded concerns H\u221e on U. This pass did not certify an exact closed-disk continuous-map subalgebra with the inherited supremum norm and boundary restriction/extension equivalence. The boundary-continuous Banach algebra assembly, rather than the holomorphic predicate alone, remains unresolved. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped diskAlgebra/DiscAlgebra/DiffContOnCl/holomorphic-subalgebra searches, inspected actual DiffContOnCl fields/closure/add/scalar laws and Tau HolomorphicFunctions/Basic carrier. H\u221e allows boundary discontinuity, so it cannot replace A(D). Unknown does not demand a dedicated alias; a checked generic closed-disk subalgebra constructor could resolve the frontier."
+    },
+    {
+      "concept": "disk-automorphism",
+      "concept_id": "f949181c-b8cb-5b9a-9f96-fd93940acfae",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Diffeomorph:82 for complex open disk, order \u221e, gives an exact generic holomorphic bijection/inverse representation: CauchyIntegral:738 proves holomorphic maps on opens are complex ContDiff of all orders. However this pass did not verify the complete arbitrary-a M\u00f6bius classification c(z\u2212a)/(1\u2212conj(a)z) in standalone Mathlib. The exact defining object is present, while the explicit classification included in the paragraph is unverified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Geometry/Manifold/Diffeomorph.lean",
+          "declarations": "Diffeomorph L82; symm/trans API",
+          "note": "Generic two-sided complex smooth equivalence on the open disk, furnishing the automorphism object."
+        },
+        {
+          "path": "Mathlib/Analysis/Complex/CauchyIntegral.lean",
+          "declarations": "DifferentiableOn.contDiffOn L738",
+          "note": "Holomorphic-to-complex-smooth equivalence needed for the exact generic disk constructor."
+        }
+      ],
+      "search_notes": "Inspected Schwarz/Cauchy and complex diffeomorphism candidates. Schwarz origin-fixing rotation rigidity is not by itself the full arbitrary-center classification. Hyperbolic isometry/Schwarzian/Riemann-mapping endpoints excluded."
+    },
+    {
+      "concept": "disk-automorphism",
+      "concept_id": "f949181c-b8cb-5b9a-9f96-fd93940acfae",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Native Moebius:43/218 constructs (z\u2212a)/(1\u2212conj(a)z), its disk self-equivalence and holomorphic inverse. UnitDisc/Automorphism/Basic adds unimodular rotations; Rotation proves an origin-fixing automorphism is a rotation via the equality case of Schwarz. Classification:83 proves EVERY two-sided holomorphic disk self-map has the standard (u,a) form, and Parametrization:94 proves uniqueness. Group defines the exact holomorphic-permutation subgroup with inverse compatibility. The actual construction, rigidity/classification and uniqueness proofs were inspected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Complex/Conformal/Moebius.lean",
+          "declarations": "unitDiscMoebius L43; unitDiscMoebiusEquiv L218",
+          "note": "Native M\u00f6bius formula, disk preservation, differentiability and two-sided inverse."
+        },
+        {
+          "path": "TauCeti/Analysis/Complex/Conformal/UnitDisc/Automorphism/Basic.lean",
+          "declarations": "unitDiscStandardAutomorphismEquiv; differentiableOn standard maps",
+          "note": "Native rotation-plus-M\u00f6bius standard maps and holomorphic forward/inverse API."
+        },
+        {
+          "path": "TauCeti/Analysis/Complex/Conformal/UnitDisc/Automorphism/Rotation.lean",
+          "declarations": "origin-fixing rotation classification L69",
+          "note": "Native Schwarz rigidity step and rotation characterization."
+        },
+        {
+          "path": "TauCeti/Analysis/Complex/Conformal/UnitDisc/Automorphism/Classification.lean",
+          "declarations": "exists_forall_unitDisc_eq_unitDiscStandardAutomorphismEquiv L83",
+          "note": "Native complete arbitrary-center classification from holomorphic two-sided inverse hypotheses."
+        },
+        {
+          "path": "TauCeti/Analysis/Complex/Conformal/UnitDisc/Automorphism/Group.lean",
+          "declarations": "unitDiscAut L69; mem_unitDiscAut_iff L134",
+          "note": "Native automorphism subgroup, inverse/identity/composition API and standard-form membership."
+        },
+        {
+          "path": "TauCeti/Analysis/Complex/Conformal/UnitDisc/Automorphism/Parametrization.lean",
+          "declarations": "standard parameter uniqueness L94; parameter equivalence L134",
+          "note": "Native unique unimodular/center parameter presentation and inverse parametrization."
+        }
+      ],
+      "search_notes": "Parameters satisfy norm u=1 and a inside open disk; singular denominators are excluded in the checked map proof. Select complete defining/classification/natural group/parameter API. Exclude SchwarzPick automorphism isometry, hyperbolic distance and unrelated upper-half-plane action files as extra endpoints."
+    },
+    {
+      "concept": "distribution-open-euclidean",
+      "concept_id": "2f847c76-a0ea-520e-8c9a-054fda0a55d1",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Distribution:165 is the continuous linear dual of real TestFunction, choose n=\u22a4 and F=\u211d (complex-valued distributions are also allowed as real-linear maps into \u2102). TestFunction:67 stores smoothness and compact support in \u03a9. Its LF topology:274 has continuous_iff_continuous_comp:335 for every fixed compact-support inclusion. ContDiffMapSupportedIn:485/521 induces each fixed-support topology by all iterated derivatives as bounded continuous functions, exactly uniform convergence of every derivative. No extension to the Schwartz dual is required. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Distribution/Distribution.lean",
+          "declarations": "Distribution L165",
+          "note": "Native continuous test-function dual, ordinary distribution operations."
+        },
+        {
+          "path": "Mathlib/Analysis/Distribution/TestFunction.lean",
+          "declarations": "TestFunction L67; topologicalSpace L274; continuous_iff_continuous_comp L335",
+          "note": "Native compactly supported smooth test functions and canonical LF universal property."
+        },
+        {
+          "path": "Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean",
+          "declarations": "structureMapLM L485; topologicalSpace L521; structureMapLM_top_apply L499",
+          "note": "Actual fixed-support topology of uniform convergence of all derivatives."
+        }
+      ],
+      "search_notes": "Actual topology/structure-map universal-property proofs inspected. Distribution topology uses compact convergence on the dual but the defining functionals are continuous for the required LF test topology. Exclude PDE, regularity, Fourier multiplier and tempered-distribution embeddings as further endpoints."
+    },
+    {
+      "concept": "distribution-open-euclidean",
+      "concept_id": "2f847c76-a0ea-520e-8c9a-054fda0a55d1",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency TestFunction and fixed-support topology files are byte-identical and Distribution differs only by a comment blank line. Native TestFunction/FinalTopology:39 proves the LF test topology equals the generic final locally convex topology of all fixed-support inclusions, by its linear-map universal property. This is direct equivalent-definition API of the continuity condition specifying distributions, not merely a use in a PDE. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Distribution/TestFunction/FinalTopology.lean",
+          "declarations": "TestFunction.finalLocallyConvexTopology_eq L39",
+          "note": "Native exact LF/final-locally-convex characterization of the test topology underlying ordinary distributions."
+        }
+      ],
+      "search_notes": "Inspected native DualEquiv:130 as an additional vector-valued dual-presentation candidate; excluded here to keep the scalar ordinary-distribution boundary on the exact LF topology. No claim every distribution is tempered, no PDE applications/import tree charged."
+    },
+    {
+      "concept": "distributional-characterization-superharmonic",
+      "concept_id": "2e17592d-0776-5930-b7b7-a4064efeddde",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Native SubharmonicOn:80 explicitly requires a CONTINUOUS real-valued function and local submean inequalities; comparison_principle:318 works in that continuous class. The catalogue L1loc distributional criterion permits general lower/upper-semicontinuous superharmonic representatives, including potential singularities, so this stronger continuity hypothesis cannot stand in for the full theorem. Neither the distribution-sign-to-representative construction, AE uniqueness nor the converse local integrability was verified under the exact scope. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped superharmonic/subharmonic/distributional-Laplacian searches in harmonic, distribution and Green-function sources; inspected actual SubharmonicOn fields and comparison hypotheses. A generic Laplacian or continuous mean-value comparison is a prerequisite/different restricted endpoint. The general representative theorem remains unresolved, not absent."
+    },
+    {
+      "concept": "distributional-characterization-superharmonic",
+      "concept_id": "2e17592d-0776-5930-b7b7-a4064efeddde",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Native SubharmonicOn:80 explicitly requires a CONTINUOUS real-valued function and local submean inequalities; comparison_principle:318 works in that continuous class. The catalogue L1loc distributional criterion permits general lower/upper-semicontinuous superharmonic representatives, including potential singularities, so this stronger continuity hypothesis cannot stand in for the full theorem. Neither the distribution-sign-to-representative construction, AE uniqueness nor the converse local integrability was verified under the exact scope. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements/definitions and representative proofs inspected, without fresh build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped superharmonic/subharmonic/distributional-Laplacian searches in harmonic, distribution and Green-function sources; inspected actual SubharmonicOn fields and comparison hypotheses. A generic Laplacian or continuous mean-value comparison is a prerequisite/different restricted endpoint. The general representative theorem remains unresolved, not absent."
+    }
+  ]
+}

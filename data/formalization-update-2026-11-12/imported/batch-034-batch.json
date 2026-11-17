@@ -1,0 +1,732 @@
+{
+  "note": "Whole-catalogue formalization update batch-034: independent source review by category_galois_formalization of analysis_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "lie-algebra-affine-algebraic-group",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Derivation/Basic.lean",
+          "declarations": "Derivation:47; Derivation.mk':445",
+          "note": "Implements the exact counit-valued derivation space after the specified scalar-action instantiation; bracket/extension frontier remains."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Derivation F A F with the A-action induced by the counit ε is exactly the stated F-linear Leibniz space. Derivation:47 and mk':445 show the additional D(1)=0 field follows from Leibniz in cancellative coefficients. The ordinary self-valued derivation commutator does not furnish a counit-valued bracket: the coproduct/invariant-extension comparison was not certified in standalone Mathlib.\nSearch and boundary notes: Checked actual counit actions, bracket closure/Jacobi and invariant-extension proofs. Exclude adjoint/coadjoint representations and tangent functor applications as separate endpoints; do not charge the entire convolution/comodule import tree.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "lie-algebra-affine-algebraic-group",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Tangent/Basic.lean",
+          "declarations": "TauCeti.Bialgebra.CounitAlgebra:85; counit-induced Algebra instance:175",
+          "note": "Defines tangent coefficient representation and the counit scalar action."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Tangent/Lie/Basic.lean",
+          "declarations": "Derivation.instBracketCounitAlgebra:122; Derivation.instLieRingCounitAlgebra:195; Derivation.instLieAlgebraCounitAlgebra:233",
+          "note": "Proves the convolution commutator closes on counit derivations and satisfies Lie identities."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Tangent/InvariantDerivation.lean",
+          "declarations": "TauCeti.Bialgebra.leftInvariantDerivation:79; .leftInvariantDerivation_apply:102; .counit_leftInvariantDerivation:111; .comul_leftInvariantDerivation:126",
+          "note": "Constructs the invariant extension as a Lie homomorphism and proves its explicit contraction/evaluation formula."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native CounitAlgebra:85 and its counit-induced A-algebra at175 supply the exact coefficient action, with R=B=F and commutative coordinate Hopf algebra A. Tangent/Lie/Basic constructs the convolution commutator as a derivation:122, LieRing:195 and LieAlgebra:233; the inspected Jacobi/scalar proofs transport the associative convolution identities. InvariantDerivation.leftInvariantDerivation:79 extends d by contraction of Δ, proves bracket preservation and counit recovery:111. This is the requested induced commutator bracket, not ordinary composition of maps A→F. Dependency Derivation has a documentation insertion, anchors48/446. Independent namespace correction: Lie/Basic declarations are in the ROOT Derivation namespace, whereas invariant contraction is TauCeti.Bialgebra.leftInvariantDerivation, not TauCeti.leftInvariantDerivation. comul_leftInvariantDerivation:126-134 explicitly proves Δ∘D=(id⊗D)∘Δ, the actual left-translation invariance.\nSearch and boundary notes: Checked actual counit actions, bracket closure/Jacobi and invariant-extension proofs. Exclude adjoint/coadjoint representations and tangent functor applications as separate endpoints; do not charge the entire convolution/comodule import tree.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "lie-algebra-real-lie-group",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean",
+          "declarations": "LeftInvariantDerivation:46; bracket:218; commutator_apply:238; LieAlgebra instance:256",
+          "note": "Defines invariant smooth-function derivations and their commutator Lie algebra."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. LeftInvariantDerivation:46 is the linear space of derivations of smooth scalar functions invariant under left translation. Its bracket:218, evaluation formula:238 and LieAlgebra:256 give precisely X(Yf)−Y(Xf). The full finite-dimensional real identification of all point derivations with tangent vectors, and hence the vector-field/derivation identification, was not certified in standalone Mathlib.\nSearch and boundary notes: Boundary is ordinary finite-dimensional real Lie groups without boundary; do not silently claim every infinite-dimensional manifold or a new equivalence of arbitrary nonsmooth vector fields. Exclude Killing forms, enveloping algebras and representation endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "lie-algebra-real-lie-group",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Lie/Tangent/LeftInvariantDerivation.lean",
+          "declarations": "TauCeti.tangentToLeftInvariantDerivation:151; LeftInvariantDerivation.evalAt_one_surjective:199; leftInvariantDerivationEquivGroupLieAlgebra:211",
+          "note": "Constructs invariant vector-field derivations and proves evaluation/tangent linear equivalence, including its inverse."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The dependency invariant derivation definition/bracket file is byte-identical to standalone Mathlib. Native tangentToLeftInvariantDerivation:151 differentiates along the smooth invariant vector field and proves left invariance by the chain rule:117. evalAt_one_surjective:199 and leftInvariantDerivationEquivGroupLieAlgebra:211 give the inverse identification for finite-dimensional smooth real Hausdorff Lie groups, with I.IsInteriorPoint 1 (automatic on the usual boundaryless Lie group). Checked both directions and scalar/additive laws. Combined with the dependency commutator this is the catalogue meaning.\nSearch and boundary notes: Boundary is ordinary finite-dimensional real Lie groups without boundary; do not silently claim every infinite-dimensional manifold or a new equivalence of arbitrary nonsmooth vector fields. Exclude Killing forms, enveloping algebras and representation endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "local-field",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/Field.lean",
+          "declarations": "IsTopologicalDivisionRing:51",
+          "note": "Defines the topological field structure used by the exact generic local-field predicate."
+        },
+        {
+          "path": "Mathlib/Topology/Defs/Filter.lean",
+          "declarations": "LocallyCompactSpace:327",
+          "note": "Defines the local-compactness component of the exact conjunction."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact generic representation: Field F, TopologicalSpace F, IsTopologicalDivisionRing F, T2Space F, LocallyCompactSpace F, and ¬DiscreteTopology F. IsTopologicalDivisionRing:51 includes continuous ring operations and inversion away from zero; LocallyCompactSpace:327 supplies local compactness. This explicitly includes archimedean fields and does not replace the paragraph with IsNonarchimedeanLocalField.\nSearch and boundary notes: Exclude classification, finite-extension stability, second countability and local reciprocity as additional endpoints. The native norm theorem is not asserted for archimedean local fields.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "local-field",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/LocalField/NormedField.lean",
+          "declarations": "TauCeti.normalizedNormedField:57; normalizedNormedField_norm_def:66; normalizedNormedField_topology_eq:81",
+          "note": "Constructs normalized nonarchimedean local-field norms and proves the exact topology dictionary."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The same generic nondiscrete locally compact Hausdorff field conjunction is available from the checked dependency (IsTopologicalDivisionRing:52 in Topology/Algebra/Field.lean; Filter definitions unchanged). Native normalizedNormedField:57 builds the normalized absolute-value norm in the nonarchimedean subclass, and normalizedNormedField_topology_eq:81 proves that norm induces the GIVEN topology by comparing both neighborhood bases; the complete proof was checked. It is ordinary norm/topology API for local fields under explicitly stronger nonarchimedean hypotheses, while archimedean availability remains in the generic definition.\nSearch and boundary notes: Exclude classification, finite-extension stability, second countability and local reciprocity as additional endpoints. The native norm theorem is not asserted for archimedean local fields.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "local-field-topology-algebraic-group-points",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Category/Ring/Topology.lean",
+          "declarations": "CommRingCat.HomTopology topology instance:48; isEmbedding_precomp_of_surjective:83; mvPolynomialHomeomorph:109",
+          "note": "Defines intrinsic evaluation topology and proves polynomial/quotient presentation comparisons; restriction to the fixed base-map fiber supplies arbitrary F-algebra points."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. CommRingCat.HomTopology.topology instance:48 is the pointwise evaluation topology on ring homomorphisms. Its isEmbedding_precomp_of_surjective:83 proves quotient-algebra presentations induce embeddings; mvPolynomialHomeomorph:109 identifies Hom(F[X_i],F) with Hom(F,F) × F^i, with continuous inverse proved by polynomial evaluation. Exact base-F points are the fiber of Hom(A,F)→Hom(F,F) over the given structural map. Restrict the proved presentation embedding/homeomorphism to this fixed-base fiber: the first product coordinate is constant, so projection to F^i and its inverse x↦(structuralMap,x) identify its subspace topology. Thus EVERY finite generating affine presentation gives the SAME intrinsic evaluation topology on AlgHom_F(A,F), precisely the catalogue embedding independence. This is an explicit generic fiber instantiation of checked constructors/comparisons, without requiring a named AlgHom topology alias.\nSearch and boundary notes: Checked the complete surjective-precomposition embedding and polynomial-homeomorphism proofs, including continuity of the polynomial inverse. The fixed base-map fiber is essential: the full ring-hom space permits varying maps F→F. No classification/existence theorem or new Lean proof is claimed. Exclude unrelated spectrum/Zariski topology and specific GL/Scheme/Weil-restriction applications.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "local-field-topology-algebraic-group-points",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Algebra/PointTopology/Basic.lean",
+          "declarations": "TauCeti.PointTopology.topology:85; mvPolynomialHomeomorph:164; isEmbedding_eval_generators:186; range_eval_generators:226; isClosedEmbedding_eval_generators:246",
+          "note": "Defines the intrinsic point topology and proves its generating-coordinate/subspace characterization."
+        },
+        {
+          "path": "TauCeti/Topology/Algebra/PointTopology/Functoriality.lean",
+          "declarations": "TauCeti.PointTopology.continuous_comap:46; isEmbedding_comap_of_surjective:51",
+          "note": "Proves polynomial/coordinate-algebra map continuity and the embedding comparison API."
+        },
+        {
+          "path": "TauCeti/Topology/Algebra/PointTopology/Group.lean",
+          "declarations": "TauCeti.PointTopology.instContinuousMulWithConv:75; instContinuousInvWithConv:95; isTopologicalGroup:102",
+          "note": "Proves group operations continuous for this point topology using finite coproduct expansions."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. PointTopology.topology:85 defines the initial evaluation topology on A→ₐ[k]F. mvPolynomialHomeomorph:164 identifies affine space points with coordinate tuples; isEmbedding_eval_generators:186 proves every generating family induces the SAME topology by expressing all evaluations as polynomials. range_eval_generators:226 identifies the image with the relation zero locus, and isClosedEmbedding_eval_generators:246 proves the subspace statement. For finite generators this is the catalogue affine embedding, independent of choices. Functoriality.continuous_comap:46 gives polynomial-map continuity; Group instances:75/95 prove multiplication/inversion continuous on Hopf points. Hypotheses are weaker than a local field, so all local fields qualify.\nSearch and boundary notes: Read actual generating-family and relation-locus proofs. Exclude specific GL/Scheme/Weil-restriction/integral-point results as applications or further endpoints; do not require a separately named local-field alias.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "local-measure-gauge-form",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The inspected MeasureTheory.Measure.withDensity:38 / withDensity_apply:43 constructs a measure with a GIVEN ENNReal density; Haar/OfBasis constructs normalized real vector-space Haar measures. These do not by themselves identify an algebraic invariant gauge form with analytic coordinate densities over every local field, prove chart independence, or establish simultaneously finite-place vol(O)=1 and complex 2 dxdy normalization. The complete gauge-form local-measure package remains unresolved; no absence claim.\nSearch and boundary notes: Searched gauge form/invariant differential, local-field measure, Jacobian and Haar normalization paths, including native algebraic-group/point-topology/local-field namespaces. Native Gauge hits in convex/PDE/log-gauge modules concern different objects. withDensity is a prerequisite, not certification of the missing coordinate/gauge comparison; inherited Mathlib availability alone is not full coverage.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "local-measure-gauge-form",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The inspected MeasureTheory.Measure.withDensity:39 / withDensity_apply:44 constructs a measure with a GIVEN ENNReal density; Haar/OfBasis constructs normalized real vector-space Haar measures. These do not by themselves identify an algebraic invariant gauge form with analytic coordinate densities over every local field, prove chart independence, or establish simultaneously finite-place vol(O)=1 and complex 2 dxdy normalization. The complete gauge-form local-measure package remains unresolved; no absence claim.\nSearch and boundary notes: Searched gauge form/invariant differential, local-field measure, Jacobian and Haar normalization paths, including native algebraic-group/point-topology/local-field namespaces. Native Gauge hits in convex/PDE/log-gauge modules concern different objects. withDensity is a prerequisite, not certification of the missing coordinate/gauge comparison; inherited Mathlib availability alone is not full coverage.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "locally-compact-group",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/Group/Defs.lean",
+          "declarations": "IsTopologicalGroup:110",
+          "note": "Defines continuous multiplication and inverse for the group component."
+        },
+        {
+          "path": "Mathlib/Topology/Defs/Filter.lean",
+          "declarations": "LocallyCompactSpace:327",
+          "note": "Defines the local compactness component."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact conjunction Group G, TopologicalSpace G, IsTopologicalGroup G:110, LocallyCompactSpace G:327 and T2Space G. The topological-group class extends ContinuousMul and ContinuousInv; the topology is Hausdorff explicitly rather than assumed by local compactness.\nSearch and boundary notes: Require Hausdorffness explicitly. Exclude Haar measure, amenability and representation applications as additional concepts; ordinary neighborhood API applies to the class without needing multiplication in each proof.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "locally-compact-group",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Compactness/LocallyCompact.lean",
+          "declarations": "TauCeti.locallyCompactSpace_of_forall_exists_mem_nhds:34; IsOpenMap.exists_isCompact_subset_image:49",
+          "note": "Proves local compact-neighborhood construction and transport laws for the underlying local-compactness property."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact generic conjunction is supplied by byte-identical dependency Group/Defs and Filter. Native locallyCompactSpace_of_forall_exists_mem_nhds:34 proves local compactness from a LOCALLY COMPACT neighborhood U around every point (∀x,∃U∈𝓝x,LocallyCompactSpace U); IsOpenMap.exists_isCompact_subset_image:49 proves the corresponding compact-neighborhood lifting law. These are direct ordinary local-compactness API applicable to Hausdorff topological groups, under weaker hypotheses, not merely group superclass installers. The theorem does not directly assume IsCompact U; its subtype local-compactness hypothesis is the precise checked statement. The separate open-map theorem lifts compact sets, as stated.\nSearch and boundary notes: Require Hausdorffness explicitly. Exclude Haar measure, amenability and representation applications as additional concepts; ordinary neighborhood API applies to the class without needing multiplication in each proof.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "locally-compact-hausdorff-space",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Defs/Filter.lean",
+          "declarations": "WeaklyLocallyCompactSpace:313; LocallyCompactSpace:327",
+          "note": "Defines both compact-neighborhood formulations."
+        },
+        {
+          "path": "Mathlib/Topology/Separation/Basic.lean",
+          "declarations": "locally compact instance from WeaklyLocallyCompactSpace:1209; exists_isOpen_mem_isCompact_closure:1221",
+          "note": "Proves the Hausdorff equivalence with the exact compact-closure neighborhood condition."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Use T2Space X together with LocallyCompactSpace X:327. WeaklyLocallyCompactSpace:313 is the every-point compact-neighborhood form; under Hausdorffness the instance at Separation/Basic:1209 upgrades it to the library class. exists_isOpen_mem_isCompact_closure:1221 supplies the precise open-neighborhood compact-closure formulation in the paragraph (and a compact closure is conversely a compact neighborhood). Checked the completed regularity/compact-neighborhood proof.\nSearch and boundary notes: Do not infer separation from LocallyCompactSpace alone. Exclude compactification and measure existence endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "locally-compact-hausdorff-space",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Compactness/LocallyCompact.lean",
+          "declarations": "TauCeti.locallyCompactSpace_of_forall_exists_mem_nhds:34; IsOpenMap.exists_isCompact_subset_image:49",
+          "note": "Proves equivalent local-neighborhood construction and its compact-neighborhood lifting API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency neighborhood definitions and Hausdorff equivalence files are byte-identical. Native locallyCompactSpace_of_forall_exists_mem_nhds:34 and open-map compact-neighborhood lifting:49 prove ordinary API for precisely the local compactness component, under weaker hypotheses; the catalogue still explicitly requires T2Space. More precisely, native:34 assumes ∀x,∃U∈𝓝x,LocallyCompactSpace U, and pushes compact neighborhoods from that subtype to X; native:49 lifts compact sets through an open map. Neither theorem drops the separate catalogue T2 hypothesis.\nSearch and boundary notes: Do not infer separation from LocallyCompactSpace alone. Exclude compactification and measure existence endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "locally-constant-function",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/LocallyConstant/Basic.lean",
+          "declarations": "IsLocallyConstant:39; IsLocallyConstant.tfae:45; IsLocallyConstant.isClopen_fiber:78; IsLocallyConstant.iff_exists_open:81",
+          "note": "Defines local constancy and proves its neighborhood/fiber characterizations."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. IsLocallyConstant:39 is defined via open preimages of all sets; the equivalence proof IsLocallyConstant.tfae:45–66 gives exactly an open neighborhood on which f is constant at every point. Fibers are clopen:78. No discrete codomain topology is required.\nSearch and boundary notes: Boundary is the defining neighborhood/fiber/pullback API; exclude finite partitions, sheaf constructions and locally constant representations as further endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "locally-constant-function",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/LocallyConstant/Fiber.lean",
+          "declarations": "LocallyConstant.fiberClopens:30; iSup_toOpens_fiberClopens:44; comap_toOpens_fiberClopens:50",
+          "note": "Constructs clopen fibers, proves their cover and continuous pullback identity."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The checked dependency Basic has five fewer assertion lines before this section, so the corresponding local constancy anchors are34/40/73. Native fiberClopens:30 bundles each fiber as clopen, proves the fibers cover:44 and commute with continuous comap:50. Completed membership, cover and pullback proofs match ordinary function-fiber API.\nSearch and boundary notes: Boundary is the defining neighborhood/fiber/pullback API; exclude finite partitions, sheaf constructions and locally constant representations as further endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "masharov-sharipov-second-cuboid-search-bound",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The inspected NumberTheory/PythagoreanTriples.circleEquivGen:245 gives an explicit rational unit-circle parametrization with both inverse proofs; it does not implement the second-cuboid degree-ten root family, the exclusion q≥59p, or the t<61p² candidate bound. Searches for Masharov/Sharipov, perfect/second cuboid and the numerical bounds did not resolve that exact theorem in native source or the dependency. This is an unresolved coverage judgment, not a claim about arbitrary perfect cuboids.\nSearch and boundary notes: Excluded the Haar/OfBasis axis-aligned cuboid volume notation as a different mathematical meaning. Ordinary Pythagorean identities do not prove this root-exclusion/search theorem; no novel proof was developed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "masharov-sharipov-second-cuboid-search-bound",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The inspected NumberTheory/PythagoreanTriples.circleEquivGen:245 gives an explicit rational unit-circle parametrization with both inverse proofs; it does not implement the second-cuboid degree-ten root family, the exclusion q≥59p, or the t<61p² candidate bound. Searches for Masharov/Sharipov, perfect/second cuboid and the numerical bounds did not resolve that exact theorem in native source or the dependency. This is an unresolved coverage judgment, not a claim about arbitrary perfect cuboids.\nSearch and boundary notes: Excluded the Haar/OfBasis axis-aligned cuboid volume notation as a different mathematical meaning. Ordinary Pythagorean identities do not prove this root-exclusion/search theorem; no novel proof was developed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "matrix-trace",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Matrix/Trace.lean",
+          "declarations": "Matrix.trace:42; trace_add:61; trace_smul:65; trace_transpose:70",
+          "note": "Defines sum-of-diagonal trace and its immediate linearity/invariance API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Matrix.trace:42 is exactly ∑i,M i i for a finite square index type. Checked diagonal, zero, additive, scalar and transpose/conjugate-transpose proofs:45–74, including the empty index case.\nSearch and boundary notes: Exclude spectral, Hermitian, trace-power and positivity endpoints unless independently selected as concepts; no transitive matrix import allocation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "matrix-trace",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Matrix/Trace/Basic.lean",
+          "declarations": "Matrix.trace_add_mul_add_mul:38; trace_two_mul_sub_one:47; trace_reindex_self:53",
+          "note": "Proves elementary trace expansion, affine and reindexing identities."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency trace definition and immediate proofs agree mathematically (one inserted documentation line gives trace43, add62). Native trace_add_mul_add_mul:38 proves the quadratic expansion with cross term, trace_two_mul_sub_one:47 an affine identity and trace_reindex_self:53 invariance under simultaneous row/column reindexing. Actual proofs were inspected.\nSearch and boundary notes: Exclude spectral, Hermitian, trace-power and positivity endpoints unless independently selected as concepts; no transitive matrix import allocation.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "maximal-compact-subgroup-lie-group",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Order/Defs/Unbundled.lean",
+          "declarations": "Minimal:240 and generated Maximal",
+          "note": "Defines the exact order-theoretic maximality predicate instantiated to compact subgroups."
+        },
+        {
+          "path": "Mathlib/Topology/Defs/Filter.lean",
+          "declarations": "IsCompact:294",
+          "note": "Defines compactness of the subgroup carrier."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact generic predicate Maximal (fun H : Subgroup G ↦ IsCompact (H:Set G)) K. Maximal is generated by to_dual from Minimal:240, i.e. compact K and every larger compact subgroup lies back in K; subgroup antisymmetry turns this into equality. IsCompact:294 supplies compactness. This representation applies directly to the given real Lie group and asserts no existence/classification theorem.\nSearch and boundary notes: Exclude GL/SL unitary classification, Iwasawa decompositions and Spin maximality claims as separately significant special endpoints. In particular the Spin Block comment explicitly does not prove topology/maximality.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "maximal-compact-subgroup-lie-group",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Algebra/Group/Subgroup.lean",
+          "declarations": "Subgroup.isCompact_conj_smul:310; maximal_isCompact_iff_exists_eq_conj_smul:320",
+          "note": "Proves conjugation transport and the exact conditional maximal-compact characterization."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact generic Maximal/IsCompact predicate is supplied by byte-identical dependency files. Native Subgroup.isCompact_conj_smul:310 proves compact subgroups are preserved by conjugation; maximal_isCompact_iff_exists_eq_conj_smul:320 proves the maximality characterization conditional on a specified maximal compact U and the explicit conjugate-into-U property. The proof checks both maximality directions. This is direct compact-subgroup/maximality API, without claiming that extra conjugacy hypothesis for every Lie group.\nSearch and boundary notes: Exclude GL/SL unitary classification, Iwasawa decompositions and Spin maximality claims as separately significant special endpoints. In particular the Spin Block comment explicitly does not prove topology/maximality.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "meromorphic-continuation",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Meromorphic/Basic.lean",
+          "declarations": "MeromorphicOn:494; MeromorphicAt.congr:251",
+          "note": "Supplies the exact local meromorphy and domain restriction data for the continuation predicate."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact generic data: open original V, larger connected open U with V⊆U, a function g with MeromorphicOn g U:494 and Set.EqOn g f V. This directly expresses the definition; it does not assert existence of continuation for an arbitrary f. The meromorphic source definition ignores arbitrary values at poles, so equality on the original analytic domain is imposed literally as stated.\nSearch and boundary notes: Do not infer arbitrary continuation existence from the choice definition (its nonexistence branch is zero). Exclude zeta/L-function continuation theorems and global divisor/residue endpoints as applications.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "meromorphic-continuation",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Meromorphic/Identity.lean",
+          "declarations": "MeromorphicOn.eventuallyEq_of_isPreconnected:31; MeromorphicNFOn.eqOn_of_isPreconnected:42",
+          "note": "Proves connected-domain meromorphic identity/uniqueness laws."
+        },
+        {
+          "path": "TauCeti/Analysis/Meromorphic/Continuation.lean",
+          "declarations": "TauCeti.meromorphicContinuation:72; meromorphicContinuation_eqOn:88; meromorphicContinuation_eq:95",
+          "note": "Constructs and identifies canonical half-plane-to-plane continuation when existence is supplied."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Basic is byte-identical. Native MeromorphicOn.eventuallyEq_of_isPreconnected:31 and MeromorphicNFOn.eqOn_of_isPreconnected:42 prove germ propagation/uniqueness on connected domains. Continuation.meromorphicContinuation:72 constructs the canonical whole-plane normal-form continuation from a half-plane; meromorphicContinuation_eqOn:88 proves agreement only under its explicit existence hypothesis, and eq:95 proves identification. Both generic supplied-continuation predicate and this direct native extension/uniqueness API match the concept. At poles the normal-form choice fixes default zero values; unnormalized meromorphic functions are compared as punctured germs.\nSearch and boundary notes: Do not infer arbitrary continuation existence from the choice definition (its nonexistence branch is zero). Exclude zeta/L-function continuation theorems and global divisor/residue endpoints as applications.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "meromorphic-function-one-variable",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Meromorphic/Basic.lean",
+          "declarations": "MeromorphicAt:36; MeromorphicAt.div:311; MeromorphicOn:494",
+          "note": "Defines local finite-pole meromorphy and quotient/domain API."
+        },
+        {
+          "path": "Mathlib/Analysis/Meromorphic/Order.lean",
+          "declarations": "MeromorphicAt.meromorphicOrderAt_eq_int_iff:97; meromorphicOrderAt_div:582",
+          "note": "Proves nonvanishing analytic-factor normal form and cancellation by subtracting orders."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. MeromorphicAt:36 uses removal of a finite power of z−x; MeromorphicOn:494 applies it locally over the domain. Analytic functions are meromorphic and division closes:311. Order.meromorphicOrderAt_eq_int_iff:97 proves the local representation (z−x)^n g with analytic nonzero g, and meromorphicOrderAt_div:582 subtracts orders. This is the quotient-of-holomorphic germ meaning with common zeros canceled; negative order is a pole. Explicit library convention: values at isolated poles/removable singularities are ignored, via congr:251; normal forms fix a representative if point values matter.\nSearch and boundary notes: Checked actual analytic-factor and division-order proofs. Exclude global residue/divisor/Laurent expansions and the additional meromorphic-germ field/localization constructions as distinct objects/endpoints; do not claim pointwise holomorphy at arbitrary assigned pole values.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "meromorphic-function-one-variable",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Meromorphic/Order.lean",
+          "declarations": "MeromorphicAt.meromorphicOrderAt_eq_neg_one_of_tendsto_sub_smul:66; AnalyticOnNhd.meromorphicOrderAt_ne_top_of_exists_ne_zero:47",
+          "note": "Proves direct local meromorphic order/pole recognition and nonzero-factor API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency Basic file is byte-identical; relevant Order:97/582 sections are unchanged (an unrelated late logarithmic-derivative theorem adds an explicit meromorphy hypothesis). Native MeromorphicAt.meromorphicOrderAt_eq_neg_one_of_tendsto_sub_smul:66 proves a nonzero rescaled punctured limit detects a simple pole, by order multiplication and the analytic nonzero limit. This is ordinary local pole/order recognition API for the same one-variable meromorphic functions. The coefficient/pole-value convention remains the dependency punctured-germ convention.\nSearch and boundary notes: Checked actual analytic-factor and division-order proofs. Exclude global residue/divisor/Laurent expansions and the additional meromorphic-germ field/localization constructions as distinct objects/endpoints; do not claim pointwise holomorphy at arbitrary assigned pole values.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "metaplectic-double-cover-sl2",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Inspected UpperHalfPlane/MoebiusAction.denom:32, denom_ne_zero:63, denom_cocycle:74 and denom_cocycle':156, and Manifold.contMDiff_denom:88. For determinant-positive matrices the cocycle is the required cτ+d automorphy factor. These prove the SL₂ action/factor ingredients, but the checked sources did not certify a group of holomorphic square-root lifts with this multiplication AND a two-element projection fiber/double-cover topology. Native metaplectic/square-root lift searches did not resolve that endpoint. No absence claim.\nSearch and boundary notes: Restricting the GL cocycle to SL₂ removes its determinant-sign conjugation; that is not a proof of the missing holomorphic square-root lift and double-cover assertion. Ordinary Möbius/slash actions and generic group extensions are prerequisites, not completed Mp₂ coverage.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "metaplectic-double-cover-sl2",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Inspected UpperHalfPlane/MoebiusAction.denom:32, denom_ne_zero:63, denom_cocycle:74 and denom_cocycle':156, and Manifold.contMDiff_denom:88. For determinant-positive matrices the cocycle is the required cτ+d automorphy factor. These prove the SL₂ action/factor ingredients, but the checked sources did not certify a group of holomorphic square-root lifts with this multiplication AND a two-element projection fiber/double-cover topology. Native metaplectic/square-root lift searches did not resolve that endpoint. No absence claim.\nSearch and boundary notes: Restricting the GL cocycle to SL₂ removes its determinant-sign conjugation; that is not a proof of the missing holomorphic square-root lift and double-cover assertion. Ordinary Möbius/slash actions and generic group extensions are prerequisites, not completed Mp₂ coverage.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "minimal-polynomial",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/FieldTheory/Minpoly/Basic.lean",
+          "declarations": "minpoly:40; minpoly.monic:55; aeval:90; min:135; natDegree_pos:194",
+          "note": "Constructs the least monic annihilator and proves vanishing/minimality/positive degree."
+        },
+        {
+          "path": "Mathlib/FieldTheory/Minpoly/Field.lean",
+          "declarations": "minpoly.unique:50; dvd:68; dvd_iff:79",
+          "note": "Proves uniqueness over a field and that vanishing polynomials are precisely its multiples."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For an algebraic α over a field F (hence integral), minpoly:40 chooses the least-degree monic annihilator; monic:55, aeval:90, min:135 and natDegree_pos:194 prove its defining properties. Field.unique:50 proves uniqueness, and dvd_iff:79 identifies its multiples with all vanishing polynomials, exactly the principal kernel ideal assertion. Checked polynomial remainder proof and the nontrivial coefficient/target hypotheses.\nSearch and boundary notes: The library default minpoly=0 for nonintegral elements is outside the catalogue algebraic input. Exclude irreducibility/separability/Galois computations as independent endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "minimal-polynomial",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/Minpoly.lean",
+          "declarations": "TauCeti.Algebra.minpoly_eq_X_pow_sub_C_of_pow_eq_of_natDegree_eq:40; exists_quadratic_relation_of_natDegree_minpoly_eq_two:52",
+          "note": "Proves ordinary minimal-polynomial recognition and quadratic relation extraction."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency Basic/Field files differ only by one inserted documentation line (minpoly41, Field.unique51/dvd69/dvd_iff80). Native TauCeti.Algebra.minpoly_eq_X_pow_sub_C_of_pow_eq_of_natDegree_eq:40 recognizes the minimum polynomial from a power relation and exact degree; exists_quadratic_relation_of_natDegree_minpoly_eq_two:52 gives the corresponding monic quadratic relation. Completed divisibility/monicity/degree and coefficient proofs were checked. This is direct recognition/relation API of the same minimum polynomial.\nSearch and boundary notes: The library default minpoly=0 for nonintegral elements is outside the catalogue algebraic input. Exclude irreducibility/separability/Galois computations as independent endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "moderate-growth-adelic-function",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Inspected Function.HasTemperateGrowth:38: smooth functions on real normed vector spaces with derivative-order-dependent polynomial powers of 1+‖x‖. This does NOT supply a fixed faithful adelic matrix height or the common exponent for ALL complexified archimedean enveloping-algebra derivatives required here. Tau Ceti-owned TauCeti/Analysis/Complex/UpperHalfPlane/Growth.lean:29 (TauCeti.UpperHalfPlane.isBigO_exp_of_le), checked only as a cross-library candidate, is an exponential cusp bound, not this adelic uniform-growth predicate. Generic scalar inequalities alone leave the actual height/right-differential-action interpretation unresolved.\nSearch and boundary notes: Searched adelic/automorphic height, moderate/uniform growth, universal-enveloping/right-differential action, and native distribution/upper-half-plane growth namespaces. A supplied scalar height can express the first pointwise bound, but the full catalogue framework including the uniform derivative requirement remains unverified. Do not substitute temperate growth, whose exponent may depend on derivative order. UpperHalfPlane/Growth is native Tau Ceti, not standalone Mathlib; its examination supplies a mismatch candidate, no Mathlib file claim.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "moderate-growth-adelic-function",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Inspected Function.HasTemperateGrowth:38: smooth functions on real normed vector spaces with derivative-order-dependent polynomial powers of 1+‖x‖. This does NOT supply a fixed faithful adelic matrix height or the common exponent for ALL complexified archimedean enveloping-algebra derivatives required here. Native UpperHalfPlane.Growth.isBigO_exp_of_le:29 is an exponential cusp bound, not this adelic uniform-growth predicate. Generic scalar inequalities alone leave the actual height/right-differential-action interpretation unresolved.\nSearch and boundary notes: Searched adelic/automorphic height, moderate/uniform growth, universal-enveloping/right-differential action, and native distribution/upper-half-plane growth namespaces. A supplied scalar height can express the first pointwise bound, but the full catalogue framework including the uniform derivative requirement remains unverified. Do not substitute temperate growth, whose exponent may depend on derivative order.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "modular-cusp-sl2",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/GroupTheory/GroupAction/Defs.lean",
+          "declarations": "MulAction.orbitRel:286; orbitRel.Quotient:348",
+          "note": "Constructs the exact Γ-orbits on the rational projective line."
+        },
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/Cusps.lean",
+          "declarations": "OnePoint.exists_mem_SL2:33; Subgroup.strictPeriods:304; strictWidthInfty:416; strictPeriods_eq_zmultiples_strictWidthInfty:432; strictWidthInfty_pos:506",
+          "note": "Proves the rational cusp/normalizing-coordinate and positive translation-width API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Use MulAction.orbitRel.Quotient Γ (OnePoint ℚ), with Γ≤SL(2,ℤ) acting by fractional linear transformations through mapGL ℚ. GroupAction/Defs:286/348 is the exact orbit quotient. Cusps.OnePoint.exists_mem_SL2:33 proves every rational cusp can be sent to infinity. For the finite-index congruence case, strictPeriods:304, strictWidthInfty:416, the generator law:432 and strictWidthInfty_pos:506 give the positive actual translation period after conjugating a representative to infinity. This uses STRICT translation width; projective widthInfty:427 permits ±translations and may differ by two when −I is absent. The checked hypothesis bridge is CongruenceSubgroups.IsCongruenceSubgroup.finiteIndex:181, ArithmeticSubgroups.isArithmetic_iff_finiteIndex:132 and isArithmetic_conj_of_mem:175; their short finite-index/commensurability proofs apply to a rational cusp-normalizing SL₂(ℤ) matrix.\nSearch and boundary notes: No claim that a rational point is a fixed parabolic cusp for an arbitrary infinite-index Γ: the catalogue defines all rational orbits. Congruence/finite index supplies positive width. Exclude modular-form norm, q-expansion orders, ramification and valence formulas as further endpoints despite their residence in a mapped file.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "modular-cusp-sl2",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/ModularForms/Norm/Cusps.lean",
+          "declarations": "TauCeti.ModularForm.CuspTranslationOrbit:110; cuspTranslationOrbitWidth:185; cuspTranslationOrbitWidth_mk_dvd_iff:221; cuspTranslationOrbitWidth_pos:256",
+          "note": "Constructs and characterizes actual positive translation widths; the full-coset carrier convention is kept explicit."
+        },
+        {
+          "path": "TauCeti/NumberTheory/ModularForms/CongruenceSubgroups/Cusp/Width.lean",
+          "declarations": "TauCeti.conj_T_zpow_mem_Gamma0_iff:40; conj_T_zpow_mem_Gamma0_iff_width_dvd:48; ModularForm.cuspTranslationOrbitWidth_Gamma0:65",
+          "note": "Proves the defining translation-membership criterion and Γ₀ width formula."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked dependency Cusps is byte-identical, and generic orbit quotient has a one-line documentation insertion (287/349). The exact cusp object remains Γ-orbits on OnePoint ℚ. Native Norm/Cusps defines full-coset translation orbits and cuspTranslationOrbitWidth:185, proves width divisibility by γ⁻¹T^mγ∈Γ:221 and positivity for finite index:256. This is a width supplier, NOT an identification of its full-coset orbit carrier with rational cusps when −I∉Γ; duplicate carriers have the same strict period. Native Γ₀ width:65 is N/gcd(N,c²), with the explicit integer translation-membership proof:40/48; Γ₀ contains −I so strict and projective widths coincide there.\nSearch and boundary notes: No claim that a rational point is a fixed parabolic cusp for an arbitrary infinite-index Γ: the catalogue defines all rational orbits. Congruence/finite index supplies positive width. Exclude modular-form norm, q-expansion orders, ramification and valence formulas as further endpoints despite their residence in a mapped file.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "module-commutative-ring",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Module/Defs.lean",
+          "declarations": "Module:54; Module.add_smul:57; Module.zero_smul:59",
+          "note": "Defines the module action and distributivity axioms over general semirings/rings."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. CommRing R, AddCommGroup M and Module R M:54 is the exact definition: inherited DistribMulAction supplies r(m+n), (rs)m and 1m, while add_smul:57 and zero_smul:59 supply addition/zero in scalars. No field or scalar invertibility assumption is introduced.\nSearch and boundary notes: Exclude the later quandle/braid constructions as added endpoints and exclude vector-space-only inverse-scalar arguments from the definition.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    },
+    {
+      "concept": "module-commutative-ring",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Module/Basic.lean",
+          "declarations": "IsSMulRegular.eq_smul_add_one_sub_smul_iff:34",
+          "note": "Proves a direct affine scalar-action/cancellation identity for modules."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Module/Defs is byte-identical. Native IsSMulRegular.eq_smul_add_one_sub_smul_iff:34 proves affine cancellation u•z+(1−u)•z'=z' ↔ z=z' for a regular scalar u over Ring R and AddCommGroup M. Its actual cancellation/rearrangement proof was read; it applies directly to every commutative-ring module under its stated regularity hypothesis. This is ordinary module API, not merely installing a superclass instance.\nSearch and boundary notes: Exclude the later quandle/braid constructions as added endpoints and exclude vector-space-only inverse-scalar arguments from the definition.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-034.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Category/Ring/Topology.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 186,
+      "sha256": "1347eea2c71c6e3d6f544f23ecfd22f2cf80c1cc84b71d6a2953e141f5dd780c",
+      "measured_at": "2026-11-13T02:28:48.321515+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Meromorphic/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 931,
+      "sha256": "b6264a9d947d14e469714a404c98163c97b31e09d63fd535aabf6029ebb9e07d",
+      "measured_at": "2026-11-13T02:28:48.334750+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Meromorphic/Order.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1079,
+      "sha256": "add8b0a0df902b6967c7401cf9d6c0bc76a61c711d2776a23d032f8d59fc9ed4",
+      "measured_at": "2026-11-13T02:28:48.339894+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/FieldTheory/Minpoly/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 286,
+      "sha256": "1caddf1cdbeed47525217ee5e0678df1033c907b966a61f09dbb50a4445cd381",
+      "measured_at": "2026-11-13T02:28:48.346971+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/FieldTheory/Minpoly/Field.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 356,
+      "sha256": "170721150f2e501937be5614b4c5b43ab8f9e9b29722160934067d4c52a50a45",
+      "measured_at": "2026-11-13T02:28:48.351871+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 261,
+      "sha256": "637b9fbc31d8f20c0baa9550df164c5bdf46cce12b5af81f3c4a8f28bdbc1bb6",
+      "measured_at": "2026-11-13T02:28:48.357449+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/LinearAlgebra/Matrix/Trace.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 310,
+      "sha256": "f23c0d64af518a93d9a6cb9454be4796e5ab22bc7be5be5ab3c03bfced10d07f",
+      "measured_at": "2026-11-13T02:28:48.367486+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/NumberTheory/ModularForms/Cusps.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 642,
+      "sha256": "1adbf5fa2c0ef3ad087f36b9c85fe6fcd8a1f3799e6a3be286d8ac9714fa601b",
+      "measured_at": "2026-11-13T02:28:48.372116+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Order/Defs/Unbundled.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 419,
+      "sha256": "b0dcb2909e312447423cf4434ad84618fe3fdc27a0e4bf37ebe1afebf3fcb706",
+      "measured_at": "2026-11-13T02:28:48.377939+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/Derivation/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 579,
+      "sha256": "2c5f4dcde56b892c82cda96d1e12ff302366db65e70f40f87897bb71178ce679",
+      "measured_at": "2026-11-13T02:28:48.383154+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Algebra/Field.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 219,
+      "sha256": "ee8a1a1af30d697e640b273f8f14132647d3f093313c3f2ee6bfad43ea82332a",
+      "measured_at": "2026-11-13T02:28:48.386820+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Algebra/Group/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 165,
+      "sha256": "dc98fc9f36ca3a88d46426a39ac940cc545d10b49ad2c59a29bd222ecab2cdb7",
+      "measured_at": "2026-11-13T02:28:48.392484+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Separation/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1228,
+      "sha256": "8a80b287621f08930347dc18b35302ac3672ff234e438cfc3c4f55f78a5fee3f",
+      "measured_at": "2026-11-13T02:28:48.405601+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/AlgebraicGroup/Tangent/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 806,
+      "sha256": "67ebfad69a82db29de56ec31dd439bcc2b77d69cefcc1568ac4eca81cefe9dff",
+      "measured_at": "2026-11-13T02:28:48.416116+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/AlgebraicGroup/Tangent/InvariantDerivation.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 311,
+      "sha256": "0dba335b350e6162c941621ff4e02945db328a7b828fa4e12b708b4acd871f56",
+      "measured_at": "2026-11-13T02:28:48.423452+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/AlgebraicGroup/Tangent/Lie/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 257,
+      "sha256": "f0204e399eb0f803972af2d7b113a22f170557d416262f292179c1d62ef1b359",
+      "measured_at": "2026-11-13T02:28:48.431865+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Meromorphic/Continuation.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 229,
+      "sha256": "31224513eef518c89b116ce19b9eb2db77172bdc45b2af7955eab41dc39794fe",
+      "measured_at": "2026-11-13T02:28:48.445531+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Meromorphic/Identity.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 47,
+      "sha256": "39b3401d194573ef8eb48d1993e23719314e41886f1559559e9af304c4506ff3",
+      "measured_at": "2026-11-13T02:28:48.450722+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Meromorphic/Order.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 116,
+      "sha256": "008a48ad3b67a00a2646980ceb63689031847b9fd56594b77836601c0b3255c0",
+      "measured_at": "2026-11-13T02:28:48.458685+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/FieldTheory/Minpoly.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 81,
+      "sha256": "42e31f2bce8578cb7786a120b7ba213a1d3289510cef79633527523607dbf135",
+      "measured_at": "2026-11-13T02:28:48.465751+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Geometry/Lie/Tangent/LeftInvariantDerivation.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 331,
+      "sha256": "67e806e55834ef88f061b4236ec529df339310171a81da607eb748a8321a0ff4",
+      "measured_at": "2026-11-13T02:28:48.472565+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/LinearAlgebra/Matrix/Trace/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 57,
+      "sha256": "fd4f97df794476f36f10205b53be056cf38a355f5ed9d3eca27b9a92901384e7",
+      "measured_at": "2026-11-13T02:28:48.481689+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/NumberTheory/ModularForms/CongruenceSubgroups/Cusp/Width.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 80,
+      "sha256": "4274621d10843842622e8f4a39b3df9086b4641737a921691796ff50423f468a",
+      "measured_at": "2026-11-13T02:28:48.497576+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/NumberTheory/ModularForms/Norm/Cusps.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 599,
+      "sha256": "1b6eb875bd5e32d31b8771d5c789c313ed1935de7f392cafb20f74bc52edac40",
+      "measured_at": "2026-11-13T02:28:48.503807+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Algebra/Group/Subgroup.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 739,
+      "sha256": "9c3f83245c2736d8eef4ba3322c2cd948320638756e46034c6c06ba33a7b9ee6",
+      "measured_at": "2026-11-13T02:28:48.511465+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Algebra/PointTopology/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 279,
+      "sha256": "1e7a51deaf473e05bccbd0207691d865ab8934cc32af8297aadbc36e51c2fe6a",
+      "measured_at": "2026-11-13T02:28:48.518779+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Algebra/PointTopology/Functoriality.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 216,
+      "sha256": "f21a6ba6a54bb9c650fe6687fa6b9c176cf4e4691b62bf6c8e1e76d2c7c83407",
+      "measured_at": "2026-11-13T02:28:48.525364+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Algebra/PointTopology/Group.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 155,
+      "sha256": "33a847ad54d2254eb30010427ac1fdb42c22ffade6724c96f8fadf76d427e850",
+      "measured_at": "2026-11-13T02:28:48.531541+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Compactness/LocallyCompact.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 73,
+      "sha256": "5efa6b6841bf765f2bb33c2ef1127547f120d29d32100564bf786d5b9cd96e31",
+      "measured_at": "2026-11-13T02:28:48.539137+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/LocallyConstant/Fiber.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 55,
+      "sha256": "9b4613f4aa4eb8c71f79adfc1029ccde47333eceb1c342a23c10706e61f81544",
+      "measured_at": "2026-11-13T02:28:48.545966+00:00"
+    }
+  ]
+}

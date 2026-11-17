@@ -1,0 +1,740 @@
+{
+  "note": "Whole-catalogue formalization update batch-001: independent source review by category_galois_formalization of analysis_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "convergence-in-metric-space",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/MetricSpace/Pseudo/Defs.lean",
+          "declarations": "Metric.tendsto_atTop (:911); Metric.tendsto_atTop' (:919); Metric.tendsto_nhds (:891); tendsto_iff_dist_tendsto_zero (:1207)",
+          "note": "Implements the metric epsilon/filter convergence equivalences, including the exact sequence epsilon-N criterion and strict-index variant."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Metric.tendsto_atTop in Topology/MetricSpace/Pseudo/Defs.lean:911–914 proves exactly Tendsto u atTop (nhds a) iff for every epsilon>0 there exists N such that every n>=N has dist(u n,a)<epsilon. Its semilattice-directed index generality specializes to Nat, and its pseudometric generality includes metric spaces. The proof expands the atTop and ball neighborhood bases, so this is the actual epsilon-N equivalence, not a name match. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read the actual metric neighborhood-basis equivalence proof and Nat specialization. Bounded API selects the convergence/epsilon equivalences, not every theorem using a convergent sequence.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "convergence-in-metric-space",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The exact metric epsilon-N convergence equivalence is supplied by the pinned dependency Topology/MetricSpace/Pseudo/Defs.lean:911–914 (byte-identical to the independently inspected Mathlib file). Native TauCeti/Topology/MetricSpace/Pseudo/Defs.lean was inspected: its radius-plus-distance eventual bound is a neighborhood containment estimate, not another implementation of the sequence-convergence criterion. Native convergence applications and arclength/discrete-energy constructions are outside this core selection. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Checked the actual dependency criterion and native Pseudo/Defs declarations :35/:43/:61/:73. None was selected as defining convergence/equivalent sequence criterion; radius-neighborhood estimates remain with metric ball API, and named energy/curve endpoints are excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "metric-space",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/MetricSpace/Defs.lean",
+          "declarations": "MetricSpace (:70); MetricSpace.ofDistTopology (:82); dist_eq_zero (:97); dist_pos (:106)",
+          "note": "Defines separated metric spaces and basic positivity/extensionality/constructor API."
+        },
+        {
+          "path": "Mathlib/Topology/MetricSpace/Pseudo/Defs.lean",
+          "declarations": "PseudoMetricSpace; dist_self; dist_comm; dist_triangle; Metric.ball; Metric.nhds_basis_ball",
+          "note": "Defines the underlying metric axioms and basic ball/neighborhood API used by MetricSpace; separation is added in the companion file."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Topology/MetricSpace/Defs.lean:70 defines MetricSpace by adding separation to PseudoMetricSpace; :82–89 constructs compatible metric data and :93–108 proves dist=0 iff equality and positivity. Pseudo/Defs supplies the symmetric triangle-inequality distance axioms and the metric ball/neighborhood API. Nonnegativity is derived from those axioms rather than encoded as a nonnegative codomain, an equivalent definition to the paragraph. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Reviewed class axioms, separation equivalence and ball criterion. Excluded ultrametric, intrinsic-distance, geodesic and product-space constructions as extra structures/constructions.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "metric-space",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/MetricSpace/Pseudo/Defs.lean",
+          "declarations": "Metric.sphere_abs_subset_ball (:35); Metric.iUnion_ball_diff_ball_mul_zpow (:43); Metric.eventually_add_dist_lt_of_tendsto_zero (:61)",
+          "note": "Native elementary sphere/ball and distance-neighborhood identities for arbitrary pseudometric/metric spaces. The MetricSpace definition itself remains in Mathlib."
+        }
+      ],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. MetricSpace and its distance axioms are supplied completely by the checked pinned Mathlib Defs/Pseudo/Defs files (byte-identical). Native Topology/MetricSpace/Pseudo/Defs.lean:35 proves sphere_abs_subset_ball from the generic metric ball API, :43 gives the annulus decomposition and :61 a general eventual ball containment estimate. These are genuine native basic metric-ball API, not an application to a specialized mathematical object. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Inspected full native Pseudo/Defs and its proofs. No extra completeness, dimension or geodesic hypotheses; metric spaces are included. Excluded intrinsic length/energy/arclength and specialized spaces.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "nonnegative-real-square-root",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Real/Sqrt.lean",
+          "declarations": "NNReal.sqrt (:45); NNReal.sq_sqrt (:48); Real.sqrt (:112); Real.sqrt_nonneg (:143); Real.sq_sqrt (:177); Real.sqrt_eq_iff_eq_sq (:182)",
+          "note": "Defines real/nonnegative square roots and proves their square, uniqueness, order and basic arithmetic API. Data/Real/Sqrt is only a deprecated import shim."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Analysis/Real/Sqrt.lean defines NNReal.sqrt as the inverse order isomorphism to squaring (:45), proves its square/inverse identities (:48–64), and Real.sqrt (:112) by restriction to nonnegative reals (zero on negative inputs). Real.sqrt_nonneg :143 and sq_sqrt :177 plus sqrt_eq_iff_eq_sq :182 establish exactly existence, nonnegativity and uniqueness for t>=0. The negative-input convention does not weaken the stated nonnegative concept. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Inspected the inverse-order-isomorphism construction and the actual nonnegative uniqueness lemmas. Excluded matrix/functional-calculus square roots and rational/natural integer algorithms as different concepts.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "nonnegative-real-square-root",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Real/Sqrt.lean",
+          "declarations": "Real.inv_sqrt_mul_sq; Real.sqrt_sq_mul; Real.sqrt_le_sqrt_two_mul",
+          "note": "Native real square-root arithmetic identities, including pulling a square factor out as its absolute value; definition imported from Mathlib."
+        },
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Sqrt.lean",
+          "declarations": "Real.abs_sqrt_sub_one_le_abs_sub_one; Real.abs_sqrt_sub_sqrt_le; Real.tendsto_mul_sqrt_nhds_zero",
+          "note": "Native generic scalar square-root displacement/continuity inequalities, with actual proof of the first bound inspected. Mixed file is counted whole under the agreed allocation model."
+        }
+      ],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The definition and nonnegative existence/uniqueness are supplied by the checked dependency Analysis/Real/Sqrt.lean (identical bytes). Native Analysis/Real/Sqrt.lean:41–56 proves inverse-square and square-factor arithmetic identities (sqrt_sq_mul), and SpecialFunctions/Sqrt.lean:75 proves the basic displacement bound by a full elementary square comparison. These are native ordinary scalar square-root arithmetic/regularity API; matrix, functional-calculus and integral applications are excluded. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read actual statements and first square-comparison proof, not just docstrings. Negative-input convention is handled explicitly. Excluded matrix and spectral square roots, substitutions/integration endpoints as reasons to add further files.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "norm-induced-metric",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Group/Defs.lean",
+          "declarations": "NormedAddCommGroup (:280); GroupNorm.toNormedGroup (:475), additive AddGroupNorm.toNormedAddGroup; SeminormedAddCommGroup.dist_eq",
+          "note": "Actually constructs norm-induced metrics and proves separation via the norm axioms, rather than merely assuming a preexisting compatible metric."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Group/Basic.lean",
+          "declarations": "dist_eq_norm_inv_mul (:41), generated additive distance identities; norm_neg; norm_sub_rev",
+          "note": "Basic norm/distance identities, in multiplicative and generated additive forms; commutative additive specialization gives the vector-space formula."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Analysis/Normed/Group/Defs.lean:280–285 defines NormedAddCommGroup with dist x y=norm(-x+y); the generated additive GroupNorm.toNormedGroup construction at :475 builds a metric from the norm, using norm separation to prove dist=0 implies equality. Basic.lean:41–46 supplies the distance/norm and reversed-distance identities with generated additive counterparts. Norm symmetry converts norm(-x+y) to norm(x-y), exactly the paragraph; scalar linearity is not needed for the metric construction. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read both construction and public identities, including the generated additive convention. Excluded topology-equivalent seminorm families and ultrametric hypotheses.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "norm-induced-metric",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The full norm-induced metric construction is inherited from checked dependency Normed/Group/Defs.lean (identical bytes). Native Normed/Group inventory was searched; LocallyBounded, WeightedVariance, Rounding, Ultra and infinite-sum files develop other structures or estimates, not the generic metric-from-norm constructor or its distance formula. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Checked exact dependency constructor/axioms and inspected native Normed/Group declaration roster. No native core file selected; this is dependency availability, not an absence assertion about normed-space applications.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "abelian-category",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Abelian/Basic.lean",
+          "declarations": "CategoryTheory.Abelian (:110); Abelian.ofCoimageImageComparisonIsIso; Abelian image/coimage and normal mono/epi constructions",
+          "note": "Defines abelian categories and develops their ordinary image/coimage, kernel/cokernel and normal factorization API."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. CategoryTheory/Abelian/Basic.lean:110 defines Abelian as Preadditive plus finite products, kernels/cokernels and normal mono/epi categories. Its documented and implemented finite-biproduct construction yields the additive-category structure; every mono is a kernel and epi a cokernel, exactly the catalogue convention. The file also gives the equivalent image/coimage comparison characterization and normal factorization API. No assumption of semisimplicity is present. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Compared the finite-product/preadditive presentation with additive+kernel/cokernel: Preadditive/Biproducts supplies finite biproducts. Derived functors, Ext, resolutions, Grothendieck axioms and diagram lemmas are separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "abelian-category",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Abelian/Images.lean",
+          "declarations": "TauCeti.Abelian.kernelFactorThruImage (:34); kernelFactorThruImage_hom_comp_ι (:41); kernelFactorThruImage_inv_comp_ι (:48)",
+          "note": "Native basic compatibility of abelian image factorization with kernels, with full short construction and simp proofs inspected. Abelian category definition is supplied by Mathlib."
+        }
+      ],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The full Abelian definition and its finite-biproduct equivalence are supplied by the checked pinned dependency (the selected Basic file differs only by whitespace). Native Abelian/Images.lean:34–51 constructs the canonical isomorphism between the kernel of the image projection and the kernel of the original morphism, together with inclusion compatibility. Its hypotheses only require the displayed kernels/cokernels, so every abelian category qualifies; it is ordinary image/kernel API, not a derived-functor application. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Inspected the complete native Images file; explicitly noted its generalization beyond Abelian under the required kernel/cokernel hypotheses. Excluded derived, injective/projective and dimension/cohomology endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "additive-category",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Preadditive/Basic.lean",
+          "declarations": "CategoryTheory.Preadditive (:64); Preadditive.homGroup; Preadditive.add_comp; Preadditive.comp_add",
+          "note": "Defines the Hom abelian groups and bilinear composition required by an additive category."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+          "declarations": "CategoryTheory.Limits.HasFiniteBiproducts (:370); HasBiproduct; Bicone.IsBilimit",
+          "note": "Defines the finite biproduct data/universal properties, including the empty-family zero object component."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Preadditive/Biproducts.lean",
+          "declarations": "isBilimitOfTotal (:92); HasFiniteBiproducts.of_hasFiniteProducts (:188); biproduct.total",
+          "note": "Proves the elementary equivalence of finite products and biproducts and matrix/identity decomposition in preadditive categories."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. The exact additive-category structure is represented by Preadditive C together with HasFiniteBiproducts C: Preadditive/Basic.lean:64 supplies abelian-group Hom sets and bilinear composition, Limits/Shapes/Biproducts.lean:370 supplies all finite biproducts (including the empty family/zero object), and Preadditive/Biproducts constructs finite biproducts from finite products and the sum-of-projections identity. This is the paragraph even though no separate class named AdditiveCategory is required. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Inspected actual component classes and their compatibility; did not confuse Preadditive alone with Additive. The empty-index biproduct is essential to the zero object.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "additive-category",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The full additive-category package Preadditive C plus HasFiniteBiproducts C is supplied by checked dependency Preadditive/Basic and Limits/Shapes/Biproducts (identical bytes), with finite-product construction in Preadditive/Biproducts. Native Preadditive/NSMul and Products/Preadditive, additive-closure and biproduct files were considered: the former gives superclass-only arithmetic, products/additive closure are new category constructions, and generic finite-biproduct identities are assigned to the separate biproduct concept rather than automatically every additive superclass/package. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: No native additive-category defining equivalence or full-package constructor selected. Do not allocate every Preadditive-only law or concrete category construction to this stronger package by superclass inheritance alone.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "adjoint-functors",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+          "declarations": "CategoryTheory.Adjunction (:108); Adjunction.homEquiv (:159); homEquiv_naturality_left; homEquiv_naturality_right; adjunctionOfEquivLeft",
+          "note": "Defines adjunctions and proves equivalence with natural Hom bijections, with ordinary unit/counit and naturality API."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Adjunction/Basic.lean:108 defines an adjunction by unit/counit and both triangle identities, then :159–172 constructs the Hom equivalence with explicit inverse proofs and :224–240 proves naturality. The inverse constructor from natural Hom equivalences provides the standard equivalent presentation. This is exactly the paragraph; no full-faithfulness or equivalence assumptions are imposed. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read the actual Hom-equivalence inverse proof and its naturality, not just the class. Adjoint functor existence theorems and representability endpoints are outside this record.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "adjoint-functors",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Adjunction/Mates.lean",
+          "declarations": "CategoryTheory.mateEquiv_adjunction_id (:70); CategoryTheory.Adjunction.homEquiv_conjugateEquiv (:91)",
+          "note": "Native generic normalization/transport identities for adjoint transposes, with actual unit/naturality proofs inspected. It does not redefine the imported adjunction structure."
+        }
+      ],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The full unit/counit and natural Hom-equivalence implementation is inherited from the checked dependency Adjunction/Basic (identical bytes). Native Adjunction/Mates.lean:70 computes identity mates and :91 proves homEquiv_conjugateEquiv directly by the unit and naturality equations; this is genuine general transpose/Hom-bijection API for adjunctions. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Included the general Hom-equivalence transpose identity; excluded Adjunction/Representable as a new representability endpoint and Additive as extra structure.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "bifunctor",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Products/Basic.lean",
+          "declarations": "CategoryStruct.prod (:39); CategoryTheory.Prod.mkHom; Prod.fst; Prod.snd; Functor.prod; evaluationUncurried",
+          "note": "Implements the product-category source and ordinary product/evaluation functor API used to represent bifunctors."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Functor/Basic.lean",
+          "declarations": "CategoryTheory.Functor (:40); Functor.map_id; Functor.map_comp",
+          "note": "The actual functor constructor and preservation laws, instantiated at source C × D, give exactly the catalogue bifunctor."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. A bifunctor in the catalogue is literally the existing type C × D ⥤ E. CategoryTheory/Products/Basic.lean:39–100 constructs the product category with componentwise Hom, identities and composition; Functor/Basic.lean:40 supplies the functor structure and laws, so this exact definition is available by generic instantiation, not a guessed near match. Products/Basic also gives product-functor/evaluation API. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Checked actual product Hom/identity/composition and functor laws. Did not replace bifunctor by a functor separately covariant in one variable without interchange compatibility.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "bifunctor",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The exact C × D ⥤ E representation is supplied by dependency Products/Basic and Functor/Basic, both byte-identical to checked source. Native Products/Basic gives zero-object/pullback structures on product categories; Preadditive/MorphismIdeal/Bifunctor addresses extra ideal structures. Neither is the generic bifunctor construction or ordinary interchange API, so no native core file is selected. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Inspected product-category native file and the named bifunctor candidate inventory; excluded extra zero-object/limit and ideal structures. Complete dependency availability is established directly by the exact type constructor.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "biproduct",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+          "declarations": "Bicone (:63); Bicone.IsBilimit; HasBiproduct (:320); biproduct.isLimit (:341); biproduct.isColimit (:345); HasFiniteBiproducts (:370)",
+          "note": "Defines and constructs biproducts with the compatible product/coproduct universal properties and finite indexing."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Limits/Shapes/Biproducts.lean:63 defines Bicone with injections/projections and precisely the diagonal identity/off-diagonal zero composites; IsBilimit asserts both product and coproduct universal properties. HasBiproduct at :320 packages existence and :337–345 projects both universal properties. Finite-family specialization is HasFiniteBiproducts at :370; this exactly matches the finite family paragraph. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read actual bicone composites and both universal-property fields. Preadditive matrix identities add further assumptions; binary sums are included as finite cases, not substituted for arbitrary finite families.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "biproduct",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Limits/Shapes/Biproduct.lean",
+          "declarations": "TauCeti.biprod_map_factor (:96); hasFiniteBiproducts_of_hasBinaryBiproducts (:127); biproductOptionIso (:296); biproductSumIso; isZero_biproduct_of_isEmpty",
+          "note": "Native generic finite-biproduct construction and ordinary splitting/index-decomposition identities; the core universal-property definition is imported."
+        }
+      ],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The full definition is supplied by checked dependency Limits/Shapes/Biproducts (identical bytes). Native Limits/Shapes/Biproduct.lean:96 proves generic factorization of biproduct maps, :127 constructs finite biproducts from zero/binary ones by finite-type induction, and :296 provides the Option-index decomposition. These are genuine generic finite-biproduct constructor/decomposition API. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Inspected actual finite-type-induction proof and bicone witnesses, not only docs. Excluded derived short-complex applications as reasons to add separate files; mixed selected file is counted whole.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "category",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Category/Basic.lean",
+          "declarations": "CategoryStruct (:122); Category (:232); Category.id_comp; Category.comp_id; Category.assoc",
+          "note": "Defines categories and their identity/associativity axioms and elementary rewriting API."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. CategoryTheory/Category/Basic.lean:122 defines CategoryStruct objects/Hom/identities/composition and :232–241 adds both identity laws and associativity. This is precisely the catalogue without additional enrichment, finiteness or object restrictions. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read actual category structure and axioms. Excluded product/preorder/pointed/total-quiver constructions as particular categories rather than the generic concept.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "category",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The complete generic category definition is supplied by checked dependency Category/Basic (only blank-line differences). Native Category/Preorder and Category/QuiverTotal and Products/Basic were searched/considered: they construct particular categories and extra structures; no selected generic identity/associativity defining API appears there. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Exact supplying Category fields inspected; native category construction inventory bounded to the generic definition and ordinary laws, not all constructions instantiating Category.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "category-equivalence",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Equivalence.lean",
+          "declarations": "CategoryTheory.Equivalence (:82); Equivalence.mk; Equivalence.refl; Equivalence.symm; Equivalence.trans",
+          "note": "Defines and supplies ordinary constructors, inverse, identity and composition for equivalences of categories."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. CategoryTheory/Equivalence.lean:82 defines a functor, inverse, unit/counit natural isomorphisms and coherent triangle law. The surrounding constructors turn a quasi-inverse into this coherent form, so the extra chosen triangle coherence does not strengthen the catalogue notion of inverse up to natural isomorphism. Composition, symmetry and identity give the standard equivalence API. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Compared coherent equivalence data with the paragraph quasi-inverse formulation, retaining ordinary equivalence API and excluding Morita/specific category applications.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "category-equivalence",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Equivalence/Trans.lean",
+          "declarations": "CategoryTheory.Equivalence.trans_unit_app (:27); trans_counit_app (:34)",
+          "note": "Native formulas computing composite equivalence unit/counit components; imported definition and natural isomorphism data remain attributed to Mathlib."
+        }
+      ],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The equivalence structure is supplied by the checked dependency Equivalence file (blank-line-only difference). Native Equivalence/Trans.lean:27–35 proves the component formulas for the unit and counit of a composite equivalence by direct simplification of Equivalence.unit/counit. These are native ordinary composition API. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read both native proofs. Excluded Equivalence/Transport autoequivalence actions and skeleton/group-of-classes endpoints as extra constructions.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "double-dual-functor",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Searched Mathlib CategoryTheory for doubleRightDualFunctor/doubleLeftDualFunctor and monoidal structures on the single-dual functors. Monoidal/Rigid/Functor.lean:43/:57 defines only left/right single-dual functors to (C opposite) monoidal-opposite and explicitly lists proving monoidal equivalence as Future work. Rigid/Basic supplies chosen dual objects and adjoint mates, but that alone does not verify the catalogue covariant strong monoidal double-dual functor. The missing checked component is the coherent tensor/unit comparison after two dualizations; no full or absence claim is made from the name search. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Actual single-dual definitions and their map-id/map-comp proofs were read. A twice-applied object operation or an unbundled candidate is insufficient for the required monoidal endofunctor. Unknown records this concrete unchecked/unimplemented coherence frontier rather than charging prerequisite-only files as a partial target.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "double-dual-functor",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Rigid/DualFunctor.lean",
+          "declarations": "TauCeti.rightDualFunctorCoreMonoidal (:214); rightDualFunctorMonoidal (:249); doubleRightDualFunctor (:357); doubleRightDualFunctorMonoidal (:362); doubleRightDualFunctor_obj (:371)",
+          "note": "Native strong monoidal right-dual and double-right-dual constructions, including actual coherence proof and object/morphism formulas."
+        },
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Rigid/LeftDualFunctor.lean",
+          "declarations": "TauCeti.leftDualFunctorCoreMonoidal; doubleLeftDualFunctor; doubleLeftDualFunctorMonoidal",
+          "note": "Native parallel left-dual and double-left-dual monoidal endofunctors, an ordinary alternative choice/presentation of the same double-dual vocabulary."
+        }
+      ],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. Tau native Monoidal/Rigid/DualFunctor.lean:357 defines doubleRightDualFunctor as rightDualFunctor followed by its opposite/opMop form and wrapper-removal equivalence; :362 supplies its Monoidal instance. The underlying right dual CoreMonoidal at :214–249 has actual naturality/associativity/unit proofs. Obj/map formulas at :371/:377 are exactly X to X** and f to f**. LeftDualFunctor provides the parallel left-handed construction. No braided/pivotal assumption is used for this construction, and in a rigid category the required dual choices exist. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Inspected native CoreMonoidal coherence and the actual composed double-dual definition. Excluded braided closed doubleDualMap, Drinfeld and pivotal trivializations: they involve different maps/extra structures. Mathlib dependency single-dual source is a supplier, not a claim that it already proves the missing monoidal structure.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "dual-object",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+          "declarations": "CategoryTheory.ExactPairing (:77); ExactPairing.coevaluation; ExactPairing.evaluation; HasLeftDual; HasRightDual; leftDualIso; rightDualIso",
+          "note": "Defines left/right dual objects by exact pairings and both zigzag laws and supplies comparison/adjoint-mate API."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Monoidal/Rigid/Basic.lean:77 defines ExactPairing with coevaluation 1→X tensor Y, evaluation Y tensor X→1 and both zigzag equations. HasLeftDual/HasRightDual choose the two orientations; the surrounding dual comparison and mate API proves uniqueness/transport. This is exactly the paragraph, with order reversal accounted for by orientation rather than assuming a braiding. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read both triangle axioms, evaluation/coevaluation types and orientations. Excluded pivotal/ribbon/trace and braided automatic-inverse theorems as extra structures.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "dual-object",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Rigid/Basic.lean",
+          "declarations": "TauCeti.ExactPairing.unit_evaluation; unit_coevaluation; exactPairingCongrLeft_evaluation; exactPairingCongrRight_evaluation; ExactPairing.homUnitEquiv",
+          "note": "Native evaluation/coevaluation and transport identities for exact pairings, with arbitrary monoidal-category assumptions."
+        },
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Rigid/Mate.lean",
+          "declarations": "CategoryTheory.ExactPairing.rightMate; leftMate; rightHom_ext; leftDualHom_ext; rightMate_comp_evaluation; comp_rightMate",
+          "note": "Native explicit-pairing construction/characterization of adjoint mates and ordinary dual comparison/transport identities."
+        }
+      ],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The full exact-pairing/left-right-dual definition is supplied by dependency Rigid/Basic (blank-line-only changes). Native Rigid/Basic computes unit and transported pairings and evaluation/coevaluation identities; Rigid/Mate gives explicit-pairing mates, their uniqueness and inverse/identity/composition formulas. These are direct generic dual-object core API, with no assumption of a braiding or pivotal structure. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Inspected actual unit evaluation proof and mate construction context; excluded double-dual monoidal/pivotal enhancements from this simpler dual-object record.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "endomorphism-algebra",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Endomorphism.lean",
+          "declarations": "CategoryTheory.End; End.of; End.asHom; End monoid instance",
+          "note": "Defines the endomorphism monoid with identity and function-composition multiplication."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Preadditive/Basic.lean",
+          "declarations": "CategoryTheory.End AddCommGroup/Ring instances; End.addEquiv (:88)",
+          "note": "Defines additive/ring structure on endomorphisms from the category Hom abelian groups and bilinearity."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Linear/Basic.lean",
+          "declarations": "CategoryTheory.End.linearEquiv (:90); Module R (End X) (:80); Algebra R (End X) (:95)",
+          "note": "Implements the scalar module/algebra structure on End X, including compatibility of multiplication and scalars."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. CategoryTheory/Endomorphism.lean gives End X with multiplication as categorical/function composition and identity as unit; Preadditive/Basic gives its additive group/ring; Linear/Basic:80–97 gives Module R (End X) and Algebra R (End X) via bilinear composition. For a field R this is the vector-space algebra in the paragraph. End multiplication f*g corresponds to g.asHom ≫ f.asHom, the usual right-to-left function-composition convention. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read actual End algebra instance; no commutativity of End X is asserted. The ground scalar ring is commutative, as required by a field-linear category.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "endomorphism-algebra",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Linear/Endomorphism.lean",
+          "declarations": "CategoryTheory.End.of_comp (:51); of_add (:65); of_smul (:80); algebraMap_asHom (:86); Functor.mapEndAlgHom (:129)",
+          "note": "Native arithmetic/scalar constructor compatibilities and natural algebra maps on endomorphism algebras. End.of(f≫g)=End.of g*End.of f fixes the multiplication convention."
+        }
+      ],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The complete End algebra is supplied by checked dependency Endomorphism, Preadditive/Basic and Linear/Basic. Native Linear/Endomorphism.lean:45–87 proves constructor compatibility with identity, composition, addition and scalar multiplication and computes algebraMap; :129 defines the algebra hom induced by a linear additive functor. These are direct endomorphism-algebra API, including the correct composition order. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read full basic arithmetic proofs and the algebra-hom constructor; excluded Schur/simple-object and radical/semiperfect endomorphism theorems as extra endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "functor",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Functor/Basic.lean",
+          "declarations": "CategoryTheory.Functor (:40); Functor.map_id; Functor.map_comp; Functor.id; Functor.comp",
+          "note": "Defines functors and elementary identity/composition and map-law API."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Functor/Basic.lean:40–51 defines object and morphism maps with exact preservation of identities/composition and develops generic identity/composition functors. This matches the paragraph without requiring full/faithful/equivalence properties. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read the actual structure and map laws. A functor between restricted/special categories is not substituted for the generic definition.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "functor",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The generic Functor implementation is inherited from the checked pinned dependency Functor/Basic (identical bytes). Native Functor/MapBijective was inspected: it proves propagation of map bijectivity through retracts and additive biproducts, a separate full-faithfulness-style endpoint; OfCovBy/OfCubeEdges are special-source constructors. No selected generic preservation-law API is allocated natively. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Actual MapBijective proof was inspected and excluded as an additional endpoint. Other named special-poset/cube and inverse-system constructions were not treated as generic functor definitions.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "idempotent-endomorphism",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Idempotent.lean",
+          "declarations": "IsIdempotentElem (:38); isIdempotentElem_iff (:40); IsIdempotentElem.mul_of_commute; pow_succ_eq",
+          "note": "Defines the idempotence predicate and ordinary elementary idempotent arithmetic; instantiated at End X it gives the exact categorical endomorphism predicate."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Algebra/Group/Idempotent.lean:38 defines IsIdempotentElem a exactly by a*a=a. Applied to the actual End X monoid from CategoryTheory/Endomorphism, this is exactly e≫e=e (order reversal is immaterial for e composed with itself). The generic predicate and elementary power/commuting-product identities implement the reusable concept, rather than requiring a duplicate category-specific named definition. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read the actual equality predicate and checked End multiplication convention. Excluded Karoubi completion as a new category and additive/linear decomposition endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "idempotent-endomorphism",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Group/Idempotent.lean",
+          "declarations": "IsIdempotentElem.mul_mul_of_mul_eq_one (:27)",
+          "note": "Native generic monoid idempotent conjugation/one-sided inverse transport law, directly instantiated at categorical End X. The idempotence definition and End monoid are dependency-owned."
+        }
+      ],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The dependency Algebra/Group/Idempotent defines IsIdempotentElem a by a*a=a and CategoryTheory/Endomorphism makes End X the composition monoid, giving precisely e∘e=e. Native TauCeti/Algebra/Group/Idempotent.lean:27–31 proves IsIdempotentElem.mul_mul_of_mul_eq_one: an idempotent e remains idempotent as a*e*b whenever b*a=1. Its complete proof reassociates the product, substitutes b*a=1 and e*e=e. This specializes directly to End X, including conjugation by an isomorphism; it is ordinary generic idempotent transport API. The definition remains Mathlib-owned, while this proof is native Tau. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Independently inspected the full native algebra Idempotent file and the actual dependency idempotence/End definitions. Generic monoid API is a valid implementation at End X even without a category-specific duplicate. Native Idempotents/Split orthogonal additive sums, Linear/Idempotent scalar enhancements and Karoubi completion are distinct endpoints excluded from this bounded core selection.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "idempotent-splitting",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Idempotents/Basic.lean",
+          "declarations": "IsIdempotentComplete.idempotents_split (:57); Idempotents.isIdempotentComplete_iff_hasEqualizer_of_id_and_idempotent (:63)",
+          "note": "Specifies exact idempotent splitting witnesses and proves their equivalent equalizer presentation; does not assert all arbitrary categories split every idempotent."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Retract.lean",
+          "declarations": "CategoryTheory.Retract (:28); Retract.map; Retract.op; Retract.trans",
+          "note": "Bundles the retraction/section certificate underlying a splitting and its elementary functorial transport."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. CategoryTheory/Idempotents/Basic.lean:53–57 encodes precisely a splitting witness: an object Y and i:Y→X,e:X→Y with i≫e=idY and e≫i=p, and its proof :63–99 identifies such splittings with equalizers of id and the idempotent. Retract.lean:28 gives the single retract certificate. These are the exact conventional splitting data; existence for every idempotent is separately the IsIdempotentComplete predicate, not assumed for arbitrary C. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read the equalizer construction from a witness and the witness equations; distinguished the definition of a splitting from global idempotent completeness.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "idempotent-splitting",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. Exact splitting/retract data and the equivalent presentation are supplied by checked dependency Idempotents/Basic and Retract. Native Idempotents/Split:35 proves existence of a sum splitting only under preadditivity, binary biproducts and orthogonality; native Karoubi modules construct a completion and retract diagram machinery. Those additional endpoints are outside the generic splitting record. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Inspected the full orthogonal split-sum proof and native Karoubi constructors. No native generic single-idempotent splitting definition/transport file selected; imported availability is complete, not a claim of automatic splitting.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "isomorphism-in-category",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Iso.lean",
+          "declarations": "CategoryTheory.Iso (:54); Iso.hom_inv_id; Iso.inv_hom_id; Iso.refl; Iso.symm; Iso.trans; IsIso",
+          "note": "Defines categorical isomorphisms, both inverse laws and ordinary inverse/composition API."
+        }
+      ],
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. CategoryTheory/Iso.lean:54–64 defines Iso by hom,inv and both inverse equations, and gives the ordinary refl/symm/trans and cancellation API. This exactly matches the catalogue morphism with a two-sided inverse; having a bare underlying bijection is not substituted. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Read both inverse fields and standard Iso operations. Excluded topology/linear/ring isomorphisms or natural-isomorphism classes as distinct structured concepts.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    },
+    {
+      "concept": "isomorphism-in-category",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Actual lake-manifest Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 was inspected separately. The full generic categorical Iso implementation is supplied by checked dependency Iso (identical bytes). Native Equivalence/Trans concerns natural-isomorphism data of equivalences, Linear/Endomorphism concerns invertible scalar identities with extra structure, and specific category isomorphism-class files concern new invariants; these were excluded from the generic two-sided inverse object record. Source declarations and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit. Bounded core API selection only.\nSearch and boundary notes: Inspected candidate generic-looking equivalence and linear-endomorphism files; their endpoints are not another generic Iso definition/ordinary inverse law implementation.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-001.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Group/Idempotent.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 122,
+      "sha256": "11fd39bc88c7338f9f193d9d90754f1dcd801db11c7321b5ea5c7dfcf4b7b300",
+      "measured_at": "2026-11-12T23:22:04.938642+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Normed/Group/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1304,
+      "sha256": "9867533a28a07f296811d9a06bc371148a737cad49c5f20387a23dfafcac0e8a",
+      "measured_at": "2026-11-12T23:22:04.942818+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Normed/Group/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 492,
+      "sha256": "03df1ae4f335fc9b80a56529b40f1b11372d7a85c094b864f6a83aa4986f034b",
+      "measured_at": "2026-11-12T23:22:04.947091+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Real/Sqrt.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 509,
+      "sha256": "1f19e1d6722b2f51c2cd676d0b28ede856c7915ac815b597cef4b3919040c204",
+      "measured_at": "2026-11-12T23:22:04.954280+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Abelian/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 881,
+      "sha256": "02bfe9e848ddb3ce82c5a468ed399a4c14bd4f852fe8d1438b698a0cd941547e",
+      "measured_at": "2026-11-12T23:22:04.958628+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 807,
+      "sha256": "74b503f6f6d3801e8f740919a43197d244dd3d7e98aa6bda83fcb75a38a821cb",
+      "measured_at": "2026-11-12T23:22:04.962665+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Category/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 405,
+      "sha256": "68055bde31ab69e01bada2a99da4a049f33f19807185902d7f59a8f0af715e0e",
+      "measured_at": "2026-11-12T23:22:04.967500+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Endomorphism.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 240,
+      "sha256": "bbb39c52c73c18c711b5a46ca34076ef0e403878faaf0da4507c089e0023bc51",
+      "measured_at": "2026-11-12T23:22:04.972224+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Equivalence.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 765,
+      "sha256": "f0abf104f9264d3d4960b251fdfc3a82406265abd029b3047bc520d3ff1e42a3",
+      "measured_at": "2026-11-12T23:22:04.975591+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Functor/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 159,
+      "sha256": "52c3f594e3be6b4e124866dfd1d4359f7d525fd85dd6483d3a6637673f6481df",
+      "measured_at": "2026-11-12T23:22:04.978865+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Idempotents/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 193,
+      "sha256": "55ccc0d6876724535c7f1b1cfbad2e3fa5f268ae4aaaf1533f67dfb0650d201b",
+      "measured_at": "2026-11-12T23:22:04.982433+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Iso.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 533,
+      "sha256": "b47565701272c0d4a9df0a43e45d33d6aee3c939af014de08224d52ea6826d7c",
+      "measured_at": "2026-11-12T23:22:04.987689+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1071,
+      "sha256": "a2a564401e9b66dc2ff74bccd9cb3f94bbeaca9613934c03e1da5c2adb444905",
+      "measured_at": "2026-11-12T23:22:04.993025+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Linear/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 232,
+      "sha256": "98de8ce4f20529b8d148a7dc45617f4f3c8fa68e2868765772206849597ed9da",
+      "measured_at": "2026-11-12T23:22:04.998819+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 735,
+      "sha256": "cc78bf56fbddc70e7a68c6f62a5176ee7a8c9bf0aeef2d14a96ab484214d5590",
+      "measured_at": "2026-11-12T23:22:05.006462+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Preadditive/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 505,
+      "sha256": "6c9cfa70bb661abab0f2f437c7290bb72c62dc2f3d95ded2f968577a649d8b97",
+      "measured_at": "2026-11-12T23:22:05.012050+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Preadditive/Biproducts.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1097,
+      "sha256": "2065319210f843afbc6f9eb498360d52052341ed509cf2ad97bd58b7d6273487",
+      "measured_at": "2026-11-12T23:22:05.018809+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/CategoryTheory/Retract.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 207,
+      "sha256": "2425421c8f2000d979cc6c23af06ef126a65e08484429831469ee8d915daa0f9",
+      "measured_at": "2026-11-12T23:22:05.030468+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/MetricSpace/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 263,
+      "sha256": "8f25071f482f1cd28225fce8d0b94a4da6fb7e13985ba26988c2d4c18198f9d8",
+      "measured_at": "2026-11-12T23:22:05.038063+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/MetricSpace/Pseudo/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1292,
+      "sha256": "49fc32b8cb76014ac8c87b5a3b154642867a9b0cf4e08f00112841edf16dce45",
+      "measured_at": "2026-11-12T23:22:05.045016+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/Group/Idempotent.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 30,
+      "sha256": "2a5e19f8c4f1d2b6bdd3fc662b5b6bd3faca5d6f9c8b0516fa6f16362213b407",
+      "measured_at": "2026-11-12T23:22:05.053240+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Real/Sqrt.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 146,
+      "sha256": "5e4d096f5f389167579fdd759626d104b1e3a3149aa24f414b85c50069c6db5b",
+      "measured_at": "2026-11-12T23:22:05.067920+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Sqrt.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 275,
+      "sha256": "f48eb166a2207a367880fa3ae30d4ffdd46afe89f008bb2412c04fdaee5471b7",
+      "measured_at": "2026-11-12T23:22:05.078970+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Abelian/Images.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 53,
+      "sha256": "60a76188b5b2fafec07b02aa3a7bf02ea302dc49deb0dadceca8994ff5c5c37e",
+      "measured_at": "2026-11-12T23:22:05.086839+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Adjunction/Mates.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 179,
+      "sha256": "45e97a8656c4ce1c1252a9d7058f2f5ad4022956ba7897eaa137c9f37d0abf41",
+      "measured_at": "2026-11-12T23:22:05.094301+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Equivalence/Trans.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 39,
+      "sha256": "7e2aac1a178fd164e13545a316d52ff5f3d65412dd2be65069854d98ee125ac1",
+      "measured_at": "2026-11-12T23:22:05.103101+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Limits/Shapes/Biproduct.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 612,
+      "sha256": "b4aef24c574694b0cc7e78e200b7786d3cf3b8704bdf763f6ac734749ae88cc7",
+      "measured_at": "2026-11-12T23:22:05.110329+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Linear/Endomorphism.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 164,
+      "sha256": "75cc3515ace90031b292fad3a9d4e7b8b593a53032295a4e0d452f247c7a414b",
+      "measured_at": "2026-11-12T23:22:05.118933+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Monoidal/Rigid/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 303,
+      "sha256": "05ee9e4f7216107a79ccf87f30df6f82d98d6f87cf50916a2aa414b7d6d48afe",
+      "measured_at": "2026-11-12T23:22:05.126904+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Monoidal/Rigid/DualFunctor.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 543,
+      "sha256": "e9d2ace4247ac72954fca87ec6a7d84acd5eb5b9cdafe17185f6fc90b0bbd66a",
+      "measured_at": "2026-11-12T23:22:05.134633+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Monoidal/Rigid/LeftDualFunctor.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 350,
+      "sha256": "6080807e3390828596aab8c6b172c9123fee93d06226a628baa4ac78547ff518",
+      "measured_at": "2026-11-12T23:22:05.141999+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Monoidal/Rigid/Mate.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 563,
+      "sha256": "b0a76eda52315f571a3bb109d80abb753f6bbc17f1efa61d01f31cb5a3d83582",
+      "measured_at": "2026-11-12T23:22:05.149641+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/MetricSpace/Pseudo/Defs.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 75,
+      "sha256": "72bca97325c0f2363c266753bc0f2cc40035a4f694c429208ef418178075affb",
+      "measured_at": "2026-11-12T23:22:05.160642+00:00"
+    }
+  ]
+}

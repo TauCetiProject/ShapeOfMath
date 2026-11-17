@@ -1,0 +1,717 @@
+Perturbation theory for Markov chains via Wasserstein distance
+
+Coverage: Entire pinned arXiv1503.04123v3 PDF, all31pages/all47references, independently reread after PR handoff. Plans004–006 complete actual reading inputs, statement cones, encountered immediate theorem proofs and contribution comparisons; exact unresolved claim dispositions remain recorded.
+Required concepts complete: True
+Introduced concepts complete: False
+All citations captured: True
+Completion refers to immediate concepts only; false means not certified.
+
+REQUIRED CONCEPT FRONTIER (18)
+
+- Azuma–Hoeffding inequality: If a real martingale has increments bounded in absolute value by c_i, then P(|M_n−M_0|≥t)≤2exp(−t²/(2∑_{i=1}^nc_i²)) for t>0.
+- Bayesian posterior density: For a prior density p(θ) and likelihood ℓ(y|θ), the posterior density given observation y is π(θ|y)=ℓ(y|θ)p(θ)/∫ℓ(y|u)p(u)du, when the denominator is positive and finite.
+- Compact petite sets for a Lebesgue-irreducible weak Feller kernel: Every compact subset of ℝᵈ is petite for a weak Feller Markov kernel that is irreducible with respect to Lebesgue measure. The full support of Lebesgue measure is essential to this version; irreducibility and weak Feller alone do not imply it for arbitrary irreducibility measures.
+- Detailed balance of the general Metropolis–Hastings kernel: For a target probabilityπ and proposal kernelQ, the general Metropolis–Hastings kernel with acceptance min(1,r), where r is the reversed/forward joint-proposal Radon–Nikodym ratio on their common part and zero on the forward-only part, satisfies detailed balance withπ and hence leavesπ invariant.
+- Equivalent petite-set drift from weighted uniform ergodicity: If a ψ-irreducible Markov kernel is V-uniformly ergodic for finite V≥1, then there are a finite V₀ with c⁻¹V≤V₀≤cV, a petite set C on which V₀ is bounded, λ<1 and b<∞ such that PV₀≤λV₀+b1_C.
+- Gibbs distribution on a finite configuration space: For a finite set Ω, energy H:Ω→ℝ and inverse temperature β≥0, the Gibbs distribution is μ(σ)=exp(−βH(σ))/Z, where Z=∑_{τ∈Ω}exp(−βH(τ)).
+- Harris geometric ergodicity from petite-set drift: LetP be ψ-irreducible and aperiodic. If a finite measurableV≥1, a petite setC withsup_CV<∞,0≤a<1 andb<∞ satisfyPV≤aV+b1_C, thenP is positive Harris recurrent andV-uniformly ergodic.
+- Invariant moment bound from geometric drift: IfP is a Markov kernel,πP=π and a finite measurableV≥0 satisfiesPV≤aV+b with0≤a<1,0≤b<∞, thenπ(V)≤b/(1−a); no prior integrability assumption onV is required.
+- Kantorovich–Rubinstein duality for a lower semicontinuous metric: For probability measures μ,ν on a Polish space equipped with a finite lower semicontinuous metric d, W_d(μ,ν)=sup_f|∫f dμ−∫f dν|, where f ranges over bounded Borel functions with |f(x)−f(y)|≤d(x,y). The equality is understood in the extended nonnegative reals; finite first moments also permit arbitrary integrable1-Lipschitz tests.
+- Markov chain Monte Carlo sampling: Use a Markov chain with a prescribed stationary distribution to generate dependent approximate samples from that distribution,with ergodic averages used to estimate expectations.
+- Power interpolation of weighted uniform ergodicity: If ||P^n(x,·)−π||_V≤Cρ^nV(x), π(V)<∞ and V≥1, then for every 0<r<1 the chain is V^r-uniformly ergodic, with bound 2^(1−r)C^rρ^(nr)V(x)^r.
+- Total variation bound by chi-squared divergence: For probability measures P,Q, the full total variation norm satisfies ||P−Q||_TV≤√χ²(P‖Q), with the inequality understood in the extended sense. The convention sup_A|P(A)−Q(A)| has the additional factor1/2.
+- Translation bound for a bounded unimodal density: If a real probability density h is weakly unimodal and h≤H, then ∫|h(z)−h(z−a)|dz≤2H|a| for every a∈ℝ.
+- Unadjusted Langevin algorithm: For a differentiable positive target density π on ℝ^d and step h>0, the unadjusted Langevin chain is X_(n+1)=X_n+h∇logπ(X_n)+√(2h)Z_(n+1), with independent standard Gaussian vectors Z_n. It is the Euler discretization of the Langevin diffusion and generally does not preserve π exactly.
+- Wasserstein contraction and submultiplicativity for Markov kernels: For Markov kernels P,Q on the declared lower-semicontinuous metric state space, W_d(μP,νP)≤τ_d(P)W_d(μ,ν) and τ_d(PQ)≤τ_d(P)τ_d(Q), whenever the products are unambiguous; the zero-coefficient case means all rows coincide.
+- Weak and strong weighted kernel perturbations for autoregressions: For AR(1) kernels P_α with any innovation density of finite first moment and V=1+|x|, ||P_β−P_α||_(B_1→B_V)→0 as β→α. For fixed 0<α<1, the stronger norm ||P_β−P_α||_(B_V→B_V) need not tend to0 as β↓α; in fact its liminf is positive for every such density.
+- Weighted geometric ergodicity of an autoregression with a density: For a real AR(1) kernel with |α|<1 and iid innovations having a Lebesgue density and finite first absolute moment, V(x)=1+|x| gives V-uniform ergodicity. For every ρ with |α|<ρ<1 there is C_ρ<∞ such that ||P^n(x,·)−π||_V≤C_ρρ^nV(x). This statement does not assert that the endpoint rate |α| is attained.
+- Weighted total variation as a Wasserstein distance: For a lower semicontinuous weight V≥1 on a Polish space, set d_V(x,y)=(V(x)+V(y))1_(x≠y). For probabilities μ,ν with finite V-moments, W_(d_V)(μ,ν)=‖μ−ν‖_V.
+
+INHERITED PREREQUISITES (132)
+
+- Abelian group — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Absolute continuity of measures — via chi-squared-total-variation-bound, metropolis-hastings-detailed-balance
+- Almost-everywhere property on a measure space — via ar1-density-weighted-geometric-ergodicity, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation
+- Almost-sure convergence of real random variables — via ar1-density-weighted-geometric-ergodicity, harris-petite-geometric-drift-theorem
+- Aperiodicity of a general-state irreducible Markov chain — via harris-petite-geometric-drift-theorem
+- Autoregressive process of order one — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast
+- Banach space — via ar1-weak-strong-perturbation-contrast
+- Bijection between sets — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Binary operation on a set — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Binary relation on a set — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Borel σ-algebra of a topological space — via unadjusted-langevin-algorithm, weak-feller-lebesgue-irreducible-compact-petite
+- Borel σ-algebra on the real line — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Bounded linear operator — via ar1-weak-strong-perturbation-contrast
+- Cartesian product of sets — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Cauchy sequence in a metric space — via ar1-weak-strong-perturbation-contrast, bayesian-posterior-density, kantorovich-rubinstein-lsc-metric-duality, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Chi-squared divergence of probability measures — via chi-squared-total-variation-bound
+- Commutative ring with identity — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Compact topological space — via weak-feller-lebesgue-irreducible-compact-petite
+- Complement of a subset — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Complete measure — via kantorovich-rubinstein-lsc-metric-duality, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Complete metric space — via ar1-weak-strong-perturbation-contrast, bayesian-posterior-density, kantorovich-rubinstein-lsc-metric-duality, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Complex number — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, unimodal-density-l1-translation-bound
+- Conditional expectation given a σ-algebra — via ar1-density-weighted-geometric-ergodicity, azuma-hoeffding, bayesian-posterior-density, harris-petite-geometric-drift-theorem, markov-chain-monte-carlo, unadjusted-langevin-algorithm, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation
+- Conditional probability given an event — via markov-chain-monte-carlo
+- Continuous map between topological spaces — via weak-feller-lebesgue-irreducible-compact-petite
+- Convergence of a sequence in a metric space — via ar1-weak-strong-perturbation-contrast, bayesian-posterior-density, kantorovich-rubinstein-lsc-metric-duality, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Convergent real series — via ar1-density-weighted-geometric-ergodicity, azuma-hoeffding, gibbs-distribution-finite, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-power-interpolation
+- Coupling of probability measures — via kantorovich-rubinstein-lsc-metric-duality, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Dense subset of a metric space — via bayesian-posterior-density, kantorovich-rubinstein-lsc-metric-duality, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Derivative of a real function — via unadjusted-langevin-algorithm
+- Detailed balance for a Markov kernel — via metropolis-hastings-detailed-balance
+- Discrete-time martingale — via azuma-hoeffding
+- Disjoint sets — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Distribution of a real random variable — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast
+- Equivalence class — via ar1-density-weighted-geometric-ergodicity, unimodal-density-l1-translation-bound
+- Equivalence relation — via ar1-density-weighted-geometric-ergodicity, unimodal-density-l1-translation-bound
+- Essential supremum of a measurable real function — via ar1-density-weighted-geometric-ergodicity, unimodal-density-l1-translation-bound
+- Euclidean space ℝᵈ — via unadjusted-langevin-algorithm, weak-feller-lebesgue-irreducible-compact-petite
+- Expectation of an integrable real random variable — via ar1-density-weighted-geometric-ergodicity, azuma-hoeffding, bayesian-posterior-density, harris-petite-geometric-drift-theorem, markov-chain-monte-carlo, unadjusted-langevin-algorithm, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation
+- Extended nonnegative real numbers — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Factorial — via ar1-density-weighted-geometric-ergodicity, azuma-hoeffding, gibbs-distribution-finite, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-power-interpolation
+- Field — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Filtration of σ-algebras — via azuma-hoeffding
+- Finite set — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Finite signed measure — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, weighted-variation-wasserstein-identity
+- Foster–Lyapunov drift condition for a Markov kernel — via harris-petite-geometric-drift-theorem, v-uniform-ergodicity-equivalent-petite-drift
+- Function between sets — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Group — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Identically distributed random variables — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast
+- Independent family of random variables — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, unadjusted-langevin-algorithm
+- Indicator function of a subset — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Intersection of a family of sets — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Invariant probability of a Markov kernel — via ar1-density-weighted-geometric-ergodicity, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation
+- Irreducibility with respect to a measure — via harris-petite-geometric-drift-theorem, v-uniform-ergodicity-equivalent-petite-drift, weak-feller-lebesgue-irreducible-compact-petite
+- Least upper bound in a partially ordered set — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Lebesgue Lᵖ space — via ar1-density-weighted-geometric-ergodicity, unimodal-density-l1-translation-bound
+- Lebesgue integral — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Lebesgue measure on Euclidean space — via unadjusted-langevin-algorithm, weak-feller-lebesgue-irreducible-compact-petite
+- Limit of a function between metric spaces — via unadjusted-langevin-algorithm
+- Limit of a real function at a point — via unadjusted-langevin-algorithm
+- Limit of a real sequence — via ar1-density-weighted-geometric-ergodicity, azuma-hoeffding, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-power-interpolation
+- Linear map between vector spaces — via ar1-weak-strong-perturbation-contrast
+- Lipschitz map between metric spaces — via kantorovich-rubinstein-lsc-metric-duality
+- Lower semicontinuous extended-real function — via kantorovich-rubinstein-lsc-metric-duality, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Matrix over a ring — via markov-chain-monte-carlo, unadjusted-langevin-algorithm
+- Measurable map between measurable spaces — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Measurable simple real function — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Measurable space — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Measure — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Metric induced by a norm — via ar1-weak-strong-perturbation-contrast
+- Metric space — via ar1-weak-strong-perturbation-contrast, bayesian-posterior-density, kantorovich-rubinstein-lsc-metric-duality, unadjusted-langevin-algorithm, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Metropolis–Hastings transition kernel — via metropolis-hastings-detailed-balance
+- Modulus of a complex number — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, unimodal-density-l1-translation-bound
+- Monotone real function — via unimodal-density-l1-translation-bound
+- Multivariate normal distribution — via unadjusted-langevin-algorithm
+- Natural logarithm — via ar1-density-weighted-geometric-ergodicity, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-power-interpolation
+- Natural number — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Nonnegative real square root — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, weak-feller-lebesgue-irreducible-compact-petite
+- Normal distribution — via unadjusted-langevin-algorithm
+- Normed vector space — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, unimodal-density-l1-translation-bound
+- Open interval in the real line — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Ordered field — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Ordered pair — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Partial derivative in Euclidean coordinates — via unadjusted-langevin-algorithm
+- Partial order — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Petite set for a Markov kernel — via harris-petite-geometric-drift-theorem, v-uniform-ergodicity-equivalent-petite-drift, weak-feller-lebesgue-irreducible-compact-petite
+- Polish space — via bayesian-posterior-density, kantorovich-rubinstein-lsc-metric-duality, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Positive Harris recurrence — via harris-petite-geometric-drift-theorem
+- Positive semidefinite real matrix — via unadjusted-langevin-algorithm
+- Preimage of a subset under a function — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Probability density relative to a measure — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, bayesian-posterior-density, unimodal-density-l1-translation-bound
+- Probability kernel between measurable spaces — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, bayesian-posterior-density, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite
+- Probability mass function on a finite set — via gibbs-distribution-finite, markov-chain-monte-carlo
+- Probability space — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite
+- Product measure — via kantorovich-rubinstein-lsc-metric-duality, metropolis-hastings-detailed-balance, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Radon–Nikodym derivative of a measure — via metropolis-hastings-detailed-balance
+- Radon–Nikodym theorem for finite measures — via chi-squared-total-variation-bound
+- Real exponential function — via ar1-density-weighted-geometric-ergodicity, azuma-hoeffding, gibbs-distribution-finite, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-power-interpolation
+- Real number — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Real power of a positive real number — via ar1-density-weighted-geometric-ergodicity, unimodal-density-l1-translation-bound, v-uniform-ergodicity-power-interpolation
+- Real sequence — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Real sine function — via unadjusted-langevin-algorithm
+- Real-valued random variable — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, harris-petite-geometric-drift-theorem, markov-chain-monte-carlo, unadjusted-langevin-algorithm, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation
+- Regular conditional distribution for a Polish-valued random variable — via bayesian-posterior-density
+- Separable metric space — via bayesian-posterior-density, kantorovich-rubinstein-lsc-metric-duality, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Sequence in a set — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Set — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Stationary distribution of a finite Markov chain — via markov-chain-monte-carlo
+- Stationary law of a contractive first-order autoregression — via ar1-density-weighted-geometric-ergodicity
+- Stochastic process — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, harris-petite-geometric-drift-theorem, markov-chain-monte-carlo, unadjusted-langevin-algorithm, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation
+- Stochastic transition matrix — via markov-chain-monte-carlo
+- Subset — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Sum of a nonnegative series — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Symmetric matrix — via unadjusted-langevin-algorithm
+- Time-homogeneous Markov chain on a finite state space — via markov-chain-monte-carlo
+- Time-homogeneous Markov chain on a measurable state space — via ar1-density-weighted-geometric-ergodicity, harris-petite-geometric-drift-theorem, markov-chain-monte-carlo, unadjusted-langevin-algorithm, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation
+- Topological space — via bayesian-posterior-density, kantorovich-rubinstein-lsc-metric-duality, unadjusted-langevin-algorithm, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Total order — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, gibbs-distribution-finite, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- Union of a family of sets — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- V-uniform ergodicity of a discrete-time Markov kernel — via ar1-density-weighted-geometric-ergodicity, harris-petite-geometric-drift-theorem, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation
+- Vector space — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound
+- Wasserstein Dobrushin coefficient of a Markov kernel — via wasserstein-kernel-contraction-submultiplicativity
+- Wasserstein distance of order one for a lower semicontinuous metric — via kantorovich-rubinstein-lsc-metric-duality, wasserstein-kernel-contraction-submultiplicativity, weighted-variation-wasserstein-identity
+- Weak Feller Markov kernel — via weak-feller-lebesgue-irreducible-compact-petite
+- Weakly unimodal density on the real line — via unimodal-density-l1-translation-bound
+- Weighted operator norm of a kernel difference — via ar1-weak-strong-perturbation-contrast
+- Weighted supremum space of measurable functions — via ar1-weak-strong-perturbation-contrast
+- Weighted total variation norm of a signed measure — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, weighted-variation-wasserstein-identity
+- π — via unadjusted-langevin-algorithm
+- σ-algebra — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- σ-algebra generated by a family of subsets — via ar1-density-weighted-geometric-ergodicity, ar1-weak-strong-perturbation-contrast, azuma-hoeffding, bayesian-posterior-density, chi-squared-total-variation-bound, harris-petite-geometric-drift-theorem, invariant-drift-moment-bound, kantorovich-rubinstein-lsc-metric-duality, markov-chain-monte-carlo, metropolis-hastings-detailed-balance, unadjusted-langevin-algorithm, unimodal-density-l1-translation-bound, v-uniform-ergodicity-equivalent-petite-drift, v-uniform-ergodicity-power-interpolation, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+- σ-finite measure — via harris-petite-geometric-drift-theorem, kantorovich-rubinstein-lsc-metric-duality, metropolis-hastings-detailed-balance, v-uniform-ergodicity-equivalent-petite-drift, wasserstein-kernel-contraction-submultiplicativity, weak-feller-lebesgue-irreducible-compact-petite, weighted-variation-wasserstein-identity
+
+INTRODUCED CONCEPTS (5)
+
+- Lyapunov-weighted Wasserstein bound for acceptance errors
+- Rudolf–Schweizer Lyapunov-weighted Wasserstein perturbation bound
+- Rudolf–Schweizer total-variation perturbation bound from weighted geometric ergodicity
+- Sharp linear Wasserstein perturbation for an autoregressive coefficient
+- Weighted variation stability under bounded acceptance error
+
+LOCATED CONCEPTS (35)
+
+1. Markov chain Monte Carlo sampling
+   Use a Markov chain with a prescribed stationary distribution to generate dependent approximate samples from that distribution,with ergodic averages used to estimate expectations.
+   Source: relies_on, §1; §4
+   Note: Standard MCMC motivation and algorithmic background.
+
+2. Kantorovich–Rubinstein duality for a lower semicontinuous metric
+   For probability measures μ,ν on a Polish space equipped with a finite lower semicontinuous metric d, W_d(μ,ν)=sup_f|∫f dμ−∫f dν|, where f ranges over bounded Borel functions with |f(x)−f(y)|≤d(x,y). The equality is understood in the extended nonnegative reals; finite first moments also permit arbitrary integrable1-Lipschitz tests.
+   Source: relies_on, §2, (2.1)
+   Note: Fundamental imported optimal-transport duality; no origin assigned to this paper.
+
+3. Wasserstein contraction and submultiplicativity for Markov kernels
+   For Markov kernels P,Q on the declared lower-semicontinuous metric state space, W_d(μP,νP)≤τ_d(P)W_d(μ,ν) and τ_d(PQ)≤τ_d(P)τ_d(Q), whenever the products are unambiguous; the zero-coefficient case means all rows coincide.
+   Source: relies_on, Proposition2.1
+   Note: Imported Dobrushin contraction/submultiplicativity properties.
+
+4. Weighted total variation as a Wasserstein distance
+   For a lower semicontinuous weight V≥1 on a Polish space, set d_V(x,y)=(V(x)+V(y))1_(x≠y). For probabilities μ,ν with finite V-moments, W_(d_V)(μ,ν)=‖μ−ν‖_V.
+   Source: relies_on, Lemma3.1
+   Note: The identity is explicitly credited to Hairer–Mattingly[17] and Mao–Zhang–Zhang[26].
+
+5. Foster–Lyapunov drift condition for a Markov kernel
+   A Markov kernel P satisfies a geometric Foster–Lyapunov condition with V≥1 if PV≤aV+b for constants0≤a<1 and b<∞. Compact sublevel sets of V make the resulting occupation-law bounds useful for tightness.
+   Source: relies_on, Theorems3.1–3.2; §4
+   Note: The approximate chain’s moment bound is a stability input, weaker than ergodicity.
+
+6. V-uniform ergodicity of a discrete-time Markov kernel
+   A Markov kernel P is V-uniformly ergodic if it has an invariant probability π with π(V)<∞ and there are C<∞ and 0≤ρ<1 such that ‖P^n(x,·)−π‖_V≤CV(x)ρ^n for all x and n≥0, for a measurable weight V≥1.
+   Source: relies_on, §3.2; applications
+   Note: A weighted convergence assumption is distinct from drift alone.
+
+7. Metropolis–Hastings transition kernel
+   For a target probability π and proposal kernel Q, let r(x,y) be the Radon–Nikodym ratio of the reversed joint proposal law π(dy)Q(y,dx) to the forward law π(dx)Q(x,dy) on their mutually absolutely continuous part, and set r=0 on the forward-only singular part. The acceptance probability a=min(1,r) gives P(x,dy)=a(x,y)Q(x,dy)+(1−∫a(x,z)Q(x,dz))δ_x(dy).
+   Source: relies_on, §4.2
+   Note: Standard acceptance/rejection kernel and Radon–Nikodym ratio.
+
+8. Bayesian posterior density
+   For a prior density p(θ) and likelihood ℓ(y|θ), the posterior density given observation y is π(θ|y)=ℓ(y|θ)p(θ)/∫ℓ(y|u)p(u)du, when the denominator is positive and finite.
+   Source: relies_on, §4.3
+   Note: Prior/likelihood/posterior calculation supplies the Langevin target.
+
+9. Unadjusted Langevin algorithm
+   For a differentiable positive target density π on ℝ^d and step h>0, the unadjusted Langevin chain is X_(n+1)=X_n+h∇logπ(X_n)+√(2h)Z_(n+1), with independent standard Gaussian vectors Z_n. It is the Euler discretization of the Langevin diffusion and generally does not preserve π exactly.
+   Source: relies_on, §4.3
+   Note: The discretized target differs from the invariant law in general.
+
+10. Autoregressive process of order one
+   A real AR(1) process satisfies X_n=aX_(n−1)+Z_n, where (Z_n) are i.i.d. real innovations independent of X₀; the stable parameter range is |a|<1.
+   Source: relies_on, §4.1
+   Note: AR(1) examples show linear error sensitivity.
+
+11. Radon–Nikodym theorem for finite measures
+   If finite positive measuresν,μ on one measurable space satisfyν≪μ, there is a nonnegative integrable f withν(A)=∫_Af,dμ for every measurableA, unique up toμ-null sets.
+   Source: relies_on, §4.2, (4.5)
+   Note: The general measurable proposal ratio uses densities of finite joint measures.
+
+12. Rudolf–Schweizer Lyapunov-weighted Wasserstein perturbation bound
+   Let P,Q be Markov kernels with τ_d(P^n)≤Cρ^n for n≥0, C≥1 and ρ<1. Suppose QV≤δV+L with V≥1,0≤δ<1, and κ=max(q₀(V),L/(1−δ))<∞. Put γ=sup_xW_d(P(x,·),Q(x,·))/V(x). Then W_d(p₀P^n,q₀Q^n)≤Cρ^nW_d(p₀,q₀)+Cγκ(1−ρ^n)/(1−ρ).
+   Source: explains, Theorem3.1
+   Note: Complete proof checked with explicit C≥1 normalization; original contribution comparison remains pending.
+
+13. Rudolf–Schweizer total-variation perturbation bound from weighted geometric ergodicity
+   Suppose ‖P^n(x,·)−π‖_V≤CV(x)ρ^n with C≥1,ρ<1,V≥1, QV≤δV+L and PV≤V+L. Put κ=max(q₀(V),L/(1−δ))<∞ and γ=sup_x‖P(x,·)−Q(x,·)‖_TV/V(x). For0<γ<e^(−1), ‖p₀P^n−q₀Q^n‖_TV≤Cρ^n‖p₀−q₀‖_V+[eκ/(1−ρ)] [2C(L+1)]^(1/log(1/γ))γlog(1/γ).
+   Source: explains, Theorem3.2
+   Note: Complete proof checked; weak total-variation row perturbations give a γlog(1/γ) bound.
+
+14. Wasserstein contraction and submultiplicativity for Markov kernels
+   For Markov kernels P,Q on the declared lower-semicontinuous metric state space, W_d(μP,νP)≤τ_d(P)W_d(μ,ν) and τ_d(PQ)≤τ_d(P)τ_d(Q), whenever the products are unambiguous; the zero-coefficient case means all rows coincide.
+   Source: explains, Proposition2.1
+   Note: Standard imported result; an elementary dual-function proof is recorded.
+
+15. Weighted total variation as a Wasserstein distance
+   For a lower semicontinuous weight V≥1 on a Polish space, set d_V(x,y)=(V(x)+V(y))1_(x≠y). For probabilities μ,ν with finite V-moments, W_(d_V)(μ,ν)=‖μ−ν‖_V.
+   Source: explains, Lemma3.1
+   Note: Standard attributed identity; independent common-part coupling proof recorded.
+
+16. Detailed balance of the general Metropolis–Hastings kernel
+   For a target probabilityπ and proposal kernelQ, the general Metropolis–Hastings kernel with acceptance min(1,r), where r is the reversed/forward joint-proposal Radon–Nikodym ratio on their common part and zero on the forward-only part, satisfies detailed balance withπ and hence leavesπ invariant.
+   Source: relies_on, §4.2(4.5)–(4.6)
+   Note: Actual source-specific imported input or vocabulary independently captured from the full31-page reread.
+
+17. Irreducibility with respect to a measure
+   A Markov kernelP on(E,𝔈) is ψ-irreducible ifψ is a nonzeroσ-finite measure and every A∈𝔈 withψ(A)>0 satisfies∑_{n≥1}Pⁿ(x,A)>0 for everyx∈E.
+   Source: relies_on, §3.2;Proposition4.1
+   Note: Actual source-specific imported input or vocabulary independently captured from the full31-page reread.
+
+18. Aperiodicity of a general-state irreducible Markov chain
+   A ψ-irreducible Markov chain is aperiodic if it admits no measurable cyclic decomposition of lengthd≥2: disjoint ψ-positive setsD₀,…,D_{d−1} withψ-null complement andP(x,D_{i+1 mod d})=1 for everyx∈D_i.
+   Source: relies_on, §3.2;Remark4.4
+   Note: Actual source-specific imported input or vocabulary independently captured from the full31-page reread.
+
+19. Petite set for a Markov kernel
+   A measurable setC is petite forP if some probability(a_n) on the nonnegative integers,ε>0 and probabilityν satisfy∑_{n≥0}a_nP^n(x,A)≥εν(A) for allx∈C and measurableA.
+   Source: relies_on, Proposition4.1
+   Note: Actual source-specific imported input or vocabulary independently captured from the full31-page reread.
+
+20. Weak Feller Markov kernel
+   A Markov kernelP on a topological space is weak Feller ifPf is bounded continuous wheneverf is bounded continuous.
+   Source: relies_on, Proposition4.1
+   Note: Actual source-specific imported input or vocabulary independently captured from the full31-page reread.
+
+21. Invariant moment bound from geometric drift
+   IfP is a Markov kernel,πP=π and a finite measurableV≥0 satisfiesPV≤aV+b with0≤a<1,0≤b<∞, thenπ(V)≤b/(1−a); no prior integrability assumption onV is required.
+   Source: relies_on, Corollary3.1;Remark3.7;§4
+   Note: Actual source-specific imported input or vocabulary independently captured from the full31-page reread.
+
+22. Harris geometric ergodicity from petite-set drift
+   LetP be ψ-irreducible and aperiodic. If a finite measurableV≥1, a petite setC withsup_CV<∞,0≤a<1 andb<∞ satisfyPV≤aV+b1_C, thenP is positive Harris recurrent andV-uniformly ergodic.
+   Source: relies_on, §3.2;Remark4.4;Proposition4.1
+   Note: Actual source-specific imported input or vocabulary independently captured from the full31-page reread.
+
+23. Weighted operator norm of a kernel difference
+   For Markov kernels P,Q and finite weights V,W≥1, the norm of P−Q:B_V→B_W is sup_x ||P(x,·)−Q(x,·)||_V/W(x), whenever the rows have finite V moments; the equality follows by taking the two suprema over x and |f|≤V in either order.
+   Source: relies_on, §3.2(3.16)
+   Note: Actual application/background input reviewed against the complete source, with predecessor or selected repair distinguished from original attribution.
+
+24. Power interpolation of weighted uniform ergodicity
+   If ||P^n(x,·)−π||_V≤Cρ^nV(x), π(V)<∞ and V≥1, then for every 0<r<1 the chain is V^r-uniformly ergodic, with bound 2^(1−r)C^rρ^(nr)V(x)^r.
+   Source: relies_on, §3.2p13,[28,Proposition2]
+   Note: Actual application/background input reviewed against the complete source, with predecessor or selected repair distinguished from original attribution.
+
+25. Stationary law of a contractive first-order autoregression
+   For X_n=αX_(n−1)+Z_n on ℝ with |α|<1 and iid innovations satisfying E|Z_1|<∞, the law of ∑_{j≥0}α^j Z_(j+1) is the unique invariant probability. The series converges almost surely and in L¹; the invariant first moment is at most E|Z_1|/(1−|α|), and its mean is EZ_1/(1−α).
+   Source: relies_on, §4.1pp16–17
+   Note: Actual application/background input reviewed against the complete source, with predecessor or selected repair distinguished from original attribution.
+
+26. Weighted geometric ergodicity of an autoregression with a density
+   For a real AR(1) kernel with |α|<1 and iid innovations having a Lebesgue density and finite first absolute moment, V(x)=1+|x| gives V-uniform ergodicity. For every ρ with |α|<ρ<1 there is C_ρ<∞ such that ||P^n(x,·)−π||_V≤C_ρρ^nV(x). This statement does not assert that the endpoint rate |α| is attained.
+   Source: relies_on, §4.1pp17–18,[15]
+   Note: Actual application/background input reviewed against the complete source, with predecessor or selected repair distinguished from original attribution.
+
+27. Translation bound for a bounded unimodal density
+   If a real probability density h is weakly unimodal and h≤H, then ∫|h(z)−h(z−a)|dz≤2H|a| for every a∈ℝ.
+   Source: relies_on, §4.1p18
+   Note: Actual application/background input reviewed against the complete source, with predecessor or selected repair distinguished from original attribution.
+
+28. Weak and strong weighted kernel perturbations for autoregressions
+   For AR(1) kernels P_α with any innovation density of finite first moment and V=1+|x|, ||P_β−P_α||_(B_1→B_V)→0 as β→α. For fixed 0<α<1, the stronger norm ||P_β−P_α||_(B_V→B_V) need not tend to0 as β↓α; in fact its liminf is positive for every such density.
+   Source: relies_on, §4.1p18,[13,Example1]
+   Note: Actual application/background input reviewed against the complete source, with predecessor or selected repair distinguished from original attribution.
+
+29. Compact petite sets for a Lebesgue-irreducible weak Feller kernel
+   Every compact subset of ℝᵈ is petite for a weak Feller Markov kernel that is irreducible with respect to Lebesgue measure. The full support of Lebesgue measure is essential to this version; irreducibility and weak Feller alone do not imply it for arbitrary irreducibility measures.
+   Source: relies_on, Proposition4.1proof,[31,Proposition6.2.8]
+   Note: Exact imported full-support compact-petite fact used in the Gaussian application; complete inspected proof recorded.
+
+30. Equivalent petite-set drift from weighted uniform ergodicity
+   If a ψ-irreducible Markov kernel is V-uniformly ergodic for finite V≥1, then there are a finite V₀ with c⁻¹V≤V₀≤cV, a petite set C on which V₀ is bounded, λ<1 and b<∞ such that PV₀≤λV₀+b1_C.
+   Source: relies_on, Remark4.4,[31,Theorem16.0.1]
+   Note: Converse direction needed to understand the claimed small-perturbation inheritance; the equivalent-weight qualification is retained.
+
+31. Sharp linear Wasserstein perturbation for an autoregressive coefficient
+   For real AR(1) kernels with common iid innovation Z of finite first moment and coefficients |α|,|β|<1, W₁(π_α,π_β)≤|α−β|[1−|β|+E|Z|]/[(1−|α|)(1−|β|)]. If EZ≠0, W₁(π_α,π_β)≥|α−β||EZ|/[|1−α||1−β|], so the linear dependence on the coefficient error cannot be improved in general.
+   Source: introduces, §4.1pp16–17
+   Note: Explicit coefficient sensitivity with a matching-order stationary lower bound.
+   Origin evidence: Sourceintroductionp2 explicitly announces AR sharpness. Checked Ferré–Hervé–Ledoux2013Example1pp4–6: predecessor proves weak-norm continuity and invariant-law continuity, without this explicit W₁ coefficient bound and mean lower bound. Checked Pillai–Smithv2Corollary1pp5–6: it assumes a globally bounded one-step error; the present Lyapunov-weighted unbounded coefficient error is the substantive extension. Origin does not cover AR recursion or its stationary-series law.
+
+32. Lyapunov-weighted Wasserstein bound for acceptance errors
+   Let P_α,P_β share proposal Q and have acceptance errors E(x,y)=|α(x,y)−β(x,y)|. If τ_d(P_α^n)≤Cρ^n, P_βV≤δV+L and γ=sup_x V(x)⁻¹∫d(x,y)E(x,y)Q(x,dy)<∞, then for p(V)<∞, W_d(pP_α^n,pP_β^n)≤γC max{p(V),L/(1−δ)}(1−ρ^n)/(1−ρ), using the n=0 convention C≥1.
+   Source: introduces, Lemma4.1;Corollary4.1
+   Note: Acceptance-error bound allowing Lyapunov weighting on noncompact spaces.
+   Origin evidence: Sourceintroductionp2 explicitly identifies the MH result as generalizing Bardenet etal[3]. Checked primaryBardenet2014Lemma3.1/Proposition3.2p4: uniform acceptance error plus uniform geometric ergodicity yields a stationary half-TV bound. Checked Pillai–Smithv2Lemma3.3pp5–6: local bounded errors and exit probabilities, rather than this global Lyapunov-weighted acceptance error. The new scope is this weighted approximate-MH application, not MH correctness or the elementary acceptance difference identity.
+
+33. Weighted variation stability under bounded acceptance error
+   Suppose V≥1 is lower semicontinuous and P_α is V-uniformly ergodic with constants C,ρ, P_αV≤δV+L, and another acceptance kernel P_β shares proposal Q. If |α−β|≤s and λ=1+sup_x QV(x)/V(x)<∞ satisfy δ+λs<1, then ||pP_α^n−pP_β^n||_V≤λs C max{p(V),L/(1−δ−λs)}(1−ρ^n)/(1−ρ), for finite p(V), C≥1 and n≥0.
+   Source: introduces, Corollary4.2
+   Note: Explicit weighted-variation extension of approximate-MH bias control.
+   Origin evidence: Sourcepp22–23 states this as the nonuniform-ergodic extension of Bardenet[3]. ActualBardenetProposition3.2 imposes uniform geometric ergodicity; the present checked result instead uses a V-weighted drift and proposal-moment ratio. Ferré–Hervé–LedouxTheorem1 gives qualitative invariant/ergodicity stability in weak norms, not this explicit acceptance-error estimate. The known weighted norm and drift tools retain their original background attribution.
+
+34. Uniform perturbation rate for bounded-statistic noisy Langevin chains
+   For a finite exponential-family likelihood ℓ_θ(y)∝exp(θs(y)) with |s|≤S, Gaussian prior variance σ_p² and 0<σ²<4σ_p², compare the exact Gaussian Euler Langevin kernel with the kernel using an iid N-sample estimate of E_θs. For every initial law of finite first moment, both invariant laws exist and the full-TV errors between invariant laws and between nth-step laws, uniformly in n, are O(logN/N). The implied constant may depend on the fixed model, step and initial moment.
+   Source: explains, Corollary4.3;selected correctedproof
+   Note: The source claims an explicit O(log²N/N) application. A checked repair establishes O(logN/N) with different model-dependent constants. No original-source attribution is assigned to the repaired stronger order; the printed constant claim remains unresolved/incorrectly supported in the origin ledger.
+
+35. Rudolf–Schweizer Lyapunov-weighted Wasserstein perturbation bound
+   Let P,Q be Markov kernels with τ_d(P^n)≤Cρ^n for n≥0, C≥1 and ρ<1. Suppose QV≤δV+L with V≥1,0≤δ<1, and κ=max(q₀(V),L/(1−δ))<∞. Put γ=sup_xW_d(P(x,·),Q(x,·))/V(x). Then W_d(p₀P^n,q₀Q^n)≤Cρ^nW_d(p₀,q₀)+Cγκ(1−ρ^n)/(1−ρ).
+   Source: introduces, Theorem3.1;§1pp2–3
+   Note: Global Lyapunov-weighted Wasserstein perturbation bound.
+   Origin evidence: Independently reread fullTheorem3.1 proof and contribution discussion. Compared actual Mitrophanov2005Theorem3.1/Corollary3.1pp1005–1007 (uniform TV, unweighted row error), Pillai–Smith1405.0182v2Lemma3.3/Corollary1pp5–6 (bounded error globally or on a subset with exit terms), and Ferré–Hervé–Ledoux2013Theorem1pp3–4 (weak-norm qualitative stability). The retained contribution is the global weighted one-step Wasserstein error controlled by a Lyapunov drift of the approximate chain; it is not original attribution of telescoping, contractions or earlier uniform-TV perturbation theory.
+
+36. Rudolf–Schweizer total-variation perturbation bound from weighted geometric ergodicity
+   Suppose ‖P^n(x,·)−π‖_V≤CV(x)ρ^n with C≥1,ρ<1,V≥1, QV≤δV+L and PV≤V+L. Put κ=max(q₀(V),L/(1−δ))<∞ and γ=sup_x‖P(x,·)−Q(x,·)‖_TV/V(x). For0<γ<e^(−1), ‖p₀P^n−q₀Q^n‖_TV≤Cρ^n‖p₀−q₀‖_V+[eκ/(1−ρ)] [2C(L+1)]^(1/log(1/γ))γlog(1/γ).
+   Source: introduces, Theorem3.2;§1pp2–3
+   Note: Explicit weak-total-variation perturbation bound with logarithmic loss.
+   Origin evidence: Source explicitly callsTheorem3.2 its second main result and contrasts its one-step weighted-TV hypothesis/explicit constants with[13]/[41]. Checked fullFerré–Hervé–Ledoux2013Theorem1/Corollary1andExample1 pp3–6: qualitative stability and a Hölder-type estimate, not this γlog(1/γ) uniform-time bound. Mitrophanov2005 assumes uniform ergodicity. The assigned theorem gives the explicit weak-TV/strong-V interpolation estimate with a drift bound. Successfully inspected the full primary via Bath’s purehost mirror after the initial researchportal403/SemanticScholar202empty. Its AssumptionsAI/AII and fullTheorem3.1 proof pp1122–1124 give a Hölderε^η bound from iterated-kernel errors growing exponentially in time, not the present one-step γlog(1/γ) bound. This resolves that predecessor comparison; introductions_complete remainsfalse only for the separately identified application scope/constant concerns.
+
+37. Gibbs distribution on a finite configuration space
+   For a finite set Ω, energy H:Ω→ℝ and inverse temperature β≥0, the Gibbs distribution is μ(σ)=exp(−βH(σ))/Z, where Z=∑_{τ∈Ω}exp(−βH(τ)).
+   Source: relies_on, §4.3pp24–26
+   Note: The finite likelihood ℓ_θ(y)∝exp(θs(y)) is precisely the existing finite Gibbs distribution with energy−s and parameterθ; the source’s Bayesian normalizing-constant/score computation uses it.
+
+38. Total variation bound by chi-squared divergence
+   For probability measures P,Q, the full total variation norm satisfies ||P−Q||_TV≤√χ²(P‖Q), with the inequality understood in the extended sense. The convention sup_A|P(A)−Q(A)| has the additional factor1/2.
+   Source: relies_on, §4.3Prop4.1 proofp27, borrowed AlquierLemma3; Alquierv3Lemma2.4 AppendixA pp31–32
+   Note: Actual likelihood-ratio/Cauchy–Schwarz bound in the borrowed predecessor route, with the required square root explicit; not the later centered-mixture Taylor repair.
+
+39. Azuma–Hoeffding inequality
+   If a real martingale has increments bounded in absolute value by c_i, then P(|M_n−M_0|≥t)≤2exp(−t²/(2∑_{i=1}^nc_i²)) for t>0.
+   Source: relies_on, §4.3Prop4.1 borrowed AlquierLemma3; Alquierv3Lemma3.3 fullAppendixA proofpp33–35
+   Note: The bounded iid score average uses the standard Hoeffding concentration consequence of the reviewed martingale inequality; its tail is integrated to bound the exponential squared error. The source drops the square root from the ensuing kernel bound; that error stays documented.
+
+ADDITIONAL PREREQUISITES (121)
+
+- Abelian group [definition]: A group whose operation is commutative.
+- Absolute continuity of measures [definition]: A measure ν is absolutely continuous with respect to μ on the same σ-algebra if μ(A)=0 implies ν(A)=0.
+- Almost-everywhere property on a measure space [definition]: A property holds almost everywhere if the set where it fails is contained in a measurable set of measure zero.
+- Almost-sure convergence of real random variables [definition]: Xₙ→X almost surely means P({ω:limₙXₙ(ω)=X(ω)})=1.
+- Banach space [definition]: A real or complex normed vector space complete for the metric induced by its norm.
+- Bijection between sets [definition]: A function for which each element of the codomain is the image of exactly one element of the domain.
+- Binary operation on a set [definition]: A function S×S→S.
+- Binary relation on a set [definition]: A subset R⊆S×S; writing xRy means (x,y)∈R.
+- Borel σ-algebra of a topological space [definition]: The σ-algebra generated by the open subsets of the space.
+- Borel σ-algebra on the real line [definition]: The σ-algebra on ℝ generated by the open intervals.
+- Bounded linear operator [definition]: A linear map T:X→Y between normed vector spaces is bounded if ∥Tx∥≤C∥x∥ for one finite constant C and every x∈X.
+- Cartesian product of sets [definition]: A×B is the set of ordered pairs (a,b) with a∈A and b∈B.
+- Cauchy sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) is Cauchy if for every ε>0 there is N such that d(xₙ,xₘ)<ε whenever n,m≥N.
+- Chi-squared divergence of probability measures [definition]: For probability measures P≪Q with density r=dP/dQ, the chi-squared divergence is χ²(P‖Q)=∫(r−1)²dQ, allowing +∞. It is +∞ when P is not absolutely continuous with respect to Q.
+- Commutative ring with identity [definition]: An abelian group under addition, together with an associative commutative multiplication with identity, distributing over addition. The zero ring is allowed.
+- Compact topological space [definition]: A topological space in which every open cover has a finite subcover.
+- Complement of a subset [definition]: For A⊆Ω, its complement Ω∖A consists of the elements of Ω that do not belong to A.
+- Complete measure [definition]: A measure is complete if every subset of a measurable null set is measurable and has measure zero.
+- Complete metric space [definition]: A metric space is complete if every Cauchy sequence in it converges to a point of that same space.
+- Complex number [definition]: A complex number is a pair of real numbers, written a+bi. Addition is componentwise and multiplication is (a+bi)(c+di)=(ac−bd)+(ad+bc)i, so i²=−1.
+- Conditional expectation given a σ-algebra [definition]: For integrable X and a sub-σ-algebra G, E[X|G] is a G-measurable integrable random variable satisfying ∫_AE[X|G]dP=∫_AXdP for every A∈G, defined up to almost-sure equality.
+- Conditional probability given an event [definition]: If P(B)>0, the conditional probability of A given B is P(A|B)=P(A∩B)/P(B).
+- Continuous map between topological spaces [definition]: A map is continuous if the preimage of every open subset of its target is open in its domain.
+- Convergence of a sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) converges to x∈X if for every ε>0 there is N such that d(xₙ,x)<ε whenever n≥N.
+- Convergent real series [definition]: The series ∑ₙ≥1aₙ converges to S if its sequence of partial sums converges to S.
+- Coupling of probability measures [definition]: A coupling of probability measures μ and ν on measurable spaces E and F is a probability measure on E×F whose coordinate marginals are μ and ν.
+- Dense subset of a metric space [definition]: A subset A of a metric space X is dense if every open ball centered in X with positive radius meets A.
+- Derivative of a real function [definition]: The derivative f′(x) is the finite limit of (f(x+h)−f(x))/h as h→0, when it exists. Higher derivatives are defined by iteration.
+- Detailed balance for a Markov kernel [definition]: A Markov kernel P on a measurable space satisfies detailed balance with a probability π if the measure π(dx)P(x,dy) on the product space is invariant under(x,y)↦(y,x). Such a kernel is reversible with respect toπ.
+- Discrete-time martingale [definition]: An integrable process (M_n) adapted to an increasing sequence of σ-algebras (F_n) such that E[M_{n+1}|F_n]=M_n almost surely.
+- Disjoint sets [definition]: Two sets are disjoint when they have no common element; a family is pairwise disjoint when every two distinct members are disjoint.
+- Distribution of a real random variable [definition]: The distribution μₓ of X is defined by μₓ(B)=P(X∈B) for Borel B⊆ℝ.
+- Equivalence class [definition]: For an equivalence relation ~ on X, [x]={y∈X:y~x}; the quotient set X/~ consists of these classes.
+- Equivalence relation [definition]: A reflexive, symmetric and transitive binary relation.
+- Essential supremum of a measurable real function [definition]: The infimum of real a for which f≤a almost everywhere, allowing infinite values when no finite bound exists.
+- Euclidean space ℝᵈ [definition]: For d≥1, ℝᵈ consists of d-tuples of real numbers with distance dist(x,y)=(∑ᵢ(xᵢ−yᵢ)²)¹ᐟ².
+- Expectation of an integrable real random variable [definition]: If E abs(X)=∫abs(X)dP<∞, the expectation of X is EX=∫X dP.
+- Extended nonnegative real numbers [definition]: The nonnegative real numbers together with a greatest element ∞. Sums involving ∞ equal ∞, and 0·∞ is taken to be 0 when integrating simple functions.
+- Factorial [definition]: For n≥1, n!=1·2···n, and 0!=1.
+- Field [definition]: A commutative ring in which 1≠0 and every nonzero element is invertible.
+- Filtration of σ-algebras [definition]: An increasing family (F_t) of sub-σ-algebras on a fixed probability space, indexed by ordered time: F_s⊆F_t for s≤t.
+- Finite set [definition]: A set X is finite if it is bijective with {1,…,n} for some natural number n≥0; its cardinality is n.
+- Finite signed measure [definition]: A differenceµ=µ₁−µ₂ of two finite positive measures on the sameσ-algebra. It is real-valued and countably additive.
+- Function between sets [definition]: An assignment taking each element of a specified domain set to exactly one element of a specified codomain set.
+- Group [definition]: A set with an associative binary operation, an identity element, and a two-sided inverse for each element.
+- Identically distributed random variables [definition]: A family is identically distributed when all its random variables have the same distribution.
+- Independent family of random variables [definition]: For distinct i₁,…,iₖ and Borel A₁,…,Aₖ, independence requires P(⋂ⱼ{Xᵢⱼ∈Aⱼ})=∏ⱼP(Xᵢⱼ∈Aⱼ).
+- Indicator function of a subset [definition]: For A⊆Ω, the real function 1_A is 1 on A and 0 on its complement.
+- Intersection of a family of sets [definition]: Inside a specified ambient set, the elements belonging to every member of the family.
+- Invariant probability of a Markov kernel [definition]: A probability measure π is invariant for a Markov kernel P if ∫P(x,A)dπ(x)=π(A) for every measurable A; equivalently πP=π.
+- Least upper bound in a partially ordered set [definition]: For A⊆P, its least upper bound is an upper bound s satisfying s≤b for every upper bound b of A, when such an s exists.
+- Lebesgue Lᵖ space [definition]: For a measure space and 1≤p<∞, Lᵖ consists of measurable scalar functions modulo equality almost everywhere with ∫|f|ᵖ<∞, normed by (∫|f|ᵖ)¹ᐟᵖ. For p=∞ use the essential-supremum norm.
+- Lebesgue integral [definition]: For measurable f≥0, ∫f dμ is the supremum of integrals of nonnegative simple functions below f. For signed f with ∫abs(f)dμ<∞, define ∫f=∫f⁺−∫f⁻.
+- Lebesgue measure on Euclidean space [definition]: The completion of the Borel measure on ℝⁿ assigning each rectangular box the product of its side lengths.
+- Limit of a function between metric spaces [definition]: For f defined near an accumulation point a of a metric space, lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<d(x,a)<δ implies d(f(x),L)<ε.
+- Limit of a real function at a point [definition]: The relation lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<|x−a|<δ in the domain implies |f(x)−L|<ε.
+- Limit of a real sequence [definition]: A sequence (aₙ) converges to L∈ℝ if for every ε>0 there is N such that n≥N implies abs(aₙ−L)<ε.
+- Linear map between vector spaces [definition]: A map between vector spaces over the same field preserving addition and scalar multiplication.
+- Lipschitz map between metric spaces [definition]: A map f:(X,d)→(Y,e) is Lipschitz if e(f(x),f(y))≤L d(x,y) for one finite constant L and all x,y∈X.
+- Lower semicontinuous extended-real function [definition]: A function u:X→(−∞,∞] on a topological space is lower semicontinuous if {x:u(x)>a} is open for every real a.
+- Matrix over a ring [definition]: A rectangular array of elements of a ring; addition is entrywise and matrix multiplication uses row-by-column sums.
+- Measurable map between measurable spaces [definition]: A function for which the preimage of each measurable subset of the codomain is measurable in the domain.
+- Measurable simple real function [definition]: A measurable real function with finite range. It can be written as a finite sum ∑ a_i 1_{A_i} with measurable level sets A_i.
+- Measurable space [definition]: A set equipped with a specified σ-algebra of subsets.
+- Measure [definition]: A measure μ maps a σ-algebra to [0,∞], sends ∅ to 0, and satisfies μ(⋃ₙAₙ)=∑ₙμ(Aₙ) for every pairwise disjoint sequence of measurable sets.
+- Metric induced by a norm [construction]: The metric induced by a norm on a real or complex vector space is d(x,y)=‖x−y‖.
+- Metric space [definition]: A set X with a function d:X×X→[0,∞) such that d(x,y)=0 exactly when x=y, d(x,y)=d(y,x), and d(x,z)≤d(x,y)+d(y,z).
+- Modulus of a complex number [definition]: For z=a+bi, its modulus is the nonnegative real number |z|=√(a²+b²).
+- Monotone real function [definition]: A real function on a linearly ordered set is nondecreasing if x≤y impliesf(x)≤f(y), and nonincreasing if the reverse inequality holds; monotone means either.
+- Multivariate normal distribution [definition]: A distribution of a real vector X for which every real linear combination of coordinates is normally distributed; it is specified by its mean vector and positive semidefinite covariance matrix.
+- Natural logarithm [definition]: The inverse ln:(0,∞)→ℝ of the real exponential function.
+- Natural number [definition]: One of 0, 1, 2, …; natural numbers count finite collections.
+- Nonnegative real square root [definition]: For t≥0, √t is the unique real number y≥0 satisfying y²=t.
+- Normal distribution [definition]: The real probability distribution N(m,σ²) with density (2πσ²)⁻¹ᐟ²exp(−(x−m)²/(2σ²)) for σ>0; variance zero gives a point mass at m.
+- Normed vector space [definition]: A real or complex vector space X with a function ∥·∥:X→[0,∞) that is positive except at zero, absolutely homogeneous, and subadditive.
+- Open interval in the real line [definition]: For real a<b, the set (a,b)={x∈ℝ:a<x<b}.
+- Ordered field [definition]: A field with a total order preserved by addition, in which the product of two positive elements is positive.
+- Ordered pair [definition]: A pair (x,y) with distinguished first and second entries; (x,y)=(x′,y′) exactly when x=x′ and y=y′.
+- Partial derivative in Euclidean coordinates [definition]: The ith partial derivative of f at x is the derivative at zero of t↦f(x+t e_i), with all other coordinates fixed; vector-valued maps are differentiated componentwise.
+- Partial order [definition]: A reflexive, antisymmetric and transitive binary relation, usually written ≤.
+- Polish space [definition]: A topological space admitting a complete separable metric that induces its topology.
+- Positive Harris recurrence [definition]: A ψ-irreducible Markov chain is Harris recurrent if every ψ-positive measurable set is visited infinitely often almost surely from every initial state; it is positive Harris recurrent if it also admits an invariant probability.
+- Positive semidefinite real matrix [definition]: A symmetric real matrix A such that xᵀAx≥0 for every real column vector x.
+- Preimage of a subset under a function [definition]: For f:A→B and E⊆B, f⁻¹(E)={x∈A:f(x)∈E}.
+- Probability density relative to a measure [definition]: A nonnegative measurable function P with ∫P dμ=1; the measure P dμ is the corresponding probability measure.
+- Probability kernel between measurable spaces [definition]: A probability kernel from(S,Σ) to(E,ℰ) assigns a probability measure K(s,·) onE to each s∈S, with s↦K(s,A) Σ-measurable for every A∈ℰ. A random probability measure is such a kernel with a probability space as its domain.
+- Probability mass function on a finite set [definition]: A function p from a finite set Ω to [0,1] satisfying ∑_{ω∈Ω}p(ω)=1; the probability of A⊆Ω is ∑_{ω∈A}p(ω).
+- Probability space [definition]: A probability space is (Ω,𝔽,P), where 𝔽 is a σ-algebra on Ω and P is a measure on 𝔽 with P(Ω)=1.
+- Product measure [construction]: For σ-finite measure spaces, the product measure on the product σ-algebra assigns a measurable rectangle A×B the value μ(A)ν(B); its completion also includes subsets of product-null sets.
+- Radon–Nikodym derivative of a measure [definition]: A nonnegative measurable function f representing ν relative to μ by ν(A)=∫_A f dμ for every measurable A; it is defined up to μ-almost-everywhere equality when such a density exists.
+- Real exponential function [definition]: The real function exp(x)=∑_{n≥0}xⁿ/n!, whose series converges for every real x.
+- Real number [definition]: A real number is an element of a complete ordered field ℝ; completeness means every nonempty subset bounded above has a least upper bound.
+- Real power of a positive real number [definition]: For x>0 and p∈ℝ, define xᵖ=exp(p log x). For p>0 extend by 0ᵖ=0.
+- Real sequence [definition]: A real sequence is a function a:ℕ₊→ℝ, written (aₙ)ₙ≥1.
+- Real sine function [definition]: The sine function is defined by the everywhere convergent power series sin(x)=∑ₖ≥0(−1)ᵏx²ᵏ⁺¹/(2k+1)!.
+- Real-valued random variable [definition]: A real-valued random variable is a measurable map from a probability space to ℝ with its Borel σ-algebra.
+- Regular conditional distribution for a Polish-valued random variable [theorem]: If X takes values in a Polish spaceE and G⊆F is a sub-σ-algebra, there is a G-measurable probability kernel K(ω,·) with∫f,dK(ω)=E[f(X)|G](ω) almost surely for every bounded Borel f. It is unique up to a common null set. Equivalently a probability measure on a product with Polish second factor disintegrates into its first marginal and such conditional probabilities.
+- Separable metric space [definition]: A metric space having a countable dense subset.
+- Sequence in a set [definition]: A function from the natural numbers, or the positive natural numbers, to that set.
+- Set [definition]: A collection of distinct elements, regarded as one object.
+- Stationary distribution of a finite Markov chain [definition]: A probability row vector π satisfying πP=π for the chain’s transition matrix P.
+- Stochastic process [definition]: A family (X_t) indexed by a specified time set, with each X_t a measurable map from a probability space into a specified measurable state space. Adaptation, joint measurability and path regularity are additional conditions when required.
+- Stochastic transition matrix [definition]: A square real matrix P with nonnegative entries and row sums one; P(x,y) is the one-step transition probability from x to y.
+- Subset [definition]: A⊆B means every element of A is an element of B.
+- Sum of a nonnegative series [definition]: For aₙ≥0, define ∑ₙ≥1aₙ as the supremum of its finite partial sums; the value may be infinite.
+- Symmetric matrix [definition]: A square matrix A equal to its transpose, so aᵢⱼ=aⱼᵢ.
+- Time-homogeneous Markov chain on a finite state space [definition]: A sequence of random states in a finite set whose conditional next-state distribution given its whole past depends only on the present state, through one fixed stochastic transition matrix.
+- Time-homogeneous Markov chain on a measurable state space [definition]: A discrete-time process (X_n) on a measurable space with a probability kernel P is Markov when P(X_(n+1)∈A|X₀,…,X_n)=P(X_n,A) almost surely for every measurable A; the same kernel is used at every step.
+- Topological space [definition]: A set X with a family τ of subsets, called open sets, containing ∅ and X and closed under arbitrary unions and finite intersections.
+- Total order [definition]: A partial order in which any two elements are comparable.
+- Union of a family of sets [definition]: The set of elements belonging to at least one member of the family.
+- Vector space [definition]: An abelian group with scalar multiplication by a field satisfying a(v+w)=av+aw, (a+b)v=av+bv, (ab)v=a(bv), and 1v=v.
+- Wasserstein Dobrushin coefficient of a Markov kernel [definition]: For a Markov kernel P on a metric state space, its Wasserstein coefficient is τ_d(P)=sup_(x≠y)W_d(P(x,·),P(y,·))/d(x,y), allowing infinity.
+- Wasserstein distance of order one for a lower semicontinuous metric [definition]: On a Polish space E with a finite-valued metric d lower semicontinuous for its given product topology, W_d(μ,ν)=inf_(γ coupling μ,ν)∫d(x,y)dγ(x,y), allowing the value∞. The metric d need not induce the original Polish topology.
+- Weakly unimodal density on the real line [definition]: A real probability density h is weakly unimodal if some m∈ℝ makes h nondecreasing on (−∞,m) and nonincreasing on (m,∞); jumps and flat portions are allowed.
+- Weighted supremum space of measurable functions [definition]: For a finite measurable weight V≥1 on a measurable space E, B_V consists of real or complex measurable f with ||f||_V=sup_x|f(x)|/V(x)<∞; with pointwise operations this is a Banach space.
+- Weighted total variation norm of a signed measure [definition]: For a measurable weight V≥1 and a signed measure μ, its weighted variation norm is ‖μ‖_V=sup{|∫f dμ|:f measurable, |f|≤V}, allowing infinity. The convention V=1 is the full total variation norm, twice the usual supremum-over-events distance for differences of probability measures.
+- π [definition]: π is the least positive zero of the real sine function and equals the circumference-to-diameter ratio of a Euclidean circle.
+- σ-algebra [definition]: A σ-algebra on Ω contains Ω and is closed under complements in Ω and countable unions.
+- σ-algebra generated by a family of subsets [definition]: The smallest σ-algebra containing that family, equivalently the intersection of all σ-algebras on the ambient set that contain it.
+- σ-finite measure [definition]: A measure whose whole underlying space is a countable union of measurable sets of finite measure.
+
+CITATIONS
+
+  [1] Ahn, S., Korattikara, A. and Welling, M. (2012). Bayesian posterior sam-
+     pling via stochastic gradient Fisher scoring. In Proceedings of the 29th International
+     Conference on Machine Learning.
+    Pedagogically necessary: unknown
+
+  [2] Alquier, P., Friel, N., Everitt, R. and Boland, A. (2016). Noisy Monte Carlo:
+     Convergence of Markov chains with approximate transition kernels. Stat. Comp. 26
+     29–47.
+    Pedagogically necessary: unknown
+
+  [3] Bardenet, R., Doucet, A. and Holmes, C. (2014). Towards scaling up Markov
+     chain Monte Carlo: an adaptive subsampling approach. In Proceedings of the 31st
+     International Conference on Machine Learning 405–413.
+    Pedagogically necessary: unknown
+
+  [4] Bardenet, R., Doucet, A. and Holmes, C. (2015). On Markov chain Monte
+     Carlo methods for tall data. arXiv preprint arXiv:1505.02827.
+    Pedagogically necessary: unknown
+    arxiv: 1505.02827
+
+  [5] Baxendale, P. (2005). Renewal theory and computable convergence rates for ge-
+     ometrically ergodic Markov chains. Ann. Appl. Probab. 15 700–738.
+    Pedagogically necessary: unknown
+
+  [6] Betancourt, M. (2015). The Fundamental Incompatibility of Scalable Hamilto-
+     nian Monte Carlo and Naive Data Subsampling. In Proceedings of the 32nd Inter-
+     national Conference on Machine Learning 533-540.
+    Pedagogically necessary: unknown
+
+  [7] Breyer, L., Roberts, G. and Rosenthal, J. (2001). A note on geometric ergod-
+     icity and floating-point roundoff error. Statist. Probab. Lett. 53 123–127.
+    Pedagogically necessary: unknown
+
+  [8] Dobrushin, R. (1956). Central limit theorem for non-stationary Markov chains. I.
+     Teor. Veroyatnost. i Primenen. 1 72–89.
+    Pedagogically necessary: unknown
+
+  [9] Dobrushin, R. (1956). Central limit theorem for nonstationary Markov chains. II.
+     Teor. Veroyatnost. i Primenen. 1 365–425.
+    Pedagogically necessary: unknown
+
+  [10] Dobrushin, R. (1996). Lectures on Probability Theory and Statistics: Ecole d’Eté
+     de Probabilités de Saint-Flour XXIV—1994 Perturbation methods of the theory of
+     Gibbsian fields, 1–66. Springer Berlin Heidelberg, Berlin, Heidelberg.
+    Pedagogically necessary: unknown
+
+  [11] Durmus, A. and Moulines, E. (2015). Quantitative bounds of convergence for
+     geometrically ergodic Markov chain in the Wasserstein distance with application to
+     the Metropolis Adjusted Langevin Algorithm. Stat. Comput. 25 5–19.
+    Pedagogically necessary: unknown
+
+  [12] Eberle, A. (2014). Error bounds for Metropolis-Hastings algorithms applied to
+     perturbations of Gaussian measures in high dimensions. Ann. Appl. Probab. 24 337–
+     377.
+    Pedagogically necessary: unknown
+
+  [13] Ferré, D., Hervé, L. and Ledoux, J. (2013). Regular perturbation of V -
+     geometrically ergodic Markov chains. J. Appl. Prob. 50 184–194.
+    Pedagogically necessary: unknown
+
+  [14] Gibbs, A. (2004). Convergence in the Wasserstein metric for Markov chain Monte
+     Carlo algorithms with applications to image restoration. Stoch. Models 20 473–492.
+    Pedagogically necessary: unknown
+
+  [15] Guibourg, D., Hervé, L. and Ledoux, J. (2012). Quasi-compactness of Markov
+     kernels on weighted-supremum spaces and geometrical ergodicity. Preprint. Avail-
+     able at http://arxiv.org/abs/1110.3240v5.
+    Pedagogically necessary: unknown
+    arxiv: 1110.3240
+    url: http://arxiv.org/abs/1110.3240v5
+
+  [16] Hairer, M. (2006). Ergodic properties of Markov processes. Lecture notes, Univ.
+     Warwick. Available at http://www.hairer.org/notes/Markov.pdf.
+    Pedagogically necessary: unknown
+    url: http://www.hairer.org/notes/Markov.pdf
+
+  [17] Hairer, M. and Mattingly, J. C. (2011). Yet another look at Harris ergodic
+     theorem for Markov chains. In Seminar on Stochastic Analysis, Random Fields and
+     Applications VI 109–117. Springer.
+    Pedagogically necessary: unknown
+
+  [18] Hairer, M., Stuart, A. and Vollmer, S. (2014). Spectral gaps for a Metropolis-
+     Hastings algorithm in infinite dimensions. Ann. Appl. Probab. 24 2455–2490.
+    Pedagogically necessary: unknown
+
+  [19] Johndrow, J., Mattingly, J., Mukherjee, S. and Dunson, D. (2015).
+     Approximations of Markov Chains and Bayesian Inference. arXiv preprint
+
+
+     arXiv:1508.03387.
+    Pedagogically necessary: unknown
+    arxiv: 1508.03387
+
+  [20] Kartashov, N. (1986). Inequalities in theorems of ergodicity and stability for
+     Markov chains with a common phase space, Parts I and II. Theory Probab. Appl.
+     30 247–259.
+    Pedagogically necessary: unknown
+
+  [21] Kartashov, N. and Golomozyı̆, V. (2013). Maximal coupling procedure and sta-
+     bility of discrete Markov chains. I. Theory of Probability and Mathematical Statistics
+     86 93–104.
+    Pedagogically necessary: unknown
+
+  [22] Keller, G. and Liverani, C. (1999). Stability of the spectrum for transfer oper-
+     ators. Ann. Scuola Norm. Sup. Pisa Classe Sci. 28 141–152.
+    Pedagogically necessary: unknown
+
+  [23] Korattikara, A., Chen, Y. and Welling, M. (2014). Austerity in MCMC Land:
+     Cutting the Metropolis-Hastings Budget. In Proceedings of The 31st International
+     Conference on Machine Learning 181–189.
+    Pedagogically necessary: unknown
+
+  [24] Lee, A., Doucet, A. and Latuszyński, K. (2014). Perfect simulation using
+     atomic regeneration with application to Sequential Monte Carlo. arXiv preprint
+     arXiv:1407.5770.
+    Pedagogically necessary: unknown
+    arxiv: 1407.5770
+
+  [25] Madras, N. and Sezer, D. (2010). Quantitative bounds for Markov chain conver-
+     gence: Wasserstein and total variation distances. Bernoulli 16 882–908.
+    Pedagogically necessary: unknown
+
+  [26] Mao, Y., Zhang, M. and Zhang, Y. (2013). A Generalization of Dobrushin coef-
+     ficient. Chinese J. Appl. Probab. Statist. 29 489–494.
+    Pedagogically necessary: unknown
+
+  [27] Marin, J. M., Pudlo, P., Robert, C. and Ryder, R. (2012). Approximate
+     Bayesian computational methods. Stat. Comp. 22 1167–1180.
+    Pedagogically necessary: unknown
+
+  [28] Mathé, P. (2004). Numerical integration using V-uniformly ergodic Markov chains.
+     J. Appl. Probab. 41 1104–1112.
+    Pedagogically necessary: unknown
+
+  [29] Medina-Aguayo, J., Lee, A. and Roberts, G. (2016). Stability of noisy
+     Metropolis–Hastings. Stat. Comp. 26 1187–1211.
+    Pedagogically necessary: unknown
+
+  [30] Mengersen, K. and Tweedie, R. (1996). Rates of convergence of the Hastings
+     and Metropolis algorithms. Ann. Statist. 24 101–121.
+    Pedagogically necessary: unknown
+
+  [31] Meyn, S. and Tweedie, R. (2009). Markov chains and stochastic stability, Second
+     ed. Cambridge University Press.
+    Pedagogically necessary: unknown
+
+  [32] Mitrophanov, A. (2003). Stability and exponential convergence of continuous-
+     time Markov chains. J. Appl. Probab. 40 970–979.
+    Pedagogically necessary: unknown
+
+  [33] Mitrophanov, A. (2005). Sensitivity and convergence of uniformly ergodic Markov
+     chains. J. Appl. Prob. 42 1003–1014.
+    Pedagogically necessary: unknown
+
+  [34] Ollivier, Y. (2009). Ricci curvature of Markov chains on metric spaces. J. Funct.
+     Anal. 256 810–864.
+    Pedagogically necessary: unknown
+
+  [35] Pillai, N. and Smith, A. (2015). Ergodicity of Approximate MCMC Chains with
+     Applications to Large Data Sets. arXiv preprint arXiv:1405.0182v2.
+    Pedagogically necessary: unknown
+    arxiv: 1405.0182
+
+  [36] Roberts, G. and Rosenthal, J. (1997). Geometric ergodicity and hybrid Markov
+     chains. Electron. Comm. Probab. 2 no. 2, 13–25.
+    Pedagogically necessary: unknown
+
+  [37] Roberts, G. and Rosenthal, J. (2004). General state space Markov chains and
+     MCMC algorithms. Probability Surveys 1 20–71.
+    Pedagogically necessary: unknown
+
+  [38] Roberts, G., Rosenthal, J. and Schwartz, P. (1998). Convergence properties
+     of perturbed Markov chains. J. Appl. Probab. 35 1–11.
+    Pedagogically necessary: unknown
+
+  [39] Roberts, G. and Tweedie, R. (1996). Exponential convergence of Langevin dis-
+
+
+     tributions and their discrete approximation. Bernoulli 2 341–363.
+    Pedagogically necessary: unknown
+
+  [40] Rudolf, D. (2012). Explicit error bounds for Markov chain Monte Carlo. Disser-
+     tationes Math. 485 93 pp.
+    Pedagogically necessary: unknown
+
+  [41] Shardlow, T. and Stuart, A. (2000). A perturbation theory for ergodic Markov
+     chains and application to numerical approximations. SIAM J. Numer. Analysis 37
+     1120–1137.
+    Pedagogically necessary: unknown
+
+  [42] Singh, S., Wick, M. and McCallum, A. (2012). Monte Carlo MCMC: efficient
+     inference by approximate sampling. In Proceedings of the 2012 Joint Conference
+     on Empirical Methods in Natural Language Processing and Computational Natural
+     Language Learning 1104–1113. Association for Computational Linguistics.
+    Pedagogically necessary: unknown
+
+  [43] Teh, Y., Thiéry, A. and Vollmer, S. (2016). Consistency and fluctuations for
+     stochastic gradient Langevin dynamics. J. Mach. Learn. Res. 17 1–33.
+    Pedagogically necessary: unknown
+
+  [44] Tierney, L. (1998). A note on the Metropolis-Hastings kernels for general state
+     spaces. Ann. Appl. Probab. 8 1–9.
+    Pedagogically necessary: unknown
+
+  [45] Villani, C. (2003). Topics in Optimal Transportation. American Mathematical
+     Society.
+    Pedagogically necessary: unknown
+
+  [46] Villani, C. (2009). Optimal Transport: Old and New. Springer Verlag, Berlin.
+     Grundlehren der Mathematischen Wissenschaften, no. 338.
+    Pedagogically necessary: unknown
+
+  [47] Welling, M. and Teh, Y. (2011). Bayesian learning via stochastic gradient
+     Langevin dynamics. In Proceedings of the 28th International Conference on Ma-
+     chine Learning 681–688.
+    Pedagogically necessary: unknown
+

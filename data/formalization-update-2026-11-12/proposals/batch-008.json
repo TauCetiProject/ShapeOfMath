@@ -1,0 +1,537 @@
+{
+  "batch_id": "batch-008",
+  "author": "category_galois_formalization",
+  "reviews": [
+    {
+      "concept": "bezout-identity-polynomials",
+      "concept_id": "96a7f3f3-a823-5cd1-81e5-73299c05e33d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Algebra/EuclideanDomain/Basic.gcd_eq_gcd_ab (:206) gives gcd a b=a*gcdA a b+b*gcdB a b, with the full xgcdAux_P invariant/Euclidean induction proof (:193\u2013210) inspected. Polynomial/FieldDivision.instEuclideanDomain (:356) provides this instance for polynomials over a field. The Euclidean gcd need not be monic: multiplying both Bezout coefficients by its normalization unit yields normalize(gcd), which FieldDivision.monic_normalize (:547) proves monic when nonzero. The not-both-zero assumption ensures gcd is nonzero; normalize_apply is multiplication by normUnit (read the normalization simp/roots proof). Thus monic normalization does not assume the raw gcd was already monic; coprime specialization rescales the unit gcd to 1. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/EuclideanDomain/Basic.lean",
+          "declarations": "EuclideanDomain.xgcdAux_P (:193); gcd_eq_gcd_ab (:206)",
+          "note": "Native extended-Euclidean Bezout proof and coefficient witness API."
+        },
+        {
+          "path": "Mathlib/Algebra/Polynomial/FieldDivision.lean",
+          "declarations": "Polynomial.instEuclideanDomain (:356); Monic.normalize_eq_self (:235); monic_normalize (:547)",
+          "note": "Native polynomial Euclidean instance and monic-normalization facts needed for the paragraph\u2019s normalized gcd presentation."
+        }
+      ],
+      "search_notes": "Read the actual algorithm invariant, proof and polynomial normalization formula. A coefficient field is required; the unrestricted polynomial ring over an arbitrary coefficient ring is not asserted Bezout. Root/gcd evaluation corollaries are optional separate API and excluded."
+    },
+    {
+      "concept": "bezout-identity-polynomials",
+      "concept_id": "96a7f3f3-a823-5cd1-81e5-73299c05e33d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency EuclideanDomain/Basic and Polynomial/FieldDivision differ only by whitespace and fully supply the checked extended-Euclidean identity plus monic normalization/rescaling. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read native Algebra/Polynomial/FieldDivision.lean: its degree-bounded polynomial relation theorem applies gcd_eq_gcd_ab to derive a degree obstruction. That is a separate syzygy/subresultant endpoint, not a native proof of Bezout or its coefficient-normalization identities. Subresultant/FirstNonzero similarly applies monic_normalize."
+    },
+    {
+      "concept": "bi-lipschitz-map",
+      "concept_id": "273536b4-119b-566b-825f-d30f6f540e6e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact representation is an equivalence e:\u03b1\u2243\u03b2 together with \u2203K, LipschitzWith K e and \u2203L, LipschitzWith L e.symm. EMetricSpace/Lipschitz:59 defines the uniform pairwise distance bound; it restricts to metric distances. MetricSpace/Antilipschitz:137 proves an antilipschitz map has a Lipschitz right inverse, and :252 conversely derives antilipschitzness of a right inverse from Lipschitzness. Read both complete inverse-substitution proofs, so the standard alternative two-sided distortion formulation and explicit inverse formulation agree. Surjectivity/bijection is retained through Equiv, not inferred from an embedding. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/EMetricSpace/Lipschitz.lean",
+          "declarations": "LipschitzWith (:59)",
+          "note": "Native global Lipschitz predicate with the exact metric bound."
+        },
+        {
+          "path": "Mathlib/Topology/MetricSpace/Antilipschitz.lean",
+          "declarations": "AntilipschitzWith (:36); AntilipschitzWith.to_rightInverse (:137); LipschitzWith.to_rightInverse (:252)",
+          "note": "Native inverse-Lipschitz equivalence API, allowing the exact bijective bilipschitz concept by generic Equiv instantiation."
+        }
+      ],
+      "search_notes": "No separate bundled Bilipschitz alias is necessary. MetricSpace/Bilipschitz.lean supplies topology/bornology transport but does not itself assert bijectivity; it is excluded from the minimal defining files. Quasi-isometry additive errors are a different meaning."
+    },
+    {
+      "concept": "bi-lipschitz-map",
+      "concept_id": "273536b4-119b-566b-825f-d30f6f540e6e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency EMetricSpace/Lipschitz is identical. Antilipschitz differs only in an auxiliary edist finite-bound proof; the inverse-conversion statements and complete proofs are unchanged, giving the exact bijection plus both Lipschitz bounds. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read native Lipschitz/Basic (max-subtraction scalar Lipschitz bound) and considered Rectifiable/Bilipschitz: these concern special scalar maps or rectifiable measure transport, rather than the generic bijective inverse-Lipschitz definition/API. No native core file selected."
+    },
+    {
+      "concept": "block-sequence-banach-basis",
+      "concept_id": "3f183084-3fc0-57c9-9f26-4d49b3c487be",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Searched block sequence/blockbasis/isBlockSeq and ordered support conditions in analysis and native sequence/basis candidates. Mathlib Analysis/Normed/Module/Bases.lean:104 defines GeneralSchauderBasis by coordinate functionals, biorthogonality and expansion; its ordinary finite projections do not define ordered nonzero block vectors. Tau ZeroAtInfty/Basis constructs the coordinate unconditional basis, not the requested block sequence. No checked implementation of max support(x_n)<min support(x_(n+1)) relative to a Banach basis was located. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected actual GeneralSchauderBasis fields and Tau unconditionalBasis (:39\u201343) construction. Missing endpoint is the ordered successive-support predicate and associated closed block span, not merely a name alias. Generic Finsupp supports and finite projections alone are prerequisite machinery; unknown is a bounded unresolved search, not absence certification."
+    },
+    {
+      "concept": "block-sequence-banach-basis",
+      "concept_id": "3f183084-3fc0-57c9-9f26-4d49b3c487be",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Searched block sequence/blockbasis/isBlockSeq and ordered support conditions in analysis and native sequence/basis candidates. Mathlib Analysis/Normed/Module/Bases.lean:104 defines GeneralSchauderBasis by coordinate functionals, biorthogonality and expansion; its ordinary finite projections do not define ordered nonzero block vectors. Tau ZeroAtInfty/Basis constructs the coordinate unconditional basis, not the requested block sequence. No checked implementation of max support(x_n)<min support(x_(n+1)) relative to a Banach basis was located. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected actual GeneralSchauderBasis fields and Tau unconditionalBasis (:39\u201343) construction. Missing endpoint is the ordered successive-support predicate and associated closed block span, not merely a name alias. Generic Finsupp supports and finite projections alone are prerequisite machinery; unknown is a bounded unresolved search, not absence certification."
+    },
+    {
+      "concept": "bochner-lp-completeness",
+      "concept_id": "a3d7281d-81f8-55e3-9f74-829cbaccfba7",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. MeasureTheory/Function/LpSpace/Complete.instCompleteSpace (:387) proves CompleteSpace (Lp E p \u03bc) under CompleteSpace E and Fact(1\u2264p), with p:\u211d\u22650\u221e so p=\u221e is included. Read cauchy_complete_eLpNorm (:370\u2013385): choose an a.e. strongly measurable pointwise limit of a Cauchy subsequence, prove eLpNorm convergence and MemLp, then completeSpace_lp_of_cauchy_complete_eLpNorm (:159) transfers controlled-sequence completeness to the quotient norm. This is Bochner-valued Lp, not merely scalar functions. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/LpSpace/Complete.lean",
+          "declarations": "completeSpace_lp_of_cauchy_complete_eLpNorm (:159); cauchy_complete_eLpNorm (:370); MeasureTheory.Lp.instCompleteSpace (:387)",
+          "note": "Native completeness proof for arbitrary complete normed value groups and all exponents at least one, including infinity."
+        }
+      ],
+      "search_notes": "Inspected actual hypotheses and full final Cauchy-limit construction/instance proof. No finite-measure or finite-dimensional range assumption is introduced. CompleteOfCompleteLp is a converse/transfer endpoint rather than a prerequisite proof file."
+    },
+    {
+      "concept": "bochner-lp-completeness",
+      "concept_id": "a3d7281d-81f8-55e3-9f74-829cbaccfba7",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency LpSpace/Complete is byte-identical and fully supplies the checked complete value-space theorem for 1\u2264p\u2264\u221e. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched native Function/Lp and Bochner/integral completeness candidates: no native LpSpace/Complete module; Sobolev and distribution Lp limits use the existing instance for different spaces/endpoints. No application file allocated to this completeness proof."
+    },
+    {
+      "concept": "borel-sigma-algebra-topological-space",
+      "concept_id": "69440d24-0ab8-5c88-a3b2-651a63268d76",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Constructions/BorelSpace/Basic.lean:51 defines borel \u03b1 as MeasurableSpace.generateFrom {s | IsOpen s}, literally the \u03c3-algebra generated by open sets. Read borel_anti and the subbasis-generation proof to check this is a generated measurable structure rather than just an assumed BorelSpace compatibility class. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.lean",
+          "declarations": "MeasureTheory.borel (:51); borel_anti (:54); borel_eq_generateFrom_of_subbasis (:61); borel_comap",
+          "note": "Native Borel \u03c3-algebra definition and generic generation/induced-topology compatibility API."
+        }
+      ],
+      "search_notes": "No second-countability condition is required for the definition; second-countability is explicitly restricted to the subbasis corollary. BorelSpace class alone is not substituted for the generator definition."
+    },
+    {
+      "concept": "borel-sigma-algebra-topological-space",
+      "concept_id": "69440d24-0ab8-5c88-a3b2-651a63268d76",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency BorelSpace/Basic has an unrelated later omission of additive/multiplicative wrapper instances; the borel generateFrom definition and its induced-topology identity remain unchanged. Native BorelSpace/Basic.Topology.IsInducing.comap_borel (:40) proves the Borel structure pulls back under an inducing map by borel_comap and the induced-topology equality. Its measurable_comp_iff is the immediate map normalization, with full proof read. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Constructions/BorelSpace/Basic.lean",
+          "declarations": "Topology.IsInducing.comap_borel (:40); Topology.IsInducing.measurable_comp_iff (:47)",
+          "note": "Native generic Borel pullback/inducing-map API; the generated \u03c3-algebra definition remains dependency-owned."
+        }
+      ],
+      "search_notes": "Later proper pushforward/local-homeomorphism results concern measures or stronger topological structures and are not the reason for inclusion. Native BorelSpace/Order/Real are specialized generation endpoints and excluded from this minimal selection."
+    },
+    {
+      "concept": "boundary-topological-space",
+      "concept_id": "3cfab35e-6203-5036-bd27-3df8bded3dab",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Topology/Defs/Basic.frontier (:132) is defined literally as closure s \\ interior s; Closure.lean supplies frontier and closure/interior complement identities, including closure_sdiff_interior (:505). This exactly matches boundary for an arbitrary topological space. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Defs/Basic.lean",
+          "declarations": "IsClosed (:105); interior (:122); closure (:127); frontier (:132)",
+          "note": "Native closed-set predicate and the literal closure/interior/boundary set constructors; only relevant constructors contribute to each mapped concept."
+        },
+        {
+          "path": "Mathlib/Topology/Closure.lean",
+          "declarations": "closure_sdiff_interior (:505); frontier_compl; frontier_subset_closure; IsClosed.frontier",
+          "note": "Native ordinary closure/interior/frontier Boolean compatibility API."
+        }
+      ],
+      "search_notes": "Read actual defining expression and immediate frontier formulas. A manifold boundary is different vocabulary and excluded; no separation/metric assumption is required."
+    },
+    {
+      "concept": "boundary-topological-space",
+      "concept_id": "3cfab35e-6203-5036-bd27-3df8bded3dab",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency Topology/Defs/Basic is identical; Closure differs only in the proof of closure_empty_iff, leaving the defining frontier/ordinary API unchanged. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected native Topology/Closure.lean: generic closure-neighborhood/cover lemmas do not define frontier or prove a direct boundary identity. Native manifold/metric boundary applications have extra structures/endpoints and are excluded from this generic concept."
+    },
+    {
+      "concept": "bounded-linear-functional",
+      "concept_id": "d516a3cf-bbfc-5b4c-b80f-ef3608ea5908",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. IsBoundedLinearMap (:82) extends linearity with \u2203 M>0, \u2200x, \u2016f x\u2016\u2264M\u2016x\u2016; IsLinearMap.with_bound shows allowing an arbitrary finite real C is equivalent, replacing a nonpositive bound by 1. Its toContinuousLinearMap proof uses this exact bound, and Operator/Basic.bound supplies the converse for nontrivially normed fields. For the scalar-valued case take codomain \ud835\udd5c=\u211d or \u2102; \u2016\u2113 x\u2016 is the stated absolute value. StrongDual is literally E\u2192L[\ud835\udd5c]\ud835\udd5c (checked ContinuousLinearMap/Basic:97), so no dual-space topology convention changes this element-level concept. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/BoundedLinearMaps.lean",
+          "declarations": "IsBoundedLinearMap (:82); isBoundedLinearMap_iff (:87); IsLinearMap.with_bound (:91); IsBoundedLinearMap.toContinuousLinearMap (:106)",
+          "note": "Native linearity plus uniform norm-bound predicate and conversion to continuous linear maps; real/complex field specializations give ordinary bounded operators/functionals."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/Basic.lean",
+          "declarations": "SemilinearMapClass.bound_of_continuous (:112); ContinuousLinearMap.bound (:130)",
+          "note": "Proves continuity implies a finite uniform norm bound; read actual norm-seminorm bound construction and field hypotheses."
+        }
+      ],
+      "search_notes": "Read the predicate fields, arbitrary-bound conversion and continuity proof. Bilinear maps are a different concept and not counted from the mixed file merely by inheritance; operator-norm identities are ordinary associated API."
+    },
+    {
+      "concept": "bounded-linear-functional",
+      "concept_id": "d516a3cf-bbfc-5b4c-b80f-ef3608ea5908",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency BoundedLinearMaps is identical and Operator/Basic has only an unrelated sphere/convex-hull proof adjustment; the checked bound constructor/converse are unchanged. Native Operator/Basic.opNorm_zero_iff' (:120) proves norm-zero iff zero for arbitrary continuous semilinear maps from seminormed sources into normed targets by extensionality and le_opNorm; it yields the direct ordinary operator/functional norm separation API. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Operator/Basic.lean",
+          "declarations": "ContinuousLinearMap.opNorm_zero_iff' (:120); opNNNorm_eq_zero_iff; normedAddCommGroup (:140)",
+          "note": "Native generic operator-norm separation for seminormed sources, with full pointwise bound proof; specializes directly to scalar-valued bounded functionals."
+        }
+      ],
+      "search_notes": "Read actual opNorm_zero_iff' and its nn/enorm consequences; scalar-valued specialization has exactly the functional meaning. Native BoundedLinearMaps instead develops bilinear continuity/scalar actions and is excluded from this linear core. Inverse perturbation estimates and Fredholm applications are separate endpoints."
+    },
+    {
+      "concept": "bounded-linear-operator",
+      "concept_id": "e7197cfb-bee0-5891-8f8b-b589e821bbe0",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. IsBoundedLinearMap (:82) extends linearity with \u2203 M>0, \u2200x, \u2016f x\u2016\u2264M\u2016x\u2016; IsLinearMap.with_bound shows allowing an arbitrary finite real C is equivalent, replacing a nonpositive bound by 1. Its toContinuousLinearMap proof uses this exact bound, and Operator/Basic.bound supplies the converse for nontrivially normed fields. Real/complex normed spaces satisfy all the displayed hypotheses; no finite-dimensional or completeness assumption is inserted. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/BoundedLinearMaps.lean",
+          "declarations": "IsBoundedLinearMap (:82); isBoundedLinearMap_iff (:87); IsLinearMap.with_bound (:91); IsBoundedLinearMap.toContinuousLinearMap (:106)",
+          "note": "Native linearity plus uniform norm-bound predicate and conversion to continuous linear maps; real/complex field specializations give ordinary bounded operators/functionals."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/Basic.lean",
+          "declarations": "SemilinearMapClass.bound_of_continuous (:112); ContinuousLinearMap.bound (:130)",
+          "note": "Proves continuity implies a finite uniform norm bound; read actual norm-seminorm bound construction and field hypotheses."
+        }
+      ],
+      "search_notes": "Read the predicate fields, arbitrary-bound conversion and continuity proof. Bilinear maps are a different concept and not counted from the mixed file merely by inheritance; operator-norm identities are ordinary associated API."
+    },
+    {
+      "concept": "bounded-linear-operator",
+      "concept_id": "e7197cfb-bee0-5891-8f8b-b589e821bbe0",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency BoundedLinearMaps is identical and Operator/Basic has only an unrelated sphere/convex-hull proof adjustment; the checked bound constructor/converse are unchanged. Native Operator/Basic.opNorm_zero_iff' (:120) proves norm-zero iff zero for arbitrary continuous semilinear maps from seminormed sources into normed targets by extensionality and le_opNorm; it yields the direct ordinary operator/functional norm separation API. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Operator/Basic.lean",
+          "declarations": "ContinuousLinearMap.opNorm_zero_iff' (:120); opNNNorm_eq_zero_iff; normedAddCommGroup (:140)",
+          "note": "Native generic operator-norm separation for seminormed sources, with full pointwise bound proof; specializes directly to scalar-valued bounded functionals."
+        }
+      ],
+      "search_notes": "Read actual opNorm_zero_iff' and its nn/enorm consequences; scalar-valued specialization has exactly the functional meaning. Native BoundedLinearMaps instead develops bilinear continuity/scalar actions and is excluded from this linear core. Inverse perturbation estimates and Fredholm applications are separate endpoints."
+    },
+    {
+      "concept": "c0-sequence-space",
+      "concept_id": "43af6961-6185-5bbf-8f8e-f9d251dc367a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Topology/ContinuousMap/ZeroAtInfty.lean:45 defines C\u2080(\u03b1,\u03b2) as continuous maps tending to zero at the cocompact filter; :461 induces its norm from bounded continuous functions and :469 identifies the norms. For \u03b1=\u2115 discrete, continuity is automatic, cocompact=cofinite (Compactness/Compact:601, proof by compact iff finite read), and cofinite convergence is exactly the usual null-sequence condition since finite subsets of \u2115 are bounded. Thus C\u2080(\u2115,\ud835\udd5c) represents precisely the scalar c\u2080 with supremum norm, not all bounded sequences. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean",
+          "declarations": "ZeroAtInftyContinuousMap (:45); instNormedAddCommGroup (:461); norm_toBCF_eq_norm (:469); NormedSpace (:472)",
+          "note": "Native vanishing-at-infinity function space with induced supremum norm; the discrete natural-number specialization is the stated null-sequence space."
+        }
+      ],
+      "search_notes": "Read actual carrier, Tendsto condition and induced norm construction. Compactness/Compact supplies an identification of the discrete filter, not the c\u2080 definition, so no extra helper file allocated. Banach completeness, bases and duality are further endpoints."
+    },
+    {
+      "concept": "c0-sequence-space",
+      "concept_id": "43af6961-6185-5bbf-8f8e-f9d251dc367a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency ZeroAtInfty is identical and supplies the complete C\u2080(\u2115,\ud835\udd5c) construction/norm. Native ZeroAtInfty/Discrete.lean:102\u2013112 proves the cofinite convergence and constructs mkOfDiscrete from an arbitrary null family, with continuous_of_discreteTopology and the cocompact equality. Native Basic.lean:80\u201390 proves pointwise norm bound and norm_eq_iSup_norm through toBCF. This explicitly checks the scalar null-sequence and supremum-norm representation. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/ContinuousMap/ZeroAtInfty/Basic.lean",
+          "declarations": "ZeroAtInftyContinuousMap.norm_coe_le_norm (:80); norm_le (:85); norm_eq_iSup_norm (:89)",
+          "note": "Native generic supremum-norm normalization API for c\u2080/vanishing continuous functions."
+        },
+        {
+          "path": "TauCeti/Topology/ContinuousMap/ZeroAtInfty/Discrete.lean",
+          "declarations": "ZeroAtInftyContinuousMap.tendsto_cofinite (:102); mkOfDiscrete (:107); cons (:172)",
+          "note": "Native equivalence with null families on discrete indices and ordinary sequence prepend/coordinate API."
+        }
+      ],
+      "search_notes": "Read actual constructor and its inverse formula. The coordinate Schauder basis, reflexivity/nonreflexivity, duality and compactoid results add separately significant structures/endpoints and are excluded."
+    },
+    {
+      "concept": "c2-embedded-surface-r3",
+      "concept_id": "1022231b-6ce5-561e-99d1-c385a0759cdf",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked Mathlib Geometry/Manifold/SmoothEmbedding.IsSmoothEmbedding (:69): it bundles a C^n immersion and topological embedding, not the paragraph\u2019s local graph after a rigid ambient-coordinate change. Tau Rectifiable/Graph proves approximate tangent/cone estimates for a differentiable normal graph; its theorem assumes a graph presentation rather than providing the full equivalence for C\u00b2 embedded subsets of \u211d\u00b3. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched embedded-surface/local graph and immersion/embedding candidates in both geometry trees. Inspected actual IsSmoothEmbedding fields and HasFDerivWithinAt.tendsto_euclideanHausdorffMeasure_normalGraphEmbedding_outside_cone_div. Unresolved is a complete subset-level local C\u00b2 graph characterization with orthogonal/rigid ambient coordinates and both directions; generic smooth embedding machinery alone is not charged as a direct partial implementation."
+    },
+    {
+      "concept": "c2-embedded-surface-r3",
+      "concept_id": "1022231b-6ce5-561e-99d1-c385a0759cdf",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked Mathlib Geometry/Manifold/SmoothEmbedding.IsSmoothEmbedding (:69): it bundles a C^n immersion and topological embedding, not the paragraph\u2019s local graph after a rigid ambient-coordinate change. Tau Rectifiable/Graph proves approximate tangent/cone estimates for a differentiable normal graph; its theorem assumes a graph presentation rather than providing the full equivalence for C\u00b2 embedded subsets of \u211d\u00b3. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched embedded-surface/local graph and immersion/embedding candidates in both geometry trees. Inspected actual IsSmoothEmbedding fields and HasFDerivWithinAt.tendsto_euclideanHausdorffMeasure_normalGraphEmbedding_outside_cone_div. Unresolved is a complete subset-level local C\u00b2 graph characterization with orthogonal/rigid ambient coordinates and both directions; generic smooth embedding machinery alone is not charged as a direct partial implementation."
+    },
+    {
+      "concept": "calderon-inhomogeneous-reproducing-formula",
+      "concept_id": "0c28c54f-0c35-5d85-b6e1-86922c905784",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked tempered-distribution/Fourier and Schwartz primitives, but no actual theorem reconstructing arbitrary tempered distributions from the catalogue\u2019s pair of dyadic kernel families and the product partition of unity was verified. Tau has a native Littlewood\u2013Paley reconstruction not present as the same generic endpoint in the independently reviewed Mathlib snapshot. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched reproducing/Calder\u00f3n/Littlewood\u2013Paley and dyadic Fourier-support candidates. Schwartz/Fourier transformations and convolution constructions are prerequisite machinery; the unresolved endpoint is convergence in S\u2032 of the two-kernel dyadic reconstruction under the stated partition assumptions. Unknown is not an absence claim."
+    },
+    {
+      "concept": "calderon-inhomogeneous-reproducing-formula",
+      "concept_id": "0c28c54f-0c35-5d85-b6e1-86922c905784",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native TemperedDistribution/LittlewoodPaley.lean:159 proves every u\u2208S\u2032 is the limit of sums of littlewoodPaleyBlock (:133), using a selected ContDiffBump partition. Read the complete sum telescoping identity (:148) and convergence proof (:159\u2013168): it reduces distribution evaluation to a Schwartz bump-dilation convergence theorem. This genuinely proves a restricted distribution reconstruction. The catalogue instead permits arbitrary dual Schwartz families \u03c6_j,\u03c8_j with sum \u03c6\u0302_j\u03c8\u0302_j=1; no general two-kernel factorization/convergence theorem for all those families was verified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Distribution/TemperedDistribution/LittlewoodPaley.lean",
+          "declarations": "TemperedDistribution.littlewoodPaleyBlock (:133); sum_littlewoodPaleyBlock_range (:148); tendsto_sum_littlewoodPaleyBlock (:159)",
+          "note": "Native dyadic distribution reconstruction for the explicitly chosen bump partition; partial endpoint, not asserted general arbitrary dual-kernel Calder\u00f3n formula."
+        }
+      ],
+      "search_notes": "Convolution.ae_eq_fourierInv_convolution_of_isVanishingOn (:215) was inspected: it is a single-frequency-localized Lp reproducing identity, not the general S\u2032 dyadic series. Bernstein annular reproduction similarly has frequency-localized hypotheses. Missing generality and dual-kernel identification remain explicit."
+    },
+    {
+      "concept": "caratheodory-blaschke-approximation",
+      "concept_id": "3e5f5f92-a506-5d0d-9c78-5feea159b1a6",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Searched Blaschke approximation, locally uniform/tendsto and Schur-algorithm/Carath\u00e9odory candidates. Mathlib BorelCaratheodory bounds real parts/holomorphic growth and CanonicalDecomposition is a different decomposition endpoint. Native Tau Conformal/BlaschkeProduct defines finite products and proves their unit-boundary norm/zeros, but no checked approximation of every disk-bounded holomorphic f by such products was found. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected the native finite-product definition/declared norm/zero endpoints and searched its entire file for approximation/uniform limit assertions. Unresolved is construction of the approximating sequence, locally uniform convergence and the zero-at-origin refinement. Finite Blaschke products themselves are prerequisites, so no partial/native mapping is inferred from their existence."
+    },
+    {
+      "concept": "caratheodory-blaschke-approximation",
+      "concept_id": "3e5f5f92-a506-5d0d-9c78-5feea159b1a6",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Searched Blaschke approximation, locally uniform/tendsto and Schur-algorithm/Carath\u00e9odory candidates. Mathlib BorelCaratheodory bounds real parts/holomorphic growth and CanonicalDecomposition is a different decomposition endpoint. Native Tau Conformal/BlaschkeProduct defines finite products and proves their unit-boundary norm/zeros, but no checked approximation of every disk-bounded holomorphic f by such products was found. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected the native finite-product definition/declared norm/zero endpoints and searched its entire file for approximation/uniform limit assertions. Unresolved is construction of the approximating sequence, locally uniform convergence and the zero-at-origin refinement. Finite Blaschke products themselves are prerequisites, so no partial/native mapping is inferred from their existence."
+    },
+    {
+      "concept": "cauchy-projection-formula",
+      "concept_id": "912b177d-465e-5a5c-a189-292a58712245",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Scoped searches for Cauchy projection, projection volume and surface-area measure found convex-body and projection constructions but did not verify the stated integral identity. Mathlib ConvexBody records convex compact nonempty carrier data; Tau Convex/Body.map sends a body along a continuous linear map. Neither gives the surface-area measure on sphere or the volume=half integral formula. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read actual ConvexBody fields and native body-map scope; searched convex and geometry/measure projection candidates, excluding algebraic projection formulas. Missing checked endpoint is the pushforward/normal surface measure identity and exact factor 1/2 for all convex bodies, not just existence of orthogonal projections. Unknown is bounded search uncertainty, not absence."
+    },
+    {
+      "concept": "cauchy-projection-formula",
+      "concept_id": "912b177d-465e-5a5c-a189-292a58712245",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Scoped searches for Cauchy projection, projection volume and surface-area measure found convex-body and projection constructions but did not verify the stated integral identity. Mathlib ConvexBody records convex compact nonempty carrier data; Tau Convex/Body.map sends a body along a continuous linear map. Neither gives the surface-area measure on sphere or the volume=half integral formula. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read actual ConvexBody fields and native body-map scope; searched convex and geometry/measure projection candidates, excluding algebraic projection formulas. Missing checked endpoint is the pushforward/normal surface measure identity and exact factor 1/2 for all convex bodies, not just existence of orthogonal projections. Unknown is bounded search uncertainty, not absence."
+    },
+    {
+      "concept": "cauchy-schwarz-cstar-module",
+      "concept_id": "ccd238a9-8ab6-5c8e-9974-7d490bdf8e98",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. CStarModule.inner_mul_inner_swap_le (:203) proves \u27eax,y\u27eb*\u27eay,x\u27eb\u2264\u2016x\u2016\u00b2 \u2022 \u27eay,y\u27eb by positivity of \u27eaa\u2022x-\u2016x\u2016\u00b2\u2022y,a\u2022x-\u2016x\u2016\u00b2\u2022y\u27eb, a norm bound on \u27eax,x\u27eb and specializing a=\u27eax,y\u27eb; read the full proof through :229. norm_sq_eq (:181) identifies \u2016x\u2016\u00b2=\u2016\u27eax,x\u27eb\u2016. However CStarModule (:74) requires inner_self=0 iff x=0 and an induced norm. The catalogue explicitly permits a semi-inner-product module (possibly nonzero null vectors); the checked theorem covers only the positive-definite subclass. The absolute-value square in a noncommutative algebra must also be interpreted with the module\u2019s inner-product orientation. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/Module/Defs.lean",
+          "declarations": "CStarModule (:74); CStarModule.norm_sq_eq (:181); CStarModule.inner_mul_inner_swap_le (:203)",
+          "note": "Native order-valued Cauchy\u2013Schwarz proof for positive-definite CStarModule; missing the general semidefinite/null-vector case in the catalogue."
+        }
+      ],
+      "search_notes": "Checked actual class fields, coefficient order/StarOrderedRing context and complete positivity proof. Do not replace the coefficient-algebra order inequality by scalar norm Cauchy\u2013Schwarz. Extending through a nullspace quotient or a direct epsilon argument was not verified; status remains partial."
+    },
+    {
+      "concept": "cauchy-schwarz-cstar-module",
+      "concept_id": "ccd238a9-8ab6-5c8e-9974-7d490bdf8e98",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency CStarModule/Defs is identical and contains only the checked positive-definite restricted theorem. Native Module/Basic proves extensionality of inner products and Gram proves positivity of finite Gram matrices, but both still assume CStarModule (including separation). A full semidefinite Cauchy\u2013Schwarz implementation was not verified, and dependency partial coverage alone does not justify inherited full status. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read native Basic.ext_inner_left proof and Gram.sum_star_mul_gram_mul/gram_nonneg with full actual hypotheses. They are different endpoints, not a native proof or normalization of the requested semidefinite inequality. Missing null-vector case and absolute-square orientation remain unresolved, so no native files are allocated to this theorem."
+    },
+    {
+      "concept": "chain-rule-frechet-derivative",
+      "concept_id": "4cd70fd2-2046-5c6d-aa6f-8bde1f1f2307",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. FDeriv/Comp.HasFDerivAt.comp (:103) states HasFDerivAt (g\u2218f) (g\u2032.comp f\u2032) x from the two derivatives at x and f x; fderiv_comp (:167) extracts the displayed equality. Read the actual proof using HasFDerivAtFilter.comp and the inner map\u2019s continuity to push the neighborhood filter. This is exactly the Frechet chain rule, with no extra invertibility/smoothness hypothesis. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/FDeriv/Comp.lean",
+          "declarations": "HasFDerivAt.comp (:103); DifferentiableAt.comp; fderiv_comp (:167)",
+          "note": "Native chain-rule proof and immediate differentiability/derivative equality variants."
+        }
+      ],
+      "search_notes": "Checked map order matches Douter\u2218Dinner. Within-set versions carry their own MapsTo/UniqueDiff conditions and do not restrict the full-space theorem. Multivariable classical coordinate chain rule is its finite-dimensional specialization."
+    },
+    {
+      "concept": "chain-rule-frechet-derivative",
+      "concept_id": "4cd70fd2-2046-5c6d-aa6f-8bde1f1f2307",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency FDeriv/Comp is identical and supplies the complete chain rule. Native FDeriv/Comp.fderiv_comp_add_smul proves the ordinary affine-input chain formula from fderiv_comp_smul and fderiv_comp_add_left; the same file gives split-linear pre/postcomposition formulas, treating nondifferentiable total-derivative zero consistently. Read these complete proof bodies; this is direct composition-normalization API. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Calculus/FDeriv/Comp.lean",
+          "declarations": "TauCeti.fderiv_comp_add_smul; ContinuousLinearMap.fderiv_comp_right_of_rightInverse; fderiv_comp_left_of_leftInverse",
+          "note": "Native affine and split-linear chain-rule normalization API; general chain rule remains dependency-owned."
+        }
+      ],
+      "search_notes": "The fixed-germ invariant and criticality/surjectivity consequences are additional endpoints, not the justification for inclusion. Ordinary chain normalizations qualify without requiring a duplicate general theorem."
+    },
+    {
+      "concept": "ck-map-euclidean",
+      "concept_id": "3cce6bb1-1b1e-5ec7-ae05-587586cd3045",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. ContDiff/Defs:1067 defines C^n via finite Taylor/Frechet derivative series; :1125 identifies C^0 with continuity and :1225 gives continuous iterated derivatives with differentiability through order n-1. FiniteDimension:38 and :67 prove finite-dimensional derivative regularity is equivalent to regularity after evaluation in every direction. On finite Euclidean coordinates, these directions are finite linear combinations of coordinate vectors, yielding precisely continuous component partials to the stated order (standard finite-dimensional equivalence, rather than a separate competing meaning). Read the actual finite-basis continuous-linear-equivalence argument and successor characterization; finite k does not use analytic \u03c9. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+          "declarations": "ContDiff (:1067); contDiff_zero (:1125); contDiff_nat_iff_continuous_differentiable (:1225)",
+          "note": "Native C^k predicate and ordinary continuous-derivative characterization including the k=0 case."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/ContDiff/FiniteDimension.lean",
+          "declarations": "contDiffWithinAt_clm_apply (:38); contDiff_clm_apply_iff (:54); contDiff_succ_iff_fderiv_apply (:67)",
+          "note": "Native finite-dimensional direction/component evaluation equivalence underpinning the Euclidean coordinate presentation."
+        }
+      ],
+      "search_notes": "Read finite-coordinate equivalence proof (ofFinrankEq, arrowCongr and piRing). The equality of mixed derivative orders is a consequence of C^k regularity; no analyticity or infinite differentiability requirement is substituted for finite k."
+    },
+    {
+      "concept": "ck-map-euclidean",
+      "concept_id": "3cce6bb1-1b1e-5ec7-ae05-587586cd3045",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency ContDiff/Defs is identical and FiniteDimension differs only by whitespace, supplying the full checked C^k meaning and coordinate equivalence. Native ContDiff/Pi.lean:38 proves finite-product piMap regularity and :48 proves replacing a coordinate by a C^r function preserves regularity, by actual componentwise contDiff_pi and coordinate projection proofs. They are ordinary Euclidean C^k map constructor API. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Calculus/ContDiff/Pi.lean",
+          "declarations": "ContDiffOn.piMap (:38); ContDiff.update_self (:48)",
+          "note": "Native finite-coordinate product and coordinate-replacement C^k closure API, with no analytic restriction for finite k."
+        }
+      ],
+      "search_notes": "Read the whole short native file, Fintype indexing and component proofs. PiecewiseC1On adds separate piecewise regularity and is not the same everywhere C^k concept."
+    },
+    {
+      "concept": "closed-range-bounded-operator",
+      "concept_id": "817f1468-b714-5240-982f-67475b3de3f0",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact predicate is IsClosed (Set.range T) for T a bounded/continuous linear map; no separate alias is needed. Topology/Defs/Basic:105 defines IsClosed by open complement, and Operator/BoundedLinearMaps:82 plus its bound/continuity conversion (:106) supplies the bounded linear operator in normed spaces. Thus the native generic constructors literally express the paragraph for every operator, without assuming its range is always closed. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Defs/Basic.lean",
+          "declarations": "IsClosed (:105); interior (:122); closure (:127); frontier (:132)",
+          "note": "Native closed-set predicate and the literal closure/interior/boundary set constructors; only relevant constructors contribute to each mapped concept."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/BoundedLinearMaps.lean",
+          "declarations": "IsBoundedLinearMap (:82); isBoundedLinearMap_iff (:87); IsLinearMap.with_bound (:91); IsBoundedLinearMap.toContinuousLinearMap (:106)",
+          "note": "Native linearity plus uniform norm-bound predicate and conversion to continuous linear maps; real/complex field specializations give ordinary bounded operators/functionals."
+        }
+      ],
+      "search_notes": "Explicitly distinguish the predicate from the closed range theorem/open mapping theorem. Operator/Banach.isClosed_range_iff_antilipschitz_of_injective adds completeness/injectivity and is an optional characterization, not assumed by this generic definition. Fredholm finite-dimensional kernel/cokernel endpoints are excluded."
+    },
+    {
+      "concept": "closed-range-bounded-operator",
+      "concept_id": "817f1468-b714-5240-982f-67475b3de3f0",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency Topology/Defs/Basic and Operator/BoundedLinearMaps are byte-identical and fully supply the exact generic IsClosed (Set.range T) representation. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read native Operator/ClosedRange.exists_norm_le_mul_norm_of_mem: it assumes Banach spaces and a topological complement to the kernel, then derives a quantitative lower bound by the open mapping theorem. This is a separate closed-range estimate theorem; Fredholm/ClosedRange and dual closed-range counterexample modules also target stronger endpoints. No native generic predicate file selected."
+    },
+    {
+      "concept": "closure-topological-space",
+      "concept_id": "549e90d9-ed61-584d-9f05-ef2b3375e0c3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Topology/Defs/Basic:105 defines closed by open complement and :127 defines closure s as \u22c2\u2080{t | IsClosed t \u2227 s\u2286t}, exactly the paragraph. Topology/Closure provides the minimality, closedness and neighborhood characterization, rather than relying on a merely sequential closure which could fail in general spaces. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Defs/Basic.lean",
+          "declarations": "IsClosed (:105); interior (:122); closure (:127); frontier (:132)",
+          "note": "Native closed-set predicate and the literal closure/interior/boundary set constructors; only relevant constructors contribute to each mapped concept."
+        },
+        {
+          "path": "Mathlib/Topology/Closure.lean",
+          "declarations": "subset_closure; isClosed_closure; closure_minimal; mem_closure_iff; closure_eq_iff_isClosed",
+          "note": "Native ordinary universal/minimality and neighborhood API for closure in arbitrary topological spaces."
+        }
+      ],
+      "search_notes": "Read the literal intersection definition and associated generic identities. No first-countability/separation condition is assumed; sequential and metric-specialized closures are excluded from the defining core."
+    },
+    {
+      "concept": "closure-topological-space",
+      "concept_id": "549e90d9-ed61-584d-9f05-ef2b3375e0c3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency topology definition is identical; Closure only adjusts the proof of closure_empty_iff and preserves the checked generic endpoint. Native Topology/Closure.interior_compl_union_interior_eq_univ_iff (:51) proves an arbitrary closure-neighborhood cover equivalence by interior_compl and complement subset algebra; :71 gives the basic neighborhood intersection consequence for a nonmember of its closure. Read full short proof bodies. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Closure.lean",
+          "declarations": "TauCeti.interior_compl_union_interior_eq_univ_iff (:51); not_subset_union_singleton_of_mem_closure (:71)",
+          "note": "Native generic closure/interior complement-normalization and neighborhood API; actual closure constructor remains Mathlib-owned."
+        }
+      ],
+      "search_notes": "Only generic topology/closure hypotheses occur. Later mapsTo closed-limit theorem is adjacent closedness API; special metric geometry and manifold boundary applications are excluded."
+    }
+  ]
+}

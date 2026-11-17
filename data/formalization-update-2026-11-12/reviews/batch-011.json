@@ -1,0 +1,345 @@
+{
+  "batch_id": "batch-011",
+  "reviewer": "algebra_formalization",
+  "proposal_sha256": "91b84c48260925e82da767cf07ece4e7db618a2185a3f764e1664ddad01571d6",
+  "decisions": [
+    {
+      "concept": "distributional-laplacian",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independently read Distribution.lineDerivCLM_apply:238 and lineDerivOp_apply_apply:268: one directional derivative is negative transpose; DerivNotation.laplacianCLM:341 and basis sum theorem:353 give the sum of second derivatives. Tau iteratedLineDerivOp_apply_apply:32 proves reversed iterates with (-1)^n by induction, hence n=2 has the required positive sign. This is immediate distribution differentiation API, not merely a PDE application."
+    },
+    {
+      "concept": "distributional-laplacian",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independently read Distribution.lineDerivCLM_apply:238 and lineDerivOp_apply_apply:268: one directional derivative is negative transpose; DerivNotation.laplacianCLM:341 and basis sum theorem:353 give the sum of second derivatives. Tau iteratedLineDerivOp_apply_apply:32 proves reversed iterates with (-1)^n by induction, hence n=2 has the required positive sign. This is immediate distribution differentiation API, not merely a PDE application."
+    },
+    {
+      "concept": "divergence-theorem-euclidean",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Mathlib integral_eq_of_hasDerivAt_off_countable_of_le:374 proof reducing to the general rectangular formula and the explicit planar rectangle flux formula:483. Read Tau InnerHalfSpace:63 change-of-variables proof and :104 trace expansion proof; unit normal, finite dimension, global C1 compact support and flat boundary with normalized Hausdorff surface measure are explicit. Neither checked endpoint supplies arbitrary bounded C1 domains with curved boundary, so partial is accurate."
+    },
+    {
+      "concept": "divergence-theorem-euclidean",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Mathlib integral_eq_of_hasDerivAt_off_countable_of_le:374 proof reducing to the general rectangular formula and the explicit planar rectangle flux formula:483. Read Tau InnerHalfSpace:63 change-of-variables proof and :104 trace expansion proof; unit normal, finite dimension, global C1 compact support and flat boundary with normalized Hausdorff surface measure are explicit. Neither checked endpoint supplies arbitrary bounded C1 domains with curved boundary, so partial is accurate."
+    },
+    {
+      "concept": "dominated-convergence-theorem",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read HasFiniteIntegral:413/429, including AE limit measurability, the integrable twice-bound dominating the difference and convergence of the L1 error; Integral/DominatedConvergence:57 supplies Bochner integral convergence. Tau Lebesgue/DominatedConvergence:153 is an actual nonnegative countably-generated-filter limsup variant, proving the limit using its general DCT and identifying the convergent limsup. The complete dependency implementation is checked, so native ordinary DCT API suffices."
+    },
+    {
+      "concept": "dominated-convergence-theorem",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read HasFiniteIntegral:413/429, including AE limit measurability, the integrable twice-bound dominating the difference and convergence of the L1 error; Integral/DominatedConvergence:57 supplies Bochner integral convergence. Tau Lebesgue/DominatedConvergence:153 is an actual nonnegative countably-generated-filter limsup variant, proving the limit using its general DCT and identifying the convergent limsup. The complete dependency implementation is checked, so native ordinary DCT API suffices."
+    },
+    {
+      "concept": "domination-basic-sequences",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Change: exact generic uniform-comparison construction verified by isBigO_iff:99 + eventually_top:734 + linearCombination_apply:59; this supplies every finitely supported coefficient inequality, not merely one operator estimate. Dependency and native ownership checked.",
+      "replacement": {
+        "concept": "domination-basic-sequences",
+        "concept_id": "844495bd-3417-5ea9-bf7e-aa29ecb68f28",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The checked generic constructor Asymptotics.IsBigO ⊤ (Finsupp.linearCombination 𝕜 y) (Finsupp.linearCombination 𝕜 x), on domain ℕ →₀ 𝕜, is exactly the catalogue domination predicate for the given basic sequences. Analysis/Asymptotics/Defs.lean IsBigOWith:72 and IsBigO:86, expanded by isBigO_iff:99, give one real C and an eventual norm inequality. Order/Filter/Basic.lean eventually_top:734 is precisely eventual-at-top-filter iff every domain element (the top filter ⊤, not atTop). LinearAlgebra/Finsupp/LinearCombination.lean linearCombination:54 and apply:59 evaluate each finitely supported family as the required scalar sum. Thus no closed-span extension theorem or dedicated alias is needed for this definition. Source inspection only, no fresh Lean build or transitive axiom audit.",
+        "files": [
+          {
+            "path": "Mathlib/Analysis/Asymptotics/Defs.lean",
+            "declarations": "Asymptotics.IsBigOWith (:72); Asymptotics.IsBigO (:86); Asymptotics.isBigO_iff (:99)",
+            "note": "Native uniform norm-comparison constructor, instantiated at the top filter on finitely supported coefficient families; directly defines the comparison in domination."
+          },
+          {
+            "path": "Mathlib/LinearAlgebra/Finsupp/LinearCombination.lean",
+            "declarations": "Finsupp.linearCombination (:54); Finsupp.linearCombination_apply (:59)",
+            "note": "Native finitely supported linear-combination constructor and exact evaluation normal form for the two families being compared."
+          }
+        ],
+        "search_notes": "Checked the exact generic uniform comparison rather than demanding an alias. Basic-sequence hypotheses are inputs to this definition. Excluded basis construction/coordinate completeness, generic filter machinery, and Tau LinearAlgebra/Finsupp/LinearCombination coercion, unique-span and list-sum API: these do not themselves compare norms of the two arbitrary families. Excluded Douglas factorization and Pietsch/Gaussian domination as separately named operator/probability endpoints."
+      }
+    },
+    {
+      "concept": "domination-basic-sequences",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Change: exact generic uniform-comparison construction verified by isBigO_iff:99 + eventually_top:734 + linearCombination_apply:59; this supplies every finitely supported coefficient inequality, not merely one operator estimate. Dependency and native ownership checked.",
+      "replacement": {
+        "concept": "domination-basic-sequences",
+        "concept_id": "844495bd-3417-5ea9-bf7e-aa29ecb68f28",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "inherited",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The checked generic constructor Asymptotics.IsBigO ⊤ (Finsupp.linearCombination 𝕜 y) (Finsupp.linearCombination 𝕜 x), on domain ℕ →₀ 𝕜, is exactly the catalogue domination predicate for the given basic sequences. Analysis/Asymptotics/Defs.lean IsBigOWith:72 and IsBigO:86, expanded by isBigO_iff:99, give one real C and an eventual norm inequality. Order/Filter/Basic.lean eventually_top:734 is precisely eventual-at-top-filter iff every domain element (the top filter ⊤, not atTop). LinearAlgebra/Finsupp/LinearCombination.lean linearCombination:54 and apply:59 evaluate each finitely supported family as the required scalar sum. Thus no closed-span extension theorem or dedicated alias is needed for this definition. Source inspection only, no fresh Lean build or transitive axiom audit. The actual dependency Asymptotics definition differs only in whitespace and the Finsupp constructor file is byte-identical to the independently checked Mathlib snapshot. No native domination comparison API was verified; zero native LOC.",
+        "files": [],
+        "search_notes": "Checked the exact generic uniform comparison rather than demanding an alias. Basic-sequence hypotheses are inputs to this definition. Excluded basis construction/coordinate completeness, generic filter machinery, and Tau LinearAlgebra/Finsupp/LinearCombination coercion, unique-span and list-sum API: these do not themselves compare norms of the two arbitrary families. Excluded Douglas factorization and Pietsch/Gaussian domination as separately named operator/probability endpoints."
+      }
+    },
+    {
+      "concept": "douglas-factorization-theorem",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Tau Gram/Factor:110 constructs factorThru by bounded extension on closure of the range and orthogonal projection; :125/:131 prove the common-source norm-bound factorization and :155 proves norm <= C for C>=0. Taking adjoints gives the operator-inequality factorization direction, but range-inclusion implies a bounded factor and optimal least constant were not verified. Mathlib generic algebraic range factorization does not establish this bounded Hilbert endpoint. Thus Tau partial and Mathlib unknown remain justified."
+    },
+    {
+      "concept": "douglas-factorization-theorem",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Tau Gram/Factor:110 constructs factorThru by bounded extension on closure of the range and orthogonal projection; :125/:131 prove the common-source norm-bound factorization and :155 proves norm <= C for C>=0. Taking adjoints gives the operator-inequality factorization direction, but range-inclusion implies a bounded factor and optimal least constant were not verified. Mathlib generic algebraic range factorization does not establish this bounded Hilbert endpoint. Thus Tau partial and Mathlib unknown remain justified."
+    },
+    {
+      "concept": "drury-teardrop",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independent scoped Drury/teardrop/numericalRange/numericalRadius searches found the scalar Complex/AbelLimit.stolzSet:49 false match, whose actual definition is norm z<1 and norm(1-z)<M(1-norm z). This is unrelated to the catalogue numerical-range two-disk enclosure for disk-algebra f(T). The evidence accurately leaves that endpoint unresolved, without asserting absence."
+    },
+    {
+      "concept": "drury-teardrop",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independent scoped Drury/teardrop/numericalRange/numericalRadius searches found the scalar Complex/AbelLimit.stolzSet:49 false match, whose actual definition is norm z<1 and norm(1-z)<M(1-norm z). This is unrelated to the catalogue numerical-range two-disk enclosure for disk-algebra f(T). The evidence accurately leaves that endpoint unresolved, without asserting absence."
+    },
+    {
+      "concept": "dyadic-cube",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Change: precise checked Cartesian-product interval construction, with existing translation and positive-scaling normal forms, is exactly the given dyadic cube definition; no extra grid theorem or dedicated alias is required.",
+      "replacement": {
+        "concept": "dyadic-cube",
+        "concept_id": "9de704cd-503d-50a1-a309-1cdc33084505",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked generic Cartesian-product/half-open interval constructors instantiate exactly to the catalogue: Set.univ.pi (fun i : Fin n => Set.Ico ((k i : ℝ) * 2^(-j)) (((k i : ℝ)+1) * 2^(-j))) for j:ℤ and k:Fin n→ℤ. Data/Set/Operations.lean Set.pi:277 and mem_univ_pi:283 give coordinatewise membership; Order/Interval/Set/Defs.lean Ico:60 gives lower-inclusive, upper-exclusive bounds. This is precisely 2^(-j)([0,1)^n+k): Algebra/Order/Interval/Set/Monoid.lean image_add_const_Ico:77 proves translation of Ico, and Algebra/Order/Field/Pointwise.lean LinearOrderedField.smul_Ico:37 proves scaling by a positive scalar, applied to the positive real integer power 2^(-j). A dedicated dyadic alias is unnecessary under the checked generic-constructor policy. This verifies the definition, not any uninspected dyadic grid theorem. Source inspection only, no fresh Lean build or transitive axiom audit.",
+        "files": [
+          {
+            "path": "Mathlib/Data/Set/Operations.lean",
+            "declarations": "Set.pi (:277); Set.mem_univ_pi (:283)",
+            "note": "Native Cartesian-product set constructor instantiated with the dyadic half-open coordinate intervals."
+          },
+          {
+            "path": "Mathlib/Order/Interval/Set/Defs.lean",
+            "declarations": "Set.Ico (:60)",
+            "note": "Native exact half-open interval constructor implementing the lower-inclusive upper-exclusive dyadic bounds."
+          },
+          {
+            "path": "Mathlib/Algebra/Order/Interval/Set/Monoid.lean",
+            "declarations": "Set.image_add_const_Ico (:77)",
+            "note": "Native translation normal form for the half-open unit intervals used in the catalogue scaled translated unit cube."
+          },
+          {
+            "path": "Mathlib/Algebra/Order/Field/Pointwise.lean",
+            "declarations": "LinearOrderedField.smul_Ico (:37)",
+            "note": "Native positive dilation normal form matching dyadic coordinate intervals to scaled translated unit intervals."
+          }
+        ],
+        "search_notes": "Independently inspected the actual Set.pi/Ico constructors and completed translation/scaling proofs, not a name-only hit or arbitrary proposed new predicate. Excluded BoxIntegral integration machinery, all importers, and Tau-owned grid subdivision/covering maximality results from the Mathlib file map. The definition requires no dedicated grid API."
+      }
+    },
+    {
+      "concept": "dyadic-cube",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Tau dyadicCube:81 as the fiber of floor(x_i/2^k), exact half-open Set.pi characterization:100, disjointness:150 and nesting-or-disjointness:157 completed proofs. Taking k=-j matches the catalogue exponent sign, including all integer scales and integer translations. Native grid core API is genuine; maximal-covering applications are excluded."
+    },
+    {
+      "concept": "ell1-block-average",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Reused independently checked GeneralSchauderBasis fields and coordinate expansion/finite projection API from batch-008, and checked native normed-tree block/support/domination candidates. No actual arbitrary successive-block-support predicate and normalized finite average with the required lower bound was verified. Coordinate lp estimates and a general finite sum do not establish that block structure; unknown is a specific unresolved endpoint."
+    },
+    {
+      "concept": "ell1-block-average",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Reused independently checked GeneralSchauderBasis fields and coordinate expansion/finite projection API from batch-008, and checked native normed-tree block/support/domination candidates. No actual arbitrary successive-block-support predicate and normalized finite average with the required lower bound was verified. Coordinate lp estimates and a general finite sum do not establish that block structure; unknown is a specific unresolved endpoint."
+    },
+    {
+      "concept": "elliptic-principal-eigenvalue",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Ownership/evidence clarification, same unknown status: checked actual negative-symbol IsLaplaceType:90 and weak H1 Schrödinger solution:267/proof. Neither establishes the general self-adjoint elliptic spectral/positive-eigenfunction endpoint; Tau candidate files must not be described as native to independent Mathlib.",
+      "replacement": {
+        "concept": "elliptic-principal-eigenvalue",
+        "concept_id": "89a31c71-675a-57b1-a5c0-633b62a3afe0",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "unknown",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Inspected the separate Tau Ceti project DifferentialOperator/LaplaceType.IsLaplaceType (:90): it prescribes a negative scalar metric principal symbol and supplies perturbation/coordinate compatibility, not the general positive principal-part spectral assertion in the catalogue. Riemannian/Schrodinger and Sobolev/Schrodinger prove coercivity/weak inverse and a zero-solution uniqueness result for nonnegative potentials. No checked proof of a simple largest eigenvalue with positive eigenfunction for every stated self-adjoint elliptic operator was verified. Source inspection only; no fresh Lean build or transitive axiom audit. These candidate PDE files are Tau Ceti-owned, not native Mathlib implementation or suppliers to independent Mathlib; their inspection is only a comparison that also did not resolve the endpoint. Independent Mathlib searches in operator spectral and manifold/elliptic candidates did not verify the catalogue realization or eigenfunction theorem.",
+        "files": [],
+        "search_notes": "Scoped principal-eigenvalue, eigenfunction, elliptic spectrum and Riemannian/PDE searches; excluded finite-dimensional matrix eigenvalue theorems. Missing is existence plus simplicity/positivity and identification of every positive eigenfunction, including the catalogue sign convention. Generic coercivity/maximum estimates are prerequisites, not a direct partial implementation of this full theorem."
+      }
+    },
+    {
+      "concept": "elliptic-principal-eigenvalue",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Ownership/evidence clarification, same unknown status: checked actual negative-symbol IsLaplaceType:90 and weak H1 Schrödinger solution:267/proof. Neither establishes the general self-adjoint elliptic spectral/positive-eigenfunction endpoint; Tau candidate files must not be described as native to independent Mathlib.",
+      "replacement": {
+        "concept": "elliptic-principal-eigenvalue",
+        "concept_id": "89a31c71-675a-57b1-a5c0-633b62a3afe0",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "unknown",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Inspected Tau DifferentialOperator/LaplaceType.IsLaplaceType (:90): it prescribes a negative scalar metric principal symbol and supplies perturbation/coordinate compatibility, not the general positive principal-part spectral assertion in the catalogue. Riemannian/Schrodinger and Sobolev/Schrodinger prove coercivity/weak inverse and a zero-solution uniqueness result for nonnegative potentials. No checked proof of a simple largest eigenvalue with positive eigenfunction for every stated self-adjoint elliptic operator was verified. Source inspection only; no fresh Lean build or transitive axiom audit. Independently checked IsLaplaceType:90 explicitly has geometric principal symbol -(c*norm ξ^2), c>0, and Sobolev/Schrodinger.existsUnique_dirichletForm_add_potentialForm_eq:267 proves a weak H¹ variational solution by the coercive-form theorem. This does not supply H²-domain equality, a smooth eigenbasis, or a principal positive eigenfunction.",
+        "files": [],
+        "search_notes": "Scoped principal-eigenvalue, eigenfunction, elliptic spectrum and Riemannian/PDE searches; excluded finite-dimensional matrix eigenvalue theorems. Missing is existence plus simplicity/positivity and identification of every positive eigenfunction, including the catalogue sign convention. Generic coercivity/maximum estimates are prerequisites, not a direct partial implementation of this full theorem."
+      }
+    },
+    {
+      "concept": "elliptic-selfadjoint-discrete-spectrum",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Ownership/evidence clarification, same unknown status: checked actual negative-symbol IsLaplaceType:90 and weak H1 Schrödinger solution:267/proof. Neither establishes the general self-adjoint elliptic spectral/positive-eigenfunction endpoint; Tau candidate files must not be described as native to independent Mathlib.",
+      "replacement": {
+        "concept": "elliptic-selfadjoint-discrete-spectrum",
+        "concept_id": "eeaffc3f-d41a-5257-b161-3a7c3a67dd11",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "unknown",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked actual Tau Ceti-owned IsLaplaceType symbol predicate and Sobolev Schrödinger weak inverse endpoint. They do not establish a self-adjoint L² realization of every symmetric second-order uniformly elliptic operator with domain H², compact resolvent/discrete spectrum and a complete smooth eigenbasis. Generic compact self-adjoint spectral results require exactly that unverified elliptic realization/regularity bridge. Source inspection only; no fresh Lean build or transitive axiom audit. These candidate PDE files are Tau Ceti-owned, not native Mathlib implementation or suppliers to independent Mathlib; their inspection is only a comparison that also did not resolve the endpoint. Independent Mathlib searches in operator spectral and manifold/elliptic candidates did not verify the catalogue realization or eigenfunction theorem.",
+        "files": [],
+        "search_notes": "Searched manifold spectral/eigen/discrete-spectrum and elliptic/PDE operator candidates; inspected smooth symbol and weak H¹-solution statements rather than inferring from filenames. Missing H²-domain equality, self-adjoint extension and all smooth eigenfunctions remain explicit; no specialized spectral subbundle or Morse spectral sequence is substituted."
+      }
+    },
+    {
+      "concept": "elliptic-selfadjoint-discrete-spectrum",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Ownership/evidence clarification, same unknown status: checked actual negative-symbol IsLaplaceType:90 and weak H1 Schrödinger solution:267/proof. Neither establishes the general self-adjoint elliptic spectral/positive-eigenfunction endpoint; Tau candidate files must not be described as native to independent Mathlib.",
+      "replacement": {
+        "concept": "elliptic-selfadjoint-discrete-spectrum",
+        "concept_id": "eeaffc3f-d41a-5257-b161-3a7c3a67dd11",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "unknown",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked actual native IsLaplaceType symbol predicate and Sobolev Schrödinger weak inverse endpoint. They do not establish a self-adjoint L² realization of every symmetric second-order uniformly elliptic operator with domain H², compact resolvent/discrete spectrum and a complete smooth eigenbasis. Generic compact self-adjoint spectral results require exactly that unverified elliptic realization/regularity bridge. Source inspection only; no fresh Lean build or transitive axiom audit. Independently checked IsLaplaceType:90 explicitly has geometric principal symbol -(c*norm ξ^2), c>0, and Sobolev/Schrodinger.existsUnique_dirichletForm_add_potentialForm_eq:267 proves a weak H¹ variational solution by the coercive-form theorem. This does not supply H²-domain equality, a smooth eigenbasis, or a principal positive eigenfunction.",
+        "files": [],
+        "search_notes": "Searched manifold spectral/eigen/discrete-spectrum and elliptic/PDE operator candidates; inspected smooth symbol and weak H¹-solution statements rather than inferring from filenames. Missing H²-domain equality, self-adjoint extension and all smooth eigenfunctions remain explicit; no specialized spectral subbundle or Morse spectral sequence is substituted."
+      }
+    },
+    {
+      "concept": "ellp-sequence-space",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Memℓp:75 branch definitions (bounded norms for infinity, summable p-powers for positive finite p), actual lp subgroup:367 and norm formulas:448/:454. For scalar families indexed by naturals these are precisely the counting-measure sequence spaces at 1<=p<=infinity. Tau evalCLM_apply:54, hasSum_norm_one:57 and exponent comparison:62 are genuine coordinate/norm core API; dependency bodies differ only in whitespace."
+    },
+    {
+      "concept": "ellp-sequence-space",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Memℓp:75 branch definitions (bounded norms for infinity, summable p-powers for positive finite p), actual lp subgroup:367 and norm formulas:448/:454. For scalar families indexed by naturals these are precisely the counting-measure sequence spaces at 1<=p<=infinity. Tau evalCLM_apply:54, hasSum_norm_one:57 and exponent comparison:62 are genuine coordinate/norm core API; dependency bodies differ only in whitespace."
+    },
+    {
+      "concept": "embedded-smooth-surface-r3",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Reused the independently checked batch-008 smooth embedding fields and normal-graph rectifiability/tangent assertions. A parametrized C-infinity immersion plus embedding, or a graph already supplied as input, does not by itself verify both directions of the subset-local graph characterization after rigid ambient coordinates. The unresolved equivalence is concrete and accurately remains unknown."
+    },
+    {
+      "concept": "embedded-smooth-surface-r3",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Reused the independently checked batch-008 smooth embedding fields and normal-graph rectifiability/tangent assertions. A parametrized C-infinity immersion plus embedding, or a graph already supplied as input, does not by itself verify both directions of the subset-local graph characterization after rigid ambient coordinates. The unresolved equivalence is concrete and accurately remains unknown."
+    },
+    {
+      "concept": "epsilon-net-metric-space",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Metric.IsCover:47 as the relation edist<=epsilon covering A by N, with no N subset A restriction; :63 proves radius monotonicity and :66 sends witnesses through a Lipschitz map. This exactly matches the external weak-radius net convention. The dependency file is byte-identical; native packing/covering-number theorems are extra endpoints, so Tau inherited is correct."
+    },
+    {
+      "concept": "epsilon-net-metric-space",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Metric.IsCover:47 as the relation edist<=epsilon covering A by N, with no N subset A restriction; :63 proves radius monotonicity and :66 sends witnesses through a Lipschitz map. This exactly matches the external weak-radius net convention. The dependency file is byte-identical; native packing/covering-number theorems are extra endpoints, so Tau inherited is correct."
+    },
+    {
+      "concept": "equivalence-class",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independently read Setoid.classes:61 as the sets {x | r x y}, rel_iff_exists_classes:86 and classes_eqv_classes:100 proof of the partition, and ker_mk_eq:84 identifying quotient equality. Actual Lean Setoid/Quotient supplier ownership is distinct from Mathlib ordinary class API. Tau ofPred_rel_eq_iff:47 proves class equality iff related by explicit transitivity/symmetry; :60 proves quotient saturation equals relational preimage. These are direct class API."
+    },
+    {
+      "concept": "equivalence-class",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independently read Setoid.classes:61 as the sets {x | r x y}, rel_iff_exists_classes:86 and classes_eqv_classes:100 proof of the partition, and ker_mk_eq:84 identifying quotient equality. Actual Lean Setoid/Quotient supplier ownership is distinct from Mathlib ordinary class API. Tau ofPred_rel_eq_iff:47 proves class equality iff related by explicit transitivity/symmetry; :60 proves quotient saturation equals relational preimage. These are direct class API."
+    },
+    {
+      "concept": "equivalence-relation",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Checked actual Lean Init/Core.lean Equivalence:1322 fields reflexive/symmetric/transitive and Setoid:1566 packaging. Mathlib Setoid.eq_iff_rel_eq:48, refl/symm/trans helpers and ker:79 supply generic ordinary API; Tau ofPred_rel_eq_iff:47 and map_of_le_surjective:54 supply relation/class/coarser-quotient core laws with completed proofs. Do not count the imported Lean definition as native, but native API justifies formalized."
+    },
+    {
+      "concept": "equivalence-relation",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked actual Lean Init/Core.lean Equivalence:1322 fields reflexive/symmetric/transitive and Setoid:1566 packaging. Mathlib Setoid.eq_iff_rel_eq:48, refl/symm/trans helpers and ker:79 supply generic ordinary API; Tau ofPred_rel_eq_iff:47 and map_of_le_surjective:54 supply relation/class/coarser-quotient core laws with completed proofs. Do not count the imported Lean definition as native, but native API justifies formalized."
+    },
+    {
+      "concept": "equivalent-basic-sequences",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Evidence change while retaining unknown: the generic mutual domination criterion is actually available, so the original broad wording is too negative. The specific closed-span extension/inverse equivalence remains an honestly unverified bridge after the bounded source review.",
+      "replacement": {
+        "concept": "equivalent-basic-sequences",
+        "concept_id": "72accd0d-cc58-55f9-955e-c34f9853ddcb",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "unknown",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The general Schauder-basis source supplies coordinates and convergent expansions, but the checked candidate search did not verify the two-sided finite-coefficient domination criterion or its equivalence with a bounded coordinate isomorphism of the closed spans. Particular c₀ coordinate bases do not establish arbitrary basic-sequence equivalence. Source inspection only; no fresh Lean build or transitive axiom audit. Independent review additionally verified that mutual finite-coefficient domination itself is expressible exactly by the two reversed Asymptotics.IsBigO comparisons at the top filter on ℕ→₀𝕜, using isBigO_iff:99, eventually_top:734 and Finsupp.linearCombination_apply:59. The remaining uncertainty is specifically the catalogue asserted equivalence with a Banach-space isomorphism of closed spans, not availability of the two-sided bound criterion.",
+        "files": [],
+        "search_notes": "Checked generic two-sided uniform finite-coefficient comparisons as above and GeneralSchauderBasis coordinate/expansion fields; bounded extension plus inverse on both closed spans was not verified in the inspected basis/operator candidates. Particular c₀ bases and bare linear equivalences do not supply that bridge. Unknown is retained only for this documented unverified equivalence, not as an absence assertion."
+      }
+    },
+    {
+      "concept": "equivalent-basic-sequences",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Evidence change while retaining unknown: the generic mutual domination criterion is actually available, so the original broad wording is too negative. The specific closed-span extension/inverse equivalence remains an honestly unverified bridge after the bounded source review.",
+      "replacement": {
+        "concept": "equivalent-basic-sequences",
+        "concept_id": "72accd0d-cc58-55f9-955e-c34f9853ddcb",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "unknown",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The general Schauder-basis source supplies coordinates and convergent expansions, but the checked candidate search did not verify the two-sided finite-coefficient domination criterion or its equivalence with a bounded coordinate isomorphism of the closed spans. Particular c₀ coordinate bases do not establish arbitrary basic-sequence equivalence. Source inspection only; no fresh Lean build or transitive axiom audit. Independent review additionally verified that mutual finite-coefficient domination itself is expressible exactly by the two reversed Asymptotics.IsBigO comparisons at the top filter on ℕ→₀𝕜, using isBigO_iff:99, eventually_top:734 and Finsupp.linearCombination_apply:59. The remaining uncertainty is specifically the catalogue asserted equivalence with a Banach-space isomorphism of closed spans, not availability of the two-sided bound criterion.",
+        "files": [],
+        "search_notes": "Checked generic two-sided uniform finite-coefficient comparisons as above and GeneralSchauderBasis coordinate/expansion fields; bounded extension plus inverse on both closed spans was not verified in the inspected basis/operator candidates. Particular c₀ bases and bare linear equivalences do not supply that bridge. Unknown is retained only for this documented unverified equivalence, not as an absence assertion."
+      }
+    },
+    {
+      "concept": "essential-supremum",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read essSup:46 as AE-filter limsup, essSup_eq_sInf:244 identifying infimum of a.e. upper bounds and ae_le_essSup:266. The evidence correctly instantiates the complete extended-real order rather than unbounded Real conditionally-complete fallback. Tau support characterization:49 explicitly assumes lower semicontinuity and conull support and proves equality by closed level sets; :63 is the bounded oscillation core law. Full definition is supplied by the exact byte-identical dependency, with genuine native core API."
+    },
+    {
+      "concept": "essential-supremum",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read essSup:46 as AE-filter limsup, essSup_eq_sInf:244 identifying infimum of a.e. upper bounds and ae_le_essSup:266. The evidence correctly instantiates the complete extended-real order rather than unbounded Real conditionally-complete fallback. Tau support characterization:49 explicitly assumes lower semicontinuity and conull support and proves equality by closed level sets; :63 is the bounded oscillation core law. Full definition is supplied by the exact byte-identical dependency, with genuine native core API."
+    },
+    {
+      "concept": "fatou-lemma",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Lebesgue/Add private nonnegative natural-sequence proof:207 using increasing tail infima and monotone convergence, public AEMeasurable countably-generated-filter version:220 and Measurable version:237. ENNReal includes infinity and there is no finite-measure or finite-integral assumption. Dependency file is byte-identical; Tau dominated reverse Fatou is a different endpoint, so inherited zero native files is correct."
+    },
+    {
+      "concept": "fatou-lemma",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Lebesgue/Add private nonnegative natural-sequence proof:207 using increasing tail infima and monotone convergence, public AEMeasurable countably-generated-filter version:220 and Measurable version:237. ENNReal includes infinity and there is no finite-measure or finite-integral assumption. Dependency file is byte-identical; Tau dominated reverse Fatou is a different endpoint, so inherited zero native files is correct."
+    }
+  ]
+}

@@ -1,0 +1,585 @@
+{
+  "batch_id": "batch-046",
+  "author": "analysis_formalization",
+  "reviews": [
+    {
+      "concept": "order-unit-abelian-group",
+      "concept_id": "0efc8ee4-0c05-5c80-908e-7a7e68096a0a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "For an ordered additive abelian group G and element u, the exact literal predicate is 0<=u AND forall g:G, exists N:Nat, 0<N AND g∈Set.Icc (-(N•u)) (N•u). Set.Icc:77/mem_Icc:81 are precisely BOTH weak bounds, and the positivity condition is on the bounding INTEGER N, not merely an arbitrary real scale. In a nontrivial ordered group the domination condition forces u!=0; no unnecessary nontriviality hypothesis is added to the definition. A dedicated order-unit alias is unnecessary. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Order/Interval/Set/Defs.lean",
+          "declarations": "Set.Icc:77; mem_Icc:81",
+          "note": "Exact closed order interval appearing in the two-sided integer order-unit domination condition."
+        }
+      ],
+      "search_notes": "Full-tree order-unit/IsOrderUnit searches and native Algebra/Order siblings checked. Lp/One constant-one order-unit estimates concern an extra function-lattice specialization, excluded; arithmetic order units in number fields mean invertible algebraic integers, a different use of the word. Keep the exact integer two-sided domination condition; ordinary bounds API is not a pure instance installer."
+    },
+    {
+      "concept": "order-unit-abelian-group",
+      "concept_id": "0efc8ee4-0c05-5c80-908e-7a7e68096a0a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "For an ordered additive abelian group G and element u, the exact literal predicate is 0<=u AND forall g:G, exists N:Nat, 0<N AND g∈Set.Icc (-(N•u)) (N•u). Set.Icc:77/mem_Icc:81 are precisely BOTH weak bounds, and the positivity condition is on the bounding INTEGER N, not merely an arbitrary real scale. In a nontrivial ordered group the domination condition forces u!=0; no unnecessary nontriviality hypothesis is added to the definition. A dedicated order-unit alias is unnecessary. Native Bounds45/55 generated additive forms preserve upper/lower bounds under uniformly bounded differences. Actual complete witness-translation proofs47–49/57–59 give ordinary group-bound API for these ordered groups, with the same direct weaker-hypothesis core-law boundary as031/048; this does not assert that those laws imply existence of an order unit. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Order/Group/Bounds.lean",
+          "declarations": "BddBelow.range_of_div_le:45 and generated range_of_sub_le; BddAbove.range_of_div_le:55 and generated range_of_sub_le",
+          "note": "Ordinary ordered-group boundedness under uniformly bounded differences, valid for partially ordered additive abelian groups, with no total-order hypothesis."
+        }
+      ],
+      "search_notes": "Full-tree order-unit/IsOrderUnit searches and native Algebra/Order siblings checked. Lp/One constant-one order-unit estimates concern an extra function-lattice specialization, excluded; arithmetic order units in number fields mean invertible algebraic integers, a different use of the word. Keep the exact integer two-sided domination condition; ordinary bounds API is not a pure instance installer."
+    },
+    {
+      "concept": "ordered-abelian-group",
+      "concept_id": "de9b426d-1020-5c48-86ad-f63daf81c2b8",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Use AddCommGroup G, PartialOrder G and IsOrderedAddMonoid:26 (translation preserves order). Preserve the paragraph-directedness by the literal condition forall g:G, exists a b:G, 0<=a AND 0<=b AND g=a-b. Equivalently Directed (<=) id at Directed:45: a common upper bound of g and0 supplies a and a-g; conversely positive-difference decomposition of h-g supplies a common upper bound. This is an explicit equivalent mathematical representation; no total order, lattice or Archimedean condition imposed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Order/Monoid/Defs.lean",
+          "declarations": "IsOrderedAddMonoid:26",
+          "note": "Translation-monotone additive order, instantiated with abelian group and partial order."
+        },
+        {
+          "path": "Mathlib/Order/Directed.lean",
+          "declarations": "Directed:45",
+          "note": "Pairwise upper-bound representation of the directedness explicitly required by this paragraph."
+        }
+      ],
+      "search_notes": "Native ordered-group Bounds and ordered Hom siblings enumerated; choose direct generic order-bound laws, exclude total-order cofinal/convex-subgroup classification and real-function lattice structure. The source BddBelow/Above proofs require only preorder and compatible left/right multiplication; additive commutative ordered groups satisfy them."
+    },
+    {
+      "concept": "ordered-abelian-group",
+      "concept_id": "de9b426d-1020-5c48-86ad-f63daf81c2b8",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Use AddCommGroup G, PartialOrder G and IsOrderedAddMonoid:26 (translation preserves order). Preserve the paragraph-directedness by the literal condition forall g:G, exists a b:G, 0<=a AND 0<=b AND g=a-b. Equivalently Directed (<=) id at Directed:45: a common upper bound of g and0 supplies a and a-g; conversely positive-difference decomposition of h-g supplies a common upper bound. This is an explicit equivalent mathematical representation; no total order, lattice or Archimedean condition imposed. Native additive difference-bound laws at Bounds45/55 are ordinary direct order/bound API under weaker compatible-group hypotheses; actual witness translation/cancellation proof bodies read. Full directed definition remains separately imposed. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development. Exact dependency IsOrderedAddMonoid begins27 (+1 header), Directed45 unchanged; relevant bodies compared.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Order/Group/Bounds.lean",
+          "declarations": "BddBelow.range_of_div_le:45 and generated range_of_sub_le; BddAbove.range_of_div_le:55 and generated range_of_sub_le",
+          "note": "Ordinary ordered-group boundedness under uniformly bounded differences, valid for partially ordered additive abelian groups, with no total-order hypothesis."
+        }
+      ],
+      "search_notes": "Native ordered-group Bounds and ordered Hom siblings enumerated; choose direct generic order-bound laws, exclude total-order cofinal/convex-subgroup classification and real-function lattice structure. The source BddBelow/Above proofs require only preorder and compatible left/right multiplication; additive commutative ordered groups satisfy them."
+    },
+    {
+      "concept": "p-adic-field",
+      "concept_id": "ef2a9b29-2c82-5bd1-a2ca-7c1a73e0003f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "For prime p (Fact p.Prime), padicNorm:46 in PadicNorm is if q=0 then0 else (p:Rat)^(-padicValRat p q), exactly the rational p-adic absolute value. Padic:545 is CauSeq.Completion.Cauchy(padicNorm p), deriving Field. Relevant PadicNumbers completeness proof1006–1022 and CompleteSpace constructor1038 onward, rational density827/832, and Cauchy embedding construction read. Thus this is literally Q_p as completion of Q for the stated normalization, not an arbitrary finite extension. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/Padics/PadicNorm.lean",
+          "declarations": "padicNorm:46",
+          "note": "Actual p-adic absolute value on rationals, with explicit zero and p-adic valuation normalization."
+        },
+        {
+          "path": "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+          "declarations": "Padic:545; Padic.rat_dense:827; denseRange_ratCast:832; Padic.complete:1006; CompleteSpace instance:1038",
+          "note": "Actual Cauchy completion field, dense rational embedding and completed completeness proofs."
+        }
+      ],
+      "search_notes": "Enumerated native Padics and LocalField direct siblings. Exclude Q_p^alg, integral lattice localization, Mahler expansions, p-adic analytic functions and dyadic/cyclotomic worked examples as additional structures/endpoints. Native PadicIntegers is a separate subring, not automatically assigned to the field."
+    },
+    {
+      "concept": "p-adic-field",
+      "concept_id": "ef2a9b29-2c82-5bd1-a2ca-7c1a73e0003f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "For prime p (Fact p.Prime), padicNorm:46 in PadicNorm is if q=0 then0 else (p:Rat)^(-padicValRat p q), exactly the rational p-adic absolute value. Padic:545 is CauSeq.Completion.Cauchy(padicNorm p), deriving Field. Relevant PadicNumbers completeness proof1006–1022 and CompleteSpace constructor1038 onward, rational density827/832, and Cauchy embedding construction read. Thus this is literally Q_p as completion of Q for the stated normalization, not an arbitrary finite extension. Native LogGauge constructs the canonical p pseudo-uniformizer and real-valued normalization, and proves norm_eq_rpow_neg_padicRealValuation:141 by rewriting the checked integer valuation norm formula; exact proof143–145 and integrality of valuations148 read. This is direct norm/valuation dictionary API on Q_p, not a theorem about a separate extension. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/Padics/LogGauge.lean",
+          "declarations": "TauCeti.padicPseudoUniformizer:112; padicRealValuation:117; padicRealValuation_eq_map:129; norm_eq_rpow_neg_padicRealValuation:141; exists_int_padicRealValuation:148",
+          "note": "Ordinary normalized Q_p valuation/uniformizer/norm comparison API; supplied completion remains Mathlib."
+        }
+      ],
+      "search_notes": "Enumerated native Padics and LocalField direct siblings. Exclude Q_p^alg, integral lattice localization, Mahler expansions, p-adic analytic functions and dyadic/cyclotomic worked examples as additional structures/endpoints. Native PadicIntegers is a separate subring, not automatically assigned to the field."
+    },
+    {
+      "concept": "p-integral-rational-number",
+      "concept_id": "83cd8b8e-6729-5169-ae83-96cc0883dd36",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Exact rational predicate for prime p is NOT p | q.den. This is equivalent to the printed exists integers a,b with q=a/b and p not dividing b: q=q.num/q.den supplies one direction; Rat.den_dvd:33 in Data/Rat/Lemmas proves the reduced denominator divides EVERY presenting integer denominator, so the converse follows by divisor transitivity. p∤b entails b!=0; q=0 is included with denominator1. The completed Rat.den_dvd proof35–40 reads reduced-coprime cross multiplication, so no hidden choice of denominator is used. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Rat/Lemmas.lean",
+          "declarations": "Rat.den_dvd:33; Rat.num_den_mk:41",
+          "note": "Actual reduced-denominator normal form and divisibility under arbitrary integer fraction presentations, supplying the exact p-integral rational predicate."
+        }
+      ],
+      "search_notes": "Native Rat/NumDenDvd and Padics/PadicValRat/PadicIntegers examined. PadicValRat.eq_zero_iff:33 characterizes both numerator and denominator prime-to-p (a stronger unit condition), not p-integrality alone; exclude that file as the primary defining equivalence. No denominator0 representation or negative p allowed."
+    },
+    {
+      "concept": "p-integral-rational-number",
+      "concept_id": "83cd8b8e-6729-5169-ae83-96cc0883dd36",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact rational predicate for prime p is NOT p | q.den. This is equivalent to the printed exists integers a,b with q=a/b and p not dividing b: q=q.num/q.den supplies one direction; Rat.den_dvd:33 in Data/Rat/Lemmas proves the reduced denominator divides EVERY presenting integer denominator, so the converse follows by divisor transitivity. p∤b entails b!=0; q=0 is included with denominator1. The completed Rat.den_dvd proof35–40 reads reduced-coprime cross multiplication, so no hidden choice of denominator is used. Native Rat.den_dvd_iff_exists_eq_intCast_div:62 gives complete both-direction proof64–73 of q.den|n iff q=k/n for n!=0. Taking an integer/natural denominator coprime to p is exactly the p-integral presenting-denominator normal form; sign can be moved into the integer numerator. No claim that p-integral means p-adic UNIT (valuation0) is made. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development. Actual dependency Rat.den_dvd:34 has only +1 header offset; completed reduced-denominator proof unchanged.",
+      "files": [
+        {
+          "path": "TauCeti/Data/Rat/NumDenDvd.lean",
+          "declarations": "Rat.den_dvd_of_intCast_eq_mul_intCast:45; den_dvd_iff_exists_eq_intCast_div:62; den_dvd_iff_exists_mul_intCast_eq:76",
+          "note": "Ordinary integer-denominator presentation and exact-divisibility API used by the p-integral condition."
+        }
+      ],
+      "search_notes": "Native Rat/NumDenDvd and Padics/PadicValRat/PadicIntegers examined. PadicValRat.eq_zero_iff:33 characterizes both numerator and denominator prime-to-p (a stronger unit condition), not p-integrality alone; exclude that file as the primary defining equivalence. No denominator0 representation or negative p allowed."
+    },
+    {
+      "concept": "parabolic-subgroup",
+      "concept_id": "e646ea91-bf4a-54c7-b007-ff138f3b6d51",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "The exact arbitrary closed-subgroup-scheme closure-contains-Borel predicate was not certified in standalone Mathlib. Generic ideal/base-change inputs do not supply the checked Borel/subgroup interface here. Native Tau Borel and parabolic implementations are not attributed to Mathlib. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Important catalogue convention: affine-algebraic-group is explicitly a finite-type affine group SCHEME, and closed-algebraic-subgroup an arbitrary Hopf ideal (live exact paragraphs checked). Nonreduced subgroups must not be silently discarded. Borel/Basic148 and FiniteType/BaseChange67/HopfIdeal/BaseChange116 are checked input suppliers, excluded from extra native file allocation. Generic exact primary predicate is complete; no unverified projective-quotient equivalence added to coverage. M unknown is specific missing Borel/group-scheme assembly, not a missing alias."
+    },
+    {
+      "concept": "parabolic-subgroup",
+      "concept_id": "e646ea91-bf4a-54c7-b007-ff138f3b6d51",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact PRIMARY scheme-level definition for the given connected reductive F-group with finite-type coordinate Hopf algebra H and arbitrary closed subgroup Hopf ideal I: form Hbar=(AlgebraicClosure F) tensor_F H and Ibar=baseChangeHopfIdeal I, then require exists J:HopfIdeal(AlgebraicClosure F) Hbar, IsBorelOverAlgClosed _ Hbar J AND Ibar<=J. Hopf-ideal order reverses subgroup inclusion, so the inequality is the correct containment. Read actual finite-type baseChange:67/70 and HopfIdeal baseChange116 kernel-of-base-changed-quotient construction, and Borel148 minimal smooth connected solvable candidate definition. This generic predicate exactly follows the catalogue primary condition, WITHOUT imposing smoothness on P. Native IsParabolicOverAlgClosed:82 additionally requires subgroup smoothness: it is a STRICTER conventional named subcase, not silently identified with all closed subgroup schemes. Its actual of_le:118 and comapOfIso:126 proofs give direct parabolic inclusion/transport API WITH smoothness explicit. The catalogue explanatory projectivity equivalence has not been separately certified here; no proof of G/P projectivity, existence of Borels or smoothness of arbitrary such P is claimed. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Parabolic/Basic.lean",
+          "declarations": "TauCeti.HopfIdeal.IsParabolicOverAlgClosed:82; isParabolicOverAlgClosed_iff:90; IsParabolicOverAlgClosed.of_le:118; comapOfIso:126",
+          "note": "Direct named smooth-parabolic constructor and ordinary inclusion/isomorphism API, with explicit stronger smoothness; complete primary scheme-level generic predicate supplied separately in evidence."
+        }
+      ],
+      "search_notes": "Important catalogue convention: affine-algebraic-group is explicitly a finite-type affine group SCHEME, and closed-algebraic-subgroup an arbitrary Hopf ideal (live exact paragraphs checked). Nonreduced subgroups must not be silently discarded. Borel/Basic148 and FiniteType/BaseChange67/HopfIdeal/BaseChange116 are checked input suppliers, excluded from extra native file allocation. Generic exact primary predicate is complete; no unverified projective-quotient equivalence added to coverage. M unknown is specific missing Borel/group-scheme assembly, not a missing alias."
+    },
+    {
+      "concept": "perfect-cuboid",
+      "concept_id": "11eb0d13-b960-5092-8d5b-dd276beee0e5",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Use seven positive integers a,b,c,d,e,f,g and PythagoreanTriple(a,b,d), PythagoreanTriple(a,c,e), PythagoreanTriple(b,c,f), PythagoreanTriple(d,c,g). Actual PythagoreanTriple:44 is the literal Int equality x*x+y*y=z*z, so the fourth equation is a²+b²+c²=g² once d²=a²+b². This is exactly three positive edges, three face diagonals and space diagonal of a rectangular box; all seven positivity hypotheses explicit. No existence asserted by defining this predicate; M triple commutativity:48 is ordinary core symmetry. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/PythagoreanTriples.lean",
+          "declarations": "PythagoreanTriple:44; pythagoreanTriple_comm:48",
+          "note": "Actual integer square-sum predicate and coordinate symmetry, instantiated to the four exact cuboid equations."
+        }
+      ],
+      "search_notes": "Perfect-cuboid/Pythagorean/box searches and native integer/number-theory siblings checked. A real axis-aligned cuboid volume or a single integer right triangle does not assert existence of a perfect cuboid. Generic triple predicate instantiation is sufficient for this bare definition. No roadmaps or open-conjecture proof inferred."
+    },
+    {
+      "concept": "perfect-cuboid",
+      "concept_id": "11eb0d13-b960-5092-8d5b-dd276beee0e5",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Use seven positive integers a,b,c,d,e,f,g and PythagoreanTriple(a,b,d), PythagoreanTriple(a,c,e), PythagoreanTriple(b,c,f), PythagoreanTriple(d,c,g). Actual PythagoreanTriple:44 is the literal Int equality x*x+y*y=z*z, so the fourth equation is a²+b²+c²=g² once d²=a²+b². This is exactly three positive edges, three face diagonals and space diagonal of a rectangular box; all seven positivity hypotheses explicit. No existence asserted by defining this predicate; M triple commutativity:48 is ordinary core symmetry. The exact defining predicate is supplied by the checked Mathlib dependency; no qualifying native perfect-cuboid definition/API certified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Perfect-cuboid/Pythagorean/box searches and native integer/number-theory siblings checked. A real axis-aligned cuboid volume or a single integer right triangle does not assert existence of a perfect cuboid. Generic triple predicate instantiation is sufficient for this bare definition. No roadmaps or open-conjecture proof inferred."
+    },
+    {
+      "concept": "perfect-cuboid-existence-problem",
+      "concept_id": "591aa3ff-eeb4-54b7-8a1c-9e4c08f15e26",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "FORMAL STATEMENT ONLY; NO PROOF OR TRUTH of perfect-cuboid existence is claimed. The exact checked statement is exists a b c d e f g:Int, all seven positive AND the four PythagoreanTriple equations spelled out in the perfect-cuboid definition above. This is a precise formal proposition using the actual integer triple constructor:44, not a theorem proving a witness. Positivity excludes the all-zero/degenerate boxes. The catalogue entry is kind=conjecture and asks the existence question; coverage here is its statement representation only. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/PythagoreanTriples.lean",
+          "declarations": "PythagoreanTriple:44; pythagoreanTriple_comm:48",
+          "note": "Actual integer square-sum predicate and coordinate symmetry, instantiated to the four exact cuboid equations."
+        }
+      ],
+      "search_notes": "Conjecture-statement interpretation explicitly required by prompts/update-formalization-coverage.md. No completed existence proof was certified or claimed. Generic existential language is stock Lean b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; no fictitious Lean theorem or witness is invented. Do not merge this conjecture with the bare cuboid definition or the second-cuboid irreducibility conjecture."
+    },
+    {
+      "concept": "perfect-cuboid-existence-problem",
+      "concept_id": "591aa3ff-eeb4-54b7-8a1c-9e4c08f15e26",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "FORMAL STATEMENT ONLY; NO PROOF OR TRUTH of perfect-cuboid existence is claimed. The exact checked statement is exists a b c d e f g:Int, all seven positive AND the four PythagoreanTriple equations spelled out in the perfect-cuboid definition above. This is a precise formal proposition using the actual integer triple constructor:44, not a theorem proving a witness. Positivity excludes the all-zero/degenerate boxes. The catalogue entry is kind=conjecture and asks the existence question; coverage here is its statement representation only. Supplier is the actual dependency triple constructor, with no qualifying native existence-statement API selected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Conjecture-statement interpretation explicitly required by prompts/update-formalization-coverage.md. No completed existence proof was certified or claimed. Generic existential language is stock Lean b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; no fictitious Lean theorem or witness is invented. Do not merge this conjecture with the bare cuboid definition or the second-cuboid irreducibility conjecture."
+    },
+    {
+      "concept": "pigeonhole-principle",
+      "concept_id": "49cfbf70-c62a-534b-b577-7be3c4dbd32f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Finset.exists_lt_card_fiber_of_mul_lt_card_of_maps_to:234 proves if card(boxes)*n<card(objects) and assignments map objects to boxes then a box fiber has cardinality>n; choose n=1 to get a collision. The nsmul version222 and weak average versions261/270 are actual completed calls to finite sum/fiber pigeonhole, also valid with real average bound and a nonempty box set. Thus some box has at least the ceiling of the mean; empty codomain edge cases retain source hypotheses, not an invented box. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Combinatorics/Pigeonhole.lean",
+          "declarations": "Finset.exists_lt_card_fiber_of_nsmul_lt_card_of_maps_to:222; exists_lt_card_fiber_of_mul_lt_card_of_maps_to:234; exists_le_card_fiber_of_nsmul_le_card_of_maps_to:261; exists_le_card_fiber_of_mul_le_card_of_maps_to:270",
+          "note": "Completed finite-fiber collision and general average pigeonhole principles."
+        }
+      ],
+      "search_notes": "Native Pigeonhole/RepeatedRepresentatives:37 entire proof read: it selects two A-equal representatives in each eventually infinite B-color fiber with a uniform prefix bound. This adds an asymptotic two-color representative selection endpoint rather than the finite collision/average principle; exclude. Cardinal infinite pigeonhole refinements and graph/Ramsey applications are separate endpoints. Tinherited does not claim all native uses absent."
+    },
+    {
+      "concept": "pigeonhole-principle",
+      "concept_id": "49cfbf70-c62a-534b-b577-7be3c4dbd32f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Finset.exists_lt_card_fiber_of_mul_lt_card_of_maps_to:234 proves if card(boxes)*n<card(objects) and assignments map objects to boxes then a box fiber has cardinality>n; choose n=1 to get a collision. The nsmul version222 and weak average versions261/270 are actual completed calls to finite sum/fiber pigeonhole, also valid with real average bound and a nonempty box set. Thus some box has at least the ceiling of the mean; empty codomain edge cases retain source hypotheses, not an invented box. Actual dependency theorem file unchanged; no selected native direct average/collision theorem beyond separate combinatorial selection endpoints. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Native Pigeonhole/RepeatedRepresentatives:37 entire proof read: it selects two A-equal representatives in each eventually infinite B-color fiber with a uniform prefix bound. This adds an asymptotic two-color representative selection endpoint rather than the finite collision/average principle; exclude. Cardinal infinite pigeonhole refinements and graph/Ramsey applications are separate endpoints. Tinherited does not claim all native uses absent."
+    },
+    {
+      "concept": "place-number-field",
+      "concept_id": "72c76cfb-c1ae-5287-a619-31506997589e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "The exact generic place definition is Quotient of {v:AbsoluteValue K Real | v.IsNontrivial} by IsEquiv:33; IsNontrivial:339 in AbsoluteValue/Basic means exists x!=0,vx!=1. Actual IsEquiv is equality of order comparisons on all x,y; Setoid46 has complete reflexive/symmetric/transitive proofs. IsNontrivial_congr83 preserves the subtype. For fields isEquiv_iff_exists_rpow_eq:337 proves the standard positive-real-power equivalence with a complete log-ratio proof339–352, hence the usual equivalence of nontrivial absolute values. AbsoluteValue.uniformSpace:42 gives the actual absolute-value uniformity; the existing completion of this field is the denoted F_v (no new canonical representative chosen). Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/AbsoluteValue/Equivalence.lean",
+          "declarations": "AbsoluteValue.IsEquiv:33; Setoid:46; IsEquiv.isNontrivial_congr:83; isEquiv_iff_exists_rpow_eq:337",
+          "note": "Actual equivalence relation and standard positive-power characterization on absolute values, restricted to nontrivial ones for the exact place quotient."
+        },
+        {
+          "path": "Mathlib/Topology/UniformSpace/AbsoluteValue.lean",
+          "declarations": "AbsoluteValue.uniformSpace:42; hasBasis_uniformity:47",
+          "note": "Actual absolute-value uniformity used to form a representative completion F_v."
+        }
+      ],
+      "search_notes": "Review distinguishes the exact generic nontrivial-absolute-value quotient from a separately named global classification theorem. Native finite/infinite canonical representative constructors are core place data/API; extensions, ramification, product formula, heights and semilocal norm identities are extra endpoints, excluded. Complex normalized abs² is not falsely called a subadditive absolute value. Complete source quotient/equivalence and both native family definitions read."
+    },
+    {
+      "concept": "place-number-field",
+      "concept_id": "72c76cfb-c1ae-5287-a619-31506997589e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The exact generic place definition is Quotient of {v:AbsoluteValue K Real | v.IsNontrivial} by IsEquiv:33; IsNontrivial:339 in AbsoluteValue/Basic means exists x!=0,vx!=1. Actual IsEquiv is equality of order comparisons on all x,y; Setoid46 has complete reflexive/symmetric/transitive proofs. IsNontrivial_congr83 preserves the subtype. For fields isEquiv_iff_exists_rpow_eq:337 proves the standard positive-real-power equivalence with a complete log-ratio proof339–352, hence the usual equivalence of nontrivial absolute values. AbsoluteValue.uniformSpace:42 gives the actual absolute-value uniformity; the existing completion of this field is the denoted F_v (no new canonical representative chosen). Native GlobalNumberFields.Place:82 is the finite/infinite canonical indexing sum (height-one primes of O_K plus InfinitePlace K); both source absolute-value representative types inspected. Basic normalizedAbsValue:92/inl101/inr105 gives the standard normalized place-value API; complex contribution is abs² and intentionally only a MonoidWithZeroHom, NOT a triangle-inequality AbsoluteValue. Completion:36 in the sibling Completion file selects actual finite adic/infinite completions, with field/algebra instances. The generic quotient above independently supplies the complete bare definition; these native files directly define and expose standard finite/infinite representative instances and their completions. No new formal theorem classifying EVERY absolute value into this sum is asserted in this pass. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/NumberField/Global/Places/Basic.lean",
+          "declarations": "TauCeti.GlobalNumberFields.Place:82; normalizedAbsValue:92; normalizedAbsValue_inl:101; normalizedAbsValue_inr:105",
+          "note": "Defines the standard finite/infinite place index and normalized local-value dictionary, with explicit complex-square convention."
+        },
+        {
+          "path": "TauCeti/NumberTheory/NumberField/Global/Places/Completion.lean",
+          "declarations": "TauCeti.GlobalNumberFields.Place.Completion:36; Field instance:40; Algebra instance:43",
+          "note": "Actual completion family for finite/infinite place representatives and its canonical field/base-field algebra structure."
+        }
+      ],
+      "search_notes": "Review distinguishes the exact generic nontrivial-absolute-value quotient from a separately named global classification theorem. Native finite/infinite canonical representative constructors are core place data/API; extensions, ramification, product formula, heights and semilocal norm identities are extra endpoints, excluded. Complex normalized abs² is not falsely called a subadditive absolute value. Complete source quotient/equivalence and both native family definitions read."
+    },
+    {
+      "concept": "polignac-conjecture",
+      "concept_id": "b75778c1-24cf-5f9f-a0f0-16a4d1eb6574",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "FORMAL STATEMENT ONLY; NO PROOF OR TRUTH of Polignac conjecture is claimed. Exact statement: forall d:Nat, 0<d -> Even d -> forall N:Nat, exists q:Nat, N<q AND Nat.Prime q AND Nat.Prime(q+d) AND forall r:Nat, r∈Set.Ioo q (q+d) -> NOT Nat.Prime r. The open-interval condition is essential: it forces the two primes to be CONSECUTIVE, unlike the Kronecker prime-difference conjecture. Set.Ioo is the exact pair of strict inequalities, and Set.infinite_iff_exists_gt:933 proves unbounded q is exactly infinitely many such pairs over Nat. No truncated natural subtraction or omitted intermediate-prime restriction. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Prime/Defs.lean",
+          "declarations": "Nat.Prime:41; Nat.prime_def:97",
+          "note": "Actual positive natural prime predicate used in the exact conjecture statement; no proof of Polignac is asserted."
+        },
+        {
+          "path": "Mathlib/Order/Interval/Set/Defs.lean",
+          "declarations": "Set.Ioo:52; Set.mem_Ioo:56",
+          "note": "Exact open interval between the two prime endpoints enforces consecutiveness in the formal statement."
+        }
+      ],
+      "search_notes": "Read actual Nat.Prime and interval constructors and completed Set.infinite_iff_exists_gt:933. Distinguish EVERY positive even d from existence of one bounded gap, and consecutive gaps from arbitrary prime differences. Distribution/Dirichlet/prime-counting helpers do not prove this conjecture. As prescribed, positive coverage means only exact formal statement availability for kind=conjecture."
+    },
+    {
+      "concept": "polignac-conjecture",
+      "concept_id": "b75778c1-24cf-5f9f-a0f0-16a4d1eb6574",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "FORMAL STATEMENT ONLY; NO PROOF OR TRUTH of Polignac conjecture is claimed. Exact statement: forall d:Nat, 0<d -> Even d -> forall N:Nat, exists q:Nat, N<q AND Nat.Prime q AND Nat.Prime(q+d) AND forall r:Nat, r∈Set.Ioo q (q+d) -> NOT Nat.Prime r. The open-interval condition is essential: it forces the two primes to be CONSECUTIVE, unlike the Kronecker prime-difference conjecture. Set.Ioo is the exact pair of strict inequalities, and Set.infinite_iff_exists_gt:933 proves unbounded q is exactly infinitely many such pairs over Nat. No truncated natural subtraction or omitted intermediate-prime restriction. Actual dependency input predicates are checked; no native Polignac-statement API selected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development. Actual dependency Nat.Prime42/prime_def98 and exact interval52/56 constructor checked; finite-unbounded equivalence933 unchanged.",
+      "files": [],
+      "search_notes": "Read actual Nat.Prime and interval constructors and completed Set.infinite_iff_exists_gt:933. Distinguish EVERY positive even d from existence of one bounded gap, and consecutive gaps from arbitrary prime differences. Distribution/Dirichlet/prime-counting helpers do not prove this conjecture. As prescribed, positive coverage means only exact formal statement availability for kind=conjecture."
+    },
+    {
+      "concept": "polymath-densely-divisible-distribution",
+      "concept_id": "c319b3ec-9c0d-5b20-a229-90e3ba6fb04b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "No complete existing proof certified of the stated Polymath MPZ discrepancy estimate with explicit 600*varpi+180*delta<7, squarefree FOUR-tuply dense divisibility, range x^(1/2+2varpi-epsilon), uniform prime-set residue data and arbitrary logarithmic saving. The recursive dense-divisibility bare predicate and discrepancy/level-of-distribution statement constructors can be represented (045/041), but do not prove this theorem. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Independent full-tree MPZ/Motohashi/Pintz/Zhang/Polymath/dense-divisibility/constants searches. Actual SelbergSieve.mainSum_lambdaSquared_eq_sum_sum_mul:350 completed lcm/gcd rearrangement read045: single-divisor quadratic weights, not the uniformly averaged four-tuple moduli refinement. Actual WeakPNT and native Chebotarev fixed-modulus progression estimates do not have growing moduli or arbitrary log-saving uniformity. No source proof of this specific extra endpoint certified; honest unknown, not absence."
+    },
+    {
+      "concept": "polymath-densely-divisible-distribution",
+      "concept_id": "c319b3ec-9c0d-5b20-a229-90e3ba6fb04b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "No complete existing proof certified of the stated Polymath MPZ discrepancy estimate with explicit 600*varpi+180*delta<7, squarefree FOUR-tuply dense divisibility, range x^(1/2+2varpi-epsilon), uniform prime-set residue data and arbitrary logarithmic saving. The recursive dense-divisibility bare predicate and discrepancy/level-of-distribution statement constructors can be represented (045/041), but do not prove this theorem. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Independent full-tree MPZ/Motohashi/Pintz/Zhang/Polymath/dense-divisibility/constants searches. Actual SelbergSieve.mainSum_lambdaSquared_eq_sum_sum_mul:350 completed lcm/gcd rearrangement read045: single-divisor quadratic weights, not the uniformly averaged four-tuple moduli refinement. Actual WeakPNT and native Chebotarev fixed-modulus progression estimates do not have growing moduli or arbitrary log-saving uniformity. No source proof of this specific extra endpoint certified; honest unknown, not absence."
+    },
+    {
+      "concept": "positional-integer-expansion",
+      "concept_id": "9f30c425-313a-5467-bf72-182caf330d7e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "For b>=2, Nat.digits:76 is the actual little-endian expansion. ofDigits_digits:240 complete strong-recursion/mod-add-div proof reconstructs x; digits_lt_base:361 bounds every digit; getLast_digit_ne_zero:86 in Lemmas has complete strong-induction proof88–101 for x!=0. digits_ofDigits:214 proves the normalized inverse direction. Nat.digits b0=[] is a valid empty zero expansion; if the printed convention demands one symbol0, use if x=0 then[0] else digits b x, with ofDigits[0]=0. No nonzero-leading-digit hypothesis is imposed at zero. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Digits/Defs.lean",
+          "declarations": "Nat.digits:76; digits_ofDigits:214; ofDigits_digits:240; digits_lt_base:361",
+          "note": "Actual radix constructor, normalized inverse/reconstruction and digit bounds."
+        },
+        {
+          "path": "Mathlib/Data/Nat/Digits/Lemmas.lean",
+          "declarations": "Nat.getLast_digit_ne_zero:86",
+          "note": "Actual nonzero most-significant digit theorem for nonzero integers/naturals."
+        }
+      ],
+      "search_notes": "Boundary exact positional representation and direct digit API; exclude automatic DFAO construction, digit-power orbit attraction, arithmetic valuation-of-factorial refinements and digit-distribution asymptotics. Base0/1 totalizations are not the catalogue b>=2 domain. Positive x leading digit and zero expansion conventions explicit."
+    },
+    {
+      "concept": "positional-integer-expansion",
+      "concept_id": "9f30c425-313a-5467-bf72-182caf330d7e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "For b>=2, Nat.digits:76 is the actual little-endian expansion. ofDigits_digits:240 complete strong-recursion/mod-add-div proof reconstructs x; digits_lt_base:361 bounds every digit; getLast_digit_ne_zero:86 in Lemmas has complete strong-induction proof88–101 for x!=0. digits_ofDigits:214 proves the normalized inverse direction. Nat.digits b0=[] is a valid empty zero expansion; if the printed convention demands one symbol0, use if x=0 then[0] else digits b x, with ofDigits[0]=0. No nonzero-leading-digit hypothesis is imposed at zero. Native Nat.map_val_map_ofNat_digits:68 complete map/mod-bound proof70–73 validates typed Fin b digit conversion; sum_digits_add_mul:95 and prod_map_digits_add_mul:111 complete radix-step decomposition proofs read. These are direct ordinary expansion/normal-form API, not merely an automatic-sequence consumer. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Data/Nat/Digits.lean",
+          "declarations": "Nat.map_val_map_ofNat_digits:68; sum_digits_add_mul:95; prod_map_digits_add_mul:111",
+          "note": "Ordinary radix digit normalization and one-step decomposition of digit sums/products."
+        }
+      ],
+      "search_notes": "Boundary exact positional representation and direct digit API; exclude automatic DFAO construction, digit-power orbit attraction, arithmetic valuation-of-factorial refinements and digit-distribution asymptotics. Base0/1 totalizations are not the catalogue b>=2 domain. Positive x leading digit and zero expansion conventions explicit."
+    },
+    {
+      "concept": "positive-definite-real-matrix",
+      "concept_id": "5872cf01-5ea1-564c-a906-17815dd06f2f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "For finite real square matrices Matrix.PosDef:176 is Hermitian plus positive finite-support quadratic form; real star is identity, so Hermitian equals transpose-symmetric. posDef_iff_dotProduct_mulVec:491 completes the Finsupp-to-all-vectors equivalence, exactly forall x!=0,x^T A x>0. No nonsymmetric quadratic-positive matrix is silently accepted: symmetry is separately present. Native ordinary matrix norm/positivity APIs can be specialized to Real. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Matrix/PosDef.lean",
+          "declarations": "Matrix.PosDef:176; posDef_iff_dotProduct_mulVec:491; PosDef.dotProduct_mulVec_pos:503",
+          "note": "Actual symmetric/Hermitian positive-definiteness definition and exact finite-vector quadratic characterization."
+        }
+      ],
+      "search_notes": "Select direct defining/finite-quadratic and positivity-cone API. Exclude C*-algebra spectral/canonical-functional-calculus theorems, Gaussian distributions, symplectic domain actions and particular number-theoretic forms. Topology here is the intrinsic finite real matrix topology, not added arbitrary topological group structure."
+    },
+    {
+      "concept": "positive-definite-real-matrix",
+      "concept_id": "5872cf01-5ea1-564c-a906-17815dd06f2f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "For finite real square matrices Matrix.PosDef:176 is Hermitian plus positive finite-support quadratic form; real star is identity, so Hermitian equals transpose-symmetric. posDef_iff_dotProduct_mulVec:491 completes the Finsupp-to-all-vectors equivalence, exactly forall x!=0,x^T A x>0. No nonsymmetric quadratic-positive matrix is silently accepted: symmetry is separately present. Native ordinary matrix norm/positivity APIs can be specialized to Real. Native convex_setOfPred_posDef:65 complete positive-combination proof70–72, isOpen_setOfPred_re_dotProduct_pos:75 full sphere-compactness/rescaling proof, measurable real posDef:100 and Hermitian-cone openness116 complete proof read. These are direct ordinary geometry of the fixed real matrix positivity condition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development. Actual dependency posDef_iff_dotProduct_mulVec:467 and PosDef.dotProduct_mulVec_pos:479 read, same completed finite-vector characterization; upstream491/503 anchors apply only to independently reviewed current Mathlib. PosDef176 unchanged.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Matrix/PosDef.lean",
+          "declarations": "TauCeti.convex_setOfPred_posDef:65; isOpen_setOfPred_re_dotProduct_pos:75; measurableSet_setOfPred_posDef:100; Matrix.isOpen_setOfPred_posDef_selfAdjoint:116",
+          "note": "Ordinary convexity, stability under small perturbations, measurability and open-cone API for positive-definite matrices."
+        }
+      ],
+      "search_notes": "Select direct defining/finite-quadratic and positivity-cone API. Exclude C*-algebra spectral/canonical-functional-calculus theorems, Gaussian distributions, symplectic domain actions and particular number-theoretic forms. Topology here is the intrinsic finite real matrix topology, not added arbitrary topological group structure."
+    },
+    {
+      "concept": "positive-semidefinite-real-matrix",
+      "concept_id": "9c08c681-ee21-59a0-9f24-a16b6e7491c8",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Matrix.PosSemidef:62 is Hermitian plus nonnegative finite-support quadratic form; with Real star trivial and finite dimension, posSemidef_iff_dotProduct_mulVec:311 proves exactly symmetric plus forall real x,x^T A x>=0. Zero vectors and zero matrix included; strict definiteness is not substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Matrix/PosDef.lean",
+          "declarations": "Matrix.PosSemidef:62; posSemidef_iff_dotProduct_mulVec:311; PosSemidef.dotProduct_mulVec_nonneg:319",
+          "note": "Actual positive-semidefinite matrix definition and exact finite real quadratic-form characterization."
+        }
+      ],
+      "search_notes": "Direct PSD Basic/FinTwo siblings read; exclude matrix exponential functional calculus, Schur-complement block theory and stronger determinant inequalities as new endpoints. Source RCLike generality is harmless under explicit Real specialization."
+    },
+    {
+      "concept": "positive-semidefinite-real-matrix",
+      "concept_id": "9c08c681-ee21-59a0-9f24-a16b6e7491c8",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Matrix.PosSemidef:62 is Hermitian plus nonnegative finite-support quadratic form; with Real star trivial and finite dimension, posSemidef_iff_dotProduct_mulVec:311 proves exactly symmetric plus forall real x,x^T A x>=0. Zero vectors and zero matrix included; strict definiteness is not substituted. Native PosSemidef.normSq_le:67 complete2x2 principal submatrix/determinant proof70–84 yields entrywise Cauchy–Schwarz; zero-diagonal row/column vanishing87/96 follows with complete proofs89–101. Native FinTwo:46/60 gives conventional2x2 trace/determinant and diagonal/determinant iff, with completed eigenvalue/product and scalar inequality proofs49–78. These are ordinary positivity identities/low-dimensional normal forms, with no char2 or nonsymmetric substitution. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Matrix/PosSemidef/Basic.lean",
+          "declarations": "Matrix.PosSemidef.normSq_le:67; eq_zero_of_apply_self_eq_zero_left:87; eq_zero_of_apply_self_eq_zero_right:96",
+          "note": "Immediate principal-minor entry bounds and zero-diagonal row/column criterion for PSD matrices."
+        },
+        {
+          "path": "TauCeti/Analysis/Matrix/PosSemidef/FinTwo.lean",
+          "declarations": "Matrix.IsHermitian.posSemidef_iff_trace_nonneg_and_det_nonneg:46; posSemidef_fin_two_ofReal_iff:60",
+          "note": "Ordinary2x2 PSD normal forms, specializing to real symmetric matrices."
+        }
+      ],
+      "search_notes": "Direct PSD Basic/FinTwo siblings read; exclude matrix exponential functional calculus, Schur-complement block theory and stronger determinant inequalities as new endpoints. Source RCLike generality is harmless under explicit Real specialization."
+    },
+    {
+      "concept": "prime",
+      "concept_id": "3408bc2c-cb29-556a-a009-3e63fecc9dc9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Nat.Prime:41 is Irreducible p; prime_def:97 proves exactly2<=p AND every natural divisor is1 orp. For the printed INTEGER p>1 use its positive natural representative (or p.toNat together with p>1); do not identify arbitrary integer irreducibility, which also includes negative primes, with this definition. Standard prime-divisor/multiplication API in the same source is complete. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Prime/Defs.lean",
+          "declarations": "Nat.Prime:41; Nat.prime_def:97; prime_def_lt:106",
+          "note": "Actual positive natural-prime constructor and divisor characterization, exact positive-integer representation."
+        }
+      ],
+      "search_notes": "Enumerated native Data/Nat/Prime and NumberTheory prime siblings. Exclude prime distribution, prime counting, root-mod-p polynomial and field-theoretic specialization endpoints; direct integer-cast divisibility API qualifies, not a mere use. No negative prime convention conflation."
+    },
+    {
+      "concept": "prime",
+      "concept_id": "3408bc2c-cb29-556a-a009-3e63fecc9dc9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Nat.Prime:41 is Irreducible p; prime_def:97 proves exactly2<=p AND every natural divisor is1 orp. For the printed INTEGER p>1 use its positive natural representative (or p.toNat together with p>1); do not identify arbitrary integer irreducibility, which also includes negative primes, with this definition. Standard prime-divisor/multiplication API in the same source is complete. Native Nat.Prime.dvd_intCast_iff:45 has a complete both-direction coprime/nonunit proof48–51 comparing divisibility by positive prime p in integers and in a commutative ring where p is nonunit. Its prime-power version54 is ordinary direct arithmetic-prime divisibility transport with regularity explicit. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development. Actual dependency Nat.Prime:42/prime_def:98 (+1 header); relevant definitions/proofs unchanged.",
+      "files": [
+        {
+          "path": "TauCeti/Data/Nat/Prime/IntCast.lean",
+          "declarations": "Nat.Prime.dvd_intCast_iff:45; pow_dvd_intCast_iff:54",
+          "note": "Ordinary prime and prime-power divisibility transport from integers to rings, preserving explicit positive Nat prime convention."
+        }
+      ],
+      "search_notes": "Enumerated native Data/Nat/Prime and NumberTheory prime siblings. Exclude prime distribution, prime counting, root-mod-p polynomial and field-theoretic specialization endpoints; direct integer-cast divisibility API qualifies, not a mere use. No negative prime convention conflation."
+    },
+    {
+      "concept": "prime-ideal",
+      "concept_id": "3416e9f9-c028-55e3-b9dd-9c71cd96669d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Ideal.IsPrime:40 in RingTheory/Ideal/Prime has ne_top and forall x y,x*y∈I ->x∈I ORy∈I; isPrime_iff:46 reads the same conjunction. This exactly matches proper prime ideal of a commutative ring, with no maximality, integrality/domain assumption on R or nonzero-ideal restriction. Properness excludes the zero ring whole ideal correctly. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Ideal/Prime.lean",
+          "declarations": "Ideal.IsPrime:40; Ideal.isPrime_iff:46; IsPrime.ne_top:49; IsPrime.one_notMem:55",
+          "note": "Actual proper/product prime-ideal predicate and elementary ordinary prime-ideal API."
+        }
+      ],
+      "search_notes": "Enumerated native Ideal Maps/PrimesOver/MinimalPrime/Quotient siblings and read Maps prime transport. Exclude going-up/down, associated/minimal primes, heights and decomposition of extensions as separately significant endpoints. Do not confuse prime and maximal, or count all ideal operations just because applicable to prime ideals."
+    },
+    {
+      "concept": "prime-ideal",
+      "concept_id": "3416e9f9-c028-55e3-b9dd-9c71cd96669d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Ideal.IsPrime:40 in RingTheory/Ideal/Prime has ne_top and forall x y,x*y∈I ->x∈I ORy∈I; isPrime_iff:46 reads the same conjunction. This exactly matches proper prime ideal of a commutative ring, with no maximality, integrality/domain assumption on R or nonzero-ideal restriction. Properness excludes the zero ring whole ideal correctly. Native Ideal.isPrime_map_iff_of_bijective:47 is a complete contraction/extension proof51–52: pullback of mapped prime along a bijective ring map recovers I, converse uses RingEquiv. This is ordinary isomorphic-ring transport of PRIME ideals, not a theorem about primes above a number-field extension. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Ideal/Maps.lean",
+          "declarations": "Ideal.isPrime_map_iff_of_bijective:47",
+          "note": "Direct preservation/reflection of primality under a bijective ring homomorphism."
+        }
+      ],
+      "search_notes": "Enumerated native Ideal Maps/PrimesOver/MinimalPrime/Quotient siblings and read Maps prime transport. Exclude going-up/down, associated/minimal primes, heights and decomposition of extensions as separately significant endpoints. Do not confuse prime and maximal, or count all ideal operations just because applicable to prime ideals."
+    },
+    {
+      "concept": "prime-number-theorem-classical-error",
+      "concept_id": "de45ac13-5ff3-51df-aae9-18d1a48cc303",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Mathlib WeakPNT.Chebyshev.tendsto_psi_div_atTop:84 and isEquivalent_psi_id:90 give the genuine leading-term qualitative PNT ψ(x)~x, with completed q=1 specialization/equivalence proof85–92. The specifically requested quantitative error O(x*exp(-c*sqrt(log x))) for some POSITIVE c was not certified. Partial records the implemented leading term and leaves its entire exponential rate unresolved; it is not a proof of that rate. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/LSeries/WeakPNT.lean",
+          "declarations": "Chebyshev.tendsto_psi_div_atTop:84; isEquivalent_psi_id:90",
+          "note": "Completed qualitative main-term PNT; explicit missing classical exponential error rate."
+        }
+      ],
+      "search_notes": "Independent full-tree psi/error/exp-sqrt-log/zero-free/PNT searches. Native LSeries/WienerIkehara/Chebyshev:162 is a generic conditional O(x) bound for nonnegative coefficients with boundary data, not a quantitative prime-number theorem; actual statement/helpers inspected. Fixed-modulus Chebotarev density and weighted prime Mellin applications do not supply the stated zero-free-region rate. Preserve positive c and classical ψ (not θ or assumed RH) frontier."
+    },
+    {
+      "concept": "prime-number-theorem-classical-error",
+      "concept_id": "de45ac13-5ff3-51df-aae9-18d1a48cc303",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Actual pinned dependency DOES NOT contain current Mathlib NumberTheory/LSeries/WeakPNT.lean; do not import that newer source by assumption. Native NumberField.Chebotarev.frobeniusPsi_asymptotic_of_isCyclotomicExtension:77 (Cyclotomic.lean) proves ψ_C(x)=(1/#Gal)*x+o(x), complete character-boundary/Wiener–Ikehara proof83–120 read. Instantiate K=Q, F=CyclotomicField1 Q, m=1, sigma=(Rat.galEquivZMod1 F).symm1. Exact dependency Cyclotomic/Basic.CyclotomicField:652, isCyclotomicExtension:672/700 and NumberField:705 give this actual field; NumberField/Cyclotomic/Galois.Rat.galEquivZMod:60 identifies its automorphism group with units(ZMod1), a singleton, so #Gal=1. Native ArithmeticProgression.frobeniusVonMangoldtCoeff_galEquivZMod_symm_of_coprime:93 gives the exact coefficient Λ(n) for EVERY n since n is coprime to1; the only ZMod1 residue is1=0. Completed prime-power coefficient proof97–120 read (all-input variant:131 also checked). Native VonMangoldt.frobeniusPsi_eq_sum_Icc:383 is sum over1..floor(x); dependency Chebyshev.psi_eq_sum_Icc:93 is sum over0..floor(x), equal since Λ(0)=0. Thus the actual checked generic instantiation supplies the genuine qualitative ψ=x+o(x) main term. No proof certified of the catalogue POSITIVE-c error O(x exp(-c sqrt(log x))); this entire quantitative rate remains missing. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual declarations/hypotheses/completed proof bodies read; bounded existing-source instantiation, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/Chebotarev/PrimeCounting/Cyclotomic.lean",
+          "declarations": "NumberField.Chebotarev.frobeniusPsi_asymptotic_of_isCyclotomicExtension:77",
+          "note": "Completed weighted cyclotomic ψ main-term proof; trivial cyclotomic level1 gives classical qualitative ψ PNT. Classical exponential error rate remains unverified."
+        },
+        {
+          "path": "TauCeti/NumberTheory/Chebotarev/PrimeCounting/ArithmeticProgression.lean",
+          "declarations": "NumberField.Chebotarev.frobeniusVonMangoldtCoeff_galEquivZMod_symm_of_coprime:93; frobeniusVonMangoldtCoeff_galEquivZMod_symm:131",
+          "note": "Exact identification of cyclotomic Frobenius coefficients with classical von Mangoldt Λ; at level1 applies to every integer."
+        },
+        {
+          "path": "TauCeti/NumberTheory/Chebotarev/PrimeCounting/VonMangoldt.lean",
+          "declarations": "NumberField.Chebotarev.frobeniusPsi:164; frobeniusPsi_eq_sum_Icc:383",
+          "note": "Actual inclusive partial-sum representation identifies the native qualitative main-term function with classical ψ after level1 coefficient specialization."
+        }
+      ],
+      "search_notes": "Independent full-tree psi/error/exp-sqrt-log/zero-free/PNT searches. Native LSeries/WienerIkehara/Chebyshev:162 is a generic conditional O(x) bound for nonnegative coefficients with boundary data, not a quantitative prime-number theorem; actual statement/helpers inspected. Fixed-modulus Chebotarev density and weighted prime Mellin applications do not supply the stated zero-free-region rate. Preserve positive c and classical ψ (not θ or assumed RH) frontier. Exact-source correction during author audit: WeakPNT is new upstream Mathlib-only. Native cyclotomic/trivial-Galois instantiation above establishes main-term partial coverage independently, rather than claiming absent dependency code. Exclude general conditional Chebyshev O(x) helper from attribution: it is an input to the native proof, not by itself a classical rate theorem."
+    },
+    {
+      "concept": "pythagorean-theorem",
+      "concept_id": "b7cda0c2-2a39-5c07-9c99-a0b1a934d832",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "InnerProductGeometry.norm_sub_sq_eq_norm_sq_add_norm_sq_iff_angle_eq_pi_div_two:54 and its forward theorem:60 in RightAngle give exactly ||x-y||²=||x||²+||y||² for real Euclidean vectors making angle pi/2. Take x=b-a,y=c-a for a right triangle at a; norm/difference are the three Euclidean lengths, hence the hypotenuse-square sum. Actual proof56–57 uses the completed inner-zero quadratic identity and angle equivalence; no integer-length or dimensional2 restriction is added. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Geometry/Euclidean/Angle/Unoriented/RightAngle.lean",
+          "declarations": "InnerProductGeometry.norm_add_sq_eq_norm_sq_add_norm_sq_iff_angle_eq_pi_div_two:43; norm_sub_sq_eq_norm_sq_add_norm_sq_iff_angle_eq_pi_div_two:54; norm_sub_sq_eq_norm_sq_add_norm_sq':60",
+          "note": "Actual Pythagorean theorem and conventional iff/angle forms in real Euclidean inner-product geometry."
+        }
+      ],
+      "search_notes": "Native InnerProductSpace and Euclidean angle siblings enumerated. Exclude Hilbert–Schmidt operator Parseval/Pythagoras, eigenvector perturbation, Gram block identities and triangle trigonometric refinements as further structures/applications. The selected theorem itself states the norm-square sum, rather than merely using it to prove another endpoint."
+    },
+    {
+      "concept": "pythagorean-theorem",
+      "concept_id": "b7cda0c2-2a39-5c07-9c99-a0b1a934d832",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "InnerProductGeometry.norm_sub_sq_eq_norm_sq_add_norm_sq_iff_angle_eq_pi_div_two:54 and its forward theorem:60 in RightAngle give exactly ||x-y||²=||x||²+||y||² for real Euclidean vectors making angle pi/2. Take x=b-a,y=c-a for a right triangle at a; norm/difference are the three Euclidean lengths, hence the hypotenuse-square sum. Actual proof56–57 uses the completed inner-zero quadratic identity and angle equivalence; no integer-length or dimensional2 restriction is added. Native TauCeti.norm_add_smul_sq:285 proves ||y+t e||²=||y||²+t² for unit e and y orthogonal to its line; completed proof287–289 reads the actual orthogonal-line isometry norm and L2 product norm. This is an ordinary Pythagorean coordinate form, applicable to every Euclidean right triangle after choosing a unit leg direction, not a mere proof application with a different conclusion. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact mathematical statements/definitions, relevant hypotheses and completed source bodies inspected; bounded review, no new Lean proof development. Actual dependency RightAngle adds one header line, so corresponding vector Pythagorean anchors are44/55/61; same statements and completed bodies.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/LinearIsometry.lean",
+          "declarations": "TauCeti.norm_add_smul_sq:285",
+          "note": "Ordinary Pythagorean orthogonal-line coordinate identity with explicit unit/perpendicular hypotheses."
+        }
+      ],
+      "search_notes": "Native InnerProductSpace and Euclidean angle siblings enumerated. Exclude Hilbert–Schmidt operator Parseval/Pythagoras, eigenvector perturbation, Gram block identities and triangle trigonometric refinements as further structures/applications. The selected theorem itself states the norm-square sum, rather than merely using it to prove another endpoint."
+    }
+  ]
+}

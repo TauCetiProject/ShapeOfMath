@@ -1,0 +1,758 @@
+{
+  "note": "Whole-catalogue formalization update batch-004: independent source review by category_galois_formalization of analysis_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "monotone-subsequence",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Order/Monotone/Defs.lean",
+          "declarations": "StrictMono L86; StrictAnti L92; StrictMonoOn L99",
+          "note": "Native strict monotonicity predicates used on the index map and selected values."
+        },
+        {
+          "path": "Mathlib/Order/Fin/Basic.lean",
+          "declarations": "Fin.strictMono_iff_lt_succ L149; strictAnti_iff_succ_lt L158",
+          "note": "Native adjacent comparison characterizations on finite ordered sequences."
+        }
+      ],
+      "evidence": "StrictMono (Order/Monotone/Defs:86) and StrictAnti (:92) give the exact strict value comparisons. For an original finite sequence a, choose an index map i:Fin k→Fin n with StrictMono i and apply StrictMono or StrictAnti to a∘i. Order/Fin/Basic:149/158 gives the ordinary adjacent-comparison criteria, with proof liftFun_iff_succ. This packages exactly increasing indices with increasing/decreasing values, without weakening strict to nonstrict. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Definition only: exclude Erdős–Szekeres existence and infinite monotone-subsequence theorems as separate endpoints; no literal subsequence alias required.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "monotone-subsequence",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Order/Monotone/Basic.lean",
+          "declarations": "StrictMonoOn.update L33",
+          "note": "Native one-value update criterion for strict monotone selected sequences; definition inherited."
+        }
+      ],
+      "evidence": "The exact dependency strict-monotonicity/Fin criteria are byte-identical. Native Order/Monotone/Basic:33 proves StrictMonoOn.update by splitting whether either compared point is the updated point. Instantiating the ordered finite index domain gives direct ordinary strict-sequence API: changing one selected value preserves its strict order under the explicitly stated bounds. The decreasing version uses the order-dual target, not a nonstrict Antitone substitution. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Inspected Order/Fin/Antitone: its constructed integer weights allow equal adjacent values and concern a different existence endpoint, excluded. Splice concerns piecewise construction and is outside this bounded update/definition selection.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "planar-general-position",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean",
+          "declarations": "affineIndependent_iff_not_collinear (:619); affineIndependent_iff_not_collinear_set (:633)",
+          "note": "Native exact three-point collinearity/affine-independence equivalence; universal instantiation over injected triples of P is precisely planar general position."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. LinearAlgebra/AffineSpace/FiniteDimensional.lean:619–640 proves affineIndependent_iff_not_collinear and its explicit three-point-set form by finrank vector span. For the finite set P⊆ℝ², the exact general-position predicate is ∀ e:Fin 3→P, Function.Injective e → ¬Collinear ℝ (Set.range (fun i => (e i:ℝ²))). Every injected triple is three distinct members and every such triple arises, so this generic specialization exactly gives no-three-collinear; a separate named alias is unnecessary. The source equivalence gives the ordinary triple-independence criterion, without imposing affine independence of all of P. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Resolved the author’s quantifier/homogeneous-coordinate frontier by explicit mathematical comparison. Require injections Fin 3→P; do not require global affine independence of all P, which fails for large planar sets. Homogeneous determinant expansion identifies the correct native generic declaration; no roadmap/identity changes made.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "planar-general-position",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/LinearIndependent/GeneralPosition.lean",
+          "declarations": "TauCeti.InGeneralPosition (:39); TauCeti.inGeneralPosition_iff_det_ne_zero (:55)",
+          "note": "Native every-injected-subfamily predicate and exact determinant criterion. Dimension three on the homogeneous lift (1,x,y) gives no three collinear planar points; plain dimension two does not."
+        }
+      ],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native LinearIndependent/GeneralPosition.lean:39 defines InGeneralPosition L by independence of every injected Fin n subfamily; :55 proves its maximal-determinant equivalence by the row-independence criterion. Use n=3 and L(p)=(1,p₁,p₂), p∈P. Subtracting the first row from the other two identifies its determinant with det(b-a,c-a); it is nonzero exactly when the three planar points are not collinear. Thus the homogeneous n=3 specialization (not the unrelated n=2 linear condition) exactly implements the catalogue finite planar predicate, including vacuity when fewer than three points exist. This homogeneous-coordinate equivalence is the reviewer’s mathematical identification of the actual generic declaration, not a claim the file contains a separately named Lean bridge. Dependency triple-affine equivalence supplies the ordinary alternative criterion. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Resolved the author’s quantifier/homogeneous-coordinate frontier by explicit mathematical comparison. Require injections Fin 3→P; do not require global affine independence of all P, which fails for large planar sets. Homogeneous determinant expansion identifies the correct native generic declaration; no roadmap/identity changes made.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "ramsey-number",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Scoped Ramsey/homogeneous-subset searches did not verify the arbitrary uniformity r, two target sizes s,t extended-natural least-threshold definition. HalesJewett describes combinatorial lines and Hindman finite-sums homogeneity, not this least-N hypergraph invariant; fixed-cardinality subset machinery alone does not supply it. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Searched Ramsey/ramseyNumber/homogeneous subset in actual combinatorics and set-theory trees; checked HalesJewett and powersetCard meanings. No absent assertion: minimum/∞ packaging and its coloring quantifiers remain unverified.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "ramsey-number",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Scoped Ramsey/homogeneous-subset searches did not verify the arbitrary uniformity r, two target sizes s,t extended-natural least-threshold definition. HalesJewett describes combinatorial lines and Hindman finite-sums homogeneity, not this least-N hypergraph invariant; fixed-cardinality subset machinery alone does not supply it. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Searched Ramsey/ramseyNumber/homogeneous subset in actual combinatorics and set-theory trees; checked HalesJewett and powersetCard meanings. No absent assertion: minimum/∞ packaging and its coloring quantifiers remain unverified.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "rooted-tree",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Order/SuccPred/Tree.lean",
+          "declarations": "RootedTree (:105); RootedTree.subtree; RootedTree.subtrees (:177); IsPredArchimedean.findAtom",
+          "note": "Native ancestor-order rooted-tree structure and ordinary root/subtree API; finite branching uses finite cover-successor sets."
+        },
+        {
+          "path": "Mathlib/Combinatorics/SimpleGraph/Acyclic.lean",
+          "declarations": "SimpleGraph.IsAcyclic (:54); SimpleGraph.IsTree (:58)",
+          "note": "Native connected-acyclic graph predicate, with a chosen root vertex giving the literal catalogue graph presentation."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. SimpleGraph/Acyclic.IsTree (:58) literally means connected acyclic, so adding a chosen vertex gives the graph presentation. Order/SuccPred/Tree.RootedTree (:105) is the equivalent ancestor-order presentation: bottom is the root, PredOrder (:62–70 in Basic) makes pred b the greatest strict ancestor, and IsPredArchimedean (:34–36) reaches every ancestor by finitely many predecessor steps. Consequently each vertex has a unique finite parent chain to root; its undirected cover graph is connected and acyclic. Conversely unique finite root paths in a rooted tree give the ancestor order, greatest common prefix/meet and those predecessor axioms. Children are precisely a⋖x, equivalently pred x=a with x nonroot, so finite branching is exactly ∀a,{x|a⋖x}.Finite (the actual finite-cover predicate also used in Order/KonigLemma:64). Along a cover the root distance increments by one. This explicit mathematical equivalence resolves the prior bridge uncertainty; no separate Lean alias is required. Native root/subtree/parent API is supplied in the selected defining files. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Explicitly checked equivalent graph/ancestor-order meanings using finite unique root paths and greatest strict predecessor, not name matching. Distinguish children from all graph neighbors: root-distance-increasing neighbors are covers. No claim every rooted tree is finitely branching; the finite-cover condition is an extra predicate. Reduced planar no-unary trees, arborescences with extra edge data and G-trees are excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "rooted-tree",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. SimpleGraph/Acyclic.IsTree (:58) literally means connected acyclic, so adding a chosen vertex gives the graph presentation. Order/SuccPred/Tree.RootedTree (:105) is the equivalent ancestor-order presentation: bottom is the root, PredOrder (:62–70 in Basic) makes pred b the greatest strict ancestor, and IsPredArchimedean (:34–36) reaches every ancestor by finitely many predecessor steps. Consequently each vertex has a unique finite parent chain to root; its undirected cover graph is connected and acyclic. Conversely unique finite root paths in a rooted tree give the ancestor order, greatest common prefix/meet and those predecessor axioms. Children are precisely a⋖x, equivalently pred x=a with x nonroot, so finite branching is exactly ∀a,{x|a⋖x}.Finite (the actual finite-cover predicate also used in Order/KonigLemma:64). Along a cover the root distance increments by one. This explicit mathematical equivalence resolves the prior bridge uncertainty; no separate Lean alias is required. The supplying RootedTree/Archimedean/Acyclic files are byte-identical; PredOrder core fields are unchanged despite later successor-helper differences. Native reduced planar trees and group-action trees add special structures, so this generic concept is dependency-only and has no native files. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Explicitly checked equivalent graph/ancestor-order meanings using finite unique root paths and greatest strict predecessor, not name matching. Distinguish children from all graph neighbors: root-distance-increasing neighbors are covers. No claim every rooted tree is finitely branching; the finite-cover condition is an extra predicate. Reduced planar no-unary trees, arborescences with extra edge data and G-trees are excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "subset-coloring",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Set/PowersetCard.lean",
+          "declarations": "Set.powersetCard L32; card_eq L58; ncard_eq L62; map",
+          "note": "Defines r-element subsets as a type, the exact domain of an r-subset coloring, and natural embedding API."
+        }
+      ],
+      "evidence": "Set.powersetCard X r (Data/Set/PowersetCard:32) is exactly {s:Finset X // s.card=r}, with the coercion and card_eq/ncard_eq proofs. Therefore Set.powersetCard X r → C is the catalogue r-subset coloring for arbitrary X and C. Finset stores every finite r-element subset uniquely; it does not order its vertices. This is a direct generic function domain instantiation, not a Ramsey theorem claim. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Exclude homogeneous-set existence and Ramsey-number minimum as distinct statements; no restriction to pairs or finite color sets.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "subset-coloring",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Set/PowersetCard.lean",
+          "declarations": "Set.powersetCard.map_injective L26; finChooseEquiv L41",
+          "note": "Native embedding and finite enumeration of r-subsets, usable to reindex arbitrary r-subset colorings."
+        }
+      ],
+      "evidence": "The supplying dependency powersetCard definition differs only in blank lines. Native Data/Set/PowersetCard:26 proves injectivity of the map induced by a vertex embedding, by subtype extensionality and Finset.map_inj; :41 constructs the canonical-size enumeration powersetCard (Fin m) j ≃ Fin (m.choose j). These are direct ordinary reindexing/enumeration API for the exact coloring domain. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: No Ramsey existence or random-coloring probability endpoint is counted; RandomColoring introduces a probability model beyond the basic map definition.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "temperley-lieb-algebra",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Scoped Temperley/Lieb searches in Algebra and RepresentationTheory found no checked planar-pairing stacking construction or exact three-relation quotient. FreeAlgebra and RingQuot provide general prerequisites but are not an implementation of these particular relations. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Actual Tau native quotient was contrasted with generic Mathlib FreeAlgebra/RingQuot; no Mathlib absence asserted, exact relation/presentation match remains unverified.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "temperley-lieb-algebra",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/TemperleyLieb/Basic.lean",
+          "declarations": "TauCeti.TemperleyLieb.Rel L107; TemperleyLieb L120; e_mul_self L169; lift L197; hom_ext L216",
+          "note": "Native three-relation quotient, relation proofs, universal property and ordinary generator/inclusion API."
+        },
+        {
+          "path": "TauCeti/Algebra/TemperleyLieb/Tower.lean",
+          "declarations": "span_strandIncl_union_strandIncl_mul_e_last_mul_eq_top L173; exists_e_last_mul_strandIncl_mul_e_last_eq L183",
+          "note": "Native tower spanning/sandwich normal forms for the same algebra, over arbitrary commutative semirings."
+        }
+      ],
+      "evidence": "Algebra/TemperleyLieb/Basic:107–124 gives the actual Rel constructors and RingQuot definition on n strands with generators Fin(n-1). The three native relation proofs :169–187 match e_i²=δe_i, adjacent zig-zag, and distant commutation, and lift/hom_ext :197–219 proves the universal presentation. The catalogue explicitly permits this equivalent generators-and-relations description, so a diagram-basis theorem is not required to identify the algebra here; the source explicitly leaves the full Catalan basis theorem unproved, and I do not claim it. Tower:173/183 proves ordinary spanning and sandwich normal forms along strandIncl by mutual induction. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Exclude Star, MarkovTrace, JonesWenzl, positivity, radical and quantum-dimension files: they add extra structures or named endpoints. Also exclude Hecke quotient comparison in TypeAHeckeAlgebra/TemperleyLieb. Full planar diagram basis remains a separately stated unresolved structure theorem, not inferred from the quotient.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "field-embedding",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Ring/Hom/Defs.lean",
+          "declarations": "RingHom L308; RingHom.comp L581; RingHom.ext",
+          "note": "Defines the actual unital ring-homomorphism structure specialized to fields and its ordinary composition API; explicit Function.Injective supplies embedding restriction."
+        }
+      ],
+      "evidence": "RingHom (Algebra/Ring/Hom/Defs:308) bundles addition, multiplication, zero and one preservation. For Field K and Field L, {f:K→+*L // Function.Injective f} is exactly the requested injective unital field homomorphism. Explicit injectivity is retained in this representation; no automatic-injectivity theorem is assumed for the match. Generic identity/composition and extensionality in the same file are direct embedding API when restricted to injective maps. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Does not require a chosen base-field algebra structure, separability, finite-dimensionality or surjectivity. Exclude root embeddings and normal-extension transitivity as stronger endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "field-embedding",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Ring/Hom.lean",
+          "declarations": "Set.MapsTo.ringHom_pow L54; natCast_pow_mul_apply_mem L64",
+          "note": "Native natural-number scalar/power preservation and iterate laws for unital maps, directly applicable to field embeddings."
+        }
+      ],
+      "evidence": "The exact dependency RingHom structure is identical. Native Algebra/Ring/Hom:64 proves Set.MapsTo.natCast_pow_mul_apply_mem using map_mul/map_pow/map_natCast, an ordinary preservation law for every unital homomorphism and hence for each field embedding. Native ringHom_pow:54 gives the iterate restriction law for endomorphisms. Definition/injectivity predicate remain dependency-owned; no stronger extension assumptions added. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: FieldTheory/Normal/Embeddings adds normality/orbit-count endpoints and IntermediateField/FieldRange computes degree invariants; excluded from bounded elementary map API. Generic map_neg_one multiplicative dichotomy is weaker than the ring-homomorphism map_neg law and is not used as the match.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "field-extension",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Field/Subfield/Defs.lean",
+          "declarations": "Subfield L132; Subfield.toField L271; Subfield.subtype_injective L315",
+          "note": "Defines literal field inclusions and supplies the induced field and injective subtype map."
+        }
+      ],
+      "evidence": "Subfield K (Algebra/Field/Subfield/Defs:132) is a subring closed under inverse. For ambient Field K, :271 constructs Field s on each subfield and :315 proves injectivity of its subtype inclusion. This is exactly the catalogue inclusion of one field in another, including extensions of arbitrary characteristic and degree. The abstract Algebra presentation is equivalent but unnecessary to impose here. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: No finite-dimensional, algebraic, normal or Galois restriction imposed. IntermediateField is an additional chosen-base refinement and not required for the bare extension identity.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "field-extension",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/IntermediateField/ScalarTower.lean",
+          "declarations": "IntermediateField.instIsScalarTower L37; le_of_isScalarTower L45; restrictScalarsAlgEquiv L60",
+          "note": "Native compatibility and identity comparisons for towers/inclusions of field extensions; underlying subfield definition inherited."
+        }
+      ],
+      "evidence": "Dependency Subfield definition/field instance is identical. Native IntermediateField/ScalarTower:45–62 proves that intermediate field inclusions and compatible algebra scalar towers agree, and restrictScalarsAlgEquiv gives the identity-on-carrier equivalence after changing the recorded base field. These are ordinary natural maps between field-extension presentations; explicit compatible-tower hypotheses are retained. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Exclude quadratic-field specializations and finite-degree/separability invariants. Native tower comparison supplies direct extension API, rather than mere subclass inheritance.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "galois-correspondence",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/FieldTheory/Galois/Basic.lean",
+          "declarations": "IntermediateField.fixingSubgroup_fixedField L282; IsGalois.fixedField_fixingSubgroup L334; intermediateFieldEquivSubgroup L370",
+          "note": "Actual finite fixed-field correspondence proof and ordinary order/inversion API."
+        }
+      ],
+      "evidence": "FieldTheory/Galois/Basic:370 defines IsGalois.intermediateFieldEquivSubgroup as an order isomorphism to the ORDER DUAL of Subgroup Gal(E/F), under FiniteDimensional F E and IsGalois F E. Its inverse is fixedField, with fixedField_fixingSubgroup:334 and fixingSubgroup_fixedField:282 proved using finite-degree/cardinality arguments. Thus all subgroups, not only normal or closed subgroups, occur exactly in the catalogue finite theorem. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Exclude infinite topological correspondence, normal-subgroup quotient and primitive-element endpoints; these are not needed for finite order reversal.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "galois-correspondence",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/Galois/FixedField.lean",
+          "declarations": "TauCeti.fixingSubgroup_fixedField_gc L133; fixedField_fixingSubgroup L143; fixingSubgroup_fixedField_of_finite L162",
+          "note": "Native ordinary fixed/fixing inverse identities and lattice API, including the finite theorem as an exact instance."
+        },
+        {
+          "path": "TauCeti/FieldTheory/Galois/SubfieldDictionary.lean",
+          "declarations": "IntermediateField.intermediateFieldEquivSubgroup L85; coe_intermediateFieldEquivSubgroup_apply L95; lift_intermediateFieldEquivSubgroup_symm_apply L103",
+          "note": "Native restriction/transport of finite correspondence and explicit evaluation formulas."
+        }
+      ],
+      "evidence": "Pinned dependency has the same finite correspondence (blank-line shifts only). Native Galois/FixedField:133–167 supplies the fixing/fixed Galois connection and inverse identities under weakened exact hypotheses; the proof uses fixed-by-all automorphisms then the range characterization, and finite-H case uses Artin fixed-point surjectivity. SubfieldDictionary:85–110 transports the finite correspondence to intermediate fields inside a given subfield and proves its fixed-field evaluation formulas. These are ordinary inverse/natural restriction API of the same correspondence. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Profinite topology, quotient extensions, Galois sets, semilinear descent and Hilbert90 are separately significant endpoints, excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "galois-group",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Algebra/Equiv.lean",
+          "declarations": "AlgEquiv L31; AlgEquiv.aut L647; mul_apply L661; coe_inv L668",
+          "note": "Native base-fixing automorphism structure and its actual group operations."
+        }
+      ],
+      "evidence": "Algebra/Algebra/Equiv:31 defines AlgEquiv k L L as a ring equivalence commuting with algebraMap k L, exactly an automorphism fixing k pointwise. The aut Group instance :647 uses composition with identity and inverse equivalence; mul_apply:661 proves (στ)(x)=σ(τx). Instantiating a finite Galois extension meets the paragraph without adding topology. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Finite Galois assumptions belong to the scoped extension; the group definition is correctly more general. Exclude absolute closure/topology and Galois correspondence proofs from basic group ownership.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "galois-group",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/Galois/Restriction.lean",
+          "declarations": "AlgHom.restrictNormalHom L75; restrictNormalHom_commutes L83; AlgEquiv.range_restrictScalarsHom_eq_ker_restrictNormalHom L261",
+          "note": "Native restriction homomorphisms, evaluation formulas and ordinary kernel/range characterizations for Galois groups."
+        }
+      ],
+      "evidence": "The exact dependency AlgEquiv definition/group instance is byte-identical. Native Galois/Restriction:75 defines restriction of Galois automorphisms along an embedding of a normal subextension as a monoid homomorphism, and :83 proves the evaluation square. At :228–266 it proves the identity/kernel/range characterization for restriction in towers by explicit base-fixing conditions. These are direct natural-map API between Galois groups, with normality and compatible tower assumptions retained. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Exclude Galois-cohomology, permutation-realization, finite-group classification and quotient-equivalence endpoints. Definitions remain Mathlib-owned.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "normal-closure",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/FieldTheory/Normal/Closure.lean",
+          "declarations": "IntermediateField.normalClosure L49; le_normalClosure L230; normalClosureOperator L257; normal_iff_normalClosure_eq L265",
+          "note": "Actual normal-closure construction, minimality via closure operator, and ordinary equivalent descriptions."
+        }
+      ],
+      "evidence": "FieldTheory/Normal/Closure:49 defines IntermediateField.normalClosure F K L as the supremum of all F-embedding ranges of K into L. For the fixed algebraic closure L of ℚ and the embedded number field K, it is normal, contains K (:230), and its closure operator :257 is monotone/idempotent with fixed points exactly normal subfields (:265). Therefore it is the smallest normal subfield containing K. Checked normalClosure_def normality and these proofs, not the unrelated integral domain NormalClosure construction. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Use F=ℚ and L the fixed algebraic closure with the given embedding. RingTheory/NormalClosure extends integral domains and is excluded as a different construction; no replacement of normal closure with arbitrary splitting field.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "normal-closure",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/Normal/Closure.lean",
+          "declarations": "TauCeti.normalClosure_iSup_fieldRange_eq_top (:48); normalClosure_adjoin_simple_eq_adjoin_rootSet (:93); isSplittingField_normalClosure_adjoin_simple (:113); AlgHom.map_normalClosure_le (:174)",
+          "note": "Native normal-closure embedding generation, root-generated presentation, splitting-field characterization and generic ambient-map transport. Definition remains Mathlib-owned; later finite-Galois-envelope applications are not the inclusion justification."
+        },
+        {
+          "path": "TauCeti/FieldTheory/GaloisGroups/NormalClosure.lean",
+          "declarations": "TauCeti.splittingFieldEquivNormalClosure L39; galEquivNormalClosure L47; galEquivNormalClosure_apply L54",
+          "note": "Native natural field/group comparisons identifying normal closure with the minimal-polynomial splitting-field presentation for simple extensions."
+        }
+      ],
+      "evidence": "Dependency normal-closure implementation is byte-identical. Native GaloisGroups/NormalClosure:39 constructs splittingFieldEquivNormalClosure for the minimal polynomial of x in a normal ambient extension, using the exact splitting-field comparison; :47 derives its Galois-group comparison by conjugation. This is a natural alternate presentation of the normal closure of a simple extension. Number fields are finite separable and simple, while the full non-simple definition remains available in dependency. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit. Independent reviewer also inspected native FieldTheory/Normal/Closure.lean:48 normalClosure_iSup_fieldRange_eq_top proves its embedding ranges generate the closure by map_iSup and algHomEquiv; :93 normalClosure_adjoin_simple_eq_adjoin_rootSet proves the root-generated presentation by both containment directions; :174 AlgHom.map_normalClosure_le proves natural ambient homomorphisms carry normal closures into normal closures by composing embedding ranges. These directly implement ordinary generation/presentation/transport API and must also be counted.\nSearch and boundary notes: Exclude stabilizer/counting applications when describing the selected concept; the whole mixed comparison file is selected for its direct field comparison. TitsSystem/Subgroup NormalClosure names refer to groups, not field extensions. Added the actual native Normal/Closure core API file imported by the comparison file. Excluded later exists_isGalois_superset as a distinct finite-envelope endpoint; mixed selected files are counted whole.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "root-of-unity",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/RootsOfUnity/Basic.lean",
+          "declarations": "rootsOfUnity L59; mem_rootsOfUnity L66; rootsOfUnity.mkOfPowEq L96",
+          "note": "Actual root-of-unity subgroup and bridge from field elements with positive vanishing exponent."
+        },
+        {
+          "path": "Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.lean",
+          "declarations": "IsPrimitiveRoot L62; IsPrimitiveRoot.orderOf L211; eq_orderOf L217",
+          "note": "Exact-order predicate, order comparison and ordinary primitive-root arithmetic."
+        }
+      ],
+      "evidence": "RootsOfUnity/Basic:59 defines rootsOfUnity n K as units with ζ^n=1 and :96 constructs a unit-root from an element with a positive power equal to one, so no field root is lost. PrimitiveRoots:62 defines IsPrimitiveRoot by ζ^n=1 plus divisibility of any vanishing exponent, and :217 identifies n with orderOf ζ. With n>0 this is exactly the least positive exponent in the catalogue; n=0 conventions are not mistaken for finite order. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Exclude cyclotomic field/polynomial structure, character orthogonality and analytic exponential constructions; n=0 predicate alone does not certify root of unity.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "root-of-unity",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/RootsOfUnity/Basic.lean",
+          "declarations": "TauCeti.restrictRootsOfUnity_injective L85; IsPrimitiveRoot.neg_one_of_two_ne_zero L122; IsPrimitiveRoot.sq_eq_neg_one L201",
+          "note": "Native elementary root-group map, low-order and exact-order API; definition and general orderOf supplied by dependency."
+        }
+      ],
+      "evidence": "The pinned root subgroup and primitive-root/order files are identical. Native RootsOfUnity/Basic:85 proves injectivity of induced root-group maps, :122 proves the ordinary primitive-square-root identity for -1 under 2≠0, :130 gives μ₂ cardinality, and :201 proves a primitive fourth root squares to -1. These directly develop the same root/order vocabulary and retain characteristic assumptions. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Map.lean concerns p-primary root groups and Tate-module files add inverse limits, excluded as additional structures. PrimitiveRoots automorphism/cyclotomic comparisons and character-sum orthogonality are outside this bounded elementary root/order boundary.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "bijection",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Logic/Function/Defs.lean",
+          "declarations": "Function.Bijective L166; Bijective.comp L169; bijective_id L172",
+          "note": "Native bijectivity predicate and identity/composition API."
+        },
+        {
+          "path": "Mathlib/Logic/Function/Basic.lean",
+          "declarations": "Function.bijective_iff_existsUnique L332; Bijective.existsUnique L337",
+          "note": "Actual equivalence with the unique-preimage definition and ordinary inverse/transport API."
+        }
+      ],
+      "evidence": "Function.Bijective (Logic/Function/Defs:166) is injective and surjective. Logic/Function/Basic:332 proves bijective_iff_existsUnique: every codomain element has exactly one preimage, with both directions constructing the injectivity and surjectivity data. This matches the paragraph including empty types. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: No finiteness/cardinality or chosen computational inverse required. Equiv bundles an inverse but does not change the unbundled concept.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "bijection",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Logic/Function/Basic.lean",
+          "declarations": "Function.bijective_of_retract L23",
+          "note": "Native bijectivity criterion under a retract, with explicit inverse/commuting data; no definition ownership claimed."
+        }
+      ],
+      "evidence": "Pinned Function.Bijective definition and existsUnique equivalence are identical. Native Logic/Function/Basic:23 proves bijective_of_retract: injectivity follows by embedding into the bijection then retracting, and surjectivity lifts b g through the ambient bijection then retracts via c. Every commuting-square and retraction hypothesis is explicit. This is ordinary structural preservation of the same bijection predicate. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Exclude triangular maps, fiber structures and category-level equivalence endpoints from the basic bijection selection.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "binary-operation",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Logic/Function/Basic.lean",
+          "declarations": "Function.uncurry_def L976; uncurry_injective L979; curry_injective L982; uncurry_flip L985",
+          "note": "Native exact curried/uncurried presentation comparison and argument-reversal API for arbitrary binary operations."
+        }
+      ],
+      "evidence": "A Lean map S×S→S is exactly the catalogue operation. Logic/Function/Basic:976 proves uncurry_def and :979/982 injectivity of curry/uncurry from their actual inverse identities, so the common curried S→S→S spelling has the identical data. uncurry_flip:985 identifies reversed arguments with composition by Prod.swap. No associativity, identity or other algebraic law is imposed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Binary-operation function type itself is Lean language supplied; selected native file develops its exact equivalent presentation. Do not substitute semigroup/Mul axioms or particular algebraic operations.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "binary-operation",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Dependency Logic/Function/Basic is identical and supplies the checked curry/uncurry and flip API for S×S→S. No native generic operation presentation file was selected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Inspected native Logic/Function/Basic, Iterate, Triangular and Update scopes: retract-bijection, iterations or constrained constructions add properties beyond a bare binary operation. Pure applications do not receive native LOC.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "binary-relation",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Basic/Rel.lean",
+          "declarations": "SetRel L85; SetRel.inv L98; mem_inv L100; inv_inv L102",
+          "note": "Native exact relation-as-set-of-pairs definition and elementary converse/domain/composition API."
+        }
+      ],
+      "evidence": "Basic/Rel:85 defines SetRel α β literally as Set(α×β); specialize α=β=S and its notation a~[R]b is exactly (a,b)∈R. inv:98 is preimage under Prod.swap with inv_inv proved by reflexivity; domain, composition and image API are direct ordinary relation operations. This matches the set-of-ordered-pairs paragraph, not only an opaque closure predicate. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Exclude equivalence/reflexive/transitive closure results and relation structures with extra axioms from this bounded bare relation selection.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "binary-relation",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "The supplying Basic/Rel file is byte-identical. Native Logic/Relation proves totality of reflexive-transitive closure versus absence of a directed cut and locality of EqvGen classes; it introduces closure/connectedness endpoints beyond ordinary converse/domain/composition. Thus the full bare relation is dependency supplied and no selected native file contributes directly under this declared boundary. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Inspected actual forall_reflTransGen_iff and eqvGen_iff_of_forall_symmGen_iff proofs. Native profinite relation modules and geometric relations are different structures/applications; graphValue constructs functions from constrained relations and is assigned to function, not every unconstrained relation.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "cartesian-product",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Set/Operations.lean",
+          "declarations": "Set.prod L218; mem_prod L231; mk_mem_prod L238",
+          "note": "Native exact cartesian product of subsets and pair-membership definition."
+        },
+        {
+          "path": "Mathlib/Data/Set/Prod.lean",
+          "declarations": "Set.prod_mono L54; prod_subset_iff L77; prod_empty L88",
+          "note": "Ordinary product-set inclusion, empty and coordinate API."
+        }
+      ],
+      "evidence": "Data/Set/Operations:218 defines s.prod t as {p | p.1∈s ∧ p.2∈t}; mem_prod:231 and mk_mem_prod:238 expose the exact ordered-pair membership. Data/Set/Prod proves ordinary monotonicity, empty-product, coordinate preimage and product-set identities, inspected :45–96. The product is of arbitrary sets, not just a finite or categorical product. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Do not conflate fiber products/equalizers with cartesian products. Lean Prod supplies ordered pairs; native Set.prod is the actual subset construction.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "cartesian-product",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Set/Prod.lean",
+          "declarations": "Set.graphOn_const L30",
+          "note": "Native ordinary constant-graph/product-slice identity; underlying Set.prod owned by Mathlib."
+        }
+      ],
+      "evidence": "Pinned Set.prod and product API are identical. Native Data/Set/Prod:30 proves graphOn_const s b = s×{b} by pair extensionality and membership simplification. This is a direct ordinary product-slice normal form, qualifying native API although the product definition is inherited. The remainder builds fiber products and is not itself claimed as cartesian-product definition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Function.Pullback.ext and fiber-of-projection equivalences introduce pullbacks, excluded from this bare product boundary even though their code shares the selected file.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "disjoint-sets",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Set/Disjoint.lean",
+          "declarations": "Set.disjoint_iff_inter_eq_empty L31; disjoint_left L38",
+          "note": "Native exact empty-intersection/elementwise disjointness characterizations and union/subset API."
+        },
+        {
+          "path": "Mathlib/Data/Set/Pairwise/Basic.lean",
+          "declarations": "Set.PairwiseDisjoint L259; PairwiseDisjoint.disjoint_of_ne L263",
+          "note": "Native pairwise disjoint family definition and restriction/monotonicity API."
+        }
+      ],
+      "evidence": "Set.disjoint_iff_inter_eq_empty (Data/Set/Disjoint:31) is exactly no common element; disjoint_left:38 gives the elementwise version. Data/Set/Pairwise/Basic:259 defines PairwiseDisjoint s f as s.Pairwise (Disjoint on f), quantifying only distinct indices. Thus both the two-set and family clauses match, including empty and repeated empty members. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Generic lattice Disjoint specializes to set intersection=empty; no assumption of finite family or nonempty members. Include family definition because it is explicitly part of catalogue paragraph.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "disjoint-sets",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Both exact dependency disjointness files are byte-identical and supply the checked two-set and pairwise definitions. Native Set/Function InjOn.union_of_disjoint_image uses disjoint images to prove injectivity of a union, an application whose output is an injectivity endpoint. No generic native disjointness core file selected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Searched native Data/Set disjoint and Pairwise candidates; inspected Set/Function proof, Set/Lattice and product graph identities. These do not add a selected empty-intersection/pairwise characterization.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "function",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Basic/Rel.lean",
+          "declarations": "Function.graph L592; graph_injective L597; SetRel.exists_graph_eq_iff L614",
+          "note": "Native exact total single-valued graph characterization and graph composition API for functions; underlying arrow type supplied by Lean."
+        }
+      ],
+      "evidence": "Functions α→β are Lean language data. Native Basic/Rel:592 constructs their graphs; graph_injective:597 and SetRel.exists_graph_eq_iff:614 prove exactly that single-valued total graphs correspond uniquely to functions. The proof uses unique choice pointwise and graph extensionality, matching the catalogue assignment of exactly one codomain element to each specified domain element. This is genuine native equivalent-presentation API, rather than attributing the language function type to Mathlib. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: No injectivity, surjectivity, computability or nonempty codomain hypothesis imposed. Restrict codomain/domain to set subtypes for functions between subsets; empty-domain case is preserved.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    },
+    {
+      "concept": "function",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Set/Graph.lean",
+          "declarations": "Set.InjOn.graphValue L30; graphValue_eq_iff L53; eq_graphValue L83",
+          "note": "Native recovery, value characterization and uniqueness of a function from its functional graph; precise domain is the first-coordinate image."
+        }
+      ],
+      "evidence": "Pinned Mathlib Basic/Rel is byte-identical and supplies the checked total single-valued graph characterization. Native Data/Set/Graph:30 defines graphValue on Prod.fst image G when the first projection on G is injective; graphValue_eq_iff:53 characterizes its unique value by membership, and eq_graphValue:83 proves uniqueness by function extensionality. This is exactly the constructive equivalent presentation of an assignment on its specified domain, without arbitrarily extending it outside that domain or requiring a nonempty target. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Selected graph/assignment representation only. Logic/Function/Basic retract-bijection criterion is assigned to bijection rather than all functions; fiber/pullback structures and iterated dynamic applications are excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-004.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Algebra/Equiv.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 982,
+      "sha256": "82233dc14c3d7acf2dbf6b9aaee8a0aa78451b3f5b06c1e5196bcff8b0cc2e7c",
+      "measured_at": "2026-11-12T23:36:12.241333+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Field/Subfield/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 345,
+      "sha256": "c203ea17c546e195fdd820cfa477bbdd52a47b73bdb28a36d5d903eb0bf959da",
+      "measured_at": "2026-11-12T23:36:12.246110+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Ring/Hom/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 681,
+      "sha256": "95c9dfacb53eb47ef05ad123d7e49cf446efe890f9ac6f02e8cb8b28a6fb11a2",
+      "measured_at": "2026-11-12T23:36:12.249949+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Basic/Rel.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 635,
+      "sha256": "383ab3e5b8b3624506146f01278f86ca4b9071521cd1995f72f50bfd9b9fa49a",
+      "measured_at": "2026-11-12T23:36:12.253153+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Combinatorics/SimpleGraph/Acyclic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 689,
+      "sha256": "02a5fcb8d7bdab371ac92140b7ad91c7dc3547bb3a1ba6ba36303bc7ef94c5fb",
+      "measured_at": "2026-11-12T23:36:12.255573+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Set/Disjoint.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 120,
+      "sha256": "ae366941cc4d32677685cdc6a28e3b6e1be061df7485f6b09caadf20268529c9",
+      "measured_at": "2026-11-12T23:36:12.259189+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Set/Operations.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 356,
+      "sha256": "8986ebf6702e65dd691cda58f22d6fac4d3381c67869a447e657dbd58aafb2ca",
+      "measured_at": "2026-11-12T23:36:12.262296+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Set/Pairwise/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 482,
+      "sha256": "d85689473d80ef0543e1d9281174bce2969fbdf6d2533f6f05ddfab66a266be6",
+      "measured_at": "2026-11-12T23:36:12.264881+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Set/Prod.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1035,
+      "sha256": "5b5928c8a16bf024be8e28ef6942865b479ece4b84a2b378f5438936fbeac14c",
+      "measured_at": "2026-11-12T23:36:12.270153+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/FieldTheory/Galois/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 813,
+      "sha256": "d45dfe20ce41527c0d16efe463bb85ba0487ec738224b751da3dd4fe70cabdd3",
+      "measured_at": "2026-11-12T23:36:12.272491+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/FieldTheory/Normal/Closure.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 310,
+      "sha256": "eb3e81f3cb2966c87ed7082a13238fe8998054551db55cdfbfe6a6d4828b44d3",
+      "measured_at": "2026-11-12T23:36:12.275621+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 980,
+      "sha256": "6c386dfd3e29c7b42f7ff6471124a8fd013f4dd631bbf5cb3e35291da4bd8012",
+      "measured_at": "2026-11-12T23:36:12.277960+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Logic/Function/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1273,
+      "sha256": "2b729a3dad901e1de549e9e092bcc0bfb33f732f8c5f8a01c6501bf22ffd790f",
+      "measured_at": "2026-11-12T23:36:12.282452+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Logic/Function/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 253,
+      "sha256": "cea8a51c5e240749dcaa10de1dc8835089451e3b5b14e3459266a43b1b90a296",
+      "measured_at": "2026-11-12T23:36:12.284733+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Order/Fin/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 456,
+      "sha256": "d5d0fb68f5df27e1c06a2e50cf18bbef6f7ecec4f98c657b57563f10e1d6af9a",
+      "measured_at": "2026-11-12T23:36:12.287829+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Order/Monotone/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 587,
+      "sha256": "47ded1e6107f68e4e6b4862f10b0b7216a1e57bbf8ef078b72af69ceb7a388c4",
+      "measured_at": "2026-11-12T23:36:12.290211+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Order/SuccPred/Tree.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 232,
+      "sha256": "f4522ee0d64c812ee8d4345957d89012994421a4c25ba5819d29d91b2c63bdfd",
+      "measured_at": "2026-11-12T23:36:12.292668+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/RootsOfUnity/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 341,
+      "sha256": "8afa7eba5160ddd60c3e02ecad943e3fc43135d4f113b16a1697079ed4a8bed8",
+      "measured_at": "2026-11-12T23:36:12.295591+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 913,
+      "sha256": "71693987b05c89022fb8c6e671ff54f0b2d408abc5ac36645f30ec5d3e1713ac",
+      "measured_at": "2026-11-12T23:36:12.298019+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/Ring/Hom.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 64,
+      "sha256": "c077c1a4189ea6b2fa944ae83c51b89e9e79d568679d93ce01b4e34f95e21485",
+      "measured_at": "2026-11-12T23:36:12.302596+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/TemperleyLieb/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 430,
+      "sha256": "1c0de670cc47e37a4c04acc7847b6064ad5a84dcecbfb42c2022f16f436f3028",
+      "measured_at": "2026-11-12T23:36:12.309004+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/TemperleyLieb/Tower.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 189,
+      "sha256": "c9a1b1fae7d26e7a258fa3c07ac5f15b869e9bddf4bb58f7b6e779626b5ad1e3",
+      "measured_at": "2026-11-12T23:36:12.313339+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Data/Set/Graph.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 84,
+      "sha256": "f5a376131126b399f1cdc149f82142f92c1beb0e70e80e87a860e5e87e0a8a6c",
+      "measured_at": "2026-11-12T23:36:12.319087+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Data/Set/PowersetCard.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 45,
+      "sha256": "0b42b3310e101ef65286734961eba6d1cffcf96ff25898bde820efd1ecf79202",
+      "measured_at": "2026-11-12T23:36:12.323240+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Data/Set/Prod.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 66,
+      "sha256": "88cbc89fc61d9df126c8ae884f134e9466f42af8f7658dce87623edd0acb4ab6",
+      "measured_at": "2026-11-12T23:36:12.327271+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/FieldTheory/Galois/FixedField.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 657,
+      "sha256": "c5edafddb0a4f7843c403b42d7279c140d059bba59c929f4d3428d7149d05953",
+      "measured_at": "2026-11-12T23:36:12.331932+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/FieldTheory/Galois/Restriction.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 297,
+      "sha256": "873f4f6d584c177b626a9ee3d74f03a5d2669ff0cc8c733b5a99feb555a6fe85",
+      "measured_at": "2026-11-12T23:36:12.336553+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/FieldTheory/Galois/SubfieldDictionary.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 160,
+      "sha256": "3a731f08c9e97715252fed7c958bc1f62f4aa9a1da0b3f44cc43c79bc1f19071",
+      "measured_at": "2026-11-12T23:36:12.341668+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/FieldTheory/GaloisGroups/NormalClosure.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 118,
+      "sha256": "c820dd40fe460f23e55a88cdd3423ec515aae4106f61ba4022fd669992df9abf",
+      "measured_at": "2026-11-12T23:36:12.347253+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/FieldTheory/IntermediateField/ScalarTower.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 79,
+      "sha256": "dece73a76ded35d4a1807012ac76c3e965e58b8f82ff429450304af9c48d443b",
+      "measured_at": "2026-11-12T23:36:12.351103+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/FieldTheory/Normal/Closure.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 178,
+      "sha256": "f4430b67fa979308d167be765070e89843898e4440ae501087213f327bab601d",
+      "measured_at": "2026-11-12T23:36:12.356272+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/LinearAlgebra/LinearIndependent/GeneralPosition.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 221,
+      "sha256": "4dc12099741a0c2403c8be490d018a1cd33fc7950e95fc9fff15f54c0f837dba",
+      "measured_at": "2026-11-12T23:36:12.361361+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Logic/Function/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 32,
+      "sha256": "183fe0dd451bcbf005dca18154768cf9c9e04db36197ba228a5dc4a4e78bb68e",
+      "measured_at": "2026-11-12T23:36:12.365687+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Order/Monotone/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 47,
+      "sha256": "3fd85c8b22e09c614f111477332701418d7e16735fa4a082affa2eb349332114",
+      "measured_at": "2026-11-12T23:36:12.370983+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RingTheory/RootsOfUnity/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 404,
+      "sha256": "880281e6795bbf3459d7f104ebc301abf58bc54709c4b86cc0a783c8f10d293e",
+      "measured_at": "2026-11-12T23:36:12.377229+00:00"
+    }
+  ]
+}

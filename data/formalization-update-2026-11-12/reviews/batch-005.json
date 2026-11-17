@@ -1,0 +1,520 @@
+{
+  "batch_id": "batch-005",
+  "reviewer": "algebra_formalization",
+  "proposal_sha256": "df5e37e37a3b48fbec05becffa42d22c554745f84d4070af7db50668d16e777b",
+  "decisions": [
+    {
+      "concept": "function-composition",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Read exact pinned Lean Prelude Function.comp:141 lambda and Core composition/application laws, and Mathlib Defs:31 rfl associativity/:39 dependent extension. Correct dcomp_eq_comp declaration anchor from55 to53; availability/native API justified.",
+      "replacement": {
+        "concept": "function-composition",
+        "concept_id": "522e16f3-1599-5bfb-8971-a8807d19a2a0",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Both projects pin Lean v4.36.0-rc2 at b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; actual committed Init source read via git show. Lean Init/Prelude.lean:141 defines Function.comp f g as fun x => f (g x), and Init/Core.lean:68–84 proves application and identity equations. Native Mathlib Logic/Function/Defs.lean:31 proves comp_assoc by rfl and :39 defines dependent composition, with dcomp_eq_comp reducing ordinary composition. Thus the operation is dependency-defined and genuine elementary composition API is native. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "Mathlib/Logic/Function/Defs.lean",
+            "declarations": "Function.comp_assoc (:31); Function.dcomp (:39); dcomp_eq_comp (:53)",
+            "note": "Native associativity and dependent-composition compatibility; the ordinary composition definition remains Lean-owned."
+          }
+        ],
+        "search_notes": "Inspected the actual generic function constructor and its rfl proof, not composition of special linear/categorical maps. Exclude function injectivity/surjectivity endpoints as separate concepts."
+      }
+    },
+    {
+      "concept": "function-composition",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Pinned Logic/Function/Defs bytes match the checked composition laws; native Function/Basic:23–30 proves bijective retract transfer rather than generic composition. Inherited correctly excludes that extra endpoint."
+    },
+    {
+      "concept": "intersection-of-sets",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "SetNotation:119/:125 intersection predicate and :228 quantified membership prove the catalogue every-member condition, including empty intersection ambient universe. Native file directly defines this operation."
+    },
+    {
+      "concept": "intersection-of-sets",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Native Set/Lattice:47–51 proves the generic comprehension union-of-fiber-intersections formula by extensionality and funext; this is ordinary intersection normal-form API. Correct nearby declaration starts iUnion_vecCons_pair39 and exists_notMem_succ_of_notMem_iInter55; mathematical selection unchanged.",
+      "replacement": {
+        "concept": "intersection-of-sets",
+        "concept_id": "ed3e9280-bca6-5456-a390-354b1f69e001",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency Order/SetNotation implementation differs only by whitespace and fully supplies the universal family operation. Native Data/Set/Lattice.lean proves setOf_apply_eq_biUnion_iInter (:47) by extensionality, existential/universal membership simplification and funext; it is a generic union/intersection normal form. Its binary-family union and decreasing-intersection successor lemma were also inspected. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "TauCeti/Data/Set/Lattice.lean",
+            "declarations": "Set.iUnion_vecCons_pair (:39); TauCeti.setOf_apply_eq_biUnion_iInter (:47); exists_notMem_succ_of_notMem_iInter (:55)",
+            "note": "Native binary-family union normalization and generic comprehension as union of simultaneous fibers/intersections; direct normal-form API, not a mere use."
+          }
+        ],
+        "search_notes": "Selected only ordinary family-operation normal forms. exists_map_eq_of_notMem constructs a stabilized sequence of maps and is a separate endpoint; the mixed file is nevertheless counted whole under the requested allocation model."
+      }
+    },
+    {
+      "concept": "least-upper-bound",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read upperBounds37, IsLeast48 and IsLUB54 actual predicates, Bounds/Basic:297/:302 comparison and :887 uniqueness. No completeness or universal existence is inferred."
+    },
+    {
+      "concept": "least-upper-bound",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Checked native iSup_fin_succ:39–43 proof through equality of upper-bound conditions. It is an ordinary supremum decomposition under explicit complete-lattice availability; general IsLUB definition is checked dependency-owned. Correct theorem start39 rather than43 proof line.",
+      "replacement": {
+        "concept": "least-upper-bound",
+        "concept_id": "970bae81-70d2-567c-a42a-75042d6011aa",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The full IsLUB predicate/comparison API is supplied by byte-identical dependency Bounds/Defs and Basic. Native Order/CompleteLattice/Basic.lean:39 proves iSup_fin_succ by equality of upper-bound conditions; it is the ordinary finite-index decomposition of a least upper bound when the required bounds exist. The stronger complete-lattice hypothesis restricts this API theorem, not the imported general definition. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "TauCeti/Order/CompleteLattice/Basic.lean",
+            "declarations": "TauCeti.iSup_fin_succ (:39); biSup_Ici_eq_biSup_Icc; iInf_mem_range_succ_eq_iInf",
+            "note": "Native supremum index-normalization identities under explicit complete-lattice assumptions; imported IsLUB definition remains attributed to Mathlib."
+          }
+        ],
+        "search_notes": "Read the whole small file and the upper-bound-equivalence proof. Other displayed integer-index and bounded-interval supremum normal forms are adjacent API, not a definition of a general supremum in every partial order."
+      }
+    },
+    {
+      "concept": "natural-number",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Pinned Lean Nat:1357 has zero/successor; Mathlib Data/Nat/Basic:35 registers actual natural order and :55/:59 gives successor injection/division commuting law. Correct those two declaration anchors from57/61.",
+      "replacement": {
+        "concept": "natural-number",
+        "concept_id": "985f72e4-4b13-5857-8151-a3d2762f4b28",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Both projects pin Lean v4.36.0-rc2 at b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; actual committed Init source read via git show. Lean Init/Prelude.lean:1357 has the actual inductive Nat with zero and successor. Native Mathlib Data/Nat/Basic.lean:35 constructs the canonical LinearOrder ℕ from Nat.le axioms, proves successor injectivity and elementary division/power identities. These are ordinary foundational natural-number API; the inductive carrier itself is Lean-owned. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "Mathlib/Data/Nat/Basic.lean",
+            "declarations": "Nat.instLinearOrder (:35); Nat.succ_injective (:55); Nat.div_right_comm (:59)",
+            "note": "Native canonical order and elementary successor/arithmetic API on Lean natural numbers."
+          }
+        ],
+        "search_notes": "Inspected stock Lean Nat declaration and native typeclass fields/proofs. Prime/factorization/digits/combinatorics files are distinct endpoints and excluded from this bounded core selection."
+      }
+    },
+    {
+      "concept": "natural-number",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Read complete native MulSucc:27–31 contradiction proof using d+1≤m and multiplication monotonicity. This is generic natural arithmetic API over checked Nat/dependency Basic, not a specialized number-theory application. Correct declaration start27 rather than29 proof line.",
+      "replacement": {
+        "concept": "natural-number",
+        "concept_id": "985f72e4-4b13-5857-8151-a3d2762f4b28",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Both projects pin Lean v4.36.0-rc2 at b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; actual committed Init source read via git show. The checked exact dependency Data/Nat/Basic is byte-identical and Lean supplies zero/successor. Native Data/Nat/MulSucc.lean:27 proves m*(n+1)≤n*d+n implies m≤d using the natural-order successor bound, monotonicity of multiplication and nlinarith. This is a generic elementary arithmetic inequality on arbitrary naturals, with no number-theoretic extra structure. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "TauCeti/Data/Nat/MulSucc.lean",
+            "declarations": "Nat.le_of_mul_succ_le_mul_add (:27)",
+            "note": "Native elementary natural multiplication/successor order API; the Nat inductive type is supplied by Lean."
+          }
+        ],
+        "search_notes": "Read the complete native file and actual contradiction/multiplication proof. Exclude primes, totients, radix windows and factorials, which are separately meaningful structures rather than generic Nat arithmetic."
+      }
+    },
+    {
+      "concept": "ordered-pair",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Pinned Lean Prod:610 has distinguished fst/snd. Mathlib pair eta is :38 and component equality iff is :68, with projection laws :48/:52. Correct older38/68 offsets; actual construction and equality match the paragraph.",
+      "replacement": {
+        "concept": "ordered-pair",
+        "concept_id": "6e178eaa-1798-5087-a3c9-4e718f73b608",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Both projects pin Lean v4.36.0-rc2 at b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; actual committed Init source read via git show. Lean Init/Prelude.lean:610 defines Prod with constructor and distinguished fst/snd. Native Mathlib Data/Prod/Basic.lean:38 proves pair eta and :68 mk_inj, exactly pair equality iff equality of each component; the latter proof simplifies the inductive-product injectivity rule. Projection/map identities give ordinary core pair API. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "Mathlib/Data/Prod/Basic.lean",
+            "declarations": "Prod.mk.eta (:38); Prod.mk_inj (:68); Prod.fst_comp_mk; Prod.snd_comp_mk; Prod.map_fst'",
+            "note": "Native product eta, componentwise equality and projection/map compatibility, extending Lean Prod."
+          }
+        ],
+        "search_notes": "Read actual Lean constructor and native equality/projection proofs. A set-theoretic Kuratowski coding is not required by this extensional ordered-pair paragraph."
+      }
+    },
+    {
+      "concept": "ordered-pair",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Pinned Prod/Basic is byte-identical to checked complete pair equality/projection API; native pairing-code, Cartesian-subset and categorical-product constructions have distinct endpoints. Inherited accurately retains zero native LOC."
+    },
+    {
+      "concept": "partial-order",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Preorder reflexivity/transitivity and PartialOrder:175 antisymmetry. The optional strict relation is constrained to the induced one, so adds no mathematical restriction. Exact catalogue axiom bundle."
+    },
+    {
+      "concept": "partial-order",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Byte comparison verifies identical pinned PartialOrder implementation. Native monotone-update/map/lattice results add separate structures or endpoints, so inherited under plain relation-axiom boundary is consistent."
+    },
+    {
+      "concept": "preimage-of-set",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Operations:130 is literally {x|f x∈s}, and :136 Iff.rfl proves the precise membership characterization. The actual constructor needs no inverse/bijection hypothesis."
+    },
+    {
+      "concept": "preimage-of-set",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Pinned Operations bytes identical to inspected preimage definition. Native Restrict:28/:34 concerns cardinality/finiteness of restricted inverse images; partial-equivalence charts add another structure. Excluding those from generic predicate/Boolean core is appropriate."
+    },
+    {
+      "concept": "sequence",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read exact Lean b35cb10c Prelude Function.comp:141–142 typed lambda and Nat:1357–1371, with both toolchain pins checked. ℕ→A is directly the checked function type with natural domain; no axioms or alias are missing. Parameter data and coinductive partial Seq do not merit native bare-sequence LOC."
+    },
+    {
+      "concept": "sequence",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Same checked stock Lean function/Nat supplier is pinned by Tau. The catalogue explicitly permits ℕ indexing, so positive indexing alternative is not missing scope. Pure function application supplies all of this definition; inherited with no native files is justified."
+    },
+    {
+      "concept": "set",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Data/Set/Defs:47 wraps a membership predicate; ext:78 proves equality from membership iff by funext/propext. Basic:265–285 proves elementary inclusion structure. Correct ext anchor from77 attribute line to78 declaration; typed extensional sets match.",
+      "replacement": {
+        "concept": "set",
+        "concept_id": "58ce6e80-a18d-59aa-8ed6-1a2c771a31a3",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Data/Set/Defs.lean:47 defines Set α as a predicate-backed collection with membership α→Prop; :78 proves extensionality using funext and propext. Thus distinct membership, not a multiset/list with repetitions, determines equality. This is the typed-set representation of the catalogue paragraph. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "Mathlib/Data/Set/Defs.lean",
+            "declarations": "Set (:47); Set.ext (:78); Set.Subset (:84); Set.union (:230); Set.inter (:237); Set.compl (:244); Set.diff (:249)",
+            "note": "Native predicate-backed extensional sets and elementary subset/Boolean constructors; each mapping names the relevant constructor."
+          },
+          {
+            "path": "Mathlib/Data/Set/Basic.lean",
+            "declarations": "Set.subset_def (:265); Set.ext_iff; Set.Subset.antisymm; Set.subset_refl; Set.Subset.trans",
+            "note": "Ordinary set extensionality and inclusion identity/transitivity/antisymmetry API."
+          }
+        ],
+        "search_notes": "Read the actual structure, membership instance and extensionality proof. The ambient type is explicit; a universal set of all sets or a ZFC coding is not required. Separate finite/countable/measure structures are excluded."
+      }
+    },
+    {
+      "concept": "set",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Pinned Set/Defs differs only in whitespace. Native generic comprehension normal form Set/Lattice:47–51 directly concerns Set.ofPred, so justifies native set API and sharing with union/intersection. Correct two adjacent theorem anchors to39/55.",
+      "replacement": {
+        "concept": "set",
+        "concept_id": "58ce6e80-a18d-59aa-8ed6-1a2c771a31a3",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The dependency Data/Set/Defs differs only by whitespace and supplies the extensional predicate collection. Native Data/Set/Lattice.lean:47 proves a completely generic set-comprehension normal form using extensionality, function extensionality and quantified membership, without topology/cardinality or other structure. This directly contributes comprehension API to the general set concept. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "TauCeti/Data/Set/Lattice.lean",
+            "declarations": "Set.iUnion_vecCons_pair (:39); TauCeti.setOf_apply_eq_biUnion_iInter (:47); exists_notMem_succ_of_notMem_iInter (:55)",
+            "note": "Native binary-family union normalization and generic comprehension as union of simultaneous fibers/intersections; direct normal-form API, not a mere use."
+          }
+        ],
+        "search_notes": "The selected lemma concerns the actual Set.ofPred comprehension, not merely a set used in another theorem. It also contributes directly to union/intersection records, so the requested whole-file apportionment can share it. Finite/cardinality/set-topology applications are excluded."
+      }
+    },
+    {
+      "concept": "set-complement",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Defs:244 complement and :249 relative difference give the required ambient-relative notion. Operations:119 is actual difference-membership iff and :114 difference=intersection-with-complement. Correct that anchor and ext78; subtype/relative interpretation is mathematically exact.",
+      "replacement": {
+        "concept": "set-complement",
+        "concept_id": "5316d7d1-45a5-5832-b1ed-607dfc940180",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Data/Set/Defs.lean:244 defines Set.compl s by nonmembership, while :249 defines relative difference by membership in the ambient set and nonmembership in s. Data/Set/Operations unfolds mem_compl and mem_sdiff. Thus complement relative to Ω is Ω\\A (or sᶜ in the subtype Ω), exactly the catalogue convention. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "Mathlib/Data/Set/Defs.lean",
+            "declarations": "Set (:47); Set.ext (:78); Set.Subset (:84); Set.union (:230); Set.inter (:237); Set.compl (:244); Set.diff (:249)",
+            "note": "Native predicate-backed extensional sets and elementary subset/Boolean constructors; each mapping names the relevant constructor."
+          },
+          {
+            "path": "Mathlib/Data/Set/Operations.lean",
+            "declarations": "Set.mem_compl; Set.mem_sdiff (:119); Set.sdiff_eq",
+            "note": "Ordinary complement/difference membership and Boolean compatibility API."
+          }
+        ],
+        "search_notes": "Distinguish type-universe complement from relative complement: both representations give the required Ω∖A, including explicit Ω sets. No complementation of vector subspaces or ideals is substituted."
+      }
+    },
+    {
+      "concept": "set-complement",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked pinned Defs whitespace-equivalence and byte-identical Operations provide actual ambient complement/difference. Native cardinality/restricted-map/chart consequences have additional structure and remain appropriately excluded."
+    },
+    {
+      "concept": "subset",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Defs:84 is the universal membership implication, Basic:265/:273/:279/:285 the definition and reflexivity/transitivity/antisymmetry. Correct shared Set.ext anchor78; proper subset is not substituted.",
+      "replacement": {
+        "concept": "subset",
+        "concept_id": "fd1ebafc-a54b-5b3a-bd45-33d913dea4d6",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Data/Set/Defs.lean:84 defines Set.Subset s t by every membership in s implying membership in t; Basic.lean:265 exposes precisely the forall-implication and supplies reflexivity, transitivity and antisymmetry. This is the paragraph without requiring proper containment. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "Mathlib/Data/Set/Defs.lean",
+            "declarations": "Set (:47); Set.ext (:78); Set.Subset (:84); Set.union (:230); Set.inter (:237); Set.compl (:244); Set.diff (:249)",
+            "note": "Native predicate-backed extensional sets and elementary subset/Boolean constructors; each mapping names the relevant constructor."
+          },
+          {
+            "path": "Mathlib/Data/Set/Basic.lean",
+            "declarations": "Set.subset_def (:265); Set.ext_iff; Set.Subset.antisymm; Set.subset_refl; Set.Subset.trans",
+            "note": "Ordinary set extensionality and inclusion identity/transitivity/antisymmetry API."
+          }
+        ],
+        "search_notes": "Read actual constructor and immediate inclusion order API. Do not confuse strict subset with subset, or allocate every theorem involving a containment hypothesis."
+      }
+    },
+    {
+      "concept": "subset",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read pinned Basic:265,273,279,285 inclusion laws; later helper changes do not affect them. Native finite/lattice uses of containment are not a new implementation or generic relation law, so inherited is correct."
+    },
+    {
+      "concept": "total-order",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "LinearOrder:60 explicitly extends PartialOrder with totality and canonical decidable comparison/min/max data; classical decidability adds no mathematical restriction. Remove separately selected PartialOrder.lean because it defines the superclass only and is a prerequisite, not a direct total-order declaration or totality API; retain actual defining LinearOrder file.",
+      "replacement": {
+        "concept": "total-order",
+        "concept_id": "dfd41a60-84ec-519f-8875-0fa1e83e4231",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Order/Defs/LinearOrder.lean:60 extends the checked PartialOrder with le_total. It also carries decidability and min/max/comparison implementations; these are classically available from any total order and add no restriction on the mathematical relation in the classical catalogue. The actual fields/min-max if definitions were inspected. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "Mathlib/Order/Defs/LinearOrder.lean",
+            "declarations": "LinearOrder (:60); LinearOrder.le_total; min_def; max_def",
+            "note": "Native total-order structure, comparability and canonical min/max/comparison helper API."
+          }
+        ],
+        "search_notes": "Explicitly checked the classical-equivalence issue introduced by decidability fields. No well-ordering or completeness is assumed. Purely constructive total orders would need a different interface, which the paragraph does not require. Independent review excludes the separate PartialOrder.lean file: it defines only prerequisite superclass structure, whereas LinearOrder.lean directly defines the total order and its ordinary totality/comparison API."
+      }
+    },
+    {
+      "concept": "total-order",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Both pinned LinearOrder and PartialOrder bytes identical to inspected axioms. No well-ordering/completeness is inferred; native monotone maps and swapped transpositions concern extra endpoints. Inherited correctly selects no native order-axiom file."
+    },
+    {
+      "concept": "union-of-sets",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "SetNotation:122/:132 existential family predicate and :223 indexed membership prove exactly membership in some family member. No finite-family hypothesis is introduced."
+    },
+    {
+      "concept": "union-of-sets",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Native Set/Lattice:39 binary-family union and :47–51 generic union-of-simultaneous-fibers normal form directly contribute ordinary union API. Correct exact declaration starts39/55 in selected mixed-file anchors; no status/file change.",
+      "replacement": {
+        "concept": "union-of-sets",
+        "concept_id": "b461fc3a-4184-5a38-bd70-f272760a6c3e",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency Order/SetNotation implementation differs only by whitespace and fully supplies the existential family operation. Native Data/Set/Lattice.lean proves setOf_apply_eq_biUnion_iInter (:47) by extensionality, existential/universal membership simplification and funext; it is a generic union/intersection normal form. Its binary-family union and decreasing-intersection successor lemma were also inspected. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "TauCeti/Data/Set/Lattice.lean",
+            "declarations": "Set.iUnion_vecCons_pair (:39); TauCeti.setOf_apply_eq_biUnion_iInter (:47); exists_notMem_succ_of_notMem_iInter (:55)",
+            "note": "Native binary-family union normalization and generic comprehension as union of simultaneous fibers/intersections; direct normal-form API, not a mere use."
+          }
+        ],
+        "search_notes": "Selected only ordinary family-operation normal forms. exists_map_eq_of_notMem constructs a stabilized sequence of maps and is a separate endpoint; the mixed file is nevertheless counted whole under the requested allocation model."
+      }
+    },
+    {
+      "concept": "cesaro-lemma",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read SpecificAsymptotics:168–193 full little-o proof, eventual n≥1 inverse cancellation and real scalar specialization. Apply to shifted a(n+1) to obtain positive-index averages; n=0 total inverse convention does not affect atTop."
+    },
+    {
+      "concept": "cesaro-lemma",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Pinned SpecificAsymptotics bytes identical to complete Cesaro proof. Native return-mean/exchangeability/L2 Cesaro candidates apply it or prove a probabilistic convergence endpoint under extra structure, so they are not selected for this elementary implication."
+    },
+    {
+      "concept": "derivative",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Read Deriv/Basic:116/:130/:153 definitions, Slope:50–85 exact punctured difference-quotient equivalence and IteratedDeriv:306/:312 iteration identities. Correct first slope theorem anchor50; zero fallback is an implementation convention outside derivative existence, not a changed predicate.",
+      "replacement": {
+        "concept": "derivative",
+        "concept_id": "18770672-db58-50d6-83cd-7b5dc06e0150",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Deriv/Basic.lean:130 defines HasDerivAt and :153 deriv via the one-dimensional Frechet derivative. Deriv/Slope.lean:50–85 proves the complete equivalence with punctured difference-quotient convergence; :82 states t⁻¹ • (f(x+t)-f x)→f′, giving the exact real quotient. IteratedDeriv/Defs:55 defines higher derivatives and :306/:312 proves successor differentiation and equality with deriv iteration. Zero fallback outside differentiability is only a total-function convention, not a false existence claim. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+            "declarations": "HasDerivAtFilter (:116); HasDerivAt (:130); deriv (:153)",
+            "note": "Native scalar derivative predicate/function and ordinary existence/uniqueness interface."
+          },
+          {
+            "path": "Mathlib/Analysis/Calculus/Deriv/Slope.lean",
+            "declarations": "hasDerivAtFilter_iff_tendsto_slope (:50); hasDerivAt_iff_tendsto_slope_zero (:82)",
+            "note": "Proves exact equivalence of the Frechet representation and classical difference-quotient limit, with the puncture explicit."
+          },
+          {
+            "path": "Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+            "declarations": "iteratedDeriv (:55); iteratedDeriv_succ (:306); iteratedDeriv_eq_iterate (:312)",
+            "note": "Native higher-derivative construction and proof it equals iterated scalar differentiation."
+          }
+        ],
+        "search_notes": "Read slope-equivalence proof, inverse scalar cancellation away from zero and higher-derivative iteration proof. Derivative of distributions and generalized/weak derivatives have different meaning; product/chain/inverse theorems are optional endpoints outside this minimal construction selection."
+      }
+    },
+    {
+      "concept": "derivative",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Read native Slope:56–67 actual little-o/rescaled-increment proof under general topological vector-space assumptions. Those assumptions include real normed scalars/codomain, so full general derivative is dependency-supplied plus ordinary native slope API. Correct second theorem start71 rather than73 hypotheses.",
+      "replacement": {
+        "concept": "derivative",
+        "concept_id": "18770672-db58-50d6-83cd-7b5dc06e0150",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency Deriv Basic/Slope and IteratedDeriv/Defs are byte-identical and give the complete ordinary/higher derivative definition. Native Analysis/Calculus/Deriv/Slope.lean:56 proves HasDerivAtFilter.tendsto_slope under even more general topological-vector-space assumptions, with full little-o/inverse-smul proof; :71 gives the ordinary rescaled-increment sequence limit. Both specialize to real-valued derivatives without extra restrictions. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "TauCeti/Analysis/Calculus/Deriv/Slope.lean",
+            "declarations": "HasDerivAtFilter.tendsto_slope (:56); HasDerivAt.tendsto_nsmul_sub_add_div (:71)",
+            "note": "Native generic difference-quotient/derivative-limit API, extending the dependency-owned definition; all hypotheses and first proof inspected."
+          }
+        ],
+        "search_notes": "Read actual generic assumptions, not an unrelated weak derivative. Later one-sided positivity and curve separation are additional endpoints; mixed file counted whole because the first generic derivative slope API qualifies."
+      }
+    },
+    {
+      "concept": "factorial",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Read factorial:37 zero/successor recursion and actual rfl rules factorial_zero53/factorial_succ56. Correct those anchors from55/58. Finite product/base1 interpretation is exact; no asymptotic growth claimed here.",
+      "replacement": {
+        "concept": "factorial",
+        "concept_id": "a4022f8b-9fe1-5f5c-bf6b-6d7d158e0743",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Data/Nat/Factorial/Basic.lean:37 defines factorial by 0↦1 and succ n↦succ n*factorial n, with factorial_zero and factorial_succ proved by rfl. This recursion is precisely the finite product in the paragraph. The same file proves nonzero/positivity and elementary divisibility/recursion identities. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "Mathlib/Data/Nat/Factorial/Basic.lean",
+            "declarations": "Nat.factorial (:37); factorial_zero (:53); factorial_succ (:56); factorial_ne_zero; factorial_pos",
+            "note": "Native factorial definition and elementary arithmetic/positivity API."
+          }
+        ],
+        "search_notes": "Checked the actual recursive constructor and base/successor proofs. Superfactorial, prime valuations, combinatorial identities and asymptotic growth have distinct meanings/endpoints and are excluded."
+      }
+    },
+    {
+      "concept": "factorial",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Native NeZero instance:32 is a direct generic API exposure of dependency factorial nonvanishing. It legitimately improves the ordinary interface despite short proof; correct descending-factorial theorem declaration anchor40 rather than43 proof line.",
+      "replacement": {
+        "concept": "factorial",
+        "concept_id": "a4022f8b-9fe1-5f5c-bf6b-6d7d158e0743",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency Factorial/Basic is byte-identical and supplies the complete recursion. Native Data/Nat/Factorial/Basic.lean:32 makes the existing factorial nonvanishing theorem into a generic NeZero n.factorial instance, directly contributing the ordinary nonzero interface. Its falling-factorial and elementary factorial comparisons were also inspected; they do not alter the imported definition. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "TauCeti/Data/Nat/Factorial/Basic.lean",
+            "declarations": "TauCeti.instNeZeroFactorial (:32); Nat.sq_eq_descFactorial_two_add (:40)",
+            "note": "Native ordinary factorial nonvanishing/typeclass API; full mixed file counted once. Definition and original factorial_ne_zero proof remain Mathlib-owned."
+          }
+        ],
+        "search_notes": "The selected instance is a genuine native generic API declaration rather than a plain import/use in an application. Superfactorial and Prime/NatCast endpoints are excluded from this bounded core selection."
+      }
+    },
+    {
+      "concept": "factorial-growth",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Floor theorem:41–57: actual two-sided order-neighborhood bounds from shifted factorial dominance, with positive factorial denominators. Specializing ordered floor field to ℝ yields every fixed positive C (indeed every real C)."
+    },
+    {
+      "concept": "factorial-growth",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Pinned Floor bytes match the complete checked fixed-base limit. Native ODE/special series sources use the imported result or stronger exponential-series endpoints, so no native core file is selected for this exact factorial quotient limit."
+    },
+    {
+      "concept": "finite-set",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Basic/Finite/Defs:101 is explicitly equivalence with Fin n, and :185 uses subtype for sets; Set/Card:645/:664 identifies ncard with finite enumeration length. The zero-index convention relabels {1,…,n}, including empty n=0."
+    },
+    {
+      "concept": "finite-set",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Read native finite-subtype finset construction:36–40 and finite-family enumeration:45–53 using actual finite sigma-type equivalence. Correct declaration starts36/45; actual cardinal-compatible enumeration API directly contributes and checked dependency supplies definition.",
+      "replacement": {
+        "concept": "finite-set",
+        "concept_id": "da0a80d4-f2be-528b-a309-880b1afb326f",
+        "concept_revision": 2,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency Basic/Finite/Defs is identical; dependency Set/Card has later additional/missing helper lemmas, but the inspected ncard definition and finite enumeration equality remain unchanged. Native Data/Set/Finite.lean:36 proves a finite subset of S is represented by a finset of subtype S with exactly Nat.card s elements; :45 explicitly enumerates finite indexed families via Finite.exists_equiv_fin. These are direct enumeration/cardinality core API. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.",
+        "files": [
+          {
+            "path": "TauCeti/Data/Set/Finite.lean",
+            "declarations": "Set.Finite.exists_finset_subtype_image_val_eq (:36); Set.exists_enumeration_finite_family (:45); TauCeti.exists_embedding_fin_comp_eq",
+            "note": "Native finite-set enumerations, cardinality-compatible subtype representation and finite-function image factorization; definition remains dependency-owned."
+          }
+        ],
+        "search_notes": "Read the actual lift-to-subtype/finset construction, cardinality proof and finite-sigma-family equivalence argument. Prime-specific finite sets, counting applications and general infinite-set enumeration are outside this core selection."
+      }
+    }
+  ]
+}

@@ -1,0 +1,537 @@
+{
+  "batch_id": "batch-043",
+  "author": "analysis_formalization",
+  "reviews": [
+    {
+      "concept": "generalized-happy-number",
+      "concept_id": "34c2faae-ef59-5385-b6fc-8a534aa09f34",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "For valid radix b>=2 and natural exponent e, take S(n)=((Nat.digits b n).map (fun d=>d^e)).sum and Happy(x):=0<x AND exists k:Nat, S^[k](x)=1. Digits/Defs:48 recursively divides by b until zero, :76 is the actual little-endian radix constructor; order is irrelevant to the sum. Stock Lean List.sum Init/Data/List/Basic:2061 is foldr addition0; Function.iterate_zero:54/iterate_succ:61 certify the actual n-fold iterate convention. k=0 includes x=1. Setting b=10,e=2 is exactly ordinary happy numbers, no orbit eventuality theorem asserted. Generalized e=0 can also be represented with the ordinary Nat.pow convention; no extension to invalid radices is claimed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Digits/Defs.lean",
+          "declarations": "Nat.digitsAux:48; digits:76; digits_zero:82",
+          "note": "Actual digit-list constructor used by the literal digit-power/iteration definition."
+        }
+      ],
+      "search_notes": "Full-tree happy/digit-power searches and native AutomaticSequence/BoundedDigits examined. IsAutomatic.exists_dfao_output_eval_eq_ofDigits:83 concerns carrying noncanonical radix words through an existing automatic sequence, not digit-power iteration or reaching1; exclude as an application to automata. List sum/pow and iteration are generic suppliers, not extra native files."
+    },
+    {
+      "concept": "generalized-happy-number",
+      "concept_id": "34c2faae-ef59-5385-b6fc-8a534aa09f34",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "For valid radix b>=2 and natural exponent e, take S(n)=((Nat.digits b n).map (fun d=>d^e)).sum and Happy(x):=0<x AND exists k:Nat, S^[k](x)=1. Digits/Defs:48 recursively divides by b until zero, :76 is the actual little-endian radix constructor; order is irrelevant to the sum. Stock Lean List.sum Init/Data/List/Basic:2061 is foldr addition0; Function.iterate_zero:54/iterate_succ:61 certify the actual n-fold iterate convention. k=0 includes x=1. Setting b=10,e=2 is exactly ordinary happy numbers, no orbit eventuality theorem asserted. Generalized e=0 can also be represented with the ordinary Nat.pow convention; no extension to invalid radices is claimed. Relevant dependency constructor/proofs unchanged; no qualifying native digit-power orbit API certified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Full-tree happy/digit-power searches and native AutomaticSequence/BoundedDigits examined. IsAutomatic.exists_dfao_output_eval_eq_ofDigits:83 concerns carrying noncanonical radix words through an existing automatic sequence, not digit-power iteration or reaching1; exclude as an application to automata. List sum/pow and iteration are generic suppliers, not extra native files."
+    },
+    {
+      "concept": "goldbach-number",
+      "concept_id": "39d2442a-2f83-5a38-9b44-7a67bb74f8c9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Let P={p:Nat | Nat.Prime p}. The literal predicate 0<n AND n∈P+P is exact: Set.add is generated from the image2 constructor Set.mul:304 in Pointwise/Set/Basic, hence n∈P+P means exists p,q prime with n=p+q. Nat.Prime:41/prime_def:97 are checked input suppliers, and primes>=2 ensure positivity automatically. Equal primes are allowed (e.g.4=2+2); no Goldbach conjecture or parity restriction imposed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Pointwise/Set/Basic.lean",
+          "declarations": "Set.mul:304 and generated Set.add; image2_mul:310 and additive companion",
+          "note": "Generic pointwise-sum constructor instantiated to the set of primes gives exactly the Goldbach-number set."
+        }
+      ],
+      "search_notes": "Searched Goldbach and prime-add/sum sources. Mathlib Fermat Goldbach theorem means coprimality of distinct Fermat numbers, a different theorem. Native prime ideal zeta sums, arithmetic progression distribution, and prime-counting are not sums-of-two-primes set API; exclude."
+    },
+    {
+      "concept": "goldbach-number",
+      "concept_id": "39d2442a-2f83-5a38-9b44-7a67bb74f8c9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Let P={p:Nat | Nat.Prime p}. The literal predicate 0<n AND n∈P+P is exact: Set.add is generated from the image2 constructor Set.mul:304 in Pointwise/Set/Basic, hence n∈P+P means exists p,q prime with n=p+q. Nat.Prime:41/prime_def:97 are checked input suppliers, and primes>=2 ensure positivity automatically. Equal primes are allowed (e.g.4=2+2); no Goldbach conjecture or parity restriction imposed. Actual dependency sumset constructor retains the same body; native prime searches supply no direct Goldbach-set API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development. Exact dependency pointwise Set.mul/add declaration:300 and image2_mul/add:306; compared actual source diff (involution instance change earlier), same sumset constructor.",
+      "files": [],
+      "search_notes": "Searched Goldbach and prime-add/sum sources. Mathlib Fermat Goldbach theorem means coprimality of distinct Fermat numbers, a different theorem. Native prime ideal zeta sums, arithmetic progression distribution, and prime-counting are not sums-of-two-primes set API; exclude."
+    },
+    {
+      "concept": "good-trace-dimension-group",
+      "concept_id": "3402c1e7-37c6-56e3-8201-053131244f36",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Given the supplied positive additive trace τ:G→+Real, the exact predicate is forall a g:G, 0<g -> 0<τ(a) -> τ(a)<τ(g) -> exists aPrime:G, aPrime∈Set.Icc 0 g AND τ(aPrime)=τ(a). The catalogue positive nonzero g is exactly0<g in a partial order. Set.Icc:77/mem_Icc:81 are literally the two weak inequalities0<=aPrime<=g; no interpolation/refinement assumption or strict positivity of aPrime substituted. AddMonoidHom:144 supplies the given trace input. A named GoodTrace alias is unnecessary. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Order/Interval/Set/Defs.lean",
+          "declarations": "Set.Icc:77; mem_Icc:81",
+          "note": "Exact closed-order-interval constructor used in the good-trace lifting/fiber condition."
+        }
+      ],
+      "search_notes": "Searched good trace/dimension group/order-unit and native ordered homomorphism siblings. Distinguish literal goodness from mere positivity: no claim that every positive trace is good. Order unit, dimension-group refinability, and classification theorems are supplied inputs or separate endpoints; do not charge C*-algebra state spaces."
+    },
+    {
+      "concept": "good-trace-dimension-group",
+      "concept_id": "3402c1e7-37c6-56e3-8201-053131244f36",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Given the supplied positive additive trace τ:G→+Real, the exact predicate is forall a g:G, 0<g -> 0<τ(a) -> τ(a)<τ(g) -> exists aPrime:G, aPrime∈Set.Icc 0 g AND τ(aPrime)=τ(a). The catalogue positive nonzero g is exactly0<g in a partial order. Set.Icc:77/mem_Icc:81 are literally the two weak inequalities0<=aPrime<=g; no interpolation/refinement assumption or strict positivity of aPrime substituted. AddMonoidHom:144 supplies the given trace input. A named GoodTrace alias is unnecessary. Native AddMonoidHom.exists_pos_of_ne_zero:23 supplies ordinary positive-functional API under weaker source AddGroup and linearly ordered target hypotheses, applicable to positive/good real traces when nonzero. Actual proof26–30 takes a nonzero value and changes its sign by negating the argument. This is the same ordinary weaker-hypothesis trace API interpretation independently accepted in045. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Order/Hom/Basic.lean",
+          "declarations": "AddMonoidHom.exists_pos_of_ne_zero:23",
+          "note": "Ordinary positive-value functional API applying to this trace subclass, while the full exact goodness condition is supplied by the checked generic interval-fiber predicate."
+        }
+      ],
+      "search_notes": "Searched good trace/dimension group/order-unit and native ordered homomorphism siblings. Distinguish literal goodness from mere positivity: no claim that every positive trace is good. Order unit, dimension-group refinability, and classification theorems are supplied inputs or separate endpoints; do not charge C*-algebra state spaces."
+    },
+    {
+      "concept": "gordan-alternative-theorem",
+      "concept_id": "f796f1ab-25cb-5930-a3dc-59c58ffd3915",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "ProperCone.hyperplane_separation_point in Analysis/Convex/Cone/Dual:132 proves separation of an outside point from a CLOSED cone via its completed singleton-compact separation proof. The finite-matrix strict dual/nonnegative zero-relation dichotomy has not been certified from that source in standalone Mathlib. Missing checked bridge is the complete finite-family homogeneous alternative, not merely availability of matrix notation. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Independent Gordan/Stiemke/dual-positive relation searches; read source166–176 and complete quotient proof186–203 (also independent042). Standalone geometric cone separation does not by itself certify this strict finite-column bridge in the pass. Full affine-row Farkas alternatives remain a separate frontier (042), not silently asserted by this homogeneous theorem."
+    },
+    {
+      "concept": "gordan-alternative-theorem",
+      "concept_id": "f796f1ab-25cb-5930-a3dc-59c58ffd3915",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "TauCeti.exists_forall_dual_pos_iff:166 in Geometry/Convex/Cone/Alternative proves exists dual functional positive on EVERY vector in a finite family iff every nonnegative zero relation has zero coefficients. Actual proof169–176 uses Tucker simultaneous relation/dual:134 and the positive dot-product zero criterion. Instantiate the family by the columns of the real finite matrix A, with V=Fin rows→Real: its linear relation is Ay=0 and a dual functional is a real row x whose values are xA. Negating the universal trivial-relation condition gives a NONZERO y>=0 relation; the iff certifies mutual exclusivity and exhaustiveness. Empty index/dimension cases retain the theorem quantifiers, not an assumed nonempty matrix. Submodule.exists_pos_dotProduct_eq_zero_iff:186 is its ordinary homogeneous subspace counterpart. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Convex/Cone/Alternative.lean",
+          "declarations": "TauCeti.exists_forall_dual_pos_iff:166; Submodule.exists_pos_dotProduct_eq_zero_iff:186",
+          "note": "Completed finite-vector Gordan and subspace Stiemke homogeneous alternatives, exact column/row interpretation of the catalogue matrix theorem."
+        }
+      ],
+      "search_notes": "Independent Gordan/Stiemke/dual-positive relation searches; read source166–176 and complete quotient proof186–203 (also independent042). Standalone geometric cone separation does not by itself certify this strict finite-column bridge in the pass. Full affine-row Farkas alternatives remain a separate frontier (042), not silently asserted by this homogeneous theorem."
+    },
+    {
+      "concept": "graph-subgraph",
+      "concept_id": "d9678da7-1f5d-591a-aab3-c47c324a2c2e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "SimpleGraph.Subgraph:61 has vertex subset verts, symmetric Adj, adj_sub into original adjacency and edge_vert support; symmetry supplies the second endpoint. This exactly permits deleting arbitrary vertices AND arbitrary surviving edges, including isolated retained vertices. IsInduced:214 requires all original adjacencies between retained vertices; (topSubgraph).induce s at:1207 has exactly verts=s and Adj=u∈s AND v∈s AND G.Adj u v. The coe graph restricts its vertex type, so neither a spanning-only graph nor induced-only restriction substitutes for a general subgraph. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Combinatorics/SimpleGraph/Subgraph.lean",
+          "declarations": "SimpleGraph.Subgraph:61; Subgraph.IsInduced:214; Subgraph.induce:1207",
+          "note": "Actual arbitrary vertex/edge subgraph structure, its induced predicate and construction."
+        }
+      ],
+      "search_notes": "Native Combinatorics/SimpleGraph and Graph/Orientation/Subgraph enumerated. The latter uses a different general multigraph Graph formalism plus chosen edge orientations; orientation inheritance is a further structure, not the definition of a simple subgraph. Exclude connectivity/Ramsey/copy counting/classification as new endpoints."
+    },
+    {
+      "concept": "graph-subgraph",
+      "concept_id": "d9678da7-1f5d-591a-aab3-c47c324a2c2e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "SimpleGraph.Subgraph:61 has vertex subset verts, symmetric Adj, adj_sub into original adjacency and edge_vert support; symmetry supplies the second endpoint. This exactly permits deleting arbitrary vertices AND arbitrary surviving edges, including isolated retained vertices. IsInduced:214 requires all original adjacencies between retained vertices; (topSubgraph).induce s at:1207 has exactly verts=s and Adj=u∈s AND v∈s AND G.Adj u v. The coe graph restricts its vertex type, so neither a spanning-only graph nor induced-only restriction substitutes for a general subgraph. Native SimpleGraph.map_comap_eq_inf_map_top:50 and comap_eq_iff_inf_map_top:57 completed extensionality/injective-map proofs give ordinary induced-window recognition/transport; restrictFin:69/restrictFin_adj:74 read initial vertex windows. These are direct subgraph/induced restriction API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development. Exact dependency Subgraph:62, IsInduced:215, induce:1196 inspected; differences remove neighbor-set API and shift anchors, without changing these definitions.",
+      "files": [
+        {
+          "path": "TauCeti/Combinatorics/SimpleGraph/Maps.lean",
+          "declarations": "SimpleGraph.map_comap_eq_inf_map_top:50; comap_eq_iff_inf_map_top:57; restrictFin:69; restrictFin_adj:74",
+          "note": "Ordinary induced-window restriction and map/comap recognition API under arbitrary vertex types."
+        }
+      ],
+      "search_notes": "Native Combinatorics/SimpleGraph and Graph/Orientation/Subgraph enumerated. The latter uses a different general multigraph Graph formalism plus chosen edge orientations; orientation inheritance is a further structure, not the definition of a simple subgraph. Exclude connectivity/Ramsey/copy counting/classification as new endpoints."
+    },
+    {
+      "concept": "greatest-common-divisor",
+      "concept_id": "e7984063-f674-5299-bd69-d41095f0a8d3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Stock Lean b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a Init/Data/Int/Gcd:43 defines Int.gcd a b=Nat.gcd |a| |b|; :50/54 prove it divides both signed integers, :89/93 prove any common divisor divides it, and :128/131 give positivity when either entry is nonzero. Thus the Nat-valued gcd interpreted as a positive integer is the greatest POSITIVE common divisor for not-both-zero a,b; signs do not change it. Mathlib Data/Int/GCD defines actual signed extended-Euclid gcdA:162/gcdB:167 and proves the coefficient identity:172 by signed cases, direct computational gcd API. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Int/GCD.lean",
+          "declarations": "Int.gcd_def:158; gcdA:162; gcdB:167; gcd_eq_gcd_ab:172",
+          "note": "Extended Euclidean gcd computation/coefficient API on signed integers; core gcd itself is stock Lean and has no project-owned LOC."
+        }
+      ],
+      "search_notes": "Read stock defining/maximality/positivity proofs and native gcd normalization/transport proof bodies. Include direct gcd API despite cusp consumers; exclude modular cusp counting files, unique factorization and polynomial gcd classification."
+    },
+    {
+      "concept": "greatest-common-divisor",
+      "concept_id": "e7984063-f674-5299-bd69-d41095f0a8d3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Stock Lean b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a Init/Data/Int/Gcd:43 defines Int.gcd a b=Nat.gcd |a| |b|; :50/54 prove it divides both signed integers, :89/93 prove any common divisor divides it, and :128/131 give positivity when either entry is nonzero. Thus the Nat-valued gcd interpreted as a positive integer is the greatest POSITIVE common divisor for not-both-zero a,b; signs do not change it. Mathlib Data/Int/GCD defines actual signed extended-Euclid gcdA:162/gcdB:167 and proves the coefficient identity:172 by signed cases, direct computational gcd API. Native TauCeti.Int.isCoprime_div_gcd_div_gcd:45 complete proof47–48 gives primitive coprime quotients after dividing by the integer gcd, an ordinary gcd normalization law (n nonzero Nat, c arbitrary Int). Further gcd transformation laws51/63 retain explicit coprimality hypotheses. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Data/Int/GCD.lean",
+          "declarations": "TauCeti.Int.isCoprime_div_gcd_div_gcd:45; gcd_dvd_of_dvd_mul_sub_mul_add_mul:51; gcd_eq_gcd_of_dvd_mul_sub_mul_add_mul:63",
+          "note": "Direct integer-gcd quotient normalization and gcd transport/divisor laws, not merely cusp consumers."
+        }
+      ],
+      "search_notes": "Read stock defining/maximality/positivity proofs and native gcd normalization/transport proof bodies. Include direct gcd API despite cusp consumers; exclude modular cusp counting files, unique factorization and polynomial gcd classification."
+    },
+    {
+      "concept": "green-tao-prime-progressions",
+      "concept_id": "73ab4364-7c24-53e8-a2e6-0941d1afb42f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "No checked existing proof certified that the primes themselves contain a NONCONSTANT arithmetic progression of EVERY finite length. Actual prime-counting/Dirichlet progression sources supply primes in a fixed residue class, not an all-prime finite progression with one nonzero common difference. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Independent full-tree Green–Tao/prime progression searches; actual Mathlib LSeries/PrimesInAP Dirichlet statement428/440 and native Chebotarev/PrimeCounting/PrimesCongruent:99 fixed-modulus density theorem inspected. Native proof uses cyclotomic Frobenius fibers and finite symmetric difference; it does not give simultaneous primality of a+id for arbitrary finite i. Generic finite-AP constructors (039) give no such theorem. Specifically unresolved prime-producing Szemeredi/transference endpoint; not an absence assertion."
+    },
+    {
+      "concept": "green-tao-prime-progressions",
+      "concept_id": "73ab4364-7c24-53e8-a2e6-0941d1afb42f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "No checked existing proof certified that the primes themselves contain a NONCONSTANT arithmetic progression of EVERY finite length. Actual prime-counting/Dirichlet progression sources supply primes in a fixed residue class, not an all-prime finite progression with one nonzero common difference. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Independent full-tree Green–Tao/prime progression searches; actual Mathlib LSeries/PrimesInAP Dirichlet statement428/440 and native Chebotarev/PrimeCounting/PrimesCongruent:99 fixed-modulus density theorem inspected. Native proof uses cyclotomic Frobenius fibers and finite symmetric difference; it does not give simultaneous primality of a+id for arbitrary finite i. Generic finite-AP constructors (039) give no such theorem. Specifically unresolved prime-producing Szemeredi/transference endpoint; not an absence assertion."
+    },
+    {
+      "concept": "group-homomorphism",
+      "concept_id": "2ffcdf1d-843e-54fa-b75e-7eff9125e15b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "MonoidHom:366 extends a multiplicative map with f1=1. This is exactly catalogue group homomorphism, because MonoidHom.mk':605 constructs it from ONLY multiplicativity into a Group; actual proof608 cancels f1 from f1*f1=f1. Thus no extra mathematical constraint is imposed. All groups, not only abelian/finite/continuous maps; map inverse and composition are ordinary API. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Hom/Defs.lean",
+          "declarations": "MonoidHom:366; MonoidHom.mk':605; MonoidHom.map_mul:700",
+          "note": "Multiplicative homomorphism structure and exact constructor from the catalogue sole group law."
+        }
+      ],
+      "search_notes": "Enumerated native Group/Hom and TypeTags siblings; exclude classification of homomorphisms from Z/Q, crossed cocycles and representation-specific actions as extra endpoints. "
+    },
+    {
+      "concept": "group-homomorphism",
+      "concept_id": "2ffcdf1d-843e-54fa-b75e-7eff9125e15b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "MonoidHom:366 extends a multiplicative map with f1=1. This is exactly catalogue group homomorphism, because MonoidHom.mk':605 constructs it from ONLY multiplicativity into a Group; actual proof608 cancels f1 from f1*f1=f1. Thus no extra mathematical constraint is imposed. All groups, not only abelian/finite/continuous maps; map inverse and composition are ordinary API. Native TauCeti.map_comp_smul:27 is literal funext/map_mul entrywise compatibility; MonoidHom.existsUnique_comp_eq_iff_of_injective:30 has complete chosen-preimage/multiplicativity/uniqueness proof; compHom'_bijective:63 and compHom_bijective:75 prove ordinary pre/postcomposition transport. Additive↔multiplicative unit-valued hom equivalence:37 has direct evaluation formulas43/50. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Group/Hom/Defs.lean",
+          "declarations": "TauCeti.map_comp_smul:27",
+          "note": "Entrywise multiplication/scalar compatibility for multiplicative maps, under weaker magma hypotheses."
+        },
+        {
+          "path": "TauCeti/Algebra/Group/Hom/Lift.lean",
+          "declarations": "MonoidHom.existsUnique_comp_eq_iff_of_injective:30",
+          "note": "Exact unique lifting criterion through an injective homomorphism."
+        },
+        {
+          "path": "TauCeti/Algebra/Group/Hom/Instances.lean",
+          "declarations": "MonoidHom.compHom'_bijective:63; compHom_bijective:75",
+          "note": "Ordinary bijective change-of-variable transport on homomorphism spaces."
+        },
+        {
+          "path": "TauCeti/Algebra/Group/TypeTags/Hom.lean",
+          "declarations": "AddMonoidHom.toMultiplicativeUnits:38; toMultiplicativeUnits_apply_apply:43; toMultiplicativeUnits_symm_apply_apply:50",
+          "note": "Direct additive/multiplicative notation and unit-valued homomorphism equivalence."
+        }
+      ],
+      "search_notes": "Enumerated native Group/Hom and TypeTags siblings; exclude classification of homomorphisms from Z/Q, crossed cocycles and representation-specific actions as extra endpoints. "
+    },
+    {
+      "concept": "group-representation",
+      "concept_id": "9cc1dd12-f3c8-53c6-9be4-0414c6e50a0a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Representation:48 is G→*End_k(V), with vector-space specialization Field k. Although the stored codomain is ALL linear endomorphisms, for Group G inv_self_apply:92/self_inv_apply:97 and apply_bijective:105 complete proofs show ρ(g^-1) is the inverse, giving exactly the action by invertible linear maps. This is equivalent to the catalogue linear action without a finite-dimensionality/unitarity restriction. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/RepresentationTheory/Basic.lean",
+          "declarations": "Representation:48; Representation.inv_self_apply:92; self_inv_apply:97; apply_bijective:105",
+          "note": "Linear representation definition and immediate invertibility of each group action map."
+        }
+      ],
+      "search_notes": "Enumerated native RepresentationTheory siblings. Exclude induction/restriction, characters, tensor-power decompositions, irreducibility/Maschke, unitary/continuous subclasses and finite-dimensional category shrinking as extra concepts rather than inflate the generic definition mapping."
+    },
+    {
+      "concept": "group-representation",
+      "concept_id": "9cc1dd12-f3c8-53c6-9be4-0414c6e50a0a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Representation:48 is G→*End_k(V), with vector-space specialization Field k. Although the stored codomain is ALL linear endomorphisms, for Group G inv_self_apply:92/self_inv_apply:97 and apply_bijective:105 complete proofs show ρ(g^-1) is the inverse, giving exactly the action by invertible linear maps. This is equivalent to the catalogue linear action without a finite-dimensionality/unitarity restriction. Native Representation.toMulAut:26 constructs automorphisms of the multiplicative type tag of the module, inverse explicitly ρ(g^-1); complete left/right inverse, addition preservation and group law proofs30–36 and evaluation40/46 read. This is ordinary action/notation API for every representation. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/RepresentationTheory/ToMultiplicative.lean",
+          "declarations": "Representation.toMulAut:26; toMulAut_apply:40; toMulAut_symm_apply:46",
+          "note": "Ordinary conversion of the linear group action to automorphisms on the multiplicative notation for its additive module."
+        }
+      ],
+      "search_notes": "Enumerated native RepresentationTheory siblings. Exclude induction/restriction, characters, tensor-power decompositions, irreducibility/Maschke, unitary/continuous subclasses and finite-dimensional category shrinking as extra concepts rather than inflate the generic definition mapping."
+    },
+    {
+      "concept": "haar-measure",
+      "concept_id": "82491cab-2817-5ef5-a1df-b0c6e6075c2f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "On a locally compact topological group with BorelSpace, use Measure.IsHaarMeasure:786 TOGETHER WITH Measure.Regular:317, as the source explicitly requires for arbitrary non-second-countable groups. IsHaarMeasure alone omits regularity! Its fields are finite-on-compacts, left invariance and positive mass on nonempty opens. The converse from nonzero regular left invariant measure to positive opens is the COMPLETE instance:611, using compact nonnull witness and finite translates596–607. Thus this conjunction is exactly the stated nonzero regular Borel left Haar condition, including general groups. Right analogue uses right invariance, or opposite-group translation, not unimodularity. haarMeasure:520 is an actual normalized constructor, left invariant530, mass1 on chosen positive compact540, regular550; completed proof bodies read. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Group/Measure.lean",
+          "declarations": "MeasureTheory.Measure.IsHaarMeasure:786; isOpenPosMeasure_of_mulLeftInvariant_of_regular:611",
+          "note": "Core Haar predicate and checked equivalence with the nonzero regular invariant convention."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Regular.lean",
+          "declarations": "MeasureTheory.Measure.Regular:317",
+          "note": "Actual regular Borel measure condition included explicitly in the catalogue Haar constructor."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Haar/Basic.lean",
+          "declarations": "MeasureTheory.Measure.haarMeasure:520; isMulLeftInvariant_haarMeasure:530; haarMeasure_self:540; regular_haarMeasure:550",
+          "note": "Constructs genuine regular normalized left Haar measures on locally compact groups."
+        }
+      ],
+      "search_notes": "Native Haar directory enumerated; RestrictTop:27 merely reinstalls the unchanged whole-space measure via restrict_univ and receives no attribution. OfBasis/Euclidean/HalfSpace are specific linear-measure applications; multiplicative real Haar, differentiation and integration estimates are separate specializations. General Haar existence/normalization Basic qualifies as a direct constructor; do not add the whole uniqueness/integration import tree."
+    },
+    {
+      "concept": "haar-measure",
+      "concept_id": "82491cab-2817-5ef5-a1df-b0c6e6075c2f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "On a locally compact topological group with BorelSpace, use Measure.IsHaarMeasure:786 TOGETHER WITH Measure.Regular:317, as the source explicitly requires for arbitrary non-second-countable groups. IsHaarMeasure alone omits regularity! Its fields are finite-on-compacts, left invariance and positive mass on nonempty opens. The converse from nonzero regular left invariant measure to positive opens is the COMPLETE instance:611, using compact nonnull witness and finite translates596–607. Thus this conjunction is exactly the stated nonzero regular Borel left Haar condition, including general groups. Right analogue uses right invariance, or opposite-group translation, not unimodularity. haarMeasure:520 is an actual normalized constructor, left invariant530, mass1 on chosen positive compact540, regular550; completed proof bodies read. Native ContinuousMulEquiv.quasiMeasurePreserving_haar:52 proves nonsingularity under a continuous group equivalence into second-countable locally compact target, and :75/92/102 give finite-Haar mass recognition and right/inversion invariance; exact stronger hypotheses explicit. These are ordinary direct Haar transport/normalization APIs, completed proofs checked. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Measure/Haar/Unique.lean",
+          "declarations": "ContinuousMulEquiv.quasiMeasurePreserving_haar:52; MeasureTheory.Measure.isMulLeftInvariant_eq_of_measure_univ_eq:75; isMulRightInvariant_of_isHaarMeasure_of_isFiniteMeasure:92; isInvInvariant_of_isHaarMeasure_of_isFiniteMeasure:102",
+          "note": "Ordinary Haar change-of-variables, finite-mass recognition and immediate finite-Haar symmetry API."
+        }
+      ],
+      "search_notes": "Native Haar directory enumerated; RestrictTop:27 merely reinstalls the unchanged whole-space measure via restrict_univ and receives no attribution. OfBasis/Euclidean/HalfSpace are specific linear-measure applications; multiplicative real Haar, differentiation and integration estimates are separate specializations. General Haar existence/normalization Basic qualifies as a direct constructor; do not add the whole uniqueness/integration import tree."
+    },
+    {
+      "concept": "hahn-simple-twisted-relative-trace-formula",
+      "concept_id": "d24b4268-c365-5244-a1ca-c64045b5c5db",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "A full simple TWISTED RELATIVE trace formula with the specified restriction-of-scalars group, three commuting involutions, support conditions and F-supercuspidal factor was not certified. Native classical trace-formula names do not establish this group/spectral/orbital identity. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Full-tree Hahn/twisted-relative/relative trace searches and native automorphic/trace source enumeration; actual Tau TraceFormula/Formula:288 proves the Popa–Zagier binary-form finite-dimensional trace equals divisor-minimum and Hurwitz-class-number sums. Read explicit formula/proof:288–306; different rank-one classical arithmetic object, not arbitrary cuspidal automorphic spectra and twisted relative orbital integrals. Mathlib modular form/action/cusp constructors likewise do not prove the requested identity. Ownership of inspected Tau formula is explicit. Concrete unresolved full geometric/spectral equality and support hypotheses, not absence."
+    },
+    {
+      "concept": "hahn-simple-twisted-relative-trace-formula",
+      "concept_id": "d24b4268-c365-5244-a1ca-c64045b5c5db",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "A full simple TWISTED RELATIVE trace formula with the specified restriction-of-scalars group, three commuting involutions, support conditions and F-supercuspidal factor was not certified. Native classical trace-formula names do not establish this group/spectral/orbital identity. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Full-tree Hahn/twisted-relative/relative trace searches and native automorphic/trace source enumeration; actual Tau TraceFormula/Formula:288 proves the Popa–Zagier binary-form finite-dimensional trace equals divisor-minimum and Hurwitz-class-number sums. Read explicit formula/proof:288–306; different rank-one classical arithmetic object, not arbitrary cuspidal automorphic spectra and twisted relative orbital integrals. Mathlib modular form/action/cusp constructors likewise do not prove the requested identity. Ownership of inspected Tau formula is explicit. Concrete unresolved full geometric/spectral equality and support hypotheses, not absence."
+    },
+    {
+      "concept": "hardy-littlewood-waring-asymptotic",
+      "concept_id": "2d75c347-9996-55df-bd29-6972de0ae636",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "No complete existing proof certified of the positive-kth-power representation ASYMPTOTIC with Gamma factor, exact singular series and a uniform positive lower bound for all n at sufficiently large fixed s. Four-square existence does not estimate this representation count. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Independent Waring/Hardy–Littlewood/singular series/kth-power representation searches. Actual Mathlib Nat.sum_four_squares:202 proves only exact existence of four nonnegative square summands by prime factorization and Euler identity; ZetaValues Fourier/Bernoulli formula treats different Dirichlet sums. These do not certify the circle-method asymptotic or uniform singular-series positivity. No complete source theorem was found by bounded comparison; preserve unknown."
+    },
+    {
+      "concept": "hardy-littlewood-waring-asymptotic",
+      "concept_id": "2d75c347-9996-55df-bd29-6972de0ae636",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "No complete existing proof certified of the positive-kth-power representation ASYMPTOTIC with Gamma factor, exact singular series and a uniform positive lower bound for all n at sufficiently large fixed s. Four-square existence does not estimate this representation count. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Independent Waring/Hardy–Littlewood/singular series/kth-power representation searches. Actual Mathlib Nat.sum_four_squares:202 proves only exact existence of four nonnegative square summands by prime factorization and Euler identity; ZetaValues Fourier/Bernoulli formula treats different Dirichlet sums. These do not certify the circle-method asymptotic or uniform singular-series positivity. No complete source theorem was found by bounded comparison; preserve unknown."
+    },
+    {
+      "concept": "harish-chandra-adelic-subgroup",
+      "concept_id": "66a1a2bb-502f-5253-bb25-2c6bc08849ce",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "The literal intersection-of-character norm kernels is mathematically clear, but a complete standalone supplier for the full adelic point/idele global normalized norm interface was not certified in this bounded pass. Generic intersection alone with an arbitrary supplied character family/norm would not verify those adelic inputs. Checked group-like and antipode-unit constructors are available; the actual normalized full-idele product and exact point evaluation are the concrete unresolved bridge. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Searched Harish–Chandra/norm-one/idele/character-kernel sources. CharacterKernelIdeal describes ALL characters literally1, a STRICTER algebraic condition than absolute idele norm1, so exclude its file. HarishChandra representation induction is another subject. Standalone Hopf/GroupLike supplier read; do not attribute Tau normalized norm implementation to Mathlib. A separately named G1 alias is unnecessary for the exact native generic representation."
+    },
+    {
+      "concept": "harish-chandra-adelic-subgroup",
+      "concept_id": "66a1a2bb-502f-5253-bb25-2c6bc08849ce",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "For an affine F-group with coordinate commutative Hopf algebra H, F-rational characters are exactly GroupLike F H: counit(c)=1 and comul(c)=c⊗c (Coalgebra/GroupLike:37/66); Hopf/GroupLike.toUnits:37 gives c a unit with antipode inverse. On adelic point p:H→ₐ[F]A_F evaluate χ_c(p)=Units.map p.toMonoidHom (GroupLike.toUnits F c). The exact bare norm-one set is {p | forall c:GroupLike F H, ideleNorm(χ_c(p))=1}. Tau FunctorOfPoints.convGroupOfSemiring:119 makes these points the actual group and mapValue:143 certifies value-algebra functoriality. Native ideleNorm:331/coe:338 is the product of real abs, complex abs-squared and residue-normalized finite norms; finite factors are1 off a finite set (:303), so no totalized divergent product is used. Defining bodies and multiplicativity proof318–325 read. This records the primary subgroup condition; no finiteness, compactness, rational-lattice or logarithmic-map theorem asserted. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development. Stock Mathlib NumberTheory/NumberField/AdeleRing.IdeleGroup:104 is literally units of the full AdeleRing, so the evaluated character unit has exactly the required idele type; this input supplier is excluded from native allocation.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/NumberField/Global/Ideles/Norm/Basic.lean",
+          "declarations": "TauCeti.GlobalNumberFields.hasFiniteMulSupport_norm_ideleFiniteCoord:303; ideleNorm:331; coe_ideleNorm:338",
+          "note": "Actual normalized adelic absolute-value product used in the literal all-rational-character norm-one condition."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/FunctorOfPoints.lean",
+          "declarations": "AlgHom.convGroupOfSemiring:119; AlgHom.mapValue:143",
+          "note": "Actual convolution group of algebraic points and ordinary value-algebra functoriality for their character evaluation."
+        }
+      ],
+      "search_notes": "Searched Harish–Chandra/norm-one/idele/character-kernel sources. CharacterKernelIdeal describes ALL characters literally1, a STRICTER algebraic condition than absolute idele norm1, so exclude its file. HarishChandra representation induction is another subject. Standalone Hopf/GroupLike supplier read; do not attribute Tau normalized norm implementation to Mathlib. A separately named G1 alias is unnecessary for the exact native generic representation."
+    },
+    {
+      "concept": "hilbert-waring-theorem",
+      "concept_id": "35a2dd39-dc88-5a13-b67e-885ebbdbf094",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Mathlib Nat.sum_four_squares:202 has a completed proof by prime-factorization induction, exact prime case and Euler four-square identity. This certifies the genuine exponent k=2 case of finite Waring number (at most4 nonnegative summands). Trivial k=1 is expressible. No existing complete proof of finiteness for EVERY positive k was certified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/SumFourSquares.lean",
+          "declarations": "Nat.sum_four_squares:202; Nat.euler_four_squares:36",
+          "note": "Completed k=2 Waring existence case; no arbitrary-exponent Hilbert–Waring theorem asserted."
+        }
+      ],
+      "search_notes": "Independent Waring/Hilbert/kth-power additive-basis searches and native integer/sum-square siblings examined. Tau Data/Int/SumSquares classifies square sum1 by a single signed basis vector, not all-exponent representability; exclude. Do not promote a generic expression of g(k), finite-sum notation or four-square existence to the universal theorem."
+    },
+    {
+      "concept": "hilbert-waring-theorem",
+      "concept_id": "35a2dd39-dc88-5a13-b67e-885ebbdbf094",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Mathlib Nat.sum_four_squares:202 has a completed proof by prime-factorization induction, exact prime case and Euler four-square identity. This certifies the genuine exponent k=2 case of finite Waring number (at most4 nonnegative summands). Trivial k=1 is expressible. No existing complete proof of finiteness for EVERY positive k was certified. Actual dependency four-square case is complete, but no native implementation of the remaining arbitrary-positive-exponent theorem was certified; unknown retains this imported partial availability. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Independent Waring/Hilbert/kth-power additive-basis searches and native integer/sum-square siblings examined. Tau Data/Int/SumSquares classifies square sum1 by a single signed basis vector, not all-exponent representability; exclude. Do not promote a generic expression of g(k), finite-sum notation or four-square existence to the universal theorem."
+    },
+    {
+      "concept": "hyperspecial-maximal-compact-subgroup",
+      "concept_id": "60e748e1-e98b-5876-81cb-88480275815f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Generic smooth affine model/base-change/valuation ring constructors exist, but the exact connected-reductive special-fiber predicate and its full standalone algebraic-group point-image interpretation were not certified. As040, the checked standalone smoothness and group-like structures do not yet certify the required unipotent-radical condition; unknown is a supplier frontier, not need for a named hyperspecial alias. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Native AffineGroupScheme Smooth:59/Reductive:64/BaseChange:73 and Points:36 comparisons read; coordinate presentation above avoids requiring a separate smooth affine group-scheme alias. Toric/IntegralModel:72 only compares a complex toric semigroup model, not general reductive smooth connected special fibers. Valuation ring/residue field supplied by local-field input, not separate attributed files. No stronger unramified-group classification or hyperspecial-building theorem asserted."
+    },
+    {
+      "concept": "hyperspecial-maximal-compact-subgroup",
+      "concept_id": "60e748e1-e98b-5876-81cb-88480275815f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact coordinate bare definition for fixed nonarchimedean local K with valuation ring O and residue field κ: choose a finite-type commutative Hopf O-algebra A with Algebra.Smooth O A, a Hopf generic-fiber isomorphism K⊗_O A≅O(G), and special fiber B=κ⊗_O A having ConnectedSpace(Spec B) and trivial unipotent radical after algebraic closure of κ. The subgroup is the IMAGE of O-points under O→K postcomposition, inverse baseChangePointsMulEquiv:251, and the supplied generic-fiber isomorphism. Actual mapValue:143–150 proves group-map postcomposition; baseChange:70/points equivalence251 with formulas263/277 and their inverse construction read. SmoothCommHopfAlgProperty:34 works over arbitrary CommRing O, not fields only. Radical Construction:69/115 supplies the exact trivial geometric radical predicate already checked040; retain literal connected special fiber rather than quietly strengthening it to a named geometrically-connected class. This is the requested existence-of-a-model PRESENTATION of the subgroup; no theorem proving compactness/maximality or existence of such a model for every reductive K-group is claimed. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Smooth/CommHopfAlgCat.lean",
+          "declarations": "TauCeti.smoothCommHopfAlgProperty:34; smoothCommHopfAlgProperty_iff:40",
+          "note": "Exact arbitrary-base-ring smooth coordinate model condition."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/CommHopfAlgCat/BaseChange.lean",
+          "declarations": "TauCeti.CommHopfAlgCat.baseChange:70; baseChangePointsMulEquiv:251; baseChangePointsMulEquiv_apply_apply:261",
+          "note": "Generic and special fiber scalar extension, with the exact base-change point transport for the integral-model image."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/FunctorOfPoints.lean",
+          "declarations": "AlgHom.mapValue:143; mapValue_apply:154",
+          "note": "Group-map postcomposition of integral points along valuation-ring inclusion."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Unipotent/Radical/Construction.lean",
+          "declarations": "TauCeti.FiniteTypeCommHopfAlgCat.unipotentRadicalDefiningIdeal:69; unipotentRadicalDefiningIdeal_eq_augmentation_iff:115",
+          "note": "Actual trivial-radical constructor applied over the algebraic closure of the special-fiber field, with connectedness explicitly conjoined."
+        }
+      ],
+      "search_notes": "Native AffineGroupScheme Smooth:59/Reductive:64/BaseChange:73 and Points:36 comparisons read; coordinate presentation above avoids requiring a separate smooth affine group-scheme alias. Toric/IntegralModel:72 only compares a complex toric semigroup model, not general reductive smooth connected special fibers. Valuation ring/residue field supplied by local-field input, not separate attributed files. No stronger unramified-group classification or hyperspecial-building theorem asserted."
+    },
+    {
+      "concept": "igusa-genus-two-generator-theorem",
+      "concept_id": "a17d410e-9473-5218-83ad-5fb06fc3b6fc",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "No complete existing proof certified of the genus-TWO complex graded-generator relation E4,E6,chi10,chi12,chi35 AND integral fourteen even generators with odd=chi35*even. Genus-one E4/E6 structure is not this theorem. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Independent Igusa/genus2/chi35/fourteen-generator searches; actual Mathlib ModularForm class uses the one-dimensional upper half plane, native SiegelFunction:95/102 is a one-variable modular unit. Native LevelOne/GradedRing.evalE4E6 and its discriminant polynomial manipulate only E4/E6 on SL2, not genus-two Siegel upper half-space or integral fourteen-generator normalization. Concrete unresolved genus2 ring surjectivity/relation/integral odd-weight decomposition; preserve all clauses, not an absence claim."
+    },
+    {
+      "concept": "igusa-genus-two-generator-theorem",
+      "concept_id": "a17d410e-9473-5218-83ad-5fb06fc3b6fc",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "No complete existing proof certified of the genus-TWO complex graded-generator relation E4,E6,chi10,chi12,chi35 AND integral fourteen even generators with odd=chi35*even. Genus-one E4/E6 structure is not this theorem. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Independent Igusa/genus2/chi35/fourteen-generator searches; actual Mathlib ModularForm class uses the one-dimensional upper half plane, native SiegelFunction:95/102 is a one-variable modular unit. Native LevelOne/GradedRing.evalE4E6 and its discriminant polynomial manipulate only E4/E6 on SL2, not genus-two Siegel upper half-space or integral fourteen-generator normalization. Concrete unresolved genus2 ring surjectivity/relation/integral odd-weight decomposition; preserve all clauses, not an absence claim."
+    },
+    {
+      "concept": "integer-divisibility",
+      "concept_id": "e07c9d8d-31e8-591e-8fb7-a04d960bbf89",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib semigroupDvd:47 and dvd_def:60 in Algebra/Divisibility/Basic use the literal exists c,b=a*c. Stock Lean b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a Init/Data/Int/DivMod/Bootstrap:29 independently has Int.dvd_def by rfl, so this is precisely integer divisibility, including a=0 iff b=0 and negative factors. Generic native divisibility API is available, with no positivity or irreducibility restriction. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Divisibility/Basic.lean",
+          "declarations": "semigroupDvd:47; Dvd.intro:52; dvd_def:60",
+          "note": "Exact generic existential divisor constructor and ordinary divisibility API, instantiated to integers."
+        }
+      ],
+      "search_notes": "Native Ring/Divisibility and GroupWithZero/Divisibility checked. NeZero.of_dvd merely repackages a nonzero-divisor conclusion as an instance, excluded; elliptic divisibility sequences, ideal divisibility and logarithm-denominator power criteria are additional concepts. Core Int predicate remains stock Lean with zero supplier LOC."
+    },
+    {
+      "concept": "integer-divisibility",
+      "concept_id": "e07c9d8d-31e8-591e-8fb7-a04d960bbf89",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Mathlib semigroupDvd:47 and dvd_def:60 in Algebra/Divisibility/Basic use the literal exists c,b=a*c. Stock Lean b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a Init/Data/Int/DivMod/Bootstrap:29 independently has Int.dvd_def by rfl, so this is precisely integer divisibility, including a=0 iff b=0 and negative factors. Generic native divisibility API is available, with no positivity or irreducibility restriction. Native IsUnit.dvd_iff_of_eq_mul_add:45–47 proves divisibility is unchanged by adding a multiple of the divisor and multiplying by a unit, under arbitrary CommRing; valid on Int including units±1. This is direct ordinary divisibility API under weaker ring hypotheses. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Ring/Divisibility.lean",
+          "declarations": "IsUnit.dvd_iff_of_eq_mul_add:45",
+          "note": "Ordinary divisor-preserving unit/multiple transformation law applicable to integer divisibility."
+        }
+      ],
+      "search_notes": "Native Ring/Divisibility and GroupWithZero/Divisibility checked. NeZero.of_dvd merely repackages a nonzero-divisor conclusion as an instance, excluded; elliptic divisibility sequences, ideal divisibility and logarithm-denominator power criteria are additional concepts. Core Int predicate remains stock Lean with zero supplier LOC."
+    },
+    {
+      "concept": "integral-miller-basis-elliptic-forms",
+      "concept_id": "5e3c9047-7a17-5601-87ba-3b1c72cd5ac7",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Mathlib ModularForm.levelOne_odd_weight_eq_zero:158, levelOne_weight_two_rank_zero:257 and dimension_level_one:262 prove the catalogue vanishing clauses and even nonnegative dimension bound d<=floor(k/12)+1 (exact dimension is k/12 except residue2, otherwise k/12+1). Complete strong-induction proof265–284 and zero proofs read. They do NOT certify an integer-Fourier triangular Miller basis f_j=q^j+O(q^d) for EVERY integer weight; the integral normalized basis existence is still unresolved. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean",
+          "declarations": "ModularForm.levelOne_odd_weight_eq_zero:158; levelOne_weight_two_rank_zero:257; dimension_level_one:262",
+          "note": "Completed exact vanishing and dimension clauses of the stated integral-basis theorem; integral triangular basis endpoint remains unchecked."
+        }
+      ],
+      "search_notes": "Independent Miller/basis/integer triangular q-expansion searches. Native LevelOne/DimensionFormula:36/42 supplies CUSP-form companions, a distinct space; Integral/BoundedDenominators:78 assumes an integral spanning set and only clears a denominator, not producing a triangular integral basis. Integral/Basic represents integral-at-cusp forms, not a basis theorem. Graded E4/E6 generation also does not by itself supply normalized integral elimination. These were read and excluded as prerequisites/weaker different endpoints."
+    },
+    {
+      "concept": "integral-miller-basis-elliptic-forms",
+      "concept_id": "5e3c9047-7a17-5601-87ba-3b1c72cd5ac7",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Mathlib ModularForm.levelOne_odd_weight_eq_zero:158, levelOne_weight_two_rank_zero:257 and dimension_level_one:262 prove the catalogue vanishing clauses and even nonnegative dimension bound d<=floor(k/12)+1 (exact dimension is k/12 except residue2, otherwise k/12+1). Complete strong-induction proof265–284 and zero proofs read. They do NOT certify an integer-Fourier triangular Miller basis f_j=q^j+O(q^d) for EVERY integer weight; the integral normalized basis existence is still unresolved. Dependency has these complete clauses, but no native source implementing the remaining exact integer-Fourier normalized basis endpoint was certified; unknown records this imported partial availability. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development.",
+      "files": [],
+      "search_notes": "Independent Miller/basis/integer triangular q-expansion searches. Native LevelOne/DimensionFormula:36/42 supplies CUSP-form companions, a distinct space; Integral/BoundedDenominators:78 assumes an integral spanning set and only clears a denominator, not producing a triangular integral basis. Integral/Basic represents integral-at-cusp forms, not a basis theorem. Graded E4/E6 generation also does not by itself supply normalized integral elimination. These were read and excluded as prerequisites/weaker different endpoints."
+    }
+  ]
+}

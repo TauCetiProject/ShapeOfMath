@@ -1,0 +1,583 @@
+Harnessing the Bethe free energy
+
+Coverage: Entire corrected arXiv:1504.03975v3,31 PDF pages,§§1–5 and42references. v1/RANDOM2015 contained a critical technical error and v2 was withdrawn; v3 explicitly replaces its main results and is the artifact analyzed here.
+Required concepts complete: True
+Introduced concepts complete: True
+All citations captured: True
+Completion refers to immediate concepts only; false means not certified.
+
+REQUIRED CONCEPT FRONTIER (20)
+
+- Azuma–Hoeffding inequality: If a real martingale has increments bounded in absolute value by c_i, then P(|M_n−M_0|≥t)≤2exp(−t²/(2∑_{i=1}^nc_i²)) for t>0.
+- Bethe free energy of factor-graph marginals: For consistent variable and factor marginals p_x,p_a, the Bethe log-partition functional is ∑_a[H(p_a)+E_{p_a}lnψ_a]−∑_x(d_x−1)H(p_x). On a limiting rooted factor-tree law one uses the corresponding expected local terms, normalized per variable node.
+- Bounded martingale convergence theorem: A martingale uniformly bounded by a deterministic constant converges almost surely and in L¹. In particular, conditional expectations of a bounded X along increasing σ-algebras converge to E[X|σ(∪_nF_n)].
+- Chernoff bound for sums of independent Bernoulli variables: If S is a sum of independent Bernoulli variables with mean μ, then for δ>0, P(S≥(1+δ)μ)≤[e^δ/(1+δ)^(1+δ)]^μ; for 0<δ<1, P(S≤(1−δ)μ)≤exp(−μδ²/2).
+- Compactness of bounded-degree rooted graphs with finite marks: Fix a degree bound Δ and a finite set of vertex/edge marks. Isomorphism classes of connected rooted graphs of degree at mostΔ, with those marks, form a compact metrizable space for local convergence: two rooted graphs are close when their marked balls around the root agree to a large radius. Finite and countably infinite graphs are allowed.
+- Configuration model for a prescribed degree sequence: Attach the prescribed number of half-edges to each vertex and match half-edges uniformly at random; collapsing each half-edge bundle gives a random multigraph with those degrees. Bipartite typed versions match compatible half-edge classes.
+- Decay of boundary influence for Gibbs measures on trees: On rooted factor trees, the root marginal changes by arbitrarily little in total variation under every possible boundary condition at sufficiently large distance. This uniform condition yields uniqueness of the limiting root marginal.
+- Girth of a graph: The length of a shortest cycle, with girth infinity for an acyclic graph. In a multigraph a loop has length one and two parallel edges form a cycle of length two.
+- Jensen’s inequality for expectations: For an integrable real random variable X and convex φ with E|φ(X)|<∞, φ(EX)≤Eφ(X), when φ is defined on an interval containing the range of X.
+- Law of total variance: For square-integrable X and sub-σ-algebra G, Var(X)=E[Var(X|G)]+Var(E[X|G]).
+- Local weak convergence of bounded-degree graphs: A bounded-degree graph sequence converges locally to a random rooted graph if, for each finite radius and rooted neighborhood type, the proportion of vertices with that neighborhood converges to the corresponding root-neighborhood probability. For random graphs this convergence may be in probability.
+- Markov’s inequality for nonnegative random variables: If Y is a nonnegative integrable real random variable and t>0, then P(Y≥t)≤E[Y]/t.
+- Non-reconstruction for Gibbs measures on sparse graphs: The spin at a typical vertex becomes asymptotically independent of a randomly sampled distant boundary condition, measured by the expected total variation change of its conditional marginal as the boundary radius tends to infinity.
+- Paley–Zygmund inequality: For nonnegative X with 0<E[X²]<∞ and 0<θ<1, P(X>θEX)≥(1−θ)²(EX)²/E[X²].
+- Partition function of a finite Gibbs model: The normalizing sum Z=∑_σ exp(−βH(σ)); equivalently Z=∑_σ∏_aψ_a(σ) for positive factor weights. Its logarithm records the model’s free energy up to normalization.
+- Polish space: A topological space admitting a complete separable metric that induces its topology.
+- Relative entropy of finite probability distributions: D(p∥q)=∑_ωp(ω)ln(p(ω)/q(ω)), with a positive p(ω) and zero q(ω) giving +∞ and zero p terms contributing zero.
+- Size-biased change of measure: Given a probability measure P and a nonnegative random variable W with 0<E_PW<∞, the W-biased measure is Q(A)=E_P[W·1_A]/E_PW; equivalently dQ/dP=W/E_PW.
+- Stirling’s formula: As n→∞, n!∼√(2πn)(n/e)^n.
+- Weak compactness of probabilities on a compact metric space: The Borel probability measures on a compact metric space form a compact metrizable space for weak convergence; in particular every sequence has a weakly convergent subsequence.
+
+INHERITED PREREQUISITES (97)
+
+- Abelian group — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Almost-everywhere property on a measure space — via azuma-hoeffding, law-total-variance, martingale-convergence-bounded, non-reconstruction-gibbs
+- Almost-sure convergence of real random variables — via martingale-convergence-bounded
+- Asymptotic equivalence — via stirling-formula
+- Bernoulli distribution — via chernoff-bernoulli-bound
+- Bijection between sets — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure
+- Binary operation on a set — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Binary relation on a set — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Bipartite multigraph — via bethe-free-energy-factor-graph
+- Borel σ-algebra on the real line — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, jensen-inequality-expectations, law-total-variance, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Cartesian product of sets — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Cauchy sequence in a metric space — via polish-space
+- Commutative ring with identity — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Compact topological space — via bounded-degree-rooted-graph-compactness, compact-space-probability-measure-weak-compactness
+- Complement of a subset — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, gibbs-boundary-influence-decay-tree, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Complete metric space — via polish-space
+- Complex number — via martingale-convergence-bounded
+- Conditional expectation given a σ-algebra — via azuma-hoeffding, law-total-variance, martingale-convergence-bounded, non-reconstruction-gibbs
+- Conditional probability given an event — via gibbs-boundary-influence-decay-tree
+- Conditional variance — via law-total-variance
+- Continuous map between topological spaces — via compact-space-probability-measure-weak-compactness
+- Convergence in probability — via local-weak-convergence-graphs
+- Convergence of a sequence in a metric space — via polish-space
+- Convergent real series — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, gibbs-boundary-influence-decay-tree, martingale-convergence-bounded, non-reconstruction-gibbs, partition-function-finite, relative-entropy-finite, stirling-formula
+- Convex function on a real interval — via jensen-inequality-expectations
+- Dense subset of a metric space — via polish-space
+- Discrete-time martingale — via azuma-hoeffding, martingale-convergence-bounded
+- Disjoint sets — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, gibbs-boundary-influence-decay-tree, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Equivalence class — via martingale-convergence-bounded
+- Equivalence relation — via martingale-convergence-bounded
+- Essential supremum of a measurable real function — via martingale-convergence-bounded
+- Expectation of an integrable real random variable — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, jensen-inequality-expectations, law-total-variance, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Extended nonnegative real numbers — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, relative-entropy-finite, size-biased-change-of-measure
+- Factorial — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, gibbs-boundary-influence-decay-tree, martingale-convergence-bounded, non-reconstruction-gibbs, partition-function-finite, relative-entropy-finite, stirling-formula
+- Field — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Filtration of σ-algebras — via azuma-hoeffding, martingale-convergence-bounded
+- Finite factor graph — via bethe-free-energy-factor-graph
+- Finite set — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure
+- Function between sets — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Gibbs distribution on a finite configuration space — via gibbs-boundary-influence-decay-tree, non-reconstruction-gibbs, partition-function-finite
+- Graph distance — via bounded-degree-rooted-graph-compactness, gibbs-boundary-influence-decay-tree, local-weak-convergence-graphs, non-reconstruction-gibbs
+- Group — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Independent family of random variables — via chernoff-bernoulli-bound
+- Indicator function of a subset — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, jensen-inequality-expectations, law-total-variance, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Intersection of a family of sets — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, gibbs-boundary-influence-decay-tree, jensen-inequality-expectations, law-total-variance, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, polish-space, size-biased-change-of-measure
+- Isomorphism of undirected multigraphs — via bounded-degree-rooted-graph-compactness
+- Least upper bound in a partially ordered set — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Lebesgue Lᵖ space — via martingale-convergence-bounded
+- Lebesgue integral — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, jensen-inequality-expectations, law-total-variance, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Limit of a function between metric spaces — via stirling-formula
+- Limit of a real sequence — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, gibbs-boundary-influence-decay-tree, local-weak-convergence-graphs, martingale-convergence-bounded, non-reconstruction-gibbs, partition-function-finite, relative-entropy-finite, stirling-formula
+- Linearity of the Lebesgue integral — via law-total-variance
+- Marginal distribution on a finite product space — via bethe-free-energy-factor-graph
+- Measurable map between measurable spaces — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, jensen-inequality-expectations, law-total-variance, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Measurable simple real function — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, jensen-inequality-expectations, law-total-variance, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Measurable space — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, jensen-inequality-expectations, law-total-variance, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Measure — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, gibbs-boundary-influence-decay-tree, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Metric space — via bounded-degree-rooted-graph-compactness, compact-space-probability-measure-weak-compactness, local-weak-convergence-graphs, polish-space, stirling-formula
+- Modulus of a complex number — via martingale-convergence-bounded
+- Natural logarithm — via bethe-free-energy-factor-graph, martingale-convergence-bounded, partition-function-finite, relative-entropy-finite
+- Natural number — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Nonnegative real square root — via martingale-convergence-bounded
+- Normed vector space — via martingale-convergence-bounded
+- Open interval in the real line — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, jensen-inequality-expectations, law-total-variance, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Ordered field — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Ordered pair — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Partial order — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Partition of a set — via bethe-free-energy-factor-graph
+- Path in an undirected graph — via bounded-degree-rooted-graph-compactness, gibbs-boundary-influence-decay-tree, graph-girth, local-weak-convergence-graphs, non-reconstruction-gibbs
+- Preimage of a subset under a function — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, jensen-inequality-expectations, law-total-variance, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Probability mass function on a finite set — via bethe-free-energy-factor-graph, chernoff-bernoulli-bound, configuration-model-graph, gibbs-boundary-influence-decay-tree, local-weak-convergence-graphs, non-reconstruction-gibbs, partition-function-finite, relative-entropy-finite
+- Probability space — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, gibbs-boundary-influence-decay-tree, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Product distribution on a finite product space — via bethe-free-energy-factor-graph
+- Real exponential function — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, gibbs-boundary-influence-decay-tree, martingale-convergence-bounded, non-reconstruction-gibbs, partition-function-finite, relative-entropy-finite, stirling-formula
+- Real number — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Real power of a positive real number — via martingale-convergence-bounded
+- Real sequence — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, gibbs-boundary-influence-decay-tree, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Real sine function — via stirling-formula
+- Real-valued random variable — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, jensen-inequality-expectations, law-total-variance, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Rooted locally finite graph — via bounded-degree-rooted-graph-compactness, gibbs-boundary-influence-decay-tree, local-weak-convergence-graphs
+- Separable metric space — via polish-space
+- Sequence in a set — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Set — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Shannon entropy of a finite distribution — via bethe-free-energy-factor-graph
+- Subset — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Sum of a nonnegative series — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, gibbs-boundary-influence-decay-tree, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- Topological space — via bounded-degree-rooted-graph-compactness, compact-space-probability-measure-weak-compactness, polish-space
+- Total order — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, partition-function-finite, polish-space, relative-entropy-finite, size-biased-change-of-measure, stirling-formula
+- Total variation distance between finite probability distributions — via gibbs-boundary-influence-decay-tree, non-reconstruction-gibbs
+- Undirected multigraph — via bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, configuration-model-graph, gibbs-boundary-influence-decay-tree, graph-girth, local-weak-convergence-graphs, non-reconstruction-gibbs
+- Union of a family of sets — via azuma-hoeffding, bethe-free-energy-factor-graph, bounded-degree-rooted-graph-compactness, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, gibbs-boundary-influence-decay-tree, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, polish-space, size-biased-change-of-measure
+- Variance of a real random variable — via law-total-variance
+- Vector space — via martingale-convergence-bounded
+- Weak convergence of probability measures on a metric space — via compact-space-probability-measure-weak-compactness
+- π — via stirling-formula
+- σ-algebra — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, gibbs-boundary-influence-decay-tree, jensen-inequality-expectations, law-total-variance, local-weak-convergence-graphs, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+- σ-algebra generated by a family of subsets — via azuma-hoeffding, bethe-free-energy-factor-graph, chernoff-bernoulli-bound, compact-space-probability-measure-weak-compactness, jensen-inequality-expectations, law-total-variance, markov-inequality, martingale-convergence-bounded, non-reconstruction-gibbs, paley-zygmund, size-biased-change-of-measure
+
+INTRODUCED CONCEPTS (3)
+
+- Bapst–Coja-Oghlan regularity lemma for probability measures on discrete cubes
+- Bethe free-energy limit under local Gibbs decorrelation
+- Finite-mixture approximate independence of finite-spin cube measures
+
+LOCATED CONCEPTS (37)
+
+1. Probability mass function on a finite set
+   A function p from a finite set Ω to [0,1] satisfying ∑_{ω∈Ω}p(ω)=1; the probability of A⊆Ω is ∑_{ω∈A}p(ω).
+   Source: relies_on, Notation,p.3;§2 proofs
+
+2. Total variation distance between finite probability distributions
+   For probability mass functions p,q on the same finite set, d_TV(p,q)=½∑_ω|p(ω)−q(ω)|=sup_A|p(A)−q(A)|.
+   Source: relies_on, Notation,p.3;§2 proofs
+
+3. Product distribution on a finite product space
+   For probability mass functions p_i on finite sets Ω_i, the product distribution on ∏_iΩ_i assigns (ω_i)_i the probability ∏_ip_i(ω_i).
+   Source: relies_on, Notation,p.3;§2 proofs
+
+4. Marginal distribution on a finite product space
+   The marginal on a set of coordinates is obtained by summing the joint mass over all other coordinates.
+   Source: relies_on, Notation,p.3;§2 proofs
+
+5. Shannon entropy of a finite distribution
+   For a finite probability mass function p, H(p)=−∑_ωp(ω)ln p(ω), with 0ln0=0.
+   Source: relies_on, Notation,p.3;§2 proofs
+
+6. Relative entropy of finite probability distributions
+   D(p∥q)=∑_ωp(ω)ln(p(ω)/q(ω)), with a positive p(ω) and zero q(ω) giving +∞ and zero p terms contributing zero.
+   Source: relies_on, Notation,p.3;§2 proofs
+
+7. Conditional expectation given a σ-algebra
+   For integrable X and a sub-σ-algebra G, E[X|G] is a G-measurable integrable random variable satisfying ∫_AE[X|G]dP=∫_AXdP for every A∈G, defined up to almost-sure equality.
+   Source: relies_on, Notation,p.3;§2 proofs
+
+8. Conditional variance
+   For square-integrable X, Var(X|G)=E[(X−E[X|G])²|G]=E[X²|G]−E[X|G]².
+   Source: relies_on, Notation,p.3;§2 proofs
+
+9. Law of total variance
+   For square-integrable X and sub-σ-algebra G, Var(X)=E[Var(X|G)]+Var(E[X|G]).
+   Source: relies_on, Notation,p.3;§2 proofs
+
+10. Markov’s inequality for nonnegative random variables
+   If Y is a nonnegative integrable real random variable and t>0, then P(Y≥t)≤E[Y]/t.
+   Source: relies_on, §§2.1,2.4,3.2,4.6,4.7,5.3
+   Note: Standard named inequalities/asymptotics imported in the stated argument; no origin claim.
+
+11. Chernoff bound for sums of independent Bernoulli variables
+   If S is a sum of independent Bernoulli variables with mean μ, then for δ>0, P(S≥(1+δ)μ)≤[e^δ/(1+δ)^(1+δ)]^μ; for 0<δ<1, P(S≤(1−δ)μ)≤exp(−μδ²/2).
+   Source: relies_on, §§2.1,2.4,3.2,4.6,4.7,5.3
+   Note: Standard named inequalities/asymptotics imported in the stated argument; no origin claim.
+
+12. Paley–Zygmund inequality
+   For nonnegative X with 0<E[X²]<∞ and 0<θ<1, P(X>θEX)≥(1−θ)²(EX)²/E[X²].
+   Source: relies_on, §§2.1,2.4,3.2,4.6,4.7,5.3
+   Note: Standard named inequalities/asymptotics imported in the stated argument; no origin claim.
+
+13. Azuma–Hoeffding inequality
+   If a real martingale has increments bounded in absolute value by c_i, then P(|M_n−M_0|≥t)≤2exp(−t²/(2∑_{i=1}^nc_i²)) for t>0.
+   Source: relies_on, §§2.1,2.4,3.2,4.6,4.7,5.3
+   Note: Standard named inequalities/asymptotics imported in the stated argument; no origin claim.
+
+14. Jensen’s inequality for expectations
+   For an integrable real random variable X and convex φ with E|φ(X)|<∞, φ(EX)≤Eφ(X), when φ is defined on an interval containing the range of X.
+   Source: relies_on, §§2.1,2.4,3.2,4.6,4.7,5.3
+   Note: Standard named inequalities/asymptotics imported in the stated argument; no origin claim.
+
+15. Stirling’s formula
+   As n→∞, n!∼√(2πn)(n/e)^n.
+   Source: relies_on, §§2.1,2.4,3.2,4.6,4.7,5.3
+   Note: Standard named inequalities/asymptotics imported in the stated argument; no origin claim.
+
+16. Bounded martingale convergence theorem
+   A martingale uniformly bounded by a deterministic constant converges almost surely and in L¹. In particular, conditional expectations of a bounded X along increasing σ-algebras converge to E[X|σ(∪_nF_n)].
+   Source: relies_on, §3.3 and Lemma4.3
+   Note: The neighborhood filtration makes a bounded conditional-expectation martingale; weak topology is used on bounded-degree rooted graph laws.
+
+17. Weak convergence of probability measures on a metric space
+   Measures μ_n converge weakly to μ if ∫f dμ_n→∫f dμ for every bounded continuous real function f on the space.
+   Source: relies_on, §3.3 and Lemma4.3
+   Note: The neighborhood filtration makes a bounded conditional-expectation martingale; weak topology is used on bounded-degree rooted graph laws.
+
+18. Polish space
+   A topological space admitting a complete separable metric that induces its topology.
+   Source: relies_on, §3.3 and Lemma4.3
+   Note: The neighborhood filtration makes a bounded conditional-expectation martingale; weak topology is used on bounded-degree rooted graph laws.
+
+19. Local weak convergence of bounded-degree graphs
+   A bounded-degree graph sequence converges locally to a random rooted graph if, for each finite radius and rooted neighborhood type, the proportion of vertices with that neighborhood converges to the corresponding root-neighborhood probability. For random graphs this convergence may be in probability.
+   Source: relies_on, §3.3 and Lemma4.3
+   Note: The neighborhood filtration makes a bounded conditional-expectation martingale; weak topology is used on bounded-degree rooted graph laws.
+
+20. Configuration model for a prescribed degree sequence
+   Attach the prescribed number of half-edges to each vertex and match half-edges uniformly at random; collapsing each half-edge bundle gives a random multigraph with those degrees. Bipartite typed versions match compatible half-edge classes.
+   Source: relies_on, §§3.2–3.5 and5
+   Note: Typed bipartite matching and short-cycle switchings are actual proof inputs.
+
+21. Graph distance
+   The distance between two vertices is the minimum length of a path joining them, or infinity if no such path exists.
+   Source: relies_on, §§3.2–3.5 and5
+   Note: Typed bipartite matching and short-cycle switchings are actual proof inputs.
+
+22. Girth of a graph
+   The length of a shortest cycle, with girth infinity for an acyclic graph. In a multigraph a loop has length one and two parallel edges form a cycle of length two.
+   Source: relies_on, §§3.2–3.5 and5
+   Note: Typed bipartite matching and short-cycle switchings are actual proof inputs.
+
+23. Gibbs distribution on a finite configuration space
+   For a finite set Ω, energy H:Ω→ℝ and inverse temperature β≥0, the Gibbs distribution is μ(σ)=exp(−βH(σ))/Z, where Z=∑_{τ∈Ω}exp(−βH(τ)).
+   Source: explains, §§1,3.1–3.2
+
+24. Partition function of a finite Gibbs model
+   The normalizing sum Z=∑_σ exp(−βH(σ)); equivalently Z=∑_σ∏_aψ_a(σ) for positive factor weights. Its logarithm records the model’s free energy up to normalization.
+   Source: explains, §§1,3.1–3.2
+
+25. Finite factor graph
+   A finite bipartite graph with variable nodes, factor nodes, and a nonnegative function at each factor depending on its adjacent variables. Multiplying the factor functions gives the weight of an assignment.
+   Source: explains, §§1,3.1–3.2
+
+26. Ising model on a finite graph
+   Spins σ_v∈{−1,+1} receive Gibbs weight exp(β∑_{uv∈E}J_{uv}σ_uσ_v+∑_vh_vσ_v), for specified couplings and external fields.
+   Source: explains, §3.1,Examples3.3–3.5
+   Note: Examples and previously known models,not introduced here.
+
+27. Potts model on a finite graph
+   A finite-state spin at every vertex receives Gibbs weight determined by whether adjacent spins agree; the antiferromagnetic model penalizes agreement.
+   Source: explains, §3.1,Examples3.3–3.5
+   Note: Examples and previously known models,not introduced here.
+
+28. Uniform random k-SAT model
+   A Boolean formula on n variables formed by m independent clauses, each uniformly chosen from the 2ᵏ·binomial(n,k) clauses containing k distinct variables, each independently negated or unnegated.
+   Source: explains, §3.1,Examples3.3–3.5
+   Note: Examples and previously known models,not introduced here.
+
+29. Bethe free energy of factor-graph marginals
+   For consistent variable and factor marginals p_x,p_a, the Bethe log-partition functional is ∑_a[H(p_a)+E_{p_a}lnψ_a]−∑_x(d_x−1)H(p_x). On a limiting rooted factor-tree law one uses the corresponding expected local terms, normalized per variable node.
+   Source: explains, §§3.4,4.1–4.4
+   Note: The cavity-method and correlation-decay concepts have predecessor credits, particularly [29],[31]. Size bias is applied with W=Z, and conditionally with W=Z/E[Z|F] to preserve coarse neighborhood information F; these applications do not warrant a paper-specific concept. No invention claim for these definitions.
+
+30. Size-biased change of measure
+   Given a probability measure P and a nonnegative random variable W with 0<E_PW<∞, the W-biased measure is Q(A)=E_P[W·1_A]/E_PW; equivalently dQ/dP=W/E_PW.
+   Source: explains, §§3.4,4.1–4.4
+   Note: The cavity-method and correlation-decay concepts have predecessor credits, particularly [29],[31]. Size bias is applied with W=Z, and conditionally with W=Z/E[Z|F] to preserve coarse neighborhood information F; these applications do not warrant a paper-specific concept. No invention claim for these definitions.
+
+31. Non-reconstruction for Gibbs measures on sparse graphs
+   The spin at a typical vertex becomes asymptotically independent of a randomly sampled distant boundary condition, measured by the expected total variation change of its conditional marginal as the boundary radius tends to infinity.
+   Source: explains, §§3.4,4.1–4.4
+   Note: The cavity-method and correlation-decay concepts have predecessor credits, particularly [29],[31]. Size bias is applied with W=Z, and conditionally with W=Z/E[Z|F] to preserve coarse neighborhood information F; these applications do not warrant a paper-specific concept. No invention claim for these definitions.
+
+32. Decay of boundary influence for Gibbs measures on trees
+   On rooted factor trees, the root marginal changes by arbitrarily little in total variation under every possible boundary condition at sufficiently large distance. This uniform condition yields uniqueness of the limiting root marginal.
+   Source: explains, §§3.4,4.1–4.4
+   Note: The cavity-method and correlation-decay concepts have predecessor credits, particularly [29],[31]. Size bias is applied with W=Z, and conditionally with W=Z/E[Z|F] to preserve coarse neighborhood information F; these applications do not warrant a paper-specific concept. No invention claim for these definitions.
+
+33. Bapst–Coja-Oghlan regularity lemma for probability measures on discrete cubes
+   For finite Ω and ε>0, every measure on Ωⁿ for sufficiently large n admits coordinate and state partitions of bounded total size N(ε,Ω), refining any coordinate partition with at most 1/ε classes. Apart from total mass ε and εn exceptional coordinates, conditioning on a state makes empirical spin distributions regular on each coordinate class: all subsets of relative size at least ε have expected total variation discrepancy below ε from the full class’s empirical distribution. Within each state, empirical distributions on each class have diameter below ε; the unconditioned measure is regular as well.
+   Source: introduces, Theorem2.1,proof§2.3
+   Note: The ε-regular/homogeneous terminology is defined inside this theorem’s paragraph and source notes,not separate permanent vocabulary.
+   Origin evidence: The abstract,Introduction and§2 claim a new regularity theorem for arbitrary finite-spin cube measures,explicitly inspired by Szemerédi[40] rather than attributed to it. Theorem2.1 and§2.3 supply the statement/proof in correctedv3.
+
+34. Bethe free-energy limit under local Gibbs decorrelation
+   For a locally convergent sequence of bounded-degree typed factor models with finite spins and positive weights from a fixed finite family, assume every fixed short-cycle-free event has nonvanishing probability in both ordinary and locally conditioned partition-function-biased models. Let p be a consistent limiting-tree marginal assignment. If average two-variable Gibbs marginals converge in total variation to the corresponding products from p, then limsup n⁻¹ElnZ≤B(p). If the same holds in the locally conditioned partition-function-biased model, the limit equals B(p). Non-reconstruction implies the required decorrelation; uniform tree boundary-influence decay yields equality in both models.
+   Source: introduces, Theorems4.4–4.5 andCorollary4.6
+   Note: Grouped as the main generic Bethe-limit criterion,with its sufficient decorrelation hypotheses; not a second identity for every proof corollary.
+   Origin evidence: The Introduction and§4 explicitly distinguish the generic positive factor-model result and method from prior special-case/interpolation proofs[7],[18],[19],[33]. Correctedv3 Theorems4.4–4.5 andCorollary4.6 establish the retained criterion; claims from withdrawnv1 are not transferred.
+
+35. Gibbs distribution on a finite configuration space
+   For a finite set Ω, energy H:Ω→ℝ and inverse temperature β≥0, the Gibbs distribution is μ(σ)=exp(−βH(σ))/Z, where Z=∑_{τ∈Ω}exp(−βH(τ)).
+   Source: relies_on, §§3–5 actual model definitions and proof hypotheses; independently of explains occurrences
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+36. Partition function of a finite Gibbs model
+   The normalizing sum Z=∑_σ exp(−βH(σ)); equivalently Z=∑_σ∏_aψ_a(σ) for positive factor weights. Its logarithm records the model’s free energy up to normalization.
+   Source: relies_on, §§3–5 actual model definitions and proof hypotheses; independently of explains occurrences
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+37. Finite factor graph
+   A finite bipartite graph with variable nodes, factor nodes, and a nonnegative function at each factor depending on its adjacent variables. Multiplying the factor functions gives the weight of an assignment.
+   Source: relies_on, §§3–5 actual model definitions and proof hypotheses; independently of explains occurrences
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+38. Bethe free energy of factor-graph marginals
+   For consistent variable and factor marginals p_x,p_a, the Bethe log-partition functional is ∑_a[H(p_a)+E_{p_a}lnψ_a]−∑_x(d_x−1)H(p_x). On a limiting rooted factor-tree law one uses the corresponding expected local terms, normalized per variable node.
+   Source: relies_on, §§3–5 actual model definitions and proof hypotheses; independently of explains occurrences
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+39. Size-biased change of measure
+   Given a probability measure P and a nonnegative random variable W with 0<E_PW<∞, the W-biased measure is Q(A)=E_P[W·1_A]/E_PW; equivalently dQ/dP=W/E_PW.
+   Source: relies_on, §§3–5 actual model definitions and proof hypotheses; independently of explains occurrences
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+40. Non-reconstruction for Gibbs measures on sparse graphs
+   The spin at a typical vertex becomes asymptotically independent of a randomly sampled distant boundary condition, measured by the expected total variation change of its conditional marginal as the boundary radius tends to infinity.
+   Source: relies_on, §§3–5 actual model definitions and proof hypotheses; independently of explains occurrences
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+41. Decay of boundary influence for Gibbs measures on trees
+   On rooted factor trees, the root marginal changes by arbitrarily little in total variation under every possible boundary condition at sufficiently large distance. This uniform condition yields uniqueness of the limiting root marginal.
+   Source: relies_on, §§3–5 actual model definitions and proof hypotheses; independently of explains occurrences
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+42. Compactness of bounded-degree rooted graphs with finite marks
+   Fix a degree bound Δ and a finite set of vertex/edge marks. Isomorphism classes of connected rooted graphs of degree at mostΔ, with those marks, form a compact metrizable space for local convergence: two rooted graphs are close when their marked balls around the root agree to a large radius. Finite and countably infinite graphs are allowed.
+   Source: relies_on, §3.3 probability laws of marked rooted factor templates and their second-order law space; finite alphabets/degree bound explicitly checked
+   Note: Actual source-specific input recorded during full statement-union review.
+
+43. Weak compactness of probabilities on a compact metric space
+   The Borel probability measures on a compact metric space form a compact metrizable space for weak convergence; in particular every sequence has a weakly convergent subsequence.
+   Source: relies_on, §3.3 probability laws of marked rooted factor templates and their second-order law space; finite alphabets/degree bound explicitly checked
+   Note: Actual source-specific input recorded during full statement-union review.
+
+44. Finite-mixture approximate independence of finite-spin cube measures
+   For every finite spin set Ω, ε>0 and integer k≥2, there is η>0 such that every probability law µ on Ωⁿ with sufficiently large n has disjoint events S₁,…,S_N, each of mass at least η and together of mass at least1−ε, for which the conditional joint law at k uniformly sampled coordinates has expected total variation distance less than ε from the product of its conditional one-coordinate marginals. The number N is at most1/η.
+   Source: introduces, corrected2015v3,Corollary2.2 and§2.4
+   Note: Captures the standalone approximate product-mixture consequence; not a new concept for each local ε,k-state notation.
+   Origin evidence: The source introduces its new finite-cube regularity theorem inIntroduction/§2.1 and explicitly derives this conditional-independence decomposition in§2.2,Corollary2.2,with proof§2.4. Szemerédi is credited as inspiration for the parent regularity theorem, not as the source of this finite-spin conditional-law result.
+
+ADDITIONAL PREREQUISITES (86)
+
+- Abelian group [definition]: A group whose operation is commutative.
+- Almost-everywhere property on a measure space [definition]: A property holds almost everywhere if the set where it fails is contained in a measurable set of measure zero.
+- Almost-sure convergence of real random variables [definition]: Xₙ→X almost surely means P({ω:limₙXₙ(ω)=X(ω)})=1.
+- Asymptotic equivalence [definition]: The assertion f∼g along a specified limit means f(x)/g(x)→1, where g is nonzero near that limit. Sequences are the instance x=n→∞.
+- Bernoulli distribution [definition]: The distribution on {0,1} assigning probability p to 1 and 1−p to 0, for 0≤p≤1.
+- Bijection between sets [definition]: A function for which each element of the codomain is the image of exactly one element of the domain.
+- Binary operation on a set [definition]: A function S×S→S.
+- Binary relation on a set [definition]: A subset R⊆S×S; writing xRy means (x,y)∈R.
+- Bipartite multigraph [definition]: An undirected multigraph whose vertices are partitioned into two classes and whose edges join opposite classes.
+- Borel σ-algebra on the real line [definition]: The σ-algebra on ℝ generated by the open intervals.
+- Cartesian product of sets [definition]: A×B is the set of ordered pairs (a,b) with a∈A and b∈B.
+- Cauchy sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) is Cauchy if for every ε>0 there is N such that d(xₙ,xₘ)<ε whenever n,m≥N.
+- Commutative ring with identity [definition]: An abelian group under addition, together with an associative commutative multiplication with identity, distributing over addition. The zero ring is allowed.
+- Compact topological space [definition]: A topological space in which every open cover has a finite subcover.
+- Complement of a subset [definition]: For A⊆Ω, its complement Ω∖A consists of the elements of Ω that do not belong to A.
+- Complete metric space [definition]: A metric space is complete if every Cauchy sequence in it converges to a point of that same space.
+- Complex number [definition]: A complex number is a pair of real numbers, written a+bi. Addition is componentwise and multiplication is (a+bi)(c+di)=(ac−bd)+(ad+bc)i, so i²=−1.
+- Conditional probability given an event [definition]: If P(B)>0, the conditional probability of A given B is P(A|B)=P(A∩B)/P(B).
+- Continuous map between topological spaces [definition]: A map is continuous if the preimage of every open subset of its target is open in its domain.
+- Convergence in probability [definition]: Random variables X_n converge in probability to X if P(|X_n−X|>ε)→0 for every ε>0; metric-valued variables use their metric in place of absolute difference.
+- Convergence of a sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) converges to x∈X if for every ε>0 there is N such that d(xₙ,x)<ε whenever n≥N.
+- Convergent real series [definition]: The series ∑ₙ≥1aₙ converges to S if its sequence of partial sums converges to S.
+- Convex function on a real interval [definition]: A real function φ on an interval I is convex if φ(tx+(1−t)y)≤tφ(x)+(1−t)φ(y) for x,y∈I and 0≤t≤1.
+- Dense subset of a metric space [definition]: A subset A of a metric space X is dense if every open ball centered in X with positive radius meets A.
+- Discrete-time martingale [definition]: An integrable process (M_n) adapted to an increasing sequence of σ-algebras (F_n) such that E[M_{n+1}|F_n]=M_n almost surely.
+- Disjoint sets [definition]: Two sets are disjoint when they have no common element; a family is pairwise disjoint when every two distinct members are disjoint.
+- Equivalence class [definition]: For an equivalence relation ~ on X, [x]={y∈X:y~x}; the quotient set X/~ consists of these classes.
+- Equivalence relation [definition]: A reflexive, symmetric and transitive binary relation.
+- Essential supremum of a measurable real function [definition]: The infimum of real a for which f≤a almost everywhere, allowing infinite values when no finite bound exists.
+- Expectation of an integrable real random variable [definition]: If E abs(X)=∫abs(X)dP<∞, the expectation of X is EX=∫X dP.
+- Extended nonnegative real numbers [definition]: The nonnegative real numbers together with a greatest element ∞. Sums involving ∞ equal ∞, and 0·∞ is taken to be 0 when integrating simple functions.
+- Factorial [definition]: For n≥1, n!=1·2···n, and 0!=1.
+- Field [definition]: A commutative ring in which 1≠0 and every nonzero element is invertible.
+- Filtration of σ-algebras [definition]: An increasing family (F_t) of sub-σ-algebras on a fixed probability space, indexed by ordered time: F_s⊆F_t for s≤t.
+- Finite set [definition]: A set X is finite if it is bijective with {1,…,n} for some natural number n≥0; its cardinality is n.
+- Function between sets [definition]: An assignment taking each element of a specified domain set to exactly one element of a specified codomain set.
+- Group [definition]: A set with an associative binary operation, an identity element, and a two-sided inverse for each element.
+- Independent family of random variables [definition]: For distinct i₁,…,iₖ and Borel A₁,…,Aₖ, independence requires P(⋂ⱼ{Xᵢⱼ∈Aⱼ})=∏ⱼP(Xᵢⱼ∈Aⱼ).
+- Indicator function of a subset [definition]: For A⊆Ω, the real function 1_A is 1 on A and 0 on its complement.
+- Intersection of a family of sets [definition]: Inside a specified ambient set, the elements belonging to every member of the family.
+- Isomorphism of undirected multigraphs [definition]: A pair of bijections between the vertex sets and edge sets of two undirected multigraphs that preserves the unordered endpoints of every edge. For rooted or marked graphs it must also preserve the root and all specified marks.
+- Least upper bound in a partially ordered set [definition]: For A⊆P, its least upper bound is an upper bound s satisfying s≤b for every upper bound b of A, when such an s exists.
+- Lebesgue Lᵖ space [definition]: For a measure space and 1≤p<∞, Lᵖ consists of measurable scalar functions modulo equality almost everywhere with ∫|f|ᵖ<∞, normed by (∫|f|ᵖ)¹ᐟᵖ. For p=∞ use the essential-supremum norm.
+- Lebesgue integral [definition]: For measurable f≥0, ∫f dμ is the supremum of integrals of nonnegative simple functions below f. For signed f with ∫abs(f)dμ<∞, define ∫f=∫f⁺−∫f⁻.
+- Limit of a function between metric spaces [definition]: For f defined near an accumulation point a of a metric space, lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<d(x,a)<δ implies d(f(x),L)<ε.
+- Limit of a real sequence [definition]: A sequence (aₙ) converges to L∈ℝ if for every ε>0 there is N such that n≥N implies abs(aₙ−L)<ε.
+- Linearity of the Lebesgue integral [theorem]: If f and g are integrable real functions and a,b are real scalars, then af+bg is integrable and ∫(af+bg)dμ=a∫f dμ+b∫g dμ.
+- Measurable map between measurable spaces [definition]: A function for which the preimage of each measurable subset of the codomain is measurable in the domain.
+- Measurable simple real function [definition]: A measurable real function with finite range. It can be written as a finite sum ∑ a_i 1_{A_i} with measurable level sets A_i.
+- Measurable space [definition]: A set equipped with a specified σ-algebra of subsets.
+- Measure [definition]: A measure μ maps a σ-algebra to [0,∞], sends ∅ to 0, and satisfies μ(⋃ₙAₙ)=∑ₙμ(Aₙ) for every pairwise disjoint sequence of measurable sets.
+- Metric space [definition]: A set X with a function d:X×X→[0,∞) such that d(x,y)=0 exactly when x=y, d(x,y)=d(y,x), and d(x,z)≤d(x,y)+d(y,z).
+- Modulus of a complex number [definition]: For z=a+bi, its modulus is the nonnegative real number |z|=√(a²+b²).
+- Natural logarithm [definition]: The inverse ln:(0,∞)→ℝ of the real exponential function.
+- Natural number [definition]: One of 0, 1, 2, …; natural numbers count finite collections.
+- Nonnegative real square root [definition]: For t≥0, √t is the unique real number y≥0 satisfying y²=t.
+- Normed vector space [definition]: A real or complex vector space X with a function ∥·∥:X→[0,∞) that is positive except at zero, absolutely homogeneous, and subadditive.
+- Open interval in the real line [definition]: For real a<b, the set (a,b)={x∈ℝ:a<x<b}.
+- Ordered field [definition]: A field with a total order preserved by addition, in which the product of two positive elements is positive.
+- Ordered pair [definition]: A pair (x,y) with distinguished first and second entries; (x,y)=(x′,y′) exactly when x=x′ and y=y′.
+- Partial order [definition]: A reflexive, antisymmetric and transitive binary relation, usually written ≤.
+- Partition of a set [definition]: A family of nonempty pairwise disjoint subsets whose union is the set.
+- Path in an undirected graph [definition]: A finite sequence of adjacent edges joining successive vertices; a simple path has no repeated vertex. Its length is the number of edges.
+- Preimage of a subset under a function [definition]: For f:A→B and E⊆B, f⁻¹(E)={x∈A:f(x)∈E}.
+- Probability space [definition]: A probability space is (Ω,𝔽,P), where 𝔽 is a σ-algebra on Ω and P is a measure on 𝔽 with P(Ω)=1.
+- Real exponential function [definition]: The real function exp(x)=∑_{n≥0}xⁿ/n!, whose series converges for every real x.
+- Real number [definition]: A real number is an element of a complete ordered field ℝ; completeness means every nonempty subset bounded above has a least upper bound.
+- Real power of a positive real number [definition]: For x>0 and p∈ℝ, define xᵖ=exp(p log x). For p>0 extend by 0ᵖ=0.
+- Real sequence [definition]: A real sequence is a function a:ℕ₊→ℝ, written (aₙ)ₙ≥1.
+- Real sine function [definition]: The sine function is defined by the everywhere convergent power series sin(x)=∑ₖ≥0(−1)ᵏx²ᵏ⁺¹/(2k+1)!.
+- Real-valued random variable [definition]: A real-valued random variable is a measurable map from a probability space to ℝ with its Borel σ-algebra.
+- Rooted locally finite graph [definition]: A connected graph with a distinguished root and finitely many incident edges at every vertex; finite-radius rooted neighborhoods retain their induced graph structure.
+- Separable metric space [definition]: A metric space having a countable dense subset.
+- Sequence in a set [definition]: A function from the natural numbers, or the positive natural numbers, to that set.
+- Set [definition]: A collection of distinct elements, regarded as one object.
+- Subset [definition]: A⊆B means every element of A is an element of B.
+- Sum of a nonnegative series [definition]: For aₙ≥0, define ∑ₙ≥1aₙ as the supremum of its finite partial sums; the value may be infinite.
+- Topological space [definition]: A set X with a family τ of subsets, called open sets, containing ∅ and X and closed under arbitrary unions and finite intersections.
+- Total order [definition]: A partial order in which any two elements are comparable.
+- Undirected multigraph [definition]: A vertex set and an edge set, with two unordered endpoints assigned to each edge; distinct edges can have the same endpoints and loops are allowed.
+- Union of a family of sets [definition]: The set of elements belonging to at least one member of the family.
+- Variance of a real random variable [definition]: If EX²<∞, then Var(X)=E[(X−EX)²].
+- Vector space [definition]: An abelian group with scalar multiplication by a field satisfying a(v+w)=av+aw, (a+b)v=av+bv, (ab)v=a(bv), and 1v=v.
+- π [definition]: π is the least positive zero of the real sine function and equals the circumference-to-diameter ratio of a Euclidean circle.
+- σ-algebra [definition]: A σ-algebra on Ω contains Ω and is closed under complements in Ω and countable unions.
+- σ-algebra generated by a family of subsets [definition]: The smallest σ-algebra containing that family, equivalently the intersection of all σ-algebras on the ambient set that contain it.
+
+CITATIONS
+
+  [1] D. Achlioptas, A. Coja-Oghlan: Algorithmic barriers from phase transitions. Proc. 49th FOCS (2008) 793–802.
+    Pedagogically necessary: unknown
+
+  [2] D. Achlioptas, C. Moore: Random k-SAT: two moments suffice to cross a sharp threshold. SIAM Journal on Computing 36 (2006) 740–762.
+    Pedagogically necessary: unknown
+
+  [3] D. Achlioptas, A. Naor: The two possible values of the chromatic number of a random graph. Annals of Mathematics 162 (2005), 1333–1349.
+    Pedagogically necessary: unknown
+
+  [4] D. Achlioptas, A. Naor, Y. Peres: Rigorous location of phase transitions in hard optimization problems. Nature 435 (2005) 759–764.
+    Pedagogically necessary: unknown
+
+  [5] D. Achlioptas, A. Naor, Y. Peres: On the maximum satisfiability of random formulas. J. ACM 54 (2007).
+    Pedagogically necessary: unknown
+
+  [6] D. Achlioptas, Y. Peres: The threshold for random k-SAT is 2k ln 2 − O(k). Journal of the AMS 17 (2004) 947–973.
+    Pedagogically necessary: unknown
+
+  [7] A. Bandyopadhyay, D. Gamarnik: Counting without sampling: asymptotics of the log-partition function for certain statistical physics
+     models. Random Struct. Algorithms 33 (2008) 452–479.
+    Pedagogically necessary: unknown
+
+  [8] V. Bapst, A. Coja-Oghlan: Harnessing the Bethe free energy. Proc. 19th RANDOM (2015) 467–480. Also available as arXiv:1504.03975, ver-
+     sion 1.
+    Pedagogically necessary: unknown
+    arxiv: 1504.03975
+    Catalogue source: bapst-coja-oghlan-bethe-2015
+
+  [9] V. Bapst, A. Coja-Oghlan: The condensation phase transition in the regular k-SAT model. In preparation.
+    Pedagogically necessary: unknown
+
+  [10] V. Bapst, A. Coja-Oghlan, S. Hetterich, F. Rassmann, D. Vilenchik: The condensation phase transition in random graph coloroing. Comm.
+     Math. Phys., in press.
+    Pedagogically necessary: unknown
+
+  [11] V. Bapst, A. Coja-Oghlan, F. Rassmann: A positive temperature phase transition in random hypergraph 2-coloring. Annals of Applied
+     Probability, in press.
+    Pedagogically necessary: unknown
+
+  [12] B. Barak, A. Rao, R. Shaltiel, A. Wigderson: 2-source dispersers for sub-polynomial entropy and Ramsey graphs beating the Frankl-Wilson
+     construction. Proc. 38th STOC (2006) 671–680.
+    Pedagogically necessary: unknown
+
+  [13] M. Bayati, D. Gamarnik, P. Tetali: Combinatorial approach to the interpolation method and scaling limits in sparse random graphs. Annals
+     of Probability 41 (2013) 4080–4115.
+    Pedagogically necessary: unknown
+
+  [14] C. Bordenave, P. Caputo: Large deviations of empirical neighborhood distribution in sparse random graphs. arXiv:1308.5725 (2013).
+    Pedagogically necessary: unknown
+    arxiv: 1308.5725
+
+  [15] A. Coja-Oghlan, K. Panagiotou: The asymptotic k-SAT threshold. arXiv:1310.2728 (2014).
+    Pedagogically necessary: unknown
+    arxiv: 1310.2728
+
+  [16] A. Coja-Oghlan, L. Zdeborová: The condensation transition in random hypergraph 2-coloring. Proc. 23rd SODA (2012) 241–250.
+    Pedagogically necessary: unknown
+
+  [17] P. Contucci, S. Dommers, C. Giardina, S. Starr: Antiferromagnetic Potts model on the Erdős-Rényi random graph. Communications in
+     Mathematical Physics 323 (2013) 517–554.
+    Pedagogically necessary: unknown
+
+  [18] A. Dembo, A. Montanari: Ising models on locally tree-like graphs. Ann. Appl. Probab. 20 (2010) 565–592.
+    Pedagogically necessary: unknown
+
+  [19] A. Dembo, A. Montanari, N. Sun: Factor models on locally tree-like graphs. Annals of Probability 41 (2013) 4162–4213.
+    Pedagogically necessary: unknown
+
+  [20] A. Dembo, A. Montanari, A. Sly, N. Sun: The replica symmetric solution for Potts models on d -regular graphs. Comm. Math. Phys. 327
+     (2014) 551–575.
+    Pedagogically necessary: unknown
+
+  [21] J. Ding, A. Sly, N. Sun: Satisfiability threshold for random regular NAE-SAT. Proc. 46th STOC (2014) 814–822.
+    Pedagogically necessary: unknown
+
+  [22] J. Ding, A. Sly, N. Sun: Proof of the satisfiability conjecture for large k. Proc. 47th STOC (2015) 59–68.
+    Pedagogically necessary: unknown
+
+  [23] R. Durrett: Probability: theory and examples (2005).
+    Pedagogically necessary: unknown
+
+  [24] P. Erdős: Some remarks on the theory of graphs. Bull. Amer. Math. Soc. 53 (1947) 292–294.
+    Pedagogically necessary: unknown
+
+  [25] P. Erdős: Graph theory and probability. Canad. J. Math. 11 (1959) 34–38.
+    Pedagogically necessary: unknown
+
+  [26] S. Franz, M. Leone: Replica bounds for optimization problems and diluted spin systems. J. Statist. Phys. 111 (2003) 535–564.
+    Pedagogically necessary: unknown
+
+  [27] A. Galanis, D. Stefankovic, E. Vigoda: Inapproximability for antiferromagnetic spin systems in the tree non-uniqueness region. Proc. 46th
+     STOC (2014) 823–831.
+    Pedagogically necessary: unknown
+
+  [28] F. Guerra: Broken replica symmetry bounds in the mean field spin glass model. Comm. Math. Phys. 233 (2003) 1–12.
+    Pedagogically necessary: unknown
+
+  [29] F. Krzakala, A. Montanari, F. Ricci-Tersenghi, G. Semerjian, L. Zdeborova: Gibbs states and the set of solutions of random constraint
+     satisfaction problems. Proc. National Academy of Sciences 104 (2007) 10318–10323.
+    Pedagogically necessary: unknown
+
+  [30] L. Lovász: Large networks and graph limits. Colloquium Publications 60 (2012), AMS.
+    Pedagogically necessary: unknown
+
+  [31] M. Mézard, A. Montanari: Information, physics and computation. Oxford University Press 2009.
+    Pedagogically necessary: unknown
+
+  [32] M. Mézard, G. Parisi, R. Zecchina: Analytic and algorithmic solution of random satisfiability problems. Science 297 (2002) 812–815.
+    Pedagogically necessary: unknown
+
+  [33] A. Montanari, D. Shah: Counting good truth assignments of random k-SAT formulae. Proc. 18th SODA (2007) 1255–1264.
+    Pedagogically necessary: unknown
+
+  [34] E. Mossel, D. Weitz, N. Wormald: On the hardness of sampling independent sets beyond the tree threshold. Probability Theory Related
+     Fields 143 (2009) 401–439.
+    Pedagogically necessary: unknown
+
+  [35] J. Nešetřil: A combinatorial classic–sparse graphs with high chromatic number. In.: L. Lovász et al. (eds.): Erdős Centennial. Springer
+     (2013).
+    Pedagogically necessary: unknown
+
+  [36] D. Panchenko, M. Talagrand: Bounds for diluted mean-fields spin glass models. Probability Theory Related Fields 130 (2004) 319–336.
+    Pedagogically necessary: unknown
+
+  [37] T. Richardson, R. Urbanke: Modern coding theory. Cambridge University Press (2008).
+    Pedagogically necessary: unknown
+
+  [38] R. Robinson, N. Wormald: Almost all regular graphs are Hamiltonian. Random Struct. Algorithms 5 (1994) 363–374.
+    Pedagogically necessary: unknown
+
+  [39] A. Sly, N. Sun: The computational hardness of counting in two-spin models on d -regular graphs. Proc. 53rd FOCS (2012) 361–369.
+    Pedagogically necessary: unknown
+
+  [40] E. Szemerédi: Regular partitions of graphs. Colloq. Internat. CNRS 260 (1978) 399–401.
+    Pedagogically necessary: unknown
+
+  [41] T. Tao: Szemerédi’s regularity lemma revisited. Contrib. Discrete Math. 1 (2006) 8–28.
+    Pedagogically necessary: unknown
+
+  [42] P. Turán: On a theorem of Hardy and Ramanujan. J. London Math. Soc. 9 (1934) 274–276.
+    Pedagogically necessary: unknown
+

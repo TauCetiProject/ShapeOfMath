@@ -1,0 +1,826 @@
+Stable low-rank matrix recovery via null space properties
+
+Coverage: Entire pinned26-page source, all proofs/applications and68references inspected. Actual reading roots and their complete statement cones reviewed; immediate imported and source-owned theorem proof accounts recorded. Local proof errors and the refuted arbitrary-rho operator-design branch are source notes.
+Required concepts complete: True
+Introduced concepts complete: False
+All citations captured: True
+Completion refers to immediate concepts only; false means not certified.
+
+REQUIRED CONCEPT FRONTIER (26)
+
+- Centered subGaussian real random variable: A centered real random variableX is subGaussian if someK≥0 satisfiesEexp(tX)≤exp(K²t²/2) for every realt.
+- Expected Euclidean norm of a standard Gaussian vector: For a standard Gaussian vectorg∈ℝ^m, E‖g‖₂=√2Γ((m+1)/2)/Γ(m/2) and m/√(m+1)≤E‖g‖₂≤√m.
+- Expected norm of a Gaussian rank-one Rademacher sum: For independent standard complex Gaussian vectorsa_i∈ℂⁿ and independent Rademacherε_i, ifm≥cn then E‖m^(−1/2)∑_(i=1)^mε_ia_ia_i*‖_(op)≤C√n for universalc,C>0.
+- Expected norm of a bounded isotropic rank-one Rademacher sum: FixK≥1. Let independent randoma_i∈ℂⁿ satisfy‖a_i‖₂²≤Kn almost surely and‖Ea_ia_i*‖_(op)≤K. For independent Rademacherε_i andm≥2nlogn,n≥2, E‖m^(−1/2)∑ε_ia_ia_i*‖_(op)≤C_K√(nlog(2n)), whereC_K depends only onK.
+- Expected operator norm of a standard real Gaussian matrix: IfG is an m×n real matrix with independentN(0,1) entries, then E‖G‖_(op)≤√m+√n.
+- Extreme singular values of a rectangular real Gaussian matrix: For an m×n matrixA,1≤n≤m, with independent real standard normal entries andt>0, P{√m−√n−t≤σ_min(A)≤σ_max(A)≤√m+√n+t}≥1−2exp(−t²/2).
+- Frobenius robust rank null space property: A linear matrix measurement map A has the Frobenius robust rank null space property of order r with constants0<ρ<1 and τ>0 if, for every matrix M, ‖M_r‖₂≤ρ‖M_c‖₁/√r+τ‖A(M)‖_(ℓ²), where M_r is its singular-value rank-r truncation and M_c its tail.
+- Gordon escape through a spherical mesh: LetA be an m×d real matrix with independent standard normal entries,T⊆S^(d−1) nonempty, andw(T)=E sup_(x∈T)⟨g_d,x⟩. For everyt>0, P{inf_(x∈T)‖Ax‖₂≥E‖g_m‖₂−w(T)−t}≥1−exp(−t²/2).
+- Helstrom formula for distinguishing two states with equal priors: For density matricesX,Y and priorprobabilities1/2 each, the largest probability of correctly identifying the state using any finite POVM is1/2+‖X−Y‖₁/4. Equivalently max_(0≤E≤I)|tr(E(X−Y))|=‖X−Y‖₁/2.
+- Latała fourth-moment bound for an independent-entry matrix: For a real random matrixX with independent mean-zero entries and finite fourth moments, E‖X‖_(op)≤C[max_i(∑_jEX_ij²)^(1/2)+max_j(∑_iEX_ij²)^(1/2)+(∑_(i,j)EX_ij⁴)^(1/4)], whereC is universal.
+- Matrix Bernstein inequality for a self-adjoint sum: LetX_k be independent mean-zero self-adjoint n×n random matrices with‖X_k‖_(op)≤R almost surely. Setv=‖∑EX_k²‖_(op). Then for everyt>0, P{‖∑X_k‖_(op)≥t}≤2n exp[−t²/(2(v+Rt/3))].
+- Mendelson small-ball lower bound for independent linear measurements: Letφ_i be independent copies of an integrable random vectorφ∈ℝ^d, and letE be a nonempty bounded deterministic subset ofℝ^d. DefineQ_ξ=inf_(u∈E)P(|⟨φ,u⟩|≥ξ) andW_m=E sup_(u∈E)⟨m^(−1/2)∑ε_iφ_i,u⟩ with independent Rademacherε_i. Forξ>0,t≥0, with probability at least1−exp(−2t²), inf_(u∈E)(∑|⟨φ_i,u⟩|²)^(1/2)≥ξ√mQ_(2ξ)−2W_m−ξt.
+- Nuclear singular-value perturbation inequality: For complex matrices X,Y of equal size with singular values in decreasing order, ∑_j|σ_j(X)−σ_j(Y)|≤‖X−Y‖₁.
+- Null space characterization of uniform nuclear-norm exact recovery: For a linear matrix measurement map A, every matrix X of rank at most r is the unique nuclear-norm minimizer with data A(X) if and only if ‖M_r‖₁<‖M_c‖₁ for every nonzero M∈kerA.
+- Paley–Zygmund inequality: For nonnegative X with 0<E[X²]<∞ and 0<θ<1, P(X>θEX)≥(1−θ)²(EX)²/E[X²].
+- Phase retrieval from quadratic measurements: Phase retrieval asks to recover a real or complex vector x from intensities |a_j*x|². In the complex case x is identifiable only up to multiplication by a scalar of modulus1; lifting X=xx* turns these observations into linear rank-one matrix measurements tr(a_ja_j*X).
+- Positive semidefinite matrix square root: For a positive semidefinite complex matrix W=Udiag(λ_j)U*, its positive square root is W^(1/2)=Udiag(√λ_j)U*; this does not depend on the chosen orthonormal eigenbasis.
+- Positive-semidefinite nullspace obstruction for Gaussian symmetric measurements: LetA(X)=(tr(A_iX))_(i=1)^m with independentA_i∼GOE(n) in Frobenius normalization andd=n(n+1)/2. For0<ε<1 andm≤(1−ε)d/2, with probability at least1−4exp(−ε²d/32), kerA contains a nonzero positive semidefinite realmatrixΔ. Consequently every noiseless positive-semidefinite feasibility set through anyX≥0 contains the unboundedrayX+tΔ,t≥0.
+- Rademacher desymmetrization for independent centered matrices: For independent mean-zero integrable random matricesX_i and independent Rademacher signsε_i, E‖∑ε_iX_i‖_(op)≤2E‖∑X_i‖_(op), whenever the right side is finite.
+- Rank restricted isometry property: A linear matrix measurement map A has the rank-r restricted isometry property with constant δ∈[0,1) if (1−δ)‖X‖_F²≤‖A(X)‖_(ℓ²)²≤(1+δ)‖X‖_F² for every matrix X of rank at most r.
+- Rank-restricted informational completeness: A finite POVM is rank-r informationally complete if every two distinct density matrices X,Z of rank at most r have tr(E_jX)≠tr(E_jZ) for some POVM element E_j.
+- Singular-value product bound in operator norm: For compatible real or complex matricesA,X,B and every singular-value indexj, σ_j(AXB)≤‖A‖_(op)‖B‖_(op)σ_j(X). For invertibleA,B this also givesσ_j(X)≤‖A⁻¹‖_(op)‖B⁻¹‖_(op)σ_j(AXB).
+- Small-ball bound for Gaussian or exact four-design quadratic measurements: LetZ be Hermitian with‖Z‖_F=1. Leta either be a standard complex Gaussian vector or have the law[n(n+1)]^(1/4)w, wherew is drawn from an exact weighted complex projective4-design. For0≤ξ≤1, P(|a*Za|≥ξ)≥(1−ξ²)²/24.
+- Small-ball bound for trace-accurate or norm-constrained operator-accurate four-designs: Letw be drawn from a weighted approximate complex projective4-design andseta=[n(n+1)]^(1/4)w. Ifθ₁≤1/4, then for every HermitianZ with‖Z‖_F=1 and0≤ξ≤1/√2, P(|a*Za|≥ξ)≥(1−2ξ²)²/192. The same bound holds underθ_∞≤1/(16s²),s≥1, provided also‖Z‖₁≤2√s.
+- Spectral condition number of an invertible matrix: For an invertible square real or complex matrix W, its spectral condition number is κ(W)=σ_max(W)/σ_min(W)=‖W‖_(op)‖W⁻¹‖_(op).
+- Trace Hölder bound for nuclear and operator norms: For real or complex matricesA,B of equal size, |tr(A*B)|≤‖A‖₁‖B‖_(op).
+
+INHERITED PREREQUISITES (131)
+
+- Abelian group — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Almost-everywhere property on a measure space — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-or-four-design-quadratic-small-ball, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality
+- Basis of a vector space — via frobenius-robust-rank-null-space-property, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, nuclear-norm-exact-recovery-null-space-characterization, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness
+- Bijection between sets — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Bilinear map — via approximate-four-design-quadratic-small-ball, frobenius-robust-rank-null-space-property, gaussian-or-four-design-quadratic-small-ball, gordon-gaussian-escape-through-mesh, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization
+- Binary operation on a set — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Binary relation on a set — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Binomial coefficient — via approximate-four-design-quadratic-small-ball, gaussian-or-four-design-quadratic-small-ball
+- Borel σ-algebra of a topological space — via approximate-four-design-quadratic-small-ball, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh
+- Borel σ-algebra on the real line — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Bounded linear operator — via bounded-rank-one-rademacher-operator-bound, gaussian-matrix-mean-operator-norm, gaussian-rank-one-rademacher-operator-bound, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Cardinality of a set — via frobenius-robust-rank-null-space-property, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, nuclear-norm-exact-recovery-null-space-characterization, phase-retrieval-quadratic-measurements, rank-restricted-informational-completeness
+- Cartesian product of sets — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Cauchy sequence in a metric space — via frobenius-robust-rank-null-space-property, nuclear-norm-exact-recovery-null-space-characterization, positive-semidefinite-matrix-square-root
+- Cauchy–Schwarz inequality for complex inner-product spaces — via frobenius-robust-rank-null-space-property, nuclear-norm-exact-recovery-null-space-characterization, positive-semidefinite-matrix-square-root
+- Commutative ring with identity — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Complement of a subset — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Complete measure — via approximate-four-design-quadratic-small-ball, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh
+- Complete metric space — via frobenius-robust-rank-null-space-property, nuclear-norm-exact-recovery-null-space-characterization, positive-semidefinite-matrix-square-root
+- Complex Hilbert space — via frobenius-robust-rank-null-space-property, nuclear-norm-exact-recovery-null-space-characterization, positive-semidefinite-matrix-square-root
+- Complex conjugation — via approximate-four-design-quadratic-small-ball, frobenius-robust-rank-null-space-property, gaussian-or-four-design-quadratic-small-ball, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Complex inner-product space — via approximate-four-design-quadratic-small-ball, frobenius-robust-rank-null-space-property, gaussian-or-four-design-quadratic-small-ball, nuclear-norm-exact-recovery-null-space-characterization, positive-semidefinite-matrix-square-root
+- Complex number — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Convergence of a sequence in a metric space — via frobenius-robust-rank-null-space-property, nuclear-norm-exact-recovery-null-space-characterization, positive-semidefinite-matrix-square-root
+- Convergent real series — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, positive-semidefinite-matrix-square-root, singular-value-product-operator-bound
+- Convex function on a convex subset of a real vector space — via nuclear-norm-exact-recovery-null-space-characterization
+- Convex subset of a real vector space — via nuclear-norm-exact-recovery-null-space-characterization
+- Dimension of a vector space — via frobenius-robust-rank-null-space-property, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, nuclear-norm-exact-recovery-null-space-characterization, phase-retrieval-quadratic-measurements, rank-restricted-informational-completeness
+- Disjoint sets — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Eigenvalue of a linear endomorphism — via approximate-four-design-quadratic-small-ball, frobenius-robust-rank-null-space-property, gaussian-or-four-design-quadratic-small-ball, gaussian-rectangular-extreme-singular-values, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, matrix-trace-nuclear-operator-holder, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, singular-value-product-operator-bound
+- Equivalence class — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-or-four-design-quadratic-small-ball, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality
+- Equivalence relation — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-or-four-design-quadratic-small-ball, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality
+- Essential supremum of a measurable real function — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-or-four-design-quadratic-small-ball, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality
+- Euclidean space ℝᵈ — via approximate-four-design-quadratic-small-ball, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh
+- Expectation of an integrable real random variable — via bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-rank-one-rademacher-operator-bound, gordon-gaussian-escape-through-mesh, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, mendelson-small-ball-lower-bound, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Extended nonnegative real numbers — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Factorial — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, positive-semidefinite-matrix-square-root, singular-value-product-operator-bound
+- Field — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Finite set — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality
+- Finite-dimensional density matrix — via helstrom-equal-prior-state-distinguishability, rank-restricted-informational-completeness
+- Finite-dimensional positive operator-valued measure — via helstrom-equal-prior-state-distinguishability, rank-restricted-informational-completeness
+- Finite-dimensional vector space — via positive-semidefinite-matrix-square-root
+- Frobenius norm of a real or complex matrix — via approximate-four-design-quadratic-small-ball, gaussian-or-four-design-quadratic-small-ball, gaussian-symmetric-psd-kernel-obstruction, matrix-rank-restricted-isometry-property
+- Function between sets — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Gamma function on the positive real axis — via gaussian-euclidean-mean-norm-bounds
+- Gaussian orthogonal ensemble in Frobenius normalization — via gaussian-symmetric-psd-kernel-obstruction
+- Gaussian width of a Euclidean set — via gordon-gaussian-escape-through-mesh
+- Group — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Hermitian complex matrix — via approximate-four-design-quadratic-small-ball, frobenius-robust-rank-null-space-property, gaussian-or-four-design-quadratic-small-ball, gaussian-rectangular-extreme-singular-values, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, matrix-trace-nuclear-operator-holder, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Improper Riemann integral — via gaussian-euclidean-mean-norm-bounds
+- Independent family of random variables — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, mendelson-small-ball-lower-bound, selfadjoint-matrix-bernstein-inequality
+- Indicator function of a subset — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Intersection of a family of sets — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Invertible square matrix — via invertible-matrix-condition-number, singular-value-product-operator-bound
+- Kernel of a linear map — via gaussian-symmetric-psd-kernel-obstruction, nuclear-norm-exact-recovery-null-space-characterization
+- Least upper bound in a partially ordered set — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Lebesgue Lᵖ space — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-or-four-design-quadratic-small-ball, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality
+- Lebesgue integral — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Lebesgue measure on Euclidean space — via approximate-four-design-quadratic-small-ball, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh
+- Limit of a function between metric spaces — via gaussian-euclidean-mean-norm-bounds
+- Limit of a real function at a point — via gaussian-euclidean-mean-norm-bounds
+- Limit of a real sequence — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, positive-semidefinite-matrix-square-root, singular-value-product-operator-bound
+- Linear combination of vectors — via frobenius-robust-rank-null-space-property, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, nuclear-norm-exact-recovery-null-space-characterization, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness
+- Linear map between vector spaces — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Linear matrix measurement map — via frobenius-robust-rank-null-space-property, gaussian-symmetric-psd-kernel-obstruction, matrix-rank-restricted-isometry-property, nuclear-norm-exact-recovery-null-space-characterization, phase-retrieval-quadratic-measurements
+- Linear span of a set of vectors — via frobenius-robust-rank-null-space-property, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, nuclear-norm-exact-recovery-null-space-characterization, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness
+- Linearly independent family of vectors — via frobenius-robust-rank-null-space-property, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, nuclear-norm-exact-recovery-null-space-characterization, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness
+- Matrix over a ring — via approximate-four-design-quadratic-small-ball, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-or-four-design-quadratic-small-ball, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Measurable map between measurable spaces — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Measurable simple real function — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Measurable space — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Measure — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Metric induced by a norm — via frobenius-robust-rank-null-space-property, nuclear-norm-exact-recovery-null-space-characterization, positive-semidefinite-matrix-square-root
+- Metric space — via frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, nuclear-norm-exact-recovery-null-space-characterization, positive-semidefinite-matrix-square-root
+- Modulus of a complex number — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Multivariate normal distribution — via approximate-four-design-quadratic-small-ball, gaussian-euclidean-mean-norm-bounds, gaussian-or-four-design-quadratic-small-ball, gordon-gaussian-escape-through-mesh
+- Natural logarithm — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-or-four-design-quadratic-small-ball, gaussian-rectangular-extreme-singular-values, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, positive-semidefinite-matrix-square-root, singular-value-product-operator-bound
+- Natural number — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Nonnegative real square root — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Normal distribution — via approximate-four-design-quadratic-small-ball, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh
+- Normed vector space — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, positive-semidefinite-matrix-square-root, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Nuclear norm minimization for noisy matrix recovery — via nuclear-norm-exact-recovery-null-space-characterization
+- Open interval in the real line — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Operator norm of a bounded linear operator — via bounded-rank-one-rademacher-operator-bound, gaussian-matrix-mean-operator-norm, gaussian-rank-one-rademacher-operator-bound, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Ordered field — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Ordered pair — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Orthogonal invariance of the standard Gaussian distribution — via approximate-four-design-quadratic-small-ball, gaussian-or-four-design-quadratic-small-ball
+- Orthonormal family in a Hilbert space — via frobenius-robust-rank-null-space-property, nuclear-norm-exact-recovery-null-space-characterization
+- Partial order — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Positive semidefinite complex matrix — via approximate-four-design-quadratic-small-ball, frobenius-robust-rank-null-space-property, gaussian-or-four-design-quadratic-small-ball, gaussian-rectangular-extreme-singular-values, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, matrix-trace-nuclear-operator-holder, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, singular-value-product-operator-bound
+- Positive semidefinite real matrix — via approximate-four-design-quadratic-small-ball, gaussian-euclidean-mean-norm-bounds, gaussian-or-four-design-quadratic-small-ball, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh
+- Preimage of a subset under a function — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Probability space — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, mendelson-small-ball-lower-bound, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Pushforward measure — via approximate-four-design-quadratic-small-ball, gaussian-or-four-design-quadratic-small-ball
+- Rademacher random sequence — via bounded-rank-one-rademacher-operator-bound, gaussian-rank-one-rademacher-operator-bound, matrix-rademacher-desymmetrization, mendelson-small-ball-lower-bound
+- Rank of a linear map — via frobenius-robust-rank-null-space-property, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, nuclear-norm-exact-recovery-null-space-characterization, phase-retrieval-quadratic-measurements, rank-restricted-informational-completeness
+- Real Hilbert space — via frobenius-robust-rank-null-space-property, nuclear-norm-exact-recovery-null-space-characterization
+- Real exponential function — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, positive-semidefinite-matrix-square-root, singular-value-product-operator-bound
+- Real inner-product space — via frobenius-robust-rank-null-space-property, gordon-gaussian-escape-through-mesh, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization
+- Real number — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Real orthogonal matrix — via approximate-four-design-quadratic-small-ball, gaussian-or-four-design-quadratic-small-ball
+- Real power of a positive real number — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-or-four-design-quadratic-small-ball, gaussian-rectangular-extreme-singular-values, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, positive-semidefinite-matrix-square-root, singular-value-product-operator-bound
+- Real sequence — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, positive-semidefinite-matrix-square-root, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Real sine function — via approximate-four-design-quadratic-small-ball, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh
+- Real-valued random variable — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, mendelson-small-ball-lower-bound, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Riemann integral — via gaussian-euclidean-mean-norm-bounds
+- Schatten norm of a finite matrix — via approximate-four-design-quadratic-small-ball, frobenius-robust-rank-null-space-property, gaussian-or-four-design-quadratic-small-ball, helstrom-equal-prior-state-distinguishability, matrix-trace-nuclear-operator-holder, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality
+- Sequence in a set — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, positive-semidefinite-matrix-square-root, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Set — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Singular value decomposition of a complex matrix — via frobenius-robust-rank-null-space-property, nuclear-norm-exact-recovery-null-space-characterization
+- Singular values of a complex matrix — via approximate-four-design-quadratic-small-ball, frobenius-robust-rank-null-space-property, gaussian-or-four-design-quadratic-small-ball, gaussian-rectangular-extreme-singular-values, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, matrix-trace-nuclear-operator-holder, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, singular-value-product-operator-bound
+- Singular-value rank truncation — via frobenius-robust-rank-null-space-property, nuclear-norm-exact-recovery-null-space-characterization
+- Spectral theorem for a Hermitian complex matrix — via positive-semidefinite-matrix-square-root
+- Standard complex Gaussian vector — via approximate-four-design-quadratic-small-ball, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound
+- Subset — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Sum of a nonnegative series — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Symmetric matrix — via approximate-four-design-quadratic-small-ball, gaussian-euclidean-mean-norm-bounds, gaussian-or-four-design-quadratic-small-ball, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh
+- Tagged Riemann sum — via gaussian-euclidean-mean-norm-bounds
+- Tensor product of vector spaces — via approximate-four-design-quadratic-small-ball, gaussian-or-four-design-quadratic-small-ball
+- Topological space — via approximate-four-design-quadratic-small-ball, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh
+- Total order — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Trace of a square matrix — via frobenius-robust-rank-null-space-property, gaussian-symmetric-psd-kernel-obstruction, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, nuclear-norm-exact-recovery-null-space-characterization, phase-retrieval-quadratic-measurements, rank-restricted-informational-completeness
+- Uniform probability law on the complex unit sphere — via approximate-four-design-quadratic-small-ball, gaussian-or-four-design-quadratic-small-ball
+- Union of a family of sets — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- Unitary operator on a complex Hilbert space — via frobenius-robust-rank-null-space-property, nuclear-norm-exact-recovery-null-space-characterization, positive-semidefinite-matrix-square-root
+- Vector space — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, invertible-matrix-condition-number, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness, selfadjoint-matrix-bernstein-inequality, singular-value-product-operator-bound
+- Vector subspace — via frobenius-robust-rank-null-space-property, gaussian-symmetric-psd-kernel-obstruction, helstrom-equal-prior-state-distinguishability, matrix-rank-restricted-isometry-property, nuclear-norm-exact-recovery-null-space-characterization, phase-retrieval-quadratic-measurements, positive-semidefinite-matrix-square-root, rank-restricted-informational-completeness
+- Weighted approximate complex projective t-design — via approximate-four-design-quadratic-small-ball, gaussian-or-four-design-quadratic-small-ball
+- π — via approximate-four-design-quadratic-small-ball, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh
+- σ-algebra — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+- σ-algebra generated by a family of subsets — via approximate-four-design-quadratic-small-ball, bounded-rank-one-rademacher-operator-bound, centered-subgaussian-real-variable, frobenius-robust-rank-null-space-property, gaussian-euclidean-mean-norm-bounds, gaussian-matrix-mean-operator-norm, gaussian-or-four-design-quadratic-small-ball, gaussian-rank-one-rademacher-operator-bound, gaussian-rectangular-extreme-singular-values, gaussian-symmetric-psd-kernel-obstruction, gordon-gaussian-escape-through-mesh, helstrom-equal-prior-state-distinguishability, latala-fourth-moment-operator-norm-bound, matrix-rademacher-desymmetrization, matrix-rank-restricted-isometry-property, matrix-trace-nuclear-operator-holder, mendelson-small-ball-lower-bound, nuclear-norm-exact-recovery-null-space-characterization, nuclear-singular-value-perturbation-inequality, paley-zygmund, selfadjoint-matrix-bernstein-inequality
+
+INTRODUCED CONCEPTS (2)
+
+- Uniform stable PSD recovery from trace-accurate four-design measurements
+- Uniform stable positive-semidefinite recovery from Gaussian quadratic measurements
+
+LOCATED CONCEPTS (47)
+
+1. Nuclear singular-value perturbation inequality
+   For complex matrices X,Y of equal size with singular values in decreasing order, ∑_j|σ_j(X)−σ_j(Y)|≤‖X−Y‖₁.
+   Source: relies_on, §3, Lemma14 proof; Horn–Johnson7.4.9.1
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+2. Frobenius robust rank null space property
+   A linear matrix measurement map A has the Frobenius robust rank null space property of order r with constants0<ρ<1 and τ>0 if, for every matrix M, ‖M_r‖₂≤ρ‖M_c‖₁/√r+τ‖A(M)‖_(ℓ²), where M_r is its singular-value rank-r truncation and M_c its tail.
+   Source: relies_on, §3, Definition10
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+3. Nuclear norm minimization for noisy matrix recovery
+   Given a linear matrix measurement map A, data b and tolerance η≥0, nuclear norm recovery chooses a minimizer of ‖Z‖₁ subject to ‖A(Z)−b‖₂≤η; with η=0 this imposes A(Z)=b. Uniqueness and stable recovery require further hypotheses on A.
+   Source: relies_on, §1–§3
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+4. Rank restricted isometry property
+   A linear matrix measurement map A has the rank-r restricted isometry property with constant δ∈[0,1) if (1−δ)‖X‖_F²≤‖A(X)‖_(ℓ²)²≤(1+δ)‖X‖_F² for every matrix X of rank at most r.
+   Source: relies_on, §1, prior recovery approaches
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+5. Phase retrieval from quadratic measurements
+   Phase retrieval asks to recover a real or complex vector x from intensities |a_j*x|². In the complex case x is identifiable only up to multiplication by a scalar of modulus1; lifting X=xx* turns these observations into linear rank-one matrix measurements tr(a_ja_j*X).
+   Source: relies_on, §2.1
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+6. Finite-dimensional density matrix
+   A density matrix is a positive semidefinite complex matrix with trace1; its rank measures the number of nonzero eigenvalues in its spectral decomposition.
+   Source: relies_on, §2.2.1; Appendix
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+7. Finite-dimensional positive operator-valued measure
+   A finite POVM on ℂⁿ is a finite collection of positive semidefinite matrices E_j with ∑E_j=I. For a density matrix X, its outcome probabilities are tr(E_jX).
+   Source: relies_on, §2.2.2; Appendix
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+8. Rank-restricted informational completeness
+   A finite POVM is rank-r informationally complete if every two distinct density matrices X,Z of rank at most r have tr(E_jX)≠tr(E_jZ) for some POVM element E_j.
+   Source: relies_on, §2.2.2, Definition7
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+9. Weighted approximate complex projective t-design
+   For unit vectors w_i∈ℂⁿ and weights p_i≥0 summing to1, the weighted family is an approximate projective t-design of Schatten-p accuracy θ if ‖∑p_i(w_iw_i*)^(⊗t)−∫_(‖w‖₂=1)(ww*)^(⊗t)dσ(w)‖_p≤θ/binom(n+t−1,t), where σ is uniform spherical probability. Accuracy0 gives an exact design.
+   Source: relies_on, §7, Definition27
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+10. Gaussian width of a Euclidean set
+   For T⊆ℝᵈ, its Gaussian width is w(T)=E sup_(x∈T)⟨g,x⟩ for a standard Gaussian vector g∈ℝᵈ, whenever the supremum is measurable; in the compact finite-dimensional sets used here it is finite.
+   Source: relies_on, §4
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+11. Rademacher random sequence
+   A Rademacher sequence consists of independent random variables ε_j with P(ε_j=1)=P(ε_j=−1)=1/2.
+   Source: relies_on, §5, Theorem22
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+12. Null space characterization of uniform nuclear-norm exact recovery
+   For a linear matrix measurement map A, every matrix X of rank at most r is the unique nuclear-norm minimizer with data A(X) if and only if ‖M_r‖₁<‖M_c‖₁ for every nonzero M∈kerA.
+   Source: relies_on, §3, Theorem15
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+13. Spectral condition number of an invertible matrix
+   For an invertible square real or complex matrix W, its spectral condition number is κ(W)=σ_max(W)/σ_min(W)=‖W‖_(op)‖W⁻¹‖_(op).
+   Source: relies_on, §8
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+14. Positive semidefinite matrix square root
+   For a positive semidefinite complex matrix W=Udiag(λ_j)U*, its positive square root is W^(1/2)=Udiag(√λ_j)U*; this does not depend on the chosen orthonormal eigenbasis.
+   Source: relies_on, §8
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+15. Paley–Zygmund inequality
+   For nonnegative X with 0<E[X²]<∞ and 0<θ<1, P(X>θEX)≥(1−θ)²(EX)²/E[X²].
+   Source: relies_on, §5, Lemma23
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+16. Standard complex Gaussian vector
+   A standard complex Gaussian vector has independent coordinates (g_j+ih_j)/√2, where all g_j,h_j are independent real N(0,1) variables; thus E|a_j|²=1.
+   Source: relies_on, §6
+   Note: Source-specific reading input; definition or prior theorem is used in the argument. No priority inferred from this source’s presentation.
+
+17. Schatten error bound under the Frobenius robust rank null space property
+   If A has Frobenius robust rank null space constants0<ρ<1,τ>0 of order r, then for1≤p≤2 and all X,Z, ‖Z−X‖_p≤(1+ρ)²[(1−ρ)r^(1−1/p)]⁻¹(‖Z‖₁−‖X‖₁+2‖X_c‖₁)+τ(3+ρ)(1−ρ)⁻¹r^(1/p−1/2)‖A(Z−X)‖_(ℓ²). Consequently any nuclear-norm minimizer with noise at mostη obeys the p=2 bound2(1+ρ)²[(1−ρ)√r]⁻¹‖X_c‖₁+2τ(3+ρ)(1−ρ)⁻¹η.
+   Source: explains, §3, Theorems11–12
+   Note: Inspected exposition/proof. Original-source status remains separately reviewed; prior vector NSP, earlier matrix literature and condensed SampTA2015 papers must be compared before assigning introduction.
+
+18. Null space characterization of uniform nuclear-norm exact recovery
+   For a linear matrix measurement map A, every matrix X of rank at most r is the unique nuclear-norm minimizer with data A(X) if and only if ‖M_r‖₁<‖M_c‖₁ for every nonzero M∈kerA.
+   Source: explains, §3, Theorem15
+   Note: Inspected exposition/proof. Original-source status remains separately reviewed; prior vector NSP, earlier matrix literature and condensed SampTA2015 papers must be compared before assigning introduction.
+
+19. Rank-restricted informational completeness
+   A finite POVM is rank-r informationally complete if every two distinct density matrices X,Z of rank at most r have tr(E_jX)≠tr(E_jZ) for some POVM element E_j.
+   Source: explains, Definition7
+   Note: Inspected exposition/proof. Original-source status remains separately reviewed; prior vector NSP, earlier matrix literature and condensed SampTA2015 papers must be compared before assigning introduction.
+
+20. Frobenius robust rank null space property
+   A linear matrix measurement map A has the Frobenius robust rank null space property of order r with constants0<ρ<1 and τ>0 if, for every matrix M, ‖M_r‖₂≤ρ‖M_c‖₁/√r+τ‖A(M)‖_(ℓ²), where M_r is its singular-value rank-r truncation and M_c its tail.
+   Source: explains, Definition10
+   Note: Inspected exposition/proof. Original-source status remains separately reviewed; prior vector NSP, earlier matrix literature and condensed SampTA2015 papers must be compared before assigning introduction.
+
+21. Singular value decomposition of a complex matrix
+   Every complex m×n matrixM admits M=UΣV*, whereU,V are unitary andΣ is rectangular diagonal with nonnegative diagonal entries equal to the singular values ofM in decreasing order.
+   Source: relies_on, §1notation;§3
+   Note: Exact imported or standard mathematical input of the inspected source argument; selected proof reviews kept independent.
+
+22. Singular-value product bound in operator norm
+   For compatible real or complex matricesA,X,B and every singular-value indexj, σ_j(AXB)≤‖A‖_(op)‖B‖_(op)σ_j(X). For invertibleA,B this also givesσ_j(X)≤‖A⁻¹‖_(op)‖B⁻¹‖_(op)σ_j(AXB).
+   Source: relies_on, §8,(50)
+   Note: Exact imported or standard mathematical input of the inspected source argument; selected proof reviews kept independent.
+
+23. Rademacher desymmetrization for independent centered matrices
+   For independent mean-zero integrable random matricesX_i and independent Rademacher signsε_i, E‖∑ε_iX_i‖_(op)≤2E‖∑X_i‖_(op), whenever the right side is finite.
+   Source: relies_on, §5,Lemma24
+   Note: Exact imported or standard mathematical input of the inspected source argument; selected proof reviews kept independent.
+
+24. Expected Euclidean norm of a standard Gaussian vector
+   For a standard Gaussian vectorg∈ℝ^m, E‖g‖₂=√2Γ((m+1)/2)/Γ(m/2) and m/√(m+1)≤E‖g‖₂≤√m.
+   Source: relies_on, §4beforeTheorem20
+   Note: Exact imported or standard mathematical input of the inspected source argument; selected proof reviews kept independent.
+
+25. Expected operator norm of a standard real Gaussian matrix
+   IfG is an m×n real matrix with independentN(0,1) entries, then E‖G‖_(op)≤√m+√n.
+   Source: relies_on, §4,Lemma21
+   Note: Exact imported or standard mathematical input of the inspected source argument; selected proof reviews kept independent.
+
+26. Gordon escape through a spherical mesh
+   LetA be an m×d real matrix with independent standard normal entries,T⊆S^(d−1) nonempty, andw(T)=E sup_(x∈T)⟨g_d,x⟩. For everyt>0, P{inf_(x∈T)‖Ax‖₂≥E‖g_m‖₂−w(T)−t}≥1−exp(−t²/2).
+   Source: relies_on, §4,Theorem20
+   Note: Exact imported or standard mathematical input of the inspected source argument; selected proof reviews kept independent.
+
+27. Mendelson small-ball lower bound for independent linear measurements
+   Letφ_i be independent copies of an integrable random vectorφ∈ℝ^d, and letE be a nonempty bounded deterministic subset ofℝ^d. DefineQ_ξ=inf_(u∈E)P(|⟨φ,u⟩|≥ξ) andW_m=E sup_(u∈E)⟨m^(−1/2)∑ε_iφ_i,u⟩ with independent Rademacherε_i. Forξ>0,t≥0, with probability at least1−exp(−2t²), inf_(u∈E)(∑|⟨φ_i,u⟩|²)^(1/2)≥ξ√mQ_(2ξ)−2W_m−ξt.
+   Source: relies_on, §5,Theorem22
+   Note: Exact imported or standard mathematical input of the inspected source argument; selected proof reviews kept independent.
+
+28. Latała fourth-moment bound for an independent-entry matrix
+   For a real random matrixX with independent mean-zero entries and finite fourth moments, E‖X‖_(op)≤C[max_i(∑_jEX_ij²)^(1/2)+max_j(∑_iEX_ij²)^(1/2)+(∑_(i,j)EX_ij⁴)^(1/4)], whereC is universal.
+   Source: relies_on, §5,Lemma24
+   Note: Exact imported or standard mathematical input of the inspected source argument; selected proof reviews kept independent.
+
+29. Extreme singular values of a rectangular real Gaussian matrix
+   For an m×n matrixA,1≤n≤m, with independent real standard normal entries andt>0, P{√m−√n−t≤σ_min(A)≤σ_max(A)≤√m+√n+t}≥1−2exp(−t²/2).
+   Source: relies_on, §8,Proposition32
+   Note: Exact imported or standard mathematical input of the inspected source argument; selected proof reviews kept independent.
+
+30. Matrix Bernstein inequality for a self-adjoint sum
+   LetX_k be independent mean-zero self-adjoint n×n random matrices with‖X_k‖_(op)≤R almost surely. Setv=‖∑EX_k²‖_(op). Then for everyt>0, P{‖∑X_k‖_(op)≥t}≤2n exp[−t²/(2(v+Rt/3))].
+   Source: relies_on, §8,Proposition33
+   Note: Exact imported or standard mathematical input of the inspected source argument; selected proof reviews kept independent.
+
+31. Small-ball bound for Gaussian or exact four-design quadratic measurements
+   LetZ be Hermitian with‖Z‖_F=1. Leta either be a standard complex Gaussian vector or have the law[n(n+1)]^(1/4)w, wherew is drawn from an exact weighted complex projective4-design. For0≤ξ≤1, P(|a*Za|≥ξ)≥(1−ξ²)²/24.
+   Source: relies_on, §6,Lemma25;§7,(46)
+   Note: Exact imported input or mathematical interpretation of the source, with independent selected proof and precise scope recorded.
+
+32. Small-ball bound for trace-accurate or norm-constrained operator-accurate four-designs
+   Letw be drawn from a weighted approximate complex projective4-design andseta=[n(n+1)]^(1/4)w. Ifθ₁≤1/4, then for every HermitianZ with‖Z‖_F=1 and0≤ξ≤1/√2, P(|a*Za|≥ξ)≥(1−2ξ²)²/192. The same bound holds underθ_∞≤1/(16s²),s≥1, provided also‖Z‖₁≤2√s.
+   Source: relies_on, §7,Theorem28proof
+   Note: Exact imported input or mathematical interpretation of the source, with independent selected proof and precise scope recorded.
+
+33. Expected norm of a Gaussian rank-one Rademacher sum
+   For independent standard complex Gaussian vectorsa_i∈ℂⁿ and independent Rademacherε_i, ifm≥cn then E‖m^(−1/2)∑_(i=1)^mε_ia_ia_i*‖_(op)≤C√n for universalc,C>0.
+   Source: relies_on, §6after(44)
+   Note: Exact imported input or mathematical interpretation of the source, with independent selected proof and precise scope recorded.
+
+34. Expected norm of a bounded isotropic rank-one Rademacher sum
+   FixK≥1. Let independent randoma_i∈ℂⁿ satisfy‖a_i‖₂²≤Kn almost surely and‖Ea_ia_i*‖_(op)≤K. For independent Rademacherε_i andm≥2nlogn,n≥2, E‖m^(−1/2)∑ε_ia_ia_i*‖_(op)≤C_K√(nlog(2n)), whereC_K depends only onK.
+   Source: relies_on, §7,Theorem28proof
+   Note: Exact imported input or mathematical interpretation of the source, with independent selected proof and precise scope recorded.
+
+35. Helstrom formula for distinguishing two states with equal priors
+   For density matricesX,Y and priorprobabilities1/2 each, the largest probability of correctly identifying the state using any finite POVM is1/2+‖X−Y‖₁/4. Equivalently max_(0≤E≤I)|tr(E(X−Y))|=‖X−Y‖₁/2.
+   Source: relies_on, §2.2.1,Helstromdiscussion
+   Note: Exact imported input or mathematical interpretation of the source, with independent selected proof and precise scope recorded.
+
+36. Centered subGaussian real random variable
+   A centered real random variableX is subGaussian if someK≥0 satisfiesEexp(tX)≤exp(K²t²/2) for every realt.
+   Source: relies_on, §1;Remark26
+   Note: The source uses centeredunit-variance independent subGaussian entries and a moment-matching realvariant.
+
+37. Trace Hölder bound for nuclear and operator norms
+   For real or complex matricesA,B of equal size, |tr(A*B)|≤‖A‖₁‖B‖_(op).
+   Source: relies_on, §4Lemma21;§6–§8
+   Note: The required bound is matrix traceHölder, which is nowexplicitly separated from scalarHölder.
+
+38. Positive-semidefinite nullspace obstruction for Gaussian symmetric measurements
+   LetA(X)=(tr(A_iX))_(i=1)^m with independentA_i∼GOE(n) in Frobenius normalization andd=n(n+1)/2. For0<ε<1 andm≤(1−ε)d/2, with probability at least1−4exp(−ε²d/32), kerA contains a nonzero positive semidefinite realmatrixΔ. Consequently every noiseless positive-semidefinite feasibility set through anyX≥0 contains the unboundedrayX+tΔ,t≥0.
+   Source: relies_on, §1.3,[63]Proposition2
+   Note: Explains why positivity-alone recovery doesnotextend to general Gaussian symmetric measurements belowhalfambientdimension. Exactcheckedweakerconstantsrecorded.
+
+39. Positive-gauge Schatten recovery bound from a robust rank null space property
+   Let A(X)=(tr(A_jX))_j on Hermitian matrices have Frobenius robust rank null space constantsρ,τ of orderr. Suppose W=Σ_jt_jA_j>0 andκ=‖W‖op‖W⁻¹‖op satisfiesκρ<1. For1≤p≤2 andX,Z≥0, ‖Z−X‖p≤2Cκr^(1/p−1)‖X_c‖₁+r^(1/p−1/2)‖A(Z−X)‖₂‖W⁻¹‖op[C‖t‖₂/√r+D‖W‖opτ], whereC=(1+κρ)²/(1−κρ) andD=(3+κρ)/(1−κρ).
+   Source: explains, §8Theorem31
+   Note: Quantitative robustNSP theorem explained here; positive-gauge congruence idea explicitly credited to earlierKalev etal.
+
+40. Robust rank null space bound for Gaussian quadratic measurements
+   For independent standard complex Gaussian vectorsa_j∈ℂⁿ letA(X)=(a_j*Xa_j)_j on Hermitian matrices. There are universalc,C,c₀>0 such that for1≤r≤n,0<ρ<1 andm≥Cρ⁻²nr, with probability at least1−exp(−cm), A has Frobenius robust rank null space constantsρ andτ=c₀/√m of orderr.
+   Source: explains, §6, proof of Theorem 2 using Lemma 25; §1, Theorem 2
+   Note: Fullpaper explains the quantitativeGaussian robustNSP/recovery argument already summarized in its earlierSampTA2015paper[34]; no automaticfullpaperoriginclaim.
+
+41. Conditioning of a complex Gaussian sample covariance matrix
+   For independent standard complex Gaussian vectorsa_j∈ℂⁿ letW=m⁻¹Σ_ja_ja_j*. There are universalc,C>0 such that ifm≥Cn then, with probability at least1−exp(−cm), (1/2)I≤W≤(3/2)I; consequently‖W‖op≤3/2,‖W⁻¹‖op≤2 andκ(W)≤3.
+   Source: explains, §8Proposition32
+   Note: Selected complex proof is explicitly independent and yields convenient fixed constants.
+
+42. Uniform stable positive-semidefinite recovery from Gaussian quadratic measurements
+   For independent standard complex Gaussian vectorsa_j∈ℂⁿ setA(X)=(a_j*Xa_j)_j. There are universalc,C,C₁,C₂>0 such that if1≤r≤n andm≥Cnr, with probability at least1−exp(−cm), simultaneously for allPSD X,Z and1≤p≤2, ‖Z−X‖p≤C₁r^(1/p−1)‖X_c‖₁+C₂r^(1/p−1/2)m⁻¹/²‖A(Z−X)‖₂. In particular every noiselessPSD feasibility set through a rank≤r matrix is a singleton; aPSD least-squares minimizer for noisy data has the same bound with residual at most twice the noise norm.
+   Source: introduces, §1.3Theorem4,Gaussianbranch;§8Theorem31/Proposition32
+   Note: Qualified Gaussianbranch of the newuniform, robust, approximately-low-rankPSD feasibility theorem; doesnotclaimoriginofpositive-gaugeidea or earlier nuclear-norm randomrecovery results.
+   Origin evidence: Checked the assigned source§1.3’s explicit arbitrary-rank uniform/stable generalization and §8 proof against its citedpredecessors. Kalev–Kosut–Deutsch arXiv1502.00536v2 AppendixA already uses thepositive gauge/congruence and requiresRIP ofthetransformedmap; itsAppendixBquantitativebound concerns the estimator tail and doesnotgive this Gaussianquadratic m=O(nr) uniformtrue-input-tail theorem. Slawski–Li–Hein arXiv1504.06305v1 Theorem2 hasfixedsignal/tangentgeometry rather than a singlemap event forallPSD inputs. The source explicitlycredits theseideas. EarlierSampTA[34,35] are acknowledgedforTheorems1–3/19; theirprimarycachedintro/abstract covers nuclear-norm recovery and explicitlyleavesPSDdetailaside. This attribution isrestrictedto thechecked GaussianTheorem4 strengthening, not the designoperator branch or a claimthatpositivity-basedfeasibility itself originatedhere.
+
+43. Uniform probability law on the complex unit sphere
+   For n≥1, the uniform probability on {z∈ℂⁿ:‖z‖₂=1} is the pushforward of a standard complex Gaussian vector g under g↦g/‖g‖₂. Define this map arbitrarily at g=0, an event of probability zero. This is the law called a Haar-random unit vector; it is invariant under unitary coordinate changes.
+   Source: relies_on, Definition27,(45);Corollary8
+   Note: ExactnormalizedGaussianuniformsphereprobabilityisnowexplicit; itsstatementparentalsoclosesthepreviouslyimplicitdesignmomentmeasure.
+
+44. Sample covariance conditioning for a trace-accurate four-design
+   Let n≥2 and let w be drawn from a weighted projective 4-design of trace-norm accuracy θ₁≤1/4. Put a=[n(n+1)]^(1/4)w. Its population covariance satisfies (3/4)I≼Eaa*≼(3/2)I. For independent copies a_j and W=m⁻¹Σ_ja_ja_j*, there is a universal C such that u≥1 and m≥Cun log(2n) imply P((1/2)I≼W≼2I)≥1−e^(−u); hence ‖W‖op≤2, ‖W⁻¹‖op≤2 and κ(W)≤4 on this event.
+   Source: explains, Proposition33,traceaccuracycase
+   Note: Selectedindependentproofverifiesstrongfirstmomentcontrolfromthetrace-fourthmomentcondition.
+
+45. Robust rank null space bound for trace-accurate four-design measurements
+   Let n≥2, 1≤r≤n and let w_j be independent draws from a weighted projective 4-design of trace-norm accuracy θ₁≤1/4. Set A(X)=(√(n(n+1))w_j*Xw_j)_j. Universal constants c,C,C₀>0 satisfy: if 0<ρ<1 and m≥Cρ⁻²nr log(2n), then with probability at least 1−e^(−cm), A has the Frobenius robust rank null space property of order r with constants ρ and τ=C₀/√m.
+   Source: explains, Theorem28traceaccuracybranch
+   Note: Explains therobustNSP resultalreadyannouncedinearlierSampTA[34]; nofullpaperorigininferred.
+
+46. Trace-norm density-matrix least squares with trace-accurate designs
+   Let n≥2, 1≤r≤n and L(X)=(√(n(n+1)/m)w_j*Xw_j)_j, with independent unit vectors drawn from a weighted projective 4-design of trace-norm accuracy θ₁≤1/4. If m≥Cnr log(2n), then with probability at least 1−e^(−cm), for every density matrix X and noise vector w, any minimizer Z of ‖L(Z)−(L(X)+w)‖₂ over density matrices satisfies ‖Z−X‖₁≤C₁‖X_c‖₁+C₂√r‖w‖₂, with universal constants.
+   Source: explains, Corollary6;Remark34
+   Note: Checkedtrace-accuratebranchwithobservednoisydataandtheactualequaltraceproof; noindependentpriorityclaimwithoutfurtherquantumpredecessorreview.
+
+47. Low-rank density identification by completed random rank-one measurements
+   For n≥2 and 1≤r≤n, draw independent uniform complex unit vectors w_j with m≥Cnr, or independent unit vectors from a weighted 4-design of trace-norm accuracy θ₁≤1/4 with m≥Cnr log(2n). Choose δ>0 with δΣ_jw_jw_j*≼I. The operators E_j=δw_jw_j* and E₀=I−Σ_jE_j form a POVM. With probability at least 1−e^(−cm), every density matrix of rank at most r is uniquely determined among all density matrices by these outcome probabilities, with suitable universal constants.
+   Source: explains, Corollary8;preceding(25)
+   Note: CheckedpositivePOVMcompletion/traceaccuracyversion; noisyrecovery/PSDuniquenessimpliesstrongdensityidentification. Nooriginofrank-rICdefinitionorpositivityidea claimed.
+
+48. Uniform stable PSD recovery from trace-accurate four-design measurements
+   Let n≥2, 1≤r≤n and A(X)=(√(n(n+1))w_j*Xw_j)_j, where w_j are independent draws from a weighted projective 4-design of trace-norm accuracy θ₁≤1/4. There are universal C,C₁,C₂>0 such that s≥1 and m≥Csnr log(2n) give, with probability at least 1−e^(−sr), simultaneously for all positive semidefinite X,Z and 1≤p≤2, ‖Z−X‖p≤C₁r^(1/p−1)‖X_c‖₁+C₂r^(1/p−1/2)m⁻¹/²‖A(Z−X)‖₂.
+   Source: introduces, Theorem4designbranch;§8Theorem31/Proposition33
+   Note: Narrowlycheckedtrace-accuracybranchofthenewuniformstablearbitrary-rankPSDfeasibilitytheorem.
+   Origin evidence: Assigned§1.3explicitlygeneralizespriorrank-onepositivityrecoverytouniformstablearbitrary-rankrecoveryand§8providesthequantitativegaugeargument. SelectedearlierKalev–Kosut–DeutschAppendicesA–Bcontainpositive-gauge/feasibilityideasbutnotthistrace-designm=O(nrlogn)uniformtrue-input-tailbound; selectedSlawskiTheorem2usesfixed-signalgeometry. EarlierSampTA[34,35]areexplicitlycreditedforTheorems1–3/19nuclear-normresults; thequalifiedPSDstrengtheningisrecordedseparately. Thisoccurrenceclaimsneitheroriginofpositive-gauge/ICideasnortheunresolvedoperator-accuracyTheorem28application.
+
+49. Uniform nuclear-norm recovery from independent entries with bounded fourth moments
+   Let the real measurement matrices Phi_j be independent copies of a matrix with independent centered entries of variance1 and fourth moments at most C4. For 1≤r≤min(n1,n2) and 0<rho<1, constants c,C,K>0 depending only on C4 give: if m≥C rho⁻²r(n1+n2), then with probability at least 1−e^(−cm), every nuclear-norm minimizer Xsharp from data A(X)+w with ‖w‖₂≤eta obeys ‖Xsharp−X‖F≤2(1+rho)²‖X_c‖₁/((1−rho)√r)+K(3+rho)eta/((1−rho)√m), simultaneously for all X and w.
+   Source: explains, §1 Theorem1; full §5 proof
+   Note: Complete proof inspected and checked with the explicit corrections in curator-main-linear-recovery-proofs.txt. The source p4 attributes the condensed theorem/proof to its earlier SampTA2015 conference version; no July-paper originality inferred.
+
+50. Explicit Gaussian measurement bound for uniform stable nuclear-norm recovery
+   Let A be a real n1×n2 matrix measurement map generated by independent standard Gaussian entries. Let 1≤r≤min(n1,n2), 0<rho<1, kappa>1 and 0<epsilon<1, and set L=sqrt(1+(1+rho⁻¹)²). If m/√(m+1)≥kappa[(√r)L(√n1+√n2)+√(2log(1/epsilon))]/(kappa−1), then with probability at least 1−epsilon every nuclear-norm minimizer Xsharp with noise tolerance eta satisfies ‖Xsharp−X‖F≤2(1+rho)²‖X_c‖₁/((1−rho)√r)+2kappa√2(3+rho)eta/((1−rho)√m), uniformly for all X and admissible noises.
+   Source: explains, §4 Theorem19 and full proof; equation(35)
+   Note: Complete proof inspected and checked with the explicit corrections in curator-main-linear-recovery-proofs.txt. The source p4 attributes the condensed theorem/proof to its earlier SampTA2015 conference version; no July-paper originality inferred.
+
+51. Weighted approximate complex projective t-design
+   For unit vectors w_i∈ℂⁿ and weights p_i≥0 summing to1, the weighted family is an approximate projective t-design of Schatten-p accuracy θ if ‖∑p_i(w_iw_i*)^(⊗t)−∫_(‖w‖₂=1)(ww*)^(⊗t)dσ(w)‖_p≤θ/binom(n+t−1,t), where σ is uniform spherical probability. Accuracy0 gives an exact design.
+   Source: discusses, §7 Definition27 and Theorem28, operator-accuracy branch
+   Note: The printed arbitrary-rho operator-accuracy robust NSP assertion is false: the finite weighted balanced-block ensemble in operator-design-theorem28-counterexample.txt has theta_infinity<1/16 and exact isotropic first moment but a deterministic full-rank null direction violating rank1 robust NSP at rho=1/192. FA independently checked. This does not refute the trace-accuracy theorem, PSDTheorem4 or nuclear-recoveryTheorem3. No active catalogue theorem asserts the refuted branch.
+
+ADDITIONAL PREREQUISITES (122)
+
+- Abelian group [definition]: A group whose operation is commutative.
+- Almost-everywhere property on a measure space [definition]: A property holds almost everywhere if the set where it fails is contained in a measurable set of measure zero.
+- Basis of a vector space [definition]: A linearly independent family of vectors whose linear span is the whole vector space.
+- Bijection between sets [definition]: A function for which each element of the codomain is the image of exactly one element of the domain.
+- Bilinear map [definition]: A map of two vector-space variables that is linear in each variable separately.
+- Binary operation on a set [definition]: A function S×S→S.
+- Binary relation on a set [definition]: A subset R⊆S×S; writing xRy means (x,y)∈R.
+- Binomial coefficient [definition]: For integers 0≤k≤n, binom(n,k) counts the k-element subsets of an n-element set and equals n!/(k!(n−k)!).
+- Borel σ-algebra of a topological space [definition]: The σ-algebra generated by the open subsets of the space.
+- Borel σ-algebra on the real line [definition]: The σ-algebra on ℝ generated by the open intervals.
+- Bounded linear operator [definition]: A linear map T:X→Y between normed vector spaces is bounded if ∥Tx∥≤C∥x∥ for one finite constant C and every x∈X.
+- Cardinality of a set [definition]: The size of a set, with two sets having the same cardinality when there is a bijection between them. A set has finite cardinality n when it is in bijection with {1,…,n}; infinite cardinalities are distinguished by the same bijection criterion.
+- Cartesian product of sets [definition]: A×B is the set of ordered pairs (a,b) with a∈A and b∈B.
+- Cauchy sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) is Cauchy if for every ε>0 there is N such that d(xₙ,xₘ)<ε whenever n,m≥N.
+- Cauchy–Schwarz inequality for complex inner-product spaces [theorem]: In a complex inner-product space, |⟨u,v⟩|²≤⟨u,u⟩⟨v,v⟩ for all u,v.
+- Commutative ring with identity [definition]: An abelian group under addition, together with an associative commutative multiplication with identity, distributing over addition. The zero ring is allowed.
+- Complement of a subset [definition]: For A⊆Ω, its complement Ω∖A consists of the elements of Ω that do not belong to A.
+- Complete measure [definition]: A measure is complete if every subset of a measurable null set is measurable and has measure zero.
+- Complete metric space [definition]: A metric space is complete if every Cauchy sequence in it converges to a point of that same space.
+- Complex Hilbert space [definition]: A complex inner-product space complete in the metric d(x,y)=∥x−y∥ induced by its inner product.
+- Complex conjugation [definition]: The complex conjugate of z=a+bi is z̄=a−bi.
+- Complex inner-product space [definition]: A complex vector space with a positive definite Hermitian form ⟨x,y⟩, linear in x and conjugate-linear in y. Its induced norm is ∥x∥=√⟨x,x⟩.
+- Complex number [definition]: A complex number is a pair of real numbers, written a+bi. Addition is componentwise and multiplication is (a+bi)(c+di)=(ac−bd)+(ad+bc)i, so i²=−1.
+- Convergence of a sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) converges to x∈X if for every ε>0 there is N such that d(xₙ,x)<ε whenever n≥N.
+- Convergent real series [definition]: The series ∑ₙ≥1aₙ converges to S if its sequence of partial sums converges to S.
+- Convex function on a convex subset of a real vector space [definition]: A function f:C→R on a convex subset of a real vector space satisfying f((1−t)x+ty)≤(1−t)f(x)+tf(y) for x,y∈C and 0≤t≤1. Unlike the separate interval-convex-function identity, the domain may be infinite-dimensional.
+- Convex subset of a real vector space [definition]: A subset C of a real vector space is convex if (1−t)x+ty∈C whenever x,y∈C and0≤t≤1. The vector space may be infinite-dimensional.
+- Dimension of a vector space [definition]: The cardinality of a basis of the vector space; a finite basis with n vectors gives dimension n.
+- Disjoint sets [definition]: Two sets are disjoint when they have no common element; a family is pairwise disjoint when every two distinct members are disjoint.
+- Eigenvalue of a linear endomorphism [definition]: A scalar λ for which a linear endomorphism T has a nonzero vector v with Tv=λv.
+- Equivalence class [definition]: For an equivalence relation ~ on X, [x]={y∈X:y~x}; the quotient set X/~ consists of these classes.
+- Equivalence relation [definition]: A reflexive, symmetric and transitive binary relation.
+- Essential supremum of a measurable real function [definition]: The infimum of real a for which f≤a almost everywhere, allowing infinite values when no finite bound exists.
+- Euclidean space ℝᵈ [definition]: For d≥1, ℝᵈ consists of d-tuples of real numbers with distance dist(x,y)=(∑ᵢ(xᵢ−yᵢ)²)¹ᐟ².
+- Expectation of an integrable real random variable [definition]: If E abs(X)=∫abs(X)dP<∞, the expectation of X is EX=∫X dP.
+- Extended nonnegative real numbers [definition]: The nonnegative real numbers together with a greatest element ∞. Sums involving ∞ equal ∞, and 0·∞ is taken to be 0 when integrating simple functions.
+- Factorial [definition]: For n≥1, n!=1·2···n, and 0!=1.
+- Field [definition]: A commutative ring in which 1≠0 and every nonzero element is invertible.
+- Finite set [definition]: A set X is finite if it is bijective with {1,…,n} for some natural number n≥0; its cardinality is n.
+- Finite-dimensional vector space [definition]: A vector space having a finite basis.
+- Frobenius norm of a real or complex matrix [definition]: The Frobenius norm of A is (∑_{i,j}|a_{ij}|²)^{1/2}.
+- Function between sets [definition]: An assignment taking each element of a specified domain set to exactly one element of a specified codomain set.
+- Gamma function on the positive real axis [definition]: For s>0, Γ(s)=∫₀∞e^(−t)t^(s−1)dt, with the integral understood as an improper real integral.
+- Gaussian orthogonal ensemble in Frobenius normalization [construction]: GOE(n) here is the law of a real symmetric n×n matrix whose diagonal entries are independentN(0,1) and whose upper offdiagonal entries are independentN(0,1/2), independent also of the diagonal. Equivalently its coordinates in a real orthonormal Frobenius basis are independent standard normals.
+- Group [definition]: A set with an associative binary operation, an identity element, and a two-sided inverse for each element.
+- Hermitian complex matrix [definition]: A square complex matrix A is Hermitian if its conjugate transpose A* equals A; equivalently A_(ij)=overline(A_(ji)) for every i,j.
+- Improper Riemann integral [definition]: An improper Riemann integral over an open endpoint or an unbounded interval is a limit of integrals over compact subintervals; with two improper endpoints both limits must exist separately.
+- Independent family of random variables [definition]: For distinct i₁,…,iₖ and Borel A₁,…,Aₖ, independence requires P(⋂ⱼ{Xᵢⱼ∈Aⱼ})=∏ⱼP(Xᵢⱼ∈Aⱼ).
+- Indicator function of a subset [definition]: For A⊆Ω, the real function 1_A is 1 on A and 0 on its complement.
+- Intersection of a family of sets [definition]: Inside a specified ambient set, the elements belonging to every member of the family.
+- Invertible square matrix [definition]: A square matrix A over a field is invertible if there is a square matrix B with AB=BA=I; this B is denoted A⁻¹.
+- Kernel of a linear map [definition]: For a linear map f:V→W, its kernel is the subspace {v∈V:f(v)=0}.
+- Least upper bound in a partially ordered set [definition]: For A⊆P, its least upper bound is an upper bound s satisfying s≤b for every upper bound b of A, when such an s exists.
+- Lebesgue Lᵖ space [definition]: For a measure space and 1≤p<∞, Lᵖ consists of measurable scalar functions modulo equality almost everywhere with ∫|f|ᵖ<∞, normed by (∫|f|ᵖ)¹ᐟᵖ. For p=∞ use the essential-supremum norm.
+- Lebesgue integral [definition]: For measurable f≥0, ∫f dμ is the supremum of integrals of nonnegative simple functions below f. For signed f with ∫abs(f)dμ<∞, define ∫f=∫f⁺−∫f⁻.
+- Lebesgue measure on Euclidean space [definition]: The completion of the Borel measure on ℝⁿ assigning each rectangular box the product of its side lengths.
+- Limit of a function between metric spaces [definition]: For f defined near an accumulation point a of a metric space, lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<d(x,a)<δ implies d(f(x),L)<ε.
+- Limit of a real function at a point [definition]: The relation lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<|x−a|<δ in the domain implies |f(x)−L|<ε.
+- Limit of a real sequence [definition]: A sequence (aₙ) converges to L∈ℝ if for every ε>0 there is N such that n≥N implies abs(aₙ−L)<ε.
+- Linear combination of vectors [definition]: A finite sum a₁v₁+⋯+aₙvₙ of vectors multiplied by scalars from their vector space’s ground field; the empty sum is zero.
+- Linear map between vector spaces [definition]: A map between vector spaces over the same field preserving addition and scalar multiplication.
+- Linear matrix measurement map [construction]: For fixed matrices A₁,…,A_m of the same size as X, a linear matrix measurement map sends X to (tr(XA_j*))_(j=1)^m. On Hermitian matrices with Hermitian A_j, this takes real values; noisy data have the form b=A(X)+w.
+- Linear span of a set of vectors [definition]: The subspace consisting of all finite linear combinations of a specified set of vectors.
+- Linearly independent family of vectors [definition]: A family of vectors is linearly independent if every finite linear combination equalling zero has all coefficients zero.
+- Matrix over a ring [definition]: A rectangular array of elements of a ring; addition is entrywise and matrix multiplication uses row-by-column sums.
+- Measurable map between measurable spaces [definition]: A function for which the preimage of each measurable subset of the codomain is measurable in the domain.
+- Measurable simple real function [definition]: A measurable real function with finite range. It can be written as a finite sum ∑ a_i 1_{A_i} with measurable level sets A_i.
+- Measurable space [definition]: A set equipped with a specified σ-algebra of subsets.
+- Measure [definition]: A measure μ maps a σ-algebra to [0,∞], sends ∅ to 0, and satisfies μ(⋃ₙAₙ)=∑ₙμ(Aₙ) for every pairwise disjoint sequence of measurable sets.
+- Metric induced by a norm [construction]: The metric induced by a norm on a real or complex vector space is d(x,y)=‖x−y‖.
+- Metric space [definition]: A set X with a function d:X×X→[0,∞) such that d(x,y)=0 exactly when x=y, d(x,y)=d(y,x), and d(x,z)≤d(x,y)+d(y,z).
+- Modulus of a complex number [definition]: For z=a+bi, its modulus is the nonnegative real number |z|=√(a²+b²).
+- Multivariate normal distribution [definition]: A distribution of a real vector X for which every real linear combination of coordinates is normally distributed; it is specified by its mean vector and positive semidefinite covariance matrix.
+- Natural logarithm [definition]: The inverse ln:(0,∞)→ℝ of the real exponential function.
+- Natural number [definition]: One of 0, 1, 2, …; natural numbers count finite collections.
+- Nonnegative real square root [definition]: For t≥0, √t is the unique real number y≥0 satisfying y²=t.
+- Normal distribution [definition]: The real probability distribution N(m,σ²) with density (2πσ²)⁻¹ᐟ²exp(−(x−m)²/(2σ²)) for σ>0; variance zero gives a point mass at m.
+- Normed vector space [definition]: A real or complex vector space X with a function ∥·∥:X→[0,∞) that is positive except at zero, absolutely homogeneous, and subadditive.
+- Open interval in the real line [definition]: For real a<b, the set (a,b)={x∈ℝ:a<x<b}.
+- Operator norm of a bounded linear operator [definition]: For a bounded linear map T:X→Y between normed spaces, ∥T∥=sup{∥Tx∥:∥x∥≤1}.
+- Ordered field [definition]: A field with a total order preserved by addition, in which the product of two positive elements is positive.
+- Ordered pair [definition]: A pair (x,y) with distinguished first and second entries; (x,y)=(x′,y′) exactly when x=x′ and y=y′.
+- Orthogonal invariance of the standard Gaussian distribution [theorem]: If X has n independent N(0,1) coordinates and U is a real orthogonal n×n matrix, then UX has the same distribution as X.
+- Orthonormal family in a Hilbert space [definition]: Vectors (e_i) with ⟨e_i,e_j⟩=0 for i≠j and ‖e_i‖=1.
+- Partial order [definition]: A reflexive, antisymmetric and transitive binary relation, usually written ≤.
+- Positive semidefinite complex matrix [definition]: A Hermitian n×n complex matrix A is positive semidefinite if z*Az≥0 for every z∈ℂⁿ.
+- Positive semidefinite real matrix [definition]: A symmetric real matrix A such that xᵀAx≥0 for every real column vector x.
+- Preimage of a subset under a function [definition]: For f:A→B and E⊆B, f⁻¹(E)={x∈A:f(x)∈E}.
+- Probability space [definition]: A probability space is (Ω,𝔽,P), where 𝔽 is a σ-algebra on Ω and P is a measure on 𝔽 with P(Ω)=1.
+- Pushforward measure [definition]: For a measurable map f:X→Y and measure μ on X, the pushforward f_*μ on Y satisfies f_*μ(B)=μ(f⁻¹(B)).
+- Rank of a linear map [definition]: The dimension of the image of a linear map.
+- Real Hilbert space [definition]: A real inner-product space complete for its induced norm metric.
+- Real exponential function [definition]: The real function exp(x)=∑_{n≥0}xⁿ/n!, whose series converges for every real x.
+- Real inner-product space [definition]: A real vector space with a symmetric bilinear form ⟨x,y⟩ that is positive on ⟨x,x⟩ for x≠0; its induced norm is √⟨x,x⟩.
+- Real number [definition]: A real number is an element of a complete ordered field ℝ; completeness means every nonempty subset bounded above has a least upper bound.
+- Real orthogonal matrix [definition]: A real square matrix U with UᵀU=I, equivalently a linear map preserving the Euclidean inner product.
+- Real power of a positive real number [definition]: For x>0 and p∈ℝ, define xᵖ=exp(p log x). For p>0 extend by 0ᵖ=0.
+- Real sequence [definition]: A real sequence is a function a:ℕ₊→ℝ, written (aₙ)ₙ≥1.
+- Real sine function [definition]: The sine function is defined by the everywhere convergent power series sin(x)=∑ₖ≥0(−1)ᵏx²ᵏ⁺¹/(2k+1)!.
+- Real-valued random variable [definition]: A real-valued random variable is a measurable map from a probability space to ℝ with its Borel σ-algebra.
+- Riemann integral [definition]: A bounded f:[a,b]→ℝ has Riemann integral I if all tagged Riemann sums approach I as the maximum length of the partition intervals tends to zero.
+- Schatten norm of a finite matrix [definition]: For a real or complex matrix M with singular values σ_j and1≤p<∞, its Schatten p-norm is ‖M‖_p=(∑σ_j^p)^(1/p); ‖M‖_∞=maxσ_j is the operator norm. The p=1 case is the nuclear norm and p=2 is the Frobenius norm.
+- Sequence in a set [definition]: A function from the natural numbers, or the positive natural numbers, to that set.
+- Set [definition]: A collection of distinct elements, regarded as one object.
+- Singular values of a complex matrix [construction]: For a complex m×n matrix M, its singular values σ₁≥⋯≥σ_q≥0, q=min(m,n), are the nonnegative square roots of the eigenvalues of M*M, with the additional forced zero eigenvalues omitted when n>m.
+- Singular-value rank truncation [construction]: For an SVD M=∑_(j=1)^qσ_j u_jv_j*, choose M_r=∑_(j≤r)σ_j u_jv_j* and M_c=M−M_r. Repeated singular values can make the choice nonunique, while the singular values and Schatten norms of the head and tail are well defined.
+- Spectral theorem for a Hermitian complex matrix [theorem]: Every Hermitian complex matrix A has a decomposition A=U diag(λ₁,…,λₙ)U* with U unitary and all λⱼ real.
+- Subset [definition]: A⊆B means every element of A is an element of B.
+- Sum of a nonnegative series [definition]: For aₙ≥0, define ∑ₙ≥1aₙ as the supremum of its finite partial sums; the value may be infinite.
+- Symmetric matrix [definition]: A square matrix A equal to its transpose, so aᵢⱼ=aⱼᵢ.
+- Tagged Riemann sum [definition]: For a partition a=x₀<⋯<x_n=b and tags t_i∈[x_{i−1},x_i], the Riemann sum of f is ∑ᵢf(t_i)(x_i−x_{i−1}); the partition mesh is maxᵢ(x_i−x_{i−1}).
+- Tensor product of vector spaces [definition]: The vector space V⊗W with its universal bilinear map from V×W.
+- Topological space [definition]: A set X with a family τ of subsets, called open sets, containing ∅ and X and closed under arbitrary unions and finite intersections.
+- Total order [definition]: A partial order in which any two elements are comparable.
+- Trace of a square matrix [definition]: The sum of the diagonal entries of a square matrix.
+- Union of a family of sets [definition]: The set of elements belonging to at least one member of the family.
+- Unitary operator on a complex Hilbert space [definition]: A surjective complex linear map preserving the inner product.
+- Vector space [definition]: An abelian group with scalar multiplication by a field satisfying a(v+w)=av+aw, (a+b)v=av+bv, (ab)v=a(bv), and 1v=v.
+- Vector subspace [definition]: A subset of a vector space containing zero and closed under addition and scalar multiplication.
+- π [definition]: π is the least positive zero of the real sine function and equals the circumference-to-diameter ratio of a Euclidean circle.
+- σ-algebra [definition]: A σ-algebra on Ω contains Ω and is closed under complements in Ω and countable unions.
+- σ-algebra generated by a family of subsets [definition]: The smallest σ-algebra containing that family, equivalently the intersection of all σ-algebras on the ambient set that contain it.
+
+CITATIONS
+
+  [1] R. Ahlswede and A. Winter. Strong converse for identiﬁcation via quantum channels. IEEE Trans. Inform. Theory,
+     48(3):569 –579, 2002.
+    Pedagogically necessary: unknown
+
+  [2] A. Ahmed and J. Romberg. Compressive multiplexing of correlated signals. IEEE Trans. Inform. Theory, 61(1):479–498,
+     2015.
+    Pedagogically necessary: unknown
+
+  [3] A. Ambainis and J. Emerson. Quantum t-designs: t-wise independence in the quantum world. In 22nd Annual IEEE
+     Conference on Computational Complexity, Proceedings, pages 129–140, 2007.
+    Pedagogically necessary: unknown
+
+  [4] D. Amelunxen, M. Lotz, M. B. McCoy, and J. A. Tropp. Living on the edge: Phase transitions in convex programs with
+     random data. Inform. Inference, 3(3):224–294, 2014.
+    Pedagogically necessary: unknown
+
+  [5] R. Balan, B. G. Bodmann, P. G. Casazza, and D. Edidin. Painless reconstruction from magnitudes of frame coeﬃcients.
+     J. Fourier Anal. Appl., 15:488–501, 2009.
+    Pedagogically necessary: unknown
+
+  [6] K. Banaszek, M. Cramer, and D. Gross. Focus on quantum tomography. New J. Phys., 15:125020, 2013.
+    Pedagogically necessary: unknown
+
+  [7] R. Bhatia. Matrix analysis. Springer, 1997.
+    Pedagogically necessary: unknown
+
+  [8] S. Boyd and L. Vandenberghe. Convex Optimization. Cambridge Univ. Press, 2004.
+    Pedagogically necessary: unknown
+
+  [9] A. M. Bruckstein, M. Elad, and M. Zibulevsky. On the uniqueness of nonnegative sparse solutions to underdetermined
+     systems of equations. IEEE Trans. Inform. Theory, 54(11):4813–4820, 2008.
+    Pedagogically necessary: unknown
+
+  [10] E. Candès, T. Strohmer, and V. Voroninski. PhaseLift: Exact and stable signal recovery from magnitude measurements
+     via convex programming. Comm. Pure Appl. Math., 66:1241–1274, 2013.
+    Pedagogically necessary: unknown
+
+  [11] E. Candes and T. Tao. The power of convex relaxation: near-optimal matrix completion. IEEE Trans. Inform. Theory,
+     56(5):2053–2080, 2010.
+    Pedagogically necessary: unknown
+
+  [12] E. J. Candès, Y. C. Eldar, T. Strohmer, and V. Voroninski. Phase retrieval via matrix completion. SIAM J. Imaging Sci.,
+     6:199–225, 2013.
+    Pedagogically necessary: unknown
+
+  [13] E. J. Candès and X. Li. Solving quadratic equations via PhaseLift when there are about as many equations as unknowns.
+     Found. Comput. Math., pages 1–10, 2013.
+    Pedagogically necessary: unknown
+
+  [14] E. J. Candès, X. Li, and M. Soltanolkotabi. Phase retrieval via Wirtinger ﬂow: Theory and algorithms. IEEE Trans.
+     Inform. Theory, 61(4):1985–2007, 2015.
+    Pedagogically necessary: unknown
+
+  [15] E. J. Candès and Y. Plan. Tight oracle inequalities for low-rank matrix recovery from a minimal number of noisy random
+     measurements. IEEE Trans. Inform. Theory, 57(4):2342–2359, 2011.
+    Pedagogically necessary: unknown
+
+  [16] E. J. Candès and B. Recht. Exact matrix completion via convex optimization. Found. Comput. Math., 9:717–772, 2009.
+    Pedagogically necessary: unknown
+
+  [17] A. Carpentier, J. Eisert, D. Gross, and R. Nickl. Uncertainty quantiﬁcation for matrix compressed sensing and quantum
+     tomography problems. preprint arXiv:1504.03234, 2015.
+    Pedagogically necessary: unknown
+    arxiv: 1504.03234
+
+  [18] V. Chandrasekaran, B. Recht, P. Parrilo, and A. Willsky. The convex geometry of linear inverse problems. Found. Comput.
+     Math., 12(6):805–849, 2012.
+    Pedagogically necessary: unknown
+
+  [19] Y. Chen, Y. Chi, and A. Goldsmith. Exact and stable covariance estimation from quadratic sampling via convex program-
+     ming. IEEE Trans. Inform. Theory, 61(7):4034–4059, July 2015.
+    Pedagogically necessary: unknown
+
+  [20] Z. Chen and J. J. Dongarra. Condition numbers of Gaussian random matrices. SIAM J. Matrix Anal. A., 27(3):603–620,
+     2005.
+    Pedagogically necessary: unknown
+
+  [21] L. Demanet and P. Hand. Stable optimizationless recovery from phaseless linear measurements. J. Fourier Anal. Appl.,
+     20(1):199–221, 2014.
+    Pedagogically necessary: unknown
+
+  [22] M. Fazel. Matrix rank minimization. PhD thesis, Stanford University, 2002.
+    Pedagogically necessary: unknown
+
+  [23] C. Ferrie and R. Kueng. Have you been using the wrong estimator? These guys bound average ﬁdelity using this one weird
+     trick von Neumann didn’t want you to know. preprint arXiv:1503.00677, 2015.
+    Pedagogically necessary: unknown
+    arxiv: 1503.00677
+
+  [24] S. T. Flammia, D. Gross, Y.-K. Liu, and J. Eisert. Quantum tomography via compressed sensing: error bounds, sample
+     complexity and eﬃcient estimators. New J. Phys., 14:095022, 2012.
+    Pedagogically necessary: unknown
+
+  [25] M. Fornasier, H. Rauhut, and R. Ward. Low-rank matrix recovery via iteratively reweighted least squares minimization.
+     SIAM J. Optim., 21(4):1614–1640, 2011.
+    Pedagogically necessary: unknown
+
+  [26] S. Foucart and H. Rauhut. A Mathematical Introduction to Compressive Sensing. Applied and Numerical Harmonic
+     Analysis. Birkhäuser/Springer, New York, 2013.
+    Pedagogically necessary: unknown
+
+  [27] Y. Gordon. On Milman’s inequality and random subspaces which escape through a mesh in Rn . In Geometric aspects of
+     functional analysis (1986/87), volume 1317 of Lecture Notes in Math., pages 84–106. Springer, Berlin, 1988.
+    Pedagogically necessary: unknown
+
+  [28] D. Gross, F. Krahmer, and R. Kueng. A partial derandomization of Phaselift using spherical designs. Journal of Fourier
+     Analysis and Applications, pages 1–38, 2014.
+    Pedagogically necessary: unknown
+
+  [29] D. Gross, F. Krahmer, and R. Kueng. Improved recovery guarantees for phase retrieval from coded diﬀraction patterns.
+     to appear in Appl. Comput. Harmon. Anal., preprint arXiv:1402.6286, 2015.
+    Pedagogically necessary: unknown
+    arxiv: 1402.6286
+
+  [30] D. Gross, Y.-K. Liu, S. T. Flammia, S. Becker, and J. Eisert. State tomography via compressed sensing. Phys. Rev. Lett.,
+     105:150401, 2010.
+    Pedagogically necessary: unknown
+
+  [31] T. Heinosaari, L. Mazzarella, and M. M. Wolf. Quantum tomography under prior information. Commun. Math. Phys.,
+     318(2):355–374, 2013.
+    Pedagogically necessary: unknown
+
+  [32] C. W. Helstrom. Quantum detection and estimation theory. J. Statist. Phys., 1(2):231–252, 1969.
+    Pedagogically necessary: unknown
+
+  [33] R. Horn and C. Johnson. Topics in matrix analysis. Cambridge University Press, Cambridge, 1991.
+    Pedagogically necessary: unknown
+
+  [34] M. Kabanava, H. Rauhut, and U. Terstiege. Analysis of low rank matrix recovery via mendelson’s small ball method. In
+     11th international conference on Sampling Theory and Applications (SampTA 2015), Washington, USA, May 2015.
+    Pedagogically necessary: unknown
+
+  [35] M. Kabanava, H. Rauhut, and U. Terstiege. On the minimal number of measurements in low-rank matrix recovery. In 11th
+     international conference on Sampling Theory and Applications (SampTA 2015), Washington, USA, May 2015.
+    Pedagogically necessary: unknown
+
+  [36] A. Kalev, C. Riofrio, R. Kosut, and I. Deutsch. Informationally complete measurements from compressed sensing method-
+     ology. Bulletin of the American Physical Society, 60, 2015.
+    Pedagogically necessary: unknown
+
+  [37] M. Kech, P. Vrana, and M. Wolf. The role of topology in quantum tomography. preprint arXiv:1503.00506, 2015.
+    Pedagogically necessary: unknown
+    arxiv: 1503.00506
+
+  [38] M. Kech and M. Wolf. From quantum tomography to phase retrieval and back. In 11th international conference on
+     Sampling Theory and Applications (SampTA 2015), Washington, USA, May 2015.
+    Pedagogically necessary: unknown
+
+  [39] M. Kech and M. M. Wolf. Quantum tomography of semi-algebraic sets with constrained measurements. preprint
+     ArXiv:1507.00903, 2015.
+    Pedagogically necessary: unknown
+    arxiv: 1507.00903
+
+  [40] V. Koltchinskii and S. Mendelson. Bounding the smallest singular value of a random matrix without concentration.
+     Internat. Math. Res. Notices, page rnv096, 2015.
+    Pedagogically necessary: unknown
+
+  [41] R. Kueng, S. Daniel, and D. Gross. Direct characterization of linear-optical networks via PhaseLift. in preparation, 2015.
+    Pedagogically necessary: unknown
+
+  [42] R. Kueng, D. Gross, and F. Krahmer. Spherical designs as a tool for derandomization: The case of PhaseLift. In 11th
+     international conference on Sampling Theory and Applications (SampTA 2015), Washington, USA, May 2015.
+    Pedagogically necessary: unknown
+
+  [43] R. Kueng, H. Rauhut, and U. Terstiege. Low rank matrix recovery from rank one measurements. Preprint arXiv:1410.6913,
+     2014.
+    Pedagogically necessary: unknown
+    arxiv: 1410.6913
+
+  [44] R. Latala. Some estimates of norms of random matrices. Proc. Amer. Math. Soc., 133(5):1273–1282, 2005.
+    Pedagogically necessary: unknown
+
+  [45] M. Ledoux and M. Talagrand. Probability in Banach Spaces. Springer-Verlag, 1991.
+    Pedagogically necessary: unknown
+
+  [46] K. Lee and Y. Bresler. ADMiRA: Atomic decomposition for minimum rank approximation. IEEE Trans. Image Process.,
+     56(9):4402 – 4416, 2010.
+    Pedagogically necessary: unknown
+
+  [47] Y.-K. Liu. Universal low-rank matrix recovery from Pauli measurements. Adv. Neural Inf. Process. Syst., pages 1638–1646,
+     2011.
+    Pedagogically necessary: unknown
+
+  [48] W. Matthews, S. Wehner, and A. Winter. Distinguishability of quantum states under restricted families of measurements
+     with an application to quantum data hiding. Commun. Math. Phys., 291(3):813–843, 2009.
+    Pedagogically necessary: unknown
+
+  [49] M. B. McCoy and J. A. Tropp. Sharp recovery bounds for convex demixing, with applications. Found. Comput. Math.,
+     14(3):503–567, 2014.
+    Pedagogically necessary: unknown
+
+  [50] S. Mendelson. Learning without Concentration. J. ACM, 62(3):1–25, 2015.
+    Pedagogically necessary: unknown
+
+  [51] K. Mohan and M. Fazel. Iterative reweighted least squares for matrix rank minimization. In Proceedings of the Allerton
+     Conference, pages 653–661, 2010.
+    Pedagogically necessary: unknown
+
+  [52] K. Mohan and M. Fazel. New restricted isometry results for noisy low-rank recovery. In Proc. International Symposium
+     Information Theory, 2010.
+    Pedagogically necessary: unknown
+
+  [53] M. A. Nielsen and I. L. Chuang. Quantum computation and quantum information. Cambridge University Press, 2010.
+    Pedagogically necessary: unknown
+
+  [54] S. Oymak, K. Mohan, M. Fazel, and B. Hassibi. A simpliﬁed approach to recovery conditions for low rank matrices. In
+     Information Theory Proceedings (ISIT), 2011 IEEE International Symposium on, pages 2318–2322, July 2011.
+    Pedagogically necessary: unknown
+
+  [55] N. Parikh and S. Boyd. Proximal algorithms. Found. Trends Optim., 1(3):123–231, 2014.
+    Pedagogically necessary: unknown
+
+  [56] B. Recht, M. Fazel, and P. A. Parrilo. Guaranteed minimum-rank solutions of linear matrix equations via nuclear norm
+     minimization. SIAM Rev., 52(3):471–501, 2010.
+    Pedagogically necessary: unknown
+
+  [57] B. Recht, W. Xu, and B. Hassibi. Necessary and suﬃcient conditions for success of the nuclear norm heuristic for rank
+     minimization. In Proc. 47th IEEE Conference on Decision and Control, pages 3065–3070, 2008.
+    Pedagogically necessary: unknown
+
+  [58] B. Recht, W. Xu, and B. Hassibi. Null space conditions and thresholds for rank minimization. Mathematical Programming,
+     Ser B, 127:175–211, 2011.
+    Pedagogically necessary: unknown
+
+  [59] M. Rudelson and R. Vershynin. On sparse reconstruction from fourier and gaussian measurements. Comm. Pure Appl.
+     Math., 61(8):1025–1045, 2008.
+    Pedagogically necessary: unknown
+
+  [60] P. Schindler, D. Nigg, T. Monz, J. T. Barreiro, E. Martinez, S. X. Wang, S. Quint, M. F. Brandl, V. Nebendahl, C. F.
+     Roos, et al. A quantum information processor with trapped ions. New J. Phys., 15(12):123012, 2013.
+    Pedagogically necessary: unknown
+
+  [61] B. Schölkopf and A. J. Smola. Learning with kernels: Support vector machines, regularization, optimization, and beyond.
+     MIT press, 2002.
+    Pedagogically necessary: unknown
+
+  [62] A. Scott. Tight informationally complete quantum measurements. J. Phys. A-Math. Gen., 39:13507–13530, 2006.
+    Pedagogically necessary: unknown
+
+  [63] M. Slawski, P. Li, and M. Hein. Regularization-free estimation in trace regression with symmetric positive semideﬁnite
+     matrices. preprint arXiv:1504.06305, 2015.
+    Pedagogically necessary: unknown
+    arxiv: 1504.06305
+
+  [64] J. Tanner and K. Wei. Normalized iterative hard thresholding for matrix completion. SIAM J. Sci. Comput., 59(11):7491–
+     7508, 2013.
+    Pedagogically necessary: unknown
+
+  [65] J. A. Tropp. User-friendly tail bounds for sums of random matrices. Found. Comput. Math., 12(4):389–434, 2012.
+    Pedagogically necessary: unknown
+
+  [66] J. A. Tropp. Convex recovery of a structured signal from independent random linear measurements. to appear in Sampling
+     Theory, a Renaissance, preprint arXiv:1405.1102, 2014.
+    Pedagogically necessary: unknown
+    arxiv: 1405.1102
+
+  [67] R. Vershynin. Introduction to the non-asymptotic analysis of random matrices. In Y. Eldar and G. Kutyniok, editors,
+     Compressed Sensing: Theory and Applications, pages 210–268. Cambridge Univ Press, 2012.
+    Pedagogically necessary: unknown
+
+  [68] Z. Xu. The minimal measurement number for low-rank matrices recovery. preprint ArXiv:1505.07204, 2015.
+    Pedagogically necessary: unknown
+    arxiv: 1505.07204
+

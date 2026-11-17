@@ -1,0 +1,614 @@
+A unified approach to a priori estimates for supersolutions of BSDEs in general filtrations
+
+Coverage: Entire pinned22-page source, all proofs/applications/Appendix and29references inspected. Actual one-step reading inputs and recursively required statement vocabulary reviewed; direct imported/source-owned proof lists recorded with precise remaining barriers.
+Required concepts complete: True
+Introduced concepts complete: False
+All citations captured: True
+Completion refers to immediate concepts only; false means not certified.
+
+REQUIRED CONCEPT FRONTIER (20)
+
+- Banach contraction mapping theorem: Every map T:X→X on a nonempty complete metric space satisfying d(Tx,Ty)≤q d(x,y) for a fixed 0≤q<1 has a unique fixed point, and Tⁿx converges to it for every x.
+- Brownian orthogonal decomposition of a local martingale: On a usual filtration carrying a d-dimensional Brownian motion W, every real càdlàg local martingale N has a unique decomposition N=N₀+∫Z_s·dW_s+M, where Z is predictable and locally square-integrable and M is a càdlàg local martingale starting at0 with [M,W^i]=0 for every i. Uniqueness of Z is modulo dt×dP.
+- Burkholder–Davis–Gundy inequalities for càdlàg local martingales at p≥1: For each p≥1 there are 0<c_p≤C_p<∞ such that every real càdlàg local martingale M starting at0 satisfies c_pE([M]_T^(p/2))≤E[sup_(t≤T)|M_t|^p]≤C_pE([M]_T^(p/2)) for stopping times T, with extended expectations.
+- Comparison for càdlàg reflected Brownian BSDE solutions: Let two given càdlàg reflected Brownian BSDE solutions on a usual Brownian-carrying filtration have a common finite horizon, globally Lipschitz drivers g1,g2 and some p>1 integrability: the suprema of |Y| and K_T and the square roots of the Brownian and orthogonal-martingale quadratic variations lie in Lp. Use the convention Y_t=xi−∫_t^Tg ds−∫_t^TZ dW−(M_T−M_t)+K_T−K_t. If xi1≤xi2, S1≤S2 and g1(t,y,z)≥g2(t,y,z) almost everywhere for every y,z, then Y1≤Y2 indistinguishably.
+- Convex power jump-remainder lower bound: For1<p<2 and reala,b withR=max(|a|,|b|)>0, |b|ᵖ−|a|ᵖ−p|a|^(p−1)sgn(a)(b−a)≥[p(p−1)/2](b−a)²R^(p−2), withsgn(0)=0. WhenR=0 bothsides are defined as0.
+- Covariation stability under UT and ucp convergence: On a common usual filtered space let X^n,Y^n and X,Y be real càdlàg semimartingales. If each sequence X^n and Y^n satisfies UT and (X^n,Y^n)→(X,Y) jointly ucp, then [X^n,Y^n]→[X,Y] ucp.
+- C² Itô formula with combined left and right jumps: LetX be optional and làdlàg withX⁺ a càdlàg semimartingale andX_(0−)=X_0. Forf∈C²(ℝ) putR_f(a,b)=f(b)−f(a)−f′(a)(b−a). Then f(X_t)=f(X_0)+∫_0^t f′(X_(s−))dX_s+(1/2)∫_0^t f″(X_(s−))d[X⁺]^c_s+Σ_(0≤s<t)R_f(X_(s−),X_(s+))+R_f(X_(t−),X_t), using the right-regularized integral increments.
+- Doob’s Lp maximal inequality for càdlàg martingales: For 1<p<∞ and a càdlàg real martingale M on [0,T] with M_T∈Lᵖ, ‖sup_(t≤T)|M_t|‖_p≤p/(p−1)‖M_T‖_p.
+- Fatou’s lemma: For nonnegative measurable functions f_n on a measure space, ∫liminf_n f_n≤liminf_n∫f_n, allowing∞.
+- Girsanov theorem for cylindrical Wiener noise: If an adapted U-valued h satisfies E exp(½∫₀ᵀ‖h_s‖²ds)<∞, then R=exp(−∫₀ᵀ⟨h_s,dW_s⟩−½∫₀ᵀ‖h_s‖²ds) has mean one, and W_t+∫₀ᵗh_sds is cylindrical Wiener noise under R,dP.
+- Hölder’s inequality: For measurable functions f_i and exponents p_i∈[1,∞] with ∑_i1/p_i=1, ∫|∏_if_i|dμ≤∏_i‖f_i‖_{p_i}.
+- Kunita–Watanabe inequality for càdlàg covariation measures: For real càdlàg semimartingalesM,N and predictableH,K on[0,T], ∫₀ᵀ|H_sK_s| |d[M,N]|_s≤(∫₀ᵀH_s²d[M]_s)^(1/2)(∫₀ᵀK_s²d[N]_s)^(1/2) almost surely, whenever the two right-hand integrals are finite; |d[M,N]| is the total variation of the signed covariation measure.
+- Lebesgue dominated convergence theorem: If measurable fₙ converge almost everywhere to f and |fₙ|≤g for an integrable g, then f is integrable and ∫|fₙ−f|→0; consequently their integrals converge.
+- Linear reflected Brownian BSDE on a usual filtration: Let p>1 and let a usual filtration carry a d-dimensional Brownian motion W. Let xi∈Lp, an adapted càdlàg lower obstacle S satisfy sup S^+∈Lp and S_T≤xi, and a progressively measurable driver h satisfy ∫₀ᵀ|h_s|ds∈Lp. Then the reflected equation Y_t=xi−∫_t^Th_sds−∫_t^TZ_sdW_s−(M_T−M_t)+K_T−K_t has a unique càdlàg solution, with M orthogonal to W, K predictable nondecreasing, ∫(Y_-−S_-)dK=0, and sup|Y|, K_T, (∫|Z|²)^(1/2), [M]_T^(1/2) in Lp.
+- Lp bound for the increasing parts of a strong supermartingale: Let p>1 and let X be a real strong optional supermartingale on a usual filtration over [0,T] with E sup_(t≤T)|X_t|^p<∞. In its Mertens decomposition X=X₀+M−A−I, with predictable càdlàg nondecreasing A and predictable left-continuous nondecreasing purely discontinuous I starting at0, one has E A_T^p+E I_T^p≤C_p E sup_(t≤T)|X_t|^p, with C_p depending only on p.
+- Meyer’s Lp estimate for the increasing process of a supermartingale potential: For each 1<p<∞ there are positive constants c_p,C_p such that if X is a class-D supermartingale potential with natural predictable increasing process A, then c_p‖sup_tX_t‖_p≤‖A_∞‖_p≤C_p‖sup_tX_t‖_p, allowing infinite norms.
+- Quasi-left-continuous filtration: A usual filtration is quasi-left-continuous if F_τ=F_(τ−) for every predictable stopping time τ, where F_(τ−) is generated by F₀ and the events A∩{t<τ} with A∈F_t.
+- Snell representation of a càdlàg reflected semimartingale: On a usual filtration let Y=Y₀+N−A be a càdlàg class-D process, where N is a uniformly integrable martingale and A is predictable càdlàg nondecreasing with A₀=0. Let R be adapted càdlàg with its positive stopped values uniformly integrable, Y≥R on [0,T), and ∫₀ᵀ(Y_(s−)−R_(s−))dA_s=0, using R_T=Y_T. Then Y_t is the essential supremum of E[R_τ1_(τ<T)+Y_T1_(τ=T)|F_t] over τ∈[t,T] for which the reward is integrable; the same formula holds with extended conditional expectations for other τ.
+- Stochastic exponential of a continuous local martingale: For a real continuous local martingale L with L₀=0, its stochastic exponential is the strictly positive process E(L)_t=exp(L_t−[L]_t/2), where [L] is quadratic variation. It is the solution of dE(L)=E(L)dL with initial value1.
+- Young’s inequality for products: For a,b≥0 and p,q>1 with 1/p+1/q=1, ab≤aᵖ/p+bᑫ/q.
+
+INHERITED PREREQUISITES (145)
+
+- Abelian group — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Adapted stochastic process — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Almost-everywhere convergence of measurable functions — via dominated-convergence-theorem
+- Almost-everywhere property on a measure space — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Almost-sure convergence of real random variables — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, quasi-left-continuous-filtration, ut-ucp-quadratic-covariation-convergence
+- Banach space — via girsanov-cylindrical-wiener
+- Banach-valued simple function — via girsanov-cylindrical-wiener
+- Bijection between sets — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Bilinear map — via girsanov-cylindrical-wiener
+- Binary operation on a set — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Binary relation on a set — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Bochner Lᵖ space — via girsanov-cylindrical-wiener
+- Borel σ-algebra of a topological space — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, girsanov-cylindrical-wiener, linear-reflected-brownian-bsde-usual-filtration
+- Borel σ-algebra on the real line — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Bounded linear operator — via girsanov-cylindrical-wiener
+- Boundedness in probability of a random family — via ut-ucp-quadratic-covariation-convergence
+- C^k map between Euclidean open sets — via ladlag-c2-ito-formula
+- Cartesian product of sets — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Cauchy sequence in a metric space — via banach-fixed-point-theorem, girsanov-cylindrical-wiener
+- Commutative ring with identity — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Complement of a subset — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Complete measure — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, girsanov-cylindrical-wiener, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Complete metric space — via banach-fixed-point-theorem, girsanov-cylindrical-wiener
+- Complex number — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate
+- Conditional expectation given a σ-algebra — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Continuous local martingale — via continuous-local-martingale-stochastic-exponential
+- Continuous map between topological spaces — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, girsanov-cylindrical-wiener, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Continuous-time martingale — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, doob-lp-martingale-maximal-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Continuous-time supermartingale — via meyer-potential-compensator-lp-estimate
+- Convergence in probability — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, girsanov-cylindrical-wiener, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, ut-ucp-quadratic-covariation-convergence
+- Convergence of a sequence in a metric space — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Convergent real series — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, young-product-inequality
+- Cylindrical Wiener process on a real Hilbert space — via girsanov-cylindrical-wiener
+- Càdlàg path — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, doob-lp-martingale-maximal-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Càdlàg semimartingale — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, ut-ucp-quadratic-covariation-convergence
+- Dense subset of a metric space — via girsanov-cylindrical-wiener
+- Derivative of a real function — via ladlag-c2-ito-formula
+- Disjoint sets — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Doob–Meyer decomposition of a càdlàg class-D supermartingale — via meyer-potential-compensator-lp-estimate
+- Equivalence class — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate
+- Equivalence relation — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate
+- Essential supremum of a family of random variables — via snell-representation-cadlag-reflected-semimartingale
+- Essential supremum of a measurable real function — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate
+- Euclidean space ℝᵈ — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, girsanov-cylindrical-wiener, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration
+- Expectation of an integrable real random variable — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Extended nonnegative real numbers — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Extended real line — via fatou-lemma
+- Factorial — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, young-product-inequality
+- Field — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Filtration of σ-algebras — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Finite set — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Finite signed measure — via comparison-cadlag-reflected-brownian-bsde, kunita-watanabe-cadlag-covariation-inequality, linear-reflected-brownian-bsde-usual-filtration, snell-representation-cadlag-reflected-semimartingale
+- Fixed point of a self-map — via banach-fixed-point-theorem
+- Function between sets — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Function of bounded variation on an interval — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Gaussian process — via girsanov-cylindrical-wiener
+- Group — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Hilbert–Schmidt operator — via girsanov-cylindrical-wiener
+- Independent family of random variables — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, girsanov-cylindrical-wiener, linear-reflected-brownian-bsde-usual-filtration
+- Independent σ-algebras — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, girsanov-cylindrical-wiener, linear-reflected-brownian-bsde-usual-filtration
+- Indicator function of a subset — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Intersection of a family of sets — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Itô integral against cylindrical Wiener noise — via girsanov-cylindrical-wiener
+- Itô integral with respect to Brownian motion — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, girsanov-cylindrical-wiener, linear-reflected-brownian-bsde-usual-filtration
+- Least upper bound in a partially ordered set — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Lebesgue Lᵖ space — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate
+- Lebesgue integral — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Lebesgue measure on Euclidean space — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, girsanov-cylindrical-wiener, linear-reflected-brownian-bsde-usual-filtration
+- Lebesgue–Stieltjes integral for a càdlàg path of locally bounded variation — via comparison-cadlag-reflected-brownian-bsde, linear-reflected-brownian-bsde-usual-filtration, snell-representation-cadlag-reflected-semimartingale
+- Limit inferior of a real or extended-real sequence — via fatou-lemma
+- Limit of a function between metric spaces — via ladlag-c2-ito-formula
+- Limit of a real function at a point — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, doob-lp-martingale-maximal-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Limit of a real sequence — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Linear combination of vectors — via girsanov-cylindrical-wiener
+- Linear map between vector spaces — via girsanov-cylindrical-wiener
+- Linear span of a set of vectors — via girsanov-cylindrical-wiener
+- Lipschitz map between metric spaces — via banach-fixed-point-theorem, comparison-cadlag-reflected-brownian-bsde
+- Local martingale — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, ut-ucp-quadratic-covariation-convergence
+- Làdlàg path — via comparison-cadlag-reflected-brownian-bsde, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate
+- Martingale orthogonal to a Brownian motion — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, linear-reflected-brownian-bsde-usual-filtration
+- Matrix over a ring — via girsanov-cylindrical-wiener
+- Measurable map between measurable spaces — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Measurable simple real function — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Measurable space — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Measure — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Mertens decomposition of a class-D strong optional supermartingale — via mertens-compensator-lp-estimate
+- Metric induced by a norm — via girsanov-cylindrical-wiener
+- Metric space — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Modulus of a complex number — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate
+- Multivariate normal distribution — via girsanov-cylindrical-wiener
+- Natural logarithm — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, convex-power-jump-remainder-lower-bound, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate
+- Natural number — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Nonnegative real square root — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate
+- Normal distribution — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, girsanov-cylindrical-wiener, linear-reflected-brownian-bsde-usual-filtration
+- Normed vector space — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate
+- Open interval in the real line — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Optional stochastic process — via ladlag-c2-ito-formula, mertens-compensator-lp-estimate
+- Ordered field — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Ordered pair — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Orthonormal basis of a Hilbert space — via girsanov-cylindrical-wiener
+- Orthonormal family in a Hilbert space — via girsanov-cylindrical-wiener
+- Partial derivative in Euclidean coordinates — via ladlag-c2-ito-formula
+- Partial order — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Positive semidefinite real matrix — via girsanov-cylindrical-wiener
+- Predictable stochastic process — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, girsanov-cylindrical-wiener, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Predictable stopping time — via quasi-left-continuous-filtration
+- Preimage of a subset under a function — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Probability space — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Quadratic covariation of càdlàg semimartingales — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, ut-ucp-quadratic-covariation-convergence
+- Real Hilbert space — via girsanov-cylindrical-wiener
+- Real exponential function — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, young-product-inequality
+- Real inner-product space — via girsanov-cylindrical-wiener
+- Real number — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Real power of a positive real number — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, convex-power-jump-remainder-lower-bound, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate
+- Real sequence — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Real sine function — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, girsanov-cylindrical-wiener, linear-reflected-brownian-bsde-usual-filtration
+- Real-valued random variable — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Reflected Brownian BSDE with a càdlàg lower obstacle — via comparison-cadlag-reflected-brownian-bsde, linear-reflected-brownian-bsde-usual-filtration
+- Sequence in a set — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Set — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Standard Brownian motion — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, girsanov-cylindrical-wiener, linear-reflected-brownian-bsde-usual-filtration
+- Stochastic integral increments for a right-regularized làdlàg process — via ladlag-c2-ito-formula
+- Stochastic integral of a predictable process against a semimartingale — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, ut-ucp-quadratic-covariation-convergence
+- Stochastic process — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, girsanov-cylindrical-wiener, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Stochastic process of class D — via mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale
+- Stopping time for a filtration — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Strong optional supermartingale — via mertens-compensator-lp-estimate
+- Strongly measurable Banach-valued function — via girsanov-cylindrical-wiener
+- Subset — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Sum of a nonnegative series — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Supermartingale potential — via meyer-potential-compensator-lp-estimate
+- Supersolution of a Brownian BSDE with an orthogonal martingale — via comparison-cadlag-reflected-brownian-bsde, linear-reflected-brownian-bsde-usual-filtration
+- Symmetric matrix — via girsanov-cylindrical-wiener
+- Topological space — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, girsanov-cylindrical-wiener, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Total order — via banach-fixed-point-theorem, brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, convex-power-jump-remainder-lower-bound, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence, young-product-inequality
+- Uniform convergence in probability on compact time intervals — via ut-ucp-quadratic-covariation-convergence
+- Uniform tightness of a sequence of semimartingales — via ut-ucp-quadratic-covariation-convergence
+- Uniformly integrable family of real random variables — via mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, snell-representation-cadlag-reflected-semimartingale
+- Union of a family of sets — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Usual conditions for a filtration — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- Vector space — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, doob-lp-martingale-maximal-inequality, girsanov-cylindrical-wiener, holder-inequality, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate
+- Vector subspace — via girsanov-cylindrical-wiener
+- π — via brownian-orthogonal-local-martingale-decomposition, comparison-cadlag-reflected-brownian-bsde, girsanov-cylindrical-wiener, linear-reflected-brownian-bsde-usual-filtration
+- σ-algebra — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+- σ-algebra generated by a family of subsets — via brownian-orthogonal-local-martingale-decomposition, cadlag-bdg-finite-exponent, comparison-cadlag-reflected-brownian-bsde, continuous-local-martingale-stochastic-exponential, dominated-convergence-theorem, doob-lp-martingale-maximal-inequality, fatou-lemma, girsanov-cylindrical-wiener, holder-inequality, kunita-watanabe-cadlag-covariation-inequality, ladlag-c2-ito-formula, linear-reflected-brownian-bsde-usual-filtration, mertens-compensator-lp-estimate, meyer-potential-compensator-lp-estimate, quasi-left-continuous-filtration, snell-representation-cadlag-reflected-semimartingale, ut-ucp-quadratic-covariation-convergence
+
+INTRODUCED CONCEPTS (0)
+
+No origin claims recorded; introduction review remains incomplete.
+
+LOCATED CONCEPTS (31)
+
+1. Quasi-left-continuous filtration
+   A usual filtration is quasi-left-continuous if F_τ=F_(τ−) for every predictable stopping time τ, where F_(τ−) is generated by F₀ and the events A∩{t<τ} with A∈F_t.
+   Source: relies_on, §1
+   Note: The paper explicitly removes this earlier hypothesis; the comparison requires understanding predictable jumps.
+
+2. Burkholder–Davis–Gundy inequalities for càdlàg local martingales at p≥1
+   For each p≥1 there are 0<c_p≤C_p<∞ such that every real càdlàg local martingale M starting at0 satisfies c_pE([M]_T^(p/2))≤E[sup_(t≤T)|M_t|^p]≤C_pE([M]_T^(p/2)) for stopping times T, with extended expectations.
+   Source: relies_on, §2 proofs
+   Note: The imported BDG theorem must allow jump martingales; the continuous version does not cover M.
+
+3. Quadratic covariation of càdlàg semimartingales
+   For real càdlàg semimartingales X,Y, their quadratic covariation is [X,Y]_t=X_tY_t−X₀Y₀−∫₀ᵗX_(s−)dY_s−∫₀ᵗY_(s−)dX_s. Its jumps satisfy Δ[X,Y]_t=ΔX_tΔY_t; [X]=[X,X] is quadratic variation.
+   Source: relies_on, §1–§2
+   Note: The optional cross-variation [M,K] is the central difficulty.
+
+4. Stochastic integral of a predictable process against a semimartingale
+   For a real semimartingale X and a predictable locally bounded integrand H, H·X is the canonical stochastic-integral extension of elementary predictable sums ∑H_i(X_(t∧t_(i+1))−X_(t∧t_i)), where H_i is measurable at time t_i; convergence is in probability uniformly on compact time intervals.
+   Source: relies_on, §1; §2
+   Note: General stochastic integrals with locally bounded predictable integrands are used.
+
+5. Strong optional supermartingale
+   An optional process X is a strong supermartingale if X_τ is integrable for every bounded stopping time τ and E[X_τ|F_σ]≤X_σ almost surely whenever σ≤τ are bounded stopping times.
+   Source: relies_on, AppendixA
+   Note: The increasing-process extension treats strong supermartingales, not just deterministic-time supermartingales.
+
+6. Doob–Meyer decomposition of a càdlàg class-D supermartingale
+   On a usual filtered probability space, a càdlàg supermartingale X of class D on [0,T] has a unique decomposition X=X₀+M−A, where M is a càdlàg uniformly integrable martingale starting at0 and A is predictable, càdlàg, nondecreasing and starts at0.
+   Source: relies_on, §1 and §3.2
+   Note: Decomposition and uniqueness are used repeatedly.
+
+7. Mertens decomposition of a class-D strong optional supermartingale
+   On a usual filtration, a class-D strong optional supermartingale X has a unique decomposition X=X₀+M−A−I, where M is a càdlàg uniformly integrable martingale, A is predictable càdlàg nondecreasing, and I is predictable left-continuous nondecreasing and purely discontinuous, all starting at0. Equivalently I=C_− for an adapted càdlàg purely discontinuous increasing C with C_(0−)=0.
+   Source: relies_on, AppendixA, (A.1)
+   Note: Right jumps require the Mertens decomposition.
+
+8. Meyer’s Lp estimate for the increasing process of a supermartingale potential
+   For each 1<p<∞ there are positive constants c_p,C_p such that if X is a class-D supermartingale potential with natural predictable increasing process A, then c_p‖sup_tX_t‖_p≤‖A_∞‖_p≤C_p‖sup_tX_t‖_p, allowing infinite norms.
+   Source: relies_on, AppendixA, Step(i)
+   Note: Meyer’s potential estimate is explicitly imported from[21], never attributed to this paper.
+
+9. Doob’s Lp maximal inequality for càdlàg martingales
+   For 1<p<∞ and a càdlàg real martingale M on [0,T] with M_T∈Lᵖ, ‖sup_(t≤T)|M_t|‖_p≤p/(p−1)‖M_T‖_p.
+   Source: relies_on, Proposition3.2; AppendixA
+   Note: The estimates use arbitrary p>1, not only L².
+
+10. Martingale orthogonal to a Brownian motion
+   A càdlàg local martingale M is orthogonal to a d-dimensional Brownian motion W if [M,W^i] is identically0 for every coordinate i. The Brownian continuity is part of this convention; orthogonality of two arbitrary jump martingales need not mean zero optional covariation.
+   Source: relies_on, §1; Definitions2.1,3.1
+   Note: An orthogonal martingale is necessary in non-Brownian-generated filtrations.
+
+11. Hölder’s inequality
+   For measurable functions f_i and exponents p_i∈[1,∞] with ∑_i1/p_i=1, ∫|∏_if_i|dμ≤∏_i‖f_i‖_{p_i}.
+   Source: relies_on, §2–§3
+   Note: Standard scalar inequality used throughout.
+
+12. Young’s inequality for products
+   For a,b≥0 and p,q>1 with 1/p+1/q=1, ab≤aᵖ/p+bᑫ/q.
+   Source: relies_on, §2
+   Note: Standard scalar absorption estimates.
+
+13. Lebesgue dominated convergence theorem
+   If measurable fₙ converge almost everywhere to f and |fₙ|≤g for an integrable g, then f is integrable and ∫|fₙ−f|→0; consequently their integrals converge.
+   Source: relies_on, Theorem3.1 proof
+   Note: Used to pass limits of supermartingales.
+
+14. Fatou’s lemma
+   For nonnegative measurable functions f_n on a measure space, ∫liminf_n f_n≤liminf_n∫f_n, allowing∞.
+   Source: relies_on, Proposition2.1; §2 proof
+   Note: Used for localization limits.
+
+15. Supersolution of a Brownian BSDE with an orthogonal martingale
+   On a usual Brownian-carrying filtration over [0,T], a supersolution with terminal ξ and driver g is a tuple (Y,Z,M,K) satisfying Y_t=ξ−∫_t^Tg(s,Y_s,Z_s)ds−∫_t^TZ_s dW_s−(M_T−M_t)+(K_T−K_t), where Y is adapted làdlàg, Z predictable and integrable, M càdlàg martingale orthogonal to W, and K predictable nondecreasing làdlàg with K₀=0.
+   Source: explains, Definition2.1
+   Note: BSDE supersolutions and the orthogonal component are explicitly credited to earlier El Karoui et al./El Karoui–Huang sources; no origin claim.
+
+16. Reflected Brownian BSDE with a càdlàg lower obstacle
+   A reflected Brownian BSDE with an orthogonal martingale is a supersolution (Y,Z,M,K) with càdlàg Y,K and a càdlàg adapted obstacle S such that Y_t≥S_t on [0,T] and ∫₀^T(Y_(s−)−S_(s−))dK_s=0. The terminal constraint Y_T=ξ necessarily requires S_T≤ξ.
+   Source: explains, Definition3.1
+   Note: Reflected BSDE vocabulary is recalled from earlier literature; terminal compatibility is explicit in the mathematical definition.
+
+17. Lp a priori estimate for BSDE supersolutions in a general filtration
+   Fix p>1 and finite T. For an Lᵖ supersolution (Y,Z,M,K) of a Brownian BSDE with an orthogonal martingale in a usual filtration, with uniformly Lipschitz driver g, there is C depending only on p,T and its Lipschitz constants such that E[(∫₀^T|Z_s|²ds)^(p/2)]+E[[M]_T^(p/2)]+E[K_T^p]≤C(E|ξ|^p+E sup_(t≤T)|Y_t|^p+E[(∫₀^T|g(s,0,0)|ds)^p]). No quasi-left-continuity hypothesis is required.
+   Source: explains, Theorem2.1
+   Note: Significant general-filtration estimate; source proof inspected but predecessor/originality comparison remains pending.
+
+18. Stochastic integral increments for a right-regularized làdlàg process
+   LetX be an optional làdlàg real process whose right-limit processX⁺ is a càdlàg semimartingale, andH a predictable process bounded after localization by stopping times. PutJ_t=∫_(0,t]H_s dX⁺_s−H_t(X_(t+)−X_t), using the ordinary càdlàg integral. Define∫_s^tH_u dX_u=J_t−J_s. This fixes increments even whenX has a right jump at0; the normalized primitive isJ_t−J_0.
+   Source: relies_on, p4stochasticintegraldefinition;§2andAppendixA
+   Note: Actualsource-specificcalculusinput; normalization and combinedjump conventions checkedagainstprimaryLenglart.
+
+19. C² Itô formula with combined left and right jumps
+   LetX be optional and làdlàg withX⁺ a càdlàg semimartingale andX_(0−)=X_0. Forf∈C²(ℝ) putR_f(a,b)=f(b)−f(a)−f′(a)(b−a). Then f(X_t)=f(X_0)+∫_0^t f′(X_(s−))dX_s+(1/2)∫_0^t f″(X_(s−))d[X⁺]^c_s+Σ_(0≤s<t)R_f(X_(s−),X_(s+))+R_f(X_(t−),X_t), using the right-regularized integral increments.
+   Source: relies_on, §2Lemma2.1;AppendixALemmaA.2,citedLenglartp538
+   Note: Actualsource-specificcalculusinput; normalization and combinedjump conventions checkedagainstprimaryLenglart.
+Actualsource-specificC²calculusinput; normalization andcombinedjump conventionscheckedagainstprimaryLenglart. Separately, printedLemmaA.2isfalseforadeterministicisolatedspikeX_u=1_{u=s}: at t=s itsentireRHSis0butLHSpositiveunderthesourcep4integral. FAindependentlyverifiedexactconventions. ThisdoesnotrefutethevalidC²Lenglartformulaormainnormtheorems; affectednonsmoothintervalproofremainsunresolved.
+
+20. Kunita–Watanabe inequality for càdlàg covariation measures
+   For real càdlàg semimartingalesM,N and predictableH,K on[0,T], ∫₀ᵀ|H_sK_s| |d[M,N]|_s≤(∫₀ᵀH_s²d[M]_s)^(1/2)(∫₀ᵀK_s²d[N]_s)^(1/2) almost surely, whenever the two right-hand integrals are finite; |d[M,N]| is the total variation of the signed covariation measure.
+   Source: relies_on, Remark2.1(i),p6
+   Note: Ordinarycadlag covariation inequality used in the energy estimates; generalizedladlagbracket conventions require rightregularization and arekeptseparate.
+
+21. Convex power jump-remainder lower bound
+   For1<p<2 and reala,b withR=max(|a|,|b|)>0, |b|ᵖ−|a|ᵖ−p|a|^(p−1)sgn(a)(b−a)≥[p(p−1)/2](b−a)²R^(p−2), withsgn(0)=0. WhenR=0 bothsides are defined as0.
+   Source: relies_on, AppendixALemmaA.2;adaptationof[14]convex-powerjumpestimate
+   Note: Validscalarconvex-powerremainder lowerbound; exactzero convention andcomplete selectedproof checked separatelyfromtheincorrectall-tladlagintervallemma.
+
+22. Stochastic exponential of a continuous local martingale
+   For a real continuous local martingale L with L₀=0, its stochastic exponential is the strictly positive process E(L)_t=exp(L_t−[L]_t/2), where [L] is quadratic variation. It is the solution of dE(L)=E(L)dL with initial value1.
+   Source: relies_on, §3.1 equation(3.2)
+   Note: Actual stochastic exponential notation used for the bounded Brownian drift density.
+
+23. Essential supremum of a family of random variables
+   On a probability space, the essential supremum of a family (X_i) of measurable extended real random variables is the almost-sure equivalence class of the least measurable upper bound: X_i≤Y almost surely for every i, and Y≤Z almost surely for every measurable Z with that property. Unlike an ordinary pointwise supremum, it is defined modulo null sets.
+   Source: relies_on, §3.1 Proposition3.1
+   Note: Actual conditional essential supremum is of random rewards, distinct from the scalar essential supremum of one function.
+
+24. Girsanov theorem for cylindrical Wiener noise
+   If an adapted U-valued h satisfies E exp(½∫₀ᵀ‖h_s‖²ds)<∞, then R=exp(−∫₀ᵀ⟨h_s,dW_s⟩−½∫₀ᵀ‖h_s‖²ds) has mean one, and W_t+∫₀ᵗh_sds is cylindrical Wiener noise under R,dP.
+   Source: relies_on, §3.1 equation(3.2)
+   Note: Existing cylindrical Girsanov theorem specialized to finite-dimensional Brownian noise. Bounded predictable eta satisfies Novikov and gives all density moments. Brownian orthogonality and true-martingale integrability under the changed measure are checked in the proof notes.
+
+25. Brownian orthogonal decomposition of a local martingale
+   On a usual filtration carrying a d-dimensional Brownian motion W, every real càdlàg local martingale N has a unique decomposition N=N₀+∫Z_s·dW_s+M, where Z is predictable and locally square-integrable and M is a càdlàg local martingale starting at0 with [M,W^i]=0 for every i. Uniqueness of Z is modulo dt×dP.
+   Source: relies_on, §3.2 p17; §4 general filtration BSDE
+   Note: Actual orthogonal Brownian martingale decomposition; no Brownian predictable representation property is assumed for the whole filtration.
+
+26. Snell representation of a càdlàg reflected semimartingale
+   On a usual filtration let Y=Y₀+N−A be a càdlàg class-D process, where N is a uniformly integrable martingale and A is predictable càdlàg nondecreasing with A₀=0. Let R be adapted càdlàg with its positive stopped values uniformly integrable, Y≥R on [0,T), and ∫₀ᵀ(Y_(s−)−R_(s−))dA_s=0, using R_T=Y_T. Then Y_t is the essential supremum of E[R_τ1_(τ<T)+Y_T1_(τ=T)|F_t] over τ∈[t,T] for which the reward is integrable; the same formula holds with extended conditional expectations for other τ.
+   Source: relies_on, §3.1 Proposition3.1, both displays
+   Note: The given reflected solution is an optimal-stopping value after the running-driver shift and bounded linearization. This is separate from construction/existence of reflected solutions.
+
+27. Covariation stability under UT and ucp convergence
+   On a common usual filtered space let X^n,Y^n and X,Y be real càdlàg semimartingales. If each sequence X^n and Y^n satisfies UT and (X^n,Y^n)→(X,Y) jointly ucp, then [X^n,Y^n]→[X,Y] ucp.
+   Source: relies_on, §3.2 p17 Corollaire1.9 of[19]
+   Note: Actual covariation stability black box. Its UT hypothesis must be checked, not inferred merely from ucp convergence. Uniform Lp bounds of M^n and K_T^n with p>1 provide the needed integral tightness via BDG/Markov; Brownian motion is a fixed semimartingale.
+
+28. Comparison for càdlàg reflected Brownian BSDE solutions
+   Let two given càdlàg reflected Brownian BSDE solutions on a usual Brownian-carrying filtration have a common finite horizon, globally Lipschitz drivers g1,g2 and some p>1 integrability: the suprema of |Y| and K_T and the square roots of the Brownian and orthogonal-martingale quadratic variations lie in Lp. Use the convention Y_t=xi−∫_t^Tg ds−∫_t^TZ dW−(M_T−M_t)+K_T−K_t. If xi1≤xi2, S1≤S2 and g1(t,y,z)≥g2(t,y,z) almost everywhere for every y,z, then Y1≤Y2 indistinguishably.
+   Source: relies_on, §3.1 equation(3.4)
+   Note: Actual source comparison is with zero reflection and the same data; the general given-solution comparison includes that case. No missing-terminal-compatibility existence assertion is imported.
+
+29. Linear reflected Brownian BSDE on a usual filtration
+   Let p>1 and let a usual filtration carry a d-dimensional Brownian motion W. Let xi∈Lp, an adapted càdlàg lower obstacle S satisfy sup S^+∈Lp and S_T≤xi, and a progressively measurable driver h satisfy ∫₀ᵀ|h_s|ds∈Lp. Then the reflected equation Y_t=xi−∫_t^Th_sds−∫_t^TZ_sdW_s−(M_T−M_t)+K_T−K_t has a unique càdlàg solution, with M orthogonal to W, K predictable nondecreasing, ∫(Y_-−S_-)dK=0, and sup|Y|, K_T, (∫|Z|²)^(1/2), [M]_T^(1/2) in Lp.
+   Source: relies_on, §3.2 Theorem3.1 step1(i); Klimsiak[13] Theorem2.12/Cor2.8
+   Note: Actual additive-driver reflected existence input, specialized with f=-h in Klimsiak sign convention. Necessary terminal compatibility retained. The assigned proof step prints the opposite running-driver sign in this one display; Proposition3.1 and the equation fix the negative sign. Not a current-paper origin claim.
+
+30. Lp bound for the increasing parts of a strong supermartingale
+   Let p>1 and let X be a real strong optional supermartingale on a usual filtration over [0,T] with E sup_(t≤T)|X_t|^p<∞. In its Mertens decomposition X=X₀+M−A−I, with predictable càdlàg nondecreasing A and predictable left-continuous nondecreasing purely discontinuous I starting at0, one has E A_T^p+E I_T^p≤C_p E sup_(t≤T)|X_t|^p, with C_p depending only on p.
+   Source: relies_on, AppendixA LemmaA.1; Lemma2.1(i)
+   Note: Actual generalized compensator estimate used by the nonlinear a priori estimate. The exact p>1 extension is already inherited from LLP1980 Theorem3.1 with a non-right-continuous predictable increasing process and a conditioning shift; current appendix explains it, not a checked origin.
+
+31. Lp bound for the increasing parts of a strong supermartingale
+   Let p>1 and let X be a real strong optional supermartingale on a usual filtration over [0,T] with E sup_(t≤T)|X_t|^p<∞. In its Mertens decomposition X=X₀+M−A−I, with predictable càdlàg nondecreasing A and predictable left-continuous nondecreasing purely discontinuous I starting at0, one has E A_T^p+E I_T^p≤C_p E sup_(t≤T)|X_t|^p, with C_p depending only on p.
+   Source: explains, AppendixA LemmaA.1 and complete proof
+   Note: Source supplies a separate jump-enumeration proof. The selected earlier primary comparison proof avoids needing its discrete interpolation argument.
+
+32. Banach contraction mapping theorem
+   Every map T:X→X on a nonempty complete metric space satisfying d(Tx,Ty)≤q d(x,y) for a fixed 0≤q<1 has a unique fixed point, and Tⁿx converges to it for every x.
+   Source: relies_on, §3.2 Theorem3.1 step1(ii), iteration(3.5)–(3.7)
+   Note: Actual contraction iteration uses a complete weighted solution space; ordinary Banach contraction theorem, not Brouwer. Existing full statement/proof review reused.
+
+33. Lp a priori estimate for BSDE supersolutions in a general filtration
+   Fix p>1 and finite T. For an Lᵖ supersolution (Y,Z,M,K) of a Brownian BSDE with an orthogonal martingale in a usual filtration, with uniformly Lipschitz driver g, there is C depending only on p,T and its Lipschitz constants such that E[(∫₀^T|Z_s|²ds)^(p/2)]+E[[M]_T^(p/2)]+E[K_T^p]≤C(E|ξ|^p+E sup_(t≤T)|Y_t|^p+E[(∫₀^T|g(s,0,0)|ds)^p]). No quasi-left-continuity hypothesis is required.
+   Source: discusses, Theorems2.1–2.2; Theorem3.1; §4Theorem4.1; AppendixA
+   Note: Full significant-result audit in bsde-significant-result-dispositions.txt distinguishes the main claimed nonlinear estimates, the false unqualified reflected existence statement, prior ordinary BSDE existence, and the earlier LLP generalized compensator estimate. No new original occurrence follows merely from a theorem number.
+
+ADDITIONAL PREREQUISITES (135)
+
+- Abelian group [definition]: A group whose operation is commutative.
+- Adapted stochastic process [definition]: A process X_t is adapted to a filtration(F_t) if each X_t is F_t-measurable.
+- Almost-everywhere convergence of measurable functions [definition]: Measurable functions fₙ converge almost everywhere to f if the pointwise limit fₙ(x)→f(x) holds outside a measurable null set.
+- Almost-everywhere property on a measure space [definition]: A property holds almost everywhere if the set where it fails is contained in a measurable set of measure zero.
+- Almost-sure convergence of real random variables [definition]: Xₙ→X almost surely means P({ω:limₙXₙ(ω)=X(ω)})=1.
+- Banach space [definition]: A real or complex normed vector space complete for the metric induced by its norm.
+- Banach-valued simple function [definition]: A measurable function with finitely many values in a Banach space, represented as a finite sum∑_ix_i1_{A_i} with measurable sets A_i.
+- Bijection between sets [definition]: A function for which each element of the codomain is the image of exactly one element of the domain.
+- Bilinear map [definition]: A map of two vector-space variables that is linear in each variable separately.
+- Binary operation on a set [definition]: A function S×S→S.
+- Binary relation on a set [definition]: A subset R⊆S×S; writing xRy means (x,y)∈R.
+- Bochner Lᵖ space [definition]: For a Banach space X, Lᵖ(S;X) consists of strongly measurable X-valued functions modulo a.e. equality with finite norm(∫‖f‖ᵖ)¹ᐟᵖ for1≤p<∞; use essential supremum for p=∞.
+- Borel σ-algebra of a topological space [definition]: The σ-algebra generated by the open subsets of the space.
+- Borel σ-algebra on the real line [definition]: The σ-algebra on ℝ generated by the open intervals.
+- Bounded linear operator [definition]: A linear map T:X→Y between normed vector spaces is bounded if ∥Tx∥≤C∥x∥ for one finite constant C and every x∈X.
+- Boundedness in probability of a random family [definition]: A family (X_i) of real random variables is bounded in probability if lim_(K→∞)sup_iP(|X_i|>K)=0. The definition also applies across different probability spaces by using each variable’s own probability.
+- C^k map between Euclidean open sets [definition]: For a finite integer k≥0, a map between open Euclidean sets is C^k if all component partial derivatives of total order at most k exist and are continuous; order zero is the component itself, so C^0 means continuous. A map is C^∞ when it is C^k for every finite k.
+- Cartesian product of sets [definition]: A×B is the set of ordered pairs (a,b) with a∈A and b∈B.
+- Cauchy sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) is Cauchy if for every ε>0 there is N such that d(xₙ,xₘ)<ε whenever n,m≥N.
+- Commutative ring with identity [definition]: An abelian group under addition, together with an associative commutative multiplication with identity, distributing over addition. The zero ring is allowed.
+- Complement of a subset [definition]: For A⊆Ω, its complement Ω∖A consists of the elements of Ω that do not belong to A.
+- Complete measure [definition]: A measure is complete if every subset of a measurable null set is measurable and has measure zero.
+- Complete metric space [definition]: A metric space is complete if every Cauchy sequence in it converges to a point of that same space.
+- Complex number [definition]: A complex number is a pair of real numbers, written a+bi. Addition is componentwise and multiplication is (a+bi)(c+di)=(ac−bd)+(ad+bc)i, so i²=−1.
+- Conditional expectation given a σ-algebra [definition]: For integrable X and a sub-σ-algebra G, E[X|G] is a G-measurable integrable random variable satisfying ∫_AE[X|G]dP=∫_AXdP for every A∈G, defined up to almost-sure equality.
+- Continuous local martingale [definition]: A continuous adapted process M_t for which stopping times T_n↑∞ almost surely exist such that M_{t∧T_n} is a martingale for every n.
+- Continuous map between topological spaces [definition]: A map is continuous if the preimage of every open subset of its target is open in its domain.
+- Continuous-time martingale [definition]: An integrable process M_t adapted to a filtration F_t, t≥0, with E[M_t|F_s]=M_s almost surely whenever s≤t. Right-continuity of paths is an additional regularity condition when needed.
+- Continuous-time supermartingale [definition]: An integrable adapted process M on a filtered probability space is a supermartingale if E[M_t|F_s]≤M_s almost surely for every s≤t; the term refers to a continuous time parameter and does not require continuous sample paths.
+- Convergence in probability [definition]: Random variables X_n converge in probability to X if P(|X_n−X|>ε)→0 for every ε>0; metric-valued variables use their metric in place of absolute difference.
+- Convergence of a sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) converges to x∈X if for every ε>0 there is N such that d(xₙ,x)<ε whenever n≥N.
+- Convergent real series [definition]: The series ∑ₙ≥1aₙ converges to S if its sequence of partial sums converges to S.
+- Cylindrical Wiener process on a real Hilbert space [definition]: A family W_t(h),t≥0,h∈U, linear in h, centered jointly Gaussian and adapted, with E[W_t(h)W_s(k)]=min(t,s)⟨h,k⟩ and independent increments relative to the filtration. For each h it is a real Brownian motion scaled by ‖h‖. In infinite dimension the formal sum∑_kβ_k(t)e_k generally is not U-valued.
+- Càdlàg path [definition]: A path from a real time interval into a metric space that is right-continuous and has a left limit at every positive time.
+- Càdlàg semimartingale [definition]: A real adapted càdlàg process X is a semimartingale if it can locally be written as X=X₀+M+A, where M is a local martingale starting at0 and A is an adapted càdlàg process of locally finite variation starting at0.
+- Dense subset of a metric space [definition]: A subset A of a metric space X is dense if every open ball centered in X with positive radius meets A.
+- Derivative of a real function [definition]: The derivative f′(x) is the finite limit of (f(x+h)−f(x))/h as h→0, when it exists. Higher derivatives are defined by iteration.
+- Disjoint sets [definition]: Two sets are disjoint when they have no common element; a family is pairwise disjoint when every two distinct members are disjoint.
+- Equivalence class [definition]: For an equivalence relation ~ on X, [x]={y∈X:y~x}; the quotient set X/~ consists of these classes.
+- Equivalence relation [definition]: A reflexive, symmetric and transitive binary relation.
+- Essential supremum of a measurable real function [definition]: The infimum of real a for which f≤a almost everywhere, allowing infinite values when no finite bound exists.
+- Euclidean space ℝᵈ [definition]: For d≥1, ℝᵈ consists of d-tuples of real numbers with distance dist(x,y)=(∑ᵢ(xᵢ−yᵢ)²)¹ᐟ².
+- Expectation of an integrable real random variable [definition]: If E abs(X)=∫abs(X)dP<∞, the expectation of X is EX=∫X dP.
+- Extended nonnegative real numbers [definition]: The nonnegative real numbers together with a greatest element ∞. Sums involving ∞ equal ∞, and 0·∞ is taken to be 0 when integrating simple functions.
+- Extended real line [definition]: The ordered set ℝ∪{−∞,+∞}, with−∞<r<+∞ for every real r.
+- Factorial [definition]: For n≥1, n!=1·2···n, and 0!=1.
+- Field [definition]: A commutative ring in which 1≠0 and every nonzero element is invertible.
+- Filtration of σ-algebras [definition]: An increasing family (F_t) of sub-σ-algebras on a fixed probability space, indexed by ordered time: F_s⊆F_t for s≤t.
+- Finite set [definition]: A set X is finite if it is bijective with {1,…,n} for some natural number n≥0; its cardinality is n.
+- Finite signed measure [definition]: A differenceµ=µ₁−µ₂ of two finite positive measures on the sameσ-algebra. It is real-valued and countably additive.
+- Fixed point of a self-map [definition]: A fixed point of f:X→X is an x∈X satisfying f(x)=x. The fixed-point set is Fix(f)={x∈X:f(x)=x}.
+- Function between sets [definition]: An assignment taking each element of a specified domain set to exactly one element of a specified codomain set.
+- Function of bounded variation on an interval [definition]: A real function f has bounded variation on [a,b] if sup∑_i|f(t_i)−f(t_{i−1})| over finite ordered partitions is finite. Vector-valued paths use the corresponding norm.
+- Gaussian process [definition]: A real or vector-valued stochastic process whose every finite vector of coordinate evaluations has a multivariate normal law.
+- Group [definition]: A set with an associative binary operation, an identity element, and a two-sided inverse for each element.
+- Hilbert–Schmidt operator [definition]: A bounded linear map B:U→H between Hilbert spaces is Hilbert–Schmidt if ∑_k‖Be_k‖²<∞ for an orthonormal basis(e_k) of U. The square root of this basis-independent sum is its Hilbert–Schmidt norm.
+- Independent family of random variables [definition]: For distinct i₁,…,iₖ and Borel A₁,…,Aₖ, independence requires P(⋂ⱼ{Xᵢⱼ∈Aⱼ})=∏ⱼP(Xᵢⱼ∈Aⱼ).
+- Independent σ-algebras [definition]: A family of sub-σ-algebras is independent if the probability of the intersection of events from any finite subfamily equals the product of their probabilities.
+- Indicator function of a subset [definition]: For A⊆Ω, the real function 1_A is 1 on A and 0 on its complement.
+- Intersection of a family of sets [definition]: Inside a specified ambient set, the elements belonging to every member of the family.
+- Itô integral against cylindrical Wiener noise [construction]: For a predictable Hilbert–Schmidt-valued B_s:U→H with E∫₀ᵀ‖B_s‖²_HS ds<∞, ∫₀ᵗB_sdW_s is the L²(Ω;H) limit of the finite sums∑_k∫₀ᵗB_se_kdβ_k(s), where β_k are the independent Brownian coordinates of cylindrical W. Local versions use stopping.
+- Itô integral with respect to Brownian motion [definition]: For an adapted process H with E∫₀ᵀ|H_s|²ds<∞, ∫H_s dB_s is the L² limit of left-endpoint adapted step-process sums. Localization extends the definition to locally square-integrable integrands.
+- Least upper bound in a partially ordered set [definition]: For A⊆P, its least upper bound is an upper bound s satisfying s≤b for every upper bound b of A, when such an s exists.
+- Lebesgue Lᵖ space [definition]: For a measure space and 1≤p<∞, Lᵖ consists of measurable scalar functions modulo equality almost everywhere with ∫|f|ᵖ<∞, normed by (∫|f|ᵖ)¹ᐟᵖ. For p=∞ use the essential-supremum norm.
+- Lebesgue integral [definition]: For measurable f≥0, ∫f dμ is the supremum of integrals of nonnegative simple functions below f. For signed f with ∫abs(f)dμ<∞, define ∫f=∫f⁺−∫f⁻.
+- Lebesgue measure on Euclidean space [definition]: The completion of the Borel measure on ℝⁿ assigning each rectangular box the product of its side lengths.
+- Lebesgue–Stieltjes integral for a càdlàg path of locally bounded variation [construction]: A real càdlàg path B of locally bounded variation determines a locally finite signed Stieltjes measure dB by dB((s,t])=B_t−B_s; ∫f dB denotes integration against that signed measure whenever f is integrable with respect to its total variation.
+- Limit inferior of a real or extended-real sequence [definition]: For a sequence (a_n) of real or extended real numbers, liminf a_n=sup_N inf_{n≥N}a_n, a value in the extended real line [−∞,∞].
+- Limit of a function between metric spaces [definition]: For f defined near an accumulation point a of a metric space, lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<d(x,a)<δ implies d(f(x),L)<ε.
+- Limit of a real function at a point [definition]: The relation lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<|x−a|<δ in the domain implies |f(x)−L|<ε.
+- Limit of a real sequence [definition]: A sequence (aₙ) converges to L∈ℝ if for every ε>0 there is N such that n≥N implies abs(aₙ−L)<ε.
+- Linear combination of vectors [definition]: A finite sum a₁v₁+⋯+aₙvₙ of vectors multiplied by scalars from their vector space’s ground field; the empty sum is zero.
+- Linear map between vector spaces [definition]: A map between vector spaces over the same field preserving addition and scalar multiplication.
+- Linear span of a set of vectors [definition]: The subspace consisting of all finite linear combinations of a specified set of vectors.
+- Lipschitz map between metric spaces [definition]: A map f:(X,d)→(Y,e) is Lipschitz if e(f(x),f(y))≤L d(x,y) for one finite constant L and all x,y∈X.
+- Local martingale [definition]: An adapted càdlàg process M for which stopping times T_n↑∞ almost surely exist such that each stopped process M_{t∧T_n} is a martingale.
+- Làdlàg path [definition]: A path on a real time interval into a metric space is làdlàg if it has both left and right limits at every interior time; neither limit is required to equal the value at that time.
+- Matrix over a ring [definition]: A rectangular array of elements of a ring; addition is entrywise and matrix multiplication uses row-by-column sums.
+- Measurable map between measurable spaces [definition]: A function for which the preimage of each measurable subset of the codomain is measurable in the domain.
+- Measurable simple real function [definition]: A measurable real function with finite range. It can be written as a finite sum ∑ a_i 1_{A_i} with measurable level sets A_i.
+- Measurable space [definition]: A set equipped with a specified σ-algebra of subsets.
+- Measure [definition]: A measure μ maps a σ-algebra to [0,∞], sends ∅ to 0, and satisfies μ(⋃ₙAₙ)=∑ₙμ(Aₙ) for every pairwise disjoint sequence of measurable sets.
+- Metric induced by a norm [construction]: The metric induced by a norm on a real or complex vector space is d(x,y)=‖x−y‖.
+- Metric space [definition]: A set X with a function d:X×X→[0,∞) such that d(x,y)=0 exactly when x=y, d(x,y)=d(y,x), and d(x,z)≤d(x,y)+d(y,z).
+- Modulus of a complex number [definition]: For z=a+bi, its modulus is the nonnegative real number |z|=√(a²+b²).
+- Multivariate normal distribution [definition]: A distribution of a real vector X for which every real linear combination of coordinates is normally distributed; it is specified by its mean vector and positive semidefinite covariance matrix.
+- Natural logarithm [definition]: The inverse ln:(0,∞)→ℝ of the real exponential function.
+- Natural number [definition]: One of 0, 1, 2, …; natural numbers count finite collections.
+- Nonnegative real square root [definition]: For t≥0, √t is the unique real number y≥0 satisfying y²=t.
+- Normal distribution [definition]: The real probability distribution N(m,σ²) with density (2πσ²)⁻¹ᐟ²exp(−(x−m)²/(2σ²)) for σ>0; variance zero gives a point mass at m.
+- Normed vector space [definition]: A real or complex vector space X with a function ∥·∥:X→[0,∞) that is positive except at zero, absolutely homogeneous, and subadditive.
+- Open interval in the real line [definition]: For real a<b, the set (a,b)={x∈ℝ:a<x<b}.
+- Optional stochastic process [definition]: A process is optional if it is measurable for the optional σ-algebra on time×sample space, the σ-algebra generated by adapted càdlàg processes.
+- Ordered field [definition]: A field with a total order preserved by addition, in which the product of two positive elements is positive.
+- Ordered pair [definition]: A pair (x,y) with distinguished first and second entries; (x,y)=(x′,y′) exactly when x=x′ and y=y′.
+- Orthonormal basis of a Hilbert space [definition]: An orthonormal family whose linear span is dense in the Hilbert space.
+- Orthonormal family in a Hilbert space [definition]: Vectors (e_i) with ⟨e_i,e_j⟩=0 for i≠j and ‖e_i‖=1.
+- Partial derivative in Euclidean coordinates [definition]: The ith partial derivative of f at x is the derivative at zero of t↦f(x+t e_i), with all other coordinates fixed; vector-valued maps are differentiated componentwise.
+- Partial order [definition]: A reflexive, antisymmetric and transitive binary relation, usually written ≤.
+- Positive semidefinite real matrix [definition]: A symmetric real matrix A such that xᵀAx≥0 for every real column vector x.
+- Predictable stochastic process [definition]: A process measurable for the σ-algebra on time×sample space generated by adapted left-continuous processes. This formalizes choosing an integrand from information available just before the integration time.
+- Predictable stopping time [definition]: A stopping time τ is predictable if it admits stopping times τ_n increasing to τ with τ_n<τ on {τ>0}; such a sequence announces τ.
+- Preimage of a subset under a function [definition]: For f:A→B and E⊆B, f⁻¹(E)={x∈A:f(x)∈E}.
+- Probability space [definition]: A probability space is (Ω,𝔽,P), where 𝔽 is a σ-algebra on Ω and P is a measure on 𝔽 with P(Ω)=1.
+- Real Hilbert space [definition]: A real inner-product space complete for its induced norm metric.
+- Real exponential function [definition]: The real function exp(x)=∑_{n≥0}xⁿ/n!, whose series converges for every real x.
+- Real inner-product space [definition]: A real vector space with a symmetric bilinear form ⟨x,y⟩ that is positive on ⟨x,x⟩ for x≠0; its induced norm is √⟨x,x⟩.
+- Real number [definition]: A real number is an element of a complete ordered field ℝ; completeness means every nonempty subset bounded above has a least upper bound.
+- Real power of a positive real number [definition]: For x>0 and p∈ℝ, define xᵖ=exp(p log x). For p>0 extend by 0ᵖ=0.
+- Real sequence [definition]: A real sequence is a function a:ℕ₊→ℝ, written (aₙ)ₙ≥1.
+- Real sine function [definition]: The sine function is defined by the everywhere convergent power series sin(x)=∑ₖ≥0(−1)ᵏx²ᵏ⁺¹/(2k+1)!.
+- Real-valued random variable [definition]: A real-valued random variable is a measurable map from a probability space to ℝ with its Borel σ-algebra.
+- Sequence in a set [definition]: A function from the natural numbers, or the positive natural numbers, to that set.
+- Set [definition]: A collection of distinct elements, regarded as one object.
+- Standard Brownian motion [definition]: A continuous process B_t starting at zero with independent increments and B_t−B_s distributed N(0,t−s) for 0≤s<t. A d-dimensional standard Brownian motion has d independent standard components.
+- Stochastic process [definition]: A family (X_t) indexed by a specified time set, with each X_t a measurable map from a probability space into a specified measurable state space. Adaptation, joint measurability and path regularity are additional conditions when required.
+- Stochastic process of class D [definition]: An adapted process X on a declared time interval is of class D if the random variables X_τ, over all finite stopping times τ taking values in that interval, form a uniformly integrable family. On a finite horizon [0,T], this means all stopping times τ≤T.
+- Stopping time for a filtration [definition]: A random time T taking values in the time index together with infinity, such that {T≤t}∈F_t for every t; by time t one can determine whether T has occurred.
+- Strongly measurable Banach-valued function [definition]: A function that is an almost-everywhere pointwise norm limit of Banach-valued simple functions.
+- Subset [definition]: A⊆B means every element of A is an element of B.
+- Sum of a nonnegative series [definition]: For aₙ≥0, define ∑ₙ≥1aₙ as the supremum of its finite partial sums; the value may be infinite.
+- Supermartingale potential [definition]: A nonnegative right-continuous supermartingale X on [0,∞) is a potential if E[X_t] tends to0 as t tends to∞.
+- Symmetric matrix [definition]: A square matrix A equal to its transpose, so aᵢⱼ=aⱼᵢ.
+- Topological space [definition]: A set X with a family τ of subsets, called open sets, containing ∅ and X and closed under arbitrary unions and finite intersections.
+- Total order [definition]: A partial order in which any two elements are comparable.
+- Uniform convergence in probability on compact time intervals [definition]: A sequence of processes X^n on the same probability space converges ucp to X if, for every finite T and epsilon>0, P(sup_(t≤T)|X_t^n−X_t|>epsilon)→0. Vector processes use any fixed finite-dimensional norm.
+- Uniform tightness of a sequence of semimartingales [definition]: A sequence of real semimartingales X^n satisfies condition UT if for every finite T the family of stochastic-integral terminal values (H·X^n)_T, over all n and elementary predictable integrands H bounded in absolute value by1, is bounded in probability. The elementary integrands use finite stopping-time intervals and coefficients measurable at the left endpoint.
+- Uniformly integrable family of real random variables [definition]: A family of integrable real random variables (X_i) is uniformly integrable if lim_(K→∞)sup_iE[|X_i|1_(|X_i|>K)]=0.
+- Union of a family of sets [definition]: The set of elements belonging to at least one member of the family.
+- Usual conditions for a filtration [definition]: A filtration on a probability space satisfies the usual conditions if it is right-continuous, F_t=⋂_(s>t)F_s, and F₀ contains every subset of every null set of the ambient probability space.
+- Vector space [definition]: An abelian group with scalar multiplication by a field satisfying a(v+w)=av+aw, (a+b)v=av+bv, (ab)v=a(bv), and 1v=v.
+- Vector subspace [definition]: A subset of a vector space containing zero and closed under addition and scalar multiplication.
+- π [definition]: π is the least positive zero of the real sine function and equals the circumference-to-diameter ratio of a Euclidean circle.
+- σ-algebra [definition]: A σ-algebra on Ω contains Ω and is closed under complements in Ω and countable unions.
+- σ-algebra generated by a family of subsets [definition]: The smallest σ-algebra containing that family, equivalently the intersection of all σ-algebras on the ambient set that contain it.
+
+CITATIONS
+
+  [1] Bouchard, B., Élie, R. and A., Réveillac. BSDEs with weak terminal condition, The Annals of
+       Probability, 43(2), 2015, 572–604.
+    Pedagogically necessary: unknown
+
+  [2] Bouchard, B., Possamaï, D. and X., Tan. A general Doob-Meyer-Mertens decomposition for
+       g-supermartingale systems, Electronic Journal of Probability, 21(36), 2015, 1–21.
+    Pedagogically necessary: unknown
+
+  [3] Briand, P., Delyon, B. and J., Mémin. On the robustness of backward stochastic diﬀerential
+     equations, Stochastic Processes and their Applications, 97, 2002, 229–253.
+    Pedagogically necessary: unknown
+
+  [4] Briand, P., Delyon, B., Hu, Y., Pardoux, É. and L. Stoica. Lp solutions of backward stochastic
+     diﬀerential equations, Stochastic Processes and their Applications, 108, 2003, 109–129.
+    Pedagogically necessary: unknown
+
+  [5] Cvitanić, J., Karatzas, I. and H.M., Soner. Backward stochastic diﬀerential equations with
+     constraints on the gain-process, The Annals of Probability, 26, 1998, 1522–1551.
+    Pedagogically necessary: unknown
+
+  [6] N., El Karoui. Les aspects probabilistes du contrôle stochastique, Ecole d’Eté de Probabilités
+     de Saint-Flour IX-1979, Lecture Notes in Mathematics, 876, 1981, 73–238.
+    Pedagogically necessary: unknown
+
+  [7] El Karoui, N. and S.-J., Huang. A general result of existence and uniqueness of backward
+     stochastic diﬀerential equations, In Backward stochastic differential equations (Paris, 1995-
+     1996), volume 364 of Pitman Res. Notes Math. Ser., pp. 27–36. Longman, Harlow, 1997.
+    Pedagogically necessary: unknown
+
+  [8] El Karoui, N., Peng, S. and M.-C., Quenez. Backward stochastic diﬀerential equations in
+     ﬁnance, Mathematical Finance, 7(1), 1997, 1–71.
+    Pedagogically necessary: unknown
+
+  [9] El Karoui, N., Kapoudjian, C., Pardoux, E., Peng, S. and M.-C., Quenez. Reﬂected solutions of
+     backward SDE’s, and related obstacle problems for PDE’s, The Annals of Applied Probability,
+     25(2), 1997, 702–737.
+    Pedagogically necessary: unknown
+
+  [10] Grigorova, M., Imkeller, P., Oﬀen, E., Ouknine, Y. and M.-C., Quenez. Reﬂected BS-
+     DEs when the obstacle is not right-continuous and optimal stopping, 2015, arXiv preprint
+     arXiv:1504.06094.
+    Pedagogically necessary: unknown
+    arxiv: 1504.06094
+
+  [11] T., Klimsiak. BSDEs with monotone generator and two irregular reﬂecting barriers, Bulletin
+     des Sciences Mathématiques, 137(3), 2013, 268–321.
+    Pedagogically necessary: unknown
+
+  [12] T., Klimsiak. Reﬂected BSDEs with monotone generator, Electronic Journal of Probability,
+     17(107), 2014, 1–25.
+    Pedagogically necessary: unknown
+
+  [13] T., Klimsiak. Reﬂected BSDEs on ﬁltered probability spaces, Stochastic Processes and their
+     Applications, 125(11), 2015, 4204–4241.
+    Pedagogically necessary: unknown
+
+  [14] Kruse, T. and A., Popier. BSDEs with monotone generator driven by Brownian and Pois-
+     son noises in a general ﬁltration, Stochastics: An International Journal of Probability and
+     Stochastic Processes, 88(4), 2016, 491–539.
+    Pedagogically necessary: unknown
+
+  [15] Lepeltier, J. P. and M., Xu. Penalization method for reﬂected backward stochastic diﬀerential
+     equations with one r.c.l.l. barrier, Statistics and Probability Letters, 75(1), 2005, 58–66.
+    Pedagogically necessary: unknown
+
+  [16] É., Lenglart. Tribus de Meyer et théorie des processus. Séminaire de probabilité (Strasbourg),
+     14, 1980, 500–546.
+    Pedagogically necessary: unknown
+
+  [17] Lenglart, É., Lépingle, D. and M., Pratelli. Présentation uniﬁée de certaines inégalités de la
+     théorie des martingales, Séminaire de probabilités (Strasbourg), 14, 1980, 26–48.
+    Pedagogically necessary: unknown
+
+  [18] Lin, Q. and S., Peng. Smallest g-supersolutions for BSDE with continuous drift coeﬃcients,
+     Chinese Annals of Mathematics, 21B(3), 2000, 359–366.
+    Pedagogically necessary: unknown
+
+  [19] Mémin, J. and L., Słomiński. Condition UT et stabilité en loi des solutions d’équations dif-
+     férentielles stochastiques, Séminaire de probabilités (Strasbourg), 25, 1991, 162–177.
+    Pedagogically necessary: unknown
+
+  [20] J.-F., Mertens. Théorie des processus stochastiques généraux applications, aux surmartingales.
+     Probability Theory and Related Fields, 22(1), 1972, 45–68.
+    Pedagogically necessary: unknown
+
+  [21] P.-A., Meyer. Une majoration du processus croissant naturel associé à une surmartingale,
+     Séminaire de probabilités (Strasbourg), 2, 1968, 166–170.
+    Pedagogically necessary: unknown
+
+  [22] A., Osȩkowski. Sharp martingale and semimartingale inequalities, Birkhaüser, 2012.
+    Pedagogically necessary: unknown
+
+  [23] S., Peng. Monotonic limit theorem of BSDE and nonlinear decomposition theorem of Doob-
+     Meyer’s type, Probability Theory and Related Fields, 113(4), 1999, 473–499.
+    Pedagogically necessary: unknown
+
+  [24] Peng, S., and M., Xu. The smallest g-supermartingale and reﬂected BSDE with single and
+     double L2 obstacles, Annales de l’Institut Henri Poincaré, Probabilités and Statistics, 41,
+     2005, 605–630.
+    Pedagogically necessary: unknown
+
+  [25] Peng, S. and M., Xu. Constrained BSDE and viscosity solutions of variation inequalities, 2007,
+     arXiv preprint, arXiv:0712.0396.
+    Pedagogically necessary: unknown
+    arxiv: 0712.0396
+
+  [26] Peng, S. and M., Xu. Reﬂected BSDE with a constraint and its applications in an incomplete
+     market, Bernoulli, 16(3), 2010, 614–640.
+    Pedagogically necessary: unknown
+
+  [27] Possamaï, D., Tan, X. and C., Zhou. Stochastic control for a class of nonlinear stochastic
+     kernels and applications, 2015, arXiv preprint, arXiv:1510.08439.
+    Pedagogically necessary: unknown
+    arxiv: 1510.08439
+
+  [28] M., Schweizer. Approximating random variables by stochastic integrals. The Annals of Prob-
+     ability, 22(3), 1994, 1536–1575.
+    Pedagogically necessary: unknown
+
+  [29] Soner, M., Touzi, N. and J., Zhang. Wellposedness of second order backward SDEs, Probability
+     Theory and Related Fields. 153(1-2), 2012, 149–190.
+    Pedagogically necessary: unknown
+

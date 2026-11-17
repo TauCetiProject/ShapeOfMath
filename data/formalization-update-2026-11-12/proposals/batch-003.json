@@ -1,0 +1,488 @@
+{
+  "batch_id": "batch-003",
+  "author": "algebra_formalization",
+  "reviews": [
+    {
+      "concept": "s-matrix",
+      "concept_id": "42b148d7-b90a-5db2-915b-e343696fcbdd",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked braided/ribbon and pivotal trace candidates do not verify an S-matrix indexed by simple objects with the specified unnormalized trace of double braiding. Trace and braiding ingredients are present, but their actual matrix assembly/convention remains unverified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched SMatrix/s_matrix/S-matrix/Hopf-link in both monoidal category trees. Inspected Tau Braided/Ribbon:37–75 (twist-dual compatibility) and Center/Ribbon:65–85 (ribbon center under semisimplicity), and located Pivotal/Trace. These are genuine prerequisites, not a checked S-matrix implementation. No absence claim."
+    },
+    {
+      "concept": "s-matrix",
+      "concept_id": "42b148d7-b90a-5db2-915b-e343696fcbdd",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked braided/ribbon and pivotal trace candidates do not verify an S-matrix indexed by simple objects with the specified unnormalized trace of double braiding. Trace and braiding ingredients are present, but their actual matrix assembly/convention remains unverified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched SMatrix/s_matrix/S-matrix/Hopf-link in both monoidal category trees. Inspected Tau Braided/Ribbon:37–75 (twist-dual compatibility) and Center/Ribbon:65–85 (ribbon center under semisimplicity), and located Pivotal/Trace. These are genuine prerequisites, not a checked S-matrix implementation. No absence claim."
+    },
+    {
+      "concept": "t-matrix",
+      "concept_id": "f600d35d-7a59-583d-9222-4ae87ddfe0d1",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The native RibbonCategory class refers to the chosen BalancedCategory.twist and proves duality compatibility, but no inspected source packages its scalar on complex simple objects into the diagonal matrix with the catalogue normalization. The scalar extraction/matrix convention is an unresolved endpoint. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched TMatrix/t_matrix/T-matrix and twist-scalar terms in Mathlib and Tau monoidal trees. Read Tau Braided/Ribbon:37–75 and Center/Ribbon:65–85. A twist family is not automatically ownership of this matrix; dependency braiding/twist machinery alone is not mapped."
+    },
+    {
+      "concept": "t-matrix",
+      "concept_id": "f600d35d-7a59-583d-9222-4ae87ddfe0d1",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The native RibbonCategory class refers to the chosen BalancedCategory.twist and proves duality compatibility, but no inspected source packages its scalar on complex simple objects into the diagonal matrix with the catalogue normalization. The scalar extraction/matrix convention is an unresolved endpoint. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched TMatrix/t_matrix/T-matrix and twist-scalar terms in Mathlib and Tau monoidal trees. Read Tau Braided/Ribbon:37–75 and Center/Ribbon:65–85. A twist family is not automatically ownership of this matrix; dependency braiding/twist machinery alone is not mapped."
+    },
+    {
+      "concept": "binomial-coefficient",
+      "concept_id": "9d9103ab-4b5c-54fc-a9ed-9c2594801bf8",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Nat.choose:51 uses the Pascal recurrence; choose_eq_factorial_div_factorial:173 proves the formula for k≤n via the factorial multiplication identity:142. Finset.card_powersetCard:211 proves its cardinality interpretation, with membership precisely subset and cardinality k (:201). Cast, row-sum and convolution formulas give bounded ordinary API. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Choose/Basic.lean",
+          "declarations": "Nat.choose (:51); choose_mul_factorial_mul_factorial (:142); choose_eq_factorial_div_factorial (:173)",
+          "note": "Native Pascal definition, factorial identity, symmetry and immediate elementary identities."
+        },
+        {
+          "path": "Mathlib/Data/Finset/Powerset.lean",
+          "declarations": "Finset.powersetCard (:197); mem_powersetCard (:201); card_powersetCard (:211)",
+          "note": "Proves the actual combinatorial interpretation as counting k-element subsets, not just a use of choose."
+        },
+        {
+          "path": "Mathlib/Data/Nat/Choose/Cast.lean",
+          "declarations": "Nat.cast_choose (:35); cast_add_choose (:40)",
+          "note": "Ordinary scalar presentation of the factorial quotient."
+        },
+        {
+          "path": "Mathlib/Data/Nat/Choose/Sum.lean",
+          "declarations": "Nat.sum_range_choose (:94)",
+          "note": "Ordinary row sums and alternating/summation identities; the mixed file also proves binomial expansion."
+        },
+        {
+          "path": "Mathlib/Data/Nat/Choose/Vandermonde.lean",
+          "declarations": "Nat.add_choose_eq (:28); sum_range_choose_sq (:38)",
+          "note": "Ordinary convolution identities for binomial coefficients."
+        }
+      ],
+      "search_notes": "Read factorial induction/cancellation proof, powersetCard constructor/cardinality proof, cast_choose, sum_range_choose and add_choose_eq. Core = definition, subset-count/factorial presentations, elementary identities, sums and convolution. Exclude central-binomial asymptotics, Lucas/digit/valuation/number-theory consequences and probability distributions as separate endpoints."
+    },
+    {
+      "concept": "binomial-coefficient",
+      "concept_id": "9d9103ab-4b5c-54fc-a9ed-9c2594801bf8",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked exact dependency Nat.choose:51 and factorial quotient:173; Powerset.lean is byte-identical to the checked subset-count proof at :211. Native Basic:149 proves falling-factorial index shifting via the factorial/choose laws, Cast:66 proves ratios with k≤n and nonzero denominators, Sum:82 proves upper-index convolution by power-series coefficient comparison, Vandermonde:47 proves finite-family convolution by induction. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Data/Nat/Choose/Basic.lean",
+          "declarations": "Nat.add_choose_two (:80); descFactorial_mul_choose (:149); add_choose_mul_choose_mul_choose (:213)",
+          "note": "Native elementary binomial coefficient identities and falling-factorial index-shift API."
+        },
+        {
+          "path": "TauCeti/Data/Nat/Choose/Cast.lean",
+          "declarations": "Nat.cast_choose_mul_sub (:34); cast_choose_add_one_div_cast_choose (:66)",
+          "note": "Native casted recurrence and neighboring-coefficient ratios."
+        },
+        {
+          "path": "TauCeti/Data/Nat/Choose/Sum.lean",
+          "declarations": "Finset.sum_antidiagonal_choose_succ_nsmul_nsmul (:65); Nat.sum_antidiagonal_choose_add_mul_choose_add (:82)",
+          "note": "Native weighted sums and upper-index convolution with actual coefficient proof."
+        },
+        {
+          "path": "TauCeti/Data/Nat/Choose/Vandermonde.lean",
+          "declarations": "Nat.sum_piAntidiag_prod_choose (:47); sum_filter_piAntidiag_prod_choose (:67)",
+          "note": "Native finite-family Vandermonde convolution and its coordinate evaluation."
+        }
+      ],
+      "search_notes": "Same elementary identity/sum/convolution boundary as Mathlib. Read representative native proofs and hypotheses. Exclude Central/Digits/Lucas and p-adic valuation, polynomial/probability files: separate specialization/endpoints rather than elementary coefficient API. Count native files only."
+    },
+    {
+      "concept": "clique",
+      "concept_id": "db5abf1d-9d00-51b0-bd72-0912f494986b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. IsClique:47 is s.Pairwise G.Adj, which excludes equal pairs by Set.Pairwise and precisely matches every two distinct vertices adjacent. induce_eq_top:58 proves the equivalent complete induced subgraph characterization. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Combinatorics/SimpleGraph/Clique.lean",
+          "declarations": "SimpleGraph.IsClique (:47); isClique_iff (:50); induce_eq_top (:58)",
+          "note": "Direct pairwise-adjacency definition and ordinary subset/insert/map/complement API; whole file shared with independent sets."
+        }
+      ],
+      "search_notes": "Read definition, negative witness and induced-subgraph proof. Exclude extremal Ramsey/Turán and line-graph applications. Generic graph definition is a prerequisite, not charged separately to clique."
+    },
+    {
+      "concept": "clique",
+      "concept_id": "db5abf1d-9d00-51b0-bd72-0912f494986b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned Clique.lean is byte-identical to checked Mathlib IsClique:47 and induced-complete criterion:58. No selected native plain-clique API is needed; implementation is dependency-owned. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched native IsClique in Combinatorics; Graph/LineGraph:89 proves that an incidence set is a clique in a specific line graph. It is a graph-specific application, outside generic clique definition/equality/subset core; no native clique LOC charged."
+    },
+    {
+      "concept": "convex-position",
+      "concept_id": "99554759-7820-5aa9-b99f-bebc69d8066c",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. ConvexIndependent ℝ ((↑):P→E) is equivalent at :151–159 to ∀x∈P,x∉convexHull ℝ (P\\{x}). This is exactly the finite planar paragraph on specializing E=ℝ²; no stronger affine-independence assumption is used. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Convex/Independent.lean",
+          "declarations": "ConvexIndependent (:58); convexIndependent_set_iff_notMem_convexHull_sdiff (:151)",
+          "note": "Defines convex independence and proves exact set-minus-point characterization and ordinary hereditary/reindexing API."
+        }
+      ],
+      "search_notes": "Read actual equivalence proof using hull monotonicity and subset difference. Finiteness and dimension two are allowed specializations of the more general definition. Exclude general convex-hull prerequisite files and extreme-point/simplicial applications."
+    },
+    {
+      "concept": "convex-position",
+      "concept_id": "99554759-7820-5aa9-b99f-bebc69d8066c",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency Independent.lean is byte-identical to inspected Mathlib :58/:151–159 and gives the catalogue characterization over ℝ². Native generic convex-independence API was not selected. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched ConvexIndependent in native convex/combinatorics trees. Extreme.lean concerns extreme faces and AffineIndependent.isExtreme_convexHull, a stronger separately structured notion. Sequence/SlopeData concerns one-dimensional convex height sequences, not a core implementation of arbitrary planar convex position."
+    },
+    {
+      "concept": "convex-set",
+      "concept_id": "f126533c-0bdc-5181-be7b-294d77d11fbc",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Convex:53 is star-convexity from each contained point; convex_iff_add_mem:72–74 proves equivalence to closure under ax+by with a,b≥0 and a+b=1. Setting a=1−t,b=t gives exactly the real-coordinate paragraph, in both directions. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Convex/Basic.lean",
+          "declarations": "Convex (:53); convex_iff_segment_subset (:61); convex_iff_add_mem (:72)",
+          "note": "Defines convexity and proves standard segment/convex-combination equivalent presentations and elementary closure/map API."
+        }
+      ],
+      "search_notes": "Read actual definition and equivalence proof via segment_subset_iff. Core = general convex combinations/segments and elementary maps/closures in Basic; exclude optimization, separation, strict/uniform convexity, recession/polyhedral and topological consequences as separate additions."
+    },
+    {
+      "concept": "convex-set",
+      "concept_id": "f126533c-0bdc-5181-be7b-294d77d11fbc",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned Convex/Basic is byte-identical to checked definition and convex-combination equivalence (:53/:72). Native Set.convexSegment:108 uses convexity to construct the canonical segment within the subtype of a convex set, agreeing with the affine line map on [0,1] (:120) and satisfying both endpoint laws (:128/:135). This is ordinary generic segment API, with no topology needed. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/Segment.lean",
+          "declarations": "Set.convexSegment (:108); convexSegment_val_eqOn (:120); convexSegment_zero (:128); convexSegment_one (:135)",
+          "note": "Native canonical convex-combination/segment map into any convex subset and ordinary parameter/endpoint formulas; definition of convexity is dependency-owned."
+        }
+      ],
+      "search_notes": "Read actual IccExtend construction and subtype membership/endpoint proofs. The scalar ring/order hypotheses include ℝ. Exclude Topology interior/compactness, strict/uniform convexity, convex functions and polyhedra as separately structured endpoints. The whole mixed segment file is counted under the rough file rule."
+    },
+    {
+      "concept": "cup-cap",
+      "concept_id": "76c6d573-2615-5884-bcb4-cb9cb1814e8a",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No inspected declaration defines cups/caps for arbitrary planar points with strictly increasing x-coordinates and strictly increasing/decreasing consecutive slopes. The located convex height-sequence API assumes unit-spaced abscissae and weak monotonicity, so its equivalence to this strict, irregularly-spaced definition is unverified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched cups/caps, increasing/decreasing slopes, planar polygon and convex-position terms in both geometry/convex/combinatorics trees. Inspected Tau Sequence/SlopeData/Basic:69–79: FiniteSlopeData has start:ℕ, fixed unit edges and Monotone slope. Brauer cap-cup files concern diagram generators, an unrelated homonym."
+    },
+    {
+      "concept": "cup-cap",
+      "concept_id": "76c6d573-2615-5884-bcb4-cb9cb1814e8a",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No inspected declaration defines cups/caps for arbitrary planar points with strictly increasing x-coordinates and strictly increasing/decreasing consecutive slopes. The located convex height-sequence API assumes unit-spaced abscissae and weak monotonicity, so its equivalence to this strict, irregularly-spaced definition is unverified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched cups/caps, increasing/decreasing slopes, planar polygon and convex-position terms in both geometry/convex/combinatorics trees. Inspected Tau Sequence/SlopeData/Basic:69–79: FiniteSlopeData has start:ℕ, fixed unit edges and Monotone slope. Brauer cap-cup files concern diagram generators, an unrelated homonym."
+    },
+    {
+      "concept": "erdos-szekeres-convex",
+      "concept_id": "edad3f32-b09c-51e4-b689-b4c668892aaa",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The finite planar existence theorem with the explicit 1935 binomial upper bound has not been verified among the checked candidates. ConvexIndependent supplies its target predicate, but no candidate proof of this extraction/size bound was checked. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Erdős/Erdos/Szekeres, convex position and convex polygon in both combinatorics/geometry/convex trees. Read Mathlib Convex/Independent:151 exact convex-position criterion; it proves hereditary/equivalence API, not the planar selection theorem. Tau slope-data construction is not an extraction proof. Unknown is not absence."
+    },
+    {
+      "concept": "erdos-szekeres-convex",
+      "concept_id": "edad3f32-b09c-51e4-b689-b4c668892aaa",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The finite planar existence theorem with the explicit 1935 binomial upper bound has not been verified among the checked candidates. ConvexIndependent supplies its target predicate, but no candidate proof of this extraction/size bound was checked. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Erdős/Erdos/Szekeres, convex position and convex polygon in both combinatorics/geometry/convex trees. Read Mathlib Convex/Independent:151 exact convex-position criterion; it proves hereditary/equivalence API, not the planar selection theorem. Tau slope-data construction is not an extraction proof. Unknown is not absence."
+    },
+    {
+      "concept": "erdos-szekeres-cups-caps",
+      "concept_id": "76c3fab3-fd5c-5c10-9077-e071832638b4",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No checked candidate establishes the sharp finite binomial threshold for strict cups/caps with arbitrary distinct abscissae and no three collinear. Neither the strict geometric predicate nor the sharp bound construction has been verified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Szekeres, cups/caps, increasing/decreasing slopes and binomial polygon selection in both source trees. Inspected Tau finite unit-slope data (weak monotone slope, unit spacing), which is not this general-position strict selection theorem. Mathlib choose identities are prerequisites only, not partial endpoint proofs."
+    },
+    {
+      "concept": "erdos-szekeres-cups-caps",
+      "concept_id": "76c3fab3-fd5c-5c10-9077-e071832638b4",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No checked candidate establishes the sharp finite binomial threshold for strict cups/caps with arbitrary distinct abscissae and no three collinear. Neither the strict geometric predicate nor the sharp bound construction has been verified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Szekeres, cups/caps, increasing/decreasing slopes and binomial polygon selection in both source trees. Inspected Tau finite unit-slope data (weak monotone slope, unit spacing), which is not this general-position strict selection theorem. Mathlib choose identities are prerequisites only, not partial endpoint proofs."
+    },
+    {
+      "concept": "erdos-szekeres-monotone",
+      "concept_id": "94327af0-51a4-5e42-8ecd-47f81f8f966e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Mathlib OrderIsoNat:186 proves the INFINITARY increasing-or-nonincreasing subsequence theorem for a transitive relation, and :201 an infinite linear-order monotone sequence. These do not certify the finite sharp (r−1)(s−1)+1 threshold or its extremal example. That endpoint remains unverified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Szekeres and simultaneous StrictMono/StrictAnti in all Mathlib/Tau sources. Read the actual ℕ-indexed statement/proof at OrderIsoNat:186–208; no finite cardinal bound follows by direct specialization. Order monotonicity definitions and infinite theorem are excluded as prerequisites/related theorem. No absence claim."
+    },
+    {
+      "concept": "erdos-szekeres-monotone",
+      "concept_id": "94327af0-51a4-5e42-8ecd-47f81f8f966e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Mathlib OrderIsoNat:186 proves the INFINITARY increasing-or-nonincreasing subsequence theorem for a transitive relation, and :201 an infinite linear-order monotone sequence. These do not certify the finite sharp (r−1)(s−1)+1 threshold or its extremal example. That endpoint remains unverified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Szekeres and simultaneous StrictMono/StrictAnti in all Mathlib/Tau sources. Read the actual ℕ-indexed statement/proof at OrderIsoNat:186–208; no finite cardinal bound follows by direct specialization. Order monotonicity definitions and infinite theorem are excluded as prerequisites/related theorem. No absence claim."
+    },
+    {
+      "concept": "euclidean-space",
+      "concept_id": "efeb4da2-9df6-5be5-b545-beb89362290e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. EuclideanSpace ℝ (Fin d):113 is PiLp 2 of d real coordinates. dist_eq:179 gives sqrt of the sum of squared coordinate distances, equivalent to sqrt(Σ(x_i−y_i)²) since real distance is absolute difference; real_norm_sq_eq:168 verifies the squared norm formula. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/PiL2.lean",
+          "declarations": "EuclideanSpace (:113); EuclideanSpace.norm_eq (:160); real_norm_sq_eq (:168); dist_eq (:179)",
+          "note": "Actual finite L² coordinate space definition, metric and norm formulas, plus ordinary basis/coordinate maps."
+        }
+      ],
+      "search_notes": "Read actual PiLp abbreviation and norm/metric formulas. Use ℝ and Fin d, not the sup-norm function-space instance. Core = Euclidean coordinate metric/basis/map API in PiL2; exclude spheres/manifolds, cross products, polar integration, spectral theorems and dimension-specific geometry."
+    },
+    {
+      "concept": "euclidean-space",
+      "concept_id": "efeb4da2-9df6-5be5-b545-beb89362290e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Read exact dependency EuclideanSpace definition:114, norm:161 and metric:180; these provide complete finite real-coordinate L² availability. Native PiL2:75 proves dot product equals squared norm, :163–168 constructs coordinate restriction with explicit formula; Euclidean/Space:36 proves distinct points force positive dimension. These are direct ordinary coordinate/dimension API. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/PiL2.lean",
+          "declarations": "EuclideanSpace.dotProduct_ofLp_self (:75); take (:163); take_apply (:167)",
+          "note": "Native ordinary norm-coordinate identity, coordinate restriction/splitting and finite-dimensional Euclidean map API."
+        },
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Euclidean/Space.lean",
+          "declarations": "TauCeti.pos_of_ne_euclideanSpace (:36); complexEuclideanRealCoords (:50)",
+          "note": "Native immediate positive-dimension consequence for distinct Euclidean points; also contains ordinary real/complex coordinate conversion in the same whole file."
+        }
+      ],
+      "search_notes": "Read native proofs and definitions, not mere imports. Include finite Euclidean metric/coordinate maps; exclude John ellipsoid, polar decomposition, frames/spectral perturbation, cross products, sphere/manifold and PDE applications. Some stronger applications share the selected mixed PiL2 file; count whole-file rough LOC only."
+    },
+    {
+      "concept": "finite-ramsey",
+      "concept_id": "79124b55-d81b-5fdc-ade5-754a81b8b6cb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The checked finite-color candidate HalesJewett concerns monochromatic combinatorial lines in word spaces, not arbitrary colorings of uniform r-subsets with a homogeneous s- or t-set. A verified reduction or direct finite Ramsey theorem has not been found in this bounded review. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Ramsey/homogeneous subset coloring throughout both source trees. Read HalesJewett Subspace.IsMono:139 (constant on combinatorial subspace) and its word-space theorem context. Hindman/infinite subsequence results have different conclusions. The required finite uniform-subset extraction endpoint remains unresolved; no prerequisite files counted."
+    },
+    {
+      "concept": "finite-ramsey",
+      "concept_id": "79124b55-d81b-5fdc-ade5-754a81b8b6cb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The checked finite-color candidate HalesJewett concerns monochromatic combinatorial lines in word spaces, not arbitrary colorings of uniform r-subsets with a homogeneous s- or t-set. A verified reduction or direct finite Ramsey theorem has not been found in this bounded review. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Ramsey/homogeneous subset coloring throughout both source trees. Read HalesJewett Subspace.IsMono:139 (constant on combinatorial subspace) and its word-space theorem context. Hindman/infinite subsequence results have different conclusions. The required finite uniform-subset extraction endpoint remains unresolved; no prerequisite files counted."
+    },
+    {
+      "concept": "finite-simple-graph",
+      "concept_id": "1de95b77-f1d6-5666-b557-a19b79a89636",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. SimpleGraph:93 stores a symmetric irreflexive relation on V; with finite V it matches a finite graph. Basic:469/:478 identifies adjacency with membership of unordered pairs; fromEdgeSet:644 discards diagonal pairs and :663 recovers G. Finite:58/:75 exposes finite edge sets whose pairs have two vertices, matching the catalogue edge-set representation. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Combinatorics/SimpleGraph/Basic.lean",
+          "declarations": "SimpleGraph (:93); edgeSetEmbedding (:469); mem_edgeSet (:478); fromEdgeSet (:644); fromEdgeSet_edgeSet (:663)",
+          "note": "Actual symmetric irreflexive relation and equivalent loop-free unordered edge-set presentation; elementary adjacency/order/map API."
+        },
+        {
+          "path": "Mathlib/Combinatorics/SimpleGraph/Finite.lean",
+          "declarations": "SimpleGraph.edgeFinset (:58); mem_edgeFinset (:68); card_toFinset_mem_edgeFinset (:75)",
+          "note": "Actual finite edge-set representation and proof each represented edge has exactly two vertices, plus ordinary finite neighborhood/degree API."
+        }
+      ],
+      "search_notes": "Read relation fields, finite graph enumeration :117, edge-set reconstruction and finite edge representation. Core = graph/finite edge/neighborhood and natural relabeling operations. Exclude clique/independent predicates, connectedness/paths, extremal/counting endpoints, graph limits and special graphs."
+    },
+    {
+      "concept": "finite-simple-graph",
+      "concept_id": "1de95b77-f1d6-5666-b557-a19b79a89636",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned SimpleGraph/Basic is byte-identical to the checked symmetric loop-free definition and edge-set equivalence. Native Finite:51 constructs finite neighbor sets, :66 proves isomorphism invariance of neighbor sums and :78 proves exact edge-set reconstruction for edge subsets. Native Maps:50/:64 proves ordinary pushforward/pullback and join laws; :69/:74 constructs finite restrictions with exact adjacency formula. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Combinatorics/SimpleGraph/Finite.lean",
+          "declarations": "SimpleGraph.neighborSetFintypeOfFinite (:51); Iso.sum_neighborFinset_comp (:66); edgeSet_fromEdgeSet_of_subset (:78)",
+          "note": "Native ordinary finite-neighbor/edge-set representation and relabeling API."
+        },
+        {
+          "path": "TauCeti/Combinatorics/SimpleGraph/Maps.lean",
+          "declarations": "SimpleGraph.map_comap_eq_inf_map_top (:50); map_sup (:64); restrictFin (:69); restrictFin_adj (:74)",
+          "note": "Native ordinary graph restriction/relabeling and adjacency-array representation API."
+        }
+      ],
+      "search_notes": "Read native representation/restriction proofs and finite hypotheses. Exclude native connectivity, cycles, degree optimization, counting, line graph and graphon applications as separate endpoints. Generic graph implementation remains dependency-attributed; only selected native API LOC counts."
+    },
+    {
+      "concept": "homogeneous-set",
+      "concept_id": "84766589-b38d-526d-95d9-6fe7c6ece3f7",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. A checked generic predicate/API for being constant on all r-subsets of H has not been verified. HalesJewett.IsMono is constant on a combinatorial word-space subspace, which is a different domain; graph color classes are not the stated uniform subset-coloring notion. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched homogeneous-set/IsHomogeneous and Ramsey/coloring terms in both source trees. Read Mathlib HalesJewett:137–139; the witness is ∃c∀word, C(l word)=c. Generic IsConstant/EqOn can express many predicates but is not by itself a checked implementation of this mathematical subset-coloring identity. Unknown preserves the unresolved definition/API match."
+    },
+    {
+      "concept": "homogeneous-set",
+      "concept_id": "84766589-b38d-526d-95d9-6fe7c6ece3f7",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. A checked generic predicate/API for being constant on all r-subsets of H has not been verified. HalesJewett.IsMono is constant on a combinatorial word-space subspace, which is a different domain; graph color classes are not the stated uniform subset-coloring notion. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched homogeneous-set/IsHomogeneous and Ramsey/coloring terms in both source trees. Read Mathlib HalesJewett:137–139; the witness is ∃c∀word, C(l word)=c. Generic IsConstant/EqOn can express many predicates but is not by itself a checked implementation of this mathematical subset-coloring identity. Unknown preserves the unresolved definition/API match."
+    },
+    {
+      "concept": "independent-set",
+      "concept_id": "fb0d239b-1d11-59a6-baf9-b280c3b105eb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. IsIndepSet:898 is pairwise ¬Adj for distinct vertices, exactly containing no edge in a loop-free graph. isClique_compl:908 and isIndepSet_compl:913 prove the expected equivalence with cliques in the complement. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Combinatorics/SimpleGraph/Clique.lean",
+          "declarations": "SimpleGraph.IsIndepSet (:898); isIndepSet_iff (:901); isClique_compl (:908); isIndepSet_compl (:913)",
+          "note": "Defines pairwise nonadjacency and proves ordinary complement duality, size and independent-set API in this shared file."
+        }
+      ],
+      "search_notes": "Read actual definition and complement proof using compl_adj; no induced graph or bipartite assumption needed. Exclude vertex-cover, coloring and extremal graph applications as separately significant endpoints."
+    },
+    {
+      "concept": "independent-set",
+      "concept_id": "fb0d239b-1d11-59a6-baf9-b280c3b105eb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned Clique.lean is byte-identical to checked Mathlib :898–915, supplying exact independent-set predicate and complement duality. No native generic independent-set file was selected. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched native IsIndepSet in Combinatorics; Graph/Matching/Coloring uses independent sets as color classes of line graphs, which is an application with extra matching/coloring structure. Excluded it from plain independent-set core; dependency coverage is positive, zero native LOC."
+    },
+    {
+      "concept": "klein-five-points",
+      "concept_id": "a24d4d3b-5b78-55d4-a394-f1cac8b98d75",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The checked convex-position definition and polygon/slope candidates do not prove that every five general-position planar points contain four in convex position. No exact five-point extraction theorem was verified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Klein/five-point/five+convex/general-position in planar geometry and combinatorics, and read Convex/Independent exact criterion. Convex independence and affine-independent simplex results alone do not prove this planar combinatorial endpoint; unresolved rather than a negative absence claim."
+    },
+    {
+      "concept": "klein-five-points",
+      "concept_id": "a24d4d3b-5b78-55d4-a394-f1cac8b98d75",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The checked convex-position definition and polygon/slope candidates do not prove that every five general-position planar points contain four in convex position. No exact five-point extraction theorem was verified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Klein/five-point/five+convex/general-position in planar geometry and combinatorics, and read Convex/Independent exact criterion. Convex independence and affine-independent simplex results alone do not prove this planar combinatorial endpoint; unresolved rather than a negative absence claim."
+    },
+    {
+      "concept": "konig-infinity",
+      "concept_id": "3219fb9e-0af5-594f-87f5-2c13dfe4f996",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Order/KonigLemma:64–79 proves that an infinite strongly atomic order with bottom and finite cover sets admits an order embedding ℕ starting at bottom whose successive vertices are covers. For a rooted finitely branching tree ordered by ancestry, bottom is root, covers are child edges, and strong atomicity follows by taking the first child on the finite root-to-descendant path. The embedding is injective, so this is the specified infinite simple rooted path in an equivalent tree/order presentation. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Order/KonigLemma.lean",
+          "declarations": "exists_seq_covby_of_forall_covby_finite (:64); exists_orderEmbedding_covby_of_forall_covby_finite_of_bot (:78)",
+          "note": "Proves König infinity lemma in equivalent rooted ancestor-order/covers presentation, including injective infinite branch starting at the root."
+        }
+      ],
+      "search_notes": "Read actual recursive selection of a cover with infinite upper cone (:66–69) and strict-mono/order-embedding proof (:73–75). The file explicitly leaves the graph-theoretic packaging TODO (:34/:51); do not claim that packaging exists. The mathematical endpoint is implemented in the equivalent rooted-order presentation; no general graph path library charged."
+    },
+    {
+      "concept": "konig-infinity",
+      "concept_id": "3219fb9e-0af5-594f-87f5-2c13dfe4f996",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Read exact dependency KonigLemma:65–81: same infinite rooted-order finite-cover theorem and injective cover sequence, with explicit recursive proof. The rooted-tree/ancestry equivalence is as described for standalone Mathlib. No selected native theorem proves or adds ordinary API to this finite-branching infinity endpoint. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched native exists_seq_covby/exists_orderEmbedding_covby/finite covers and König terms. Descriptive/Tree:160 concerns ill-foundedness iff a branch for arbitrary descriptive trees, rather than the finite-branching infinite-tree implication; later rank boundedness is a separately significant endpoint. No native LOC charged for those related theorems."
+    },
+    {
+      "concept": "monotone-gap-theorem",
+      "concept_id": "d7832eec-2c55-5c1f-b203-82d381700b6f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No checked declaration extracts the specified numbers of points with weakly monotone consecutive gaps at the binomial threshold. Tau finite convex slope data encodes an already monotone unit-slope sequence; it does not prove arbitrary point selection or the required combinatorial bound. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched monotone/nondecreasing gaps, Szekeres and finite slope sequences in combinatorics/convex/geometry. Read Tau Sequence/SlopeData/Basic:69–79 and Mathlib infinitary OrderIsoNat:186; both differ from this finite gap-selection statement. Binomial arithmetic and monotone-sequence definitions are prerequisites only; endpoint remains unknown."
+    },
+    {
+      "concept": "monotone-gap-theorem",
+      "concept_id": "d7832eec-2c55-5c1f-b203-82d381700b6f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, with actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No checked declaration extracts the specified numbers of points with weakly monotone consecutive gaps at the binomial threshold. Tau finite convex slope data encodes an already monotone unit-slope sequence; it does not prove arbitrary point selection or the required combinatorial bound. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched monotone/nondecreasing gaps, Szekeres and finite slope sequences in combinatorics/convex/geometry. Read Tau Sequence/SlopeData/Basic:69–79 and Mathlib infinitary OrderIsoNat:186; both differ from this finite gap-selection statement. Binomial arithmetic and monotone-sequence definitions are prerequisites only; endpoint remains unknown."
+    }
+  ]
+}

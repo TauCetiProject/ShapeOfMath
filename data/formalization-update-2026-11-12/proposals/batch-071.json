@@ -1,0 +1,636 @@
+{
+  "batch_id": "batch-071",
+  "author": "category_galois_formalization",
+  "reviews": [
+    {
+      "concept": "uniform-distribution-unit-interval",
+      "concept_id": "85b80d2e-8c08-5b4c-a2d0-557780086985",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Use ProbabilityTheory.cond volume (Icc(0:R)1). Actual cond75 is normalized restricted measure; cond_apply214/218 and Real.volume_Icc87 show its mass on any [a,b] subset[0,1] is ofReal(b-a), and its total mass is1. The real closed endpoints have zero Lebesgue atoms, so the Ioc(0,1) constructor below is the same probability law, not a different endpoint convention. Zero/reversed intervals are excluded in this unit-interval case.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Probability/ConditionalProbability.lean",
+          "declarations": "cond:75; cond_apply:214",
+          "note": "Actual normalized restricted interval law and measurable-set mass formula."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Lebesgue/Basic.lean",
+          "declarations": "Real.volume_Icc:87",
+          "note": "Actual interval-length identity proving the precise displayed probability mass."
+        }
+      ],
+      "search_notes": "Enumerated native interval-uniform Basic/Support/Quantile/Affine and sphere/ball/Beta alternatives. Selected direct interval law, density/CDF/mean/variance, support, lower-quantile and affine-image API. Sphere/ball distributions, finite permutations and Beta-distribution identification are separately meaningful constructions. Quantile formula requires0<u<1; no endpoint-default value is asserted."
+    },
+    {
+      "concept": "uniform-distribution-unit-interval",
+      "concept_id": "85b80d2e-8c08-5b4c-a2d0-557780086985",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Use ProbabilityTheory.cond volume (Icc(0:R)1). Actual cond75 is normalized restricted measure; cond_apply214/218 and Real.volume_Icc87 show its mass on any [a,b] subset[0,1] is ofReal(b-a), and its total mass is1. The real closed endpoints have zero Lebesgue atoms, so the Ioc(0,1) constructor below is the same probability law, not a different endpoint convention. Zero/reversed intervals are excluded in this unit-interval case. Native uniformMeasure108 is cond volume(Ioc a b); apply124/prob130 prove its exact set mass/probability. CDF263, mean306 and variance317 completed proofs were read; support_uniformMeasure29 gives Icc a b, quantile_uniformMeasure48 gives a+(b-a)u for0<u<1, and Affine39/58/78 gives positive/negative/zero-slope images with sorted endpoints and Dirac at zero. All are direct ordinary API, specialized a=0,b=1.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Distributions/Uniform/Basic.lean",
+          "declarations": "uniformMeasure:108; uniformMeasure_apply:124; isProbabilityMeasure_uniformMeasure:130; cdf_uniformMeasure:263; integral_id_uniformMeasure:306; variance_id_uniformMeasure:317",
+          "note": "Native exact interval-uniform constructor and ordinary density, probability, integration, CDF and moment API."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Uniform/Support.lean",
+          "declarations": "support_uniformMeasure:29",
+          "note": "Native exact closed-interval support, with endpoint-null convention justified."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Uniform/Quantile.lean",
+          "declarations": "quantile_uniformMeasure:48; tendsto_quantile_uniformMeasure_nhdsGT_zero:72; tendsto_quantile_uniformMeasure_nhdsLT_one:85",
+          "note": "Native exact lower quantile and one-sided probability-level endpoint limits."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Uniform/Affine.lean",
+          "declarations": "uniformMeasure_map_affine_pos:39; uniformMeasure_map_affine_neg:58; uniformMeasure_map_affine:78",
+          "note": "Native direct affine-image law API, including reflection and zero-slope Dirac."
+        }
+      ],
+      "search_notes": "Enumerated native interval-uniform Basic/Support/Quantile/Affine and sphere/ball/Beta alternatives. Selected direct interval law, density/CDF/mean/variance, support, lower-quantile and affine-image API. Sphere/ball distributions, finite permutations and Beta-distribution identification are separately meaningful constructions. Quantile formula requires0<u<1; no endpoint-default value is asserted."
+    },
+    {
+      "concept": "uniformly-elliptic-divergence-operator",
+      "concept_id": "3505912e-cae8-5890-a8e0-f573f9ab125b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Literal primary constructor: a:E→Matrix(Fin n)(Fin n)R with a(x).IsSymm for every x in the domain, constants0<c<=C and forall x,xi, c*norm(xi)^2 <= sum_ij aij(x)*xi_i*xi_j <= C*norm(xi)^2. On a supplied differentiability domain define Lf(x)=sum_ij lineDeriv R(fun y=>aij(y)*lineDeriv R f y(e_j)) x(e_i). The actual lineDeriv109 evaluates that directional derivative; weak/distributional realizations and boundary conditions are additional supplied choices, rather than silently using the totalized derivative where coefficients lack classical regularity. This gives the EXACT POSITIVE divergence expression in the paragraph.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/LineDeriv/Basic.lean",
+          "declarations": "lineDeriv:109",
+          "note": "Actual finite coordinate divergence-form differential expression; exact quadratic/symmetry predicate is explicit."
+        }
+      ],
+      "search_notes": "Enumerated native PDE/Ellipticity/{Basic,Extension} and EnergyForm/Operator candidates. Native UniformlyEllipticOn529 uses a stronger upper BILINEAR bound and has no built-in symmetry; do not silently identify it with the primary symmetric quadratic-bound predicate. Direct coefficient restriction/bound/positivity API applies on the stated stronger subcase. Native positive energy forms represent NEGATIVE divergence, so no sign reversal is used as the bare L definition."
+    },
+    {
+      "concept": "uniformly-elliptic-divergence-operator",
+      "concept_id": "3505912e-cae8-5890-a8e0-f573f9ab125b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Literal primary constructor: a:E→Matrix(Fin n)(Fin n)R with a(x).IsSymm for every x in the domain, constants0<c<=C and forall x,xi, c*norm(xi)^2 <= sum_ij aij(x)*xi_i*xi_j <= C*norm(xi)^2. On a supplied differentiability domain define Lf(x)=sum_ij lineDeriv R(fun y=>aij(y)*lineDeriv R f y(e_j)) x(e_i). The actual lineDeriv109 evaluates that directional derivative; weak/distributional realizations and boundary conditions are additional supplied choices, rather than silently using the totalized derivative where coefficients lack classical regularity. This gives the EXACT POSITIVE divergence expression in the paragraph. Native UniformlyEllipticOn529 and congr633 prove actual domain-local coefficient transport under the explicit stronger bilinear upper bound. opNorm_matrixBilinearForm_le653/toQuadraticForm_le659/abs_apply_le666 derive actual operator/quadratic/entry bounds (complete proofs read); impose symmetry separately as in the primary definition. These are direct ordinary ellipticity API, not a PDE existence theorem or a claim that arbitrary measurable coefficients have classical derivatives.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/PDE/Ellipticity/Basic.lean",
+          "declarations": "UniformlyEllipticOn:529; UniformlyEllipticOn.congr:633; UniformlyEllipticOn.opNorm_matrixBilinearForm_le:653; UniformlyEllipticOn.toQuadraticForm'_le:659; UniformlyEllipticOn.abs_apply_le:666",
+          "note": "Native actual coefficient ellipticity constructor and ordinary local/bound API, with stronger bilinear-bound subcase and separate symmetry explicit."
+        }
+      ],
+      "search_notes": "Enumerated native PDE/Ellipticity/{Basic,Extension} and EnergyForm/Operator candidates. Native UniformlyEllipticOn529 uses a stronger upper BILINEAR bound and has no built-in symmetry; do not silently identify it with the primary symmetric quadratic-bound predicate. Direct coefficient restriction/bound/positivity API applies on the stated stronger subcase. Native positive energy forms represent NEGATIVE divergence, so no sign reversal is used as the bare L definition."
+    },
+    {
+      "concept": "unilateral-credit-valuation-adjustment",
+      "concept_id": "e617860a-f75c-5f72-a1ec-e3810d38fba1",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For the specified pricing probability Q, supplied default time tau, exposure V, discount D and fractional loss L, take the REAL Bochner integral of the payoff omega↦if tau(omega)<T then D(0,tau)*L_tau*max(V_tau,0) else0. For an extended default time use its finite value ONLY in the tau<T branch; the infinity/default branch contributes0. Actual stoppedValue803 evaluates the supplied time-indexed V,L at that finite time. Require this loss payoff Integrable under Q, so Bochner.integral157 uses the genuine L1 integral rather than its nonintegrable fallback. The institution has no own default event/time in this unilateral constructor. No no-arbitrage or closeout theorem is claimed.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+          "declarations": "integral:157",
+          "note": "Actual expected discounted positive-exposure loss, under explicit integrability."
+        },
+        {
+          "path": "Mathlib/Probability/Process/Stopping.lean",
+          "declarations": "stoppedValue:803",
+          "note": "Actual finite random-time exposure/loss evaluation; infinity handled by the payoff branch."
+        }
+      ],
+      "search_notes": "Enumerated native Finance/StaticClaim, Pricing, SimpleStrategy, BlackScholes and loss/default candidates. StaticClaim concerns exact replication cashflows; Pricing/Operator is a log-spot parabolic differential operator, not an expectation/default-loss interface. No qualifying native unilateral default-loss API selected. Bilateral first-to-default conventions are not added to this supplied one-counterparty formula."
+    },
+    {
+      "concept": "unilateral-credit-valuation-adjustment",
+      "concept_id": "e617860a-f75c-5f72-a1ec-e3810d38fba1",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For the specified pricing probability Q, supplied default time tau, exposure V, discount D and fractional loss L, take the REAL Bochner integral of the payoff omega↦if tau(omega)<T then D(0,tau)*L_tau*max(V_tau,0) else0. For an extended default time use its finite value ONLY in the tau<T branch; the infinity/default branch contributes0. Actual stoppedValue803 evaluates the supplied time-indexed V,L at that finite time. Require this loss payoff Integrable under Q, so Bochner.integral157 uses the genuine L1 integral rather than its nonintegrable fallback. The institution has no own default event/time in this unilateral constructor. No no-arbitrage or closeout theorem is claimed. Complete exact suppliers are dependency integral158/stoppedValue804, selected bodies identical after header shift.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Enumerated native Finance/StaticClaim, Pricing, SimpleStrategy, BlackScholes and loss/default candidates. StaticClaim concerns exact replication cashflows; Pricing/Operator is a log-spot parabolic differential operator, not an expectation/default-loss interface. No qualifying native unilateral default-loss API selected. Bilateral first-to-default conventions are not added to this supplied one-counterparty formula."
+    },
+    {
+      "concept": "up-and-in-barrier-option",
+      "concept_id": "3ed0f1c9-25fc-5574-a498-3b008da85fde",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For supplied monitoring set I, define activation H={omega|exists t in I,S(t,omega)>=B}. The claim is the actual Set.indicator H of its supplied terminal payoff, or of a fixed payment for the digital version. Discrete I is the declared grid (finite/time-indexed observations); continuous I is the actual monitoring interval, such as Icc(0,T), and these are distinct predicates. Require H/payoff measurable in the model; no pricing/hedging/existence theorem is part of this bare definition. Do not treat hittingBtwn's no-hit fallback=maturity as an actual hit.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Process/HittingTime.lean",
+          "declarations": "hittingAfter:65; hittingBtwn:56",
+          "note": "Actual hit-event/time constructors used with explicit discrete versus continuous monitoring; no-hit fallbacks distinguished."
+        },
+        {
+          "path": "Mathlib/Algebra/Notation/Indicator.lean",
+          "declarations": "mulIndicator:52",
+          "note": "Actual generated Set.indicator activation-payoff constructor, zero outside the monitored hit event."
+        }
+      ],
+      "search_notes": "Enumerated native HittingTime, HittingTime/{Countable,Grid}, Finance/SpotExit and barrier/claim candidates. Select actual closed-upper-barrier hit-attainment/finite-horizon dictionary on continuous paths, an explicit subcase of the continuous contract. SpotExit reciprocal two-sided localization and BlackScholes pricing PDE are other endpoints, not the option definition."
+    },
+    {
+      "concept": "up-and-in-barrier-option",
+      "concept_id": "3ed0f1c9-25fc-5574-a498-3b008da85fde",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For supplied monitoring set I, define activation H={omega|exists t in I,S(t,omega)>=B}. The claim is the actual Set.indicator H of its supplied terminal payoff, or of a fixed payment for the digital version. Discrete I is the declared grid (finite/time-indexed observations); continuous I is the actual monitoring interval, such as Icc(0,T), and these are distinct predicates. Require H/payoff measurable in the model; no pricing/hedging/existence theorem is part of this bare definition. Do not treat hittingBtwn's no-hit fallback=maturity as an actual hit. Native IsClosed.exists_hittingAfter_eq45 and hittingAfter_le_iff59 prove that a continuous path reaches the CLOSED upper target Ici B by T iff there is an ACTUAL hit in Icc(start,T), including both endpoints; complete infimum/closed-attainment proof45–68 read. Continuous.le_of_le_hittingAfter_Ici74–88 gives the ordinary before-barrier bound by IVT. This is native defining activation-event API; it does not identify discrete monitoring with dense sampling of closed hits.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Process/HittingTime.lean",
+          "declarations": "IsClosed.exists_hittingAfter_eq:45; IsClosed.hittingAfter_le_iff:59; Continuous.le_of_le_hittingAfter_Ici:74",
+          "note": "Native actual closed-level activation-by-horizon and pre-hit upper-barrier path API for continuous monitoring."
+        }
+      ],
+      "search_notes": "Enumerated native HittingTime, HittingTime/{Countable,Grid}, Finance/SpotExit and barrier/claim candidates. Select actual closed-upper-barrier hit-attainment/finite-horizon dictionary on continuous paths, an explicit subcase of the continuous contract. SpotExit reciprocal two-sided localization and BlackScholes pricing PDE are other endpoints, not the option definition."
+    },
+    {
+      "concept": "upper-semicontinuous-function",
+      "concept_id": "301359ad-2619-5236-948e-3c882451e1fb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For f:X→EReal use the exact relation r(x,a:R):=f(x)<(a:EReal) and Semicontinuous r. Actual semicontinuous_iff_isOpen166 proves LITERALLY forall a:R,IsOpen{x|f(x)<a}, exactly the paragraph including extended values. This avoids an unchecked replacement of real thresholds by arbitrary extended thresholds. UpperSemicontinuous316 is the ordinary all-codomain-level version; the real-level relation already supplies the exact bare definition. EReal includes BOTH infinities.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Semicontinuity/Defs.lean",
+          "declarations": "Semicontinuous:96; semicontinuous_iff_isOpen:166; UpperSemicontinuous:316",
+          "note": "Actual exact open strict-level relation and ordinary upper-semicontinuity constructor."
+        }
+      ],
+      "search_notes": "Enumerated native Semicontinuity/Basic, CompactInfimum, Approximation, MinimizingLifts and GammaConvergence. Select ordinary neighborhood-envelope API via order dual; exclude Gamma-limit convergence/minimizer existence and approximation representation as separately significant endpoints. Use EReal's complete linear order, not the false CompleteLinearOrder instance for WithTop R."
+    },
+    {
+      "concept": "upper-semicontinuous-function",
+      "concept_id": "301359ad-2619-5236-948e-3c882451e1fb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For f:X→EReal use the exact relation r(x,a:R):=f(x)<(a:EReal) and Semicontinuous r. Actual semicontinuous_iff_isOpen166 proves LITERALLY forall a:R,IsOpen{x|f(x)<a}, exactly the paragraph including extended values. This avoids an unchecked replacement of real thresholds by arbitrary extended thresholds. UpperSemicontinuous316 is the ordinary all-codomain-level version; the real-level relation already supplies the exact bare definition. EReal includes BOTH infinities. Native lowerSemicontinuous_iSup_nhds34–41, instantiated to OrderDual EReal, proves upper semicontinuity of the corresponding neighborhood-INF envelope. Its complete actual proof chooses the strict-bound witnessing neighborhood and uses its interior; hence it supplies genuine ordinary upper-envelope API, with the all-extended-level conclusion in particular giving every real strict sublevel.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Semicontinuity/Basic.lean",
+          "declarations": "lowerSemicontinuous_iSup_nhds:34",
+          "note": "Native direct neighborhood-envelope semicontinuity law; order-dual instantiation gives the actual upper-envelope API."
+        }
+      ],
+      "search_notes": "Enumerated native Semicontinuity/Basic, CompactInfimum, Approximation, MinimizingLifts and GammaConvergence. Select ordinary neighborhood-envelope API via order dual; exclude Gamma-limit convergence/minimizer existence and approximation representation as separately significant endpoints. Use EReal's complete linear order, not the false CompleteLinearOrder instance for WithTop R."
+    },
+    {
+      "concept": "vague-convergence-radon-measures",
+      "concept_id": "1a8df1c3-a5db-5420-ad65-1551951c5b5a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Literal predicate on the given LCH Radon measures: forall f:C_c(X,R), Tendsto(fun n=>integral f(mu_n))atTop(nhds(integral f mu)). Actual CompactlySupportedContinuousMap40 has BOTH continuity and compact support; no bounded-continuous-only or all-continuous test class is substituted. Radon/local finiteness makes these compact tests integrable, so the Bochner integral is genuine even when the measures have infinite TOTAL mass.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/ContinuousMap/CompactlySupported.lean",
+          "declarations": "CompactlySupportedContinuousMap:40",
+          "note": "Actual precise continuous compact-support test carrier in the definition."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+          "declarations": "integral:157",
+          "note": "Actual scalar test integrals in vague convergence of locally finite/Radon measures."
+        }
+      ],
+      "search_notes": "Enumerated native Measure/Vague, Portmanteau, locally-finite cutoff and distribution weak-convergence candidates. Vague tests remain compactly supported, not weak convergence of arbitrary infinite measures against all bounded continuous functions. The native continuity-set theorem has explicit outer-approximation assumptions; this is an ordinary stronger-topology subcase, not silently imposed on the bare LCH definition."
+    },
+    {
+      "concept": "vague-convergence-radon-measures",
+      "concept_id": "1a8df1c3-a5db-5420-ad65-1551951c5b5a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Literal predicate on the given LCH Radon measures: forall f:C_c(X,R), Tendsto(fun n=>integral f(mu_n))atTop(nhds(integral f mu)). Actual CompactlySupportedContinuousMap40 has BOTH continuity and compact support; no bounded-continuous-only or all-continuous test class is substituted. Radon/local finiteness makes these compact tests integrable, so the Bochner integral is genuine even when the measures have infinite TOTAL mass. Native tendsto_measure_of_null_frontier_of_tendsto_integral_compactlySupported37 proves ordinary convergence on relatively compact measurable continuity sets under LCH T2 +HasOuterApproxClosed and locally finite measures. Read its ENTIRE proof: localizing by a compact cutoff, converting to finite weighted weak convergence, applying Portmanteau, and recovering the same original set masses. Infinite total mass is genuinely allowed.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Measure/Vague.lean",
+          "declarations": "tendsto_measure_of_null_frontier_of_tendsto_integral_compactlySupported:37",
+          "note": "Native actual vague-convergence continuity-set API, retaining outer-approximation/relative-compactness hypotheses."
+        }
+      ],
+      "search_notes": "Enumerated native Measure/Vague, Portmanteau, locally-finite cutoff and distribution weak-convergence candidates. Vague tests remain compactly supported, not weak convergence of arbitrary infinite measures against all bounded continuous functions. The native continuity-set theorem has explicit outer-approximation assumptions; this is an ordinary stronger-topology subcase, not silently imposed on the bare LCH definition."
+    },
+    {
+      "concept": "vitali-porter-holomorphic-convergence",
+      "concept_id": "788000a4-5072-5c0a-9239-d1a79b2acfad",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual locally-uniform holomorphic limit/differentiability source does not establish convergence from only local boundedness and pointwise convergence on an interior-accumulation set. A completed standalone Montel+analytic-identity accumulation-set convergence theorem was not certified after bounded source search. Native Tau Vitali is not a Mathlib declaration.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Vitali/Porter, analytic uniqueness, Montel and local bounds in actual Complex/Conformal and locally uniform limit namespaces. Standalone Complex/LocallyUniformLimit assumes convergence already, while native Montel/identity theorem is what upgrades the accumulation-set pointwise limit. General topological MontelSpace is not this analytic normal-family theorem. Scalar C is proper, so native target properness adds no restriction to the catalogue."
+    },
+    {
+      "concept": "vitali-porter-holomorphic-convergence",
+      "concept_id": "788000a4-5072-5c0a-9239-d1a79b2acfad",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native vitali95–120 proves EXACTLY the stated theorem on open preconnected complex Omega and proper complex target (instantiate C): local uniform bounds, pointwise convergence on A⊆Omega with AccPt z0(filter principal A), z0 in Omega, imply a holomorphic locally-uniform limit. Complete proof read: Montel supplies one subsequential limit, any further subsequential limit agrees on A, analytic identity propagates to the connected domain, then the subsequence criterion yields whole-sequence convergence uniformly on each compact. vitali_of_tendsto129–138 adds the actual prescribed-limit identity on A. No boundary accumulation or unbounded family hypothesis is silently substituted.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Complex/Conformal/Vitali.lean",
+          "declarations": "vitali:95; vitali_of_tendsto:129",
+          "note": "Native complete local-boundedness/interior-accumulation-point Vitali–Porter theorem and prescribed-limit API."
+        }
+      ],
+      "search_notes": "Searched Vitali/Porter, analytic uniqueness, Montel and local bounds in actual Complex/Conformal and locally uniform limit namespaces. Standalone Complex/LocallyUniformLimit assumes convergence already, while native Montel/identity theorem is what upgrades the accumulation-set pointwise limit. General topological MontelSpace is not this analytic normal-family theorem. Scalar C is proper, so native target properness adds no restriction to the catalogue."
+    },
+    {
+      "concept": "weak-convergence-probability-measures",
+      "concept_id": "7d0e82df-68a9-54f7-b5e5-d89964984aa4",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual ProbabilityMeasure.tendsto_iff_forall_integral_tendsto366–373 states EXACTLY weak convergence iff every real BoundedContinuousFunction test integral converges. Read the actual proof through the embedding in FiniteMeasure and its integral topology. Restrict to the supplied metric space; no extra Polish/separability requirement is inserted. These are probability measures, hence all bounded real tests are integrable and mass is fixed1.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean",
+          "declarations": "tendsto_iff_forall_integral_tendsto:366",
+          "note": "Actual complete real bounded-continuous-test characterization of probability weak convergence."
+        }
+      ],
+      "search_notes": "Enumerated native Measure/Portmanteau, Moments/WeakConvergence, Wasserstein and ResolventTransform weak-convergence siblings. Select ordinary continuity-set API of the same weak topology; exclude sufficient moment/transform/tightness/transport criteria as separately meaningful endpoints rather than allocate their prerequisite law topology."
+    },
+    {
+      "concept": "weak-convergence-probability-measures",
+      "concept_id": "7d0e82df-68a9-54f7-b5e5-d89964984aa4",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual ProbabilityMeasure.tendsto_iff_forall_integral_tendsto366–373 states EXACTLY weak convergence iff every real BoundedContinuousFunction test integral converges. Read the actual proof through the embedding in FiniteMeasure and its integral topology. Restrict to the supplied metric space; no extra Polish/separability requirement is inserted. These are probability measures, hence all bounded real tests are integrable and mass is fixed1. Native FiniteMeasure.tendsto_measure_of_null_frontier_of_tendsto152 handles ordinary continuity-set convergence even for a ZERO finite limiting measure, by separate total-mass squeeze versus nonzero normalization; the previously independently read actual proof152–172 specializes to probabilities.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Measure/Portmanteau.lean",
+          "declarations": "FiniteMeasure.tendsto_measure_of_null_frontier_of_tendsto:152",
+          "note": "Native direct ordinary continuity-set API for weak probability/finite-measure convergence."
+        }
+      ],
+      "search_notes": "Enumerated native Measure/Portmanteau, Moments/WeakConvergence, Wasserstein and ResolventTransform weak-convergence siblings. Select ordinary continuity-set API of the same weak topology; exclude sufficient moment/transform/tightness/transport criteria as separately meaningful endpoints rather than allocate their prerequisite law topology."
+    },
+    {
+      "concept": "weak-dirichlet-laplacian",
+      "concept_id": "a385bada-f25a-542e-a559-529b834067fc",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. On H01 (the actual smooth-test closure in the W1,2 value-gradient norm), define u↦(v↦inner_L2(gradient u,gradient v)). Actual L2.inner_def136 makes this exactly integral grad(u) dot grad(v); continuous linear gradient projection and innerSL give the actual bounded functional in StrongDual R H01=Hminus1. This certifies the positive -Delta sign of the paragraph, without claiming a negative energy form. The exact primary bilinear/dual constructor is available, and LaxMilgram.continuousLinearEquivOfBilin105 proves isomorphism GIVEN a coercive complete-Hilbert form. However an actual standalone bounded-domain H01 Poincare/coercivity/complete weak-graph supplier was not certified, so the paragraph's unconditional bounded-domain inverse/Poisson conclusion remains unresolved.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/L2Space.lean",
+          "declarations": "L2.inner_def:136",
+          "note": "Actual gradient-pairing definition of the weak -Delta functional on the supplied H01 graph."
+        }
+      ],
+      "search_notes": "Enumerated native PDE/DirichletProblem, EnergyForm/Sobolev, Sobolev/Poincare/W1p0 and Spectrum/Operator. General dual forcing, not merely L2 f, is needed for the stated isomorphism. Select the actual H01 energy operator and all-dual solvability/coercivity API; exclude eigenvalue/spectral/maximum-principle/regularity applications. Usual Euclidean domain dimension is positive (native Fin(n+1)); the zero-dimensional gradient-zero case is not an asserted isomorphism."
+    },
+    {
+      "concept": "weak-dirichlet-laplacian",
+      "concept_id": "a385bada-f25a-542e-a559-529b834067fc",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. On H01 (the actual smooth-test closure in the W1,2 value-gradient norm), define u↦(v↦inner_L2(gradient u,gradient v)). Actual L2.inner_def136 makes this exactly integral grad(u) dot grad(v); continuous linear gradient projection and innerSL give the actual bounded functional in StrongDual R H01=Hminus1. This certifies the positive -Delta sign of the paragraph, without claiming a negative energy form. Native energyFormH1L0:798/808 is the actual bounded bilinear operator on H01. DirichletProblem614 proves identity-coefficient zero-lower-order energy is exactly the L2 gradient inner product; exists_isCoercive_laplacian_of_isBounded781–799 proves coercivity on EVERY bounded open positive-dimensional Euclidean domain. Crucially existsUnique_sub_mem_w1p0Submodule_forall_energyFormH1_eq396–422 handles ANY ell:StrongDual H01; g=0 gives the full Hminus1 Poisson inverse, not only L2 forcing. Combining actual coercive continuousLinearEquivOfBilin105 with the checked real Riesz isometry136 gives a continuous-linear isomorphism H01→Hminus1. Poincare/W1p0.norm_value_le_mul_norm_gradient_of_subset_ball122–138 gives norm(value)<=2R*norm(gradient); together with W1p.norm_sq_eq_norm_value_sq_add_norm_gradient_sq this identifies the gradient norm as equivalent to the complete graph norm on H01, so the same inverse is continuous in the required gradient norm. Complete cited coercivity/variational/Poincare bodies read; boundary regularity is not assumed.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/PDE/EnergyForm/Sobolev.lean",
+          "declarations": "energyFormH1L0:798; energyFormH1L0_apply:808",
+          "note": "Native actual bounded H01 energy/dual operator, specialized to identity principal coefficients and zero lower terms."
+        },
+        {
+          "path": "TauCeti/Analysis/PDE/DirichletProblem.lean",
+          "declarations": "energyFormH1_one_zero_zero_eq_inner:614; exists_isCoercive_laplacian_of_isBounded:781; existsUnique_sub_mem_w1p0Submodule_forall_energyFormH1_eq:396",
+          "note": "Native exact gradient pairing, bounded-domain coercivity and full continuous-dual Poisson inverse API."
+        },
+        {
+          "path": "TauCeti/Analysis/Sobolev/Poincare/W1p0.lean",
+          "declarations": "W1p.norm_value_le_mul_norm_gradient_of_subset_ball:122",
+          "note": "Native actual H01 gradient-norm equivalence bound, used for the norm specified by the concept."
+        }
+      ],
+      "search_notes": "Enumerated native PDE/DirichletProblem, EnergyForm/Sobolev, Sobolev/Poincare/W1p0 and Spectrum/Operator. General dual forcing, not merely L2 f, is needed for the stated isomorphism. Select the actual H01 energy operator and all-dual solvability/coercivity API; exclude eigenvalue/spectral/maximum-principle/regularity applications. Usual Euclidean domain dimension is positive (native Fin(n+1)); the zero-dimensional gradient-zero case is not an asserted isomorphism."
+    },
+    {
+      "concept": "weak-mixing-rds-one-point-laws",
+      "concept_id": "69d8435e-19de-55c7-8150-3493662f744d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. On a SUPPLIED measurable RDS phi over probability base(P,theta), form the actual pushforward probability Law_t,x=P.map(fun omega=>phi(t,omega,x)), with genuine measurability of that map (not Measure.map's arbitrary nonmeasurable Dirac fallback). Require for EVERY fixed x, Tendsto Law_t,x atTop(nhds mu), equivalently all real bounded-continuous test integrals converge by ProbabilityMeasure366. This is exactly convergence of the ONE-POINT state laws, and asserts no mixing of theta or joint multipoint law. The same limit mu is used for every x.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Map.lean",
+          "declarations": "map:95",
+          "note": "Actual measurable one-point law pushforward constructor."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean",
+          "declarations": "tendsto_iff_forall_integral_tendsto:366",
+          "note": "Actual weak-topology criterion applied to every fixed initial state law."
+        }
+      ],
+      "search_notes": "Enumerated native Dynamics/Flow, Probability/Process, RandomDynamical/Attractor/synchronization and law-convergence candidates. Deterministic flow identities and generic moment/Portmanteau criteria concern separately supplied flow/law inputs rather than a selected RDS one-point-law implementation. No native RDS-specific ordinary API was selected; this is not an absence assertion."
+    },
+    {
+      "concept": "weak-mixing-rds-one-point-laws",
+      "concept_id": "69d8435e-19de-55c7-8150-3493662f744d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. On a SUPPLIED measurable RDS phi over probability base(P,theta), form the actual pushforward probability Law_t,x=P.map(fun omega=>phi(t,omega,x)), with genuine measurability of that map (not Measure.map's arbitrary nonmeasurable Dirac fallback). Require for EVERY fixed x, Tendsto Law_t,x atTop(nhds mu), equivalently all real bounded-continuous test integrals converge by ProbabilityMeasure366. This is exactly convergence of the ONE-POINT state laws, and asserts no mixing of theta or joint multipoint law. The same limit mu is used for every x. The complete supplied-law predicate uses actual dependency map96/weak-test367; selected statements/bodies match.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Enumerated native Dynamics/Flow, Probability/Process, RandomDynamical/Attractor/synchronization and law-convergence candidates. Deterministic flow identities and generic moment/Portmanteau criteria concern separately supplied flow/law inputs rather than a selected RDS one-point-law implementation. No native RDS-specific ordinary API was selected; this is not an absence assertion."
+    },
+    {
+      "concept": "weak-point-random-attractor",
+      "concept_id": "c3ba9f22-14ed-5a90-bd5a-72f0a79cb4e5",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For supplied metric measurable RDS with invertible measure-preserving base flow theta, let A:Omega→NonemptyCompacts E be a random compact set. Use the exact hit-open (Effros) sigma algebra generated by {K|K meets U} for open U, via generateFrom329; do not silently identify it with a hyperspace Borel sigma algebra. Require invariance phi_t(omega) image A(omega)=A(theta_t omega) AE with the intended all-time common-event convention. For EVERY FIXED deterministic x, require TendstoInMeasure P (fun t omega=>Metric.infDist(phi_t(theta_-t omega,x),A(omega)))atTop0, with these distance variables genuinely measurable. infDist464 is distance to the set and NonemptyCompacts398 prevents its empty-set-zero fallback. This is point attraction in P-probability, not uniform attraction over all deterministic compact K.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Sets/Compacts.lean",
+          "declarations": "NonemptyCompacts:398",
+          "note": "Actual nonempty compact-valued carrier of the random set."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/MeasurableSpace/Defs.lean",
+          "declarations": "generateFrom:329",
+          "note": "Actual exact hit-open-generated random-compact-set sigma algebra."
+        },
+        {
+          "path": "Mathlib/Topology/MetricSpace/HausdorffDistance.lean",
+          "declarations": "infDist:464",
+          "note": "Actual point-to-attractor distance in the point attraction predicate."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean",
+          "declarations": "TendstoInMeasure:57",
+          "note": "Actual probability convergence of each fixed initial point distance."
+        }
+      ],
+      "search_notes": "Enumerated native random-set/RDS/attractor and deterministic Flow candidates, plus HausdorffDistance and ConvergenceInMeasure siblings. Native infEDist-to-infDist dictionary is a separately supplied distance-input identity, and general probability-rate convergence is not selected as RDS attraction API merely because the predicate uses it. Exact generic compact/random-set/in-probability constructors fully supply the bare definition; no attractor existence theorem is inferred."
+    },
+    {
+      "concept": "weak-point-random-attractor",
+      "concept_id": "c3ba9f22-14ed-5a90-bd5a-72f0a79cb4e5",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For supplied metric measurable RDS with invertible measure-preserving base flow theta, let A:Omega→NonemptyCompacts E be a random compact set. Use the exact hit-open (Effros) sigma algebra generated by {K|K meets U} for open U, via generateFrom329; do not silently identify it with a hyperspace Borel sigma algebra. Require invariance phi_t(omega) image A(omega)=A(theta_t omega) AE with the intended all-time common-event convention. For EVERY FIXED deterministic x, require TendstoInMeasure P (fun t omega=>Metric.infDist(phi_t(theta_-t omega,x),A(omega)))atTop0, with these distance variables genuinely measurable. infDist464 is distance to the set and NonemptyCompacts398 prevents its empty-set-zero fallback. This is point attraction in P-probability, not uniform attraction over all deterministic compact K. All selected generic defining supplier files/constructors are byte-identical in the actual dependency.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Enumerated native random-set/RDS/attractor and deterministic Flow candidates, plus HausdorffDistance and ConvergenceInMeasure siblings. Native infEDist-to-infDist dictionary is a separately supplied distance-input identity, and general probability-rate convergence is not selected as RDS attraction API merely because the predicate uses it. Exact generic compact/random-set/in-probability constructors fully supply the bare definition; no attractor existence theorem is inferred."
+    },
+    {
+      "concept": "weak-synchronization-rds",
+      "concept_id": "919a5f3e-3110-5117-a235-850e3b521877",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a SUPPLIED measurable RDS phi/base flow theta, require EXISTS a measurable random point a:Omega→E, with phi_t(omega,a(omega))=a(theta_t omega) on the stated common AE all-time event, and FOR EVERY fixed deterministic x, TendstoInMeasure P(fun t omega=>phi_t(theta_-t omega,x))atTop a. These are actual measurable state variables; probability convergence is exactly the epsilon/distance failure probability→0 at ConvergenceInMeasure57. Singleton {a(omega)} is nonempty compact and has the same point-distance, hence supplies precisely the stated weak point attractor. This is existence of a point with the defining property, not a theorem that an arbitrary RDS synchronizes.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean",
+          "declarations": "TendstoInMeasure:57",
+          "note": "Actual precise pullback point-to-random-point convergence in probability in the synchronization definition."
+        }
+      ],
+      "search_notes": "Enumerated native RDS/random-attractor/synchronization/flow sources and probability convergence siblings. No deterministic contraction or pathwise-almost-sure coupling theorem is substituted for pullback convergence in probability. The quantifier is EVERY fixed x, not a uniform compact-set or one-common-null-set-for-all-x strengthening. No native RDS-specific core file selected."
+    },
+    {
+      "concept": "weak-synchronization-rds",
+      "concept_id": "919a5f3e-3110-5117-a235-850e3b521877",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For a SUPPLIED measurable RDS phi/base flow theta, require EXISTS a measurable random point a:Omega→E, with phi_t(omega,a(omega))=a(theta_t omega) on the stated common AE all-time event, and FOR EVERY fixed deterministic x, TendstoInMeasure P(fun t omega=>phi_t(theta_-t omega,x))atTop a. These are actual measurable state variables; probability convergence is exactly the epsilon/distance failure probability→0 at ConvergenceInMeasure57. Singleton {a(omega)} is nonempty compact and has the same point-distance, hence supplies precisely the stated weak point attractor. This is existence of a point with the defining property, not a theorem that an arbitrary RDS synchronizes. The full defining probability-convergence constructor is byte-identical in D.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Enumerated native RDS/random-attractor/synchronization/flow sources and probability convergence siblings. No deterministic contraction or pathwise-almost-sure coupling theorem is substituted for pullback convergence in probability. The quantifier is EVERY fixed x, not a uniform compact-set or one-common-null-set-for-all-x strengthening. No native RDS-specific core file selected."
+    },
+    {
+      "concept": "weak-time-derivative-banach",
+      "concept_id": "18f03c3d-2b27-5d4e-98f1-53f4d145b2ae",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. On the supplied interval interior I and Banach X, require v Integrable on I, u LocallyIntegrable on I, and forall phi:TestFunction I R, integral(deriv phi(t) smul u(t))=-integral(phi(t) smul v(t)). Actual TestFunction67 means smooth scalar compact support in I; Deriv153 is the scalar derivative; Bochner157 genuinely integrates these X-valued test products (complete codomain and test-product integrability retained, avoiding fallback0). Compactly supported tests on an interval are interpreted in its interior, with no hidden endpoint boundary term. This is the literal weak derivative criterion, not pointwise differentiability of u.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Distribution/TestFunction.lean",
+          "declarations": "TestFunction:67",
+          "note": "Actual smooth compactly-supported scalar interval test constructor."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+          "declarations": "deriv:153",
+          "note": "Actual scalar time derivative of the smooth test."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+          "declarations": "integral:157",
+          "note": "Actual Banach-valued distributional time integration-by-parts pairing."
+        }
+      ],
+      "search_notes": "Enumerated native WeakDeriv/Basic, Coordinates, Interval and Sobolev/TimeDerivative siblings. Native HasWeakLineDerivOn at E=R/direction1 is the exact Banach-valued test pairing, but it imposes only LOCAL integrability; the paragraph's additional global Integrable v is an explicit conjunct. Fundamental theorem/time regularization and Bochner-Sobolev trace are separate endpoints."
+    },
+    {
+      "concept": "weak-time-derivative-banach",
+      "concept_id": "18f03c3d-2b27-5d4e-98f1-53f4d145b2ae",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. On the supplied interval interior I and Banach X, require v Integrable on I, u LocallyIntegrable on I, and forall phi:TestFunction I R, integral(deriv phi(t) smul u(t))=-integral(phi(t) smul v(t)). Actual TestFunction67 means smooth scalar compact support in I; Deriv153 is the scalar derivative; Bochner157 genuinely integrates these X-valued test products (complete codomain and test-product integrability retained, avoiding fallback0). Compactly supported tests on an interval are interpreted in its interior, with no hidden endpoint boundary term. This is the literal weak derivative criterion, not pointwise differentiability of u. Native HasWeakLineDerivOn221 and hasWeakLineDerivOn_iff_testFunction228 are LITERALLY complete codomain +local integrability +the test identity. At direction1, smooth phi has lineDeriv= fderiv applied1 by actual LineDeriv319 and deriv153 is exactly fderiv applied1, so the signs/scalar action match the paragraph. Global Integrable v is added explicitly. The actual native predicate/eliminator and local-integrability/identity proofs221–250 were read.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Sobolev/WeakDeriv/Basic.lean",
+          "declarations": "HasWeakLineDerivOn:221; hasWeakLineDerivOn_iff_testFunction:228; HasWeakLineDerivOn.integral_lineDeriv_smul_eq_neg_integral_smul:249",
+          "note": "Native exact Banach-valued compact-test weak time-derivative predicate and integration-by-parts API, specialized to scalar time/direction1."
+        }
+      ],
+      "search_notes": "Enumerated native WeakDeriv/Basic, Coordinates, Interval and Sobolev/TimeDerivative siblings. Native HasWeakLineDerivOn at E=R/direction1 is the exact Banach-valued test pairing, but it imposes only LOCAL integrability; the paragraph's additional global Integrable v is an explicit conjunct. Fundamental theorem/time regularization and Bochner-Sobolev trace are separate endpoints."
+    },
+    {
+      "concept": "weierstrass-holomorphic-derivative-convergence",
+      "concept_id": "d149c9b0-dfe6-5163-8ff4-a3e3b37b89f8",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual Complex/LocallyUniformLimit.TendstoLocallyUniformlyOn.differentiableOn136 proves the locally uniform limit is holomorphic; deriv154 proves FIRST derivatives converge locally uniformly, via compact thickenings, Cauchy derivative integral and its uniform continuity bound. Complete proofs read. CauchyIntegral.DifferentiableOn.deriv742 also makes each derivative holomorphic, and iteratedDeriv55 is available, but an existing completed general ALL-ORDER locally-uniform derivative-convergence supplier/assembly was not certified in bounded search. The catalogue explicitly includes every order, so the verified holomorphic/first-derivative component remains partial rather than silently dropping that material clause.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Complex/LocallyUniformLimit.lean",
+          "declarations": "TendstoLocallyUniformlyOn.differentiableOn:136; TendstoLocallyUniformlyOn.deriv:154",
+          "note": "Actual holomorphic limit and first-derivative locally uniform convergence proof; every-order frontier explicit."
+        }
+      ],
+      "search_notes": "Searched general TendstoLocallyUniformlyOn with iteratedDeriv/iteratedFDeriv across both actual trees. Native HolomorphicFunctions/CompactnessExamples153 concerns only the specific maps z/m; it is not a general all-order theorem. No new induction/proof is developed to erase the frontier. Native UniformLimitsDeriv closes actual value-and-derivative graphs under uniform convergence, a direct ordinary stronger-hypothesis limit API, but does not establish the missing higher-order limit from value convergence alone."
+    },
+    {
+      "concept": "weierstrass-holomorphic-derivative-convergence",
+      "concept_id": "d149c9b0-dfe6-5163-8ff4-a3e3b37b89f8",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual Complex/LocallyUniformLimit.TendstoLocallyUniformlyOn.differentiableOn136 proves the locally uniform limit is holomorphic; deriv154 proves FIRST derivatives converge locally uniformly, via compact thickenings, Cauchy derivative integral and its uniform continuity bound. Complete proofs read. CauchyIntegral.DifferentiableOn.deriv742 also makes each derivative holomorphic, and iteratedDeriv55 is available, but an existing completed general ALL-ORDER locally-uniform derivative-convergence supplier/assembly was not certified in bounded search. The catalogue explicitly includes every order, so the verified holomorphic/first-derivative component remains partial rather than silently dropping that material clause. The full supplying first-derivative file is byte-identical in D. Native isClosed_setOf_hasFDerivAt_comp36–54 and isClosed_setOf_hasFDerivAt57–64 prove actual closedness of the joint uniform value/derivative graph, including complex scalars, by the complete hasFDerivAt_of_tendstoUniformly argument. This is genuine native ordinary derivative-limit API on the explicitly stronger joint-convergence subcase; no general higher-order theorem is claimed.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Calculus/UniformLimitsDeriv.lean",
+          "declarations": "isClosed_setOf_hasFDerivAt_comp:36; isClosed_setOf_hasFDerivAt:57",
+          "note": "Native actual closed derivative-graph/uniform-limit API; full all-order holomorphic derivative convergence remains unverified."
+        }
+      ],
+      "search_notes": "Searched general TendstoLocallyUniformlyOn with iteratedDeriv/iteratedFDeriv across both actual trees. Native HolomorphicFunctions/CompactnessExamples153 concerns only the specific maps z/m; it is not a general all-order theorem. No new induction/proof is developed to erase the frontier. Native UniformLimitsDeriv closes actual value-and-derivative graphs under uniform convergence, a direct ordinary stronger-hypothesis limit API, but does not establish the missing higher-order limit from value convergence alone."
+    },
+    {
+      "concept": "weighted-geometric-mean-concavity",
+      "concept_id": "b894959e-b734-5fa8-b73a-17b709666501",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual Real.geom_mean_le_arith_mean_weighted128–148 proves weighted AM-GM (including zero weights) by convex exp and log, while scalar concaveOn_rpow concerns one coordinate. A completed existing multivariable geometric-mean concavity/superadditivity supplier was not certified in standalone Mathlib. No new normalized-ratio argument is developed here; the actual such completed argument was located in Tau-owned MeanInequalities.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched weighted geometric mean/concave product-rpow and enumerated MeanInequalities/Convex/SpecificFunctions/Pow. Scalar rpow concavity and weighted AM-GM are checked related ingredients, not automatically the full multivariable theorem. Native Matrix/MinkowskiDeterminant is an independently significant application, excluded. Finite coordinate/weight family is the usual weighted geometric-mean interpretation; zero-weight factors contribute1 and may be omitted."
+    },
+    {
+      "concept": "weighted-geometric-mean-concavity",
+      "concept_id": "b894959e-b734-5fa8-b73a-17b709666501",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native Real.prod_rpow_add_prod_rpow_le_prod_add_rpow90–118 proves EXACT superadditivity of G(a)=product_i a_i^beta_i for NONNEGATIVE a,b and beta, sum beta=1. Complete proof read: factor each coordinate by a_i+b_i (handling the zero case), apply weighted AM-GM to both normalized families, and use their weighted arithmetic means sum<=1. Existing actual Real.mul_rpow476 plus rpow_sum_of_nonneg246 gives G(lambda*x)=lambda*G(x) including lambda=0, since sum beta=1; substituting a=lambda*x,b=(1-lambda)*y in the SAME general native inequality is exactly the displayed concavity inequality. Zero beta factors are Real.rpow_zero=1, matching omission, and zero positive-weight coordinates are handled in the actual native proof. This is an algebraic normalization of the proved theorem, not an inferred determinant or log-concavity statement.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/MeanInequalities.lean",
+          "declarations": "Real.prod_rpow_add_prod_rpow_le_prod_add_rpow:90",
+          "note": "Native completed exact weighted geometric-mean superadditivity/concavity theorem on the nonnegative orthant, including zeros."
+        }
+      ],
+      "search_notes": "Searched weighted geometric mean/concave product-rpow and enumerated MeanInequalities/Convex/SpecificFunctions/Pow. Scalar rpow concavity and weighted AM-GM are checked related ingredients, not automatically the full multivariable theorem. Native Matrix/MinkowskiDeterminant is an independently significant application, excluded. Finite coordinate/weight family is the usual weighted geometric-mean interpretation; zero-weight factors contribute1 and may be omitted."
+    },
+    {
+      "concept": "white-noise-rds",
+      "concept_id": "63ae3250-9fa5-550a-b9bc-e1f2727eb68b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. On a SUPPLIED measurable filtered RDS phi over an invertible probability-preserving base flow theta, define the actual noise sigma algebra F_st as the supremum of comaps of omega↦phi(v-u,theta_u omega,x), over s<=u<=v<=t and all initial x. Actual MeasurableSpace.comap_process_pi626 proves the generated-family sigma/tuple dictionary. Require joint iIndep of F_(s_j,t_j) for EVERY finite family of disjoint half-open time intervals (s_j,t_j], and require F_(s+r,t+r)=MeasurableSpace.comap(theta_r)F_st for all r. This shift orientation follows the actual increment convention: evaluating the [s,t] increment at theta_r omega is the [s+r,t+r] increment at omega. Adaptation/filter compatibility is an explicit defining conjunct. Actual iIndep110 tests JOINT finite independence, not merely pairwise independence or independence of all overlapping increments.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/MeasurableSpace/Constructions.lean",
+          "declarations": "MeasurableSpace.comap_process_pi:626",
+          "note": "Actual exact increment-family generated sigma algebra/tuple constructor dictionary."
+        },
+        {
+          "path": "Mathlib/Probability/Independence/Basic.lean",
+          "declarations": "iIndep:110",
+          "note": "Actual joint independence predicate for the sigma algebras of disjoint time intervals."
+        }
+      ],
+      "search_notes": "Enumerated native random flow/noise and Independence/DisjointBlocks siblings. Select actual block-generated-sigma/tuple dictionary for the defining cocycle increments. Its theorem69 needs no global independence of the full increment family; such a premise would be false for overlapping intervals. Do not use white Gaussian scalar random variables or stationary increments alone as the white-noise RDS definition."
+    },
+    {
+      "concept": "white-noise-rds",
+      "concept_id": "63ae3250-9fa5-550a-b9bc-e1f2727eb68b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. On a SUPPLIED measurable filtered RDS phi over an invertible probability-preserving base flow theta, define the actual noise sigma algebra F_st as the supremum of comaps of omega↦phi(v-u,theta_u omega,x), over s<=u<=v<=t and all initial x. Actual MeasurableSpace.comap_process_pi626 proves the generated-family sigma/tuple dictionary. Require joint iIndep of F_(s_j,t_j) for EVERY finite family of disjoint half-open time intervals (s_j,t_j], and require F_(s+r,t+r)=MeasurableSpace.comap(theta_r)F_st for all r. This shift orientation follows the actual increment convention: evaluating the [s,t] increment at theta_r omega is the [s+r,t+r] increment at omega. Adaptation/filter compatibility is an explicit defining conjunct. Actual iIndep110 tests JOINT finite independence, not merely pairwise independence or independence of all overlapping increments. Native blockSigma59 and blockSigma_eq_comap_restrict69–74 supply EXACTLY the interval-subfamily generated-sigma dictionary on the index triples(u,v,x). Complete comap/iSup/pi proof read. This directly implements the defining interval noise algebras; no unverified RDS existence or independence theorem is inferred from an arbitrary supplied cocycle.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Independence/DisjointBlocks.lean",
+          "declarations": "blockSigma:59; blockSigma_eq_comap_restrict:69",
+          "note": "Native actual generated increment-subfamily sigma algebra and tuple normal-form API of the defining disjoint-interval independence condition."
+        }
+      ],
+      "search_notes": "Enumerated native random flow/noise and Independence/DisjointBlocks siblings. Select actual block-generated-sigma/tuple dictionary for the defining cocycle increments. Its theorem69 needs no global independence of the full increment family; such a premise would be false for overlapping intervals. Do not use white Gaussian scalar random variables or stationary increments alone as the white-noise RDS definition."
+    },
+    {
+      "concept": "wiener-measure",
+      "concept_id": "4709eb2d-e008-5b92-a969-53ec27ee10d7",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact bare law predicate on P0={f:C(R>=0,R) // f(0)=0}: equip the continuous-path subtype with the BOREL sigma algebra of the compact-open topology, then require Q:ProbabilityMeasure P0 with IsBrownianReal(fun t f=>f(t))Q. Actual Brownian.Basic74 specifies ALL finite-dimensional centered Gaussian projective laws, and301 adds common-AE path continuity (automatic on this carrier); covariance is min(s,t) in GaussianProjectiveFamily57. CompactOpen54 defines the actual continuous-map topology and CompactConvergence103–147 proves it is precisely uniform convergence on EVERY compact time set. The subtype enforces starting at ZERO pathwise. This is the exact definition of the continuous-path Brownian LAW, not a product-coordinate sigma algebra silently identified with path Borel. As a bare definition this supplies the defining law predicate; no separate Brownian-path existence/unique-continuous-version construction theorem is asserted.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Probability/BrownianMotion/Basic.lean",
+          "declarations": "IsPreBrownianReal:74; IsBrownianReal:301",
+          "note": "Actual canonical finite-dimensional Brownian law and continuous-path criterion, used directly on the zero-start path carrier."
+        },
+        {
+          "path": "Mathlib/Topology/CompactOpen.lean",
+          "declarations": "compactOpen:54",
+          "note": "Actual compact-open path topology whose Borel sigma algebra defines the law."
+        },
+        {
+          "path": "Mathlib/Topology/UniformSpace/CompactConvergence.lean",
+          "declarations": "tendsto_iff_forall_isCompact_tendstoUniformlyOn:103",
+          "note": "Actual completed identification of this topology with uniform convergence on compact time sets."
+        }
+      ],
+      "search_notes": "Enumerated native BrownianMotion/NormalizedIncrements, Filtered, NaturalFiltration, UsualFiltration, Girsanov and quadratic-variation siblings. Select actual canonical finite-dimensional increment law API; exclude stochastic integration, measure-change, path maxima and quadratic variation as separately significant endpoints. A nonmeasurable map is not used to manufacture the law; it is directly a probability measure on the given Borel path carrier."
+    },
+    {
+      "concept": "wiener-measure",
+      "concept_id": "4709eb2d-e008-5b92-a969-53ec27ee10d7",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact bare law predicate on P0={f:C(R>=0,R) // f(0)=0}: equip the continuous-path subtype with the BOREL sigma algebra of the compact-open topology, then require Q:ProbabilityMeasure P0 with IsBrownianReal(fun t f=>f(t))Q. Actual Brownian.Basic74 specifies ALL finite-dimensional centered Gaussian projective laws, and301 adds common-AE path continuity (automatic on this carrier); covariance is min(s,t) in GaussianProjectiveFamily57. CompactOpen54 defines the actual continuous-map topology and CompactConvergence103–147 proves it is precisely uniform convergence on EVERY compact time set. The subtype enforces starting at ZERO pathwise. This is the exact definition of the continuous-path Brownian LAW, not a product-coordinate sigma algebra silently identified with path Borel. As a bare definition this supplies the defining law predicate; no separate Brownian-path existence/unique-continuous-version construction theorem is asserted. Native normalizedBrownianIncrements44 and IsPreBrownianReal.hasLaw_normalizedBrownianIncrements73–93 prove the actual finite-grid normalized increments have independent STANDARD Gaussian coordinates. Complete proof read: independence is preserved under the coordinate scaling; positive grid increments give the exact variance ratio1, including no zero-time-interval division. This is ordinary defining finite-dimensional Wiener law API on the canonical path law, with no filtration assumption.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/BrownianMotion/NormalizedIncrements.lean",
+          "declarations": "normalizedBrownianIncrements:44; ProbabilityTheory.IsPreBrownianReal.hasLaw_normalizedBrownianIncrements:73",
+          "note": "Native actual finite-dimensional standardized independent-increment law API for the defining Wiener path law."
+        }
+      ],
+      "search_notes": "Enumerated native BrownianMotion/NormalizedIncrements, Filtered, NaturalFiltration, UsualFiltration, Girsanov and quadratic-variation siblings. Select actual canonical finite-dimensional increment law API; exclude stochastic integration, measure-change, path maxima and quadratic variation as separately significant endpoints. A nonmeasurable map is not used to manufacture the law; it is directly a probability measure on the given Borel path carrier."
+    },
+    {
+      "concept": "with-high-probability",
+      "concept_id": "ea846db3-ea1f-590f-b9b4-566ab8b0f7f6",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Literal exact predicate is Tendsto(fun n=>P_n(A_n))atTop(nhds1), with actual measurable/null-measurable events in their specified probability models; different n may have DIFFERENT probability spaces. Actual Filter.Tendsto415 is the genuine limit predicate. This imposes no common probability space and does NOT assert an almost-sure eventual intersection/union event. The ENNReal probability limit and its real version are the same bounded[0,1] probability convention.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Order/Filter/Defs.lean",
+          "declarations": "Tendsto:415",
+          "note": "Actual precise event-probability tends-to-one predicate for an asymptotic random model."
+        }
+      ],
+      "search_notes": "Enumerated native asymptotic-probability/concentration and convergence-in-measure siblings. Selected direct high-probability rate-to-probability-convergence API, with event null-measurability retained. Exclude Borel–Cantelli/as-almost-sure conclusions and individual model concentration estimates as different endpoints; no independence is assumed by the bare definition."
+    },
+    {
+      "concept": "with-high-probability",
+      "concept_id": "ea846db3-ea1f-590f-b9b4-566ab8b0f7f6",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Literal exact predicate is Tendsto(fun n=>P_n(A_n))atTop(nhds1), with actual measurable/null-measurable events in their specified probability models; different n may have DIFFERENT probability spaces. Actual Filter.Tendsto415 is the genuine limit predicate. This imposes no common probability space and does NOT assert an almost-sure eventual intersection/union event. The ENNReal probability limit and its real version are the same bounded[0,1] probability convention. Native tendstoInMeasure_of_tendsto_measure_dist_le_rate95–110 is direct ordinary WHP-rate API: on a common probability-space subcase, if good events{dist(f_n,g)<=rate_n} have probability→1 and rate_n→0, then f_n→g in probability. Its actual proof uses eventually NULL-MEASURABLE good events to turn their complements into probability1-minus-good; without that hypothesis outer measures could assign mass1 to both. Complete proof read, and no almost-sure/eventual-occurrence conclusion is claimed.  Exact pinned supplier bytes checked: conditional probability, Lebesgue interval volume, LineDeriv/Deriv, HausdorffDistance, ConvergenceInMeasure, Compacts, MeasurableSpace/Defs, TestFunction, Complex/LocallyUniformLimit/CauchyIntegral, CompactConvergence, Filter/Defs, LaxMilgram and real rpow are identical. Bochner integral, Stopping/HittingTime, Semicontinuity/Defs, C_c, ProbabilityMeasure, Measure/Map and Brownian/Basic have one preceding documentation line (e.g. integral158, stoppedValue804, hittingAfter66, weak-test367, map96, Brownian302 in D). Independence basic definitions110/117 are unchanged. MeasurableSpace.comap_process_pi is608 in D after removal of unrelated TypeTag instances; the selected proof matches. CompactOpen constructor51 is unchanged after three fewer doc lines; later product-homeomorphism additions at M are not used. L2.inner_def136 is identical; a later finite-index matrix-positivity signature differs.  Relevant actual declarations, hypotheses and completed source bodies inspected; bounded existing-source review without new proof development or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Function/ConvergenceInMeasure.lean",
+          "declarations": "tendstoInMeasure_of_tendsto_measure_dist_le_rate:95",
+          "note": "Native actual WHP-event/rate interpretation and conversion to convergence in probability, retaining null-measurability."
+        }
+      ],
+      "search_notes": "Enumerated native asymptotic-probability/concentration and convergence-in-measure siblings. Selected direct high-probability rate-to-probability-convergence API, with event null-measurability retained. Exclude Borel–Cantelli/as-almost-sure conclusions and individual model concentration estimates as different endpoints; no independence is assumed by the bare definition."
+    }
+  ]
+}

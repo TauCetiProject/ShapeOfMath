@@ -1,0 +1,135 @@
+{
+  "reviewer": "analysis_formalization (independent of category_galois author)",
+  "scope": [
+    "drinfeld-center/mathlib",
+    "drinfeld-center/tau-ceti",
+    "absolute-galois-group/mathlib",
+    "absolute-galois-group/tau-ceti"
+  ],
+  "revisions": {
+    "mathlib": "26573066084e6e2aa8526ea358bc43b66d96f970",
+    "tau-ceti": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+    "tau-ceti_mathlib_dependency": "2ddf59c8f14245864e6c0ed227a2dab76b9efea2"
+  },
+  "verification": "Exact frozen source definitions, representative complete proof bodies, hypotheses and file-selection boundaries inspected. Exact dependency declarations were also inspected with git show. No fresh Lean build or transitive axiom audit. No live data/library/document edits.",
+  "decisions": [
+    {
+      "concept": "drinfeld-center",
+      "concept_id": "a0d843ee-b6d1-5801-8721-9a977f907ed3",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "existing_review_id": 9,
+      "decision": "accept",
+      "status": "formalized",
+      "selected_files": [
+        "Mathlib/CategoryTheory/Monoidal/Center.lean"
+      ],
+      "selected_whole_file_loc": 411,
+      "reasons": [
+        "Mathlib/CategoryTheory/Monoidal/Center.lean declares only Category C and MonoidalCategory C at line 44, defines HalfBraiding at 53 and Center at 72, and the compatible Hom/category at 82–103.",
+        "The file constructs tensor/unit/associator/unitors and MonoidalCategory (Center C), then braiding and braidedCategoryCenter at 352–363. No ambient BraidedCategory C is needed: that assumption begins only at 368 for the separate ofBraided functor.",
+        "This implements every part of concept revision 2, including the explicit statement that C itself need not be braided. The selected single file is both defining code and ordinary structural API; full coverage does not need extra additive/rigid/pivotal/ribbon structures."
+      ],
+      "unchanged": true
+    },
+    {
+      "concept": "drinfeld-center",
+      "concept_id": "a0d843ee-b6d1-5801-8721-9a977f907ed3",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "existing_review_id": 10,
+      "decision": "accept",
+      "status": "formalized",
+      "selected_files": [
+        "TauCeti/CategoryTheory/Monoidal/Center/Basic.lean"
+      ],
+      "selected_whole_file_loc": 121,
+      "reasons": [
+        "Actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 has the same complete center definition and braided construction at Center.lean:53/72/362; the ambient braided assumption again starts only at 368.",
+        "Native Tau Center/Basic.lean:51 proves the unit component from monoidality/naturality; :72–97 proves inverse monoidality/naturality and contraction identities. These are genuine generic half-braiding identities under only MonoidalCategory C, not downstream applications.",
+        "Native :109/:116 gives simp-facing formulas for the actual braiding of Center C. Definition inheritance does not invalidate these owned core API contributions. Retain formalized and the user-confirmed 121 native whole-file LOC.",
+        "Rigid, OfHom, Pivotal, Ribbon, Preadditive, Abelian, Limits, Simple and Induction files introduce extra structures or distinct construction/results beyond this generic center record. OfHom is an alternate construction only with extra exact-pairing/rigidity hypotheses; not required for generic monoidal center coverage."
+      ],
+      "unchanged": true
+    },
+    {
+      "concept": "absolute-galois-group",
+      "concept_id": "7fe79105-2af8-5075-b9f0-30f338dc21d9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "existing_review_id": 11,
+      "decision": "change",
+      "status": "formalized",
+      "selected_files": [
+        "Mathlib/FieldTheory/AbsoluteGaloisGroup.lean",
+        "Mathlib/FieldTheory/Galois/Profinite.lean",
+        "Mathlib/FieldTheory/KrullTopology.lean"
+      ],
+      "selected_whole_file_loc": 717,
+      "change_kind": "evidence-only; status, file selection and LOC unchanged",
+      "reasons": [
+        "Accept full coverage by the exact generic construction Gal(SeparableClosure K/K), not just by informally identifying the differently named algebraic-closure model.",
+        "The absolute SeparableClosure abbreviation is in Mathlib/FieldTheory/IsSepClosed.lean:347, with separableClosure.isGalois at :321; the file named SeparableClosure.lean primarily defines the relative closure. These precise supplying declarations strengthen the saved evidence.",
+        "KrullTopology.lean constructs the actual topology on any Gal(L/K); Galois/Profinite.lean:321–340 supplies compact/profinite structure when instantiated at L=SeparableClosure K, whose IsGalois instance is available without a perfection hypothesis.",
+        "The named Field.absoluteGaloisGroup K in AbsoluteGaloisGroup.lean:43 uses AlgebraicClosure K, and Mathlib does not supply the general topological comparison in this selected snapshot. The actual checked comparison is Tau Ceti Basic.lean:150/:340. Do not claim the named algebraic-closure model is Galois over an imperfect field or infer Mathlib has its general compactness instance from IsGalois.",
+        "The three selected files are a defensible bounded selection for this object, topology and intrinsic topological-group API. IsSepClosed.lean supplies the separate prerequisite separable-closure construction; include its anchors in evidence without mechanically importing its entire file into this concept LOC."
+      ],
+      "replacement": {
+        "status": "formalized",
+        "evidence": "Inspected Mathlib at 26573066084e6e2aa8526ea358bc43b66d96f970. The exact catalogue construction Gal(SeparableClosure K/K) is available by instantiating the generic Galois group at the absolute SeparableClosure abbreviation in FieldTheory/IsSepClosed.lean:347; separableClosure.isGalois at :321 supplies its Galois structure without assuming K perfect. FieldTheory/KrullTopology.lean:105–151 constructs its actual Krull topology and topological-group structure. FieldTheory/Galois/Profinite.lean:321–340 specializes to this separable-closure extension and supplies the inverse-limit/compact/profinite structure. The separately named Field.absoluteGaloisGroup K in FieldTheory/AbsoluteGaloisGroup.lean:43 instead uses AlgebraicClosure K and has continuous field-embedding maps at :58–90. Its general topological comparison with Gal(SeparableClosure K/K), including imperfect fields, is proved in Tau Ceti AbsoluteGaloisGroup/Basic.lean:150/:340, not attributed to Mathlib here. Fixed-field or action statements in the algebraic closure must not be transferred as if the ambient extension were separable over an imperfect field. Selected core files and exclusions remain unchanged; prerequisite construction files are not automatically charged as native implementation files. Independent source/proof review was performed, with no fresh Lean build or transitive axiom audit; see data/formalization-update-2026-11-12/review.txt for this update decision.",
+        "files": [
+          {
+            "path": "Mathlib/FieldTheory/AbsoluteGaloisGroup.lean",
+            "declarations": "Field.absoluteGaloisGroup; Field.instTopologicalSpaceAbsoluteGaloisGroup; Field.absoluteGaloisGroup.mapOfAlgebra; Field.absoluteGaloisGroup.map",
+            "note": "Lines 41–45 define the named algebraic-closure model of the absolute Galois group and derive its Krull topology and topological-group structure; lines 58–90 construct continuous restriction maps for field embeddings. The separable-closure model in the database is an equivalent presentation, not literally this named definition; for an imperfect field the ambient fixed-field statements must not be transferred without translation."
+          },
+          {
+            "path": "Mathlib/FieldTheory/Galois/Profinite.lean",
+            "declarations": "InfiniteGalois.restrictNormalHom_continuous; InfiniteGalois.continuousMulEquivToLimit; InfiniteGalois.profiniteGalGrp",
+            "note": "Lines 151–168 prove continuity of restriction; lines 319–340 identify an algebraic Galois group with the inverse limit of finite Galois groups and provide its compact/profinite structure. This is included as the general topological Galois-group API, specialized to the separable closure; no arithmetic application is included."
+          },
+          {
+            "path": "Mathlib/FieldTheory/KrullTopology.lean",
+            "declarations": "galGroupBasis; krullTopology; krullTopology_mem_nhds_one_iff; IntermediateField.fixingSubgroup_isOpen; krullTopology_t2; stabilizer_isOpen_of_isIntegral",
+            "note": "Lines 105–151 construct the Krull topology on Gal(L/K) and its neighbourhood basis, including its topological-group structure; lines 173–239 provide open fixing subgroups, Hausdorff and totally-separated API. This is actual topology construction explicitly needed by the concept, not a downstream use. It applies in particular to L = SeparableClosure K."
+          }
+        ]
+      },
+      "unchanged": false
+    },
+    {
+      "concept": "absolute-galois-group",
+      "concept_id": "7fe79105-2af8-5075-b9f0-30f338dc21d9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "existing_review_id": 12,
+      "decision": "accept",
+      "status": "formalized",
+      "selected_files": [
+        "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Basic.lean",
+        "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Congr.lean",
+        "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Map.lean"
+      ],
+      "selected_whole_file_loc": 973,
+      "reasons": [
+        "Basic.lean:327 defines precisely Gal(SeparableClosure K/K). Its relative normal-extension restriction equivalence at :150 proves both forward continuity (Mathlib restrictNormalHom_continuous) and inverse continuity (native finite-fixing-subgroup argument :104–135). The absolute comparison at :340 specializes this proof to AlgebraicClosure K. There is no perfection hypothesis.",
+        "The source correctly distinguishes group/topology equivalence from ambient fixed-field assertions. Its :288–310 argument identifies the fixed field of the algebraic-closure action with the relative purely inseparable/perfect closure, whereas the separable-closure action has fixed base field. No incorrect transfer between these actions was found.",
+        "Map.lean supplies generic continuous contravariant maps for arbitrary field extensions with explicitly chosen separable-closure embeddings, intertwining, conjugation dependence and composition. Congr.lean supplies isomorphism/presentation invariance. These natural maps between instances fall within ordinary core object API.",
+        "Retain Basic/Map/Congr, 397+264+312=973 whole-file LOC. Congr imports Extension and calls its fixing-subgroup construction; that proof dependency does not force the entire supplying file into the core-object LOC selection.",
+        "Extension introduces the separate realization of G_L as a fixing subgroup in G_K under a chosen embedding. FiniteExtension adds open subgroups, degree/index formulas and normal-quotient endpoints. Subextension compares finite-level restriction with that fixing-subgroup realization. Quotient identifies absolute-Galois quotients with subextension Galois groups. These are substantive additional correspondence/quotient endpoints, not missing parts of the basic object definition or ordinary field-isomorphism transport.",
+        "Some selected mixed files themselves include additional Galois-correspondence material. Whole-file allocation intentionally retains those lines once a file independently qualifies for core implementation/API; this does not justify selecting every separate file proving a further endpoint. The bounded selection is sound and is not an exhaustive API completeness certification."
+      ],
+      "unchanged": true
+    }
+  ],
+  "prompt_review": {
+    "overall": "The update workflow is mathematically usable and preserves the pilot boundary. The new delegation separation is correct; the coordinator-only sentence formerly in formalization.md was flagged and root reports it has been corrected.",
+    "clarifications": [
+      "An exact generic construction/typeclass instantiation can establish full concept availability even when no new literal named abbreviation exists. Require its supplying declarations and hypothesis instantiations in evidence; do not demand the named algebraic-closure object be definitional equal to the catalogue separable-closure object.",
+      "Ordinary intrinsic structure (the object Krull topology, profiniteness and natural maps) is included here. New Galois-correspondence/open-subgroup/index/quotient endpoints are excluded. This is a declared bounded API boundary, not evidence that excluded results are unformalized or that the selected set lists every related theorem.",
+      "Whole-file mapping qualification and proof prerequisite closure are different: a selected file may use a substantial imported theorem without automatically allocating the entire prerequisite file to this concept. Conversely, an actual proof living in another file must be identified and included when it is the implementation of the target theorem itself.",
+      "Keep the explicit warning on imperfect fields and source ownership of comparison proofs; it addresses the most serious mathematical false-positive risk found in this pair."
+    ],
+    "required_math_policy_changes": []
+  }
+}

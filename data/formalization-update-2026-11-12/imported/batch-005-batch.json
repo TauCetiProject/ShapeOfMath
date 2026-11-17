@@ -1,0 +1,628 @@
+{
+  "note": "Whole-catalogue formalization update batch-005: independent source review by algebra_formalization of category_galois_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "function-composition",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Logic/Function/Defs.lean",
+          "declarations": "Function.comp_assoc (:31); Function.dcomp (:39); dcomp_eq_comp (:53)",
+          "note": "Native associativity and dependent-composition compatibility; the ordinary composition definition remains Lean-owned."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Both projects pin Lean v4.36.0-rc2 at b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; actual committed Init source read via git show. Lean Init/Prelude.lean:141 defines Function.comp f g as fun x => f (g x), and Init/Core.lean:68–84 proves application and identity equations. Native Mathlib Logic/Function/Defs.lean:31 proves comp_assoc by rfl and :39 defines dependent composition, with dcomp_eq_comp reducing ordinary composition. Thus the operation is dependency-defined and genuine elementary composition API is native. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Inspected the actual generic function constructor and its rfl proof, not composition of special linear/categorical maps. Exclude function injectivity/surjectivity endpoints as separate concepts.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "function-composition",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Both projects pin Lean v4.36.0-rc2 at b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; actual committed Init source read via git show. Exact dependency Logic/Function/Defs is byte-identical and supplies the checked native Mathlib associativity API; Lean supplies the actual lambda constructor. No native generic composition law selected. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Read TauCeti/Logic/Function/Basic.lean: its bijective_of_retract proves a property of retracting functions, rather than another definition/associativity law. Function/Fiber, Extend and Triangular target extra endpoints; category/function-specific composition applications are excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "intersection-of-sets",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Order/SetNotation.lean",
+          "declarations": "Set.sInter (:125); Set.sUnion (:132); Set.iUnion (:147); Set.iInter (:151); Set.mem_iUnion (:223); Set.mem_iInter (:228)",
+          "note": "Native arbitrary set-family unions/intersections, with actual existential/universal membership proofs; ambient type supplies the universe."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Order/SetNotation.lean:119–151 defines the set-family operations from explicit predicates: intersection requires membership in every family member, union membership in some member. Its mem_iInter (:228) and mem_iUnion (:223) prove the exact universal membership characterization. The ambient type fixes the specified universe, so an empty intersection is the full ambient set. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Read both InfSet/SupSet predicate constructors and full indexed-membership proofs. Data/Set/Lattice.lean is a deprecated import wrapper and is not counted; indexed helper lemmas are optional adjacent API rather than required implementation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "intersection-of-sets",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Set/Lattice.lean",
+          "declarations": "Set.iUnion_vecCons_pair (:39); TauCeti.setOf_apply_eq_biUnion_iInter (:47); exists_notMem_succ_of_notMem_iInter (:55)",
+          "note": "Native binary-family union normalization and generic comprehension as union of simultaneous fibers/intersections; direct normal-form API, not a mere use."
+        }
+      ],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency Order/SetNotation implementation differs only by whitespace and fully supplies the universal family operation. Native Data/Set/Lattice.lean proves setOf_apply_eq_biUnion_iInter (:47) by extensionality, existential/universal membership simplification and funext; it is a generic union/intersection normal form. Its binary-family union and decreasing-intersection successor lemma were also inspected. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Selected only ordinary family-operation normal forms. exists_map_eq_of_notMem constructs a stabilized sequence of maps and is a separate endpoint; the mixed file is nevertheless counted whole under the requested allocation model.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "least-upper-bound",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Order/Bounds/Defs.lean",
+          "declarations": "upperBounds (:37); IsLeast (:48); IsLUB (:54)",
+          "note": "Native least-upper-bound predicate and its two conditions."
+        },
+        {
+          "path": "Mathlib/Order/Bounds/Basic.lean",
+          "declarations": "isLUB_le_iff (:297); isLUB_iff_le_iff (:302); IsLUB.unique (:887)",
+          "note": "Ordinary least-upper-bound comparison/uniqueness API; relevant proof bodies inspected."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Order/Bounds/Defs.lean:37 defines upperBounds by forall a in s, a≤b, :48 IsLeast by membership and minimality, and :54 IsLUB as IsLeast (upperBounds s). These are exactly the two catalogue clauses without assuming existence. Bounds/Basic:297 proves the comparison characterization and :887 uniqueness by antisymmetry. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Distinguish a partial-order IsLUB predicate from a total sSup operator guaranteed only with stronger completeness assumptions. No claim that every set has a supremum.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "least-upper-bound",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Order/CompleteLattice/Basic.lean",
+          "declarations": "TauCeti.iSup_fin_succ (:39); biSup_Ici_eq_biSup_Icc; iInf_mem_range_succ_eq_iInf",
+          "note": "Native supremum index-normalization identities under explicit complete-lattice assumptions; imported IsLUB definition remains attributed to Mathlib."
+        }
+      ],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The full IsLUB predicate/comparison API is supplied by byte-identical dependency Bounds/Defs and Basic. Native Order/CompleteLattice/Basic.lean:39 proves iSup_fin_succ by equality of upper-bound conditions; it is the ordinary finite-index decomposition of a least upper bound when the required bounds exist. The stronger complete-lattice hypothesis restricts this API theorem, not the imported general definition. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Read the whole small file and the upper-bound-equivalence proof. Other displayed integer-index and bounded-interval supremum normal forms are adjacent API, not a definition of a general supremum in every partial order.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "natural-number",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Basic.lean",
+          "declarations": "Nat.instLinearOrder (:35); Nat.succ_injective (:55); Nat.div_right_comm (:59)",
+          "note": "Native canonical order and elementary successor/arithmetic API on Lean natural numbers."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Both projects pin Lean v4.36.0-rc2 at b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; actual committed Init source read via git show. Lean Init/Prelude.lean:1357 has the actual inductive Nat with zero and successor. Native Mathlib Data/Nat/Basic.lean:35 constructs the canonical LinearOrder ℕ from Nat.le axioms, proves successor injectivity and elementary division/power identities. These are ordinary foundational natural-number API; the inductive carrier itself is Lean-owned. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Inspected stock Lean Nat declaration and native typeclass fields/proofs. Prime/factorization/digits/combinatorics files are distinct endpoints and excluded from this bounded core selection.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "natural-number",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Nat/MulSucc.lean",
+          "declarations": "Nat.le_of_mul_succ_le_mul_add (:27)",
+          "note": "Native elementary natural multiplication/successor order API; the Nat inductive type is supplied by Lean."
+        }
+      ],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Both projects pin Lean v4.36.0-rc2 at b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; actual committed Init source read via git show. The checked exact dependency Data/Nat/Basic is byte-identical and Lean supplies zero/successor. Native Data/Nat/MulSucc.lean:27 proves m*(n+1)≤n*d+n implies m≤d using the natural-order successor bound, monotonicity of multiplication and nlinarith. This is a generic elementary arithmetic inequality on arbitrary naturals, with no number-theoretic extra structure. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Read the complete native file and actual contradiction/multiplication proof. Exclude primes, totients, radix windows and factorials, which are separately meaningful structures rather than generic Nat arithmetic.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "ordered-pair",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Prod/Basic.lean",
+          "declarations": "Prod.mk.eta (:38); Prod.mk_inj (:68); Prod.fst_comp_mk; Prod.snd_comp_mk; Prod.map_fst'",
+          "note": "Native product eta, componentwise equality and projection/map compatibility, extending Lean Prod."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Both projects pin Lean v4.36.0-rc2 at b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; actual committed Init source read via git show. Lean Init/Prelude.lean:610 defines Prod with constructor and distinguished fst/snd. Native Mathlib Data/Prod/Basic.lean:38 proves pair eta and :68 mk_inj, exactly pair equality iff equality of each component; the latter proof simplifies the inductive-product injectivity rule. Projection/map identities give ordinary core pair API. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Read actual Lean constructor and native equality/projection proofs. A set-theoretic Kuratowski coding is not required by this extensional ordered-pair paragraph.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "ordered-pair",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Both projects pin Lean v4.36.0-rc2 at b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; actual committed Init source read via git show. The actual dependency Data/Prod/Basic is byte-identical and fully gives the checked pair equality and projection API, with Lean Prod as carrier. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Searched native Data/Prod and pair/product candidates: Data/Set/Prod addresses Cartesian subsets, Data/Nat/Pairing codes pairs by naturals and categorical Products constructs a category; these are separate constructions, not core Prod equality/projections.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "partial-order",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Order/Defs/PartialOrder.lean",
+          "declarations": "Preorder; PartialOrder (:175); PartialOrder.le_antisymm; le_antisymm_iff",
+          "note": "Native reflexive/transitive/antisymmetric order structure and immediate rewriting API."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Order/Defs/PartialOrder.lean:175 defines PartialOrder extending Preorder (reflexivity/transitivity) with antisymmetry. The actual structure fields and elementary order/cancellation facts match the paragraph exactly; no comparability assumption is imposed. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Compared the inherited Preorder fields and PartialOrder field; strict order is an induced helper and adds no mathematical restriction. Lattice and linear-order constructions are additional structures, not this predicate.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "partial-order",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency Order/Defs/PartialOrder is byte-identical and contains the full checked structure. No native general partial-order axiom or immediate order-rewriting file is selected. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Read Order/Monotone/Basic: StrictMonoOn.update proves preservation of a monotone-function property after changing a value; Order/Hom and lattice files address maps/additional structures. These are distinct endpoints rather than a second partial-order definition/core relation law.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "preimage-of-set",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Set/Operations.lean",
+          "declarations": "Set.preimage (:130); Set.mem_preimage (:136); Set.preimage_comp; Set.preimage_inter; Set.preimage_compl",
+          "note": "Native inverse-image predicate and generic elementary membership/composition/Boolean compatibility API."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Data/Set/Operations.lean:130 defines preimage f s as {x | f x ∈ s} and :136 proves mem_preimage by Iff.rfl, exactly the paragraph. Its ordinary preimage composition and Boolean-operation identities provide the immediate API. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Read actual predicate constructor and membership proof; an inverse function is not required. Category-theoretic pullback or measurable/continuous preimages impose additional structure and are excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "preimage-of-set",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency Data/Set/Operations is byte-identical and fully gives the set-comprehension inverse-image definition and generic membership laws. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Inspected native Data/Set/Restrict.lean: ncard_preimage_restrictPreimage and finite_preimage_restrictPreimage_iff add cardinality/finiteness endpoints; Logic/Equiv/PartialEquiv.lean:85 needs a family of partial equivalence charts to reconstruct a preimage. These additional endpoints are excluded from the bare preimage core; native Fiber merely uses preimage_comp.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "sequence",
+      "library": "mathlib",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The paragraph is literally a function ℕ→A, represented by Lean dependent-function/Pi syntax specialized to the checked Nat inductive carrier in Init/Prelude.lean:1357. Both importing projects pin leanprover/lean4:v4.36.0-rc2, resolved and read via git show at Lean commit b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a. A sequence is formed by a lambda n => a_n; evaluation is ordinary function application. No separate sequence structure or alias is mathematically needed. Positive-indexing is the permitted alternative, not a missing requirement. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Inspected actual committed Lean Nat and function constructors/term representations; Mathlib/Data/Seq is a coinductive partial sequence and has different meaning, so it is excluded. Convergence, summation, stabilized-map construction and special sequence operators introduce further concepts; no native files are allocated simply because they use ℕ→A.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "sequence",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The paragraph is literally a function ℕ→A, represented by Lean dependent-function/Pi syntax specialized to the checked Nat inductive carrier in Init/Prelude.lean:1357. Both importing projects pin leanprover/lean4:v4.36.0-rc2, resolved and read via git show at Lean commit b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a. A sequence is formed by a lambda n => a_n; evaluation is ordinary function application. No separate sequence structure or alias is mathematically needed. Positive-indexing is the permitted alternative, not a missing requirement. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Inspected actual committed Lean Nat and function constructors/term representations; Mathlib/Data/Seq is a coinductive partial sequence and has different meaning, so it is excluded. Convergence, summation, stabilized-map construction and special sequence operators introduce further concepts; no native files are allocated simply because they use ℕ→A.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "set",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Set/Defs.lean",
+          "declarations": "Set (:47); Set.ext (:78); Set.Subset (:84); Set.union (:230); Set.inter (:237); Set.compl (:244); Set.diff (:249)",
+          "note": "Native predicate-backed extensional sets and elementary subset/Boolean constructors; each mapping names the relevant constructor."
+        },
+        {
+          "path": "Mathlib/Data/Set/Basic.lean",
+          "declarations": "Set.subset_def (:265); Set.ext_iff; Set.Subset.antisymm; Set.subset_refl; Set.Subset.trans",
+          "note": "Ordinary set extensionality and inclusion identity/transitivity/antisymmetry API."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Data/Set/Defs.lean:47 defines Set α as a predicate-backed collection with membership α→Prop; :78 proves extensionality using funext and propext. Thus distinct membership, not a multiset/list with repetitions, determines equality. This is the typed-set representation of the catalogue paragraph. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Read the actual structure, membership instance and extensionality proof. The ambient type is explicit; a universal set of all sets or a ZFC coding is not required. Separate finite/countable/measure structures are excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "set",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Set/Lattice.lean",
+          "declarations": "Set.iUnion_vecCons_pair (:39); TauCeti.setOf_apply_eq_biUnion_iInter (:47); exists_notMem_succ_of_notMem_iInter (:55)",
+          "note": "Native binary-family union normalization and generic comprehension as union of simultaneous fibers/intersections; direct normal-form API, not a mere use."
+        }
+      ],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The dependency Data/Set/Defs differs only by whitespace and supplies the extensional predicate collection. Native Data/Set/Lattice.lean:47 proves a completely generic set-comprehension normal form using extensionality, function extensionality and quantified membership, without topology/cardinality or other structure. This directly contributes comprehension API to the general set concept. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: The selected lemma concerns the actual Set.ofPred comprehension, not merely a set used in another theorem. It also contributes directly to union/intersection records, so the requested whole-file apportionment can share it. Finite/cardinality/set-topology applications are excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "set-complement",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Set/Defs.lean",
+          "declarations": "Set (:47); Set.ext (:78); Set.Subset (:84); Set.union (:230); Set.inter (:237); Set.compl (:244); Set.diff (:249)",
+          "note": "Native predicate-backed extensional sets and elementary subset/Boolean constructors; each mapping names the relevant constructor."
+        },
+        {
+          "path": "Mathlib/Data/Set/Operations.lean",
+          "declarations": "Set.mem_compl; Set.mem_sdiff (:119); Set.sdiff_eq",
+          "note": "Ordinary complement/difference membership and Boolean compatibility API."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Data/Set/Defs.lean:244 defines Set.compl s by nonmembership, while :249 defines relative difference by membership in the ambient set and nonmembership in s. Data/Set/Operations unfolds mem_compl and mem_sdiff. Thus complement relative to Ω is Ω\\A (or sᶜ in the subtype Ω), exactly the catalogue convention. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Distinguish type-universe complement from relative complement: both representations give the required Ω∖A, including explicit Ω sets. No complementation of vector subspaces or ideals is substituted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "set-complement",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency Defs differs only by whitespace and Operations is byte-identical, so both ambient-relative difference and predicate complement are completely supplied. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Inspected native Set/Function complement MapsTo consequence and Set/Card complement insertion/cardinality candidates; these are properties of restricted maps or new cardinal invariants rather than the bare complement Boolean identities. Equiv/Option extends complement matchings and is likewise excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "subset",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Set/Defs.lean",
+          "declarations": "Set (:47); Set.ext (:78); Set.Subset (:84); Set.union (:230); Set.inter (:237); Set.compl (:244); Set.diff (:249)",
+          "note": "Native predicate-backed extensional sets and elementary subset/Boolean constructors; each mapping names the relevant constructor."
+        },
+        {
+          "path": "Mathlib/Data/Set/Basic.lean",
+          "declarations": "Set.subset_def (:265); Set.ext_iff; Set.Subset.antisymm; Set.subset_refl; Set.Subset.trans",
+          "note": "Ordinary set extensionality and inclusion identity/transitivity/antisymmetry API."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Data/Set/Defs.lean:84 defines Set.Subset s t by every membership in s implying membership in t; Basic.lean:265 exposes precisely the forall-implication and supplies reflexivity, transitivity and antisymmetry. This is the paragraph without requiring proper containment. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Read actual constructor and immediate inclusion order API. Do not confuse strict subset with subset, or allocate every theorem involving a containment hypothesis.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "subset",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact predicate comes from dependency Data/Set/Defs (whitespace-only difference). Basic.lean differs in later empty/universal-set helper lemmas, but subset_def and the basic inclusion axioms inspected here are unchanged and complete. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Native finite-set enumeration assumes s⊆S and lattice/monotone arguments use inclusions, but they do not reimplement the bare implication predicate or generic transitivity/antisymmetry. They are excluded rather than charged from mere hypotheses.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "total-order",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Order/Defs/LinearOrder.lean",
+          "declarations": "LinearOrder (:60); LinearOrder.le_total; min_def; max_def",
+          "note": "Native total-order structure, comparability and canonical min/max/comparison helper API."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Order/Defs/LinearOrder.lean:60 extends the checked PartialOrder with le_total. It also carries decidability and min/max/comparison implementations; these are classically available from any total order and add no restriction on the mathematical relation in the classical catalogue. The actual fields/min-max if definitions were inspected. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Explicitly checked the classical-equivalence issue introduced by decidability fields. No well-ordering or completeness is assumed. Purely constructive total orders would need a different interface, which the paragraph does not require. Independent review excludes the separate PartialOrder.lean file: it defines only prerequisite superclass structure, whereas LinearOrder.lean directly defines the total order and its ordinary totality/comparison API.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "total-order",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency LinearOrder and PartialOrder files are byte-identical and supply the complete comparable partial-order package with the noted classical decidability equivalence. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Read native Equiv/Basic.swap_min_max: it normalizes transpositions rather than defines the order relation. Order/Monotone.update and Splice construct monotone functions with extra hypotheses. No generic total-order core relation file is selected.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "union-of-sets",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Order/SetNotation.lean",
+          "declarations": "Set.sInter (:125); Set.sUnion (:132); Set.iUnion (:147); Set.iInter (:151); Set.mem_iUnion (:223); Set.mem_iInter (:228)",
+          "note": "Native arbitrary set-family unions/intersections, with actual existential/universal membership proofs; ambient type supplies the universe."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Order/SetNotation.lean:119–151 defines the set-family operations from explicit predicates: intersection requires membership in every family member, union membership in some member. Its mem_iInter (:228) and mem_iUnion (:223) prove the exact existential membership characterization. The ambient type fixes the specified universe, so an empty intersection is the full ambient set. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Read both InfSet/SupSet predicate constructors and full indexed-membership proofs. Data/Set/Lattice.lean is a deprecated import wrapper and is not counted; indexed helper lemmas are optional adjacent API rather than required implementation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "union-of-sets",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Set/Lattice.lean",
+          "declarations": "Set.iUnion_vecCons_pair (:39); TauCeti.setOf_apply_eq_biUnion_iInter (:47); exists_notMem_succ_of_notMem_iInter (:55)",
+          "note": "Native binary-family union normalization and generic comprehension as union of simultaneous fibers/intersections; direct normal-form API, not a mere use."
+        }
+      ],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency Order/SetNotation implementation differs only by whitespace and fully supplies the existential family operation. Native Data/Set/Lattice.lean proves setOf_apply_eq_biUnion_iInter (:47) by extensionality, existential/universal membership simplification and funext; it is a generic union/intersection normal form. Its binary-family union and decreasing-intersection successor lemma were also inspected. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Selected only ordinary family-operation normal forms. exists_map_eq_of_notMem constructs a stabilized sequence of maps and is a separate endpoint; the mixed file is nevertheless counted whole under the requested allocation model.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "cesaro-lemma",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Asymptotics/SpecificAsymptotics.lean",
+          "declarations": "Asymptotics.isLittleO_sum_range_of_tendsto_zero (:168); Filter.Tendsto.cesaro_smul (:176); Filter.Tendsto.cesaro (:191)",
+          "note": "Native Cesaro convergence proof and the direct zero-limit partial-sum API used to derive it."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Analysis/Asymptotics/SpecificAsymptotics.lean:176 proves Filter.Tendsto.cesaro_smul by subtracting the limit, using little-o for partial sums, multiplying by 1/n and checking the identities eventually n≥1; :191 specializes to real multiplication. Its range n averages indices 0,...,n-1. Applying this full theorem to u(n)=a(n+1), whose limit follows by the shift tending to infinity, yields the displayed a₁+...+aₙ version exactly. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Read complete Cesaro proof, not just its theorem name. Normalization at n=0 is harmless since the limit is atTop. Exclude probabilistic mean ergodic/Cesaro convergence without input pointwise convergence, which is a different theorem.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "cesaro-lemma",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency SpecificAsymptotics file is byte-identical and supplies the checked full Cesaro theorem, including scalar specialization and index-shift equivalence. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Searched all native cesaro declarations. IntegerWalk/ReturnMean applies the imported theorem to shifted return probabilities. Exchangeability/L2/Cesaro develops exchangeable-process L² convergence and tail conditional expectations, not an independent proof/core API of this elementary convergent-sequence lemma.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "derivative",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+          "declarations": "HasDerivAtFilter (:116); HasDerivAt (:130); deriv (:153)",
+          "note": "Native scalar derivative predicate/function and ordinary existence/uniqueness interface."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/Deriv/Slope.lean",
+          "declarations": "hasDerivAtFilter_iff_tendsto_slope (:50); hasDerivAt_iff_tendsto_slope_zero (:82)",
+          "note": "Proves exact equivalence of the Frechet representation and classical difference-quotient limit, with the puncture explicit."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+          "declarations": "iteratedDeriv (:55); iteratedDeriv_succ (:306); iteratedDeriv_eq_iterate (:312)",
+          "note": "Native higher-derivative construction and proof it equals iterated scalar differentiation."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Deriv/Basic.lean:130 defines HasDerivAt and :153 deriv via the one-dimensional Frechet derivative. Deriv/Slope.lean:50–85 proves the complete equivalence with punctured difference-quotient convergence; :82 states t⁻¹ • (f(x+t)-f x)→f′, giving the exact real quotient. IteratedDeriv/Defs:55 defines higher derivatives and :306/:312 proves successor differentiation and equality with deriv iteration. Zero fallback outside differentiability is only a total-function convention, not a false existence claim. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Read slope-equivalence proof, inverse scalar cancellation away from zero and higher-derivative iteration proof. Derivative of distributions and generalized/weak derivatives have different meaning; product/chain/inverse theorems are optional endpoints outside this minimal construction selection.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "derivative",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Calculus/Deriv/Slope.lean",
+          "declarations": "HasDerivAtFilter.tendsto_slope (:56); HasDerivAt.tendsto_nsmul_sub_add_div (:71)",
+          "note": "Native generic difference-quotient/derivative-limit API, extending the dependency-owned definition; all hypotheses and first proof inspected."
+        }
+      ],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency Deriv Basic/Slope and IteratedDeriv/Defs are byte-identical and give the complete ordinary/higher derivative definition. Native Analysis/Calculus/Deriv/Slope.lean:56 proves HasDerivAtFilter.tendsto_slope under even more general topological-vector-space assumptions, with full little-o/inverse-smul proof; :71 gives the ordinary rescaled-increment sequence limit. Both specialize to real-valued derivatives without extra restrictions. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Read actual generic assumptions, not an unrelated weak derivative. Later one-sided positivity and curve separation are additional endpoints; mixed file counted whole because the first generic derivative slope API qualifies.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "factorial",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Factorial/Basic.lean",
+          "declarations": "Nat.factorial (:37); factorial_zero (:53); factorial_succ (:56); factorial_ne_zero; factorial_pos",
+          "note": "Native factorial definition and elementary arithmetic/positivity API."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Data/Nat/Factorial/Basic.lean:37 defines factorial by 0↦1 and succ n↦succ n*factorial n, with factorial_zero and factorial_succ proved by rfl. This recursion is precisely the finite product in the paragraph. The same file proves nonzero/positivity and elementary divisibility/recursion identities. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Checked the actual recursive constructor and base/successor proofs. Superfactorial, prime valuations, combinatorial identities and asymptotic growth have distinct meanings/endpoints and are excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "factorial",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Nat/Factorial/Basic.lean",
+          "declarations": "TauCeti.instNeZeroFactorial (:32); Nat.sq_eq_descFactorial_two_add (:40)",
+          "note": "Native ordinary factorial nonvanishing/typeclass API; full mixed file counted once. Definition and original factorial_ne_zero proof remain Mathlib-owned."
+        }
+      ],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency Factorial/Basic is byte-identical and supplies the complete recursion. Native Data/Nat/Factorial/Basic.lean:32 makes the existing factorial nonvanishing theorem into a generic NeZero n.factorial instance, directly contributing the ordinary nonzero interface. Its falling-factorial and elementary factorial comparisons were also inspected; they do not alter the imported definition. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: The selected instance is a genuine native generic API declaration rather than a plain import/use in an application. Superfactorial and Prime/NatCast endpoints are excluded from this bounded core selection.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "factorial-growth",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/Order/Floor.lean",
+          "declarations": "FloorSemiring.tendsto_mul_pow_div_factorial_sub_atTop (:41); tendsto_pow_div_factorial_atTop (:54)",
+          "note": "Native proof of fixed-base exponential divided by factorial tending to zero, plus immediate scaled/shifted variant."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Topology/Algebra/Order/Floor.lean:54 proves FloorSemiring.tendsto_pow_div_factorial_atTop for every c in an ordered field with floor/order topology. Specializing to ℝ and c=C gives the paragraph, even without C>0. Its full proof reduces to :41 shifted factorial growth and proves both order-neighborhood bounds from eventually_mul_pow_lt_factorial_sub using positive factorial casts. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Read both complete proofs and the actual hypotheses. factorial_div_pow_self_tendsto_zero has denominator n^n, a different endpoint; exponential-series summability is stronger background but not charged as an independent proof of this selected limit.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "factorial-growth",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency Topology/Algebra/Order/Floor is byte-identical and supplies the complete checked fixed-C factorial-growth limit. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Searched native factorial-atTop and pow_div_factorial declarations. ODE/Caratheodory applies this exact imported theorem; hypergeometric, incomplete-gamma, Sobolev and Dyson-series modules apply exponential-series summability in other constructions. No independent native proof or ordinary normalization API of the stated growth limit selected.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "finite-set",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Basic/Finite/Defs.lean",
+          "declarations": "Finite (:101); finite_iff_exists_equiv_fin (:104); Set.Finite (:185)",
+          "note": "Actual native finite type/set definition by equivalence to Fin n, with subtype and equivalence invariance API."
+        },
+        {
+          "path": "Mathlib/Data/Set/Card.lean",
+          "declarations": "Set.ncard (:645); Set.ncard_eq_toFinset_card (:664); Nat.card_coe_set_eq (:662)",
+          "note": "Native finite-set cardinality and proof it agrees with the enumeration cardinality; infinite-set fallback zero is explicitly outside the finite hypothesis."
+        }
+      ],
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Basic/Finite/Defs.lean:101 defines Finite α by an equivalence α≃Fin n; :104 exposes the exact existence equivalence and :185 defines Set.Finite using the subtype. Fin n indexes 0,...,n-1, canonically relabeled 1,...,n, including n=0. Data/Set/Card:645 defines ncard and :664 proves it equals the chosen finite enumeration length via toFinset.card, giving the stated cardinality. Source inspection only; no fresh Lean build or transitive axiom audit.\nSearch and boundary notes: Read actual constructors, cardinality equality proof and n=0 meaning. Data/Finite/Defs is an import wrapper, so excluded. Countable sets and finite-dimensional spaces are different concepts.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    },
+    {
+      "concept": "finite-set",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Set/Finite.lean",
+          "declarations": "Set.Finite.exists_finset_subtype_image_val_eq (:36); Set.exists_enumeration_finite_family (:45); TauCeti.exists_embedding_fin_comp_eq",
+          "note": "Native finite-set enumerations, cardinality-compatible subtype representation and finite-function image factorization; definition remains dependency-owned."
+        }
+      ],
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency Basic/Finite/Defs is identical; dependency Set/Card has later additional/missing helper lemmas, but the inspected ncard definition and finite enumeration equality remain unchanged. Native Data/Set/Finite.lean:36 proves a finite subset of S is represented by a finset of subtype S with exactly Nat.card s elements; :45 explicitly enumerates finite indexed families via Finite.exists_equiv_fin. These are direct enumeration/cardinality core API. Source inspection only; no fresh Lean build or transitive axiom audit. Independently rechecked at the same immutable commits; declaration-start anchors corrected where needed, mathematical status retained.\nSearch and boundary notes: Read the actual lift-to-subtype/finset construction, cardinality proof and finite-sigma-family equivalence argument. Prime-specific finite sets, counting applications and general infinite-set enumeration are outside this core selection.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-005.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Asymptotics/SpecificAsymptotics.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 272,
+      "sha256": "51fff0da2e28247469cab6f184dc8e941b008ffc37e243136c0c7b0f0f311d61",
+      "measured_at": "2026-11-12T23:37:06.543901+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 985,
+      "sha256": "ffa1eabfb2d831ad7544488a73ba317a63fb869cddd4519f6eac96393b17b22e",
+      "measured_at": "2026-11-12T23:37:06.546651+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Calculus/Deriv/Slope.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 303,
+      "sha256": "6eb8a54304caac1b8a37d8fa4206d868c4dc1aeb4722b37f281f2d74fbe3f81e",
+      "measured_at": "2026-11-12T23:37:06.549864+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 391,
+      "sha256": "95e6b06e0b5094f2404bef7f871317a22065cf3f4eea2775011be4fff7bdd491",
+      "measured_at": "2026-11-12T23:37:06.553441+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Basic/Finite/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 246,
+      "sha256": "152c2303bb2874ff093b660cb3d92f6eff38fd8110d80abc9d95990cce1381cd",
+      "measured_at": "2026-11-12T23:37:06.556647+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Nat/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 169,
+      "sha256": "3ee0baad265fea427696726bba29a30bc778d32ebc976fd615bc42e8f3c9a47f",
+      "measured_at": "2026-11-12T23:37:06.559217+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Nat/Factorial/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 573,
+      "sha256": "aef1b3e3680950f04b5b724febd542b84700bb56f29de6521981c586d7837780",
+      "measured_at": "2026-11-12T23:37:06.562162+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Prod/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 345,
+      "sha256": "4067d771a0b0140cf46092e7dde1eadfebcaefbc3124bd0d1af9a1b98684aedd",
+      "measured_at": "2026-11-12T23:37:06.564604+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Set/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1159,
+      "sha256": "5d61e1e40f1209ddcf671fe83893caf994ffc313e0085f1d3de47538964fb78d",
+      "measured_at": "2026-11-12T23:37:06.567101+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Set/Card.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1518,
+      "sha256": "eded4bde517bb5d1f504f5521df524236801cb8b2f9569da162dc2080ed62506",
+      "measured_at": "2026-11-12T23:37:06.569721+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Set/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 278,
+      "sha256": "8f267392c231cdf50e524be427e3382fe42aeb13691a6cc7433f2a25eed1db2e",
+      "measured_at": "2026-11-12T23:37:06.572258+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Order/Bounds/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1032,
+      "sha256": "16ebc3accef94cffd0d92ff14f86b2ea00ffb6fbd8b0bfe06c075ddab1c1f08e",
+      "measured_at": "2026-11-12T23:37:06.580674+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Order/Bounds/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 92,
+      "sha256": "3a165be3059614f93b54083f529e35e3c6462eea9a4bbd6bc83e01c60a34a01b",
+      "measured_at": "2026-11-12T23:37:06.584816+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Order/Defs/LinearOrder.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 282,
+      "sha256": "25744c3dd45882124c46baf95367729fa1cf4bc9f7e6bb43ec4d5c99bb5f96e6",
+      "measured_at": "2026-11-12T23:37:06.588212+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Order/Defs/PartialOrder.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 228,
+      "sha256": "c551e636b3f853c46203252d509fda76cca57072cfd5644e28e2496296cc5a48",
+      "measured_at": "2026-11-12T23:37:06.592467+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Order/SetNotation.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 248,
+      "sha256": "597a1920c5f3a0cda5411068407c7b212d499f87d0ebafe3fd993e34e21ff86d",
+      "measured_at": "2026-11-12T23:37:06.595716+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Algebra/Order/Floor.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 234,
+      "sha256": "971b6691a47deeee361923e5773208872318a950b17e290ff6b29981fe69000f",
+      "measured_at": "2026-11-12T23:37:06.599598+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Calculus/Deriv/Slope.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 124,
+      "sha256": "6b2a4b8e3fcc0de67b60c7f3b67c0902f2b25656534985984b97a895b324d348",
+      "measured_at": "2026-11-12T23:37:06.606183+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Data/Nat/Factorial/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 78,
+      "sha256": "315dde6ddf7513767243ccf771118d098fd554144499a57afc935cc7fd82ddfb",
+      "measured_at": "2026-11-12T23:37:06.610747+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Data/Nat/MulSucc.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 33,
+      "sha256": "4e75a17d82fb5dabbc012300c5c8aefa4e765e9c26902df52fd2991ccd395109",
+      "measured_at": "2026-11-12T23:37:06.614752+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Data/Set/Finite.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 73,
+      "sha256": "3e53f7a345494b2dd312144dc58c382f1a8ad14de1e2bb840597af5b2949613d",
+      "measured_at": "2026-11-12T23:37:06.618614+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Data/Set/Lattice.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 78,
+      "sha256": "ff46a2582f264497f37c372fe81ba5ec9a18e9a043676affb46f1f3a8d9052c3",
+      "measured_at": "2026-11-12T23:37:06.624161+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Order/CompleteLattice/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 92,
+      "sha256": "1a3698d591df38eedfb0c1bd5082be15176fb98aad881a889bc93506838cc373",
+      "measured_at": "2026-11-12T23:37:06.628901+00:00"
+    }
+  ]
+}

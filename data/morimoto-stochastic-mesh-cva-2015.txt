@@ -1,0 +1,560 @@
+Application of Stochastic Mesh Method to Efficient Approximation of CVA
+
+Coverage: Entire pinned arXiv:1510.04588v1,29 PDF pages, §§1–7 including Malliavin/mesh estimates, convergence proofs and numerical example, plus all12 references. Major displayed intermediate-estimate issues are explicitly retained for review; unsupported rate assertions are not installed as theorem concepts.
+Required concepts complete: True
+Introduced concepts complete: False
+All citations captured: True
+Completion refers to immediate concepts only; false means not certified.
+
+REQUIRED CONCEPT FRONTIER (14)
+
+- Burkholder–Davis–Gundy inequalities: For each p>0 there are0<c_p≤C_p<∞ such that every real continuous local martingale M starting at zero satisfies c_p E[M]_T^{p/2}≤E sup_{t≤T}|M_t|ᵖ≤C_p E[M]_T^{p/2}, with extended expectations and stopping times T.
+- Burkholder–Davis–Gundy inequality in L²: For a continuous local martingale M with M₀=0 and a stopping time T, E[M]_T≤E sup_{s≤T}|M_s|²≤4E[M]_T, with expectations allowed infinite and [M] its quadratic variation. The finite case follows by localization.
+- Cauchy–Schwarz inequality for complex inner-product spaces: In a complex inner-product space, |⟨u,v⟩|²≤⟨u,u⟩⟨v,v⟩ for all u,v.
+- First and second noise-direction estimates for UFG diffusion semigroups: For bounded smooth UFG fields, P_tf(x)=Ef(X_t^x) and every noise field V_j,j≥1, there is C_T such that ‖V_jP_tf‖∞≤C_T‖∇f‖∞ and ‖V_j²P_tf‖∞≤C_Tt^{-1/2}‖∇f‖∞ for0<t≤T and smooth f with bounded first derivative.
+- Gaussian upper bound for full-rank UFG transition densities: For bounded smooth UFG fields on ℝᴺ generated through weighted length ℓ, write h for their finite-bracket Gram determinant and E={h>0}. For0<t≤T and x,y∈E, the smooth transition density satisfies p_t(x,y)≤Ct^{−(N+1)ℓ/2}h(x)^{−2(N+1)ℓ}exp(−c|x−y|²/t). The same estimate holds with h(y) replacing h(x); C,c>0 may depend on the fields and T.
+- Hölder’s inequality: For measurable functions f_i and exponents p_i∈[1,∞] with ∑_i1/p_i=1, ∫|∏_if_i|dμ≤∏_i‖f_i‖_{p_i}.
+- Itô’s formula for Brownian diffusions: If X solves dX=b dt+σ dB and f is C¹ in time and C² in space, then df(t,X_t)=(∂_tf+b·∇f+½tr(σσᵀD²f))dt+∇f·σdB, with the usual localization hypotheses.
+- Malliavin covariance matrix: For a random vector F=(F¹,…,Fⁿ) with Malliavin differentiable components, its covariance matrix is γ_F^{ij}=⟨DFⁱ,DFʲ⟩ in the Cameron–Martin space.
+- Malliavin integration by parts along UFG bracket directions: For bounded smooth UFG Stratonovich fields, a generated bracket V_α of weighted length |α|, and random weight Φ with uniformly bounded D¹,ᵖ norms for every p>1, there are weights H_α(Φ;t,x) with uniformly bounded Lᵖ norms on0<t≤T such that E[Φ(V_αf)(X_t^x)]=t^{−|α|/2}E[H_α(Φ;t,x)f(X_t^x)] for bounded smooth f. Constants depend on the fields, bracket and weight norms.
+- Markov’s inequality for nonnegative random variables: If Y is a nonnegative integrable real random variable and t>0, then P(Y≥t)≤E[Y]/t.
+- Smooth stochastic flow for bounded smooth diffusion fields: For C_b∞ Stratonovich fields on ℝⁿ, the solution maps x↦X_t^x form a stochastic flow of C∞ diffeomorphisms, after choosing a suitable version. Their spatial derivatives and inverse Jacobians have all finite moments locally uniformly in time, uniformly in the starting point.
+- Stochastic mesh method for conditional expectations: Approximate a Markov transition expectation by weighted values at simulated future states. With transition density p(s,x;t,y) and L simulated paths, a common weight at Y_j=X_j(t) is p(s,x;t,Y_j)/(Lq(Y_j)), where q(y)=L⁻¹∑_ℓp(s,X_ℓ(s);t,y); this reuses one random mesh for many starting states.
+- Strong well-posedness of globally Lipschitz Brownian SDEs: If drift b and diffusion matrix σ are globally Lipschitz on ℝⁿ, then for each deterministic initial state and Brownian motion there is a pathwise unique adapted continuous strong solution of dX=b(X)dt+σ(X)dB, with finite second moments of its supremum on bounded time intervals.
+- Unilateral credit valuation adjustment: In a model where the valuing institution cannot default, CVA is the expected discounted loss on positive counterparty exposure at counterparty default: E[D(0,τ)L_τ(V_τ)⁺1_{τ<T}], under a specified pricing measure. Here V is the default-free portfolio value and L is the fractional loss at default.
+
+INHERITED PREREQUISITES (136)
+
+- Abelian group — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Absolutely continuous function on a real interval — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Almost-everywhere property on a measure space — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Almost-sure convergence of real random variables — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, smooth-stochastic-flow-diffeomorphisms, unilateral-credit-valuation-adjustment
+- Banach space — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Bijection between sets — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Bilinear map — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Binary operation on a set — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Binary relation on a set — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Borel σ-algebra of a topological space — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Borel σ-algebra on the real line — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Cameron–Martin space for Wiener measure — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Cartesian product of sets — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Cauchy sequence in a metric space — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Closed linear operator — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Commutative ring with identity — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Complement of a subset — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Complete measure — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Complete metric space — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Complex conjugation — via cauchy-schwarz-inner-product
+- Complex inner-product space — via cauchy-schwarz-inner-product
+- Complex number — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Composition of functions — via ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound
+- Conditional expectation given a σ-algebra — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Continuous local martingale — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, smooth-stochastic-flow-diffeomorphisms
+- Continuous map between topological spaces — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Continuous semimartingale — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, smooth-stochastic-flow-diffeomorphisms
+- Continuous-time martingale — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, smooth-stochastic-flow-diffeomorphisms, unilateral-credit-valuation-adjustment
+- Convergence in probability — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Convergence of a sequence in a metric space — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts, unilateral-credit-valuation-adjustment
+- Convergent real series — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Càdlàg path — via unilateral-credit-valuation-adjustment
+- Default intensity process — via unilateral-credit-valuation-adjustment
+- Derivative of a real function — via ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound
+- Determinant of a square matrix — via ufg-transition-density-gaussian-upper-bound
+- Diffeomorphism between open Euclidean sets — via smooth-stochastic-flow-diffeomorphisms
+- Discrete-time martingale — via unilateral-credit-valuation-adjustment
+- Disjoint sets — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Distribution of a real random variable — via stochastic-mesh-method
+- Equivalence class — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Equivalence relation — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Essential supremum of a measurable real function — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Euclidean space ℝᵈ — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Expectation of an integrable real random variable — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Extended nonnegative real numbers — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Factorial — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Field — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Filtration of σ-algebras — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Finite set — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- First-order Malliavin Sobolev space on Wiener space — via ufg-malliavin-integration-by-parts
+- Function between sets — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Function of bounded variation on an interval — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, smooth-stochastic-flow-diffeomorphisms
+- Group — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Hörmander smooth-density theorem for diffusions — via ufg-transition-density-gaussian-upper-bound
+- Identically distributed random variables — via stochastic-mesh-method
+- Independent family of random variables — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Independent σ-algebras — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Indicator function of a subset — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Integer — via ufg-transition-density-gaussian-upper-bound
+- Intersection of a family of sets — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Itô integral with respect to Brownian motion — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Itô stochastic differential equation driven by Brownian motion — via ito-formula, strong-sde-wellposedness-lipschitz, ufg-transition-density-gaussian-upper-bound
+- Least upper bound in a partially ordered set — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Lebesgue Lᵖ space — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Lebesgue integral — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Lebesgue measure on Euclidean space — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Lie bracket of smooth vector fields — via ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound
+- Limit of a function between metric spaces — via ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound
+- Limit of a real function at a point — via ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Limit of a real sequence — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Linear combination of vectors — via ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound
+- Linear map between vector spaces — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Linear span of a set of vectors — via ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound
+- Lipschitz map between metric spaces — via strong-sde-wellposedness-lipschitz
+- Local martingale — via unilateral-credit-valuation-adjustment
+- Malliavin derivative on Wiener space — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Markov transition semigroup — via stochastic-mesh-method, ufg-noise-direction-semigroup-estimates
+- Matrix over a ring — via malliavin-covariance-matrix, ufg-transition-density-gaussian-upper-bound
+- Measurable map between measurable spaces — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Measurable simple real function — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Measurable space — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Measure — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Metric induced by a norm — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Metric space — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Modulus of a complex number — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Monte Carlo estimator of an expectation — via stochastic-mesh-method
+- Natural logarithm — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Natural number — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Nonnegative real square root — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Normal distribution — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Normed vector space — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Open interval in the real line — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Ordered field — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Ordered pair — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Parabolic Hörmander bracket condition for a diffusion — via ufg-transition-density-gaussian-upper-bound
+- Partial derivative in Euclidean coordinates — via ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound
+- Partial order — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Predictable stochastic process — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Preimage of a subset under a function — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Preservation of full Hörmander rank for UFG diffusions — via ufg-transition-density-gaussian-upper-bound
+- Probability density relative to a measure — via stochastic-mesh-method, ufg-transition-density-gaussian-upper-bound
+- Probability space — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Quadratic covariation of continuous semimartingales — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, smooth-stochastic-flow-diffeomorphisms
+- Real Hilbert space — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Real exponential function — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Real inner-product space — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Real number — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Real power of a positive real number — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Real sequence — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Real sine function — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Real-valued random variable — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Risk-neutral valuation of contingent claims — via unilateral-credit-valuation-adjustment
+- Sequence in a set — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Set — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Sign of a permutation — via ufg-transition-density-gaussian-upper-bound
+- Skorokhod divergence on Wiener space — via ufg-malliavin-integration-by-parts
+- Smooth map between open Euclidean sets — via ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound
+- Smooth vector field on Euclidean space — via ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound
+- Standard Brownian motion — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Stochastic process — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Stopping time for a filtration — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, smooth-stochastic-flow-diffeomorphisms, unilateral-credit-valuation-adjustment
+- Stratonovich integral for continuous semimartingales — via smooth-stochastic-flow-diffeomorphisms
+- Subset — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Sum of a nonnegative series — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Symmetric group of a finite set — via ufg-transition-density-gaussian-upper-bound
+- Topological space — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Total order — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Uniform convergence of functions into a metric space — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- Uniformly finitely generated condition for diffusion vector fields — via ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound
+- Union of a family of sets — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Vector space — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, cauchy-schwarz-inner-product, holder-inequality, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- Vector subspace — via ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound
+- Wiener measure — via malliavin-covariance-matrix, ufg-malliavin-integration-by-parts
+- π — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, ito-formula, malliavin-covariance-matrix, smooth-stochastic-flow-diffeomorphisms, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- σ-algebra — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+- σ-algebra generated by a family of subsets — via burkholder-davis-gundy-inequality, burkholder-davis-gundy-l2, holder-inequality, ito-formula, malliavin-covariance-matrix, markov-inequality, smooth-stochastic-flow-diffeomorphisms, stochastic-mesh-method, strong-sde-wellposedness-lipschitz, ufg-malliavin-integration-by-parts, ufg-noise-direction-semigroup-estimates, ufg-transition-density-gaussian-upper-bound, unilateral-credit-valuation-adjustment
+
+INTRODUCED CONCEPTS (1)
+
+- Morimoto’s stochastic-mesh CVA estimators
+
+LOCATED CONCEPTS (40)
+
+1. Standard Brownian motion
+   A continuous process B_t starting at zero with independent increments and B_t−B_s distributed N(0,t−s) for 0≤s<t. A d-dimensional standard Brownian motion has d independent standard components.
+   Source: relies_on, §1 equations(3)–(6); §3 Lemmas7–9
+   Note: Bounded smooth vector fields give the model, with Markov conditional-expectation semigroups.
+
+2. Wiener measure
+   The probability law of standard Brownian motion on continuous paths starting at zero, equipped with the Borel σ-algebra for uniform convergence on compact time intervals.
+   Source: relies_on, §1 equations(3)–(6); §3 Lemmas7–9
+   Note: Bounded smooth vector fields give the model, with Markov conditional-expectation semigroups.
+
+3. Itô integral with respect to Brownian motion
+   For an adapted process H with E∫₀ᵀ|H_s|²ds<∞, ∫H_s dB_s is the L² limit of left-endpoint adapted step-process sums. Localization extends the definition to locally square-integrable integrands.
+   Source: relies_on, §1 equations(3)–(6); §3 Lemmas7–9
+   Note: Bounded smooth vector fields give the model, with Markov conditional-expectation semigroups.
+
+4. Itô stochastic differential equation driven by Brownian motion
+   An adapted continuous process X solves dX_t=b(X_t)dt+σ(X_t)dB_t if it satisfies X_t=X₀+∫₀ᵗb(X_s)ds+∫₀ᵗσ(X_s)dB_s almost surely.
+   Source: relies_on, §1 equations(3)–(6); §3 Lemmas7–9
+   Note: Bounded smooth vector fields give the model, with Markov conditional-expectation semigroups.
+
+5. Stratonovich integral for continuous semimartingales
+   For continuous semimartingales X,Y, ∫Y∘dX=∫YdX+½[Y,X], when the Itô integral exists. Equivalently it is obtained from symmetric stochastic Riemann sums.
+   Source: relies_on, §1 equations(3)–(6); §3 Lemmas7–9
+   Note: Bounded smooth vector fields give the model, with Markov conditional-expectation semigroups.
+
+6. Itô’s formula for Brownian diffusions
+   If X solves dX=b dt+σ dB and f is C¹ in time and C² in space, then df(t,X_t)=(∂_tf+b·∇f+½tr(σσᵀD²f))dt+∇f·σdB, with the usual localization hypotheses.
+   Source: relies_on, §1 equations(3)–(6); §3 Lemmas7–9
+   Note: Bounded smooth vector fields give the model, with Markov conditional-expectation semigroups.
+
+7. Quadratic covariation of continuous semimartingales
+   For continuous semimartingales X,Y, [X,Y]_t is the limit in probability of sums ∑(X_{t_{i+1}}−X_{t_i})(Y_{t_{i+1}}−Y_{t_i}) as the partition mesh tends to zero.
+   Source: relies_on, §1 equations(3)–(6); §3 Lemmas7–9
+   Note: Bounded smooth vector fields give the model, with Markov conditional-expectation semigroups.
+
+8. Smooth vector field on Euclidean space
+   A smooth map V:ℝⁿ→ℝⁿ, acting on smooth scalar functions by Vf=∑_iVⁱ∂_if.
+   Source: relies_on, §§2–3, Proposition4 and Lemma5
+   Note: UFG bracket generation, Malliavin integration by parts and transition-density estimates are inherited from Kusuoka[7], Kusuoka–Stroock[8], and Kusuoka–Morimoto preprint[9].
+
+9. Lie bracket of smooth vector fields
+   The vector field [V,W] characterized by [V,W]f=V(Wf)−W(Vf); in coordinates [V,W]ⁱ=∑_j(Vʲ∂_jWⁱ−Wʲ∂_jVⁱ).
+   Source: relies_on, §§2–3, Proposition4 and Lemma5
+   Note: UFG bracket generation, Malliavin integration by parts and transition-density estimates are inherited from Kusuoka[7], Kusuoka–Stroock[8], and Kusuoka–Morimoto preprint[9].
+
+10. Uniformly finitely generated condition for diffusion vector fields
+   For bounded smooth diffusion fields V₀,…,V_d, the C_b^∞ module generated by all iterated brackets except the drift field alone is generated by brackets of uniformly bounded weighted length (a drift letter has weight two, a noise letter weight one). Each longer bracket is a linear combination of these finitely many fields with bounded smooth coefficient functions.
+   Source: relies_on, §§2–3, Proposition4 and Lemma5
+   Note: UFG bracket generation, Malliavin integration by parts and transition-density estimates are inherited from Kusuoka[7], Kusuoka–Stroock[8], and Kusuoka–Morimoto preprint[9].
+
+11. Determinant of a square matrix
+   For an n×n matrix A over a commutative ring, det A=∑_{σ∈Sₙ}sgn(σ)∏_{i=1}ⁿA_{i,σ(i)}, with the 0×0 determinant equal to one.
+   Source: relies_on, §§2–3, Proposition4 and Lemma5
+   Note: UFG bracket generation, Malliavin integration by parts and transition-density estimates are inherited from Kusuoka[7], Kusuoka–Stroock[8], and Kusuoka–Morimoto preprint[9].
+
+12. Malliavin derivative on Wiener space
+   For a smooth cylindrical Wiener functional F=f(B(h₁),…,B(h_n)), DF=∑_i∂_if(B(h₁),…,B(h_n))h_i in the Cameron–Martin space; its closure defines the Malliavin derivative on the corresponding Sobolev domains.
+   Source: relies_on, §§2–3, Proposition4 and Lemma5
+   Note: UFG bracket generation, Malliavin integration by parts and transition-density estimates are inherited from Kusuoka[7], Kusuoka–Stroock[8], and Kusuoka–Morimoto preprint[9].
+
+13. Skorokhod divergence on Wiener space
+   The adjoint δ of the Malliavin derivative on L² Wiener space: u belongs to D(δ) when E⟨DF,u⟩=E[Fδ(u)] for all smooth cylindrical F, for some square-integrable δ(u). It extends the adapted Itô integral.
+   Source: relies_on, §§2–3, Proposition4 and Lemma5
+   Note: UFG bracket generation, Malliavin integration by parts and transition-density estimates are inherited from Kusuoka[7], Kusuoka–Stroock[8], and Kusuoka–Morimoto preprint[9].
+
+14. Malliavin covariance matrix
+   For a random vector F=(F¹,…,Fⁿ) with Malliavin differentiable components, its covariance matrix is γ_F^{ij}=⟨DFⁱ,DFʲ⟩ in the Cameron–Martin space.
+   Source: relies_on, §§2–3, Proposition4 and Lemma5
+   Note: UFG bracket generation, Malliavin integration by parts and transition-density estimates are inherited from Kusuoka[7], Kusuoka–Stroock[8], and Kusuoka–Morimoto preprint[9].
+
+15. Hölder’s inequality
+   For measurable functions f_i and exponents p_i∈[1,∞] with ∑_i1/p_i=1, ∫|∏_if_i|dμ≤∏_i‖f_i‖_{p_i}.
+   Source: relies_on, §§3,5–6
+   Note: Repeated Hölder/Cauchy–Schwarz bounds, conditional mesh moments and sign-error decomposition. The paper also invokes Burkholder and smooth-density/derivative estimates, which require separate precise theorem records before coverage can be certified.
+
+16. Cauchy–Schwarz inequality for complex inner-product spaces
+   In a complex inner-product space, |⟨u,v⟩|²≤⟨u,u⟩⟨v,v⟩ for all u,v.
+   Source: relies_on, §§3,5–6
+   Note: Repeated Hölder/Cauchy–Schwarz bounds, conditional mesh moments and sign-error decomposition. The paper also invokes Burkholder and smooth-density/derivative estimates, which require separate precise theorem records before coverage can be certified.
+
+17. Markov’s inequality for nonnegative random variables
+   If Y is a nonnegative integrable real random variable and t>0, then P(Y≥t)≤E[Y]/t.
+   Source: relies_on, §§3,5–6
+   Note: Repeated Hölder/Cauchy–Schwarz bounds, conditional mesh moments and sign-error decomposition. The paper also invokes Burkholder and smooth-density/derivative estimates, which require separate precise theorem records before coverage can be certified.
+
+18. Conditional expectation given a σ-algebra
+   For integrable X and a sub-σ-algebra G, E[X|G] is a G-measurable integrable random variable satisfying ∫_AE[X|G]dP=∫_AXdP for every A∈G, defined up to almost-sure equality.
+   Source: relies_on, §§3,5–6
+   Note: Repeated Hölder/Cauchy–Schwarz bounds, conditional mesh moments and sign-error decomposition. The paper also invokes Burkholder and smooth-density/derivative estimates, which require separate precise theorem records before coverage can be certified.
+
+19. Lipschitz map between metric spaces
+   A map f:(X,d)→(Y,e) is Lipschitz if e(f(x),f(y))≤L d(x,y) for one finite constant L and all x,y∈X.
+   Source: relies_on, §§3,5–6
+   Note: Repeated Hölder/Cauchy–Schwarz bounds, conditional mesh moments and sign-error decomposition. The paper also invokes Burkholder and smooth-density/derivative estimates, which require separate precise theorem records before coverage can be certified.
+
+20. Lebesgue Lᵖ space
+   For a measure space and 1≤p<∞, Lᵖ consists of measurable scalar functions modulo equality almost everywhere with ∫|f|ᵖ<∞, normed by (∫|f|ᵖ)¹ᐟᵖ. For p=∞ use the essential-supremum norm.
+   Source: relies_on, §§3,5–6
+   Note: Repeated Hölder/Cauchy–Schwarz bounds, conditional mesh moments and sign-error decomposition. The paper also invokes Burkholder and smooth-density/derivative estimates, which require separate precise theorem records before coverage can be certified.
+
+21. Stochastic mesh method for conditional expectations
+   Approximate a Markov transition expectation by weighted values at simulated future states. With transition density p(s,x;t,y) and L simulated paths, a common weight at Y_j=X_j(t) is p(s,x;t,Y_j)/(Lq(Y_j)), where q(y)=L⁻¹∑_ℓp(s,X_ℓ(s);t,y); this reuses one random mesh for many starting states.
+   Source: explains, §1 and§7
+   Note: CVA predecessor credit Duffie–Huang[3]; standard stochastic meshes credited Broadie–Glasserman[2] and refinements[1,9,11].
+
+22. Monte Carlo estimator of an expectation
+   Estimate EF by the empirical mean L⁻¹∑_{ℓ=1}ᴸF(X_ℓ) of independent identically distributed samples. Variants may use dependent samples with a separately justified sampling law.
+   Source: explains, §1 and§7
+   Note: CVA predecessor credit Duffie–Huang[3]; standard stochastic meshes credited Broadie–Glasserman[2] and refinements[1,9,11].
+
+23. Risk-neutral valuation of contingent claims
+   Under a specified probability measure making discounted traded asset prices martingales, the arbitrage-free price of a replicable claim is the conditional expectation of its discounted payoff, subject to the market model and integrability hypotheses.
+   Source: explains, §1 and§7
+   Note: CVA predecessor credit Duffie–Huang[3]; standard stochastic meshes credited Broadie–Glasserman[2] and refinements[1,9,11].
+
+24. Default intensity process
+   For a default time τ, a nonnegative predictable process λ_t such that 1_{τ≤t}−∫₀^{t∧τ}λ_sds is a local martingale in the specified information filtration. Cox-model conditional survival is exp(−∫₀ᵗλ_sds).
+   Source: explains, §1 and§7
+   Note: CVA predecessor credit Duffie–Huang[3]; standard stochastic meshes credited Broadie–Glasserman[2] and refinements[1,9,11].
+
+25. Unilateral credit valuation adjustment
+   In a model where the valuing institution cannot default, CVA is the expected discounted loss on positive counterparty exposure at counterparty default: E[D(0,τ)L_τ(V_τ)⁺1_{τ<T}], under a specified pricing measure. Here V is the default-free portfolio value and L is the fractional loss at default.
+   Source: explains, §1 and§7
+   Note: CVA predecessor credit Duffie–Huang[3]; standard stochastic meshes credited Broadie–Glasserman[2] and refinements[1,9,11].
+
+26. Morimoto’s stochastic-mesh CVA estimators
+   For a portfolio whose payoffs each depend only on a shared macro factor and one local factor, approximate each future conditional payoff with a low-dimensional stochastic mesh and time-discretize expected positive aggregate exposure. One estimator uses the approximate exposure itself; another uses the mesh only to classify its sign and averages realized discounted payoffs from independent paths on the estimated positive-exposure region.
+   Source: introduces, §1 equations(8)–(9), implementation pp.6–7
+   Note: Construction only. Rates in Theorems1–2,18,20 depend on intermediate estimates with identified problems and are withheld from the theorem catalog pending correction.
+   Origin evidence: Abstract and Introduction explicitly introduce two CVA adaptations of the existing mesh method, using block dependence and a second sign-classification estimator. Prior mesh methods[1,2,9,11] are credited rather than originated here.
+
+27. Stochastic mesh method for conditional expectations
+   Approximate a Markov transition expectation by weighted values at simulated future states. With transition density p(s,x;t,y) and L simulated paths, a common weight at Y_j=X_j(t) is p(s,x;t,Y_j)/(Lq(Y_j)), where q(y)=L⁻¹∑_ℓp(s,X_ℓ(s);t,y); this reuses one random mesh for many starting states.
+   Source: relies_on, §1 actual pricing target and estimation formulas
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+28. Monte Carlo estimator of an expectation
+   Estimate EF by the empirical mean L⁻¹∑_{ℓ=1}ᴸF(X_ℓ) of independent identically distributed samples. Variants may use dependent samples with a separately justified sampling law.
+   Source: relies_on, §1 actual pricing target and estimation formulas
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+29. Risk-neutral valuation of contingent claims
+   Under a specified probability measure making discounted traded asset prices martingales, the arbitrage-free price of a replicable claim is the conditional expectation of its discounted payoff, subject to the market model and integrability hypotheses.
+   Source: relies_on, §1 actual pricing target and estimation formulas
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+30. Default intensity process
+   For a default time τ, a nonnegative predictable process λ_t such that 1_{τ≤t}−∫₀^{t∧τ}λ_sds is a local martingale in the specified information filtration. Cox-model conditional survival is exp(−∫₀ᵗλ_sds).
+   Source: relies_on, §1 actual pricing target and estimation formulas
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+31. Unilateral credit valuation adjustment
+   In a model where the valuing institution cannot default, CVA is the expected discounted loss on positive counterparty exposure at counterparty default: E[D(0,τ)L_τ(V_τ)⁺1_{τ<T}], under a specified pricing measure. Here V is the default-free portfolio value and L is the fractional loss at default.
+   Source: relies_on, §1 actual pricing target and estimation formulas
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+32. Predictable stochastic process
+   A process measurable for the σ-algebra on time×sample space generated by adapted left-continuous processes. This formalizes choosing an integrand from information available just before the integration time.
+   Source: relies_on, §1 default hazard and §3 stochastic-integral arguments
+   Note: Required source-specific input identified during union review, including uncited background.
+
+33. Local martingale
+   An adapted càdlàg process M for which stopping times T_n↑∞ almost surely exist such that each stopped process M_{t∧T_n} is a martingale.
+   Source: relies_on, §1 default hazard and §3 stochastic-integral arguments
+   Note: Required source-specific input identified during union review, including uncited background.
+
+34. Stochastic process
+   A family (X_t) indexed by a specified time set, with each X_t a measurable map from a probability space into a specified measurable state space. Adaptation, joint measurability and path regularity are additional conditions when required.
+   Source: relies_on, §1 default hazard and §3 stochastic-integral arguments
+   Note: Required source-specific input identified during union review, including uncited background.
+
+35. First-order Malliavin Sobolev space on Wiener space
+   For1<p<∞, D¹,ᵖ is the completion of smooth cylindrical Wiener functionals in the norm(E|F|ᵖ+E‖DF‖_Hᵖ)¹ᐟᵖ, using the closed Malliavin derivative D and Cameron–Martin space H.
+   Source: relies_on, §1 construction/density assumptions; §3Lemma5 and gradient bounds; §5Propositions12–15 imported from[7–9]
+   Note: Actual source-specific input recorded during full statement-union review.
+
+36. Parabolic Hörmander bracket condition for a diffusion
+   For smooth Stratonovich fields V₀,V₁,…,V_d, the noise fields V_i,i≥1, together with their iterated Lie brackets with V₀,…,V_d, span the spatial tangent space at every point. The drift field alone is not included as a generating direction.
+   Source: relies_on, §1 construction/density assumptions; §3Lemma5 and gradient bounds; §5Propositions12–15 imported from[7–9]
+   Note: Actual source-specific input recorded during full statement-union review.
+
+37. Preservation of full Hörmander rank for UFG diffusions
+   For bounded smooth UFG fields with finite bracket-generation level ℓ, let h(x) be the determinant of the Gram matrix formed from brackets of weighted length≤ℓ, excluding the drift alone. The solution started in E={h>0} remains in E at every fixed time almost surely. For p>1 and0≤t≤T, E[h(X_t^x)^{-p}]≤C_{p,T}h(x)^{-p}.
+   Source: relies_on, §1 construction/density assumptions; §3Lemma5 and gradient bounds; §5Propositions12–15 imported from[7–9]
+   Note: Actual source-specific input recorded during full statement-union review.
+
+38. Hörmander smooth-density theorem for diffusions
+   For bounded smooth Stratonovich diffusion fields satisfying the parabolic Hörmander bracket condition, the transition law at positive time has a smooth density with respect to Lebesgue measure. A full-rank invariant open region may be used in place of the whole Euclidean space.
+   Source: relies_on, §1 construction/density assumptions; §3Lemma5 and gradient bounds; §5Propositions12–15 imported from[7–9]
+   Note: Actual source-specific input recorded during full statement-union review.
+
+39. Gaussian upper bound for full-rank UFG transition densities
+   For bounded smooth UFG fields on ℝᴺ generated through weighted length ℓ, write h for their finite-bracket Gram determinant and E={h>0}. For0<t≤T and x,y∈E, the smooth transition density satisfies p_t(x,y)≤Ct^{−(N+1)ℓ/2}h(x)^{−2(N+1)ℓ}exp(−c|x−y|²/t). The same estimate holds with h(y) replacing h(x); C,c>0 may depend on the fields and T.
+   Source: relies_on, §1 construction/density assumptions; §3Lemma5 and gradient bounds; §5Propositions12–15 imported from[7–9]
+   Note: Actual source-specific input recorded during full statement-union review.
+
+40. Malliavin integration by parts along UFG bracket directions
+   For bounded smooth UFG Stratonovich fields, a generated bracket V_α of weighted length |α|, and random weight Φ with uniformly bounded D¹,ᵖ norms for every p>1, there are weights H_α(Φ;t,x) with uniformly bounded Lᵖ norms on0<t≤T such that E[Φ(V_αf)(X_t^x)]=t^{−|α|/2}E[H_α(Φ;t,x)f(X_t^x)] for bounded smooth f. Constants depend on the fields, bracket and weight norms.
+   Source: relies_on, §1 construction/density assumptions; §3Lemma5 and gradient bounds; §5Propositions12–15 imported from[7–9]
+   Note: Actual source-specific input recorded during full statement-union review.
+
+41. First and second noise-direction estimates for UFG diffusion semigroups
+   For bounded smooth UFG fields, P_tf(x)=Ef(X_t^x) and every noise field V_j,j≥1, there is C_T such that ‖V_jP_tf‖∞≤C_T‖∇f‖∞ and ‖V_j²P_tf‖∞≤C_Tt^{-1/2}‖∇f‖∞ for0<t≤T and smooth f with bounded first derivative.
+   Source: relies_on, §1 construction/density assumptions; §3Lemma5 and gradient bounds; §5Propositions12–15 imported from[7–9]
+   Note: Actual source-specific input recorded during full statement-union review.
+
+42. Burkholder–Davis–Gundy inequality in L²
+   For a continuous local martingale M with M₀=0 and a stopping time T, E[M]_T≤E sup_{s≤T}|M_s|²≤4E[M]_T, with expectations allowed infinite and [M] its quadratic variation. The finite case follows by localization.
+   Source: relies_on, §1 construction/density assumptions; §3Lemma5 and gradient bounds; §5Propositions12–15 imported from[7–9]
+   Note: Actual source-specific input recorded during full statement-union review.
+
+43. Strong well-posedness of globally Lipschitz Brownian SDEs
+   If drift b and diffusion matrix σ are globally Lipschitz on ℝⁿ, then for each deterministic initial state and Brownian motion there is a pathwise unique adapted continuous strong solution of dX=b(X)dt+σ(X)dB, with finite second moments of its supremum on bounded time intervals.
+   Source: relies_on, §1 construction/density assumptions; §3Lemma5 and gradient bounds; §5Propositions12–15 imported from[7–9]
+   Note: Actual source-specific input recorded during full statement-union review.
+
+44. Smooth stochastic flow for bounded smooth diffusion fields
+   For C_b∞ Stratonovich fields on ℝⁿ, the solution maps x↦X_t^x form a stochastic flow of C∞ diffeomorphisms, after choosing a suitable version. Their spatial derivatives and inverse Jacobians have all finite moments locally uniformly in time, uniformly in the starting point.
+   Source: relies_on, §1 construction/density assumptions; §3Lemma5 and gradient bounds; §5Propositions12–15 imported from[7–9]
+   Note: Actual source-specific input recorded during full statement-union review.
+
+45. Burkholder–Davis–Gundy inequalities
+   For each p>0 there are0<c_p≤C_p<∞ such that every real continuous local martingale M starting at zero satisfies c_p E[M]_T^{p/2}≤E sup_{t≤T}|M_t|ᵖ≤C_p E[M]_T^{p/2}, with extended expectations and stopping times T.
+   Source: relies_on, §§3,5 imported Burkholder estimates use generalLᵖ moment bounds, not only the previously capturedL² specialization
+   Note: Actual source-specific input recorded during full statement-union review.
+
+ADDITIONAL PREREQUISITES (111)
+
+- Abelian group [definition]: A group whose operation is commutative.
+- Absolutely continuous function on a real interval [definition]: A real function f on [a,b] is absolutely continuous if for every ε>0 there is δ>0 such that any finite disjoint family of intervals (a_i,b_i) with ∑(b_i−a_i)<δ has ∑|f(b_i)−f(a_i)|<ε.
+- Almost-everywhere property on a measure space [definition]: A property holds almost everywhere if the set where it fails is contained in a measurable set of measure zero.
+- Almost-sure convergence of real random variables [definition]: Xₙ→X almost surely means P({ω:limₙXₙ(ω)=X(ω)})=1.
+- Banach space [definition]: A real or complex normed vector space complete for the metric induced by its norm.
+- Bijection between sets [definition]: A function for which each element of the codomain is the image of exactly one element of the domain.
+- Bilinear map [definition]: A map of two vector-space variables that is linear in each variable separately.
+- Binary operation on a set [definition]: A function S×S→S.
+- Binary relation on a set [definition]: A subset R⊆S×S; writing xRy means (x,y)∈R.
+- Borel σ-algebra of a topological space [definition]: The σ-algebra generated by the open subsets of the space.
+- Borel σ-algebra on the real line [definition]: The σ-algebra on ℝ generated by the open intervals.
+- Cameron–Martin space for Wiener measure [definition]: The Hilbert space of absolutely continuous paths h:[0,T]→ℝᵈ with h(0)=0 and square-integrable derivative, with inner product ∫₀ᵀh′(s)·k′(s)ds.
+- Cartesian product of sets [definition]: A×B is the set of ordered pairs (a,b) with a∈A and b∈B.
+- Cauchy sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) is Cauchy if for every ε>0 there is N such that d(xₙ,xₘ)<ε whenever n,m≥N.
+- Closed linear operator [definition]: A linear map A:D(A)⊆X→Y between Banach spaces is closed if x_n→x and Ax_n→y with x_n∈D(A) imply x∈D(A) and Ax=y.
+- Commutative ring with identity [definition]: An abelian group under addition, together with an associative commutative multiplication with identity, distributing over addition. The zero ring is allowed.
+- Complement of a subset [definition]: For A⊆Ω, its complement Ω∖A consists of the elements of Ω that do not belong to A.
+- Complete measure [definition]: A measure is complete if every subset of a measurable null set is measurable and has measure zero.
+- Complete metric space [definition]: A metric space is complete if every Cauchy sequence in it converges to a point of that same space.
+- Complex conjugation [definition]: The complex conjugate of z=a+bi is z̄=a−bi.
+- Complex inner-product space [definition]: A complex vector space with a positive definite Hermitian form ⟨x,y⟩, linear in x and conjugate-linear in y. Its induced norm is ∥x∥=√⟨x,x⟩.
+- Complex number [definition]: A complex number is a pair of real numbers, written a+bi. Addition is componentwise and multiplication is (a+bi)(c+di)=(ac−bd)+(ad+bc)i, so i²=−1.
+- Composition of functions [definition]: For f:A→B and g:B→C, the composite g∘f:A→C sends x to g(f(x)).
+- Continuous local martingale [definition]: A continuous adapted process M_t for which stopping times T_n↑∞ almost surely exist such that M_{t∧T_n} is a martingale for every n.
+- Continuous map between topological spaces [definition]: A map is continuous if the preimage of every open subset of its target is open in its domain.
+- Continuous semimartingale [definition]: A continuous adapted process expressible as M+A where M is a continuous local martingale and A is an adapted continuous process of finite variation on every bounded time interval.
+- Continuous-time martingale [definition]: An integrable process M_t adapted to a filtration F_t, t≥0, with E[M_t|F_s]=M_s almost surely whenever s≤t. Right-continuity of paths is an additional regularity condition when needed.
+- Convergence in probability [definition]: Random variables X_n converge in probability to X if P(|X_n−X|>ε)→0 for every ε>0; metric-valued variables use their metric in place of absolute difference.
+- Convergence of a sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) converges to x∈X if for every ε>0 there is N such that d(xₙ,x)<ε whenever n≥N.
+- Convergent real series [definition]: The series ∑ₙ≥1aₙ converges to S if its sequence of partial sums converges to S.
+- Càdlàg path [definition]: A path from a real time interval into a metric space that is right-continuous and has a left limit at every positive time.
+- Derivative of a real function [definition]: The derivative f′(x) is the finite limit of (f(x+h)−f(x))/h as h→0, when it exists. Higher derivatives are defined by iteration.
+- Diffeomorphism between open Euclidean sets [definition]: A bijection between open subsets of Euclidean spaces that is smooth and has a smooth inverse.
+- Discrete-time martingale [definition]: An integrable process (M_n) adapted to an increasing sequence of σ-algebras (F_n) such that E[M_{n+1}|F_n]=M_n almost surely.
+- Disjoint sets [definition]: Two sets are disjoint when they have no common element; a family is pairwise disjoint when every two distinct members are disjoint.
+- Distribution of a real random variable [definition]: The distribution μₓ of X is defined by μₓ(B)=P(X∈B) for Borel B⊆ℝ.
+- Equivalence class [definition]: For an equivalence relation ~ on X, [x]={y∈X:y~x}; the quotient set X/~ consists of these classes.
+- Equivalence relation [definition]: A reflexive, symmetric and transitive binary relation.
+- Essential supremum of a measurable real function [definition]: The infimum of real a for which f≤a almost everywhere, allowing infinite values when no finite bound exists.
+- Euclidean space ℝᵈ [definition]: For d≥1, ℝᵈ consists of d-tuples of real numbers with distance dist(x,y)=(∑ᵢ(xᵢ−yᵢ)²)¹ᐟ².
+- Expectation of an integrable real random variable [definition]: If E abs(X)=∫abs(X)dP<∞, the expectation of X is EX=∫X dP.
+- Extended nonnegative real numbers [definition]: The nonnegative real numbers together with a greatest element ∞. Sums involving ∞ equal ∞, and 0·∞ is taken to be 0 when integrating simple functions.
+- Factorial [definition]: For n≥1, n!=1·2···n, and 0!=1.
+- Field [definition]: A commutative ring in which 1≠0 and every nonzero element is invertible.
+- Filtration of σ-algebras [definition]: An increasing family (F_t) of sub-σ-algebras on a fixed probability space, indexed by ordered time: F_s⊆F_t for s≤t.
+- Finite set [definition]: A set X is finite if it is bijective with {1,…,n} for some natural number n≥0; its cardinality is n.
+- Function between sets [definition]: An assignment taking each element of a specified domain set to exactly one element of a specified codomain set.
+- Function of bounded variation on an interval [definition]: A real function f has bounded variation on [a,b] if sup∑_i|f(t_i)−f(t_{i−1})| over finite ordered partitions is finite. Vector-valued paths use the corresponding norm.
+- Group [definition]: A set with an associative binary operation, an identity element, and a two-sided inverse for each element.
+- Identically distributed random variables [definition]: A family is identically distributed when all its random variables have the same distribution.
+- Independent family of random variables [definition]: For distinct i₁,…,iₖ and Borel A₁,…,Aₖ, independence requires P(⋂ⱼ{Xᵢⱼ∈Aⱼ})=∏ⱼP(Xᵢⱼ∈Aⱼ).
+- Independent σ-algebras [definition]: A family of sub-σ-algebras is independent if the probability of the intersection of events from any finite subfamily equals the product of their probabilities.
+- Indicator function of a subset [definition]: For A⊆Ω, the real function 1_A is 1 on A and 0 on its complement.
+- Integer [definition]: An integer is an element of the ordered ring ℤ, obtained by adjoining additive inverses to the natural numbers.
+- Intersection of a family of sets [definition]: Inside a specified ambient set, the elements belonging to every member of the family.
+- Least upper bound in a partially ordered set [definition]: For A⊆P, its least upper bound is an upper bound s satisfying s≤b for every upper bound b of A, when such an s exists.
+- Lebesgue integral [definition]: For measurable f≥0, ∫f dμ is the supremum of integrals of nonnegative simple functions below f. For signed f with ∫abs(f)dμ<∞, define ∫f=∫f⁺−∫f⁻.
+- Lebesgue measure on Euclidean space [definition]: The completion of the Borel measure on ℝⁿ assigning each rectangular box the product of its side lengths.
+- Limit of a function between metric spaces [definition]: For f defined near an accumulation point a of a metric space, lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<d(x,a)<δ implies d(f(x),L)<ε.
+- Limit of a real function at a point [definition]: The relation lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<|x−a|<δ in the domain implies |f(x)−L|<ε.
+- Limit of a real sequence [definition]: A sequence (aₙ) converges to L∈ℝ if for every ε>0 there is N such that n≥N implies abs(aₙ−L)<ε.
+- Linear combination of vectors [definition]: A finite sum a₁v₁+⋯+aₙvₙ of vectors multiplied by scalars from their vector space’s ground field; the empty sum is zero.
+- Linear map between vector spaces [definition]: A map between vector spaces over the same field preserving addition and scalar multiplication.
+- Linear span of a set of vectors [definition]: The subspace consisting of all finite linear combinations of a specified set of vectors.
+- Markov transition semigroup [definition]: A family of transition kernels P_t(x,A), t≥0, with P₀(x,·)=δ_x and P_{s+t}(x,A)=∫P_t(y,A)P_s(x,dy). Sub-Markov semigroups may lose mass at a cemetery state.
+- Matrix over a ring [definition]: A rectangular array of elements of a ring; addition is entrywise and matrix multiplication uses row-by-column sums.
+- Measurable map between measurable spaces [definition]: A function for which the preimage of each measurable subset of the codomain is measurable in the domain.
+- Measurable simple real function [definition]: A measurable real function with finite range. It can be written as a finite sum ∑ a_i 1_{A_i} with measurable level sets A_i.
+- Measurable space [definition]: A set equipped with a specified σ-algebra of subsets.
+- Measure [definition]: A measure μ maps a σ-algebra to [0,∞], sends ∅ to 0, and satisfies μ(⋃ₙAₙ)=∑ₙμ(Aₙ) for every pairwise disjoint sequence of measurable sets.
+- Metric induced by a norm [construction]: The metric induced by a norm on a real or complex vector space is d(x,y)=‖x−y‖.
+- Metric space [definition]: A set X with a function d:X×X→[0,∞) such that d(x,y)=0 exactly when x=y, d(x,y)=d(y,x), and d(x,z)≤d(x,y)+d(y,z).
+- Modulus of a complex number [definition]: For z=a+bi, its modulus is the nonnegative real number |z|=√(a²+b²).
+- Natural logarithm [definition]: The inverse ln:(0,∞)→ℝ of the real exponential function.
+- Natural number [definition]: One of 0, 1, 2, …; natural numbers count finite collections.
+- Nonnegative real square root [definition]: For t≥0, √t is the unique real number y≥0 satisfying y²=t.
+- Normal distribution [definition]: The real probability distribution N(m,σ²) with density (2πσ²)⁻¹ᐟ²exp(−(x−m)²/(2σ²)) for σ>0; variance zero gives a point mass at m.
+- Normed vector space [definition]: A real or complex vector space X with a function ∥·∥:X→[0,∞) that is positive except at zero, absolutely homogeneous, and subadditive.
+- Open interval in the real line [definition]: For real a<b, the set (a,b)={x∈ℝ:a<x<b}.
+- Ordered field [definition]: A field with a total order preserved by addition, in which the product of two positive elements is positive.
+- Ordered pair [definition]: A pair (x,y) with distinguished first and second entries; (x,y)=(x′,y′) exactly when x=x′ and y=y′.
+- Partial derivative in Euclidean coordinates [definition]: The ith partial derivative of f at x is the derivative at zero of t↦f(x+t e_i), with all other coordinates fixed; vector-valued maps are differentiated componentwise.
+- Partial order [definition]: A reflexive, antisymmetric and transitive binary relation, usually written ≤.
+- Preimage of a subset under a function [definition]: For f:A→B and E⊆B, f⁻¹(E)={x∈A:f(x)∈E}.
+- Probability density relative to a measure [definition]: A nonnegative measurable function P with ∫P dμ=1; the measure P dμ is the corresponding probability measure.
+- Probability space [definition]: A probability space is (Ω,𝔽,P), where 𝔽 is a σ-algebra on Ω and P is a measure on 𝔽 with P(Ω)=1.
+- Real Hilbert space [definition]: A real inner-product space complete for its induced norm metric.
+- Real exponential function [definition]: The real function exp(x)=∑_{n≥0}xⁿ/n!, whose series converges for every real x.
+- Real inner-product space [definition]: A real vector space with a symmetric bilinear form ⟨x,y⟩ that is positive on ⟨x,x⟩ for x≠0; its induced norm is √⟨x,x⟩.
+- Real number [definition]: A real number is an element of a complete ordered field ℝ; completeness means every nonempty subset bounded above has a least upper bound.
+- Real power of a positive real number [definition]: For x>0 and p∈ℝ, define xᵖ=exp(p log x). For p>0 extend by 0ᵖ=0.
+- Real sequence [definition]: A real sequence is a function a:ℕ₊→ℝ, written (aₙ)ₙ≥1.
+- Real sine function [definition]: The sine function is defined by the everywhere convergent power series sin(x)=∑ₖ≥0(−1)ᵏx²ᵏ⁺¹/(2k+1)!.
+- Real-valued random variable [definition]: A real-valued random variable is a measurable map from a probability space to ℝ with its Borel σ-algebra.
+- Sequence in a set [definition]: A function from the natural numbers, or the positive natural numbers, to that set.
+- Set [definition]: A collection of distinct elements, regarded as one object.
+- Sign of a permutation [definition]: The sign of a permutation of {1,…,n} is (−1) to the number of inversions, where an inversion is a pair i<j with σ(i)>σ(j).
+- Smooth map between open Euclidean sets [definition]: A map on an open subset of ℝⁿ is smooth if all of its component partial derivatives of every order exist and are continuous.
+- Stopping time for a filtration [definition]: A random time T taking values in the time index together with infinity, such that {T≤t}∈F_t for every t; by time t one can determine whether T has occurred.
+- Subset [definition]: A⊆B means every element of A is an element of B.
+- Sum of a nonnegative series [definition]: For aₙ≥0, define ∑ₙ≥1aₙ as the supremum of its finite partial sums; the value may be infinite.
+- Symmetric group of a finite set [definition]: The group of all bijections of a finite set to itself under composition.
+- Topological space [definition]: A set X with a family τ of subsets, called open sets, containing ∅ and X and closed under arbitrary unions and finite intersections.
+- Total order [definition]: A partial order in which any two elements are comparable.
+- Uniform convergence of functions into a metric space [definition]: A sequence fₙ:X→(Y,d) converges uniformly to f if for every ε>0, d(fₙ(x),f(x))<ε for every x∈X once n is sufficiently large independently of x.
+- Union of a family of sets [definition]: The set of elements belonging to at least one member of the family.
+- Vector space [definition]: An abelian group with scalar multiplication by a field satisfying a(v+w)=av+aw, (a+b)v=av+bv, (ab)v=a(bv), and 1v=v.
+- Vector subspace [definition]: A subset of a vector space containing zero and closed under addition and scalar multiplication.
+- π [definition]: π is the least positive zero of the real sine function and equals the circumference-to-diameter ratio of a Euclidean circle.
+- σ-algebra [definition]: A σ-algebra on Ω contains Ω and is closed under complements in Ω and countable unions.
+- σ-algebra generated by a family of subsets [definition]: The smallest σ-algebra containing that family, equivalently the intersection of all σ-algebras on the ambient set that contain it.
+
+CITATIONS
+
+  [1] Avramidis, A.N. , and P. Hyden, Efficiency improvements for pricing American
+     options with a stochastic mesh, in Proceedings of the 1999 Winter Simulation Con-
+     ference, pp. 344-350
+    Pedagogically necessary: unknown
+
+  [2] Broadie, M., and P. Glasserman, A stochastic mesh method for pricing high-
+     dimensional American options J. Computational Finance, 7 (4) (2004), 35-72.
+    Pedagogically necessary: unknown
+
+  [3] Duffie, D., M. Huang, 1996, Swap Rates and Credit Quality, Journal of Finance,
+     Vol. 51, No. 3, 921
+    Pedagogically necessary: unknown
+
+  [4] Fujii, F., A. Takahashi Derivative Pricing under Asymmetric and Imperfect Collat-
+     eralization, and CVA CARF Working Paper F-240, December 2010
+    Pedagogically necessary: unknown
+
+  [5] Glasserman, P., ”Monte Carlo Methods in Financial Engineering” Springer, 2004,
+     Berlin.
+    Pedagogically necessary: unknown
+
+  [6] Gregory, J., Counterparty credit risk and credit value adjustment: A continuing
+     challenge for global financial markets, Second Editio, John Wiley & Sons, 2012.
+    Pedagogically necessary: unknown
+
+  [7] Kusuoka, S., Malliavin Calculus Revisited, J. Math. Sci. Univ. Tokyo 10(2003),
+     261-277.
+    Pedagogically necessary: unknown
+
+  [8] Kusuoka, S., and D.W.Stroock, Applications of Malliavin Calculus II, J. Fac. Sci.
+     Univ. Tokyo Sect. IA Math. 32(1985),1-76.
+    Pedagogically necessary: unknown
+
+  [9] Kusuoka, S. , and Y. Morimoto, Stochastic mesh methods for Hörmander type
+     diffusion processes, Preprint.
+    Pedagogically necessary: unknown
+
+  [10] Laborde’re,H. Cutting CVA’s Complexity, Risk Magazine, July, 2012, pp. 67-73.
+    Pedagogically necessary: unknown
+
+  [11] Liu, G., and L.J. Hong, Revisit of stochastic mesh method for pricing American
+     options, Operations Research Letters 37(2009), 411-414.
+    Pedagogically necessary: unknown
+
+  [12] Shigekawa, I., ”Stochastic Analysis”, Translation of Mathematical Monographs
+     vol.224, AMS 2000.
+    Pedagogically necessary: unknown
+

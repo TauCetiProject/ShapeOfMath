@@ -1,0 +1,329 @@
+{
+  "batch_id": "batch-043",
+  "reviewer": "category_galois_formalization",
+  "proposal_sha256": "a3d144f36887ba937c3c5873b5ff03e0d265d2ab8dbcf7179ce542b37dc56a07",
+  "decisions": [
+    {
+      "concept": "generalized-happy-number",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Read Digits48-83 actual terminating radix recursion, Function.iterate54/61, and exact stock Lean b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a List.sum2061 foldr addition0. The literal positive x with finite digit-power orbit hitting1 is exact, includes k0/x1, valid b>=2 and natural exponent convention. Native Iterate40-48 is a missed DIRECT reachability simulation theorem: when Phi1=1, it transfers existence of an iterate hitting1 to the simulated map. This is ordinary happy-orbit reachability API, unlike mere construction of the underlying digit-power step or a minimum-height theorem.",
+      "replacement": {
+        "concept": "generalized-happy-number",
+        "concept_id": "34c2faae-ef59-5385-b6fc-8a534aa09f34",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "For valid radix b>=2 and natural exponent e, take S(n)=((Nat.digits b n).map (fun d=>d^e)).sum and Happy(x):=0<x AND exists k:Nat, S^[k](x)=1. Digits/Defs:48 recursively divides by b until zero, :76 is the actual little-endian radix constructor; order is irrelevant to the sum. Stock Lean List.sum Init/Data/List/Basic:2061 is foldr addition0; Function.iterate_zero:54/iterate_succ:61 certify the actual n-fold iterate convention. k=0 includes x=1. Setting b=10,e=2 is exactly ordinary happy numbers, no orbit eventuality theorem asserted. Generalized e=0 can also be represented with the ordinary Nat.pow convention; no extension to invalid radices is claimed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development. Exact stock Lean supplier commit b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a (both projects actual Lean4v4.36.0-rc2), src/Init/Data/List/Basic.lean2061: sum is literally foldr addition0; committed source independently read.",
+        "files": [
+          {
+            "path": "Mathlib/Data/Nat/Digits/Defs.lean",
+            "declarations": "Nat.digitsAux:48; digits:76; digits_zero:82",
+            "note": "Actual digit-list constructor used by the literal digit-power/iteration definition."
+          }
+        ],
+        "search_notes": "Full-tree happy/digit-power searches and native AutomaticSequence/BoundedDigits examined. IsAutomatic.exists_dfao_output_eval_eq_ofDigits:83 concerns carrying noncanonical radix words through an existing automatic sequence, not digit-power iteration or reaching1; exclude as an application to automata. List sum/pow and iteration are generic suppliers, not extra native files."
+      }
+    },
+    {
+      "concept": "generalized-happy-number",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Read Digits48-83 actual terminating radix recursion, Function.iterate54/61, and exact stock Lean b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a List.sum2061 foldr addition0. The literal positive x with finite digit-power orbit hitting1 is exact, includes k0/x1, valid b>=2 and natural exponent convention. Native Iterate40-48 is a missed DIRECT reachability simulation theorem: when Phi1=1, it transfers existence of an iterate hitting1 to the simulated map. This is ordinary happy-orbit reachability API, unlike mere construction of the underlying digit-power step or a minimum-height theorem.",
+      "replacement": {
+        "concept": "generalized-happy-number",
+        "concept_id": "34c2faae-ef59-5385-b6fc-8a534aa09f34",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "For valid radix b>=2 and natural exponent e, take S(n)=((Nat.digits b n).map (fun d=>d^e)).sum and Happy(x):=0<x AND exists k:Nat, S^[k](x)=1. Digits/Defs:48 recursively divides by b until zero, :76 is the actual little-endian radix constructor; order is irrelevant to the sum. Stock Lean List.sum Init/Data/List/Basic:2061 is foldr addition0; Function.iterate_zero:54/iterate_succ:61 certify the actual n-fold iterate convention. k=0 includes x=1. Setting b=10,e=2 is exactly ordinary happy numbers, no orbit eventuality theorem asserted. Generalized e=0 can also be represented with the ordinary Nat.pow convention; no extension to invalid radices is claimed. Relevant dependency constructor/proofs unchanged; no qualifying native digit-power orbit API certified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development. Exact stock Lean supplier commit b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a (both projects actual Lean4v4.36.0-rc2), src/Init/Data/List/Basic.lean2061: sum is literally foldr addition0; committed source independently read. Newly checked native Iterate40: if every f-step is a finite stretch of g along Phi, every finite f-iterate maps to a finite g-iterate. Complete induction43-48 adds the stretch lengths and rewrites iterate addition. For supplied Phi(1)=1, a witness f^[k](x)=1 therefore transfers to g^[m](Phi x)=1; retain positivity of Phi x for the happy-number predicate. This is ordinary reachability-of1 API under explicit simulation hypotheses, not mere availability of the underlying digit map.",
+        "files": [
+          {
+            "path": "TauCeti/Logic/Function/Iterate.lean",
+            "declarations": "TauCeti.exists_iterate_of_forall_exists_iterate:40",
+            "note": "Native direct finite-reachability transfer under simulations of each digit-power step, applied to reaching1; no minimum-height theorem claimed."
+          }
+        ],
+        "search_notes": "Full-tree happy/digit-power searches and native AutomaticSequence/BoundedDigits examined. IsAutomatic.exists_dfao_output_eval_eq_ofDigits:83 concerns carrying noncanonical radix words through an existing automatic sequence, not digit-power iteration or reaching1; exclude as an application to automata. List sum/pow and iteration are generic suppliers, not extra native files. Revised inherited decision after actual sibling Iterate40 discovery. Select direct hitting/reachability API; native Digits.prod_map_digits_add_mul111 is a useful digit-power step recurrence but is underlying step-map input, excluded from this orbit-property allocation (already maps to digit-power-sum concept). Generic iteration notation alone still earns no file."
+      }
+    },
+    {
+      "concept": "goldbach-number",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read actual pointwise Set.mul304/image2 law310 and generated additive construction: membership in P+P precisely existential prime sum, allows equal primes/odd Goldbach numbers and imposes no conjecture. Actual dependency earlier involutiveInv refactor shifts constructor to300/306; Prime42/prime_def98 is header+1. Native progression and fixed-modulus prime counting do not implement this two-prime sum predicate."
+    },
+    {
+      "concept": "goldbach-number",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Read actual pointwise Set.mul304/image2 law310 and generated additive construction: membership in P+P precisely existential prime sum, allows equal primes/odd Goldbach numbers and imposes no conjecture. Actual dependency earlier involutiveInv refactor shifts constructor to300/306; Prime42/prime_def98 is header+1. Native progression and fixed-modulus prime counting do not implement this two-prime sum predicate.",
+      "replacement": {
+        "concept": "goldbach-number",
+        "concept_id": "39d2442a-2f83-5a38-9b44-7a67bb74f8c9",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "inherited",
+        "evidence": "Let P={p:Nat | Nat.Prime p}. The literal predicate 0<n AND n\u2208P+P is exact: Set.add is generated from the image2 constructor Set.mul:304 in Pointwise/Set/Basic, hence n\u2208P+P means exists p,q prime with n=p+q. Nat.Prime:41/prime_def:97 are checked input suppliers, and primes>=2 ensure positivity automatically. Equal primes are allowed (e.g.4=2+2); no Goldbach conjecture or parity restriction imposed. Actual dependency sumset constructor retains the same body; native prime searches supply no direct Goldbach-set API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development. Exact dependency pointwise Set.mul/add declaration:300 and image2_mul/add:306; compared actual source diff (involution instance change earlier), same sumset constructor. Actual dependency prime-input declaration starts are Nat.Prime42 and prime_def98 after header+1; the reference41/97 earlier describes the separately reviewed Mathlib snapshot. Relevant predicate body unchanged.",
+        "files": [],
+        "search_notes": "Searched Goldbach and prime-add/sum sources. Mathlib Fermat Goldbach theorem means coprimality of distinct Fermat numbers, a different theorem. Native prime ideal zeta sums, arithmetic progression distribution, and prime-counting are not sums-of-two-primes set API; exclude."
+      }
+    },
+    {
+      "concept": "good-trace-dimension-group",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Read Icc77/membership81 exact closed inequalities and native Order/Hom23-30 positive-value proof via sign reversal. Goodness is exactly interval-fiber lifting with arbitrary a and positive nonzero g, not necessarily positive a or all positive traces good. Actual monotone_iff_map_nonneg226-232 equates nonnegative-input positivity with monotonicity for additive ordered-group maps, so supplied positive trace can be encoded precisely without a stronger hidden requirement. Weaker-hyp nonzero functional value API is directly allowed under previously accepted trace policy.",
+      "replacement": {
+        "concept": "good-trace-dimension-group",
+        "concept_id": "3402c1e7-37c6-56e3-8201-053131244f36",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Given the supplied positive additive trace \u03c4:G\u2192+Real, the exact predicate is forall a g:G, 0<g -> 0<\u03c4(a) -> \u03c4(a)<\u03c4(g) -> exists aPrime:G, aPrime\u2208Set.Icc 0 g AND \u03c4(aPrime)=\u03c4(a). The catalogue positive nonzero g is exactly0<g in a partial order. Set.Icc:77/mem_Icc:81 are literally the two weak inequalities0<=aPrime<=g; no interpolation/refinement assumption or strict positivity of aPrime substituted. AddMonoidHom:144 supplies the given trace input. A named GoodTrace alias is unnecessary. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development. Positive trace means additive tau with forall g>=0,tau g>=0; actual OrderAddMonoidHom79 and monotone_iff_map_nonneg226-232 in Algebra/Order/Hom/Monoid.lean certify equivalence with a monotone additive map. Relevant supplier file is byte-identical in actual dependency. This adds no faithfulness/order-unit hypothesis and does NOT assert every positive trace is good.",
+        "files": [
+          {
+            "path": "Mathlib/Order/Interval/Set/Defs.lean",
+            "declarations": "Set.Icc:77; mem_Icc:81",
+            "note": "Exact closed-order-interval constructor used in the good-trace lifting/fiber condition."
+          }
+        ],
+        "search_notes": "Searched good trace/dimension group/order-unit and native ordered homomorphism siblings. Distinguish literal goodness from mere positivity: no claim that every positive trace is good. Order unit, dimension-group refinability, and classification theorems are supplied inputs or separate endpoints; do not charge C*-algebra state spaces."
+      }
+    },
+    {
+      "concept": "good-trace-dimension-group",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Read Icc77/membership81 exact closed inequalities and native Order/Hom23-30 positive-value proof via sign reversal. Goodness is exactly interval-fiber lifting with arbitrary a and positive nonzero g, not necessarily positive a or all positive traces good. Actual monotone_iff_map_nonneg226-232 equates nonnegative-input positivity with monotonicity for additive ordered-group maps, so supplied positive trace can be encoded precisely without a stronger hidden requirement. Weaker-hyp nonzero functional value API is directly allowed under previously accepted trace policy.",
+      "replacement": {
+        "concept": "good-trace-dimension-group",
+        "concept_id": "3402c1e7-37c6-56e3-8201-053131244f36",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Given the supplied positive additive trace \u03c4:G\u2192+Real, the exact predicate is forall a g:G, 0<g -> 0<\u03c4(a) -> \u03c4(a)<\u03c4(g) -> exists aPrime:G, aPrime\u2208Set.Icc 0 g AND \u03c4(aPrime)=\u03c4(a). The catalogue positive nonzero g is exactly0<g in a partial order. Set.Icc:77/mem_Icc:81 are literally the two weak inequalities0<=aPrime<=g; no interpolation/refinement assumption or strict positivity of aPrime substituted. AddMonoidHom:144 supplies the given trace input. A named GoodTrace alias is unnecessary. Native AddMonoidHom.exists_pos_of_ne_zero:23 supplies ordinary positive-functional API under weaker source AddGroup and linearly ordered target hypotheses, applicable to positive/good real traces when nonzero. Actual proof26\u201330 takes a nonzero value and changes its sign by negating the argument. This is the same ordinary weaker-hypothesis trace API interpretation independently accepted in045. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development. Positive trace means additive tau with forall g>=0,tau g>=0; actual OrderAddMonoidHom79 and monotone_iff_map_nonneg226-232 in Algebra/Order/Hom/Monoid.lean certify equivalence with a monotone additive map. Relevant supplier file is byte-identical in actual dependency. This adds no faithfulness/order-unit hypothesis and does NOT assert every positive trace is good.",
+        "files": [
+          {
+            "path": "TauCeti/Algebra/Order/Hom/Basic.lean",
+            "declarations": "AddMonoidHom.exists_pos_of_ne_zero:23",
+            "note": "Ordinary positive-value functional API applying to this trace subclass, while the full exact goodness condition is supplied by the checked generic interval-fiber predicate."
+          }
+        ],
+        "search_notes": "Searched good trace/dimension group/order-unit and native ordered homomorphism siblings. Distinguish literal goodness from mere positivity: no claim that every positive trace is good. Order unit, dimension-group refinability, and classification theorems are supplied inputs or separate endpoints; do not charge C*-algebra state spaces."
+      }
+    },
+    {
+      "concept": "gordan-alternative-theorem",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independently read native Gordan166-176 and Stiemke186-203 complete proofs. For finite real column family, sum_j yj column_j is Ay; a dual row has coefficients f(e_i), giving xA. Negation of every nonnegative zero relation being zero is exactly existence of nonzero y>=0. This yields exhaustive and mutually exclusive alternatives including empty row/column dimensions. Standalone closed-cone separation lacks the checked full finite homogeneous bridge in this bounded review, so its unknown remains appropriate."
+    },
+    {
+      "concept": "gordan-alternative-theorem",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independently read native Gordan166-176 and Stiemke186-203 complete proofs. For finite real column family, sum_j yj column_j is Ay; a dual row has coefficients f(e_i), giving xA. Negation of every nonnegative zero relation being zero is exactly existence of nonzero y>=0. This yields exhaustive and mutually exclusive alternatives including empty row/column dimensions. Standalone closed-cone separation lacks the checked full finite homogeneous bridge in this bounded review, so its unknown remains appropriate."
+    },
+    {
+      "concept": "graph-subgraph",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Subgraph61 verts/Adj/adj_sub/edge_vert/symmetry, IsInduced214 and induce1207-1212. These permit independent vertex and edge deletion, including isolated retained vertices; inducing top yields all original edges. Native Maps50-75 explicitly proves map/comap graph-window recognition and restrictFin adjacency, direct induced-restriction API. Compared actual dependency: header+1 and removed neighbor API shift induce to1196 without changing selected construction."
+    },
+    {
+      "concept": "graph-subgraph",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Subgraph61 verts/Adj/adj_sub/edge_vert/symmetry, IsInduced214 and induce1207-1212. These permit independent vertex and edge deletion, including isolated retained vertices; inducing top yields all original edges. Native Maps50-75 explicitly proves map/comap graph-window recognition and restrictFin adjacency, direct induced-restriction API. Compared actual dependency: header+1 and removed neighbor API shift induce to1196 without changing selected construction."
+    },
+    {
+      "concept": "greatest-common-divisor",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Inspected exact stock Lean Gcd43 defining Nat.gcd of natAbs, signed common-divisor/maximality and positivity when not-both-zero. Read Mathlib signed gcdA162/gcdB167 and all signed Bezout cases172-181, plus native Int/GCD45-71 primitive quotient normalization/gcd transforms with explicit hypotheses. These are ordinary computational gcd API, not attribution of stock gcd definition to Mathlib. Correct Mathlib gcd_def actual159, not blank158.",
+      "replacement": {
+        "concept": "greatest-common-divisor",
+        "concept_id": "e7984063-f674-5299-bd69-d41095f0a8d3",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Stock Lean b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a Init/Data/Int/Gcd:43 defines Int.gcd a b=Nat.gcd |a| |b|; :50/54 prove it divides both signed integers, :89/93 prove any common divisor divides it, and :128/131 give positivity when either entry is nonzero. Thus the Nat-valued gcd interpreted as a positive integer is the greatest POSITIVE common divisor for not-both-zero a,b; signs do not change it. Mathlib Data/Int/GCD defines actual signed extended-Euclid gcdA:162/gcdB:167 and proves the coefficient identity:172 by signed cases, direct computational gcd API. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development. Exact Mathlib gcd_def declaration start is159 (158 is blank).",
+        "files": [
+          {
+            "path": "Mathlib/Data/Int/GCD.lean",
+            "declarations": "Int.gcd_def:159; gcdA:162; gcdB:167; gcd_eq_gcd_ab:172",
+            "note": "Extended Euclidean gcd computation/coefficient API on signed integers; core gcd itself is stock Lean and has no project-owned LOC."
+          }
+        ],
+        "search_notes": "Read stock defining/maximality/positivity proofs and native gcd normalization/transport proof bodies. Include direct gcd API despite cusp consumers; exclude modular cusp counting files, unique factorization and polynomial gcd classification."
+      }
+    },
+    {
+      "concept": "greatest-common-divisor",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Inspected exact stock Lean Gcd43 defining Nat.gcd of natAbs, signed common-divisor/maximality and positivity when not-both-zero. Read Mathlib signed gcdA162/gcdB167 and all signed Bezout cases172-181, plus native Int/GCD45-71 primitive quotient normalization/gcd transforms with explicit hypotheses. These are ordinary computational gcd API, not attribution of stock gcd definition to Mathlib. Correct Mathlib gcd_def actual159, not blank158."
+    },
+    {
+      "concept": "green-tao-prime-progressions",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Actual Dirichlet/fixed-residue prime infinitude gives infinitely many individual primes, not arbitrarily long all-prime nonconstant finite APs. Scoped Green-Tao/prime tuple/progression search exposes no checked theorem with every finite length and a common nonzero step. Explicit unresolved theorem frontier accepted, not absence inferred from a name."
+    },
+    {
+      "concept": "green-tao-prime-progressions",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Actual Dirichlet/fixed-residue prime infinitude gives infinitely many individual primes, not arbitrarily long all-prime nonconstant finite APs. Scoped Green-Tao/prime tuple/progression search exposes no checked theorem with every finite length and a common nonzero step. Explicit unresolved theorem frontier accepted, not absence inferred from a name."
+    },
+    {
+      "concept": "group-homomorphism",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read MonoidHom366 and exact multiplicativity-only mk605-608 cancellation proof: unit preservation follows for group targets. Native entrywise map27, unique lift30-41, bijective pre/postcomposition63-80 and TypeTags/Hom38-54 genuine hom-space/unit-valued equivalent presentation provide ordinary map API under explicit weaker/commutative special hypotheses; no finite/abelian restriction imposed on the primary definition."
+    },
+    {
+      "concept": "group-homomorphism",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read MonoidHom366 and exact multiplicativity-only mk605-608 cancellation proof: unit preservation follows for group targets. Native entrywise map27, unique lift30-41, bijective pre/postcomposition63-80 and TypeTags/Hom38-54 genuine hom-space/unit-valued equivalent presentation provide ordinary map API under explicit weaker/commutative special hypotheses; no finite/abelian restriction imposed on the primary definition."
+    },
+    {
+      "concept": "group-representation",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Representation48=G\u2192*End(V) and COMPLETE inverse92/97/bijection105 proofs: for group inputs all stored endomorphisms are invertible. Native toMulAut26-36 explicitly uses rho(g^-1) for inverse and map_add for automorphism law, then40/46 evaluation. Ordinary natural action presentation, no finite dimension or unitarity assumption. Relevant dependency Representation file identical."
+    },
+    {
+      "concept": "group-representation",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Representation48=G\u2192*End(V) and COMPLETE inverse92/97/bijection105 proofs: for group inputs all stored endomorphisms are invertible. Native toMulAut26-36 explicitly uses rho(g^-1) for inverse and map_add for automorphism law, then40/46 evaluation. Ordinary natural action presentation, no finite dimension or unitarity assumption. Relevant dependency Representation file identical."
+    },
+    {
+      "concept": "haar-measure",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independently read Haar786-788 actual fields and Regular317-318; IsHaar alone lacks textbook regularity. Actual compact nonnull finite-translate proof596-607 and instance611-614 establish positivity of opens from nonzero regular invariance. Haar constructor520, invariance530, compact normalization540 and regularity550 proof bodies checked. Native Unique52-60 keeps second-countable target for nonsingularity;75-105 proves finite-Haar equality/right/inversion invariance with exact locally compact/finite hypotheses. Definition and both library file boundaries sound; no universal unimodularity claim."
+    },
+    {
+      "concept": "haar-measure",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independently read Haar786-788 actual fields and Regular317-318; IsHaar alone lacks textbook regularity. Actual compact nonnull finite-translate proof596-607 and instance611-614 establish positivity of opens from nonzero regular invariance. Haar constructor520, invariance530, compact normalization540 and regularity550 proof bodies checked. Native Unique52-60 keeps second-countable target for nonsingularity;75-105 proves finite-Haar equality/right/inversion invariance with exact locally compact/finite hypotheses. Definition and both library file boundaries sound; no universal unimodularity claim."
+    },
+    {
+      "concept": "hahn-simple-twisted-relative-trace-formula",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "The specified relative twisted orbital/spectral identity with commuting involutions, relative elliptic/regular support and a supercuspidal local factor is not supplied by classical finite-group or elliptic modular trace-formula candidates. Concrete unresolved general automorphic/orbital/spectral assembly accepted; no proof claim follows from expressing its inputs."
+    },
+    {
+      "concept": "hahn-simple-twisted-relative-trace-formula",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "The specified relative twisted orbital/spectral identity with commuting involutions, relative elliptic/regular support and a supercuspidal local factor is not supplied by classical finite-group or elliptic modular trace-formula candidates. Concrete unresolved general automorphic/orbital/spectral assembly accepted; no proof claim follows from expressing its inputs."
+    },
+    {
+      "concept": "hardy-littlewood-waring-asymptotic",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read actual four-square prime-factorization proof202-212: existence of four nonnegative squares cannot yield positive-kth-power asymptotic counts, exact Gamma/singular series and a uniform positive lower bound. Scoped source searches preserve all requested asymptotic hypotheses/constants rather than weaken the theorem; unknown accepted in both."
+    },
+    {
+      "concept": "hardy-littlewood-waring-asymptotic",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read actual four-square prime-factorization proof202-212: existence of four nonnegative squares cannot yield positive-kth-power asymptotic counts, exact Gamma/singular series and a uniform positive lower bound. Scoped source searches preserve all requested asymptotic hypotheses/constants rather than weaken the theorem; unknown accepted in both."
+    },
+    {
+      "concept": "harish-chandra-adelic-subgroup",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read GroupLike37/66 actual counit/comul, Hopf.toUnits37 inverse antipode and Group64, and exact convolution identity56/multiplication58-63. Character coordinate algebra is F[Multiplicative Z], equivalently additive Laurent F[Z]. zpowersHom280 plus MonoidAlgebra.mapDomainBialgHom82 and liftGroupLikeBialgHom159 constructs every generator character; actual lift equivalence gives uniqueness, converse preserves group-likeness. Native norm303/320-342 uses finite-support finite-place product and normalized real/complex factors and is an actual hom to positive units. Thus all rational-character norm kernels give exact subgroup, no stronger all-characters-value1 condition. Ambient FunctorOfPoints119 is prerequisite group structure and mapValue143 acts on VALUE algebra, not character domain evaluation: remove that file from HC allocation, retain Norm/Basic full status. Standalone exact global norm supplier remains bounded unknown."
+    },
+    {
+      "concept": "harish-chandra-adelic-subgroup",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Read GroupLike37/66 actual counit/comul, Hopf.toUnits37 inverse antipode and Group64, and exact convolution identity56/multiplication58-63. Character coordinate algebra is F[Multiplicative Z], equivalently additive Laurent F[Z]. zpowersHom280 plus MonoidAlgebra.mapDomainBialgHom82 and liftGroupLikeBialgHom159 constructs every generator character; actual lift equivalence gives uniqueness, converse preserves group-likeness. Native norm303/320-342 uses finite-support finite-place product and normalized real/complex factors and is an actual hom to positive units. Thus all rational-character norm kernels give exact subgroup, no stronger all-characters-value1 condition. Ambient FunctorOfPoints119 is prerequisite group structure and mapValue143 acts on VALUE algebra, not character domain evaluation: remove that file from HC allocation, retain Norm/Basic full status. Standalone exact global norm supplier remains bounded unknown.",
+      "replacement": {
+        "concept": "harish-chandra-adelic-subgroup",
+        "concept_id": "66a1a2bb-502f-5253-bb25-2c6bc08849ce",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "For an affine F-group with coordinate commutative Hopf algebra H, F-rational characters are exactly GroupLike F H: counit(c)=1 and comul(c)=c\u2297c (Coalgebra/GroupLike:37/66); Hopf/GroupLike.toUnits:37 gives c a unit with antipode inverse. On adelic point p:H\u2192\u2090[F]A_F evaluate \u03c7_c(p)=Units.map p.toMonoidHom (GroupLike.toUnits F c). The exact bare norm-one set is {p | forall c:GroupLike F H, ideleNorm(\u03c7_c(p))=1}. Tau FunctorOfPoints.convGroupOfSemiring:119 makes these points the actual group and mapValue:143 certifies value-algebra functoriality. Native ideleNorm:331/coe:338 is the product of real abs, complex abs-squared and residue-normalized finite norms; finite factors are1 off a finite set (:303), so no totalized divergent product is used. Defining bodies and multiplicativity proof318\u2013325 read. This records the primary subgroup condition; no finiteness, compactness, rational-lattice or logarithmic-map theorem asserted. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual target meanings, defining statements/hypotheses and relevant completed proof bodies read; bounded source review, no new Lean proof development. Stock Mathlib NumberTheory/NumberField/AdeleRing.IdeleGroup:104 is literally units of the full AdeleRing, so the evaluated character unit has exactly the required idele type; this input supplier is excluded from native allocation. Independent exact character check: the multiplicative-group coordinate algebra is F[Multiplicative Int], equivalently additive Laurent F[Int], with additive-integer exponent group, not the integer multiplication monoid. Data/Int/Cast/Lemmas.zpowersHom280 parametrizes generator images; Bialgebra/MonoidAlgebra.mapDomainBialgHom82 then liftGroupLikeBialgHom159 constructs its bialgebra map to H, and MonoidAlgebra.lift230 plus inverse laws233/234 supplies uniqueness; any such map preserves group-like generator by Coalgebra/GroupLike.map52. Convolution.convOne_apply56 and convMul_apply58 show evaluation at c is multiplicative, using counit1/comul=c tensor c; Hopf GroupLike.toUnits37 supplies invertibility. All GroupLike/Bialgebra/Convolution/Int suppliers are byte-identical in actual dependency; MonoidAlgebra/Basic only header+1. FunctorOfPoints119 remains checked ambient point-group availability, but mapValue143 changes VALUE algebra and is not this character evaluation. Accordingly only Norm/Basic is allocated as native direct norm-condition contribution.",
+        "files": [
+          {
+            "path": "TauCeti/NumberTheory/NumberField/Global/Ideles/Norm/Basic.lean",
+            "declarations": "TauCeti.GlobalNumberFields.hasFiniteMulSupport_norm_ideleFiniteCoord:303; ideleNorm:331; coe_ideleNorm:338",
+            "note": "Actual normalized adelic absolute-value product used in the literal all-rational-character norm-one condition."
+          }
+        ],
+        "search_notes": "Searched Harish\u2013Chandra/norm-one/idele/character-kernel sources. CharacterKernelIdeal describes ALL characters literally1, a STRICTER algebraic condition than absolute idele norm1, so exclude its file. HarishChandra representation induction is another subject. Standalone Hopf/GroupLike supplier read; do not attribute Tau normalized norm implementation to Mathlib. A separately named G1 alias is unnecessary for the exact native generic representation. Removed FunctorOfPoints native mapping as underlying-group prerequisite; retain its checked availability without allocating LOC for this concept. Its O\u2192K postcomposition DOES remain directly mapped for the separately reviewed hyperspecial image construction."
+      }
+    },
+    {
+      "concept": "hilbert-waring-theorem",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Actual Mathlib sum_four_squares202-212 completes k2 existence via prime factorization and Euler identity, yielding at most4 square summands after zero convention. Genuine partial case, not every positive k. Native sum-square1 classification is different; imported partial availability does not satisfy inherited complete status, so Tau unknown with that limitation is correct."
+    },
+    {
+      "concept": "hilbert-waring-theorem",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Actual Mathlib sum_four_squares202-212 completes k2 existence via prime factorization and Euler identity, yielding at most4 square summands after zero convention. Genuine partial case, not every positive k. Native sum-square1 classification is different; imported partial availability does not satisfy inherited complete status, so Tau unknown with that limitation is correct."
+    },
+    {
+      "concept": "hyperspecial-maximal-compact-subgroup",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read native arbitrary-CommRing smooth property34/40 and baseChange64/70: K tensor_O A, not field-only base. BaseChangePoints251-279 explicitly supplies both point-transport formulas; mapValue143-150 is the group map O\u2192K, so its image under supplied generic-fiber iso is exactly integral model subgroup. Mathlib Smooth.baseChange570 (dependency571) ensures smooth special fiber; literal connectedness plus actual closure radical69/115 matches reductivity without a hidden geometric-connectedness substitution. Radical universal/triviality proof was independently checked040. Bare model-existence presentation is complete; compactness/maximality classification or existence for every G is not claimed. M radical supplier frontier remains unresolved."
+    },
+    {
+      "concept": "hyperspecial-maximal-compact-subgroup",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native arbitrary-CommRing smooth property34/40 and baseChange64/70: K tensor_O A, not field-only base. BaseChangePoints251-279 explicitly supplies both point-transport formulas; mapValue143-150 is the group map O\u2192K, so its image under supplied generic-fiber iso is exactly integral model subgroup. Mathlib Smooth.baseChange570 (dependency571) ensures smooth special fiber; literal connectedness plus actual closure radical69/115 matches reductivity without a hidden geometric-connectedness substitution. Radical universal/triviality proof was independently checked040. Bare model-existence presentation is complete; compactness/maximality classification or existence for every G is not claimed. M radical supplier frontier remains unresolved."
+    },
+    {
+      "concept": "igusa-genus-two-generator-theorem",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Actual SL2 upper-half-plane modular classes and E4/E6 graded polynomial identity are genus1; native SiegelFunction is a one-variable modular unit. Neither supplies genus2 chi10/chi12/chi35 complex generator relation plus fourteen integral generators and odd-weight decomposition. Complete coupled ring theorem remains unverified after actual candidate comparison; bounded unknown appropriate."
+    },
+    {
+      "concept": "igusa-genus-two-generator-theorem",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Actual SL2 upper-half-plane modular classes and E4/E6 graded polynomial identity are genus1; native SiegelFunction is a one-variable modular unit. Neither supplies genus2 chi10/chi12/chi35 complex generator relation plus fourteen integral generators and odd-weight decomposition. Complete coupled ring theorem remains unverified after actual candidate comparison; bounded unknown appropriate."
+    },
+    {
+      "concept": "integer-divisibility",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read semigroupDvd47/existential dvd_def60 and exact stock Int.dvd_def29 supplier: b=a*c with signed/zero factors allowed. Native CommRing IsUnit.dvd_iff_of_eq_mul_add45-47 proves exactly divisor-preserving multiple addition/unit multiplication and applies to Int units\u00b11. Genuine ordinary arithmetic API; no positivity or prime restriction."
+    },
+    {
+      "concept": "integer-divisibility",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read semigroupDvd47/existential dvd_def60 and exact stock Int.dvd_def29 supplier: b=a*c with signed/zero factors allowed. Native CommRing IsUnit.dvd_iff_of_eq_mul_add45-47 proves exactly divisor-preserving multiple addition/unit multiplication and applies to Int units\u00b11. Genuine ordinary arithmetic API; no positivity or prime restriction."
+    },
+    {
+      "concept": "integral-miller-basis-elliptic-forms",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read completed odd-weight158-159, weight2 zero257-259 and exact even natural-weight dimension262-284 strong induction proof. These establish only stated vanishing/dimension clauses, hence genuine M partial. Native cusp-dimension companions concern different space; BoundedDenominators assumes integral spanning inputs, and newforms orthogonal basis does not produce full-group integer triangular q^j+O(q^d) Miller basis. Repeated namespace/basis searches retained explicit unresolved all-integer-weight integral triangular endpoint; Tau unknown with imported partial evidence appropriate."
+    },
+    {
+      "concept": "integral-miller-basis-elliptic-forms",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read completed odd-weight158-159, weight2 zero257-259 and exact even natural-weight dimension262-284 strong induction proof. These establish only stated vanishing/dimension clauses, hence genuine M partial. Native cusp-dimension companions concern different space; BoundedDenominators assumes integral spanning inputs, and newforms orthogonal basis does not produce full-group integer triangular q^j+O(q^d) Miller basis. Repeated namespace/basis searches retained explicit unresolved all-integer-weight integral triangular endpoint; Tau unknown with imported partial evidence appropriate."
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "reviewer": "analysis_formalization",
+  "scope": "Bounded final mathematical/policy review of public formalization prompts against selected independently reviewed run cases; no catalogue re-review, live edits, or new proof development.",
+  "overall_decision": "accept_with_targeted_clarifications",
+  "inputs": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "1dd2c407607cb9018b9785b1bcff3f7bdd2da55bcf4a674dfeea31344373b396"
+    },
+    {
+      "path": "prompts/update-formalization-coverage.md",
+      "sha256": "5a8e57a1c1ce296ff68a2f75025f87f2c2d44dec2eb862824ea024d7696af706"
+    },
+    {
+      "path": "prompts/formalization.md",
+      "sha256": "37a56d9987bfc1c3e847188d29f304df6d324defe1e1a25ab909b5f10114c335"
+    },
+    {
+      "path": "CONCEPTS.md",
+      "sha256": "2ae48985543bcb6b2ef0e2c129aefd0210664bc553de5633d04bec9abb39ad1c"
+    },
+    {
+      "path": "API.md",
+      "sha256": "9b54760c986eb3447f2a5f4bd24d9dbf89e734c2df9c9ac8f6cd89eaf25f9710"
+    }
+  ],
+  "workflow_compliance": {
+    "decision": "accept",
+    "applicable_text": "Follow AGENTS.md: all mathematical processing, source reading, concept matching, file selection, and mathematical review happen in subagents. The coordinator handles scope, snapshots, software, structural checks and mechanical audited imports.",
+    "reason": "This matches the current AGENTS division of responsibility. Mathematical interpretation, hidden-hypothesis decisions, generic-constructor matching and API allocation decisions must stay with author/reviewer subagents; root may implement operational wording and mechanically import accepted full replacements. Root must route any unresolved meaning or source-equivalence question back to a mathematical subagent."
+  },
+  "accepted_rules": [
+    {
+      "rule": "Material clauses and theorem proofs",
+      "applicable_text": "Review every material clause in the catalogue paragraph.",
+      "reason": "Necessary and correctly stated: checked primary predicates did not establish the asserted completion equivalence for closable forms or ground-state operator characterization for intrinsic ultracontractivity. Partial/unknown decisions were appropriate. Merely writing the desired theorem proposition remains insufficient.",
+      "evidence": [
+        "reviews/batch-053.json:closable-symmetric-form, both libraries",
+        "reviews/batch-061.json:intrinsic-ultracontractivity, both libraries"
+      ]
+    },
+    {
+      "rule": "Domain and totalization checks",
+      "applicable_text": "Verify the integrability, nonzero-denominator, existence or other domain hypotheses needed for the catalogue meaning; a well-typed expression alone does not establish the intended definition or theorem on invalid inputs.",
+      "reason": "Retain prominently. Default-intensity review required finite stopped time integrals on a common full-measure set and integrable stopped martingale slices; otherwise totalized integrals could create a false compensator. Missing hypotheses in catalogue paragraphs must be reported without silently editing the identity.",
+      "evidence": [
+        "reviews/batch-055.json:default-intensity, both libraries",
+        "proposals/batch-073.json:monotone-convergence, both libraries"
+      ]
+    },
+    {
+      "rule": "Independent source ownership and revisions",
+      "applicable_text": "A checked supplying dependency proves availability; it does not by itself establish absence of native contributions.",
+      "reason": "Correct. Preserve actual dependency pin, directory/sibling inspection before inherited judgments, precise declaration starts and ownership-qualified comparisons. A Tau proof cannot certify standalone Mathlib availability. File-byte equality may reuse checked context but not establish an originally unreviewed mathematical claim.",
+      "evidence": [
+        "reviews/batch-073.json:standalone G2 unknown ownership corrections",
+        "reviews/batch-075.json:rotational-eigenvector, both libraries"
+      ]
+    },
+    {
+      "rule": "Statement-only conjectures",
+      "applicable_text": "Mark that distinction in saved evidence, the webpage, readable exports and aggregate counts; a positive conjecture-statement record is not a solved conjecture.",
+      "reason": "Correct, and API.md now documents computed concept_kind/statement_only. This is a report interpretation rule, not proof evidence. Never count these positives as proved theorem coverage.",
+      "evidence": [
+        "API.md:Formalization reports include concept_kind and statement_only"
+      ]
+    },
+    {
+      "rule": "Bounded actual-source review",
+      "applicable_text": "A source review is not a fresh Lean build or a transitive axiom audit; state the verification actually performed.",
+      "reason": "Retain. Completed declaration/proof-body inspection is required, but this coverage pass should not invent new Lean proofs, inspect every transitive proof dependency, or claim fresh elaboration/build verification.",
+      "evidence": []
+    }
+  ],
+  "changes": [
+    {
+      "id": "dependency-only-partial",
+      "priority": "high",
+      "target": "prompts/update-formalization-coverage.md, immediately after statuses; prompts/formalization.md, partial-coverage paragraph",
+      "applicable_text": "`partial`: identified native coverage with an explicit missing endpoint/scope.",
+      "problem": "The schema has no status for an identified partial implementation supplied only by dependencies. inherited requires FULL availability and partial requires NATIVE files. These reviewed cases currently become unknown despite meaningful checked partial availability. The prompts do not explicitly tell workers how to preserve that distinction.",
+      "proposed_text": "When only a proper part of the catalogue meaning is available through checked dependencies and no native core files qualify, save unknown with an empty file set under the current schema. State explicitly that this is checked dependency-only partial availability, name the covered component and supplier/pin/anchors, and state the unresolved endpoint. Do not call it inherited, invent native files, or describe it as an unsearched concept. Report this subgroup separately from unreviewed/unfinished unknowns when possible.",
+      "evidence": [
+        "reviews/batch-061.json:intrinsic-ultracontractivity, Tau Ceti",
+        "reviews/batch-061.json:killed-markov-process, Tau Ceti"
+      ]
+    },
+    {
+      "id": "ordinary-api-vs-input-api",
+      "priority": "high",
+      "target": "Both prompts, bounded core API/shared-file guidance",
+      "applicable_text": "Shared files require a direct contribution to each concept, rather than subclass inheritance alone.",
+      "problem": "Correct but underspecified. Review repeatedly had to separate a genuine ordinary law on the defining object from a refinement of one prerequisite input to a compound definition. Conversely, an ordinary law need not use every stronger subclass hypothesis to qualify.",
+      "proposed_text": "For a compound concept, identify the defining object or operation to which each selected declaration contributes. Ordinary laws under weaker hypotheses may qualify when they act directly on that object and are valid for the catalogue subclass; explain the instantiation and preserve any extra admissibility conditions. A formula about a prerequisite input alone does not qualify merely because that input occurs in the definition. Record the boundary judgment explicitly and have the independent reviewer check it.",
+      "evidence": [
+        "reviews/batch-063.json:mixing-time-total-variation Tau removes TV input-only file",
+        "reviews/batch-063.json:maximal-coupling-finite Tau retains actual coupling constructor/core API",
+        "reviews/batch-069.json:strong-stationary-time Tau restricts filtration transport to admissible independent-auxiliary filtrations",
+        "reviews/batch-053.json:closed-symmetric-form Tau ordinary same-form polarization"
+      ]
+    },
+    {
+      "id": "generic-representation-supplied-inputs",
+      "priority": "medium",
+      "target": "Both prompts, generic-constructor guidance",
+      "applicable_text": "A dedicated alias is not required when an independently checked generic constructor is already the exact representation.",
+      "problem": "Sound, but the saved evidence should distinguish a named bundled declaration from an exact generic representation on supplied inputs. Otherwise readers may infer a library constructs the missing ambient structure, or mistakes may hide an asserted realization theorem behind a newly assumed input.",
+      "proposed_text": "For a generic representation, write the actual mathematical/type-level instantiation, identify every supplied semantic input, and state which structures or existence results are not being constructed. Supplied inputs may match the domain of a bare definition; they may not assume away a realization, existence, comparison or other material endpoint asserted by the catalogue paragraph. Identify the exact supplying language/library constructor and revision. Say whether this is source-inspected representation evidence or an actually elaborated/build-checked Lean declaration.",
+      "evidence": [
+        "reviews/batch-075.json:rotational-eigenvector uses supplied genuine n-box rotation and period, not construction of a planar algebra",
+        "reviews/batch-063.json:maximal-coupling-finite defines maximal-plan predicate without asserting existence",
+        "proposals/batch-077.json:envy-free-allocation uses stock Lean forall/function constructors; independently accepted in reviews/batch-077.json"
+      ]
+    }
+  ],
+  "remaining_schema_limits": [
+    {
+      "limit": "Coverage extent and native contribution are encoded in one status.",
+      "effect": "Dependency-only partial coverage cannot be represented as partial without fictitious native files. Use the documented unknown fallback for this run; a future design could separate mathematical availability extent from native contribution ownership. No schema migration is required for this prompt review."
+    },
+    {
+      "limit": "Endpoint-by-endpoint coverage, supplier provenance and generic-versus-named representation are free-text evidence.",
+      "effect": "Structured queries cannot reliably separate which equivalence/existence clauses are proved or which exact supplier owns each component. Preserve explicit evidence now; avoid claiming aggregate complete endpoint coverage from generic/source-backed formula availability."
+    },
+    {
+      "limit": "statement_only is computed from concept kind, rather than an independently stored proof-state judgment.",
+      "effect": "It correctly warns about conjecture statements but cannot itself establish a proof or identify whether a later proof exists. Kind revisions and actual re-review must govern any stronger claim."
+    },
+    {
+      "limit": "Whole-file LOC is a shared catalogue allocation, not proof complexity or percentage coverage.",
+      "effect": "Native ordinary API may receive LOC when its definition is inherited; a large generic file may dominate a bare-definition estimate; partial LOC counts only selected implemented components. Never infer a larger body of concept-specific proof from the estimate, and never combine dependency zero LOC with absence."
+    }
+  ],
+  "recommended_operational_disposition": "Accept the present workflow. Root may add the three wording clarifications above and report schema limitations, preserving all mathematical judgments and published proposal/review history. No live mathematical identities or records should change because of this prompt review."
+}

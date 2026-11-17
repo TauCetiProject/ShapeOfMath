@@ -1,0 +1,803 @@
+Triebel-Lizorkin-Type Spaces with Variable Exponents
+
+Coverage: Definitions and contribution statements in§1;§2 transform characterization and imported estimates;§3 molecule/atom and maximal-function arguments;§4 trace construction and its concluding reconstruction inspected.
+Required concepts complete: True
+Introduced concepts complete: False
+All citations captured: True
+Completion refers to immediate concepts only; false means not certified.
+
+REQUIRED CONCEPT FRONTIER (18)
+
+- Almost orthogonality of dyadically dilated Schwartz kernels: If φ,ψ∈S(ℝⁿ) both have vanishing moments below the integer L≥0 and φⱼ(x)=2ʲⁿφ(2ʲx), ψₖ(x)=2ᵏⁿψ(2ᵏx), then for every M>0, |φⱼ*ψₖ(x)|≤C2^{−L|j−k|}2^{n min(j,k)}(1+2^min(j,k)|x|)⁻ᴹ. For j≥k only φ needs the moment condition; for k≥j only ψ does. Constants may depend on the fixed kernels, L,M,n, but not j,k,x.
+- Calderón reproducing formula for an inhomogeneous dyadic resolution: Let φ₀,ψ₀ be fixed Schwartz kernels and, for j≥1, let φ_j,ψ_j be the standard dyadic dilations of fixed Schwartz kernels with annular Fourier support, with φ̂₀ψ̂₀+∑_{j≥1}φ̂_jψ̂_j=1 and the high-frequency terms supported in dyadic annuli. Then f=ψ₀*φ₀*f+∑_{j≥1}ψ_j*φ_j*f in S′ for every tempered distribution f.
+- Characteristic-function norm estimates in variable-exponent Lebesgue spaces: Let 0<p⁻≤p⁺<∞ and p be globally log-Hölder. For a cube Q, ∥χ_Q∥_{p(·)}≈|Q|^{1/p(x)} for |Q|≤1 and x∈Q, and ≈|Q|^{1/p∞} for |Q|≥1. If Q₁⊂Q₂, their norm ratio lies between constant multiples of (|Q₁|/|Q₂|)^{1/p⁻} and (|Q₁|/|Q₂|)^{1/p⁺}. If p⁻>1, ∥χ_Q∥_{p(·)}∥χ_Q∥_{p′(·)}≈|Q|.
+- Doubling cube gauge: A positive measurable function φ(x,r) on ℝⁿ×(0,∞), viewed as a weight of the cube centered at x with side r, is doubling if φ(x,2r) is comparable to φ(x,r), uniformly in x,r. Write c̃₁⁻¹≤φ(x,r)/φ(x,2r)≤c₁; neither chosen constant must be at least one.
+- Dual norm formula in variable-exponent Lebesgue spaces: For measurable p with 1<p⁻≤p⁺<∞ and p′=p/(p−1), the associate norm sup{∫|fg|:∥g∥_{p′(·)}≤1} lies between ∥f∥_{p(·)} and 2∥f∥_{p(·)}. This formula is valid also for a measurable f whose norm is initially allowed to be infinite.
+- Embedding of variable-exponent Lebesgue spaces with a common limit at infinity: If globally log-Hölder exponents p₁,p₂ have positive finite lower and upper bounds, p₁≤p₂, and the same limit p∞ at infinity, then L^{p₂(·)}(ℝⁿ) continuously embeds into L^{p₁(·)}(ℝⁿ).
+- Frazier–Jawerth φ-transform: A discrete analysis map sends a tempered distribution to its scale-normalized convolutions with admissible band-limited Schwartz functions sampled at dyadic cube corners; a dual family reconstructs it by summing the associated atoms.
+- Hyperplane trace operator for a function space: The restriction map f(x₁,…,x_n)↦f(x₁,…,x_{n−1},0), initially on smooth functions; a trace on a larger function space is a continuous extension of this map when such an extension exists.
+- Hölder inequality in variable-exponent Lebesgue spaces: For measurable p with 1<p⁻≤p⁺<∞ and 1/p(x)+1/p′(x)=1, ∫|fg|≤2∥f∥_{p(·)}∥g∥_{p′(·)}.
+- Littlewood–Paley characterization of variable-exponent Lebesgue spaces: For globally log-Hölder p with 1<p⁻≤p⁺<∞ and a fixed admissible inhomogeneous Schwartz resolution, L^{p(·)}(ℝⁿ) consists exactly of the tempered distributions with finite ∥(∑_{j≥0}|ϕⱼ*f|²)^{1/2}∥_{p(·)}, and this square-function norm is equivalent to the Luxemburg norm.
+- Locally comparable cube gauge: A positive measurable cube gauge φ(x,r) is locally comparable if some C≥1 satisfies C⁻¹≤φ(x,r)/φ(y,r)≤C whenever |x−y|≤r. It compares cubes of the same size at nearby centers.
+- Log-Hölder extension from a coordinate hyperplane: Every bounded globally log-Hölder real function g on ℝⁿ⁻¹ extends to a globally log-Hölder function on ℝⁿ with the same limit at infinity and values between inf g and sup g. For any prescribed A>0, the extension may be chosen equal to g(x′) throughout the strip |t|≤A.
+- Minkowski inequality for Lᵖ norms: For 1≤p≤∞ and f,g∈Lᵖ of a measure space, ∥f+g∥_p≤∥f∥_p+∥g∥_p.
+- Peetre maximal estimate by dyadic local means: Fix an admissible inhomogeneous Schwartz resolution (Φⱼ), a>0, r>0 and an integer N≥a. For f∈S′ and ℓ≥0, [sup_z |Φℓ*f(x+z)|/(1+2^ℓ|z|)^a]^r≤C∑_{v≥0}2⁻ᵛᴺʳ2⁽ᵛ⁺ℓ⁾ⁿ∫|Φᵥ₊ℓ*f(y)|^r/(1+2^ℓ|x−y|)^{ar}dy. The constant depends on the fixed resolution and parameters, not f,ℓ,x; an infinite right side is allowed.
+- Peetre submean inequality for band-limited functions: For r>0 and m>n there is C such that every tempered distribution g with Fourier support in {|ξ|≤2^{ν+1}}, ν≥0, satisfies |g(x)|≤C[ηᵥ,ₘ*|g|^r(x)]^{1/r}, where ηᵥ,ₘ(x)=2^{νn}(1+2^ν|x|)⁻ᵐ. The band-limited distribution is represented by a smooth function; C is independent of g,ν,x.
+- Power triangle inequality in variable-exponent Lebesgue spaces: For a bounded positive measurable exponent p and 0<r≤min(1,p⁻), the Luxemburg quasi-norm satisfies ∥∑ᵢfᵢ∥_{p(·)}^r≤∑ᵢ∥fᵢ∥_{p(·)}^r for every finite family; the analogous countable inequality holds whenever the sum of the pointwise absolute values defines a measurable function.
+- Smooth molecule for dyadic function-space decompositions: A smooth molecule associated to a dyadic cube has prescribed vanishing moments and scale-normalized derivative bounds with polynomial decay away from that cube, instead of compact support.
+- Vector-valued convolution inequality in variable Lebesgue spaces: If p,q are globally log-Hölder with 1<p⁻≤p⁺<∞ and 1<q⁻≤q⁺<∞, then for m>n the kernels ηⱼ,m(x)=2ʲⁿ(1+2ʲ|x|)⁻ᵐ satisfy ∥(ηⱼ,m*fⱼ)ⱼ∥_{L^{p(·)}(ℓ^{q(·)})}≤C∥(fⱼ)ⱼ∥_{L^{p(·)}(ℓ^{q(·)})}.
+
+INHERITED PREREQUISITES (99)
+
+- Abelian group — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Admissible Schwartz pair for an inhomogeneous dyadic resolution — via frazier-jawerth-phi-transform, littlewood-paley-variable-lebesgue, peetre-local-means-estimate
+- Almost-everywhere property on a measure space — via dual-norm-variable-lebesgue, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, r-triangle-variable-lebesgue, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Bijection between sets — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Binary operation on a set — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Binary relation on a set — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Borel σ-algebra of a topological space — via indicator-norm-variable-lebesgue
+- Borel σ-algebra on the real line — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Cartesian product of sets — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Closure of a subset of a topological space — via band-limited-r-trick, frazier-jawerth-phi-transform, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, smooth-molecule-triebel-lizorkin
+- Commutative ring with identity — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Compact topological space — via band-limited-r-trick
+- Compactly supported smooth test function on an open Euclidean set — via band-limited-r-trick
+- Complement of a subset — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Complete measure — via indicator-norm-variable-lebesgue
+- Complex exponential function — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, littlewood-paley-variable-lebesgue, peetre-local-means-estimate
+- Complex number — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Complex power series — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, littlewood-paley-variable-lebesgue, peetre-local-means-estimate
+- Composition of functions — via hyperplane-trace-function-space
+- Continuous map between topological spaces — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, hyperplane-trace-function-space, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality
+- Convergence of a sequence in a metric space — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, littlewood-paley-variable-lebesgue, peetre-local-means-estimate
+- Convergent real series — via dual-norm-variable-lebesgue, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, log-holder-hyperplane-extension, minkowski-inequality-lp, r-triangle-variable-lebesgue, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Convex subset of a real vector space — via band-limited-r-trick
+- Convolution on Euclidean space — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, littlewood-paley-variable-lebesgue, schwartz-dyadic-almost-orthogonality, variable-convolution-inequality
+- Derivative of a real function — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, hyperplane-trace-function-space, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality
+- Disjoint sets — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Distribution on an open Euclidean set — via band-limited-r-trick
+- Dyadic cube in Euclidean space — via calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, smooth-molecule-triebel-lizorkin
+- Equivalence class — via dual-norm-variable-lebesgue, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, r-triangle-variable-lebesgue, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Equivalence relation — via dual-norm-variable-lebesgue, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, r-triangle-variable-lebesgue, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Essential supremum of a measurable real function — via dual-norm-variable-lebesgue, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, r-triangle-variable-lebesgue, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Euclidean space ℝᵈ — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, frazier-jawerth-phi-transform, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Extended nonnegative real numbers — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Factorial — via dual-norm-variable-lebesgue, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, log-holder-hyperplane-extension, minkowski-inequality-lp, r-triangle-variable-lebesgue, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Field — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Finite set — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Fourier transform on Euclidean space — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, littlewood-paley-variable-lebesgue, peetre-local-means-estimate
+- Function between sets — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Group — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Indicator function of a subset — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Integer — via calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, smooth-molecule-triebel-lizorkin
+- Intersection of a family of sets — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Least upper bound in a partially ordered set — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Lebesgue Lᵖ space — via minkowski-inequality-lp
+- Lebesgue integral — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Lebesgue measure on Euclidean space — via indicator-norm-variable-lebesgue
+- Limit of a function between metric spaces — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, hyperplane-trace-function-space, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality
+- Limit of a real function at a point — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, hyperplane-trace-function-space, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality
+- Limit of a real sequence — via dual-norm-variable-lebesgue, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, log-holder-hyperplane-extension, minkowski-inequality-lp, r-triangle-variable-lebesgue, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Linear map between vector spaces — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, hyperplane-trace-function-space, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, variable-convolution-inequality
+- Locally convex topological vector space — via band-limited-r-trick
+- Log-Hölder continuous variable exponent — via indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, log-holder-hyperplane-extension, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Measurable map between measurable spaces — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Measurable simple real function — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Measurable space — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Measure — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Metric space — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, hyperplane-trace-function-space, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality
+- Mixed variable Lebesgue–sequence space L^{p(·)}(ℓ^{q(·)}) — via littlewood-paley-variable-lebesgue, variable-convolution-inequality
+- Modulus of a complex number — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Natural logarithm — via dual-norm-variable-lebesgue, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, log-holder-hyperplane-extension, minkowski-inequality-lp, r-triangle-variable-lebesgue, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Natural number — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Nonnegative real square root — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Normed vector space — via minkowski-inequality-lp
+- Open interval in the real line — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Ordered field — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Ordered pair — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Partial derivative in Euclidean coordinates — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, hyperplane-trace-function-space, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality
+- Partial order — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Peetre maximal function of a band-limited function — via peetre-local-means-estimate
+- Preimage of a subset under a function — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Product topology — via band-limited-r-trick
+- Quasi-normed vector space — via dual-norm-variable-lebesgue, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, r-triangle-variable-lebesgue, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Real exponential function — via dual-norm-variable-lebesgue, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, log-holder-hyperplane-extension, minkowski-inequality-lp, r-triangle-variable-lebesgue, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Real number — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Real polynomial in finitely many variables — via schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin
+- Real power of a positive real number — via dual-norm-variable-lebesgue, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, r-triangle-variable-lebesgue, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Real sequence — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Schwartz space — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality
+- Seminorm on a real or complex vector space — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality
+- Sequence in a set — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Set — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Smooth atom for dyadic function-space decompositions — via smooth-molecule-triebel-lizorkin
+- Smooth map between open Euclidean sets — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, hyperplane-trace-function-space, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality
+- Subset — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Sum of a nonnegative series — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Support of a distribution — via band-limited-r-trick
+- Support of a function — via band-limited-r-trick, frazier-jawerth-phi-transform, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, smooth-molecule-triebel-lizorkin
+- Tempered distribution — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, variable-convolution-inequality
+- Test-function topology on C_c^∞ of an open Euclidean set — via band-limited-r-trick
+- Topological space — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality
+- Topological vector space over ℝ or ℂ — via band-limited-r-trick
+- Topology generated by a family of seminorms — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, frazier-jawerth-phi-transform, littlewood-paley-variable-lebesgue, peetre-local-means-estimate, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality
+- Total order — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Union of a family of sets — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Vanishing polynomial moments of a Euclidean function — via schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin
+- Variable-exponent Lebesgue space — via dual-norm-variable-lebesgue, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, r-triangle-variable-lebesgue, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- Vector space — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, hyperplane-trace-function-space, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- σ-algebra — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, doubling-cube-gauge, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, locally-comparable-cube-gauge, log-holder-hyperplane-extension, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+- σ-algebra generated by a family of subsets — via band-limited-r-trick, calderon-inhomogeneous-reproducing-formula, dual-norm-variable-lebesgue, frazier-jawerth-phi-transform, holder-variable-lebesgue, indicator-norm-variable-lebesgue, littlewood-paley-variable-lebesgue, minkowski-inequality-lp, peetre-local-means-estimate, r-triangle-variable-lebesgue, schwartz-dyadic-almost-orthogonality, smooth-molecule-triebel-lizorkin, variable-convolution-inequality, variable-lebesgue-common-limit-embedding
+
+INTRODUCED CONCEPTS (9)
+
+- Atomic and molecular characterization of cube-weighted variable Triebel–Lizorkin spaces
+- Full-frequency cube norm for variable Triebel–Lizorkin-type spaces
+- Hyperplane trace theorem for cube-weighted variable Triebel–Lizorkin spaces
+- Morrey identification of zero-smoothness variable Triebel–Lizorkin-type spaces
+- Peetre maximal characterization of cube-weighted variable Triebel–Lizorkin spaces
+- Sobolev embedding for cube-weighted variable Triebel–Lizorkin spaces
+- Triebel–Lizorkin-type sequence space with variable exponents and cube weight
+- Triebel–Lizorkin-type space with variable exponents and cube weight
+- φ-transform characterization of variable-exponent Triebel–Lizorkin-type spaces
+
+LOCATED CONCEPTS (40)
+
+1. Tempered distribution
+   A continuous linear functional on the Schwartz space S(ℝⁿ).
+   Source: relies_on, Definition1.4;§§2–4
+   Note: The spaces and reconstructions are in S′, not merely pointwise functions.
+
+2. Schwartz space
+   The space S(ℝⁿ) of smooth functions φ for which supₓ|xᵅ∂ᵝφ(x)| is finite for every pair of multi-indices α,β, with the topology of these seminorms.
+   Source: relies_on, §1 beforeDefinition1.4
+   Note: Admissible frequency-localized kernels and test functions.
+
+3. Fourier transform on Euclidean space
+   For an integrable f on ℝⁿ, its Fourier transform is f̂(ξ)=∫f(x)e⁻ⁱˣ·ξ dx; extend it to Schwartz functions and tempered distributions by duality.
+   Source: relies_on, §1 equations1.2–1.3;§2
+   Note: The dyadic partition and reconstruction use Fourier supports.
+
+4. Convolution on Euclidean space
+   For functions with an appropriate integrability condition, (f*g)(x)=∫f(x−y)g(y)dy; convolution of a tempered distribution with a Schwartz function is defined by duality.
+   Source: relies_on, Definition1.4 and§2
+   Note: All dyadic pieces are convolution operators.
+
+5. Variable-exponent Lebesgue space
+   For measurable p:ℝⁿ→(0,∞) with 0<ess inf p≤ess sup p<∞, L^{p(·)} consists of measurable functions of finite Luxemburg quasi-norm inf{λ>0:∫|f(x)/λ|^{p(x)}dx≤1}, modulo equality almost everywhere.
+   Source: relies_on, §1 pp.4–5
+   Note: The Luxemburg quasi-norm permits p⁻<1; not restricted to the Banach range.
+
+6. Mixed variable Lebesgue–sequence space L^{p(·)}(ℓ^{q(·)})
+   A sequence of measurable functions (fⱼ) has quasi-norm ∥(∑ⱼ|fⱼ(·)|^{q(·)})^{1/q(·)}∥_{L^{p(·)}}; functions are identified almost everywhere.
+   Source: relies_on, §1 p.3; Lemma2.9
+   Note: The pointwise variable sequence exponent is essential.
+
+7. Log-Hölder continuous variable exponent
+   An exponent p is locally log-Hölder if |p(x)−p(y)|≤C/log(e+1/|x−y|); global log-Hölder continuity additionally requires |p(x)−p∞|≤C/log(e+|x|) for a constant p∞.
+   Source: relies_on, §1 equation1.1
+   Note: Local and global regularity hypotheses must be distinguished.
+
+8. Dyadic cube in Euclidean space
+   A half-open cube 2⁻ʲ([0,1)ⁿ+k), with j∈ℤ and k∈ℤⁿ.
+   Source: relies_on, §1 p.6
+   Note: Scale/location indexing and cube-wise supremum.
+
+9. Vector-valued convolution inequality in variable Lebesgue spaces
+   If p,q are globally log-Hölder with 1<p⁻≤p⁺<∞ and 1<q⁻≤q⁺<∞, then for m>n the kernels ηⱼ,m(x)=2ʲⁿ(1+2ʲ|x|)⁻ᵐ satisfy ∥(ηⱼ,m*fⱼ)ⱼ∥_{L^{p(·)}(ℓ^{q(·)})}≤C∥(fⱼ)ⱼ∥_{L^{p(·)}(ℓ^{q(·)})}.
+   Source: relies_on, Lemma2.9
+   Note: Explicitly imported as Diening–Hästö–Roudenko[20] Theorem3.2; not new here.
+
+10. Peetre maximal function of a band-limited function
+   For scale j and a>0, the Peetre maximal function is f*_{j,a}(x)=sup_y |f(y)|/(1+2ʲ|x−y|)^a, used for functions localized to a frequency band of size 2ʲ.
+   Source: relies_on, Theorem3.11
+   Note: Equivalent maximal-function characterization.
+
+11. Smooth atom for dyadic function-space decompositions
+   A smooth atom associated to a dyadic cube Q is supported in a fixed dilation of Q, obeys scale-normalized derivative bounds up to a specified order, and has vanishing polynomial moments up to a specified order.
+   Source: relies_on, Definition3.6;Theorem3.8
+   Note: Scale normalization, support and moment conditions.
+
+12. Smooth molecule for dyadic function-space decompositions
+   A smooth molecule associated to a dyadic cube has prescribed vanishing moments and scale-normalized derivative bounds with polynomial decay away from that cube, instead of compact support.
+   Source: relies_on, Definition3.6;Theorem3.8
+   Note: Decaying molecules yield bounded synthesis.
+
+13. Frazier–Jawerth φ-transform
+   A discrete analysis map sends a tempered distribution to its scale-normalized convolutions with admissible band-limited Schwartz functions sampled at dyadic cube corners; a dual family reconstructs it by summing the associated atoms.
+   Source: relies_on, §2 beforeTheorem2.3
+   Note: Classical transform is credited to Frazier–Jawerth[27]; the new result concerns its boundedness for the new scale.
+
+14. Variable-exponent Lebesgue space
+   For measurable p:ℝⁿ→(0,∞) with 0<ess inf p≤ess sup p<∞, L^{p(·)} consists of measurable functions of finite Luxemburg quasi-norm inf{λ>0:∫|f(x)/λ|^{p(x)}dx≤1}, modulo equality almost everywhere.
+   Source: explains, §1 pp.4–5
+   Note: Recalls the Luxemburg construction and attributes the older variable-exponent literature.
+
+15. Log-Hölder continuous variable exponent
+   An exponent p is locally log-Hölder if |p(x)−p(y)|≤C/log(e+1/|x−y|); global log-Hölder continuity additionally requires |p(x)−p∞|≤C/log(e+|x|) for a constant p∞.
+   Source: explains, §1 p.5
+   Note: The continuity conventions are explicitly recalled.
+
+16. Triebel–Lizorkin-type space with variable exponents and cube weight
+   For bounded positive exponents p,q with globally log-Hölder reciprocals, bounded locally log-Hölder smoothness s, and a positive doubling/locally comparable cube weight φ, F^{s(·),φ}_{p(·),q(·)} consists of tempered distributions with finite sup_P φ(P)⁻¹∥(∑_{j≥max(0,−log₂ℓ(P))}(2^{js(·)}|ϕⱼ*f|)^{q(·)})^{1/q(·)}∥_{L^{p(·)}(P)}. Here P ranges over dyadic cubes and the admissible Schwartz family includes a low-frequency term at j=0.
+   Source: introduces, Definition1.4 and§1 contribution discussion
+   Note: New combined variable-smoothness/integrability/cube-weight scale.
+   Origin evidence: The introduction explicitly distinguishes the earlier constant-exponent type spaces[76,77,80] and earlier variable-exponent unweighted spaces[20,35], and announces the combined F^{s(·),φ}_{p(·),q(·)} scale introduced inDefinition1.4.
+
+17. φ-transform characterization of variable-exponent Triebel–Lizorkin-type spaces
+   For the admissible p,q,s,φ defining F^{s(·),φ}_{p(·),q(·)}, the Frazier–Jawerth analysis and synthesis maps are bounded between this function space and its matching dyadic coefficient space, and analysis followed by synthesis reconstructs the distribution: TψSϕ=id. In particular the function-space quasi-norm is independent, up to equivalence, of the admissible Schwartz pair.
+   Source: introduces, Theorem2.3 andCorollary2.4
+   Note: Main bounded analysis/reconstruction theorem for the new scale.
+   Origin evidence: §2 states this as the characterization for the newly defined scale; the paper credits the transform itself toFrazier–Jawerth, and the proof extends earlier estimates using the imported variable convolution bound. The claim is the boundedness/reconstruction result in this precise parameter family, not invention of the transform.
+
+18. Hölder inequality in variable-exponent Lebesgue spaces
+   For measurable p with 1<p⁻≤p⁺<∞ and 1/p(x)+1/p′(x)=1, ∫|fg|≤2∥f∥_{p(·)}∥g∥_{p′(·)}.
+   Source: explains, Remark1.1(iii); elementary normalized-modular proof in005-proof-notes.txt
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+19. Calderón reproducing formula for an inhomogeneous dyadic resolution
+   Let φ₀,ψ₀ be fixed Schwartz kernels and, for j≥1, let φ_j,ψ_j be the standard dyadic dilations of fixed Schwartz kernels with annular Fourier support, with φ̂₀ψ̂₀+∑_{j≥1}φ̂_jψ̂_j=1 and the high-frequency terms supported in dyadic annuli. Then f=ψ₀*φ₀*f+∑_{j≥1}ψ_j*φ_j*f in S′ for every tempered distribution f.
+   Source: explains, ProofTheorem2.3,(2.14); uses the stated admissible smooth dyadic resolution
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+20. Support of a distribution
+   The complement of the largest open set on which the distribution vanishes on every smooth compactly supported test function.
+   Source: relies_on, Admissibilityconditions(1.2)–(1.3),§2
+   Note: Band localization refers to support of the Fourier transform of a tempered distribution.
+
+21. Hyperplane trace operator for a function space
+   The restriction map f(x₁,…,x_n)↦f(x₁,…,x_{n−1},0), initially on smooth functions; a trace on a larger function space is a continuous extension of this map when such an extension exists.
+   Source: relies_on, §4,especially(4.1) andTheorem4.1
+   Note: The section constructs the continuous restriction to x_n=0; the generic notion of trace is background.
+
+22. Hölder inequality in variable-exponent Lebesgue spaces
+   For measurable p with 1<p⁻≤p⁺<∞ and 1/p(x)+1/p′(x)=1, ∫|fg|≤2∥f∥_{p(·)}∥g∥_{p′(·)}.
+   Source: relies_on, Remark1.1(iii) and§§2–4
+   Note: The proof uses the variable-exponent Hölder inequality, not merely the classical fixed-p version.
+
+23. Minkowski inequality for Lᵖ norms
+   For 1≤p≤∞ and f,g∈Lᵖ of a measure space, ∥f+g∥_p≤∥f∥_p+∥g∥_p.
+   Source: relies_on, Proofs§§2–4
+   Note: Minkowski is explicitly invoked for finite/sequence norms after the appropriate r-trick.
+
+24. Calderón reproducing formula for an inhomogeneous dyadic resolution
+   Let φ₀,ψ₀ be fixed Schwartz kernels and, for j≥1, let φ_j,ψ_j be the standard dyadic dilations of fixed Schwartz kernels with annular Fourier support, with φ̂₀ψ̂₀+∑_{j≥1}φ̂_jψ̂_j=1 and the high-frequency terms supported in dyadic annuli. Then f=ψ₀*φ₀*f+∑_{j≥1}ψ_j*φ_j*f in S′ for every tempered distribution f.
+   Source: relies_on, ProofTheorem2.3 and later§3
+   Note: The reconstruction identity is repeatedly imported by name.
+
+25. Dual norm formula in variable-exponent Lebesgue spaces
+   For measurable p with 1<p⁻≤p⁺<∞ and p′=p/(p−1), the associate norm sup{∫|fg|:∥g∥_{p′(·)}≤1} lies between ∥f∥_{p(·)} and 2∥f∥_{p(·)}. This formula is valid also for a measurable f whose norm is initially allowed to be infinite.
+   Source: relies_on, Remark3.17 andProposition3.18
+   Note: Actual definition or imported estimate used in this argument; located independently of introduced conclusions.
+
+26. Power triangle inequality in variable-exponent Lebesgue spaces
+   For a bounded positive measurable exponent p and 0<r≤min(1,p⁻), the Luxemburg quasi-norm satisfies ∥∑ᵢfᵢ∥_{p(·)}^r≤∑ᵢ∥fᵢ∥_{p(·)}^r for every finite family; the analogous countable inequality holds whenever the sum of the pointwise absolute values defines a measurable function.
+   Source: relies_on, Remark1.1(i), used throughout§§2–4
+   Note: Actual definition or imported estimate used in this argument; located independently of introduced conclusions.
+
+27. Doubling cube gauge
+   A positive measurable function φ(x,r) on ℝⁿ×(0,∞), viewed as a weight of the cube centered at x with side r, is doubling if φ(x,2r) is comparable to φ(x,r), uniformly in x,r. Write c̃₁⁻¹≤φ(x,r)/φ(x,2r)≤c₁; neither chosen constant must be at least one.
+   Source: relies_on, Definition1.4(S1)
+   Note: Actual definition or imported estimate used in this argument; located independently of introduced conclusions.
+
+28. Locally comparable cube gauge
+   A positive measurable cube gauge φ(x,r) is locally comparable if some C≥1 satisfies C⁻¹≤φ(x,r)/φ(y,r)≤C whenever |x−y|≤r. It compares cubes of the same size at nearby centers.
+   Source: relies_on, Definition1.4(S2)
+   Note: Actual definition or imported estimate used in this argument; located independently of introduced conclusions.
+
+29. Admissible Schwartz pair for an inhomogeneous dyadic resolution
+   An admissible pair (ϕ,Φ) consists of Schwartz functions with supp ϕ̂⊂{1/2≤|ξ|≤2}, |ϕ̂| bounded below on {3/5≤|ξ|≤5/3}, supp Φ̂⊂{|ξ|≤2}, and |Φ̂| bounded below on {|ξ|≤5/3}. Its inhomogeneous family is Φ at scale0 and ϕⱼ(x)=2ʲⁿϕ(2ʲx) for j≥1.
+   Source: relies_on, §1(1.2)–(1.3);§2
+   Note: Actual definition or imported estimate used in this argument; located independently of introduced conclusions.
+
+30. Almost orthogonality of dyadically dilated Schwartz kernels
+   If φ,ψ∈S(ℝⁿ) both have vanishing moments below the integer L≥0 and φⱼ(x)=2ʲⁿφ(2ʲx), ψₖ(x)=2ᵏⁿψ(2ᵏx), then for every M>0, |φⱼ*ψₖ(x)|≤C2^{−L|j−k|}2^{n min(j,k)}(1+2^min(j,k)|x|)⁻ᴹ. For j≥k only φ needs the moment condition; for k≥j only ψ does. Constants may depend on the fixed kernels, L,M,n, but not j,k,x.
+   Source: relies_on, ProofTheorem3.8, convolution estimates
+   Note: Actual definition or imported estimate used in this argument; located independently of introduced conclusions.
+
+31. Peetre maximal estimate by dyadic local means
+   Fix an admissible inhomogeneous Schwartz resolution (Φⱼ), a>0, r>0 and an integer N≥a. For f∈S′ and ℓ≥0, [sup_z |Φℓ*f(x+z)|/(1+2^ℓ|z|)^a]^r≤C∑_{v≥0}2⁻ᵛᴺʳ2⁽ᵛ⁺ℓ⁾ⁿ∫|Φᵥ₊ℓ*f(y)|^r/(1+2^ℓ|x−y|)^{ar}dy. The constant depends on the fixed resolution and parameters, not f,ℓ,x; an infinite right side is allowed.
+   Source: relies_on, Lemma3.10; proofTheorem3.11
+   Note: Actual definition or imported estimate used in this argument; located independently of introduced conclusions.
+
+32. Peetre submean inequality for band-limited functions
+   For r>0 and m>n there is C such that every tempered distribution g with Fourier support in {|ξ|≤2^{ν+1}}, ν≥0, satisfies |g(x)|≤C[ηᵥ,ₘ*|g|^r(x)]^{1/r}, where ηᵥ,ₘ(x)=2^{νn}(1+2^ν|x|)⁻ᵐ. The band-limited distribution is represented by a smooth function; C is independent of g,ν,x.
+   Source: relies_on, Lemma2.5; Lemma2.8 andlater proofs
+   Note: Actual definition or imported estimate used in this argument; located independently of introduced conclusions.
+
+33. Characteristic-function norm estimates in variable-exponent Lebesgue spaces
+   Let 0<p⁻≤p⁺<∞ and p be globally log-Hölder. For a cube Q, ∥χ_Q∥_{p(·)}≈|Q|^{1/p(x)} for |Q|≤1 and x∈Q, and ≈|Q|^{1/p∞} for |Q|≥1. If Q₁⊂Q₂, their norm ratio lies between constant multiples of (|Q₁|/|Q₂|)^{1/p⁻} and (|Q₁|/|Q₂|)^{1/p⁺}. If p⁻>1, ∥χ_Q∥_{p(·)}∥χ_Q∥_{p′(·)}≈|Q|.
+   Source: relies_on, Lemma2.7; Proposition3.18 andtraceproof
+   Note: Actual definition or imported estimate used in this argument; located independently of introduced conclusions.
+
+34. Embedding of variable-exponent Lebesgue spaces with a common limit at infinity
+   If globally log-Hölder exponents p₁,p₂ have positive finite lower and upper bounds, p₁≤p₂, and the same limit p∞ at infinity, then L^{p₂(·)}(ℝⁿ) continuously embeds into L^{p₁(·)}(ℝⁿ).
+   Source: relies_on, Lemma4.4; Proposition4.5
+   Note: Actual definition or imported estimate used in this argument; located independently of introduced conclusions.
+
+35. Log-Hölder extension from a coordinate hyperplane
+   Every bounded globally log-Hölder real function g on ℝⁿ⁻¹ extends to a globally log-Hölder function on ℝⁿ with the same limit at infinity and values between inf g and sup g. For any prescribed A>0, the extension may be chosen equal to g(x′) throughout the strip |t|≤A.
+   Source: relies_on, ProofTheorem4.1 Step1, extension from the hyperplane strip
+   Note: Actual definition or imported estimate used in this argument; located independently of introduced conclusions.
+
+36. Littlewood–Paley characterization of variable-exponent Lebesgue spaces
+   For globally log-Hölder p with 1<p⁻≤p⁺<∞ and a fixed admissible inhomogeneous Schwartz resolution, L^{p(·)}(ℝⁿ) consists exactly of the tempered distributions with finite ∥(∑_{j≥0}|ϕⱼ*f|²)^{1/2}∥_{p(·)}, and this square-function norm is equivalent to the Luxemburg norm.
+   Source: relies_on, Proposition3.18 proof, recalledDieningTheorem4.2
+   Note: Actual definition or imported estimate used in this argument; located independently of introduced conclusions.
+
+37. Sobolev embedding for cube-weighted variable Triebel–Lizorkin spaces
+   For admissible pᵢ,q,sᵢ,φ, if p₀≤p₁, s₀≥s₁ and s₀−n/p₀=s₁−n/p₁ pointwise, then F^{s₀(·),φ}_{p₀(·),q(·)} continuously embeds into F^{s₁(·),φ}_{p₁(·),q(·)}. If inf(s₀−s₁)>0, the source and target may have different arbitrary admissible sequence exponents q₀,q₁.
+   Source: introduces, Corollaries3.4–3.5, afterTheorems3.1–3.2
+   Note: Original full parameter-family result; earlier special cases retain their own priority.
+   Origin evidence: §3 first proves the coefficient-space Sobolev embedding for the new variable/cube-gauge class and derivesCorollaries3.4–3.5. Remark3.3 credits Vybíral[72]Theorems3.1–3.2 whenφ=1 and Yuanbook[80]Prop2.5 for constant exponents; the contribution is the stated combined generalization.
+
+38. Atomic and molecular characterization of cube-weighted variable Triebel–Lizorkin spaces
+   For admissible p,q,s,φ, put c̃₁⁻¹≤φ(x,r)/φ(x,2r). If nonnegative integers K>s⁺+max(0,log₂c̃₁) and L>n/min(1,p⁻,q⁻)−n−s⁻, then sufficiently rapidly decaying uniformly normalized (K,L)-molecules synthesize matching dyadic coefficient sequences boundedly into F^{s(·),φ}_{p(·),q(·)}, with convergence in S′. Conversely every element has a smooth atomic expansion with coefficient quasi-norm bounded by its function-space quasi-norm, with arbitrarily prescribed nonnegative orders K,L; scale0 atoms require no cancellation.
+   Source: introduces, Theorem3.8(i)–(ii); Definition3.6
+   Note: Original full parameter-family result; earlier special cases retain their own priority.
+   Origin evidence: Theorem3.8 announces and proves the characterization for the combinedvariable/gauge class. The surrounding discussion credits Kempka[35]Cor5.6 forφ=1 and Drihem[23]Theorem3.12/Yuanbook[80]Theorem3.3 for constant-exponent type spaces. This exact full-family theorem, not atoms/molecules themselves, is attributed here.
+
+39. Peetre maximal characterization of cube-weighted variable Triebel–Lizorkin spaces
+   For admissible p,q,s,φ, if a>n/min(p⁻,q⁻)+log₂c̃₁+C_log(s), the quasi-norm of F^{s(·),φ}_{p(·),q(·)} is equivalent to the same cube-wise mixed quasi-norm with each |ϕⱼ*f(x)| replaced by sup_y |ϕⱼ*f(x+y)|/(1+2ʲ|y|)^a. Here c̃₁ is the lower scale-comparison constant in φ(x,r)/φ(x,2r)≥c̃₁⁻¹ and C_log(s) is a local log-Hölder constant.
+   Source: introduces, Theorem3.11
+   Note: Original full parameter-family result; earlier special cases retain their own priority.
+   Origin evidence: §3 provesTheorem3.11 for the newly combined class; its proof explicitly importsUllrich[71](2.48)/(2.66), rather than claiming those local-means estimates are new. Earlier maximal characterizations for unweighted or constant-exponent scales are credited toLiang[46]/Ullrich[71] and the type-space literature.
+
+40. Full-frequency cube norm for variable Triebel–Lizorkin-type spaces
+   For admissible p,q,s,φ with lower scale-comparison constant c̃₁<2^{n/p⁺}, an equivalent quasi-norm of F^{s(·),φ}_{p(·),q(·)} is obtained by summing all inhomogeneous scales j≥0 inside every dyadic cube, instead of starting at max(0,−log₂ℓ(P)).
+   Source: introduces, Theorem3.12(i)
+   Note: Original full parameter-family result; earlier special cases retain their own priority.
+   Origin evidence: Theorem3.12(i) is proved for the combined variable-exponent/cube-gauge family usingTheorem3.11. The following comparison discussion credits earlier constant-exponent equivalent cube norms toYuanbook[80]Cor3.3(i) and[78]Theorem2.2(i). This record does not silently repair the separately ambiguous indexing in3.12(ii).
+
+41. Variable-exponent Morrey space with a cube gauge
+   For a positive measurable cube gauge φ and a bounded positive exponent p, M_φ^{p(·)}(ℝⁿ) consists of measurable functions modulo almost-everywhere equality for which sup_P φ(P)⁻¹∥fχ_P∥_{L^{p(·)}} is finite; the supremum is over dyadic cubes P. This fixes the cube-gauge convention, which differs from some other generalized Morrey normalizations.
+   Source: explains, Definition afterRemark3.15; Remark3.16
+   Note: The paper teaches this convention and compares Ho/Nakai variable Morrey normalizations. No origin claim is inferred from a numbered definition; the comparisons are not imposed as prior reading roots.
+
+42. Morrey identification of zero-smoothness variable Triebel–Lizorkin-type spaces
+   For globally log-Hölder p with 1<p⁻≤p⁺<∞ and a doubling locally comparable cube gauge with c̃₁<2^{n/p⁺}, M_φ^{p(·)}(ℝⁿ)=F^{0,φ}_{p(·),2}(ℝⁿ) with equivalent norms.
+   Source: introduces, Proposition3.18
+   Note: Original full parameter-family result; earlier special cases retain their own priority.
+   Origin evidence: Proposition3.18 proves the identification for the specified combined variable/gauge class. Its preceding discussion compares earlier variable Morrey models[31,52] and cites the classical constant-exponent Morrey/Triebel identification[62]Theorem3.9; those credits do not supply the full new proposition.
+
+43. Hyperplane trace theorem for cube-weighted variable Triebel–Lizorkin spaces
+   For admissible p,q,s,φ on ℝⁿ, n≥2, assume s⁻−1/p⁻−(n−1)(1/min(1,p⁻)−1)>0. Write p̄(x′)=p(x′,0), s̄(x′)=s(x′,0), and φ̄(Q′)=φ(Q′×[0,ℓ(Q′))). Restriction extends continuously and surjectively from F^{s(·),φ}_{p(·),q(·)}(ℝⁿ) onto F^{s̄(·)−1/p̄(·),φ̄}_{p̄(·),p̄(·)}(ℝⁿ⁻¹); in particular the trace range is independent of q.
+   Source: introduces, Theorem4.1; Propositions4.5–4.8; traceconstructionLemma4.3
+   Note: Original full parameter-family result; earlier special cases retain their own priority.
+   Origin evidence: §1 announces and§4 proves the trace theorem for the combined cube-gauge/variable family. Remark4.2 explicitly creditsDiening–Hästö–Roudenko[20]Theorem3.13 andNoi[56]Theorem5.1 in the unweightedφ=1 case and notes the stronger global-gap hypothesis used here. The claim is this precise generalization, not invention of hyperplane trace theory.
+
+44. Triebel–Lizorkin-type sequence space with variable exponents and cube weight
+   For bounded positive exponents p,q with globally log-Hölder reciprocals, bounded locally log-Hölder s, and a doubling, locally comparable cube weight φ, f^{s(·),φ}_{p(·),q(·)} consists of complex sequences t=(t_Q) indexed by dyadic cubes of side at most 1 with finite sup_P φ(P)⁻¹∥(∑_{Q⊂P}(|Q|^{−s(·)/n−1/2}|t_Q|χ_Q)^{q(·)})^{1/q(·)}∥_{L^{p(·)}(P)}, the supremum over all dyadic cubes P; for q≡∞ the sum is replaced by a supremum.
+   Source: introduces, Definition 2.1
+   Note: Sequence space matching the function space of Definition 1.4; φ≡1 gives the Diening–Hästö–Roudenko space and constant exponents with φ=|Q|^τ give the Yuan–Sickel–Yang space.
+   Origin evidence: §2 opens: 'we first introduce the sequence space f^{s(·),φ}_{p(·),q(·)} corresponding to the space F^{s(·),φ}_{p(·),q(·)}'; Definition 2.1 combines variable p,q,s with a general cube weight φ, and §1 credits only the unweighted variable case [20] and the constant-exponent τ case [80] as predecessors.
+
+ADDITIONAL PREREQUISITES (87)
+
+- Abelian group [definition]: A group whose operation is commutative.
+- Almost-everywhere property on a measure space [definition]: A property holds almost everywhere if the set where it fails is contained in a measurable set of measure zero.
+- Bijection between sets [definition]: A function for which each element of the codomain is the image of exactly one element of the domain.
+- Binary operation on a set [definition]: A function S×S→S.
+- Binary relation on a set [definition]: A subset R⊆S×S; writing xRy means (x,y)∈R.
+- Borel σ-algebra of a topological space [definition]: The σ-algebra generated by the open subsets of the space.
+- Borel σ-algebra on the real line [definition]: The σ-algebra on ℝ generated by the open intervals.
+- Cartesian product of sets [definition]: A×B is the set of ordered pairs (a,b) with a∈A and b∈B.
+- Closure of a subset of a topological space [definition]: The closure of A is the intersection of all closed subsets containing A; a set is closed when its complement is open.
+- Commutative ring with identity [definition]: An abelian group under addition, together with an associative commutative multiplication with identity, distributing over addition. The zero ring is allowed.
+- Compact topological space [definition]: A topological space in which every open cover has a finite subcover.
+- Compactly supported smooth test function on an open Euclidean set [definition]: A smooth function on an open Ω⊂ℝⁿ whose support is a compact subset of Ω; these form C_c^∞(Ω).
+- Complement of a subset [definition]: For A⊆Ω, its complement Ω∖A consists of the elements of Ω that do not belong to A.
+- Complete measure [definition]: A measure is complete if every subset of a measurable null set is measurable and has measure zero.
+- Complex exponential function [definition]: The entire function exp(z)=∑ₙ₌₀∞zⁿ/n!; on imaginary arguments exp(it)=cos(t)+i sin(t).
+- Complex number [definition]: A complex number is a pair of real numbers, written a+bi. Addition is componentwise and multiplication is (a+bi)(c+di)=(ac−bd)+(ad+bc)i, so i²=−1.
+- Complex power series [definition]: A series ∑ₙ₌₀∞aₙ(z−z₀)ⁿ with complex coefficients, considered at points where its partial sums converge.
+- Composition of functions [definition]: For f:A→B and g:B→C, the composite g∘f:A→C sends x to g(f(x)).
+- Continuous map between topological spaces [definition]: A map is continuous if the preimage of every open subset of its target is open in its domain.
+- Convergence of a sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) converges to x∈X if for every ε>0 there is N such that d(xₙ,x)<ε whenever n≥N.
+- Convergent real series [definition]: The series ∑ₙ≥1aₙ converges to S if its sequence of partial sums converges to S.
+- Convex subset of a real vector space [definition]: A subset C of a real vector space is convex if (1−t)x+ty∈C whenever x,y∈C and0≤t≤1. The vector space may be infinite-dimensional.
+- Derivative of a real function [definition]: The derivative f′(x) is the finite limit of (f(x+h)−f(x))/h as h→0, when it exists. Higher derivatives are defined by iteration.
+- Disjoint sets [definition]: Two sets are disjoint when they have no common element; a family is pairwise disjoint when every two distinct members are disjoint.
+- Distribution on an open Euclidean set [definition]: A continuous linear functional on C_c^∞(Ω), where test functions on each fixed compact support converge with all derivatives uniformly. It need not extend to a tempered distribution.
+- Equivalence class [definition]: For an equivalence relation ~ on X, [x]={y∈X:y~x}; the quotient set X/~ consists of these classes.
+- Equivalence relation [definition]: A reflexive, symmetric and transitive binary relation.
+- Essential supremum of a measurable real function [definition]: The infimum of real a for which f≤a almost everywhere, allowing infinite values when no finite bound exists.
+- Euclidean space ℝᵈ [definition]: For d≥1, ℝᵈ consists of d-tuples of real numbers with distance dist(x,y)=(∑ᵢ(xᵢ−yᵢ)²)¹ᐟ².
+- Extended nonnegative real numbers [definition]: The nonnegative real numbers together with a greatest element ∞. Sums involving ∞ equal ∞, and 0·∞ is taken to be 0 when integrating simple functions.
+- Factorial [definition]: For n≥1, n!=1·2···n, and 0!=1.
+- Field [definition]: A commutative ring in which 1≠0 and every nonzero element is invertible.
+- Finite set [definition]: A set X is finite if it is bijective with {1,…,n} for some natural number n≥0; its cardinality is n.
+- Function between sets [definition]: An assignment taking each element of a specified domain set to exactly one element of a specified codomain set.
+- Group [definition]: A set with an associative binary operation, an identity element, and a two-sided inverse for each element.
+- Indicator function of a subset [definition]: For A⊆Ω, the real function 1_A is 1 on A and 0 on its complement.
+- Integer [definition]: An integer is an element of the ordered ring ℤ, obtained by adjoining additive inverses to the natural numbers.
+- Intersection of a family of sets [definition]: Inside a specified ambient set, the elements belonging to every member of the family.
+- Least upper bound in a partially ordered set [definition]: For A⊆P, its least upper bound is an upper bound s satisfying s≤b for every upper bound b of A, when such an s exists.
+- Lebesgue Lᵖ space [definition]: For a measure space and 1≤p<∞, Lᵖ consists of measurable scalar functions modulo equality almost everywhere with ∫|f|ᵖ<∞, normed by (∫|f|ᵖ)¹ᐟᵖ. For p=∞ use the essential-supremum norm.
+- Lebesgue integral [definition]: For measurable f≥0, ∫f dμ is the supremum of integrals of nonnegative simple functions below f. For signed f with ∫abs(f)dμ<∞, define ∫f=∫f⁺−∫f⁻.
+- Lebesgue measure on Euclidean space [definition]: The completion of the Borel measure on ℝⁿ assigning each rectangular box the product of its side lengths.
+- Limit of a function between metric spaces [definition]: For f defined near an accumulation point a of a metric space, lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<d(x,a)<δ implies d(f(x),L)<ε.
+- Limit of a real function at a point [definition]: The relation lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<|x−a|<δ in the domain implies |f(x)−L|<ε.
+- Limit of a real sequence [definition]: A sequence (aₙ) converges to L∈ℝ if for every ε>0 there is N such that n≥N implies abs(aₙ−L)<ε.
+- Linear map between vector spaces [definition]: A map between vector spaces over the same field preserving addition and scalar multiplication.
+- Locally convex topological vector space [definition]: A real or complex topological vector space whose zero has a neighborhood base of convex sets; equivalently its topology can be generated by seminorms.
+- Measurable map between measurable spaces [definition]: A function for which the preimage of each measurable subset of the codomain is measurable in the domain.
+- Measurable simple real function [definition]: A measurable real function with finite range. It can be written as a finite sum ∑ a_i 1_{A_i} with measurable level sets A_i.
+- Measurable space [definition]: A set equipped with a specified σ-algebra of subsets.
+- Measure [definition]: A measure μ maps a σ-algebra to [0,∞], sends ∅ to 0, and satisfies μ(⋃ₙAₙ)=∑ₙμ(Aₙ) for every pairwise disjoint sequence of measurable sets.
+- Metric space [definition]: A set X with a function d:X×X→[0,∞) such that d(x,y)=0 exactly when x=y, d(x,y)=d(y,x), and d(x,z)≤d(x,y)+d(y,z).
+- Modulus of a complex number [definition]: For z=a+bi, its modulus is the nonnegative real number |z|=√(a²+b²).
+- Natural logarithm [definition]: The inverse ln:(0,∞)→ℝ of the real exponential function.
+- Natural number [definition]: One of 0, 1, 2, …; natural numbers count finite collections.
+- Nonnegative real square root [definition]: For t≥0, √t is the unique real number y≥0 satisfying y²=t.
+- Normed vector space [definition]: A real or complex vector space X with a function ∥·∥:X→[0,∞) that is positive except at zero, absolutely homogeneous, and subadditive.
+- Open interval in the real line [definition]: For real a<b, the set (a,b)={x∈ℝ:a<x<b}.
+- Ordered field [definition]: A field with a total order preserved by addition, in which the product of two positive elements is positive.
+- Ordered pair [definition]: A pair (x,y) with distinguished first and second entries; (x,y)=(x′,y′) exactly when x=x′ and y=y′.
+- Partial derivative in Euclidean coordinates [definition]: The ith partial derivative of f at x is the derivative at zero of t↦f(x+t e_i), with all other coordinates fixed; vector-valued maps are differentiated componentwise.
+- Partial order [definition]: A reflexive, antisymmetric and transitive binary relation, usually written ≤.
+- Preimage of a subset under a function [definition]: For f:A→B and E⊆B, f⁻¹(E)={x∈A:f(x)∈E}.
+- Product topology [definition]: On a Cartesian product of topological spaces, the topology with basic open sets restricting finitely many coordinates to open subsets and leaving all other coordinates unrestricted.
+- Quasi-normed vector space [definition]: A real or complex vector space with a positive definite absolutely homogeneous function q satisfying q(x+y)≤C(q(x)+q(y)) for a fixed C≥1.
+- Real exponential function [definition]: The real function exp(x)=∑_{n≥0}xⁿ/n!, whose series converges for every real x.
+- Real number [definition]: A real number is an element of a complete ordered field ℝ; completeness means every nonempty subset bounded above has a least upper bound.
+- Real polynomial in finitely many variables [definition]: A finite real linear combination of monomials x₁^{a₁}⋯x_d^{a_d} with nonnegative integer exponents.
+- Real power of a positive real number [definition]: For x>0 and p∈ℝ, define xᵖ=exp(p log x). For p>0 extend by 0ᵖ=0.
+- Real sequence [definition]: A real sequence is a function a:ℕ₊→ℝ, written (aₙ)ₙ≥1.
+- Seminorm on a real or complex vector space [definition]: A nonnegative function p with p(ax)=|a|p(x) and p(x+y)≤p(x)+p(y); p may vanish on nonzero vectors.
+- Sequence in a set [definition]: A function from the natural numbers, or the positive natural numbers, to that set.
+- Set [definition]: A collection of distinct elements, regarded as one object.
+- Smooth map between open Euclidean sets [definition]: A map on an open subset of ℝⁿ is smooth if all of its component partial derivatives of every order exist and are continuous.
+- Subset [definition]: A⊆B means every element of A is an element of B.
+- Sum of a nonnegative series [definition]: For aₙ≥0, define ∑ₙ≥1aₙ as the supremum of its finite partial sums; the value may be infinite.
+- Support of a function [definition]: The closure in its domain of the set on which a function is nonzero.
+- Test-function topology on C_c^∞ of an open Euclidean set [definition]: The finest locally convex topology making every inclusion D_K→C_c^∞(Ω) continuous, where D_K consists of smooth functions supported in a fixed compact K⊂Ω and has the seminorms max_{|α|≤m}sup|∂^αφ|.
+- Topological space [definition]: A set X with a family τ of subsets, called open sets, containing ∅ and X and closed under arbitrary unions and finite intersections.
+- Topological vector space over ℝ or ℂ [definition]: A real or complex vector space with a topology for which vector addition and scalar multiplication are continuous.
+- Topology generated by a family of seminorms [definition]: For seminorms (p_i) on a vector space, a neighborhood base at zero consists of finite intersections of sets {x:p_i(x)<ε}; neighborhoods at other points are translates.
+- Total order [definition]: A partial order in which any two elements are comparable.
+- Union of a family of sets [definition]: The set of elements belonging to at least one member of the family.
+- Vanishing polynomial moments of a Euclidean function [definition]: An integrable function with the required weighted integrability has vanishing moments of order below L if ∫xᵅf(x)dx=0 for every multi-index α with |α|<L. Here L is a nonnegative integer; L=0 imposes no moment conditions.
+- Vector space [definition]: An abelian group with scalar multiplication by a field satisfying a(v+w)=av+aw, (a+b)v=av+bv, (ab)v=a(bv), and 1v=v.
+- σ-algebra [definition]: A σ-algebra on Ω contains Ω and is closed under complements in Ω and countable unions.
+- σ-algebra generated by a family of subsets [definition]: The smallest σ-algebra containing that family, equivalently the intersection of all σ-algebras on the ambient set that contain it.
+
+CITATIONS
+
+  [1] E. Acerbi and G. Mingione, Regularity results for stationary electro-rheological fluids, Arch.
+Ration. Mech. Anal. 164 (2002), 213–259.
+    Pedagogically necessary: unknown
+
+  [2] E. Acerbi and G. Mingione, Regularity results for electrorheological fluids: the stationary
+case, C. R. Math. Acad. Sci. Paris 334 (2002), 817–822.
+    Pedagogically necessary: unknown
+
+  [3] E. Acerbi and G. Mingione, Gradient estimates for the p(x)-Laplacean system, J. Reine
+Angew. Math. 584 (2005), 117–148.
+    Pedagogically necessary: unknown
+
+  [4] A. Almeida and P. Hästö, Besov spaces with variable smoothness and integrability, J.
+Funct. Anal. 258 (2010), 1628–1655.
+    Pedagogically necessary: unknown
+
+  [5] A. Almeida and S. Samko, Characterization of Riesz and Bessel potentials on variable
+Lebesgue spaces, J. Funct. Spaces Appl. 4 (2006), 113–144.
+    Pedagogically necessary: unknown
+
+  [6] K. Astala, T. Iwaniec, P. Koskela and G. Martin, Mappings of BMO-bounded distortion,
+Math. Ann. 317 (2000), 703–726.
+    Pedagogically necessary: unknown
+
+  [7] O. Besov, On spaces of functions of variable smoothness defined by pseudodifferential op-
+erators, Tr. Mat. Inst. Steklova 227 (1999)(in Russian), Issled. po Teor. Differ. Funkts.
+Mnogikh Perem. i ee Prilozh. 18, 56–74, translation in: Proc. Steklov Inst. Math. 227
+(1999), 50–69.
+    Pedagogically necessary: unknown
+
+  [8] O. Besov, Equivalent normings of spaces of functions of variable smoothness, Tr. Mat.
+Inst. Steklova 243 (2003) (in Russian), Funkts. Prostran., Priblizh., Differ. Uravn., 87–95,
+translation in: Proc. Steklov Inst. Math. 243 (2003), 80–88.
+    Pedagogically necessary: unknown
+
+  [9] O. Besov, Interpolation, embedding, and extension of spaces of functions of variable
+smoothness, Tr. Mat. Inst. Steklova 248 (2005) (in Russian), Issled. po Teor. Funkts.
+i Differ. Uravn., 52–63, translation in: Proc. Steklov Inst. Math. 248 (2005), 47–58.
+    Pedagogically necessary: unknown
+
+  [10] Z. Birnbaum and W. Orlicz, Über die Verallgemeinerung des Begriffes der zueinander
+konjugierten Potenzen, Studia Math. 3 (1931), 1–67.
+    Pedagogically necessary: unknown
+
+  [11] Y. Chen, S. Levine and M. Rao, Variable exponent, linear growth functionals in image
+restoration, SIAM J. Appl. Math. 66 (2006), 1383–1406.
+    Pedagogically necessary: unknown
+
+  [12] D. Cruz-Uribe, L. Diening and P. Hästö, The maximal operator on weighted variable
+Lebesgue spaces, Fract. Calc. Appl. Anal. 14 (2011), 361–374.
+    Pedagogically necessary: unknown
+
+  [13] D. Cruz-Uribe and A. Fiorenza, Variable Lebesgue Spaces, Foundations and Harmonic
+Analysis, in: Applied and Numerical Harmonic Analysis, Birkhäuser/Sprin-ger, Heidel-
+berg, 2013.
+    Pedagogically necessary: unknown
+
+  [14] D. Cruz-Uribe, A. Fiorenza, J. M. Martell and C. Pérez, The boundedness of classical
+operators on variable Lp spaces, Ann. Acad. Sci. Fenn. Math. 31 (2006), 239–264.
+    Pedagogically necessary: unknown
+
+  [15] D. Cruz-Uribe and L.-A. D. Wang, Variable Hardy spaces, Indiana Univ. Math. J. 63
+(2014), 447–493.
+    Pedagogically necessary: unknown
+
+  [16] G. Dafni and J. Xiao, Some new tent spaces and duality theorems for fractional Carleson
+measures and Qα (Rn ), J. Funct. Anal. 208 (2004), 377–422.
+    Pedagogically necessary: unknown
+
+  [17] L. Diening, Maximal function on generalized Lebesgue spaces Lp(·) (Rn ), Math. Inequal.
+Appl. 7 (2004), 245–253.
+    Pedagogically necessary: unknown
+
+  [18] L. Diening, P. Harjulehto, P. Hästö, Y. Mizuta and T. Shimomura, Maximal functions in
+variable exponent spaces: limiting cases of the exponent, Ann. Acad. Sci. Fenn. Math. 34
+(2009), 503–522.
+    Pedagogically necessary: unknown
+
+  [19] L. Diening, P. Harjulehto, P. Hästö and M. Růžička, Lebesgue and Sobolev Spaces with
+Variable Exponents, Lecture Notes in Mathematics 2017, Springer, Heidelberg, 2011.
+    Pedagogically necessary: unknown
+
+  [20] L. Diening, P. Hästö and S. Roudenko, Function spaces of variable smoothness and inte-
+grability, J. Funct. Anal. 256 (2009), 1731–1768.
+    Pedagogically necessary: unknown
+
+  [21] L. Diening and M. Růžička, Calderón-Zygmund operators on generalized Lebesgue spaces
+Lp(·) and problems related to fluid dynamics, J. Reine Angew. Math. 563 (2003), 197–220.
+    Pedagogically necessary: unknown
+
+  [22] D. Drihem, Atomic decomposition of Besov spaces with variable smoothness and integra-
+bility, J. Math. Anal. Appl. 389 (2012), 15–31.
+    Pedagogically necessary: unknown
+
+  [23] D. Drihem, Atomic decomposition of Besov-type and Triebel-Lizorkin-type spaces, Sci.
+China Math. 56 (2013), 1073–1086.
+    Pedagogically necessary: unknown
+
+  [24] M. Essén, S. Janson, L. Z. Peng and J. Xiao, Q spaces of several real variables, Indiana
+Univ. Math. J. 49 (2000), 575-615.
+    Pedagogically necessary: unknown
+
+  [25] X. L. Fan, Global C 1,α regularity for variable exponent elliptic equations in divergence
+form, J. Differential Equations 235 (2007), 397–417.
+    Pedagogically necessary: unknown
+
+  [26] M. Frazier and B. Jawerth, Decomposition of Besov spaces, Indiana Univ. Math. J. 34
+(1985), 777–799.
+    Pedagogically necessary: unknown
+
+  [27] M. Frazier and B. Jawerth, A discrete transform and decompositions of distribution spaces,
+J. Funct. Anal. 93 (1990), 34–170.
+    Pedagogically necessary: unknown
+
+  [28] M. Frazier, B. Jawerth and G. Weiss, Littlewood-Paley Theory and the Study of Function
+Spaces, CBMS Regional Conference Series in Mathematics, 79, Published for the Confer-
+ence Board of the Mathematical Sciences, Washington, DC; by the American Mathematical
+Society, Providence, RI, 1991.
+    Pedagogically necessary: unknown
+
+  [29] H.F. Gonçalves, S.D. Moura and J.S. Neves, On trace spaces of 2-microlocal type spaces,
+J. Funct. Anal. 267 (2014), 3444–3468.
+    Pedagogically necessary: unknown
+
+  [30] P. Gurka, P. Harjulehto and A. Nekvinda, Bessel potential spaces with variable exponent,
+Math. Inequal. Appl. 10 (2007), 661–676.
+    Pedagogically necessary: unknown
+
+  [31] K.-P. Ho, Vector-valued singular integral operators on Morrey type spaces and variable
+Triebel-Lizorkin-Morrey spaces, Ann. Acad. Sci. Fenn. Math. 37 (2012), 375–406.
+    Pedagogically necessary: unknown
+
+  [32] T. Iwaniec and J. Onninen, H 1 -estimates of Jacobians by subdeterminants, Math. Ann.
+324 (2002), 341–358.
+    Pedagogically necessary: unknown
+
+  [33] M. Izuki, E. Nakai and Y. Sawano, Function spaces with variable exponents – an introduc-
+tion, Sci. Math. Jpn. 77 (2014), 187–315.
+    Pedagogically necessary: unknown
+
+  [34] H. Kempka, 2-microlocal Besov and Triebel-Lizorkin spaces of variable integrability, Rev.
+Mat. Complut. 22 (2009), 227–251.
+    Pedagogically necessary: unknown
+
+  [35] H. Kempka, Atomic, molecular and wavelet decomposition of 2-microlocal Besov and
+Triebel-Lizorkin spaces with variable integrability, Funct. Approx. Comment. Math. 43
+(2010), part 2, 171–208.
+    Pedagogically necessary: unknown
+
+  [36] H. Kempka and J. Vybı́ral, Spaces of variable smoothness and integrability: characteri-
+zations by local means and ball means of differences, J. Fourier Anal. Appl. 18 (2012),
+852–891.
+    Pedagogically necessary: unknown
+
+  [37] O. Kováčik and J. Rákosnı́k, On spaces Lp(x) and W k,p(x) , Czechoslovak Math. J. 41 (116)
+(1991), 592–618.
+    Pedagogically necessary: unknown
+
+  [38] H.-G. Leopold, On Besov spaces of variable order of differentiation, Z. Anal. Anwendungen
+8 (1989), 69–82.
+    Pedagogically necessary: unknown
+
+  [39] H.-G. Leopold, Interpolation of Besov spaces of variable order of differentiation, Arch.
+Math. (Basel) 53 (1989), 178–187.
+    Pedagogically necessary: unknown
+
+  [40] H.-G. Leopold, On function spaces of variable order of differentiation, Forum Math. 3
+(1991), 1–21.
+    Pedagogically necessary: unknown
+
+  [41] H.-G. Leopold, Embedding of function spaces of variable order of differentiation in function
+spaces of variable order of integration, Czechoslovak Math. J. 49(124) (1999), 633–644.
+    Pedagogically necessary: unknown
+
+  [42] H.-G. Leopold and E. Schrohe, Trace theorems for Sobolev spaces of variable order of
+differentiation, Math. Nachr. 179 (1996), 223–245.
+    Pedagogically necessary: unknown
+
+  [43] P. Li, J. Xiao and Q. Yang, Global mild solutions to modified Navier-Stokes equations with
+small initial data in critical Besov-Q spaces, Electron. J. Differential Equations 2014, No.
+185, 37 pp.
+    Pedagogically necessary: unknown
+
+  [44] P. Li and Z. Zhai, Generalized Navier-Stokes equations with initial data in local Q-type
+spaces, J. Math. Anal. Appl. 369 (2010), 595–609.
+    Pedagogically necessary: unknown
+
+  [45] P. Li and Z. Zhai, Well-posedness and regularity of generalized Navier-Stokes equations in
+some critical Q-spaces, J. Funct. Anal. 259 (2010), 2457–2519.
+    Pedagogically necessary: unknown
+
+  [46] Y. Liang, Y. Sawano, T. Ullrich, D. Yang and W. Yuan, New characterizations of Besov-
+Triebel-Lizorkin-Hausdorff spaces including coorbits and wavelets, J. Fourier Anal. Appl.
+18 (2012), 1067–1111.
+    Pedagogically necessary: unknown
+
+  [47] Y. Liang, D. Yang, W. Yuan, Y. Sawano and T. Ullrich, A new framework for generalized
+Besov-type and Triebel-Lizorkin-type spaces, Dissertationes Math. (Rozprawy Mat.) 489
+(2013), 114 pp.
+    Pedagogically necessary: unknown
+
+  [48] S. Martı́nez and N. Wolanski, A minimum problem with free boundary in Orlicz spaces,
+Adv. Math. 218 (2008), 1914–1971.
+    Pedagogically necessary: unknown
+
+  [49] S.D. Moura, J.S. Neves and C. Schneider, On trace spaces of 2-microlocal Besov spaces
+with variable integrability, Math. Nachr. 286 (2013), 1240–1254.
+    Pedagogically necessary: unknown
+
+  [50] E. Nakai, Pointwise multipliers for functions of weighted bounded mean oscillation, Studia
+Math. 105 (1993), 105–119.
+    Pedagogically necessary: unknown
+
+  [51] E. Nakai, The Campanato, Morrey and Hölder spaces on spaces of homogeneous type,
+Studia Math. 176 (2006), 1–19.
+    Pedagogically necessary: unknown
+
+  [52] E. Nakai, Generalized fractional integrals on generalized Morrey spaces, Math. Nachr. 287
+(2014), 339–351.
+    Pedagogically necessary: unknown
+
+  [53] E. Nakai and Y. Sawano, Hardy spaces with variable exponents and generalized Campanato
+spaces, J. Funct. Anal. 262 (2012), 3665–3748.
+    Pedagogically necessary: unknown
+
+  [54] H. Nakano, Modulared Semi-Ordered Linear Spaces, Maruzen Co., Ltd., Tokyo, 1950.
+    Pedagogically necessary: unknown
+
+  [55] H. Nakano, Topology of Linear Topological Spaces, Maruzen Co., Ltd., Tokyo, 1951.
+    Pedagogically necessary: unknown
+
+  [56] T. Noi, Trace and extension operators for Besov spaces and Triebel-Lizorkin spaces with
+variable exponents, arXiv: 1410.1185.
+    Pedagogically necessary: unknown
+    arxiv: 1410.1185
+
+  [57] T. Noi and Y. Sawano, Complex interpolation of Besov spaces and Triebel-Lizorkin spaces
+with variable exponents, J. Math. Anal. Appl. 387 (2012), 676–690.
+    Pedagogically necessary: unknown
+
+  [58] W. Orlicz, Über eine gewisse Klasse von Räumen vom Typus B, Bull. Int. Acad. Pol. Ser.
+A 8 (1932), 207–220.
+    Pedagogically necessary: unknown
+
+  [59] M. Růžička, Electrorheological fluids: modeling and mathematical theory, Lecture Notes in
+Mathematics, 1748, Springer-Verlag, Berlin, 2000.
+    Pedagogically necessary: unknown
+
+  [60] M. Růžička, Modeling, mathematical and numerical analysis of electrorheological fluids,
+Appl. Math. 49 (2004), 565–609.
+    Pedagogically necessary: unknown
+
+  [61] Y. Sawano, Wavelet characterization of Besov-Morrey and Triebel-Lizorkin-Morrey spaces,
+Funct. Approx. Comment. Math. 38 (2008), 93–107.
+    Pedagogically necessary: unknown
+
+  [62] Y. Sawano and H. Tanaka, Decompositions of Besov-Morrey spaces and Triebel-Lizorkin-
+Morrey spaces, Math. Z. 257 (2007), 871–905.
+    Pedagogically necessary: unknown
+
+  [63] W. Sickel, Smoothness spaces related to Morrey spaces-a survey. I, Eurasian Math. J. 3
+(2012), 110–149.
+    Pedagogically necessary: unknown
+
+  [64] W. Sickel, Smoothness spaces related to Morrey spaces-a survey. II, Eurasian Math. J. 4
+(2013), 82–124.
+    Pedagogically necessary: unknown
+
+  [65] E. M. Stein, Harmonic Analysis: Real-Variable Methods, Orthogonality, and Oscillatory
+Integrals, Princeton Univ. Press, Princeton, N.J., 1993.
+    Pedagogically necessary: unknown
+
+  [66] H. Triebel, Theory of Function Spaces, Birkhäuser Verlag, Basel, 1983.
+    Pedagogically necessary: unknown
+
+  [67] H. Triebel, Theory of Function Spaces II, Birkhäuser Verlag, Basel, 1992.
+    Pedagogically necessary: unknown
+
+  [68] H. Triebel, Interpolation Theory, Function Spaces, Differential Operators, Second edition,
+Johann Ambrosius Barth, Heidelberg, 1995.
+    Pedagogically necessary: unknown
+
+  [69] H. Triebel, Theory of Function Spaces III, Birkhäuser Verlag, Basel, 2006.
+    Pedagogically necessary: unknown
+
+  [70] H. Triebel, Local Function Spaces, Heat and Navier-Stokes Equations, EMS Tracts in
+Mathematics 20, European Mathematical Society (EMS), Zürich, 2013.
+    Pedagogically necessary: unknown
+
+  [71] T. Ullrich, Continuous characterizations of Besov-Lizorkin-Triebel spaces and new inter-
+pretations as coorbits, J. Funct. Spaces Appl. 2012, Art. ID 163213, 47 pp.
+    Pedagogically necessary: unknown
+
+  [72] J. Vybı́ral, Sobolev and Jawerth embeddings for spaces with variable smoothness and inte-
+grability, Ann. Acad. Sci. Fenn. Math. 34 (2009), 529–544.
+    Pedagogically necessary: unknown
+
+  [73] J. Xu, Variable Besov and Triebel-Lizorkin spaces, Ann. Acad. Sci. Fenn. Math. 33 (2008),
+511–522.
+    Pedagogically necessary: unknown
+
+  [74] J. Xu, The relation between variable Bessel potential spaces and Triebel-Lizorkin spaces,
+Integral Transforms Spec. Funct. 19 (2008), no. 7-8, 599–605.
+    Pedagogically necessary: unknown
+
+  [75] J. Xu, An atomic decomposition of variable Besov and Triebel-Lizorkin spaces, Armen. J.
+Math. 2 (2009), 1–12.
+    Pedagogically necessary: unknown
+
+  [76] D. Yang and W. Yuan, A new class of function spaces connecting Triebel-Lizorkin spaces
+and Q spaces, J. Funct. Anal. 255 (2008), 2760–2809.
+    Pedagogically necessary: unknown
+
+  [77] D. Yang and W. Yuan, New Besov-type spaces and Triebel-Lizorkin-type spaces including
+Q spaces, Math. Z. 265 (2010), 451–480.
+    Pedagogically necessary: unknown
+
+  [78] D. Yang and W. Yuan, Relations among Besov-type spaces, Triebel-Lizorkin-type spaces
+and generalized Carleson measure spaces, Appl. Anal. 92 (2013), 549–561.
+    Pedagogically necessary: unknown
+
+  [79] D. Yang, W. Yuan and C. Zhuo, Complex interpolation on Besov-type and Triebel-Lizorkin-
+type spaces, Anal. Appl. (Singap.) 11 (2013), 1350021, 45 pp.
+    Pedagogically necessary: unknown
+
+  [80] W. Yuan, W. Sickel and D. Yang, Morrey and Campanato Meet Besov, Lizorkin and
+Triebel, Lecture Notes in Mathematics 2005, Springer-Verlag, Berlin, 2010.
+    Pedagogically necessary: unknown
+
+  [81] W. Yuan, W. Sickel and D. Yang, On the coincidence of certain approaches to smoothness
+spaces related to Morrey spaces, Math. Nachr. 286 (2013), 1571–1584.
+    Pedagogically necessary: unknown
+
+  [82] C. Zhuo, D. Yang and Y. Liang, Intrinsic square function characterizations of Hardy spaces
+with variable exponents, Bull. Malays. Math. Sci. Soc. (2), to appear.
+    Pedagogically necessary: unknown
+

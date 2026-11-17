@@ -1,0 +1,550 @@
+{
+  "batch_id": "batch-049",
+  "author": "analysis_formalization",
+  "reviews": [
+    {
+      "concept": "torsion-free-abelian-group",
+      "concept_id": "10ccf520-afdd-5905-8441-adeb17047a90",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For AddCommGroup G the exact property is forall nonzero n:Int and g:G, n smul g=0 implies g=0. HasUniqueDiv in Algebra/Group/Monoid:572 gives injectivity of every nonzero natural scalar; generated IsAddTorsionFree and Torsion.zsmul_eq_zero_iff_right:128 expose the equivalent integer zero-kernel condition. Read both positive/negative integer cases in the actual zpow proof117\u2013131 and additive generation, so no divisibility/existence of roots is imposed. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Monoid.lean",
+          "declarations": "HasUniqueDiv:572; IsAddTorsionFree generated from IsMulTorsionFree:552",
+          "note": "Actual torsion-free/unique-scalar cancellation constructor, not divisible group."
+        },
+        {
+          "path": "Mathlib/Algebra/Group/Torsion.lean",
+          "declarations": "IsAddTorsionFree.zsmul_eq_zero_iff_right generated at128; zsmul_left_injective_iff generated at140",
+          "note": "Integer torsion-zero and cancellation API, with complete signed-integer proof."
+        }
+      ],
+      "search_notes": "Enumerated native group Torsion/ZMultiples/UniqueProds and module Torsion siblings. Unique-product structure theorem is a new endpoint; Group/Torsion commutation identities add no torsion-free abelian cancellation information beyond tautological commutation and are excluded. Finite-generation classification/reduction finiteness is not the reason for selecting Int."
+    },
+    {
+      "concept": "torsion-free-abelian-group",
+      "concept_id": "10ccf520-afdd-5905-8441-adeb17047a90",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For AddCommGroup G the exact property is forall nonzero n:Int and g:G, n smul g=0 implies g=0. HasUniqueDiv in Algebra/Group/Monoid:572 gives injectivity of every nonzero natural scalar; generated IsAddTorsionFree and Torsion.zsmul_eq_zero_iff_right:128 expose the equivalent integer zero-kernel condition. Read both positive/negative integer cases in the actual zpow proof117\u2013131 and additive generation, so no divisibility/existence of roots is imposed. Native Module/Torsion/Int.subsingleton_torsionBy_int:53 proves every nonzero n-torsion subgroup trivial under HasUniqueDiv, and :75 proves the same directly from injective zsmul. Native ZMultiples.comp_zmultiples_subtype_injective:69 proves exact cancellation on a generated cyclic subgroup when its image in a torsion-free group is nonzero. These are direct torsion-free ordinary consequences; dependency Monoid/Torsion bytes identical. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Module/Torsion/Int.lean",
+          "declarations": "TauCeti.subsingleton_torsionBy_int:53; subsingleton_torsionBy_of_injective_zsmul:75",
+          "note": "Direct native zero-torsion and scalar-injectivity recognition API."
+        },
+        {
+          "path": "TauCeti/Algebra/Group/ZMultiples.lean",
+          "declarations": "TauCeti.AddMonoidHom.comp_zmultiples_subtype_injective:69",
+          "note": "Native torsion-free target cancellation on cyclic subgroups."
+        }
+      ],
+      "search_notes": "Enumerated native group Torsion/ZMultiples/UniqueProds and module Torsion siblings. Unique-product structure theorem is a new endpoint; Group/Torsion commutation identities add no torsion-free abelian cancellation information beyond tautological commutation and are excluded. Finite-generation classification/reduction finiteness is not the reason for selecting Int."
+    },
+    {
+      "concept": "torsion-point-complex-torus",
+      "concept_id": "1ea7b9ff-a446-5fe1-a95d-aa15e4c4457d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. On a SUPPLIED complex torus A=V/Lambda, use its underlying additive quotient and IsOfFinAddOrder a. OrderOfElement.isOfFinAddOrder_iff_nsmul_eq_zero generated at72 is exactly exists positive N with N smul a=0. AddSubgroup.torsionBy A N:971 and nsmul_iff:995 give the precise N-torsion subgroup. QuotientGroup/Defs generated AddQuotientGroup.eq_zero_iff:120 and mk_nsmul:175 identify N smul [v]=0 with N smul v in Lambda. For N>0 in a complex vector space this is exactly v in (1/N)Lambda, via invertible scalar N; no assertion of new analytic atlas construction is part of this point definition. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/GroupTheory/OrderOfElement.lean",
+          "declarations": "IsOfFinAddOrder generated at62; isOfFinAddOrder_iff_nsmul_eq_zero generated at72",
+          "note": "Exact positive-integer annihilation predicate."
+        },
+        {
+          "path": "Mathlib/Algebra/Module/Torsion/Basic.lean",
+          "declarations": "Submodule.torsionBy:177; AddSubgroup.torsionBy:971; torsionBy.nsmul_iff:995",
+          "note": "Actual N-torsion kernel and subgroup membership API."
+        },
+        {
+          "path": "Mathlib/GroupTheory/QuotientGroup/Defs.lean",
+          "declarations": "AddQuotientGroup.eq_zero_iff generated at120; mk_nsmul generated at175",
+          "note": "Actual lattice quotient annihilation/membership dictionary."
+        }
+      ],
+      "search_notes": "Definition concerns points on given torus, so ambient quotient-chart/manifold files are prerequisites, not charged here. Native one-dimensional ComplexTorus affine-map classification and elliptic torsion classification are extra endpoints; general torsion product/restriction/transport remains core. No unproved finite-order lattice classification or torsion count asserted."
+    },
+    {
+      "concept": "torsion-point-complex-torus",
+      "concept_id": "1ea7b9ff-a446-5fe1-a95d-aa15e4c4457d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. On a SUPPLIED complex torus A=V/Lambda, use its underlying additive quotient and IsOfFinAddOrder a. OrderOfElement.isOfFinAddOrder_iff_nsmul_eq_zero generated at72 is exactly exists positive N with N smul a=0. AddSubgroup.torsionBy A N:971 and nsmul_iff:995 give the precise N-torsion subgroup. QuotientGroup/Defs generated AddQuotientGroup.eq_zero_iff:120 and mk_nsmul:175 identify N smul [v]=0 with N smul v in Lambda. For N>0 in a complex vector space this is exactly v in (1/N)Lambda, via invertible scalar N; no assertion of new analytic atlas construction is part of this point definition. Native AddEquiv.torsionByCongr:181 gives the exact N-torsion transport across additive equivalences, with completed forward/inverse scalar-commutation proofs. Native torsionByTorsionByEquiv:148 gives direct restriction to divisible annihilators; both apply to this quotient group. Dependency torsion and quotient definitions byte-identical. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Module/Torsion/Basic.lean",
+          "declarations": "TauCeti.AddSubgroup.torsionByTorsionByEquiv:148; AddEquiv.torsionByCongr:181",
+          "note": "Native ordinary N-torsion subgroup restriction/coordinate-transport API."
+        }
+      ],
+      "search_notes": "Definition concerns points on given torus, so ambient quotient-chart/manifold files are prerequisites, not charged here. Native one-dimensional ComplexTorus affine-map classification and elliptic torsion classification are extra endpoints; general torsion product/restriction/transport remains core. No unproved finite-order lattice classification or torsion count asserted."
+    },
+    {
+      "concept": "trace-ordered-group",
+      "concept_id": "4d3a137a-8304-5383-84bb-80e574a89417",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact type is {tau:G ->+ Real | tau!=0 AND forall g,0<=g ->0<=tau g}, for supplied partially ordered additive abelian G. Normalization at supplied u adds tau u=1. AddMonoidHom:144 stores actual zero/add laws; monotone_iff_map_nonneg in Algebra/Order/Hom/Monoid:226 proves precisely the equivalent order-preservation criterion, by subtracting source elements. No linear order on G, scalar linearity, topology or completeness inserted. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Hom/Defs.lean",
+          "declarations": "AddMonoidHom:144",
+          "note": "Exact additive real-valued functional constructor."
+        },
+        {
+          "path": "Mathlib/Algebra/Order/Hom/Monoid.lean",
+          "declarations": "monotone_iff_map_nonneg:226",
+          "note": "Direct proof of positive homomorphism/order-preservation equivalence."
+        }
+      ],
+      "search_notes": "Exclude normalized-trace-space topology, order-unit existence and refinability/goodness/interpolation endpoints. Positivity is weak nonnegativity on the positive cone, not strictly positive faithfulness."
+    },
+    {
+      "concept": "trace-ordered-group",
+      "concept_id": "4d3a137a-8304-5383-84bb-80e574a89417",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact type is {tau:G ->+ Real | tau!=0 AND forall g,0<=g ->0<=tau g}, for supplied partially ordered additive abelian G. Normalization at supplied u adds tau u=1. AddMonoidHom:144 stores actual zero/add laws; monotone_iff_map_nonneg in Algebra/Order/Hom/Monoid:226 proves precisely the equivalent order-preservation criterion, by subtracting source elements. No linear order on G, scalar linearity, topology or completeness inserted. Native AddMonoidHom.exists_pos_of_ne_zero:23 applies with target Real; actual proof26\u201330 changes sign of a nonzero value when necessary. This is direct ordinary positive-functional API under weaker source-group hypotheses, independently used for normalized and good traces in045/043. Supplier Hom144 and ordered equivalence226 checked at exact dependency. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Order/Hom/Basic.lean",
+          "declarations": "AddMonoidHom.exists_pos_of_ne_zero:23",
+          "note": "Native positive-value ordinary trace API, preserving explicit nonzero condition."
+        }
+      ],
+      "search_notes": "Exclude normalized-trace-space topology, order-unit existence and refinability/goodness/interpolation endpoints. Positivity is weak nonnegativity on the positive cone, not strictly positive faithfulness."
+    },
+    {
+      "concept": "twin-prime-conjecture",
+      "concept_id": "de3c7cd6-151c-5e03-a4c4-e5f2be0a241a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. FORMAL STATEMENT ONLY; NO PROOF OR TRUTH CLAIMED. The exact proposition is forall N:Nat, exists p:Nat, N<p AND Nat.Prime p AND Nat.Prime(p+2), equivalently infinitude of the twin-start set. Nat.Prime:41 (dependency42) is actual irreducibility/prime predicate; stock Lean supplies Nat/addition/quantifiers. This certifies an exact source-backed conjecture statement, not a theorem of infinitely many twins. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Prime/Defs.lean",
+          "declarations": "Nat.Prime:41; prime_def:97",
+          "note": "Prime predicate specialized to the exact twin-start conjecture statement; no infinitude proof."
+        }
+      ],
+      "search_notes": "Conjecture statement convention is explicit, consistent with046 Polignac. Prime infinitude and bounded-gap/sieve inputs are not a twin-prime proof. Tau prime casts are generic prerequisite-only here."
+    },
+    {
+      "concept": "twin-prime-conjecture",
+      "concept_id": "de3c7cd6-151c-5e03-a4c4-e5f2be0a241a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. FORMAL STATEMENT ONLY; NO PROOF OR TRUTH CLAIMED. The exact proposition is forall N:Nat, exists p:Nat, N<p AND Nat.Prime p AND Nat.Prime(p+2), equivalently infinitude of the twin-start set. Nat.Prime:41 (dependency42) is actual irreducibility/prime predicate; stock Lean supplies Nat/addition/quantifiers. This certifies an exact source-backed conjecture statement, not a theorem of infinitely many twins. Native Prime/IntCast gives prime-integer transport, not a twin-start statement or twin-prime theorem, and no selected native contribution was certified; inherited statement availability only, zero native LOC. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Conjecture statement convention is explicit, consistent with046 Polignac. Prime infinitude and bounded-gap/sieve inputs are not a twin-prime proof. Tau prime casts are generic prerequisite-only here."
+    },
+    {
+      "concept": "twisted-relative-orbital-integral",
+      "concept_id": "db118f53-f814-50c1-a3af-7758d3ccf56a",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. CURRENT REVISION2, explicitly re-reviewed from rechecks/batch-049-input.json. Exact H=Gsigma(k) times Gtheta(k), L=connected twisted stabilizer(k), and actual unitary chi(x,y)=mu1(x)*mu2(y)^(-1) must be trivial ON L. It is chi(x,y), not a silently altered mu(x,y^-1) character, that weights f(x^-1*gamma*y) on the LEFT quotient L\\H. Read actual MulAction.orbitRel:286/quotient and Bochner integral:157; they supply quotient/integration primitives with supplied measures. The complete local smooth test/orbital descent interface, and adelic convergence under the paragraph conditions, were not certified in existing source. Unknown is that concrete representation/identification frontier, not absence of generic integration. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Searched full orbitalIntegral/relative orbital/twisted relative namespaces; inspected actual quotient orbit relation, generic Haar quotient supplied-measure interface and native integrated representation completed bilinear construction144\u2013175. Do not substitute ordinary convolution or infer compatible local/adelic quotient measure and convergence from a filename. Revision refresh is explicit; baseline rev1 judgment not carried forward."
+    },
+    {
+      "concept": "twisted-relative-orbital-integral",
+      "concept_id": "db118f53-f814-50c1-a3af-7758d3ccf56a",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. CURRENT REVISION2, explicitly re-reviewed from rechecks/batch-049-input.json. Exact H=Gsigma(k) times Gtheta(k), L=connected twisted stabilizer(k), and actual unitary chi(x,y)=mu1(x)*mu2(y)^(-1) must be trivial ON L. It is chi(x,y), not a silently altered mu(x,y^-1) character, that weights f(x^-1*gamma*y) on the LEFT quotient L\\H. Read actual MulAction.orbitRel:286/quotient and Bochner integral:157; they supply quotient/integration primitives with supplied measures. The complete local smooth test/orbital descent interface, and adelic convergence under the paragraph conditions, were not certified in existing source. Unknown is that concrete representation/identification frontier, not absence of generic integration. Supplier Bochner definition is dependency158 (+1 header); no native twisted-relative orbital constructor identified. Native Integrated/Basic144/175 constructs a uniformly bounded representation operator from L1 input, not this stabilizer quotient orbital integral. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Searched full orbitalIntegral/relative orbital/twisted relative namespaces; inspected actual quotient orbit relation, generic Haar quotient supplied-measure interface and native integrated representation completed bilinear construction144\u2013175. Do not substitute ordinary convolution or infer compatible local/adelic quotient measure and convergence from a filename. Revision refresh is explicit; baseline rev1 judgment not carried forward."
+    },
+    {
+      "concept": "twisted-relative-spectral-trace",
+      "concept_id": "2b8949b8-a957-5987-8b7c-90ede0524c35",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No exact full representation certified of the cuspidal convolution-kernel integral on the TWO normalized automorphic quotients, with character chi(x,y)=mu1(x)*mu2(y)^(-1), together with the stated K-finite orthonormal-basis product-of-periods presentation. Generic Bochner integrals and supplied measured-quotient L2 spaces exist, but the exact K_pi(f), cuspidal restriction, normalization and spectral-to-period dictionary were not checked as an existing complete implementation. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Actual generic orbit quotient and Haar/Quotient supplied-measure definitions inspected, plus native Continuous/Integrated/Basic144\u2013175. Searched automorphic/cuspidal/relative spectral/orbital/period interfaces. No spectral trace or sum-interchange theorem inferred from ordinary operator trace or non-automorphic de Rham period files. Specific unresolved packaging and equality endpoint, no absence claim."
+    },
+    {
+      "concept": "twisted-relative-spectral-trace",
+      "concept_id": "2b8949b8-a957-5987-8b7c-90ede0524c35",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No exact full representation certified of the cuspidal convolution-kernel integral on the TWO normalized automorphic quotients, with character chi(x,y)=mu1(x)*mu2(y)^(-1), together with the stated K-finite orthonormal-basis product-of-periods presentation. Generic Bochner integrals and supplied measured-quotient L2 spaces exist, but the exact K_pi(f), cuspidal restriction, normalization and spectral-to-period dictionary were not checked as an existing complete implementation. Read native ContRepresentation.integratedOperatorL1:144/175 completed L1-orbit integral construction; it constructs a bounded operator under continuous-orbit/uniform-bound hypotheses, not the asserted automorphic kernel/basis period identity. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Actual generic orbit quotient and Haar/Quotient supplied-measure definitions inspected, plus native Continuous/Integrated/Basic144\u2013175. Searched automorphic/cuspidal/relative spectral/orbital/period interfaces. No spectral trace or sum-interchange theorem inferred from ordinary operator trace or non-automorphic de Rham period files. Specific unresolved packaging and equality endpoint, no absence claim."
+    },
+    {
+      "concept": "unimodular-locally-compact-group",
+      "concept_id": "4706d1f7-e6d7-5948-96ca-2d5bf05ae070",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a locally compact topological group with Borel measurable space, exact generic property is forall mu:Measure G, IsHaarMeasure mu -> Regular mu -> mu.IsMulRightInvariant. Right invariance in Group/Defs:88 is literally forall g, map(x->x*g)mu=mu. Group/Measure.forall_measure_preimage_mul_right_iff:126 proves equivalent invariant measurable-set masses; read complete ext/map proof. Regular is explicit because Mathlib IsHaarMeasure:786 alone does not enforce textbook regularity on arbitrary locally compact groups. Thus every genuine regular LEFT Haar measure is right invariant, exactly unimodularity. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Group/Defs.lean",
+          "declarations": "MeasureTheory.Measure.IsMulRightInvariant:88",
+          "note": "Exact right-translation measure invariance constructor."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Group/Measure.lean",
+          "declarations": "MeasureTheory.Measure.forall_measure_preimage_mul_right_iff:126; IsHaarMeasure:786",
+          "note": "Right-invariance recognition and actual supplied Haar predicate."
+        }
+      ],
+      "search_notes": "Exclude general modular-character density computation (constructs a DIFFERENT right Haar measure on arbitrary groups), quotient-measure existence, Haar disintegration, and downstream harmonic-analysis applications. IsHaar+Regular supplier definitions are explicit; no second-countability requirement silently inserted."
+    },
+    {
+      "concept": "unimodular-locally-compact-group",
+      "concept_id": "4706d1f7-e6d7-5948-96ca-2d5bf05ae070",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For a locally compact topological group with Borel measurable space, exact generic property is forall mu:Measure G, IsHaarMeasure mu -> Regular mu -> mu.IsMulRightInvariant. Right invariance in Group/Defs:88 is literally forall g, map(x->x*g)mu=mu. Group/Measure.forall_measure_preimage_mul_right_iff:126 proves equivalent invariant measurable-set masses; read complete ext/map proof. Regular is explicit because Mathlib IsHaarMeasure:786 alone does not enforce textbook regularity on arbitrary locally compact groups. Thus every genuine regular LEFT Haar measure is right invariant, exactly unimodularity. Native isMulRightInvariant_of_isHaarMeasure_of_isFiniteMeasure:92 proves every finite Haar measure is right invariant by uniqueness and preserved total mass; :102 proves inversion invariance. Actual full proofs75\u2013105 checked. These ordinary compact/finite-Haar unimodularity consequences contribute under explicit narrower hypotheses; general definition remains the supplied universal property. Dependency Group/Defs identical and relevant Group/Measure body checked. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Measure/Haar/Unique.lean",
+          "declarations": "MeasureTheory.Measure.isMulRightInvariant_of_isHaarMeasure_of_isFiniteMeasure:92; isInvInvariant_of_isHaarMeasure_of_isFiniteMeasure:102",
+          "note": "Native finite-Haar/compact-group unimodularity and immediate inversion invariance proofs."
+        }
+      ],
+      "search_notes": "Exclude general modular-character density computation (constructs a DIFFERENT right Haar measure on arbitrary groups), quotient-measure existence, Haar disintegration, and downstream harmonic-analysis applications. IsHaar+Regular supplier definitions are explicit; no second-countability requirement silently inserted."
+    },
+    {
+      "concept": "unipotent-radical",
+      "concept_id": "0c333fa0-c5f8-57d4-9039-847ecf7af5a3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Standalone Mathlib has generic schemes/Hopf ideals and connectedness/smoothness inputs, but no independently checked complete unipotent group property plus largest smooth connected normal unipotent subgroup constructor at this snapshot. Native Tau candidate/construction files are not standalone Mathlib suppliers; no inherited credit is assigned from them. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Enumerated full native Unipotent/Radical directory. Core boundary is definition/greatest-candidate proof, isomorphism transport, base-change inclusion and immediate recognition/idempotence. Exclude NormalSubgroup (radical of arbitrary normal subgroup), reductive quotient, faithful representation, diagonalizable quotient, characters and structure decomposition endpoints. Interpretation note: affine/linear algebraic groups as used by the source; nonaffine extension not certified. No geometric-radical/base-change equality silently asserted."
+    },
+    {
+      "concept": "unipotent-radical",
+      "concept_id": "0c333fa0-c5f8-57d4-9039-847ecf7af5a3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native finite-type AFFINE algebraic-group implementation: HopfIdeal.IsUnipotentRadicalCandidate Basic:73 combines normal Hopf ideal with geometrically connected quotient and smooth geometric unipotence. Basic:149 obtains maximal Lie dimension; Product:105 proves closure under the scheme-theoretic product of normal candidates; Maximal:54 turns dimension maximality into I<=J. Construction.unipotentRadicalDefiningIdeal:69 chooses the candidate, :88 proves containment of every other candidate (Hopf ideals reverse subgroup order), :99 gives exact greatest/universal property and :135/147 canonical inclusion kernel. Read completed proofs, with no perfect-field assumption. Isomorphism:87/115 transports the actual radical; BaseChange:69/94 proves candidate base-change and the CORRECT inclusion, not an unjustified equality over imperfect fields; Characteristic:86/104 gives whole-group recognition/idempotence. This covers the conventional linear/affine algebraic-group meaning; an interpretation allowing arbitrary nonaffine group schemes is not claimed here. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Unipotent/Radical/Basic.lean",
+          "declarations": "TauCeti.HopfIdeal.IsUnipotentRadicalCandidate:73; exists_isUnipotentRadicalCandidate_maximal_finrank_quotientLie:149",
+          "note": "Actual candidate definition and existence of dimension-maximal smooth connected normal unipotent subgroup."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Unipotent/Radical/Product.lean",
+          "declarations": "TauCeti.HopfIdeal.IsUnipotentRadicalCandidate.productOfNormal:105",
+          "note": "Direct product-closure proof used to construct the greatest candidate."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Unipotent/Radical/Maximal.lean",
+          "declarations": "TauCeti.HopfIdeal.IsUnipotentRadicalCandidate.le_of_finrank_maximal:54",
+          "note": "Actual maximal-dimension to greatest-subgroup proof."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Unipotent/Radical/Construction.lean",
+          "declarations": "TauCeti.FiniteTypeCommHopfAlgCat.unipotentRadicalDefiningIdeal:69; unipotentRadicalDefiningIdeal_le:88; eq_unipotentRadicalDefiningIdeal_iff:99",
+          "note": "Actual radical, universal property and canonical subgroup inclusion."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Unipotent/Radical/Isomorphism.lean",
+          "declarations": "TauCeti.FiniteTypeCommHopfAlgCat.comapOfSurjective_unipotentRadicalDefiningIdeal:87; unipotentRadicalIsoOfIso:115",
+          "note": "Ordinary radical coordinate-isomorphism invariance."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Unipotent/Radical/BaseChange.lean",
+          "declarations": "TauCeti.HopfIdeal.IsUnipotentRadicalCandidate.baseChange:69; TauCeti.FiniteTypeCommHopfAlgCat.unipotentRadicalDefiningIdeal_baseChange_le:94",
+          "note": "Ordinary scalar-extension candidate/inclusion API, explicitly only inclusion."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Unipotent/Radical/Characteristic.lean",
+          "declarations": "TauCeti.FiniteTypeCommHopfAlgCat.unipotentRadicalDefiningIdeal_eq_bot_iff:86; unipotentRadicalDefiningIdeal_unipotentRadical_eq_bot:104",
+          "note": "Immediate whole-group recognition and radical idempotence."
+        }
+      ],
+      "search_notes": "Enumerated full native Unipotent/Radical directory. Core boundary is definition/greatest-candidate proof, isomorphism transport, base-change inclusion and immediate recognition/idempotence. Exclude NormalSubgroup (radical of arbitrary normal subgroup), reductive quotient, faithful representation, diagonalizable quotient, characters and structure decomposition endpoints. Interpretation note: affine/linear algebraic groups as used by the source; nonaffine extension not certified. No geometric-radical/base-change equality silently asserted."
+    },
+    {
+      "concept": "unitary-character-group",
+      "concept_id": "59a7c56d-bd64-550f-946d-8acb920e8bfe",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. PontryaginDual:40 is EXACTLY A ->continuousMonoidHom Circle, with only a Monoid and topology on A required; hence arbitrary topological groups qualify, not only abelian ones. Read actual definition and derived continuous homomorphism/group instances. Circle is the complex unit-circle multiplicative type. PontryaginDual.ext:76 identifies characters by values; no representation dimension or algebraicity condition added. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/PontryaginDual.lean",
+          "declarations": "PontryaginDual:40; PontryaginDual.ext:76; one_apply:80",
+          "note": "Actual arbitrary-domain continuous unit-circle character constructor and ordinary pointwise API."
+        }
+      ],
+      "search_notes": "Exclude Pontryagin duality theorem, locally compact dual topology endpoints, Fourier measure representation and algebraic character lattices. The term unitary means unit-modulus scalar character, not a C-star algebra character or an arbitrary Hilbert representation."
+    },
+    {
+      "concept": "unitary-character-group",
+      "concept_id": "59a7c56d-bd64-550f-946d-8acb920e8bfe",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. PontryaginDual:40 is EXACTLY A ->continuousMonoidHom Circle, with only a Monoid and topology on A required; hence arbitrary topological groups qualify, not only abelian ones. Read actual definition and derived continuous homomorphism/group instances. Circle is the complex unit-circle multiplicative type. PontryaginDual.ext:76 identifies characters by values; no representation dimension or algebraicity condition added. Native PontryaginDual.mul_apply:47 and inv_apply:51 are exact pointwise multiplication/inverse identities for the same continuous characters. Read their rfl proofs; native circleEquivPontryaginDualInt:64 supplies the ordinary explicit integer-character evaluation dictionary. Dependency PontryaginDual bytes identical. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Algebra/PontryaginDual.lean",
+          "declarations": "PontryaginDual.mul_apply:47; inv_apply:51; TauCeti.circleEquivPontryaginDualInt:64",
+          "note": "Native pointwise character group laws and exact circle/integers character parametrization."
+        }
+      ],
+      "search_notes": "Exclude Pontryagin duality theorem, locally compact dual topology endpoints, Fourier measure representation and algebraic character lattices. The term unitary means unit-modulus scalar character, not a C-star algebra character or an arbitrary Hilbert representation."
+    },
+    {
+      "concept": "unperforated-ordered-group",
+      "concept_id": "29f6d091-4a0e-5ed8-96aa-95636b9da123",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact generic property on partially ordered AddCommGroup G is forall positive n:Nat and g:G, 0<=n smul g -> 0<=g. Retain translation-compatible PARTIAL order; no total order, Archimedeanness, interpolation or divisibility implied. Existing nsmul in group structure gives literal predicate. Native Unbundled/Pow.one_le_pow_iff:210 generates nsmul_nonneg_iff under the explicitly stronger LINEAR-order hypothesis, with complete proof by negative contrapositive; it is direct ordinary recognition API on that subclass, not a claim that every partially ordered group is unperforated. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Order/Monoid/Unbundled/Pow.lean",
+          "declarations": "nsmul_nonneg_iff generated from one_le_pow_iff:210",
+          "note": "Exact ordinary positive-scalar order-reflection API under explicit linear-order subclass hypothesis, alongside literal general predicate."
+        }
+      ],
+      "search_notes": "Named Unperforated alias not required for the exact predicate. Exclude interpolation/refinement, dimension-group representation and total-order classification. Native source weaker-hypothesis ordinary bounds are selected under the established group/subclass API policy."
+    },
+    {
+      "concept": "unperforated-ordered-group",
+      "concept_id": "29f6d091-4a0e-5ed8-96aa-95636b9da123",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact generic property on partially ordered AddCommGroup G is forall positive n:Nat and g:G, 0<=n smul g -> 0<=g. Retain translation-compatible PARTIAL order; no total order, Archimedeanness, interpolation or divisibility implied. Existing nsmul in group structure gives literal predicate. Native Unbundled/Pow.one_le_pow_iff:210 generates nsmul_nonneg_iff under the explicitly stronger LINEAR-order hypothesis, with complete proof by negative contrapositive; it is direct ordinary recognition API on that subclass, not a claim that every partially ordered group is unperforated. Native Bounds.BddBelow.range_of_sub_le / BddAbove.range_of_sub_le generated at45/55 prove preservation of order boundedness under uniformly bounded differences under merely partial-order compatible group hypotheses. Actual witness-translation proofs checked. These direct ordinary ordered-group bounds qualify for this subclass consistently with031/048; no use of a linear-order instance to replace the general definition. Dependency Pow body identical. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Order/Group/Bounds.lean",
+          "declarations": "BddBelow.range_of_sub_le generated at45; BddAbove.range_of_sub_le generated at55",
+          "note": "Native ordinary partial-order/difference-bound API applying directly to unperforated ordered groups."
+        }
+      ],
+      "search_notes": "Named Unperforated alias not required for the exact predicate. Exclude interpolation/refinement, dimension-group representation and total-order classification. Native source weaker-hypothesis ordinary bounds are selected under the established group/subclass API policy."
+    },
+    {
+      "concept": "unramified-extension-local-field",
+      "concept_id": "4f2475f3-383c-576f-8fba-0149d5a41c3e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a supplied finite compatible extension of complete discretely valued fields with normalized valuations and induced residue extension, exact bare predicate is e=1 AND Algebra.IsSeparable residueK residueL. Set e to index of the image of K-units in the normalized integer value group (GroupTheory/Index.index:55; index_eq_one:480), with normalized valuations supplied as in036. FieldTheory/Separable.IsSeparable:536 and Algebra.IsSeparable:546 say every residue element has separable minimal polynomial. This retains the residue-separability clause for arbitrary complete DVFs; finite residue fields are NOT silently assumed. Definition does not assert existence/classification of arbitrary unramified extensions. Read actual generic index and separability constructors; exact dependency index identical, separability defining bodies header+1. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/GroupTheory/Index.lean",
+          "declarations": "Subgroup.index:55; index_eq_one:480",
+          "note": "Exact normalized value-group image-index-one defining condition."
+        },
+        {
+          "path": "Mathlib/FieldTheory/Separable.lean",
+          "declarations": "IsSeparable:536; Algebra.IsSeparable:546",
+          "note": "Actual full residue-field separability condition, not just e=1."
+        }
+      ],
+      "search_notes": "Enumerated native entire Unramified directory, with Basic/Criterion actual bodies inspected. Select Basic for definition/ordinary valuation and residue basis recognition. Exclude Frobenius, existence of every degree, maximal unramified extensions, local-class-field norms, Kummer and simple-root generation criteria as separately significant endpoints. General residue-separability remains explicit even though native local subclass makes it automatic."
+    },
+    {
+      "concept": "unramified-extension-local-field",
+      "concept_id": "4f2475f3-383c-576f-8fba-0149d5a41c3e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For a supplied finite compatible extension of complete discretely valued fields with normalized valuations and induced residue extension, exact bare predicate is e=1 AND Algebra.IsSeparable residueK residueL. Set e to index of the image of K-units in the normalized integer value group (GroupTheory/Index.index:55; index_eq_one:480), with normalized valuations supplied as in036. FieldTheory/Separable.IsSeparable:536 and Algebra.IsSeparable:546 say every residue element has separable minimal polynomial. This retains the residue-separability clause for arbitrary complete DVFs; finite residue fields are NOT silently assumed. Definition does not assert existence/classification of arbitrary unramified extensions. Read actual generic index and separability constructors; exact dependency index identical, separability defining bodies header+1. Native LocalField/Unramified/Basic.IsUnramified:122 defines e=1 for nonarchimedean LOCAL fields. Its source explicitly explains residue separability is automatic there: Mathlib LocalField/Basic:140 proves finite residue field, hence perfect. Native iff_normalizedValuation_comp_unitsMap_surjective:143 and iff_formallyUnramified:327 prove direct defining dictionaries; actual proof327 invokes Algebra.FormallyUnramified.iff_map_maximalIdeal_eq (LocalRing116) with the separability instance. This narrower local-field API contributes while the checked generic primary predicate covers arbitrary complete DVF input. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/LocalField/Unramified/Basic.lean",
+          "declarations": "TauCeti.IsUnramified:122; isUnramified_iff_ramificationIndex_eq_one:132; isUnramified_iff_formallyUnramified:327",
+          "note": "Native local unramified definition, value-group/ideal dictionaries and ordinary integral/residue basis API; finite-residue restriction explicit."
+        }
+      ],
+      "search_notes": "Enumerated native entire Unramified directory, with Basic/Criterion actual bodies inspected. Select Basic for definition/ordinary valuation and residue basis recognition. Exclude Frobenius, existence of every degree, maximal unramified extensions, local-class-field norms, Kummer and simple-root generation criteria as separately significant endpoints. General residue-separability remains explicit even though native local subclass makes it automatic."
+    },
+    {
+      "concept": "vandermonde-determinant",
+      "concept_id": "8f92169a-7962-5603-89c6-aaa779bb0f43",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Matrix.vandermonde:85 has entry v_i^j on Fin n, hence exponent j-1 on one-based indices. det_vandermonde:220 is EXACT product over i<j of (v_j-v_i), including n=0. Read complete projective determinant proof155\u2013204 over a field by column reduction/cofactor induction, then206\u2013217 polynomial universal specialization to arbitrary commutative rings. No field/distinctness hypotheses imposed on the identity; det nonzero234 adds domain/injectivity only for that corollary. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Vandermonde.lean",
+          "declarations": "Matrix.vandermonde:85; det_projVandermonde:206; det_vandermonde:220; det_vandermonde_ne_zero_iff:234",
+          "note": "Actual determinant formula, generic-ring proof and ordinary distinct-node/translation API."
+        }
+      ],
+      "search_notes": "Exclude confluent/repeated-node Hermite determinant, quantum Vandermonde, Choose/Vandermonde convolution (different identity), factorial divisibility and power-sum nonvanishing endpoints as reasons to select files. Whole selected native file still apportioned as usual."
+    },
+    {
+      "concept": "vandermonde-determinant",
+      "concept_id": "8f92169a-7962-5603-89c6-aaa779bb0f43",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Matrix.vandermonde:85 has entry v_i^j on Fin n, hence exponent j-1 on one-based indices. det_vandermonde:220 is EXACT product over i<j of (v_j-v_i), including n=0. Read complete projective determinant proof155\u2013204 over a field by column reduction/cofactor induction, then206\u2013217 polynomial universal specialization to arbitrary commutative rings. No field/distinctness hypotheses imposed on the identity; det nonzero234 adds domain/injectivity only for that corollary. Native TauCeti.sum_mul_det_vandermonde_update_sub_one:239 gives a direct node-lowering identity for this determinant over ANY commutative ring. Read complete falling-factorial change-of-basis/update-row multilinearity proof239\u2013276. It is ordinary determinant evaluation/perturbation API; the generic determinant formula is supplied by byte-identical dependency Vandermonde. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Vandermonde.lean",
+          "declarations": "TauCeti.sum_mul_det_vandermonde_update_sub_one:239; det_vandermonde_eq_prod_range:278",
+          "note": "Native exact node-perturbation identity and product-of-differences evaluation dictionary."
+        }
+      ],
+      "search_notes": "Exclude confluent/repeated-node Hermite determinant, quantum Vandermonde, Choose/Vandermonde convolution (different identity), factorial divisibility and power-sum nonvanishing endpoints as reasons to select files. Whole selected native file still apportioned as usual."
+    },
+    {
+      "concept": "vector-valued-siegel-modular-form",
+      "concept_id": "eae36b6b-a657-5846-90de-f75980686804",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact higher-genus finite-quotient vector-valued Siegel-form type was not certified: H_g is the symmetric complex matrix domain with positive-definite imaginary part, but the full Sp(2g,Z) action/det(CZ+D)^k rho(M) transformation, finite-index kernel and holomorphic Fourier condition remain an unchecked combined interface. Generic holomorphic functions, representations and finite-index subgroups alone do not certify that whole target. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Read actual SlashInvariantForm36 (elliptic upper half-plane), native SiegelFunction95 and JacobiTheta ordinary transformations, and generic symmetric/positive-imaginary matrix suppliers reviewed048. Full higher-genus action and Fourier-holomorphy/finite-quotient representation assembly not independently checked. No alias-only absence claim."
+    },
+    {
+      "concept": "vector-valued-siegel-modular-form",
+      "concept_id": "eae36b6b-a657-5846-90de-f75980686804",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact higher-genus finite-quotient vector-valued Siegel-form type was not certified: H_g is the symmetric complex matrix domain with positive-definite imaginary part, but the full Sp(2g,Z) action/det(CZ+D)^k rho(M) transformation, finite-index kernel and holomorphic Fourier condition remain an unchecked combined interface. Generic holomorphic functions, representations and finite-index subgroups alone do not certify that whole target. Native ModularForms/SiegelFunction/Basic.siegelFunction:95 is an explicit ONE-variable modular-unit product g_r(tau), read formula95\u2013100, not a vector-valued higher-genus Siegel modular form. Native JacobiTheta one-variable transformations likewise do not supply the matrix action/finite-type interface. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Read actual SlashInvariantForm36 (elliptic upper half-plane), native SiegelFunction95 and JacobiTheta ordinary transformations, and generic symmetric/positive-imaginary matrix suppliers reviewed048. Full higher-genus action and Fourier-holomorphy/finite-quotient representation assembly not independently checked. No alias-only absence claim."
+    },
+    {
+      "concept": "waring-number",
+      "concept_id": "7d5f1c9b-e4f8-503e-bebc-a47034a498ac",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact least-number constructor is Nat.find:67 applied to P_k(s):=forall n:Nat, exists a:Fin s -> Nat, sum_i(a_i^k)=n; zeros are allowed. find_spec70/min75 prove actual leastness GIVEN a witness exists s,P_k(s). Source does not in this review supply that witness for every k>=1. Identified native Nat.sum_four_squares:202 proves P_2(4), by prime-factor induction and Euler identity; thus the k=2 least-number case is available. Arbitrary-k Hilbert-Waring finite-cover existence/total-domain bridge remains unverified, rather than choosing a junk least value for an empty set. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Find.lean",
+          "declarations": "Nat.find:67; find_spec:70; find_min:75",
+          "note": "Actual least finite power-cover constructor, with existence hypothesis retained."
+        },
+        {
+          "path": "Mathlib/NumberTheory/SumFourSquares.lean",
+          "declarations": "Nat.sum_four_squares:202",
+          "note": "Native all-n four-square proof supplies the k=2 finite-cover witness; general k frontier explicit."
+        }
+      ],
+      "search_notes": "Searched Waring/Hilbert finite-power-cover and sum-powers namespaces; read Nat.find exact witness hypothesis and Nat.sum_four_squares202 full induction. The theorem on g(2)=4 and general g(k) finiteness are not silently claimed. Generic least relation is expressible; uncertainty is the all-k existence needed for this total number on the specified domain."
+    },
+    {
+      "concept": "waring-number",
+      "concept_id": "7d5f1c9b-e4f8-503e-bebc-a47034a498ac",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact least-number constructor is Nat.find:67 applied to P_k(s):=forall n:Nat, exists a:Fin s -> Nat, sum_i(a_i^k)=n; zeros are allowed. find_spec70/min75 prove actual leastness GIVEN a witness exists s,P_k(s). Source does not in this review supply that witness for every k>=1. Identified native Nat.sum_four_squares:202 proves P_2(4), by prime-factor induction and Euler identity; thus the k=2 least-number case is available. Arbitrary-k Hilbert-Waring finite-cover existence/total-domain bridge remains unverified, rather than choosing a junk least value for an empty set. Dependency constructors/proof bytes identical. No native general Waring finite-cover/least-number API certified, so no positive inherited all-k judgment is made and no native file selected. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Searched Waring/Hilbert finite-power-cover and sum-powers namespaces; read Nat.find exact witness hypothesis and Nat.sum_four_squares202 full induction. The theorem on g(2)=4 and general g(k) finiteness are not silently claimed. Generic least relation is expressible; uncertainty is the all-k existence needed for this total number on the specified domain."
+    },
+    {
+      "concept": "witt-kernel-genus-two-large-prime",
+      "concept_id": "25489a35-cf64-5910-943f-8a8b8f7c3205",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No existing proof certified of ker(reduced genus-two Witt restriction at prime p>=5, even k)=X10 times reduced weight(k-10) space over Z_(p). Actual elliptic SlashInvariantForm/ModularForm and tensor constructions are not that genus-two integral/reduction operator; scalar polynomial kernels do not prove this modular identity. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Searched genus-two/Siegel/Witt restriction/X10/Igusa/reduced modular kernels, and inspected actual one-variable SiegelFunction plus elliptic modular interfaces. Remaining frontier is genus-two integral modular-form model, reduced Witt map and the stated prime-uniform kernel theorem; no inference from a shared Witt name."
+    },
+    {
+      "concept": "witt-kernel-genus-two-large-prime",
+      "concept_id": "25489a35-cf64-5910-943f-8a8b8f7c3205",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No existing proof certified of ker(reduced genus-two Witt restriction at prime p>=5, even k)=X10 times reduced weight(k-10) space over Z_(p). Actual elliptic SlashInvariantForm/ModularForm and tensor constructions are not that genus-two integral/reduction operator; scalar polynomial kernels do not prove this modular identity. Native SiegelFunction95 is a one-variable modular unit, and native WittVector files concern p-typical Witt vectors, not Witt restriction on Siegel forms. They do not certify this kernel theorem. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Searched genus-two/Siegel/Witt restriction/X10/Igusa/reduced modular kernels, and inspected actual one-variable SiegelFunction plus elliptic modular interfaces. Remaining frontier is genus-two integral modular-form model, reduced Witt map and the stated prime-uniform kernel theorem; no inference from a shared Witt name."
+    },
+    {
+      "concept": "witt-operators-genus-two",
+      "concept_id": "f4d3c486-5b09-5df1-9a56-bbc4b3967ab0",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No complete existing representation certified of ALL three normalized genus-two transverse coefficients W,Wprime,Wsecond with the factor2 and 2*pi*i conventions, together with tensor-product elliptic/quasimodular targets and weight parity. Generic Taylor/iterated derivatives can state raw scalar coefficients, but exact target/transformation interface remains unverified. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Actual generic elliptic slash-invariance and native SiegelFunction defining formula inspected; searched genus-two/Witt operator/diagonal restriction/Igusa and modular differential coefficients. Do not conflate raw differentiability with the stated modular/quasimodular tensor targets or omit factor2 normalization."
+    },
+    {
+      "concept": "witt-operators-genus-two",
+      "concept_id": "f4d3c486-5b09-5df1-9a56-bbc4b3967ab0",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No complete existing representation certified of ALL three normalized genus-two transverse coefficients W,Wprime,Wsecond with the factor2 and 2*pi*i conventions, together with tensor-product elliptic/quasimodular targets and weight parity. Generic Taylor/iterated derivatives can state raw scalar coefficients, but exact target/transformation interface remains unverified. Native SiegelFunction95 is a one-variable product and cannot supply the genus-two block-diagonal restriction/Taylor-target construction. Native WittVector arithmetic is unrelated. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Actual generic elliptic slash-invariance and native SiegelFunction defining formula inspected; searched genus-two/Witt operator/diagonal restriction/Igusa and modular differential coefficients. Do not conflate raw differentiability with the stated modular/quasimodular tensor targets or omit factor2 normalization."
+    },
+    {
+      "concept": "zagier-involution",
+      "concept_id": "00eb822f-950f-5f97-b72f-4922afc2e534",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. CURRENT REVISION2 requires not just a piecewise triple formula but well-definedness on positive integer solutions, exhaustion of the strict cases, involutivity and the unique fixed point (1,1,(p-1)/4). Searched actual triple-formula variants and Zagier/involution names in both snapshots. Mathlib SumTwoSquares.Nat.Prime.sq_add_sq:36 proves Fermat by Gaussian-integer factorization, read proof; it does not implement this involution or its case/fixed-point proof. Those construction correctness endpoints remain unverified. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Search included x+2*z, y-x-z, 2*y-x and x-y+z variants as well as semantic names. No proof is inferred from the already proved sum-of-two-squares theorem; positivity and omitted-boundary exclusion depend on prime hypotheses and remain concrete unchecked obligations, no new proof development."
+    },
+    {
+      "concept": "zagier-involution",
+      "concept_id": "00eb822f-950f-5f97-b72f-4922afc2e534",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. CURRENT REVISION2 requires not just a piecewise triple formula but well-definedness on positive integer solutions, exhaustion of the strict cases, involutivity and the unique fixed point (1,1,(p-1)/4). Searched actual triple-formula variants and Zagier/involution names in both snapshots. Mathlib SumTwoSquares.Nat.Prime.sq_add_sq:36 proves Fermat by Gaussian-integer factorization, read proof; it does not implement this involution or its case/fixed-point proof. Those construction correctness endpoints remain unverified. Native GroupAction/Free and quadratic-form sources referencing Popa-Zagier concern Eichler-Selberg action/trace formulas, not this three-positive-integer involution; no native candidate implementing the exact cases certified. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Search included x+2*z, y-x-z, 2*y-x and x-y+z variants as well as semantic names. No proof is inferred from the already proved sum-of-two-squares theorem; positivity and omitted-boundary exclusion depend on prime hypotheses and remain concrete unchecked obligations, no new proof development."
+    },
+    {
+      "concept": "zhang-smooth-modulus-prime-distribution",
+      "concept_id": "6a4af2a7-2e5a-56a5-9c9d-89300cae9476",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No existing proof certified of the exact theta=1/2+7/300 squarefree x^delta-smooth modulus sum, coherent nonzero prime residues, all fixed A power-log savings and required quantifier uniformity. Read BoundingSieve.mainSum_lambdaSquared_eq_sum_sum_mul:350 actual finite quadratic-form identity; this algebraic sieve identity does not prove averaged prime distribution beyond1/2. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Actual Selberg350 finite identity and native Cyclotomic77/ArithmeticProgression93 definitions/proofs inspected in046 and reused here with exact pins. Searched MPZ/smooth moduli/Bombieri-Vinogradov/Zhang/prime AP uniformity. Specific unresolved averaged growing-modulus estimate and residue-uniform quantifiers; not an absence claim."
+    },
+    {
+      "concept": "zhang-smooth-modulus-prime-distribution",
+      "concept_id": "6a4af2a7-2e5a-56a5-9c9d-89300cae9476",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No existing proof certified of the exact theta=1/2+7/300 squarefree x^delta-smooth modulus sum, coherent nonzero prime residues, all fixed A power-log savings and required quantifier uniformity. Read BoundingSieve.mainSum_lambdaSquared_eq_sum_sum_mul:350 actual finite quadratic-form identity; this algebraic sieve identity does not prove averaged prime distribution beyond1/2. Native Chebotarev/PrimeCounting/Cyclotomic.frobeniusPsi_asymptotic_of_isCyclotomicExtension:77 gives fixed-extension weighted qualitative psi main terms o(x). Its checked AP coefficient dictionary is for a fixed modulus; no uniform growing family of smooth moduli, explicit distribution exponent or arbitrary log-saving estimate is supplied by that theorem. Actual dependency lacks current Mathlib WeakPNT file; it is not misattributed here. Actual defining statements, hypotheses and relevant completed proofs read; bounded existing-source review, no Lean rebuild or new proof development.",
+      "files": [],
+      "search_notes": "Actual Selberg350 finite identity and native Cyclotomic77/ArithmeticProgression93 definitions/proofs inspected in046 and reused here with exact pins. Searched MPZ/smooth moduli/Bombieri-Vinogradov/Zhang/prime AP uniformity. Specific unresolved averaged growing-modulus estimate and residue-uniform quantifiers; not an absence claim."
+    }
+  ]
+}

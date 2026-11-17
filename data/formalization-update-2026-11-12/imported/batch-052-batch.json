@@ -1,0 +1,654 @@
+{
+  "note": "Whole-catalogue formalization update batch-052: independent source review by category_galois_formalization of analysis_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "bounded-operator-polar-decomposition",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No complete existing polar partial-isometry factor and both factorizations were certified in standalone Mathlib. The positive CFC square root and adjoint/range dictionaries are available inputs, but they do not alone construct the required isometric extension on closure(range). Actual full Analysis/LinearAlgebra polarFactor/factorThru/IsPartialIsometry searches did not identify a supplier of that missing factor; unknown, not an assertion of absence. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Read native sqrt/range extension and both decomposition proofs, with exact RCLike hypotheses. Exclude finite polar, unitary/invertible variants, deformation, determinant and PiL2 coordinate endpoints as independent extra selection reasons. Mathlib suppliers are not credited with Tau-native implementation. Ownership clarification: any Poisson/SizeBias, StronglyContinuousSemigroup, Gaussian/Symmetry, Brownian RightContinuity/QV/RunningMaximum or MarkovChain/StrongMarkov candidate mentioned here is Tau Ceti-native, not a standalone Mathlib implementation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "bounded-operator-polar-decomposition",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Modulus.lean",
+          "declarations": "ContinuousLinearMap.modulus:90; modulus_comp_modulus:99; eq_modulus_iff:109; topologicalClosure_range_modulus:211",
+          "note": "Native positive square-root factor and exact initial-space dictionary."
+        },
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Gram/Factor.lean",
+          "declarations": "ContinuousLinearMap.factorThru:110; factorThru_apply_apply:125; factorThru_comp:131; isPartialIsometry_factorThru:287",
+          "note": "Actual bounded range-extension construction and its partial-isometry proof."
+        },
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/PartialIsometry.lean",
+          "declarations": "ContinuousLinearMap.IsPartialIsometry:86; isPartialIsometry_iff_norm_map:193",
+          "note": "Actual geometric partial-isometry characterization used by the factor proof."
+        },
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Polar/Bounded.lean",
+          "declarations": "ContinuousLinearMap.polarFactor:73; polarFactor_comp_modulus:90; isPartialIsometry_polarFactor:118; adjoint_polarFactor_comp_polarFactor:123; modulus_adjoint_comp_polarFactor:224",
+          "note": "Exact bounded polar decomposition, initial/final projections, uniqueness and left decomposition."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native ContinuousLinearMap.modulus:90 is the POSITIVE CFC square root of T-adjoint composed with T, for arbitrary RCLike scalar and complete Hilbert source/target; square99/unique109 and modulus_eq_sqrt:181 checked. Gram/Factor.factorThru:110 extends the isometric range rule by continuity on closure(range modulus), and by0 on its orthogonal complement. Polar/Bounded.polarFactor:73 is this factor; factorization90, norm on ker-perp105, partial-isometry118 and initial projection123 have completed proofs. Modulus.topologicalClosure_range_modulus:211 identifies initial space with ker(T)-perp; actual dependency Adjoint.orthogonal_ker:189 identifies it with closure(range T-adjoint), exactly the paragraph. Left factorization224 proves T=modulus(T-adjoint) composed with U, and203/214 give modulus/adjoint identities. No injectivity, closed range, finite dimension or invertibility imposed. Native PartialIsometry:86/193 gives the equivalent geometric norm-preservation notion. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Read native sqrt/range extension and both decomposition proofs, with exact RCLike hypotheses. Exclude finite polar, unitary/invertible variants, deformation, determinant and PiL2 coordinate endpoints as independent extra selection reasons. Mathlib suppliers are not credited with Tau-native implementation.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "bounded-self-adjoint-spectral-theorem",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Basic.lean",
+          "declarations": "continuousFunctionalCalculus:117; continuousFunctionalCalculus_map_id:122",
+          "note": "Existing continuous spectral representation, only part of the PVM/Borel target."
+        },
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unital.lean",
+          "declarations": "cfcHom:237; cfcHom_id:248",
+          "note": "Actual identity-generating continuous calculus."
+        },
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Instances.lean",
+          "declarations": "IsSelfAdjoint.spectrumRestricts:230; instContinuousFunctionalCalculus:234",
+          "note": "Actual real-spectrum restriction for selfadjoint complex C-star operators."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Identified CONTINUOUS spectral-calculus portion on complex Hilbert spaces: Mathlib CStarAlgebra/ContinuousLinearMap:20 makes H->L[Complex]H a C-star algebra; continuousFunctionalCalculus:117/map_id122 constructs the continuous spectral representation, cfcHom:237/id248 represents the operator, and Instances.IsSelfAdjoint.spectrumRestricts:230/instance234 gives its REAL spectrum. Read actual constructor/Gelfand and identity proof. No projection-valued measure or full bounded BOREL calculus construction/uniqueness was certified in standalone Mathlib, so partial rather than replacing the requested PVM theorem with continuous CFC. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Boundary selects direct PVM carrier/integral/representation construction and spectral theorem, not the whole import graph. MatrixElement and general PVM map/variation/dominated-convergence transport are supporting/general API, not added solely because imported. BorelCalculus commutant refinements, unitary/Stone representation, compact/eigenframe/relative spectrum and unbounded spectral theorems are extra endpoints. Real-Hilbert interpretation gap stated explicitly; no assumption that complex code automatically certifies it.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "bounded-self-adjoint-spectral-theorem",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/ProjValMeasure/Basic.lean",
+          "declarations": "TauCeti.ProjValMeasure:92; ProjValMeasure.hasSum_proj_of_pairwise_disjoint:429",
+          "note": "Actual PVM carrier, projection laws, strong countable additivity and uniqueness by diagonals."
+        },
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/ProjValMeasure/Integral.lean",
+          "declarations": "TauCeti.ProjValMeasure.integral:220",
+          "note": "Actual simple-symbol extension to bounded Borel spectral integration as a star-algebra homomorphism."
+        },
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/ProjValMeasure/Representation/DiagonalMeasure.lean",
+          "declarations": "StarAlgHom.representationDiagMeasure:94; integral_representationDiagMeasure:120; eq_representationDiagMeasure_iff:131",
+          "note": "Direct Riesz diagonal measure construction and uniqueness for a continuous representation."
+        },
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/ProjValMeasure/Representation/PolarizedMeasure.lean",
+          "declarations": "StarAlgHom.representationPolarizedMeasure:80; integral_representationPolarizedMeasure:122",
+          "note": "Actual polarized finite complex matrix-element measures used to construct Borel operators."
+        },
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/ProjValMeasure/Representation/BorelOperator.lean",
+          "declarations": "StarAlgHom.representationBorelOperator:226; inner_representationBorelOperator:245",
+          "note": "Actual bounded Borel operator representation from polarized measures."
+        },
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/ProjValMeasure/Representation/OfRepresentation.lean",
+          "declarations": "TauCeti.ProjValMeasure.ofRepresentation:76; integral_ofRepresentation:117; eq_ofRepresentation_iff:132",
+          "note": "Actual PVM of a representation, recovery and unique regular-measure characterization."
+        },
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/BorelCalculus/Basic.lean",
+          "declarations": "ContinuousLinearMap.spectralPVM:70; borelCalculus:75; borelCalculus_restrict_id:112; eq_spectralPVM_iff:182",
+          "note": "Actual spectral measure/Borel calculus and unique-PVM theorem for bounded normal/selfadjoint complex operators."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Complete COMPLEX-Hilbert PVM/Borel theorem is native: BorelCalculus/Basic.spectralPVM:70 applies the constructed ProjValMeasure.ofRepresentation to cfcHom; borelCalculus:75 is bounded Borel integration, continuous extension91 and coordinate representation112 prove a=integral z dP. Actual selfadjoint spectrum restriction is dependency Instances:230 (identical to M230), so this spectrum consists of real points. PVM Basic92 supplies projection/finite diagonal laws and proves unconditional STRONG countable additivity429; Integral220 constructs a genuine star-algebra Borel homomorphism. Representation DiagonalMeasure94/120/131 proves finite regular Riesz measures; PolarizedMeasure80 gives complex matrix-element measures; BorelOperator226 constructs the bounded operator homomorphism and its multiplicativity205 proof. OfRepresentation76/117/132 constructs the PVM, recovers continuous representation and proves uniqueness by scalar Riesz uniqueness. Basic.eq_spectralPVM_iff:182 gives precise unique-PVM criterion. All these actual proofs were read. HOWEVER the native construction requires InnerProductSpace Complex H throughout. Catalogue Hilbert field is unqualified; a full REAL-Hilbert PVM construction/complexification dictionary was not checked. Status partial retains that actual field-scope gap, not a gap in the complex theorem. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Boundary selects direct PVM carrier/integral/representation construction and spectral theorem, not the whole import graph. MatrixElement and general PVM map/variation/dominated-convergence transport are supporting/general API, not added solely because imported. BorelCalculus commutant refinements, unitary/Stone representation, compact/eigenframe/relative spectrum and unbounded spectral theorems are extra endpoints. Real-Hilbert interpretation gap stated explicitly; no assumption that complex code automatically certifies it.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "branching-diffusion-killed-domain",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The full particle-population construction was not certified: independent supplied diffusions, killing at exit, independent exponential rate-beta lifetimes, general offspring A at the parent position and recursively independent descendants from a finite initial configuration. Actual one-trajectory Markov path and stopping constructors are not this branching genealogy and lifetime/offspring law. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Read actual Markov kernels/path-law and stopping839 constructors; native StronglyContinuousSemigroup43 is a deterministic Banach-operator semigroup, not a killed branching-population probability law. Concrete unresolved interface is genealogy plus independently marked killed-diffusion trajectories and branching events, not inability to write a generic predicate. Ownership clarification: any Poisson/SizeBias, StronglyContinuousSemigroup, Gaussian/Symmetry, Brownian RightContinuity/QV/RunningMaximum or MarkovChain/StrongMarkov candidate mentioned here is Tau Ceti-native, not a standalone Mathlib implementation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "branching-diffusion-killed-domain",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The full particle-population construction was not certified: independent supplied diffusions, killing at exit, independent exponential rate-beta lifetimes, general offspring A at the parent position and recursively independent descendants from a finite initial configuration. Actual one-trajectory Markov path and stopping constructors are not this branching genealogy and lifetime/offspring law. Native candidate ownership: Poisson SizeBias39 and StronglyContinuousSemigroup43 belong to Tau Ceti, not its Mathlib dependency. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Read actual Markov kernels/path-law and stopping839 constructors; native StronglyContinuousSemigroup43 is a deterministic Banach-operator semigroup, not a killed branching-population probability law. Concrete unresolved interface is genealogy plus independently marked killed-diffusion trajectories and branching events, not inability to write a generic predicate.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "branching-many-to-few-lemma",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No completed existing proof certified of the exact unchanged-motion MULTIPLE-SPINE identity with ordinary m_j=E[A^j], marked skeleton counts D_s(v), beta-integrated sum(m_D-1), killed marks zero and REPEATED terminal labels. Finite Gaussian moments or a binomial expansion do not prove this law-change/marked-tree identity. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Compared actual Gaussian/moment and one-trajectory Markov sources with the full stated marked-spine endpoint. Poisson count-size-bias39 is a one-law identity, not the general A^j offspring marked-branching law. Full skeleton change of measure and exponential weight remain unverified; no distinct-label/factorial-moment substitute. Ownership clarification: any Poisson/SizeBias, StronglyContinuousSemigroup, Gaussian/Symmetry, Brownian RightContinuity/QV/RunningMaximum or MarkovChain/StrongMarkov candidate mentioned here is Tau Ceti-native, not a standalone Mathlib implementation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "branching-many-to-few-lemma",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No completed existing proof certified of the exact unchanged-motion MULTIPLE-SPINE identity with ordinary m_j=E[A^j], marked skeleton counts D_s(v), beta-integrated sum(m_D-1), killed marks zero and REPEATED terminal labels. Finite Gaussian moments or a binomial expansion do not prove this law-change/marked-tree identity. Native candidate ownership: Poisson SizeBias39 and StronglyContinuousSemigroup43 belong to Tau Ceti, not its Mathlib dependency. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Compared actual Gaussian/moment and one-trajectory Markov sources with the full stated marked-spine endpoint. Poisson count-size-bias39 is a one-law identity, not the general A^j offspring marked-branching law. Full skeleton change of measure and exponential weight remain unverified; no distinct-label/factorial-moment substitute.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "branching-many-to-one-lemma",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No completed existing proof certified of the exact first-moment branching semigroup E sum_u f(Xu(t))=exp(beta*(m-1)*t) P^D_t f for arbitrary nonnegative measurable f. The killed single-particle semigroup as supplied input does not itself prove the branching first-moment identity. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Actual operator-semigroup43 and Markov trajectory constructors inspected. Neither establishes offspring-mean factor, branching population sums or the nonnegative measurable extension. Searched many-to-one/branching/spine/Galton-Watson and killed diffusion moment variants; concrete unresolved first-moment theorem, no absence claim. Ownership clarification: any Poisson/SizeBias, StronglyContinuousSemigroup, Gaussian/Symmetry, Brownian RightContinuity/QV/RunningMaximum or MarkovChain/StrongMarkov candidate mentioned here is Tau Ceti-native, not a standalone Mathlib implementation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "branching-many-to-one-lemma",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No completed existing proof certified of the exact first-moment branching semigroup E sum_u f(Xu(t))=exp(beta*(m-1)*t) P^D_t f for arbitrary nonnegative measurable f. The killed single-particle semigroup as supplied input does not itself prove the branching first-moment identity. Native candidate ownership: Poisson SizeBias39 and StronglyContinuousSemigroup43 belong to Tau Ceti, not its Mathlib dependency. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Actual operator-semigroup43 and Markov trajectory constructors inspected. Neither establishes offspring-mean factor, branching population sums or the nonnegative measurable extension. Searched many-to-one/branching/spine/Galton-Watson and killed diffusion moment variants; concrete unresolved first-moment theorem, no absence claim.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "branching-many-to-two-lemma",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No existing proof certified of T_t(fg)+beta*q integral_0^t T_s[(T_(t-s)f)(T_(t-s)g)] ds with q=E[A(A-1)], including SAME terminal particle labels. q is the FACTORIAL second moment, not m^2 or ordinary E[A^2]; diagonal term T_t(fg) is required. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Checked actual finite algebra/moment and one-trajectory semigroup candidates. They do not supply the two-lineage split-time decomposition, coefficient beta*q or Duhamel convolution. Bounded nonnegative f,g and finite factorial second moment retained; missing full branching second-moment proof explicit. Ownership clarification: any Poisson/SizeBias, StronglyContinuousSemigroup, Gaussian/Symmetry, Brownian RightContinuity/QV/RunningMaximum or MarkovChain/StrongMarkov candidate mentioned here is Tau Ceti-native, not a standalone Mathlib implementation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "branching-many-to-two-lemma",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No existing proof certified of T_t(fg)+beta*q integral_0^t T_s[(T_(t-s)f)(T_(t-s)g)] ds with q=E[A(A-1)], including SAME terminal particle labels. q is the FACTORIAL second moment, not m^2 or ordinary E[A^2]; diagonal term T_t(fg) is required. Native candidate ownership: Poisson SizeBias39 and StronglyContinuousSemigroup43 belong to Tau Ceti, not its Mathlib dependency. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Checked actual finite algebra/moment and one-trajectory semigroup candidates. They do not supply the two-lineage split-time decomposition, coefficient beta*q or Duhamel convolution. Bounded nonnegative f,g and finite factorial second moment retained; missing full branching second-moment proof explicit.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "branching-spine-change-of-measure",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No complete source construction certified of the stated martingale-density family AND its spine law: ground-state transformed motion, accelerated m*beta lifetime, general size-biased offspring k*P(A=k)/m, uniform child and independent original off-spine families. Density normalization requires the usual positive nonzero M0 and nondegenerate mean conditions; no zero denominator is silently accepted. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Read actual native Poisson/SizeBias.withDensity_natCast_poissonMeasure39 completed singleton proof (count-bias of a POISSON equals rate times successor pushforward) and generic tilted/withDensity inputs. This does not identify a general offspring-size-biased spine law or ground-state genealogy. Generic density weighting alone does not certify all the construction properties; exact law-change/genealogy bridge unresolved. Ownership clarification: any Poisson/SizeBias, StronglyContinuousSemigroup, Gaussian/Symmetry, Brownian RightContinuity/QV/RunningMaximum or MarkovChain/StrongMarkov candidate mentioned here is Tau Ceti-native, not a standalone Mathlib implementation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "branching-spine-change-of-measure",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No complete source construction certified of the stated martingale-density family AND its spine law: ground-state transformed motion, accelerated m*beta lifetime, general size-biased offspring k*P(A=k)/m, uniform child and independent original off-spine families. Density normalization requires the usual positive nonzero M0 and nondegenerate mean conditions; no zero denominator is silently accepted. Native candidate ownership: Poisson SizeBias39 and StronglyContinuousSemigroup43 belong to Tau Ceti, not its Mathlib dependency. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Read actual native Poisson/SizeBias.withDensity_natCast_poissonMeasure39 completed singleton proof (count-bias of a POISSON equals rate times successor pushforward) and generic tilted/withDensity inputs. This does not identify a general offspring-size-biased spine law or ground-state genealogy. Generic density weighting alone does not certify all the construction properties; exact law-change/genealogy bridge unresolved.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "brownian-bridge",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Distributions/Gaussian/IsGaussianProcess/Basic.lean",
+          "declarations": "ProbabilityTheory.IsGaussianProcess.of_isGaussianProcess:125",
+          "note": "Actual finite-linear-combination Gaussian-process constructor instantiated to the exact Brownian bridge."
+        },
+        {
+          "path": "Mathlib/Probability/Moments/Covariance.lean",
+          "declarations": "ProbabilityTheory.covariance_const_mul_left:135; covariance_const_mul_right:138; covariance_fun_sub_fun_sub:200",
+          "note": "Exact existing affine covariance evaluation API for the constructed bridge."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For supplied standard real Brownian B and T>0, exact generic Gaussian-process constructor IsGaussianProcess.of_isGaussianProcess:125 applies to Y_s=B_s-(s/T)*B_T with finite index set {s,T} and L_s(z)=z_s-(s/T)z_T. Actual proof125–138 explicitly assembles finite linear-combination Gaussian laws; repeated index s=T is harmless. This is an EXISTING checked constructor, no named BrownianBridge alias required. Source Brownian Basic116 gives cov(B_s,B_t)=min(s,t), centered means108 and L2 evaluation. Covariance.const_mul135/138 and sub_sub200 give, for s,t<=T, min(s,t)-(t/T)*s-(s/T)*t+(s*t/T^2)*T=min(s,t)-s*t/T. The primary formula has endpoints0 (B0 almost surely0, and T/T=1); continuity is preserved by this affine combination on the common Brownian full-measure path set. Adding x+(s/T)*(y-x) gives the specified bridge from x to y. Only bare construction/meaning is claimed, not a new formal bridge-sampling theorem. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Enumerated native Brownian and Gaussian conditional directories. Brownian TimeIntegral.inner_toL2:55 gives the AMBIENT Brownian covariance min, not a bridge-specific native contribution, so excluded. Conditional Gaussian kernels and bridge sampling are separate endpoints. T>0 and finite interval source supplied explicitly; do not silently evaluate division at T=0.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "brownian-bridge",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For supplied standard real Brownian B and T>0, exact generic Gaussian-process constructor IsGaussianProcess.of_isGaussianProcess:125 applies to Y_s=B_s-(s/T)*B_T with finite index set {s,T} and L_s(z)=z_s-(s/T)z_T. Actual proof125–138 explicitly assembles finite linear-combination Gaussian laws; repeated index s=T is harmless. This is an EXISTING checked constructor, no named BrownianBridge alias required. Source Brownian Basic116 gives cov(B_s,B_t)=min(s,t), centered means108 and L2 evaluation. Covariance.const_mul135/138 and sub_sub200 give, for s,t<=T, min(s,t)-(t/T)*s-(s/T)*t+(s*t/T^2)*T=min(s,t)-s*t/T. The primary formula has endpoints0 (B0 almost surely0, and T/T=1); continuity is preserved by this affine combination on the common Brownian full-measure path set. Adding x+(s/T)*(y-x) gives the specified bridge from x to y. Only bare construction/meaning is claimed, not a new formal bridge-sampling theorem. Exact supplying Gaussian-process/covariance bodies checked at dependency revision. No qualifying native bridge definition/covariance API was identified; inherited availability, zero native LOC. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Enumerated native Brownian and Gaussian conditional directories. Brownian TimeIntegral.inner_toL2:55 gives the AMBIENT Brownian covariance min, not a bridge-specific native contribution, so excluded. Conditional Gaussian kernels and bridge sampling are separate endpoints. T>0 and finite interval source supplied explicitly; do not silently evaluate division at T=0.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "brownian-bridge-sampling",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/Probability/BrownianMotion/GaussianProjectiveFamily.lean",
+          "declarations": "ProbabilityTheory.BrownianReal.covMatrix:57; projectiveFamily:81",
+          "note": "Actual complete finite-grid Brownian Gaussian law; conditional recursive sampling frontier explicit."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Identified finite-grid JOINT-law portion: BrownianReal.projectiveFamily:81 is the centered multivariate Gaussian with covariance min(s,t) on a finite grid, and Basic.hasLaw gives exactly that joint law for Brownian coordinates. This includes the endpoint Gaussian law. The existing finite-grid conditional Gaussian regression/bracketing recursion supplier was not certified in standalone Mathlib, so the full stated sampling construction remains partial. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Exact finite-dimensional Gaussian and native conditional regression statements/proofs inspected. Distinguish conditioning on the whole sampled block (generic theorem) from the bracketing-only simplification and recursive bridge-law consistency. Do not infer a Brownian finite-grid sampling algorithm from unrelated Poisson/count-size-bias sampling.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "brownian-bridge-sampling",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Conditional/Basic.lean",
+          "declarations": "EuclideanSpace.gaussianCondMean:65; gaussianCondCov:105; gaussianCondKernel:194; TauCeti.Probability.condDistrib_multivariateGaussian:537",
+          "note": "Actual conditional Gaussian parameters/kernel and completed conditional-law theorem, not merely a formula."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native Gaussian conditional kernel implements a substantial sampling step: EuclideanSpace.gaussianCondMean:65 and gaussianCondCov:105 use the exact block pseudoinverse/Schur complement; gaussianCondKernel:194 evaluates to that multivariate Gaussian at213. TauCeti.Probability.condDistrib_multivariateGaussian:537 proves the conditional law from an actual positive-semidefinite jointly Gaussian law, including singular observed blocks, by the completed compProd disintegration proof537–560. Apply to the finite Brownian grid with covariance min(s,t), supplied by exact dependency BrownianReal.projectiveFamily:81. This gives all finite conditional Gaussian stage laws. The full recursive algorithm using ONLY the already generated BRACKETING values, with its explicit bridge-mean/variance simplification and joint-law consistency, was not independently certified as an existing completed source interface. Partial preserves that actual bridge rather than calling a generic conditional kernel the entire sampling algorithm. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Exact finite-dimensional Gaussian and native conditional regression statements/proofs inspected. Distinguish conditioning on the whole sampled block (generic theorem) from the bracketing-only simplification and recursive bridge-law consistency. Do not infer a Brownian finite-grid sampling algorithm from unrelated Poisson/count-size-bias sampling.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "brownian-motion",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/BrownianMotion/GaussianProjectiveFamily.lean",
+          "declarations": "ProbabilityTheory.BrownianReal.covMatrix:57; projectiveFamily:81",
+          "note": "Actual standard Brownian finite-dimensional Gaussian law and its consistent covariance model."
+        },
+        {
+          "path": "Mathlib/Probability/BrownianMotion/Basic.lean",
+          "declarations": "ProbabilityTheory.IsPreBrownianReal:74; IsPreBrownianReal.hasIndepIncrements:168; HasIndepIncrements.isPreBrownianReal_of_hasLaw:187; IsBrownianReal:301",
+          "note": "Exact continuous Brownian predicate, independent-increment equivalence and ordinary shift/scaling API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. IsPreBrownianReal:74 is exact Gaussian finite-dimensional Brownian law, built from projectiveFamily:81/covMatrix57=min(s,t). Basic.hasLaw_sub:104 gives normal(0,abs(t-s)); hasIndepIncrements:168 proves joint independence of disjoint increments by Gaussian covariance cancellation (full proof168–184 checked). IsBrownianReal:301 adds a COMMON almost-sure continuous path property, and time0 law is Dirac0. Conversely187 constructs the same predicate from independent increments and Gaussian one-time laws, with zero-at0 and covariance proof checked. This is the standard process definition up to indistinguishable versions. d-dimensional standard Brownian is the literal finite family of independent such real component processes; no correlated-components weakening. Catalogue asks a definition, not an existence/Wiener-measure construction. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: All native Brownian filenames enumerated. Exclude Girsanov/tilted drift (NaturalFiltration45 is specifically tilted-law transport), geometric/exponential martingales, stochastic integral construction, cubic/weighted quadratic variation and running-maximum estimates as separately significant endpoints. IsBrownianReal uses the standard AE path convention, not merely separate-at-each-time continuity.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "brownian-motion",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/BrownianMotion/Filtered.lean",
+          "declarations": "TauCeti.Probability.IsFilteredPreBrownianReal:62; ProbabilityTheory.IsPreBrownianReal.isFilteredPreBrownianReal_natural:118; hasLaw_sub_of_le:133",
+          "note": "Native filtered/natural-past characterization and direct Gaussian increment moment API."
+        },
+        {
+          "path": "TauCeti/Probability/BrownianMotion/NormalizedIncrements.lean",
+          "declarations": "TauCeti.normalizedBrownianIncrements:44; ProbabilityTheory.IsPreBrownianReal.hasLaw_normalizedBrownianIncrements:73",
+          "note": "Exact standardized finite-grid law and independent-component normal form."
+        },
+        {
+          "path": "TauCeti/Probability/BrownianMotion/Martingale.lean",
+          "declarations": "ProbabilityTheory.IsPreBrownianReal.memLp_eval:45; TauCeti.Probability.IsFilteredPreBrownianReal.martingale:97; martingale_sq_sub:141",
+          "note": "Ordinary finite-moment and immediate Brownian martingale/centered-square identities."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. IsPreBrownianReal:74 is exact Gaussian finite-dimensional Brownian law, built from projectiveFamily:81/covMatrix57=min(s,t). Basic.hasLaw_sub:104 gives normal(0,abs(t-s)); hasIndepIncrements:168 proves joint independence of disjoint increments by Gaussian covariance cancellation (full proof168–184 checked). IsBrownianReal:301 adds a COMMON almost-sure continuous path property, and time0 law is Dirac0. Conversely187 constructs the same predicate from independent increments and Gaussian one-time laws, with zero-at0 and covariance proof checked. This is the standard process definition up to indistinguishable versions. d-dimensional standard Brownian is the literal finite family of independent such real component processes; no correlated-components weakening. Catalogue asks a definition, not an existence/Wiener-measure construction. Native Filtered.IsFilteredPreBrownianReal:62 and natural-filtration dictionary118 add genuine ordinary increment/past-independence API; NormalizedIncrements.hasLaw_normalizedBrownianIncrements:73 proves independent standard Gaussians on every STRICTLY increasing finite grid. Native Martingale.martingale:97 is the completed immediate conditional-mean consequence (proof97–105 read), with finite moments45 and centered-square process141. These files genuinely concern ordinary Brownian law/process API, not merely importing it. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: All native Brownian filenames enumerated. Exclude Girsanov/tilted drift (NaturalFiltration45 is specifically tilted-law transport), geometric/exponential martingales, stochastic integral construction, cubic/weighted quadratic variation and running-maximum estimates as separately significant endpoints. IsBrownianReal uses the standard AE path convention, not merely separate-at-each-time continuity.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "brownian-quadratic-covariation",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The requested endpoint is CROSS-coordinate quadratic covariation equal delta_ij*t almost surely SIMULTANEOUSLY for every t>=0. No complete existing proof of that entire path-level coordinate bracket statement was certified in this review. Standalone Mathlib supplies Gaussian covariance min(s,t), which is a different object from quadratic covariation and is not substituted. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Read actual scalar QV error97/limit113/129 proofs and Weighted177 statement/proof. Do not conflate covariance of B_s,B_t, pointwise probability convergence, or a weighted finite-grid estimate with pathwise coordinate bracket processes on one common full-measure event. Ownership clarification: any Poisson/SizeBias, StronglyContinuousSemigroup, Gaussian/Symmetry, Brownian RightContinuity/QV/RunningMaximum or MarkovChain/StrongMarkov candidate mentioned here is Tau Ceti-native, not a standalone Mathlib implementation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "brownian-quadratic-covariation",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Process/QuadraticVariation.lean",
+          "declarations": "TauCeti.Probability.quadraticSum:44",
+          "note": "Actual quadratic-increment sum, rather than ordinary covariance."
+        },
+        {
+          "path": "TauCeti/Probability/BrownianMotion/QuadraticVariation.lean",
+          "declarations": "ProbabilityTheory.IsPreBrownianReal.tendsto_integral_sq_quadraticSum_sub:113; tendstoInMeasure_quadraticSum:129",
+          "note": "Completed scalar/diagonal fixed-time Brownian quadratic-sum limit; full cross/all-times endpoint unverified."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The requested endpoint is CROSS-coordinate quadratic covariation equal delta_ij*t almost surely SIMULTANEOUSLY for every t>=0. No complete existing proof of that entire path-level coordinate bracket statement was certified in this review. Identified native diagonal fixed-horizon part: quadraticSum:44 and IsPreBrownianReal.tendsto_integral_sq_quadraticSum_sub:113/tendstoInMeasure_quadraticSum:129 prove scalar Brownian squared-increment sums converge to elapsed time in L2/probability along any deterministic vanishing-mesh partition family. For each coordinate this certifies the diagonal fixed-time limit. Native WeightedQuadraticVariation:177 is another deterministic-grid L2 weighted error theorem, not an AS all-time cross-coordinate result. Partial records the precise weaker endpoint, without claiming probability convergence gives the requested simultaneous almost-sure identity. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Read actual scalar QV error97/limit113/129 proofs and Weighted177 statement/proof. Do not conflate covariance of B_s,B_t, pointwise probability convergence, or a weighted finite-grid estimate with pathwise coordinate bracket processes on one common full-measure event.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "brownian-reflection-principle",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No completed source proof certified of the exact hit-a path reflection preserving Wiener law and its joint running-maximum/terminal event identity for measurable A subset(-infinity,a), including arbitrary a>=0. Gaussian symmetry of a SINGLE evaluation does not establish random hitting-time path reflection. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Searched Brownian reflection/hitting/path transformations and generic stopping/Brownian running-maximum sources. Explicit missing stopped-path transformation and measure-preservation/joint event equality; no absence inference and no stopping-time reflection proof developed. Ownership clarification: any Poisson/SizeBias, StronglyContinuousSemigroup, Gaussian/Symmetry, Brownian RightContinuity/QV/RunningMaximum or MarkovChain/StrongMarkov candidate mentioned here is Tau Ceti-native, not a standalone Mathlib implementation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "brownian-reflection-principle",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No completed source proof certified of the exact hit-a path reflection preserving Wiener law and its joint running-maximum/terminal event identity for measurable A subset(-infinity,a), including arbitrary a>=0. Gaussian symmetry of a SINGLE evaluation does not establish random hitting-time path reflection. Native Gaussian/Symmetry.measurePreserving_reflection_gaussianReal:76 is finite planar Gaussian rotation/reflection; RunningMaximum.lintegral_iSup_exponentialMartingale_lt_top:74 proves integrability of an exponential Brownian running maximum. Actual statements/proofs inspected; neither supplies first-hit reflected-path law. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Searched Brownian reflection/hitting/path transformations and generic stopping/Brownian running-maximum sources. Explicit missing stopped-path transformation and measure-preservation/joint event equality; no absence inference and no stopping-time reflection proof developed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "brownian-strong-markov-property",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/Probability/BrownianMotion/Basic.lean",
+          "declarations": "ProbabilityTheory.IsPreBrownianReal.shift:234; indepFun_shift:252",
+          "note": "Completed deterministic-time future Brownian law/process independence, a strict scope subset of the stopping-time theorem."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Existing DETERMINISTIC-time part is exact: IsPreBrownianReal.shift:234 proves future shifted increments have Brownian finite-dimensional law; indepFun_shift:252 proves the ENTIRE future process is independent of the natural past, by Gaussian joint-process/covariance-zero proof. For a continuous Brownian input, continuity of the shifted paths is preserved, so this is the constant stopping-time case of the statement. Arbitrary almost-surely finite RANDOM T with stopped-history information is not certified here. Partial explicitly does not rename weak Markov as full strong Markov. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Read actual Mathlib weak Markov234/252 proof and native right-continuous natural past57 proof. Native MarkovChain/StrongMarkov/Process97 concerns WithTop NAT stopping times for DISCRETE chains, inspected full statement and event law; it is not a continuous Brownian strong-Markov supplier. No new optional-time approximation proof developed. Ownership clarification: any Poisson/SizeBias, StronglyContinuousSemigroup, Gaussian/Symmetry, Brownian RightContinuity/QV/RunningMaximum or MarkovChain/StrongMarkov candidate mentioned here is Tau Ceti-native, not a standalone Mathlib implementation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "brownian-strong-markov-property",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Probability/BrownianMotion/RightContinuity.lean",
+          "declarations": "ProbabilityTheory.IsBrownianReal.indep_shift_rightCont_natural:57; rightCont_natural_le_nullAugment:101",
+          "note": "Native deterministic-time future independence/natural filtration API, not a random-stopping-time theorem."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Existing DETERMINISTIC-time part is exact: IsPreBrownianReal.shift:234 proves future shifted increments have Brownian finite-dimensional law; indepFun_shift:252 proves the ENTIRE future process is independent of the natural past, by Gaussian joint-process/covariance-zero proof. For a continuous Brownian input, continuity of the shifted paths is preserved, so this is the constant stopping-time case of the statement. Arbitrary almost-surely finite RANDOM T with stopped-history information is not certified here. Partial explicitly does not rename weak Markov as full strong Markov. Native RightContinuity.indep_shift_rightCont_natural:57 proves future-process independence even from the raw RIGHT-CONTINUOUS natural past, by decreasing deterministic-time approximation and finite-dimensional independence limits; full proof57–98 checked. UsualFiltration:114 separately preserves the filtered Brownian property under usual augmentation. The unresolved random-stopping-time bridge remains explicit. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Read actual Mathlib weak Markov234/252 proof and native right-continuous natural past57 proof. Native MarkovChain/StrongMarkov/Process97 concerns WithTop NAT stopping times for DISCRETE chains, inspected full statement and event law; it is not a continuous Brownian strong-Markov supplier. No new optional-time approximation proof developed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "burkholder-davis-gundy-l2",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No completed source proof certified of full continuous LOCAL martingale BDG at arbitrary stopping T with its CONSTRUCTED bracket, both inequalities, localization and INFINITE expectations. The genuine native Tau Martingale.integral_sq_partialSups_norm_le:125 gives Doob upper bound4 for a FINITE NATURAL-time martingale maximum and terminal second moment (full actual proof read); it does not identify a continuous-time bracket or pass to local/random horizons. Brownian deterministic-time QV alone also does not cover the stated arbitrary-M scope. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Searched BDG/Burkholder/continuous maximal/bracket/optional stopping, inspected actual native discrete L2 maximal125, Brownian QV113 and RunningMaximum74 exponential-process estimate. Do not replace bracket expectation by terminal moment without a checked stopped isometry, or infer infinite-expectation localization from a finite-index inequality. Native candidates are ownership-qualified Tau sources. Ownership clarification: any Poisson/SizeBias, StronglyContinuousSemigroup, Gaussian/Symmetry, Brownian RightContinuity/QV/RunningMaximum or MarkovChain/StrongMarkov candidate mentioned here is Tau Ceti-native, not a standalone Mathlib implementation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "burkholder-davis-gundy-l2",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No completed source proof certified of full continuous LOCAL martingale BDG at arbitrary stopping T with its CONSTRUCTED bracket, both inequalities, localization and INFINITE expectations. The genuine native Tau Martingale.integral_sq_partialSups_norm_le:125 gives Doob upper bound4 for a FINITE NATURAL-time martingale maximum and terminal second moment (full actual proof read); it does not identify a continuous-time bracket or pass to local/random horizons. Brownian deterministic-time QV alone also does not cover the stated arbitrary-M scope. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Searched BDG/Burkholder/continuous maximal/bracket/optional stopping, inspected actual native discrete L2 maximal125, Brownian QV113 and RunningMaximum74 exponential-process estimate. Do not replace bracket expectation by terminal moment without a checked stopped isometry, or infer infinite-expectation localization from a finite-index inequality. Native candidates are ownership-qualified Tau sources.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "c1-map-euclidean",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+          "declarations": "HasDerivAt:130",
+          "note": "Actual coordinate-line derivative constructor in the exact continuous-partials predicate."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+          "declarations": "ContDiffOn:471; contDiffOn_succ_iff_fderiv_of_isOpen:891; contDiff_one_iff_fderiv:1261",
+          "note": "Existing ordinary C1 derivative-continuity characterization on open domains."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact C1 coordinate predicate on an OPEN Euclidean set Omega: there are real coefficient functions g_ij continuous on Omega with HasDerivAt (r -> (f(x+r*e_i))_j) (g_ij x) 0 for every x in Omega and each input/output coordinate. HasDerivAt:130 in Deriv/Basic is the actual first-order derivative limit constructor, so this exactly matches existence and continuity of all first partials, not just directional differentiability. No named C1Map alias required. Existing ContDiffOn:471 and open-domain derivative characterization891 provide the conventional Frechet C1 representation; ContDiff_one_iff_fderiv:1261 explicitly states differentiability plus continuous derivative. The exact coordinate predicate does not depend on claiming an unlocated named equivalence theorem. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Read actual derivative130, ContDiffOn471/891/1261 and finite-dimensional derivative-evaluation68/80 constructors/proofs. Exclude local injectivity, inverse function, Hessian, higher smoothness and finite-dimensional calculus applications as independent endpoints. No smoothness beyond first order imposed by the primary predicate.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "c1-map-euclidean",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Calculus/ContDiff/FDerivApply.lean",
+          "declarations": "ContDiffOn.fderiv_apply_of_isOpen:26",
+          "note": "Native ordinary directional/coordinate derivative continuity of C1 maps on open sets."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact C1 coordinate predicate on an OPEN Euclidean set Omega: there are real coefficient functions g_ij continuous on Omega with HasDerivAt (r -> (f(x+r*e_i))_j) (g_ij x) 0 for every x in Omega and each input/output coordinate. HasDerivAt:130 in Deriv/Basic is the actual first-order derivative limit constructor, so this exactly matches existence and continuity of all first partials, not just directional differentiability. No named C1Map alias required. Existing ContDiffOn:471 and open-domain derivative characterization891 provide the conventional Frechet C1 representation; ContDiff_one_iff_fderiv:1261 explicitly states differentiability plus continuous derivative. The exact coordinate predicate does not depend on claiming an unlocated named equivalence theorem. Native ContDiffOn.fderiv_apply_of_isOpen:26 proves directional/coordinate derivative regularity on open domains with m+1<=n, so m=0,n=1 gives ordinary continuous first-partial API. Actual two-line completed proof uses the existing derivative map and evaluation constructor; no analyticity or second derivative substituted. Its Frechet C1 hypothesis is explicit for this ordinary API; the full bare coordinate predicate is already exact. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Read actual derivative130, ContDiffOn471/891/1261 and finite-dimensional derivative-evaluation68/80 constructors/proofs. Exclude local injectivity, inverse function, Hessian, higher smoothness and finite-dimensional calculus applications as independent endpoints. No smoothness beyond first order imposed by the primary predicate.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "c1-domain",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Affine/Isometry.lean",
+          "declarations": "AffineIsometryEquiv:326",
+          "note": "Actual rigid Euclidean coordinate-change constructor in the defining graph charts."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+          "declarations": "HasDerivAt:130",
+          "note": "Exact continuous coordinate-partial regularity of local boundary graph functions."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact bare local-graph predicate: Omega is open and connected (use IsPreconnected for the usual empty-allowed topological convention); for every boundary p there are an open neighborhood U, a RIGID affine isometry e, an open base neighborhood V and a C1 real graph function h such that, locally in e(U), boundary membership is y=h(z) and domain membership is y>h(z) (or y<h(z)). AffineIsometryEquiv:326 genuinely preserves the Euclidean norm of its linear part, so this is orthogonal rotation/reflection plus translation, not an arbitrary differentiable chart. C1 is the exact continuous coordinate-partial predicate from HasDerivAt:130; its usual ContDiffOn1 formulation is also available. This is an existing checked generic predicate construction; no theorem constructing charts for arbitrary domains or named Domain alias is asserted. In dimension0 the boundary condition is vacuous when boundary is empty; ordinary graph charts concern d>=1. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Boundary is literal rigid local one-side graphs and their ordinary topology. Native PDE/Regularity/FlatBoundary and Green piecewise-graph integration assume special domains or perform PDE/integral applications; they do not replace this definition. Do not silently require boundedness, global graph, compact boundary or a uniform chart radius. Connectedness convention/empty-domain ambiguity stated explicitly.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "c1-domain",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Order/RegionBetween.lean",
+          "declarations": "TauCeti.closedRegionBetween:62; closedRegionBetween_self:76; closure_regionBetween:137; isOpen_regionBetween:419",
+          "note": "Native ordinary graph/one-side band topology, closure and openness API applying to C1 boundary charts."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact bare local-graph predicate: Omega is open and connected (use IsPreconnected for the usual empty-allowed topological convention); for every boundary p there are an open neighborhood U, a RIGID affine isometry e, an open base neighborhood V and a C1 real graph function h such that, locally in e(U), boundary membership is y=h(z) and domain membership is y>h(z) (or y<h(z)). AffineIsometryEquiv:326 genuinely preserves the Euclidean norm of its linear part, so this is orthogonal rotation/reflection plus translation, not an arbitrary differentiable chart. C1 is the exact continuous coordinate-partial predicate from HasDerivAt:130; its usual ContDiffOn1 formulation is also available. This is an existing checked generic predicate construction; no theorem constructing charts for arbitrary domains or named Domain alias is asserted. In dimension0 the boundary condition is vacuous when boundary is empty; ordinary graph charts concern d>=1. Native RegionBetween.closedRegionBetween:62 / graph recognition76 and closure_regionBetween:137 prove the actual graph-band boundary/closure dictionary for endpoints continuous on the CLOSURE of the base with strict separation on the base; isOpen_regionBetween:419 proves those bands are open. Read complete graph recognition76 and closure137–166/isOpen419–431 proofs. C1 or C1,1 graph bands are directly covered under explicit continuity (and locally an upper cutoff), without using graph regularity in that topological proof. This is ordinary local one-side graph-domain API under weaker regularity, not a PDE application; the full precise differentiability predicate remains supplier-owned. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Boundary is literal rigid local one-side graphs and their ordinary topology. Native PDE/Regularity/FlatBoundary and Green piecewise-graph integration assume special domains or perform PDE/integral applications; they do not replace this definition. Do not silently require boundedness, global graph, compact boundary or a uniform chart radius. Connectedness convention/empty-domain ambiguity stated explicitly.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "c11-domain",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Affine/Isometry.lean",
+          "declarations": "AffineIsometryEquiv:326",
+          "note": "Actual rigid Euclidean coordinate-change constructor in the defining graph charts."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+          "declarations": "HasDerivAt:130",
+          "note": "Exact continuous coordinate-partial regularity of local boundary graph functions."
+        },
+        {
+          "path": "Mathlib/Topology/EMetricSpace/Lipschitz.lean",
+          "declarations": "LipschitzOnWith:63",
+          "note": "Actual local first-partial Lipschitz condition in the defining C1,1 graph charts."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact bare local-graph predicate: Omega is open and connected (use IsPreconnected for the usual empty-allowed topological convention); for every boundary p there are an open neighborhood U, a RIGID affine isometry e, an open base neighborhood V and a C1 real graph function h such that, locally in e(U), boundary membership is y=h(z) and domain membership is y>h(z) (or y<h(z)). AffineIsometryEquiv:326 genuinely preserves the Euclidean norm of its linear part, so this is orthogonal rotation/reflection plus translation, not an arbitrary differentiable chart. C1 is the exact continuous coordinate-partial predicate from HasDerivAt:130; its usual ContDiffOn1 formulation is also available. This is an existing checked generic predicate construction; no theorem constructing charts for arbitrary domains or named Domain alias is asserted. In dimension0 the boundary condition is vacuous when boundary is empty; ordinary graph charts concern d>=1. C1,1 adds that EACH first-partial coefficient g_i of each scalar boundary graph is locally Lipschitz on its chart: choose K_i:NNReal with LipschitzOnWith K_i g_i V. Topology/EMetricSpace/Lipschitz:63 is literally the two-point distance bound on V. This asks LIPSCHITZ FIRST DERIVATIVES, not merely Lipschitz h; chart may be shrunk locally, and no globally uniform K is imposed. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Same local rigid graph convention as C1 domain, plus exact Lipschitz coordinate derivatives. Do not replace by a globally Lipschitz domain, a second differentiable/C2 graph or a positive-reach theorem. Native regularity/PDE Schauder conclusions are distinct endpoints; graph-band ordinary topology directly contributes under the established weaker-hypothesis core-API rule.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "c11-domain",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Order/RegionBetween.lean",
+          "declarations": "TauCeti.closedRegionBetween_self:76; closure_regionBetween:137; isOpen_regionBetween:419",
+          "note": "Ordinary one-side graph-domain closure/openness API valid for the more regular C1,1 graph subclass."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact bare local-graph predicate: Omega is open and connected (use IsPreconnected for the usual empty-allowed topological convention); for every boundary p there are an open neighborhood U, a RIGID affine isometry e, an open base neighborhood V and a C1 real graph function h such that, locally in e(U), boundary membership is y=h(z) and domain membership is y>h(z) (or y<h(z)). AffineIsometryEquiv:326 genuinely preserves the Euclidean norm of its linear part, so this is orthogonal rotation/reflection plus translation, not an arbitrary differentiable chart. C1 is the exact continuous coordinate-partial predicate from HasDerivAt:130; its usual ContDiffOn1 formulation is also available. This is an existing checked generic predicate construction; no theorem constructing charts for arbitrary domains or named Domain alias is asserted. In dimension0 the boundary condition is vacuous when boundary is empty; ordinary graph charts concern d>=1. C1,1 adds that EACH first-partial coefficient g_i of each scalar boundary graph is locally Lipschitz on its chart: choose K_i:NNReal with LipschitzOnWith K_i g_i V. Topology/EMetricSpace/Lipschitz:63 is literally the two-point distance bound on V. This asks LIPSCHITZ FIRST DERIVATIVES, not merely Lipschitz h; chart may be shrunk locally, and no globally uniform K is imposed. Native RegionBetween.closedRegionBetween:62 / graph recognition76 and closure_regionBetween:137 prove the actual graph-band boundary/closure dictionary for endpoints continuous on the CLOSURE of the base with strict separation on the base; isOpen_regionBetween:419 proves those bands are open. Read complete graph recognition76 and closure137–166/isOpen419–431 proofs. C1 or C1,1 graph bands are directly covered under explicit continuity (and locally an upper cutoff), without using graph regularity in that topological proof. This is ordinary local one-side graph-domain API under weaker regularity, not a PDE application; the full precise differentiability predicate remains supplier-owned. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Same local rigid graph convention as C1 domain, plus exact Lipschitz coordinate derivatives. Do not replace by a globally Lipschitz domain, a second differentiable/C2 graph or a positive-reach theorem. Native regularity/PDE Schauder conclusions are distinct endpoints; graph-band ordinary topology directly contributes under the established weaker-hypothesis core-API rule.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "cadlag-path",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Order/Cadlag.lean",
+          "declarations": "IsRightContinuous:35; IsCadlag:227; Continuous.isCadlag:232; IsCadlag.continuous_comp:242",
+          "note": "Exact right-continuous/left-limit path constructor and ordinary composition/boundedness API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. IsCadlag:227 in Topology/Order/Cadlag is EXACTLY right continuity plus existence of a left limit at every time. Apply it to the REAL INTERVAL SUBTYPE with its induced order/topology; at its left endpoint the left-neighborhood filter is empty, so it imposes no unwanted endpoint limit, and all positive/interior left limits are actual metric limits. IsRightContinuous:35 requires convergence from the strict right-neighborhood to f(a), so the limit is the actual path value at that time; Continuous.isCadlag:232 and continuous composition242/251 give ordinary path stability. No jumps restricted to a countable prescribed grid, no left continuity or finite variation added. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Enumerated all native Topology/Order files and all IsCadlag hits (only Wasserstein/Jump69). Read the complete elementary jump-limit proof69–90. Progressive57/continuous-stopping results use right-continuous processes for stochastic-process conclusions, rather than define/manipulate the bare cadlag path class. Do not charge mere use/application.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    },
+    {
+      "concept": "cadlag-path",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Order/LeftRightLim.lean",
+          "declarations": "Homeomorph.leftLim_comp:39; Homeomorph.rightLim_comp:55",
+          "note": "Native ordinary transport of the defining one-sided path limits through target homeomorphisms, with the actual/fallback cases proved; applicable to metric cadlag paths under weaker hypotheses."
+        },
+        {
+          "path": "TauCeti/Topology/Order/LeftRight.lean",
+          "declarations": "Dense.exists_mem_insert_inter_Iic_lt:41; TopologicalSpace.exists_countable_subset_Iic_exists_mem_lt:59; TauCeti.le_of_forall_rat_add_le:77",
+          "note": "Native dense/countable-time level and rational-comparison API for right-continuous real paths; direct ordinary regularity API for cadlag paths, no stochastic process application required."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. IsCadlag:227 in Topology/Order/Cadlag is EXACTLY right continuity plus existence of a left limit at every time. Apply it to the REAL INTERVAL SUBTYPE with its induced order/topology; at its left endpoint the left-neighborhood filter is empty, so it imposes no unwanted endpoint limit, and all positive/interior left limits are actual metric limits. IsRightContinuous:35 requires convergence from the strict right-neighborhood to f(a), so the limit is the actual path value at that time; Continuous.isCadlag:232 and continuous composition242/251 give ordinary path stability. No jumps restricted to a countable prescribed grid, no left continuity or finite variation added. Exact dependency Cadlag defining bytes differ only by one preceding header line (IsCadlag228 etc). Native Topology/Order/LeftRightLim Homeomorph.leftLim_comp:39 and rightLim_comp:55 prove exact transport of the defining one-sided limits under arbitrary target homeomorphisms, including empty-neighborhood and fallback cases; full proofs39–68 checked. This is direct ordinary one-sided path API under weaker hypotheses, applying in particular to metric-valued cadlag paths. Native LeftRight Dense.exists_mem_insert_inter_Iic_lt:41 and TopologicalSpace.exists_countable_subset_Iic_exists_mem_lt:59 reduce level-exceedance tests of real-valued right-continuous paths to a fixed dense/countable time set; le_of_forall_rat_add_le:77 transports rational comparison to real increments. Actual completed proofs41–70/77–88 checked. These are native core regularity API, while the underlying exact cadlag definition remains dependency-owned. The special Wasserstein/Jump69 example remains excluded as a separate application. Exact supplier checks: GaussianProcess/Basic, GaussianProjectiveFamily, Deriv/Basic, ContDiff/Defs and Lipschitz defining bytes are identical; Covariance and Brownian/Basic have a header +1 (covariance136/139/201; Brownian75/302/235/253 in dependency); Cadlag has header+1 (IsCadlag228). AffineIsometryEquiv is dependency302 rather than standalone326 because an earlier unrelated API block differs, and its defining fields are identical. Continuous-CFC Basic alone has header+1; Instances and Unital are byte-identical to the standalone snapshot, so their anchors remain230/234 and237/248. Actual relevant definitions, hypotheses and completed proof bodies inspected; bounded source review, no new Lean proof development or transitive axiom audit.\nSearch and boundary notes: Enumerated and read native Topology/Order sibling files, including LeftRightLim and LeftRight; exact generic one-sided-limit/right-continuity API qualifies even without an IsCadlag name. Read Wasserstein/Jump69–90 but exclude that single transport jump example. Progressive57 and stochastic stopping consequences are separate applications, not needed for this file boundary. Literal interval-subtype boundary convention remains supplier-owned.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-052.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Normed/Affine/Isometry.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 901,
+      "sha256": "18e9b5815947f740f5361001e1984c283fe125df100843b17b13102382dece52",
+      "measured_at": "2026-11-13T04:28:28.468551+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/BrownianMotion/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 333,
+      "sha256": "ff62037951ea61bc25dff47b9bcd1c0f80b2be36b550b6a732d0a293857d8abe",
+      "measured_at": "2026-11-13T04:28:28.482226+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/BrownianMotion/GaussianProjectiveFamily.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 214,
+      "sha256": "9014a683ad688fb77511b160524c5d6dd467cb3ab93910419caa6dbc53c68163",
+      "measured_at": "2026-11-13T04:28:28.500060+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/Distributions/Gaussian/IsGaussianProcess/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 174,
+      "sha256": "7946cb3444e9e8136ed5211fd38086f8dfd83d9f5ac991551b908b84e08d75e3",
+      "measured_at": "2026-11-13T04:28:28.525655+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/Moments/Covariance.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 345,
+      "sha256": "67be1d67ad3adf03b9dad3e39c08bbd70fec3e2e2bdf44e3659e8592fd001a51",
+      "measured_at": "2026-11-13T04:28:28.535657+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Calculus/ContDiff/FDerivApply.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 28,
+      "sha256": "92803a222c20c20f9fe85e121198d7b759f5c321070e514b08be8bf8604c9773",
+      "measured_at": "2026-11-13T04:28:28.577411+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/BorelCalculus/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 221,
+      "sha256": "9b5e6dcd28a3d9525e8f9c854372698d3a1b17a35621d7069d07e58cacaed1de",
+      "measured_at": "2026-11-13T04:28:28.596876+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/Modulus.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 294,
+      "sha256": "af1fa9c71e201025c0f95b91b4d96075f384b41a8e1c858f366fcfad2737ae17",
+      "measured_at": "2026-11-13T04:28:28.636133+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/Polar/Bounded.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 269,
+      "sha256": "a2c85230798485686cfdc58703599d26508a3542b74cf12b578be9fe985d0def",
+      "measured_at": "2026-11-13T04:28:28.685547+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/ProjValMeasure/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 519,
+      "sha256": "af39b6455560cf26301881221a130b9ff2a2289bdd1f49c9f64b27fbcad73fa6",
+      "measured_at": "2026-11-13T04:28:28.703327+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/ProjValMeasure/Integral.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 346,
+      "sha256": "3ff0113ae267add82741e66e4aa9ce36d3ca670c0c72e8ccbdebbce089524668",
+      "measured_at": "2026-11-13T04:28:28.720017+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/ProjValMeasure/Representation/BorelOperator.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 287,
+      "sha256": "22cdf3e3aa51112c867309a9f815249e1012917abeec53470a82e513d19b6eed",
+      "measured_at": "2026-11-13T04:28:28.740439+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/ProjValMeasure/Representation/DiagonalMeasure.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 184,
+      "sha256": "532714ab8c885cdda7d4e231575846846659dd6cca9410ba09a89f37e170d9f2",
+      "measured_at": "2026-11-13T04:28:28.762874+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/ProjValMeasure/Representation/OfRepresentation.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 150,
+      "sha256": "ff408ab877ec7f5c451b232bd2914b6e9e54744627ae2c487b6f82380ebfb49b",
+      "measured_at": "2026-11-13T04:28:28.782501+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/ProjValMeasure/Representation/PolarizedMeasure.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 267,
+      "sha256": "3b63cc28dbaf429e8808d2d1cbb72768230b6f6161686576a51d3775589c1145",
+      "measured_at": "2026-11-13T04:28:28.796743+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/BrownianMotion/Martingale.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 153,
+      "sha256": "e3f51c661f6a7cc279c77b3c2c29279f6b18424e60dd39f27b16321ae0c86812",
+      "measured_at": "2026-11-13T04:28:28.839187+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/BrownianMotion/NormalizedIncrements.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 94,
+      "sha256": "0d314e65a32543dc77bcab869d2e98d10f1fb0417642a9b16b96e41b365b0cae",
+      "measured_at": "2026-11-13T04:28:28.854999+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/BrownianMotion/RightContinuity.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 149,
+      "sha256": "7527e72e34818c324fb4c6aed4ac2f881452197b3808abf4647b43376fb1de42",
+      "measured_at": "2026-11-13T04:28:28.896162+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Distributions/Gaussian/Conditional/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 558,
+      "sha256": "5c26d6069448ee0df87ec4a3c95d7b1865a9ee53942a25cbe27a8a9295d3552f",
+      "measured_at": "2026-11-13T04:28:28.915234+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Order/LeftRight.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 89,
+      "sha256": "c2aba606abd20b1e322d8b6aa78123b507d2cc7354f5b5606ec3b50866b240fa",
+      "measured_at": "2026-11-13T04:28:28.957987+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Order/LeftRightLim.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 101,
+      "sha256": "40526054702e92722da1eaa7c95fbbde1fd57a75ef47d256dec6de91eaba68d1",
+      "measured_at": "2026-11-13T04:28:28.986972+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Order/RegionBetween.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 490,
+      "sha256": "f2f2ac5298e2eb99fe2ee6aed4a0ad46c7e9ea9740a3fe472585f5be928b92ad",
+      "measured_at": "2026-11-13T04:28:29.006987+00:00"
+    }
+  ]
+}

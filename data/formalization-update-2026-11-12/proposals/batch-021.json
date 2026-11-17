@@ -1,0 +1,493 @@
+{
+  "batch_id": "batch-021",
+  "author": "algebra_formalization",
+  "reviews": [
+    {
+      "concept": "regularization-minimizing-solution",
+      "concept_id": "96891350-a6e6-542d-aff1-cb6d28fceb4d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact existing predicate is F x=y together with IsMinOn R {z | F z=y} x. IsMinOn:112 and isMinOn_iff:129 require R x\u2264R z for every exact solution z, and no existence/uniqueness or convexity hypothesis is smuggled in. The separate equality is necessary because IsMinOn does not require membership in its constraint set. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Order/Filter/Extr.lean",
+          "declarations": "IsMinOn L112; isMinOn_iff L129",
+          "note": "Existing exact constrained minimum predicate instantiated on the equation fibre, with membership separately imposed."
+        }
+      ],
+      "search_notes": "Explicit fibre restriction, not unconstrained minimization of R or of a penalized Tikhonov objective. No dedicated inverse-problem alias required."
+    },
+    {
+      "concept": "regularization-minimizing-solution",
+      "concept_id": "96891350-a6e6-542d-aff1-cb6d28fceb4d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact existing predicate is F x=y together with IsMinOn R {z | F z=y} x. IsMinOn:112 and isMinOn_iff:129 require R x\u2264R z for every exact solution z, and no existence/uniqueness or convexity hypothesis is smuggled in. The separate equality is necessary because IsMinOn does not require membership in its constraint set. Dependency Extr is byte-identical; no qualifying native fibre-minimizing API selected. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Native Convex.Superlinear64/72 proves unqualified whole-space tilted-objective existence/uniqueness, not this exact-solution fibre definition. Native PDE extrema and convex coercivity are separate endpoints; zero native LOC."
+    },
+    {
+      "concept": "reproducing-kernel-hilbert-space",
+      "concept_id": "da33d7be-542f-5fbe-a84b-b795d2c7f1b4",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. RKHS:63 is an injective continuous-linear map from H to X\u2192V with pointwise topology. eval:120/125 is the bounded evaluation map at every x. With CompleteSpace H and scalar V=\u2102 (or \u211d), kerFun:137 is adjoint evaluation and kerFun_inner:161/inner_kerFun:167 prove reproduction. Take k_x=kerFun H x 1; Mathlib inner is conjugate-linear first, so inner_math k_x f=f(x), exactly the catalogue linear-first convention f(x)=\u27e8f,k_x\u27e9. Completeness is explicitly added: the RKHS class alone permits pre-Hilbert spaces, while the kernel construction uses CompleteSpace. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Reproducing.lean",
+          "declarations": "RKHS L63; RKHS.eval L120; kerFun L137; kernel L143; kerFun_inner L161; inner_kerFun L167",
+          "note": "Native complete RKHS structure/evaluation/kernel representation and ordinary reproduction/norm/natural-operation API."
+        }
+      ],
+      "search_notes": "Positive-kernel existence and extra kernel sum constructions occur in associated files but are separate constructions; selected core is the exact function/evaluation/kernel characterization. Explicit scalar and inner-slot convention checked."
+    },
+    {
+      "concept": "reproducing-kernel-hilbert-space",
+      "concept_id": "da33d7be-542f-5fbe-a84b-b795d2c7f1b4",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. RKHS:63 is an injective continuous-linear map from H to X\u2192V with pointwise topology. eval:120/125 is the bounded evaluation map at every x. With CompleteSpace H and scalar V=\u2102 (or \u211d), kerFun:137 is adjoint evaluation and kerFun_inner:161/inner_kerFun:167 prove reproduction. Take k_x=kerFun H x 1; Mathlib inner is conjugate-linear first, so inner_math k_x f=f(x), exactly the catalogue linear-first convention f(x)=\u27e8f,k_x\u27e9. Completeness is explicitly added: the RKHS class alone permits pre-Hilbert spaces, while the kernel construction uses CompleteSpace. Dependency Reproducing is byte-identical. Native Hardy.ReproducingKernel:43 constructs actual bounded point evaluation of the holomorphic disk function,59 its Riesz representative,65 reproduction and77 uniqueness. This is the conventional Hardy-space RKHS instance/API, not an import of the generic class. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Fourier/Hardy/ReproducingKernel.lean",
+          "declarations": "TauCeti.HardySpace.diskEvaluation L43; reproducingKernel L59; inner_reproducingKernel L65; eq_reproducingKernel_iff L77",
+          "note": "Native bounded evaluation/reproducing-vector construction for the conventional Hardy RKHS instance; generic RKHS definition remains dependency-owned."
+        }
+      ],
+      "search_notes": "Selected for direct evaluation/reproduction/uniqueness, not the later explicit Szeg\u0151 formula, normalized kernels, boundary convergence or Toeplitz applications. Native boundary Hardy vectors are identified with their disk functions by the checked representation, not bare L\u00b2 point evaluation."
+    },
+    {
+      "concept": "residual-subset",
+      "concept_id": "1f85b38a-a15e-5df7-8404-39dc84b5c6c9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Topology.GDelta.Basic.residual:173 is the countable-generated filter of dense open sets; mem_residual_iff:191 gives the countable-intersection characterization. IsMeagre:293 is literally s\u1d9c\u2208residual X, so s residual iff its complement is meagre by double complementation. No Baire/nonempty/metrizability hypothesis is needed for this definition. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/GDelta/Basic.lean",
+          "declarations": "residual L173; mem_residual_iff L191; IsMeagre L293",
+          "note": "Native residual/meagre complement definitions and ordinary complement/countable-union/filter API."
+        }
+      ],
+      "search_notes": "Comeagre may be empty in non-Baire spaces; do not silently equate residual with dense. Baire-category theorem is a separate endpoint."
+    },
+    {
+      "concept": "residual-subset",
+      "concept_id": "1f85b38a-a15e-5df7-8404-39dc84b5c6c9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Topology.GDelta.Basic.residual:173 is the countable-generated filter of dense open sets; mem_residual_iff:191 gives the countable-intersection characterization. IsMeagre:293 is literally s\u1d9c\u2208residual X, so s residual iff its complement is meagre by double complementation. No Baire/nonempty/metrizability hypothesis is needed for this definition. Exact dependency file identical and no native generic residual-definition API selected. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Native Baire.Perfect52/58 derives uncountability under perfect T1/nonempty Baire hypotheses; Mycielski constructs independent sets. These are separately significant consequences, not the defining residual complement criterion; zero native LOC."
+    },
+    {
+      "concept": "reverse-cauchy-schwarz-positive-index-one",
+      "concept_id": "e71ca70b-28fe-58e8-a55e-5d60e361c9fb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The actual positive-semidefinite Cauchy\u2013Schwarz machinery proves the opposite-direction inequality under nonnegative diagonal. Native Tau BilinearForm.PosSemidef.apply_sq_le_mul_of_apply_le_apply:69 is a majorant variant still assuming positivity everywhere; native QuadraticForm.Real150 classifies anisotropic real forms as positive/negative definite and214 counts positive diagonal coefficients. None of these is a checked proof of the reverse inequality from the absence of a two-dimensional positive subspace. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped reverse-Cauchy/Schwarz, positive-index/sigPos, bilinear/real quadratic form and signature searches; inspected actual PosSemidef69 and Real150 hypotheses/bodies. The index\u22641-to-negative-orthogonal-complement/determinant bound bridge remains unverified, not absent. No finite-dimensional or nondegenerate hypothesis is added to the catalogue theorem."
+    },
+    {
+      "concept": "reverse-cauchy-schwarz-positive-index-one",
+      "concept_id": "e71ca70b-28fe-58e8-a55e-5d60e361c9fb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual positive-semidefinite Cauchy\u2013Schwarz machinery proves the opposite-direction inequality under nonnegative diagonal. Native Tau BilinearForm.PosSemidef.apply_sq_le_mul_of_apply_le_apply:69 is a majorant variant still assuming positivity everywhere; native QuadraticForm.Real150 classifies anisotropic real forms as positive/negative definite and214 counts positive diagonal coefficients. None of these is a checked proof of the reverse inequality from the absence of a two-dimensional positive subspace. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped reverse-Cauchy/Schwarz, positive-index/sigPos, bilinear/real quadratic form and signature searches; inspected actual PosSemidef69 and Real150 hypotheses/bodies. The index\u22641-to-negative-orthogonal-complement/determinant bound bridge remains unverified, not absent. No finite-dimensional or nondegenerate hypothesis is added to the catalogue theorem."
+    },
+    {
+      "concept": "riemann-removable-singularity-theorem",
+      "concept_id": "af5e867e-30ca-5f37-9f2f-205b9314a5f4",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Complex.differentiableOn_update_limUnder_of_bddAbove:101 assumes s\u2208nhds c, complex differentiability on s\\{c}, and a bounded norm image there; it proves differentiability of f updated at c to limUnder of the punctured filter. The proof bounds norm(f z\u2212f c), applies the stronger little-o removable theorem and actually produces the extension. :123 proves the punctured limit. Specializing E=\u2102 gives precisely bounded punctured holomorphic removability; the value at c is replaced, not assumed correct. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Complex/RemovableSingularity.lean",
+          "declarations": "Complex.differentiableOn_update_limUnder_of_bddAbove L101; tendsto_limUnder_of_differentiable_on_punctured_nhds_of_bounded_under L123",
+          "note": "Native bounded-punctured-neighborhood holomorphic extension proof and ordinary limit/continuous-extension API."
+        }
+      ],
+      "search_notes": "Existing continuousAt variant36 and little-o theorem70 are nearby core; no meromorphic pole classification or Painlev\u00e9 removability across curves is counted as an extra endpoint."
+    },
+    {
+      "concept": "riemann-removable-singularity-theorem",
+      "concept_id": "af5e867e-30ca-5f37-9f2f-205b9314a5f4",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Complex.differentiableOn_update_limUnder_of_bddAbove:101 assumes s\u2208nhds c, complex differentiability on s\\{c}, and a bounded norm image there; it proves differentiability of f updated at c to limUnder of the punctured filter. The proof bounds norm(f z\u2212f c), applies the stronger little-o removable theorem and actually produces the extension. :123 proves the punctured limit. Specializing E=\u2102 gives precisely bounded punctured holomorphic removability; the value at c is replaced, not assumed correct. Dependency file is byte-identical; no native bounded-punctured-point extension proof/API selected. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Native Conformal.Removability.Basic138 proves Painlev\u00e9 removal across a line assuming continuity already on the domain, a separate extension theorem. ThricePuncturedSphere.Rigidity applies removability in a global classification; mere uses are excluded. Zero native LOC."
+    },
+    {
+      "concept": "riemann-sum",
+      "concept_id": "c7f2ff39-0364-5c22-911e-4ff8ca28da25",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. BoxIntegral.integralSum:79 is the finite sum vol J (f(tag J)). TaggedPrepartition:41 carries the tag, but tag_mem_Icc:46 only puts it in the PARENT box; impose IsHenstock:197 to require tag J\u2208J.Icc, and IsPartition for full coverage. Partition.Measure.Box.volume_apply:117 proves volume.toBoxAdditive J=product_i(upper_i\u2212lower_i); for Fin1 this is exactly each interval width. Thus the one-dimensional ordered interval partition gives the stated tagged Riemann sum. Its mesh is the existing Finset.sup':529 of the nonempty finite interval-width family (or0 for a degenerate empty partition), not the partition distortion. This checks both displayed constructions without asserting convergence to an integral. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/BoxIntegral/Basic.lean",
+          "declarations": "BoxIntegral.integralSum L79; integralSum_biUnionTagged L90",
+          "note": "Native tagged finite weighted sum and ordinary refinement/decomposition API."
+        },
+        {
+          "path": "Mathlib/Analysis/BoxIntegral/Partition/Tagged.lean",
+          "declarations": "BoxIntegral.TaggedPrepartition L41; TaggedPrepartition.IsHenstock L197",
+          "note": "Native tagged partition data; exact own-subinterval tag condition explicitly supplied."
+        },
+        {
+          "path": "Mathlib/Analysis/BoxIntegral/Partition/Measure.lean",
+          "declarations": "MeasureTheory.Measure.toBoxAdditive L99; BoxIntegral.Box.volume_apply L117",
+          "note": "Native volume weight equals product of side widths, exactly interval length in one dimension."
+        }
+      ],
+      "search_notes": "Finite maximum constructor read as a supplier, not another counted file. Henstock/gauge integrability convergence and fundamental theorem are separately significant endpoints; distortion is not mislabeled mesh."
+    },
+    {
+      "concept": "riemann-sum",
+      "concept_id": "c7f2ff39-0364-5c22-911e-4ff8ca28da25",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. BoxIntegral.integralSum:79 is the finite sum vol J (f(tag J)). TaggedPrepartition:41 carries the tag, but tag_mem_Icc:46 only puts it in the PARENT box; impose IsHenstock:197 to require tag J\u2208J.Icc, and IsPartition for full coverage. Partition.Measure.Box.volume_apply:117 proves volume.toBoxAdditive J=product_i(upper_i\u2212lower_i); for Fin1 this is exactly each interval width. Thus the one-dimensional ordered interval partition gives the stated tagged Riemann sum. Its mesh is the existing Finset.sup':529 of the nonempty finite interval-width family (or0 for a degenerate empty partition), not the partition distortion. This checks both displayed constructions without asserting convergence to an integral. Dependency selected definitions/proofs unchanged (Basic differs only a later blank line). Native intervalBox:28 has one coordinate with lower=a/upper=b,45 proves the exact closed interval membership needed for tags, and72/82 its ordinary split correspondence. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/BoxIntegral/IntervalIntegral.lean",
+          "declarations": "TauCeti.intervalBox L28; intervalBox_lower L32; intervalBox_upper L36; mem_Icc_intervalBox L45; splitLower_intervalBox L72; splitUpper_intervalBox L82",
+          "note": "Native exact ordinary one-dimensional interval/box and split presentation for tagged sums; dependency supplies finite weighted sum and mesh constructor."
+        }
+      ],
+      "search_notes": "No claim that any tag in the parent interval is automatically a Riemann tag. Interval integral identification and substitution/FundThmCalculus endpoints excluded as reasons for selection."
+    },
+    {
+      "concept": "riesz-decomposition-unit-disk",
+      "concept_id": "31b30915-118b-5e27-9c5e-e7457cec7bc4",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Native Tau planarGreenKernelDisk:35 and harmonicity50/positivity76 provide the actual disk Green kernel away from the pole. PoissonIntegral.Ball.eqOn_ballPoissonIntegral_of_harmonicOnNhd:387 represents a harmonic function continuous on the CLOSED ball by its continuous boundary values. Those are not a proof of unique Green-potential plus positive harmonic decomposition for arbitrary positive superharmonic functions, nor arbitrary positive boundary-measure representation. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Independent Riesz-decomposition/Green-potential/superharmonic searches; read native Disk35/50/76 and Ball387 proof using Dirichlet uniqueness. The kernel is totalized at its pole and is not silently treated as an extended-value superharmonic decomposition. General locally finite Riesz measure, uniqueness and positive harmonic boundary-measure endpoint remain unverified in both projects."
+    },
+    {
+      "concept": "riesz-decomposition-unit-disk",
+      "concept_id": "31b30915-118b-5e27-9c5e-e7457cec7bc4",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native Tau planarGreenKernelDisk:35 and harmonicity50/positivity76 provide the actual disk Green kernel away from the pole. PoissonIntegral.Ball.eqOn_ballPoissonIntegral_of_harmonicOnNhd:387 represents a harmonic function continuous on the CLOSED ball by its continuous boundary values. Those are not a proof of unique Green-potential plus positive harmonic decomposition for arbitrary positive superharmonic functions, nor arbitrary positive boundary-measure representation. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Independent Riesz-decomposition/Green-potential/superharmonic searches; read native Disk35/50/76 and Ball387 proof using Dirichlet uniqueness. The kernel is totalized at its pole and is not silently treated as an extended-value superharmonic decomposition. General locally finite Riesz measure, uniqueness and positive harmonic boundary-measure endpoint remain unverified in both projects."
+    },
+    {
+      "concept": "right-module-complex-algebra",
+      "concept_id": "1d2a0d13-cbbc-50d9-9607-3dd021a75bf7",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact existing generic representation: a bilinear map \u03c1:X\u2192\u2097[\u2102] A\u2192\u2097[\u2102] X (two LinearMap:84 constructors) with \u2200x a b,\u03c1(\u03c1 x a)b=\u03c1 x (a*b). This covers a nonunital complex associative algebra as well. When A is unital, impose \u2200x,\u03c1 x 1=x. Equivalently the unital presentation uses Module A\u1d50\u1d52\u1d56 X with compatible complex scalars; Module:54 includes both distributivities and MulAction.one_smul, and opposite multiplication reverses the order as required. The bilinear presentation avoids silently assuming that every A has an identity. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Module/LinearMap/Defs.lean",
+          "declarations": "LinearMap L84",
+          "note": "Existing exact bilinear-map constructor for the right action, with associativity/unital predicates explicit."
+        },
+        {
+          "path": "Mathlib/Algebra/Module/Defs.lean",
+          "declarations": "Module L54",
+          "note": "Native conventional unital module presentation, applied over the opposite algebra with compatible \u2102-scalar structure."
+        }
+      ],
+      "search_notes": "The action equation uses (x a)b=x(ab), not left multiplication. Opposite and complex scalar towers are checked suppliers rather than extra transport files. Bare definition does not assert representation/semisimplicity/existence of additional structure."
+    },
+    {
+      "concept": "right-module-complex-algebra",
+      "concept_id": "1d2a0d13-cbbc-50d9-9607-3dd021a75bf7",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact existing generic representation: a bilinear map \u03c1:X\u2192\u2097[\u2102] A\u2192\u2097[\u2102] X (two LinearMap:84 constructors) with \u2200x a b,\u03c1(\u03c1 x a)b=\u03c1 x (a*b). This covers a nonunital complex associative algebra as well. When A is unital, impose \u2200x,\u03c1 x 1=x. Equivalently the unital presentation uses Module A\u1d50\u1d52\u1d56 X with compatible complex scalars; Module:54 includes both distributivities and MulAction.one_smul, and opposite multiplication reverses the order as required. The bilinear presentation avoids silently assuming that every A has an identity. Dependency LinearMap/Module files identical. Native inverseRightAction:34 maps a unit d to right multiplication by d\u207b\u00b9, a COMPLETED monoid hom into complex-linear endomorphisms; its proof uses reversed inverse multiplication and op_mul/mul_smul, and44 is its actual action formula. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Module/Opposite.lean",
+          "declarations": "TauCeti.inverseRightAction L34; inverseRightAction_apply L44",
+          "note": "Native natural unit action on a right algebra module, direct ordinary right-module API; nonunital/general definition supplied by checked generic bilinear constructor."
+        }
+      ],
+      "search_notes": "Double-opposite module/semilinear transport later in the same file is an extra presentation, not the reason for selection. Unit API is restricted to the actual unital context; no missing nonunital identity is imposed."
+    },
+    {
+      "concept": "sarason-nonextreme-hb-characterization",
+      "concept_id": "97d746fb-39dc-5024-9ecb-48c715ec2746",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The checked native Tau boundary Hardy Hilbert space and Toeplitz operators implement H\u00b2 and T-symbol operators, but not an identified de Branges\u2013Rovnyak H(b) norm model or the completed Pythagorean-pair membership/unique-companion/norm formula. No such exact proof was certified in standalone Mathlib or Tau. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped Sarason/Rovnyak/de-Branges/Pythagorean-pair searches and actual Hardy.Basic/Toeplitz/ReproducingKernel contexts. Hilbert projection/Pythagorean theorem is not the Toeplitz characterization; the required H(b) realization and outer companion endpoint remain unverified. Tau Hardy declarations are not Mathlib ownership."
+    },
+    {
+      "concept": "sarason-nonextreme-hb-characterization",
+      "concept_id": "97d746fb-39dc-5024-9ecb-48c715ec2746",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The checked native Tau boundary Hardy Hilbert space and Toeplitz operators implement H\u00b2 and T-symbol operators, but not an identified de Branges\u2013Rovnyak H(b) norm model or the completed Pythagorean-pair membership/unique-companion/norm formula. No such exact proof was certified in standalone Mathlib or Tau. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped Sarason/Rovnyak/de-Branges/Pythagorean-pair searches and actual Hardy.Basic/Toeplitz/ReproducingKernel contexts. Hilbert projection/Pythagorean theorem is not the Toeplitz characterization; the required H(b) realization and outer companion endpoint remain unverified. Tau Hardy declarations are not Mathlib ownership."
+    },
+    {
+      "concept": "sarason-polynomial-density-nonextreme-hb",
+      "concept_id": "6e22dbb3-40fd-5d67-acce-28d7298d62eb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Hardy.Basic constructs H\u00b2 as the closed span of nonnegative Fourier modes, but its polynomial density is in the H\u00b2 norm. No identified H(b) space norm and proof of polynomial density in that stronger non-extreme de Branges\u2013Rovnyak norm was checked. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Searched Sarason/non-extreme/Rovnyak/polynomial density in both analysis trees; inspected Hardy closed-span and Toeplitz contexts. Density in the ambient Hardy Hilbert space does not imply density for an unverified H(b) norm. Unresolved exact space/outer-pair estimate, not absence."
+    },
+    {
+      "concept": "sarason-polynomial-density-nonextreme-hb",
+      "concept_id": "6e22dbb3-40fd-5d67-acce-28d7298d62eb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Hardy.Basic constructs H\u00b2 as the closed span of nonnegative Fourier modes, but its polynomial density is in the H\u00b2 norm. No identified H(b) space norm and proof of polynomial density in that stronger non-extreme de Branges\u2013Rovnyak norm was checked. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Searched Sarason/non-extreme/Rovnyak/polynomial density in both analysis trees; inspected Hardy closed-span and Toeplitz contexts. Density in the ambient Hardy Hilbert space does not imply density for an unverified H(b) norm. Unresolved exact space/outer-pair estimate, not absence."
+    },
+    {
+      "concept": "saroglou-zvavitch-quermass-inequality",
+      "concept_id": "887a97a7-fb71-54e6-8cd8-8d06b948c988",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked convex-body normalization and available volume/Steiner candidates do not prove the specific quermassintegral refinement with its displayed constants, mixed projection body \u03a0_(d\u22122), equality for balls and strictness for nonsymmetric bodies. No qualifying partial proof of this endpoint was verified. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped Saroglou/Zvavitch/Lutwak/quermass/mixed projection/body searches; native AffineNormalization:228 is ball containment after affine normalization, not a mixed surface-area/projection-body inequality. Exact mixed projection and quermass representation plus strict inequality/equality characterization remain unverified in both libraries."
+    },
+    {
+      "concept": "saroglou-zvavitch-quermass-inequality",
+      "concept_id": "887a97a7-fb71-54e6-8cd8-8d06b948c988",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked convex-body normalization and available volume/Steiner candidates do not prove the specific quermassintegral refinement with its displayed constants, mixed projection body \u03a0_(d\u22122), equality for balls and strictness for nonsymmetric bodies. No qualifying partial proof of this endpoint was verified. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped Saroglou/Zvavitch/Lutwak/quermass/mixed projection/body searches; native AffineNormalization:228 is ball containment after affine normalization, not a mixed surface-area/projection-body inequality. Exact mixed projection and quermass representation plus strict inequality/equality characterization remain unverified in both libraries."
+    },
+    {
+      "concept": "schauder-basis",
+      "concept_id": "876938fc-e59f-5b84-b471-ee10c7697959",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. GeneralSchauderBasis:104 records basis vectors, continuous coordinate functionals, biorthogonality and actual HasSum expansion. SchauderBasis:120 specializes its summation filter to conditional \u2115, the sequence of initial finite partial sums; assume CompleteSpace X to match Banach. These fields give the catalogue norm-convergent expansion with fixed unique coordinates: ContinuousLinearMap.hasSum (InfiniteSum.Module:122) commutes each coordinate with any convergent expansion, and biorthogonality isolates its scalar coefficient. This is the classical conditional basis, not merely an algebraic Hamel or unconditional basis. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Module/Bases.lean",
+          "declarations": "GeneralSchauderBasis L104; SchauderBasis L120; SchauderBasis.proj L291; SchauderBasis.tendsto_proj L318",
+          "note": "Native classical continuous-coordinate/biorthogonal/conditional-expansion basis and ordinary partial projection API."
+        }
+      ],
+      "search_notes": "UnconditionalSchauderBasis136 is stronger and is not substituted. Generic map-of-sum theorem is a checked proof supplier, not another counted file; no distortion or spreading-model theorem is claimed."
+    },
+    {
+      "concept": "schauder-basis",
+      "concept_id": "876938fc-e59f-5b84-b471-ee10c7697959",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. GeneralSchauderBasis:104 records basis vectors, continuous coordinate functionals, biorthogonality and actual HasSum expansion. SchauderBasis:120 specializes its summation filter to conditional \u2115, the sequence of initial finite partial sums; assume CompleteSpace X to match Banach. These fields give the catalogue norm-convergent expansion with fixed unique coordinates: ContinuousLinearMap.hasSum (InfiniteSum.Module:122) commutes each coordinate with any convergent expansion, and biorthogonality isolates its scalar coefficient. This is the classical conditional basis, not merely an algebraic Hamel or unconditional basis. Dependency Bases differs only a comment offset(+1). Native SchauderBasis.subsequence:55 constructs the actual basis on a strictly monotone subsequence\u2019s closed span, with inherited restricted coordinate functionals and a completed convergence proof;71/75 identify vectors/coordinates. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Module/Bases/Subsequence.lean",
+          "declarations": "SchauderBasis.subsequence L55; coe_subsequence_apply L71; subsequence_coord_apply L75; norm_subsequence_proj_le L89",
+          "note": "Native ordinary subsequence/coordinate/projection API of a Schauder basis; exact definition remains dependency-owned."
+        }
+      ],
+      "search_notes": "Small perturbation, unconditional multipliers and Banach distortion endpoints are additional structure/results. No arbitrary subsequence is claimed equivalent to the original basis."
+    },
+    {
+      "concept": "schlumprecht-space",
+      "concept_id": "171ed068-b621-55a7-bd4b-4b4cf50961e4",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The checked Finsupp finite-coordinate family and generic normed-space completion constructors do not implement the stated least implicitly recursive successive-block norm, its logarithmic n\u22652 weights, or the unconditional/subsymmetric basis claims. No exact norm or full construction was verified. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped Schlumprecht/distortable/Tsirelson/successive block/implicit norm searches in both Banach/sequence trees. c00=Finsupp, ordinary lp norms and a completion by themselves are prerequisites, not the recursive normed space. Actual basis/subsequence API does not prove these special basis properties."
+    },
+    {
+      "concept": "schlumprecht-space",
+      "concept_id": "171ed068-b621-55a7-bd4b-4b4cf50961e4",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The checked Finsupp finite-coordinate family and generic normed-space completion constructors do not implement the stated least implicitly recursive successive-block norm, its logarithmic n\u22652 weights, or the unconditional/subsymmetric basis claims. No exact norm or full construction was verified. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped Schlumprecht/distortable/Tsirelson/successive block/implicit norm searches in both Banach/sequence trees. c00=Finsupp, ordinary lp norms and a completion by themselves are prerequisites, not the recursive normed space. Actual basis/subsequence API does not prove these special basis properties."
+    },
+    {
+      "concept": "schneider-projection-functional-monotonicity",
+      "concept_id": "fd7d6eab-5376-56ba-b6d3-334b86a35612",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No checked full-dimensional projection-body iteration implementation and proof of P(K)\u2265P(\u03a0K), with iff homothety to \u03a0\u00b2K, was certified from the actual convex-volume/normalization candidates. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped Schneider/projection functional/projectionBody/homothetic and convex volume sources. Available affine normalization/Steiner perimeter identities do not supply the projection-body surface-area integral, iterated volume monotonicity or equality characterization. Exact endpoint remains unknown, not absent."
+    },
+    {
+      "concept": "schneider-projection-functional-monotonicity",
+      "concept_id": "fd7d6eab-5376-56ba-b6d3-334b86a35612",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No checked full-dimensional projection-body iteration implementation and proof of P(K)\u2265P(\u03a0K), with iff homothety to \u03a0\u00b2K, was certified from the actual convex-volume/normalization candidates. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped Schneider/projection functional/projectionBody/homothetic and convex volume sources. Available affine normalization/Steiner perimeter identities do not supply the projection-body surface-area integral, iterated volume monotonicity or equality characterization. Exact endpoint remains unknown, not absent."
+    },
+    {
+      "concept": "schur-algorithm-disk",
+      "concept_id": "6a292abf-610e-592d-b0b4-25dd28a7bdfb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Complex.norm_dslope_le_div_of_mapsTo_ball:272 and differentiableOn_dslope (RemovableSingularity:60) prove that for the f(0)=0 special case the actual derivative-filled quotient dslope f 0 is holomorphic and bounded by1 on the unit disk, equal to f(z)/z off zero. This is a genuine Schur first-step subcase. A checked generic M\u00f6bius-normalization and entire parameter/iteration interface at the standalone Mathlib snapshot was not certified. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Complex/Schwarz.lean",
+          "declarations": "Complex.norm_dslope_le_div_of_mapsTo_ball L272",
+          "note": "Native completed unit-disk bound for the Schur quotient in the zero-origin-value subcase."
+        },
+        {
+          "path": "Mathlib/Analysis/Complex/RemovableSingularity.lean",
+          "declarations": "Complex.differentiableOn_dslope L60",
+          "note": "Native holomorphic removable derivative-filled divided difference for the first Schur step."
+        }
+      ],
+      "search_notes": "Scope/frontier: iteration must stop at a unimodular constant or allow closed-disk Schur functions. The valid initial map f(z)=c*z, norm c=1, f(0)=0 gives constant c after one step, so an unqualified infinite iteration through open self-maps would be false. No catalogue identity edit made; no new proof developed."
+    },
+    {
+      "concept": "schur-algorithm-disk",
+      "concept_id": "6a292abf-610e-592d-b0b4-25dd28a7bdfb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native schwarzPickConjugate:48/def:56 at a=0 is exactly g(z)=(f(z)\u2212f(0))/(1\u2212conj(f(0))*f(z)); scaffold:75 proves g holomorphic, maps the open disk to itself and g(0)=0. The checked dependency dslope/removable/Schwarz:272 then gives the requested derivative-filled first Schur quotient with norm\u22641. This supplies the full generic first-step construction. An implemented Schur-parameter recursion with a checked termination/continuation convention was not verified, so coverage remains partial. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Complex/Conformal/SchwarzPick/Basic.lean",
+          "declarations": "TauCeti.schwarzPickConjugate L48; schwarzPickConjugate_def L56; differentiableOn_and_mapsTo_ball_and_apply_zero_schwarzPickConjugate L75",
+          "note": "Native actual M\u00f6bius-normalized zero-origin holomorphic disk map, direct generic first-step component; division by z supplied by dependency dslope."
+        }
+      ],
+      "search_notes": "UnitDisc M\u00f6bius helper is a checked supplier, not an additional counted downstream application. Important convention: f(z)=c*z with norm c=1 gives unimodular constant after one step; iteration stops there. Generic Function.iterate alone does not prove indefinite admissibility or identify all Schur parameters."
+    },
+    {
+      "concept": "schwartz-space",
+      "concept_id": "00b14cc2-ea8b-5508-a06b-00fa66eba9e9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. SchwartzMap:75 is smooth ContDiff \u211d \u221e plus \u2200k n a uniform bound on norm(x)^k * norm(iteratedFDeriv \u211d n f x). Basic.seminorm:401/409 is the least such bound; le_seminorm:426 and seminorm_le_bound:413 give both comparison directions. instTopologicalSpace:504 and schwartz_withSeminorms:507 install exactly the topology of this seminorm family. On finite-dimensional Euclidean space this is the conventional equivalent total-derivative/norm-power presentation of the multi-index monomial seminorms: finite coordinate derivatives are components of the multilinear derivative and polynomial coordinate weights are controlled by norm powers. The implementation includes derivatives of every order and every decay power, not merely bounded smooth functions. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean",
+          "declarations": "SchwartzMap L75; SchwartzMap.seminorm L401; seminorm_apply L409; le_seminorm L426; instTopologicalSpace L504; schwartz_withSeminorms L507",
+          "note": "Native smooth rapid-decay space, seminorm construction/comparison and exact locally convex seminorm topology, with ordinary linear/coordinate/composition API."
+        }
+      ],
+      "search_notes": "Explicit equivalent Euclidean norm/total-derivative convention retained. Fourier inversion, tempered-distribution duality and nuclearity are separate endpoints; no code for them is charged as a prerequisite."
+    },
+    {
+      "concept": "schwartz-space",
+      "concept_id": "00b14cc2-ea8b-5508-a06b-00fa66eba9e9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. SchwartzMap:75 is smooth ContDiff \u211d \u221e plus \u2200k n a uniform bound on norm(x)^k * norm(iteratedFDeriv \u211d n f x). Basic.seminorm:401/409 is the least such bound; le_seminorm:426 and seminorm_le_bound:413 give both comparison directions. instTopologicalSpace:504 and schwartz_withSeminorms:507 install exactly the topology of this seminorm family. On finite-dimensional Euclidean space this is the conventional equivalent total-derivative/norm-power presentation of the multi-index monomial seminorms: finite coordinate derivatives are components of the multilinear derivative and polynomial coordinate weights are controlled by norm powers. The implementation includes derivatives of every order and every decay power, not merely bounded smooth functions. Exact dependency defining structure, seminorms and topology unchanged; later CLM constructor bodies differ in tactic/syntax. Native Basic:61 proves polynomial/Japanese-bracket weight absorption with an explicit finite supremum of Schwartz seminorms, an ordinary decay/seminorm normal form. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Distribution/SchwartzSpace/Basic.lean",
+          "declarations": "SchwartzMap.one_add_norm_smul_sq_rpow_mul_norm_le L61",
+          "note": "Native direct seminorm-controlled weighted-decay normal form; definition/topology remain dependency-owned."
+        }
+      ],
+      "search_notes": "Integrability and compact-support/Lp inclusion in same file are not the reason for selection. Exclude Littlewood\u2013Paley decomposition, Fourier inversion and distributional applications from the generic Schwartz boundary."
+    },
+    {
+      "concept": "schwarz-lemma",
+      "concept_id": "bda7991f-2cc5-5253-87b2-73843aaa0e63",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Complex.norm_le_norm_of_mapsTo_ball:234 and norm_deriv_le_one_of_mapsTo_ball:261 prove the two Schwarz inequalities (open-disk self-maps also map into closed unit disk). norm_dslope_le_div:272 combines them. affine_of_mapsTo_ball_of_norm_dslope_eq_div:291 proves equality rigidity under strict convexity; \u2102 satisfies it. At z0=0 dslope is deriv, and at nonzero z0 the modulus equality is exactly norm dslope=1, giving f(z)=z*c with norm c=1 on the disk. Actual equality proof uses holomorphic dslope and strict-convex maximum-modulus rigidity. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Complex/Schwarz.lean",
+          "declarations": "Complex.norm_le_norm_of_mapsTo_ball L234; norm_deriv_le_one_of_mapsTo_ball L261; norm_dslope_le_div_of_mapsTo_ball L272; affine_of_mapsTo_ball_of_norm_dslope_eq_div L291",
+          "note": "Native full Schwarz norm/derivative inequalities and conventional equality cases."
+        }
+      ],
+      "search_notes": "Scalar codomain \u2102 is essential for rotation rigidity; no false equality claim for arbitrary non-strictly-convex Banach codomains. Schwarz\u2013Pick global automorphism classification is a separate theorem."
+    },
+    {
+      "concept": "schwarz-lemma",
+      "concept_id": "bda7991f-2cc5-5253-87b2-73843aaa0e63",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Complex.norm_le_norm_of_mapsTo_ball:234 and norm_deriv_le_one_of_mapsTo_ball:261 prove the two Schwarz inequalities (open-disk self-maps also map into closed unit disk). norm_dslope_le_div:272 combines them. affine_of_mapsTo_ball_of_norm_dslope_eq_div:291 proves equality rigidity under strict convexity; \u2102 satisfies it. At z0=0 dslope is deriv, and at nonzero z0 the modulus equality is exactly norm dslope=1, giving f(z)=z*c with norm c=1 on the disk. Actual equality proof uses holomorphic dslope and strict-convex maximum-modulus rigidity. Dependency Schwarz file is byte-identical; no selected native file implementing ordinary first-order single-zero Schwarz/equality API. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Native Complex.Schwarz90 is a prescribed-multiple-zeros higher-order product estimate, and Conformal.SchwarzPick.Rigidity98/249 proves hyperbolic equality/automorphism classification. These are separately significant enhancements and are excluded from the bounded basic Schwarz selection; zero native LOC."
+    },
+    {
+      "concept": "self-adjoint-norm-quadratic-form",
+      "concept_id": "b1c57eb2-ff6b-57a9-9b99-1f2e9af4d7c4",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. ContinuousLinearMap.norm_eq_iSup_rayleighQuotient:120 proves norm A=sup_x abs(Re inner(Ax,x)/norm x\u00b2) for symmetric A, by a completed polarization/operator-norm proof. image_rayleigh_eq_image_rayleigh_sphere:84 proves scale invariance identifies nonzero-vector values with the unit-sphere values; on the sphere denominator=1. Symmetric.im_inner_apply_self:146 and coe_re_inner_apply_self:156 prove the self-adjoint quadratic value is real, so abs(Re inner)=complex norm/absolute value. The adjoint-self hypothesis gives IsSymmetric; no compactness or finite-dimensionality assumption. In the zero Hilbert space, A=0 and the real conditional supremum of the empty sphere is0, consistent with the displayed formula. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Rayleigh.lean",
+          "declarations": "ContinuousLinearMap.rayleigh_smul L58; image_rayleigh_eq_image_rayleigh_sphere L84; norm_eq_iSup_rayleighQuotient L120",
+          "note": "Native completed norm/Rayleigh-supremum theorem and sphere normalization."
+        },
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Symmetric.lean",
+          "declarations": "LinearMap.IsSymmetric.im_inner_apply_self L146; coe_re_inner_apply_self L156",
+          "note": "Native proof that self-adjoint quadratic values are real, identifying the actual complex absolute-value convention."
+        }
+      ],
+      "search_notes": "Generic operator norm, adjoint and inner-product conventions checked as suppliers. General numerical-radius factor2 and Berger power inequality are different endpoints and not inferred from self-adjointness."
+    },
+    {
+      "concept": "self-adjoint-norm-quadratic-form",
+      "concept_id": "b1c57eb2-ff6b-57a9-9b99-1f2e9af4d7c4",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. ContinuousLinearMap.norm_eq_iSup_rayleighQuotient:120 proves norm A=sup_x abs(Re inner(Ax,x)/norm x\u00b2) for symmetric A, by a completed polarization/operator-norm proof. image_rayleigh_eq_image_rayleigh_sphere:84 proves scale invariance identifies nonzero-vector values with the unit-sphere values; on the sphere denominator=1. Symmetric.im_inner_apply_self:146 and coe_re_inner_apply_self:156 prove the self-adjoint quadratic value is real, so abs(Re inner)=complex norm/absolute value. The adjoint-self hypothesis gives IsSymmetric; no compactness or finite-dimensionality assumption. In the zero Hilbert space, A=0 and the real conditional supremum of the empty sphere is0, consistent with the displayed formula. Dependency Symmetric byte-identical and Rayleigh differs only a comment offset(+1); exact proof and normalization unchanged. Actual committed definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Native QuadraticForm.Bounds58/62 defines one-sided real-part form inequalities on subspaces and monotonicity/positive recognition109/116; it does not supply a separate norm-from-sphere identity. CourantFischer finite-dimensional eigenvalue extrema and concentration bounds are separate endpoints; no native LOC."
+    }
+  ]
+}

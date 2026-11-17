@@ -1,0 +1,590 @@
+{
+  "batch_id": "batch-032",
+  "author": "category_galois_formalization",
+  "reviews": [
+    {
+      "concept": "function-limit-metric-spaces",
+      "concept_id": "bbac87e1-1ef7-56a5-945e-8aeea06268ef",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Metric.tendsto_nhdsWithin_nhds:864 proves EXACTLY the epsilon-delta condition for a function along a specified set s. Take s={a} complement: in a metric space x!=a is equivalent to 0<dist(x,a), yielding the punctured-neighborhood definition Tendsto f (nhdsWithin a {a}complement) (nhds L). Read the neighborhood-ball-basis proof:858/864. Restrict further to an actual domain near a when f is only defined there; accumulation is the nontrivial-filter hypothesis for meaningful uniqueness, not an inserted value f(a)=L. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/MetricSpace/Pseudo/Defs.lean",
+          "declarations": "Metric.nhdsWithin_basis_ball:851; tendsto_nhdsWithin_nhds:864",
+          "note": "Actual metric neighborhood/epsilon-delta limit constructor and equivalent within-set presentation."
+        }
+      ],
+      "search_notes": "Exclude the unpunctured continuous-at condition:870 as a replacement. The limit does not depend on f(a). The source theorem works for pseudometrics; metric separation is used to rewrite the deleted point as positive distance."
+    },
+    {
+      "concept": "function-limit-metric-spaces",
+      "concept_id": "bbac87e1-1ef7-56a5-945e-8aeea06268ef",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency metric within-set epsilon-delta criterion agrees. Native ContinuousAt.tendsto_nhdsNE:27 proves an injective map continuous at x sends punctured neighborhoods to punctured neighborhoods, using continuousWithinAt plus injectivity to exclude the image point. This is direct ordinary punctured-limit input/composition API and applies to inclusions of metric subspaces; it does not require f(a)=L for the function whose punctured limit is being evaluated. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/ContinuousOn/PuncturedNhds.lean",
+          "declarations": "ContinuousAt.tendsto_nhdsNE:27",
+          "note": "Native ordinary map/composition rule for the precise deleted-neighborhood filter used by function limits."
+        }
+      ],
+      "search_notes": "The limit definition remains dependency-owned. Exclude path endpoint extension constructions, compact-cluster classifications and pure filter-instance transports as separate endpoints."
+    },
+    {
+      "concept": "galois-field-extension",
+      "concept_id": "fbf1feb0-f428-5324-ae4c-464f88cbac95",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "IsGalois:54 has precisely Algebra.IsSeparable F E and Normal F E; isGalois_iff:60 proves that conjunction. Normal:34 in Normal/Defs explicitly extends Algebra.IsAlgebraic, and separability in this library is algebraic as well. Thus no transcendental normal extension or finite-degree-only restriction is substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/FieldTheory/Galois/Basic.lean",
+          "declarations": "IsGalois:54; isGalois_iff:60; IsGalois.integral:77; separable:80; splits:83",
+          "note": "Actual algebraic normal/separable extension predicate and elementary recognition/integrality/splitting API."
+        }
+      ],
+      "search_notes": "Normal/Separable are defining inputs rather than an import tree of separately allocated files. Infinite algebraic Galois extensions are allowed; the fundamental correspondence/cardinality formulas are separate endpoints."
+    },
+    {
+      "concept": "galois-field-extension",
+      "concept_id": "fbf1feb0-f428-5324-ae4c-464f88cbac95",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency IsGalois:55/iff:61 has the same mathematical body (header whitespace shift). Native minpoly_map_eq_prod_X_sub_C_of_adjoin_eq_top:50 computes the defining minimal polynomial of a primitive element in a finite Galois extension as the product over all automorphisms. Its completed proof identifies the conjugate-root class with the Galois orbit and proves injectivity on a primitive generator. Derivative formula:68 is proved by the same actual factorization. These are direct ordinary normal/separable minimal-polynomial API, under their explicitly finite/primitive hypotheses. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/Galois/Minpoly.lean",
+          "declarations": "TauCeti.minpoly_map_eq_prod_X_sub_C_of_adjoin_eq_top:50; aeval_derivative_minpoly_eq_prod_of_adjoin_eq_top:68",
+          "note": "Native ordinary splitting/conjugate factorization and derivative API for finite primitive Galois extensions."
+        }
+      ],
+      "search_notes": "The general predicate includes infinite algebraic extensions; finite dimensionality is only a hypothesis of this API. Exclude Hilbert90, trace/class field results, group classifications and pure instance reinstallation."
+    },
+    {
+      "concept": "general-linear-group-ring",
+      "concept_id": "b07f4e69-e785-5bf7-87ec-7d2f6663bb77",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Matrix.GeneralLinearGroup:43 is literally Units(Matrix n n R). Checked Units:49 val/inv and the TWO identities val_inv:55/inv_val:57, so these are precisely two-sided invertible square matrices, with inherited unit multiplication equal to matrix multiplication. Specialize the finite index to Fin n and the semiring to a commutative ring. Determinant-based constructors in the same file are equivalent conveniences, not the definition over fields only. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean",
+          "declarations": "Matrix.GeneralLinearGroup:43; scalar:55; toLin:121; mk'':143",
+          "note": "Actual invertible-matrix group alias and ordinary scalar/determinant/linear-coordinate constructors."
+        }
+      ],
+      "search_notes": "Do not replace GL by all matrices or by special linear/positive determinant subgroups; n=0 is allowed."
+    },
+    {
+      "concept": "general-linear-group-ring",
+      "concept_id": "b07f4e69-e785-5bf7-87ec-7d2f6663bb77",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency GL=matrix Units constructor agrees. Native Matrix.GeneralLinearGroup.map_injective:36 proves change of scalars along an injective ring hom is injective on GL, by actual matrix-entry injectivity and Units.map_injective. This is direct ordinary general-linear-group scalar-map API over arbitrary commutative rings. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Matrix/GeneralLinearGroup/Map.lean",
+          "declarations": "Matrix.GeneralLinearGroup.map_injective:36",
+          "note": "Native ordinary entrywise scalar-extension injectivity for the same invertible-matrix group."
+        }
+      ],
+      "search_notes": "Exclude positive determinant, SL, Bruhat, centralizer/cardinality and topological maximal compact subgroup endpoints. No field assumption or positive dimension is introduced."
+    },
+    {
+      "concept": "geometric-character-lattice-reductive-group",
+      "concept_id": "db709302-0e24-5a33-981d-a8b59c546283",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Checked the geometric coordinate character group GroupLike(kbar)(kbar tensor_k H), using the actual Hopf tensor scalar extension, grouplike counit/coproduct conditions and antipode inverses. This is a genuine geometric character-group component. The corresponding full natural absolute-Galois action and lattice/descent theorem interfaces were not certified in standalone Mathlib. The catalogue is over Fsep, and also asserts finite free rank and rational characters as fixed elements for EVERY connected reductive group. The exact Fsep-versus-algebraic-closure comparison, general reductive finite-generation/freeness and rational fixed-character descent were not certified. Keep partial, rather than silently specializing to tori. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Coalgebra/GroupLike.lean",
+          "declarations": "IsGroupLikeElem:37; GroupLike:66",
+          "note": "Actual coordinate geometric-character carrier on the checked algebraic-closure scalar extension."
+        },
+        {
+          "path": "Mathlib/RingTheory/Bialgebra/GroupLike.lean",
+          "declarations": "IsGroupLikeElem.mul:35; GroupLike multiplication:72",
+          "note": "Actual multiplication of coordinate characters."
+        },
+        {
+          "path": "Mathlib/RingTheory/HopfAlgebra/GroupLike.lean",
+          "declarations": "GroupLike.toUnits:37; Group instance:64; instCommGroup:72",
+          "note": "Actual antipode inversion and abelian character-group operations."
+        }
+      ],
+      "search_notes": "Actual native Torus/CharacterLattice:61/68 proves finite freeness ONLY for tori via a split-torus isomorphism. HopfAlgebra/GroupLike/FiniteGeneration:52/76 requires group-like elements SPAN the entire coordinate algebra, a multiplicative-type restriction not true for all reductive groups. Those complete proofs were inspected and cannot settle this general endpoint. Native geometric constructions are separately owned in Mathlib judgments. No unverified reductive abelianization proof is developed."
+    },
+    {
+      "concept": "geometric-character-lattice-reductive-group",
+      "concept_id": "db709302-0e24-5a33-981d-a8b59c546283",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Checked the geometric coordinate character group GroupLike(kbar)(kbar tensor_k H), using the actual Hopf tensor scalar extension, grouplike counit/coproduct conditions and antipode inverses. This is a genuine geometric character-group component. Native geometricCharacterGroup:73 bundles it; ScalarAut:44 proves the natural multiplicative action on the coefficient factor, with explicit equivariance:66. Native Torsion:74/95 proves torsion freeness under geometric connectedness and smoothness by reduced/connected algebraic-closure base change. Read these completed proofs. The catalogue is over Fsep, and also asserts finite free rank and rational characters as fixed elements for EVERY connected reductive group. The exact Fsep-versus-algebraic-closure comparison, general reductive finite-generation/freeness and rational fixed-character descent were not certified. Keep partial, rather than silently specializing to tori. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/CommHopfAlgCat/CharacterLattice/Basic.lean",
+          "declarations": "TauCeti.CommHopfAlgCat.geometricCharacterGroup:73; additiveCharacterGroup:104",
+          "note": "Native geometric-character carrier on the algebraic-closure base change and its absolute-Galois action interface."
+        },
+        {
+          "path": "TauCeti/Algebra/Bialgebra/GroupLike/ScalarAut.lean",
+          "declarations": "TauCeti.ScalarAut.instGroupLikeDistribMulAction:44; BialgHom.mapGroupLike_baseChangeMap_smul:66",
+          "note": "Native actual multiplicative coefficient-automorphism action and equivariance proof."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/CommHopfAlgCat/CharacterLattice/Torsion.lean",
+          "declarations": "isMulTorsionFree_geometricCharacterGroup:74; isMulTorsionFree_geometricCharacterGroup_of_smooth:95",
+          "note": "Native torsion-freeness proof for smooth geometrically connected affine-group characters."
+        }
+      ],
+      "search_notes": "Actual native Torus/CharacterLattice:61/68 proves finite freeness ONLY for tori via a split-torus isomorphism. HopfAlgebra/GroupLike/FiniteGeneration:52/76 requires group-like elements SPAN the entire coordinate algebra, a multiplicative-type restriction not true for all reductive groups. Those complete proofs were inspected and cannot settle this general endpoint. Native geometric constructions are separately owned in Mathlib judgments. No unverified reductive abelianization proof is developed."
+    },
+    {
+      "concept": "geometrically-connected-affine-group",
+      "concept_id": "e7f7d8e1-5e26-5fcd-b756-476b5eed2117",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "An exact existing generic bare representation is a commutative F-algebra H with HopfAlgebra F H and the predicate forall e:kbar tensor_F H, IsIdempotentElem e -> e=0 or e=1. IsIdempotentElem:37 is literally e*e=e; the checked Hopf scalar-extension constructor gives this exact coordinate algebra, with no smoothness/reducedness or finite-dimensionality imposed.  Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Idempotent.lean",
+          "declarations": "IsIdempotentElem:37; isIdempotentElem_iff:39",
+          "note": "Actual coordinate idempotent predicate used in the precise no-nontrivial-idempotents refinement."
+        }
+      ],
+      "search_notes": "The primary exact closure-only predicate above is the catalogue definition and does not require a new alias. The native generic all-field-extension predicate is NOT asserted here to be definitionally identical to the closure-only wording; no unlocated converse bridge is claimed. Its checked closure/no-idempotent consequences retain their actual hypotheses. Native tensor commutation and spectral connectedness use inherited prerequisites, not additional allocated files."
+    },
+    {
+      "concept": "geometrically-connected-affine-group",
+      "concept_id": "e7f7d8e1-5e26-5fcd-b756-476b5eed2117",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "An exact existing generic bare representation is a commutative F-algebra H with HopfAlgebra F H and the predicate forall e:kbar tensor_F H, IsIdempotentElem e -> e=0 or e=1. IsIdempotentElem:37 is literally e*e=e; the checked Hopf scalar-extension constructor gives this exact coordinate algebra, with no smoothness/reducedness or finite-dimensionality imposed. Native Connected/CommHopfAlgCat:59 defines the standard all-field-extension connected-spectrum condition; :104 proves its exact idempotent formulation, and :84 proves algebraic-closure connectedness in the same tensor orientation. Read those proofs. These provide direct ordinary coordinate/fiber API.  Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Connected/CommHopfAlgCat.lean",
+          "declarations": "geometricallyConnectedCommHopfAlgProperty:59; connectedSpace_algebraicClosureBaseChange:84; geometricallyConnectedCommHopfAlgProperty_iff_idempotent_eq_zero_or_one:104",
+          "note": "Native direct connected-spectrum/idempotent and algebraic-closure-fiber API, under the actual all-field-extension condition."
+        }
+      ],
+      "search_notes": "The primary exact closure-only predicate above is the catalogue definition and does not require a new alias. The native generic all-field-extension predicate is NOT asserted here to be definitionally identical to the closure-only wording; no unlocated converse bridge is claimed. Its checked closure/no-idempotent consequences retain their actual hypotheses. Native tensor commutation and spectral connectedness use inherited prerequisites, not additional allocated files."
+    },
+    {
+      "concept": "gradient-scalar-function-euclidean",
+      "concept_id": "4d84fbac-e251-554d-8566-c708a8a2b772",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Gradient.gradient:83 is the inverse Riesz map of fderiv; inner_gradient_left:293 proves inner(grad f,v)=Df(v). For Euclidean real n-space evaluate at each standard basis vector: inner(grad,e_i) is its i-th coordinate, and DifferentiableAt.lineDeriv_eq_fderiv:319 identifies Df(e_i) with the coordinate partial. Thus this exact existing gradient is the catalogue tuple of partial derivatives. Differentiability at x on the open domain is explicit; totalized zero at nondifferentiable points is not used. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/Gradient/Basic.lean",
+          "declarations": "gradient:83; toDual_gradient:128; inner_gradient_left:293",
+          "note": "Actual Riesz gradient constructor, defining derivative pairing and ordinary gradient/coordinate API."
+        }
+      ],
+      "search_notes": "Do not confuse complex conjugate-gradient conventions with real Euclidean partials; the specialization is over R. Riesz duality and line-derivative equality are checked suppliers, not extra generic helper files."
+    },
+    {
+      "concept": "gradient-scalar-function-euclidean",
+      "concept_id": "4d84fbac-e251-554d-8566-c708a8a2b772",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency Riesz-gradient/pairing agrees. Native norm_gradient_eq_norm_fderiv:97 proves the defining Riesz norm equality; gradient_add:107 proves additivity at differentiability points, and gradient_const_smul:114 proves scalar homogeneity (conjugated over C, ordinary over R). Read the complete inverse-Riesz-map and derivative-law proofs. These are direct ordinary gradient API for the same Euclidean specialization. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Calculus/Gradient.lean",
+          "declarations": "norm_gradient_eq_norm_fderiv:97; gradient_add:107; gradient_const_smul:114",
+          "note": "Native defining norm identity and ordinary addition/scalar-gradient laws."
+        }
+      ],
+      "search_notes": "Completeness of Euclidean space meets the actual Riesz hypothesis. Exclude gradient-flow, harmonic, manifold-Morse and higher-derivative estimate endpoints."
+    },
+    {
+      "concept": "gritsenko-nikulin-igusa-product-formulas",
+      "concept_id": "7903b936-f48d-5462-8ecf-3ab9762a712c",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Bounded Igusa/Gritsenko/Nikulin/Borcherds/genus-two Siegel product searches did not certify the exact X10/X35 products, prefactors, discriminant coefficient f2 with Kronecker symbol and standard-cusp convergence. Actual native SiegelFunction/Basic.siegelFunction:95 is a ONE-upper-half-plane-variable Siegel modular unit g_r built from q-Pochhammer products, not a genus-two Igusa form; its definition/product:102 was inspected. Generic infinite products do not prove the requested identities. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [],
+      "search_notes": "Native Siegel function source is separate Tau ownership in the standalone judgment. Ordinary modular forms/Jacobi theta and Nikulin finite quadratic-form citations do not implement these two Igusa product theorems. Unknown records this exact unverified endpoint, not absence."
+    },
+    {
+      "concept": "gritsenko-nikulin-igusa-product-formulas",
+      "concept_id": "7903b936-f48d-5462-8ecf-3ab9762a712c",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Bounded Igusa/Gritsenko/Nikulin/Borcherds/genus-two Siegel product searches did not certify the exact X10/X35 products, prefactors, discriminant coefficient f2 with Kronecker symbol and standard-cusp convergence. Actual native SiegelFunction/Basic.siegelFunction:95 is a ONE-upper-half-plane-variable Siegel modular unit g_r built from q-Pochhammer products, not a genus-two Igusa form; its definition/product:102 was inspected. Generic infinite products do not prove the requested identities. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [],
+      "search_notes": "Native Siegel function source is separate Tau ownership in the standalone judgment. Ordinary modular forms/Jacobi theta and Nikulin finite quadratic-form citations do not implement these two Igusa product theorems. Unknown records this exact unverified endpoint, not absence."
+    },
+    {
+      "concept": "group-action",
+      "concept_id": "87623605-67e0-5a9e-895b-2c63307424dd",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "MulAction:133 extends SemigroupAction with exactly one_smul, while SemigroupAction.mul_smul:104 is (gh)x=g(hx). The underlying SMul is the displayed map GxX->X. Specialize the acting monoid to a group: these are precisely the two catalogue axioms, with no transitivity, freeness or topological continuity assumption. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Action/Defs.lean",
+          "declarations": "SemigroupAction:102; SemigroupAction.mul_smul:104; MulAction:133",
+          "note": "Actual action constructor and elementary identity/associativity/scalar-action API."
+        }
+      ],
+      "search_notes": "Do not allocate stabilizer/orbit classifications or representation-specific raising/lowering results as defining action files."
+    },
+    {
+      "concept": "group-action",
+      "concept_id": "87623605-67e0-5a9e-895b-2c63307424dd",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency MulAction constructor agrees. Native MulActionHom.toPUnit:45 constructs the equivariant map from ANY acted set to the one-point action, and constOfMemFixedPoints:55 constructs constant equivariant maps at actual fixed points, with elementary evaluation identities. Read these actual map constructions and their equivariance proofs. This is direct ordinary action-morphism API, not a mere use/import. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/GroupTheory/GroupAction/Hom.lean",
+          "declarations": "MulActionHom.toPUnit:45; constOfMemFixedPoints:55; constOfMemFixedPoints_apply:59",
+          "note": "Native elementary equivariant map/constant-map construction and evaluation API for group actions."
+        }
+      ],
+      "search_notes": "The broader stabilizer criterion for existence of equivariant maps later in the same file is an extra endpoint, not required for selection. Underlying action data stays Mathlib-owned; no linearity is imposed on acted sets."
+    },
+    {
+      "concept": "group-automorphism",
+      "concept_id": "50a5df5e-cf2f-5f8d-8af4-169c3cb2e5c4",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "MulAut:630 is M multiplicatively equivalent to M; checked MulEquiv:73 extends an actual Equiv and a multiplicative map, so it is bijective. Group structure:647 uses reversed trans for composition, refl for identity and symm for inverse; coe_mul:661 is literal function composition. For groups multiplicativity implies preservation of1/inverses, so this is exactly group automorphisms and their composition group. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/End.lean",
+          "declarations": "MulAut:630; Group instance:647; MulAut.coe_mul:661",
+          "note": "Actual automorphism group and elementary composition/inverse/conjugation API."
+        }
+      ],
+      "search_notes": "MulEquiv uses an inverse function, not a possibly noninjective endomorphism. Exclude automorphisms of unrelated additive/module/ring structures and group classifications."
+    },
+    {
+      "concept": "group-automorphism",
+      "concept_id": "50a5df5e-cf2f-5f8d-8af4-169c3cb2e5c4",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency MulAut group agrees. Native MulAut.mapQuotient:40 proves an automorphism induces an automorphism of a quotient by a CHARACTERISTIC subgroup, and packages composition compatibility as a group homomorphism. mapQuotient_mk:51 evaluates on classes; mem_ker_mapQuotient_iff:57 identifies trivial quotient action. Read the completed quotient/extensionality proofs. This is ordinary natural automorphism-map API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/GroupTheory/QuotientGroup/MulAut.lean",
+          "declarations": "MulAut.mapQuotient:40; mapQuotient_mk:51; mem_ker_mapQuotient_iff:57",
+          "note": "Native quotient-induced automorphism homomorphism and ordinary evaluation/kernel API."
+        }
+      ],
+      "search_notes": "Characteristic-subgroup hypotheses are explicit for this operation; do not claim every automorphism descends across an arbitrary subgroup. Frattini/p-group consequences are separate endpoints."
+    },
+    {
+      "concept": "half-integral-weight-jacobi-form",
+      "concept_id": "1169224f-2800-5beb-8daa-3b7a5b30ef0b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Checked ordinary ModularForm:80: it is holomorphic with INTEGER weight k:Z and cusp boundedness. The actual generic SlashAction:38 does not supply a metaplectic multiplier system. Exact Metaplectic/JacobiForm/half-weight searches in both source trees did not certify the requested data. Native Tau HeckeSlash/Basic handles integer-weight rational slashes and explicitly stops before its automorphic-invariance result; native Siegel functions are individual modular units rather than this general constructor. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [],
+      "search_notes": "Need half-index Jacobi translations, compatible multiplier and all-cusp Fourier discriminant4mn-l^2>=0 condition. Tau-only candidates are not standalone Mathlib ownership. No conclusion follows from theta-function examples or from rational weight arithmetic alone; unknown is a bounded interface gap."
+    },
+    {
+      "concept": "half-integral-weight-jacobi-form",
+      "concept_id": "1169224f-2800-5beb-8daa-3b7a5b30ef0b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Checked ordinary ModularForm:80: it is holomorphic with INTEGER weight k:Z and cusp boundedness. The actual generic SlashAction:38 does not supply a metaplectic multiplier system. Exact Metaplectic/JacobiForm/half-weight searches in both source trees did not certify the requested data. Native Tau HeckeSlash/Basic handles integer-weight rational slashes and explicitly stops before its automorphic-invariance result; native Siegel functions are individual modular units rather than this general constructor. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [],
+      "search_notes": "Need half-index Jacobi translations, compatible multiplier and all-cusp Fourier discriminant4mn-l^2>=0 condition. Tau-only candidates are not standalone Mathlib ownership. No conclusion follows from theta-function examples or from rational weight arithmetic alone; unknown is a bounded interface gap."
+    },
+    {
+      "concept": "half-integral-weight-modular-form",
+      "concept_id": "2b7a1a01-c64d-5f0f-be80-b58274f3cc06",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Checked ordinary ModularForm:80: it is holomorphic with INTEGER weight k:Z and cusp boundedness. The actual generic SlashAction:38 does not supply a metaplectic multiplier system. Exact Metaplectic/JacobiForm/half-weight searches in both source trees did not certify the requested data. Native Tau HeckeSlash/Basic handles integer-weight rational slashes and explicitly stops before its automorphic-invariance result; native Siegel functions are individual modular units rather than this general constructor. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [],
+      "search_notes": "Need the metaplectic lift (gamma,phi), specified finite-image multiplier, half-weight transformation and holomorphy at every cusp. Tau-only candidates are not standalone Mathlib ownership. No conclusion follows from theta-function examples or from rational weight arithmetic alone; unknown is a bounded interface gap."
+    },
+    {
+      "concept": "half-integral-weight-modular-form",
+      "concept_id": "2b7a1a01-c64d-5f0f-be80-b58274f3cc06",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Checked ordinary ModularForm:80: it is holomorphic with INTEGER weight k:Z and cusp boundedness. The actual generic SlashAction:38 does not supply a metaplectic multiplier system. Exact Metaplectic/JacobiForm/half-weight searches in both source trees did not certify the requested data. Native Tau HeckeSlash/Basic handles integer-weight rational slashes and explicitly stops before its automorphic-invariance result; native Siegel functions are individual modular units rather than this general constructor. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [],
+      "search_notes": "Need the metaplectic lift (gamma,phi), specified finite-image multiplier, half-weight transformation and holomorphy at every cusp. Tau-only candidates are not standalone Mathlib ownership. No conclusion follows from theta-function examples or from rational weight arithmetic alone; unknown is a bounded interface gap."
+    },
+    {
+      "concept": "hausdorff-topological-space",
+      "concept_id": "d5c72057-c8d7-590f-8a25-6438f662691d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "T2Space:83 literally requires every distinct pair have disjoint OPEN neighborhoods containing the respective points; t2_separation:88 exposes this field and t2Space_iff_disjoint_nhds:93 proves the filter formulation. Read the actual class and equivalence proof. This is exactly the definition, without compactness, metrizability or second countability. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Separation/Hausdorff.lean",
+          "declarations": "T2Space:83; t2_separation:88; t2Space_iff_disjoint_nhds:93",
+          "note": "Actual Hausdorff predicate and ordinary separation/filter/diagonal API."
+        }
+      ],
+      "search_notes": "Distinguish T1 separation and Hausdorff measure/distance notions. No local-Hausdorff-only condition is substituted."
+    },
+    {
+      "concept": "hausdorff-topological-space",
+      "concept_id": "d5c72057-c8d7-590f-8a25-6438f662691d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Actual dependency T2Space:84 and separation criterion:94 agree (one header blank line). Native Separation/TypeTags:33/35 only reinstalls the inherited T2 instance on definitionally equal Additive/Multiplicative types; Sigma adds T1/regularity rather than a new Hausdorff core fact; OpenEmbedding is T1-only. Native InvFunOn proves continuity of an inverse under compactness/injectivity, a separately significant compact-map theorem. No qualifying new ordinary Hausdorff predicate/separation API was selected after these checks. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [],
+      "search_notes": "Zero native LOC. An imported T2 assumption in geometric/functional applications is not ownership of the Hausdorff concept. The native candidate exclusions were inspected, not inferred from filenames."
+    },
+    {
+      "concept": "holomorphic-at-modular-cusp",
+      "concept_id": "7d876ce1-53f0-51d3-9ae6-b3feacc4c06c",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "BoundedAtCusp.IsBoundedAt:53 requires boundedness at infinity after every slash matrix taking infinity to the specified cusp; :85 permits any chosen such matrix, matching the coordinate convention. QExpansion.cuspFunction:88 uses q_h=exp(2pi*i*tau/h). For h>0, periodic holomorphic bounded functions have analytic cuspFunction at0:113 and the actual PowerSeries qExpansion:166 with coefficients indexed by NAT. hasSum_qExpansion:189 proves this nonnegative-power series converges to f; :280 proves boundedness conversely from such a convergent expansion. Read the actual removable-point/Taylor and converse-limit proofs. Apply to the slashed modular form with its cusp width h. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean",
+          "declarations": "OnePoint.IsBoundedAt:53; isBoundedAt_iff:85",
+          "note": "Actual slash-coordinate cusp regularity criterion and independence of chosen cusp matrix."
+        },
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/QExpansion.lean",
+          "declarations": "UpperHalfPlane.cuspFunction:88; analyticAt_cuspFunction_zero:113; qExpansion:166; hasSum_qExpansion:189; isBoundedAtImInfty_of_hasSum_qExpansion:280",
+          "note": "Actual holomorphic q-coordinate extension and nonnegative-Fourier-power equivalence/API."
+        }
+      ],
+      "search_notes": "The library right-slash convention chooses g with g(infinity)=c; use the inverse of a coordinate matrix described as sending c to infinity. The existing primary bounded-slash condition is matched by the checked convergent nonnegative-power characterization, not a vanishing cusp-form condition. Positive period/cusp width is explicit; weight is the stated ordinary modular slash weight."
+    },
+    {
+      "concept": "holomorphic-at-modular-cusp",
+      "concept_id": "7d876ce1-53f0-51d3-9ae6-b3feacc4c06c",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency cusp/q-expansion constructors agree; the QExpansion header adds one blank line, so cuspFunction:89, analyticAt_cuspFunction_zero:114, qExpansion:167 and hasSum_qExpansion:190. Native OnePoint.isBoundedAt_rat_slash:69 and isBoundedAt_sum_rat_slash:77 prove preservation of the SAME all-cusp boundedness condition under rational slashes and finite sums for arithmetic groups, using the actual cusp image and slash transformation equivalence. Under the checked dependency q-expansion characterization this is direct ordinary cusp-holomorphy API. Read the complete short proofs. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/ModularForms/Cusps/Rat/Slash.lean",
+          "declarations": "OnePoint.isBoundedAt_rat_slash:69; isBoundedAt_sum_rat_slash:77",
+          "note": "Native ordinary rational-slash/finite-sum preservation of the exact cusp regularity condition."
+        }
+      ],
+      "search_notes": "Arithmetic-group/rational-matrix hypotheses belong to this API only. Exclude theta-series cusp classifications, Hecke adjoint results and residue/dimension formulas as separate endpoints."
+    },
+    {
+      "concept": "holomorphic-function-several-variables",
+      "concept_id": "fe264b26-70b6-555a-9b1a-ff643f44dd5f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "AnalyticAt:109 is existence of a convergent FormalMultilinearSeries at x. AnalyticOnNhd on an open subset of C^n is therefore the catalogue local convergent complex-coordinate power-series notion. AnalyticAt.pi/analyticAt_pi_iff:576 and analyticOnNhd_pi_iff:593 prove exact finite-target-coordinate detection, by the actual multilinear-series pi constructor and continuous coordinate projections. For an arbitrary finite-dimensional target use a complex linear basis equivalence; no only-separate-coordinate analyticity assumption is substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Analytic/Basic.lean",
+          "declarations": "AnalyticAt:109; AnalyticOnNhd:119",
+          "note": "Actual convergent complex power-series predicate, specialized to finite complex coordinate spaces."
+        },
+        {
+          "path": "Mathlib/Analysis/Analytic/Constructions.lean",
+          "declarations": "AnalyticAt.pi:571; analyticAt_pi_iff:576; analyticOnNhd_pi_iff:593",
+          "note": "Actual finite-coordinate holomorphy assembly/detection proof and ordinary analytic operations."
+        }
+      ],
+      "search_notes": "The primary power-series definition avoids needing a new Hartogs theorem. Real C-infinity smoothness is not complex holomorphy. The exact finite-dimensional target/basis meaning is retained."
+    },
+    {
+      "concept": "holomorphic-function-several-variables",
+      "concept_id": "fe264b26-70b6-555a-9b1a-ff643f44dd5f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency analytic-series/pi-coordinate constructors agree; Basic.lean has a header blank line, so AnalyticAt:110 and AnalyticOnNhd:120, while the relevant Constructions proofs have identical bytes. Native AnalyticAt.eventually_analyticAt_curry_right:31 proves nearby parameter slices are analytic by the open analytic locus and actual curry theorem. analyticAt_sumElim:39/analyticOnNhd_sumElim:47 prove concatenation of finite coordinate families analytic by the actual pi criterion. Read these complete proofs. Specializing to C and finite coordinate spaces is direct ordinary several-variable holomorphy/slicing API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Analytic/Constructions.lean",
+          "declarations": "AnalyticAt.eventually_analyticAt_curry_right:31; TauCeti.analyticAt_sumElim:39; analyticOnNhd_sumElim:47",
+          "note": "Native direct parameter-slice and finite complex-coordinate assembly API for analytic functions."
+        }
+      ],
+      "search_notes": "Complete target hypotheses apply automatically to finite-dimensional complex spaces. Exclude analytic continuation, Weierstrass preparation and complex manifold classification endpoints."
+    },
+    {
+      "concept": "hopf-ideal",
+      "concept_id": "4e7ccc40-e642-5ccb-9557-708dade2abad",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Ideal.IsHopfIdeal:40 extends the underlying scalar-submodule IsCoideal plus antipode stability. IsCoideal:38 requires counit zero and vanishing after tensoring quotient maps; isCoideal_iff_comul_mem:44 proves EXACT equivalence to Delta(I) in image(I tensor H)+image(H tensor I), using the completed TensorProduct.map_ker proof. HopfAlgebra.Quotient instance:68 proves the quotient Hopf algebra by the actual surjective quotient map. Thus the textbook tensor containment, counit and antipode clauses all match; commutativity supplies two-sidedness. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/HopfAlgebra/Quotient.lean",
+          "declarations": "Ideal.IsHopfIdeal:40; HopfAlgebra.Quotient HopfAlgebra instance:68",
+          "note": "Actual Hopf ideal predicate, descended antipode and completed quotient Hopf structure."
+        },
+        {
+          "path": "Mathlib/RingTheory/Coalgebra/Quotient.lean",
+          "declarations": "Submodule.IsCoideal:38; isCoideal_iff_comul_mem:44",
+          "note": "Actual textbook tensor-containment/counit equivalence used by the Hopf ideal predicate."
+        }
+      ],
+      "search_notes": "Images in the ambient tensor product are intended; no flatness/injective tensor-submodule assumption is added. Kernel/normal-subgroup equivalences and geometric quotient theorems are extra endpoints."
+    },
+    {
+      "concept": "hopf-ideal",
+      "concept_id": "4e7ccc40-e642-5ccb-9557-708dade2abad",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency quotient Hopf/coideal interfaces agree. Native HopfIdeal:66 bundles an Ideal with precisely the explicit leftTensorIdeal sup rightTensorIdeal coproduct condition, counit zero and antipode preservation. Its instIsCoideal:460 rewrites the tensor ideals into the exact inherited scalar-submodule ranges; instIsHopfIdeal:473 passes the antipode field. Read those completed bridges, which give the actual quotient its inherited Hopf operations. The native file also constructs zero/sums/suprema with actual ideal and Hopf closure proofs. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/HopfAlgebra/HopfIdeal/Basic.lean",
+          "declarations": "TauCeti.HopfIdeal:66; instIsCoideal:460; instIsHopfIdeal:473",
+          "note": "Native bundled textbook Hopf-ideal definition, basic ideal operations and genuine tensor/quotient bridge."
+        }
+      ],
+      "search_notes": "Underlying quotient proof remains Mathlib-owned. The two-sided field is automatic for the catalogue commutative algebra but retained in the generic native object. Exclude quotient representability/smoothness/normality classifications."
+    },
+    {
+      "concept": "idele-group",
+      "concept_id": "34ae4c2a-34a0-50b0-820c-b829a86461c9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Use the PRIMARY existing restricted-product constructor: finite places contribute local completion units relative to integral units, and the finite product of archimedean completion units is unrestricted. RestrictedProduct:78 is cofinite membership in those integral-unit subgroups; topologicalSpace:148 is explicitly the final topology of cofinite principal stages with their product topology. It is NOT the subspace topology inherited by the value adele. unitsEquiv:81 proves algebraically that units of the restricted product of local rings are exactly this restricted product of their units, using BOTH value and inverse integral almost everywhere. AdeleRing.IdeleGroup:104 is the unit alias, and product-of-units gives the archimedean/finite factor split. Read the actual constructor, topology and units-equivalence inverse proofs. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/RestrictedProduct/Basic.lean",
+          "declarations": "RestrictedProduct:78",
+          "note": "Actual restricted local-unit product carrier and cofinite integrality condition."
+        },
+        {
+          "path": "Mathlib/Topology/Algebra/RestrictedProduct/TopologicalSpace.lean",
+          "declarations": "RestrictedProduct.topologicalSpace:148",
+          "note": "Actual independently specified restricted-product topology on local unit groups."
+        },
+        {
+          "path": "Mathlib/Topology/Algebra/RestrictedProduct/Units.lean",
+          "declarations": "RestrictedProduct.mkUnit:71; unitsEquiv:81",
+          "note": "Actual group identification between units of the coordinate restricted ring and restricted local-unit product."
+        }
+      ],
+      "search_notes": "This bare definition uses the restricted-product topology directly. The units topology itself is induced by the PAIR value,inverse (Topology/Algebra/Constructions:101), not by value alone; no unlocated standalone topological comparison theorem is claimed. Native Tau proves that comparison separately. Completions/adele ring are input objects, not extra allocated files."
+    },
+    {
+      "concept": "idele-group",
+      "concept_id": "34ae4c2a-34a0-50b0-820c-b829a86461c9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency restricted-product and algebraic units constructors agree. Native ContinuousMulEquiv.restrictedProductUnits:115 proves the units topology induced by (value,inverse) agrees with restricted-product topology for the COFINITE filter when each integral submonoid is OPEN. Read the full inverse-continuity:60 and forward-continuity:76 proofs via open integral-unit neighborhoods and principal stages. Native FiniteAdeleRing.unitsContinuousMulEquiv:55 specializes to local valuation rings with actual openness, and :71/:78 recover coordinates in both directions. Combining with finite archimedean units gives exactly the number-field idele topology. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Algebra/RestrictedProduct/Units.lean",
+          "declarations": "RestrictedProduct.continuous_unitsEquiv_symm:60; continuous_unitsEquiv:76; ContinuousMulEquiv.restrictedProductUnits:115",
+          "note": "Native completed comparison of the units pair topology with the restricted-product topology."
+        },
+        {
+          "path": "TauCeti/RingTheory/DedekindDomain/FiniteAdeleRing/Units.lean",
+          "declarations": "FiniteAdeleRing.unitsContinuousMulEquiv:55; coe_unitsContinuousMulEquiv_apply:71; unitsContinuousMulEquiv_symm_apply_apply:78",
+          "note": "Native exact finite-idele topological identification and local coordinate API."
+        }
+      ],
+      "search_notes": "Do not use the subspace topology of the adele value alone. Openness/cofinite hypotheses are checked; no arbitrary-filter topological equivalence is asserted. Idele class groups, Artin reciprocity and principal subgroup classifications are extra endpoints."
+    },
+    {
+      "concept": "idele-norm",
+      "concept_id": "e879dbcc-7b31-5f1f-9427-171807a94b92",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "AdeleRing norm instance:163 and norm_apply_of_isUnit:167 define the exact product VALUE on ideles: product over archimedean places of norm^(place multiplicity), times the finite product of local norms. FiniteAdeleRing.norm_eq_finprod_of_unit:111 and actual isUnit criterion ensure almost all finite factors are1. Checked finite local normalization Completion/FinitePlace.adicAbv:134 and norm_def:182 uses prime absolute norm; complex multiplicity is2 and real1. This is a genuine implemented component of the idelic norm. A completed standalone positive-valued multiplicative/CONTINUOUS homomorphism interface was not certified; keep partial for that explicit remaining clause. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/NumberField/AdeleRing.lean",
+          "declarations": "AdeleRing Norm instance:163; norm_def:165; norm_apply_of_isUnit:167",
+          "note": "Actual normalized all-place product value, with unit formula and principal-value API; continuity/homomorphism interface unverified."
+        }
+      ],
+      "search_notes": "A custom Norm notation here is a product function, not an assertion the adele topology is induced by this norm. No new local constancy or product-continuity proof is developed. The native Tau completed homomorphism/continuity result is separate ownership."
+    },
+    {
+      "concept": "idele-norm",
+      "concept_id": "e879dbcc-7b31-5f1f-9427-171807a94b92",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Native eventually_norm_ideleFiniteCoord_eq_one:293 proves almost-all finite factors1, and :303 records finite multiplicative support. ideleNormAux:312 is precisely the normalized all-place product; :320 proves multiplication using finprod_mul_distrib, and ideleNorm:331 packages a homomorphism into positive reals as NNReal units, with literal formula:338. completionNormalizedAbsValue:66/:71 is norm^(place multiplicity), giving real abs and complex abs squared; actual dependency FinitePlace.norm_def:182 gives the prime-norm normalization. continuous_ideleNormAux:473 proves local constancy of the finite product on the open integral-UNITS neighborhood (value AND inverse integral), then translates; :505 proves continuity of the positive-valued homomorphism. Read these complete proofs. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/NumberField/Global/Ideles/Norm/Basic.lean",
+          "declarations": "eventually_norm_ideleFiniteCoord_eq_one:293; ideleNorm:331; coe_ideleNorm:338; continuous_ideleNorm:505",
+          "note": "Native exact normalized idelic product, positive multiplicative packaging, finite-support proof and completed continuity API."
+        }
+      ],
+      "search_notes": "The continuity argument uses the correct units/restricted-product topology, not the adele-value subspace topology. Surjectivity/product formula/reciprocity farther down are extra endpoints, not assumed in the definition."
+    },
+    {
+      "concept": "inertia-group-number-field",
+      "concept_id": "c37498f7-02e3-5d15-b687-21ca8141ea35",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "ValuationSubring.decompositionSubgroup:29 is the stabilizer of the valuation ring under Gal(L/F); inertiaSubgroup:49 is literally the KERNEL of its action on that ring residue field. For the valuation ring at w this is exactly the subgroup acting trivially on the residue field at w. Also checked Ideal.inertia:153/mem_inertia:156 and its actual subgroup closure proof1183: automorphisms move each integral element by an element of the prime ideal, the equivalent residue-fixed condition. No inertia DEGREE is substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Valuation/RamificationGroup.lean",
+          "declarations": "ValuationSubring.decompositionSubgroup:29; inertiaSubgroup:49",
+          "note": "Actual decomposition-group stabilizer and inertia kernel of its residue-field action."
+        }
+      ],
+      "search_notes": "The valuation-ring description and integral-prime description give the same defining residue action in the catalogue number-field situation. Subgroup membership is within the decomposition group. Exclude ramification-index/cardinality and tame/wild inertia theorems as separate endpoints."
+    },
+    {
+      "concept": "inertia-group-number-field",
+      "concept_id": "c37498f7-02e3-5d15-b687-21ca8141ea35",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency valuation inertia kernel agrees. Native ValuationSubring.mem_inertiaSubgroup_iff:98 proves membership is precisely fixing the residue of EVERY element of the valuation ring, using residue surjectivity and RingEquiv.ext. :105 proves the equivalent moved-by-maximal-ideal criterion via the residue-kernel equation. Read both completed proofs. Specialize to the valuation at the number-field prime w: these are direct ordinary defining inertia API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed definitions, hypotheses and completed proof bodies inspected; no new proof development, fresh build or transitive audit.",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Valuation/RamificationGroup.lean",
+          "declarations": "ValuationSubring.mem_inertiaSubgroup_iff:98; mem_inertiaSubgroup_iff_sub_mem_maximalIdeal:105",
+          "note": "Native exact residue-fixing and maximal-ideal membership characterizations of the same inertia subgroup."
+        }
+      ],
+      "search_notes": "Keep actual decomposition subgroup and residue-field action; inertia degrees and unramified extensions are related separate concepts. No finite-group classification or ramification-filtration result is counted."
+    }
+  ]
+}

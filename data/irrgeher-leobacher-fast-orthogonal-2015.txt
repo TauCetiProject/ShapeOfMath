@@ -1,0 +1,529 @@
+Fast Orthogonal transforms for pricing derivatives with quasi-Monte Carlo
+
+Coverage: Entire arXiv:1508.02160v1,16 PDF pages, §§1–4, all numerical examples, Brownian-maximum appendix and13 references. Category stamp math.NA is preserved even though this paper belongs to the sampled PR-crosslist collection.
+Required concepts complete: True
+Introduced concepts complete: True
+All citations captured: True
+Completion refers to immediate concepts only; false means not certified.
+
+REQUIRED CONCEPT FRONTIER (20)
+
+- Brownian-bridge sampling of discrete Brownian paths: Generate a Brownian path on a finite grid by first sampling its endpoint, then recursively sampling an interior value conditional on already generated bracketing values using its Gaussian bridge law.
+- Discrete orthonormal Haar transform on a dyadic grid: For a vector of length2ᵐ, replace each consecutive pair by its normalized sum and difference, (a+b)/√2 and(a−b)/√2, then recursively transform the sums until a single average remains. Order the average and detail coefficients by scale.
+- Discrete sine transform of type I: The orthonormal real transform on ℝᴺ given by (Sy)_j=√(2/(N+1))∑_{k=1}ᴺy_k sin(πjk/(N+1)),1≤j≤N. Other discrete sine transform types are separate conventions.
+- Discretely monitored arithmetic Asian option: A contingent claim whose payoff depends on an arithmetic average of asset prices at a specified finite set of monitoring times, for example (n⁻¹∑_kS_{t_k}−K)⁺.
+- Distribution of the maximum of Brownian motion with drift: For standard Brownian motion B, μ∈ℝ,t>0 and a≥0, P(max_{0≤s≤t}(B_s+μs)≤a)=Φ((a−μt)/√t)−exp(2μa)Φ((−a−μt)/√t), where Φ is the standard normal distribution function. The probability is zero for a<0.
+- Effective dimension in the truncation sense: For a nonconstant square-integrable function of n independent inputs and tolerance ε∈(0,1), the smallest k for which ANOVA components involving only the first k coordinates account for at least 1−ε of its variance.
+- Girsanov change of measure for constant Brownian drift: On Brownian paths up to T, changing measure by exp(−νB_T−ν²T/2) makes B_t+νt standard Brownian motion for 0≤t≤T.
+- Householder reflection: For a nonzero real vector v, the orthogonal reflection H=I−2vvᵀ/(vᵀv) fixes the hyperplane perpendicular to v and negates v. Applying H to a vector uses O(n) arithmetic operations.
+- Kronecker product of matrices: For A=(a_ij)∈M_{m,n}(R) and B=(b_kl)∈M_{p,q}(R) over a commutative ring, A⊗B is the mp×nq block matrix whose(i,j) block is a_ijB; its((i,k),(j,l)) entry is a_ijb_kl.
+- Law of total variance: For square-integrable X and sub-σ-algebra G, Var(X)=E[Var(X|G)]+Var(E[X|G]).
+- Lipschitz map between metric spaces: A map f:(X,d)→(Y,e) is Lipschitz if e(f(x),f(y))≤L d(x,y) for one finite constant L and all x,y∈X.
+- Orthogonal invariance of the standard Gaussian distribution: If X has n independent N(0,1) coordinates and U is a real orthogonal n×n matrix, then UX has the same distribution as X.
+- Population least-squares linear regression: For a square-integrable response Y and real predictors X, choose coefficients a,b minimizing E(Y−aᵀX−b)². With independent standard normal predictors, b=EY and a_j=E(YX_j).
+- Principal component analysis of a random vector: For a square-integrable real vector, choose orthonormal eigenvectors of its covariance matrix in decreasing eigenvalue order. Projection onto the first k such vectors captures the largest possible sum of coordinate variances among k-dimensional orthogonal projections.
+- Randomly shifted quasi-Monte Carlo rule: Add one uniform random vector in [0,1]ˢ to every point of a deterministic quadrature set, reducing coordinates modulo one. Independent shifts give independent randomized estimates; digital shifts use digitwise addition in a fixed base instead.
+- Reflection principle for Brownian motion: For standard Brownian motion, a≥0 and measurable A⊆(−∞,a), P(max_{s≤t}B_s≥a,B_t∈A)=P(B_t∈2a−A). Reflection of the path after first hitting a preserves Wiener measure.
+- Sobol sequence in a finite-dimensional unit cube: For each coordinate choose a primitive binary polynomial xˢ+a₁xˢ⁻¹+⋯+a_{s−1}x+1 and odd initial m_k<2ᵏ for1≤k≤s. Continue m_k=(⊕_{i=1}^{s−1}2ⁱa_im_{k−i})⊕2ˢm_{k−s}⊕m_{k−s}, and put v_k=m_k/2ᵏ. The n-th coordinate is ⊕_kn_kv_k, where n_k are binary digits of n. A standard first coordinate uses v_k=2⁻ᵏ. Gray-code indexing reorders each initial power-of-two block; polynomial and direction-number choices specify the sequence.
+- Spectral theorem for a real symmetric matrix: Every real symmetric matrix admits an orthonormal basis of real eigenvectors; equivalently A=UΛUᵀ with U orthogonal and Λ real diagonal.
+- Star discrepancy of a finite point set: For points x₁,…,x_N in [0,1]ˢ, D* is sup_{a∈[0,1]ˢ}|N⁻¹∑_i1_{x_i∈[0,a)}−∏_ja_j|.
+- Up-and-in barrier option: A contingent claim activated only if the asset price reaches a specified upper barrier during the monitoring period; discrete and continuous monitoring are distinct contracts. A digital version pays a fixed amount upon activation.
+
+INHERITED PREREQUISITES (129)
+
+- ANOVA decomposition on a product probability space — via effective-dimension-truncation
+- Abelian group — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, kronecker-product-matrices, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Almost-everywhere property on a measure space — via asian-option-discrete-arithmetic, brownian-bridge-sampling, effective-dimension-truncation, law-total-variance, least-squares-linear-regression, up-and-in-barrier-option
+- Bijection between sets — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Bilinear map — via least-squares-linear-regression
+- Binary expansion of a nonnegative number — via sobol-sequence
+- Binary operation on a set — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, kronecker-product-matrices, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Binary relation on a set — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Bitwise exclusive-or — via sobol-sequence
+- Black–Scholes market model — via asian-option-discrete-arithmetic, up-and-in-barrier-option
+- Borel σ-algebra of a topological space — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Borel σ-algebra on the real line — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Brownian bridge on a finite interval — via brownian-bridge-sampling
+- Cartesian product of sets — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, kronecker-product-matrices, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Cauchy sequence in a metric space — via least-squares-linear-regression
+- Cauchy–Schwarz inequality for complex inner-product spaces — via least-squares-linear-regression
+- Closure of a subset of a topological space — via least-squares-linear-regression
+- Commutative ring with identity — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, kronecker-product-matrices, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Complement of a subset — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Complete measure — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Complete metric space — via least-squares-linear-regression
+- Complex Hilbert space — via least-squares-linear-regression
+- Complex conjugation — via least-squares-linear-regression
+- Complex inner-product space — via least-squares-linear-regression
+- Complex number — via asian-option-discrete-arithmetic, effective-dimension-truncation, least-squares-linear-regression, up-and-in-barrier-option
+- Conditional expectation given a σ-algebra — via asian-option-discrete-arithmetic, brownian-bridge-sampling, effective-dimension-truncation, law-total-variance, up-and-in-barrier-option
+- Conditional variance — via law-total-variance
+- Continuous map between topological spaces — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, girsanov-constant-brownian-drift, up-and-in-barrier-option
+- Continuous-time martingale — via asian-option-discrete-arithmetic, up-and-in-barrier-option
+- Convergence in probability — via asian-option-discrete-arithmetic, up-and-in-barrier-option
+- Convergence of a sequence in a metric space — via least-squares-linear-regression
+- Convergent real series — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-sine-transform-type-one, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, least-squares-linear-regression, principal-component-analysis-finite, sobol-sequence, up-and-in-barrier-option
+- Discrete-time martingale — via asian-option-discrete-arithmetic, up-and-in-barrier-option
+- Disjoint sets — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Distribution of a real random variable — via random-shift-qmc
+- Eigenvalue of a linear endomorphism — via finite-dimensional-symmetric-spectral-theorem, principal-component-analysis-finite
+- Equivalence class — via asian-option-discrete-arithmetic, effective-dimension-truncation, least-squares-linear-regression, up-and-in-barrier-option
+- Equivalence relation — via asian-option-discrete-arithmetic, effective-dimension-truncation, least-squares-linear-regression, up-and-in-barrier-option
+- Essential supremum of a measurable real function — via asian-option-discrete-arithmetic, effective-dimension-truncation, least-squares-linear-regression, up-and-in-barrier-option
+- Euclidean space ℝᵈ — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Expectation of an integrable real random variable — via asian-option-discrete-arithmetic, brownian-bridge-sampling, effective-dimension-truncation, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, up-and-in-barrier-option
+- Extended nonnegative real numbers — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Factorial — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-sine-transform-type-one, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, least-squares-linear-regression, principal-component-analysis-finite, up-and-in-barrier-option
+- Field — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Field with two elements — via sobol-sequence
+- Filtration of σ-algebras — via asian-option-discrete-arithmetic, brownian-reflection-principle, up-and-in-barrier-option
+- Finite field — via sobol-sequence
+- Finite set — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Function between sets — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, kronecker-product-matrices, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Geometric Brownian motion — via asian-option-discrete-arithmetic, up-and-in-barrier-option
+- Group — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, kronecker-product-matrices, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Ideal of a commutative ring — via sobol-sequence
+- Independent family of random variables — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, random-shift-qmc, up-and-in-barrier-option
+- Independent σ-algebras — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, girsanov-constant-brownian-drift, up-and-in-barrier-option
+- Indicator function of a subset — via asian-option-discrete-arithmetic, brownian-bridge-sampling, effective-dimension-truncation, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, up-and-in-barrier-option
+- Intersection of a family of sets — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Irreducible polynomial — via sobol-sequence
+- Itô integral with respect to Brownian motion — via asian-option-discrete-arithmetic, up-and-in-barrier-option
+- Itô stochastic differential equation driven by Brownian motion — via asian-option-discrete-arithmetic, up-and-in-barrier-option
+- Least upper bound in a partially ordered set — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Lebesgue Lᵖ space — via asian-option-discrete-arithmetic, effective-dimension-truncation, least-squares-linear-regression, up-and-in-barrier-option
+- Lebesgue integral — via asian-option-discrete-arithmetic, brownian-bridge-sampling, effective-dimension-truncation, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, up-and-in-barrier-option
+- Lebesgue measure on Euclidean space — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Limit of a function between metric spaces — via random-shift-qmc
+- Limit of a real function at a point — via random-shift-qmc
+- Limit of a real sequence — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-sine-transform-type-one, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, least-squares-linear-regression, principal-component-analysis-finite, sobol-sequence, up-and-in-barrier-option
+- Linear map between vector spaces — via finite-dimensional-symmetric-spectral-theorem, least-squares-linear-regression, principal-component-analysis-finite
+- Linearity of the Lebesgue integral — via effective-dimension-truncation, law-total-variance, principal-component-analysis-finite
+- Matrix over a ring — via brownian-bridge-sampling, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, householder-reflection, kronecker-product-matrices, principal-component-analysis-finite
+- Measurable map between measurable spaces — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Measurable simple real function — via asian-option-discrete-arithmetic, brownian-bridge-sampling, effective-dimension-truncation, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, up-and-in-barrier-option
+- Measurable space — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Measure — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Metric induced by a norm — via least-squares-linear-regression
+- Metric space — via asian-option-discrete-arithmetic, brownian-reflection-principle, least-squares-linear-regression, lipschitz-map, random-shift-qmc, up-and-in-barrier-option
+- Modulus of a complex number — via asian-option-discrete-arithmetic, effective-dimension-truncation, least-squares-linear-regression, up-and-in-barrier-option
+- Multivariate normal distribution — via brownian-bridge-sampling, gaussian-orthogonal-invariance, principal-component-analysis-finite
+- Natural logarithm — via asian-option-discrete-arithmetic, effective-dimension-truncation, least-squares-linear-regression, up-and-in-barrier-option
+- Natural number — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, kronecker-product-matrices, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Nonnegative real square root — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Normal distribution — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, principal-component-analysis-finite, up-and-in-barrier-option
+- Normed vector space — via asian-option-discrete-arithmetic, effective-dimension-truncation, least-squares-linear-regression, up-and-in-barrier-option
+- Open interval in the real line — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Ordered field — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Ordered pair — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, kronecker-product-matrices, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Orthogonal projection onto a closed Hilbert subspace — via least-squares-linear-regression
+- Partial order — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Polynomial ring over a commutative ring — via sobol-sequence
+- Positive semidefinite real matrix — via brownian-bridge-sampling, gaussian-orthogonal-invariance, principal-component-analysis-finite
+- Predictable stochastic process — via asian-option-discrete-arithmetic, up-and-in-barrier-option
+- Preimage of a subset under a function — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Primitive polynomial over a finite field — via sobol-sequence
+- Probability space — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Quasi-Monte Carlo integration — via random-shift-qmc
+- Quotient of a commutative ring by an ideal — via sobol-sequence
+- Real Hilbert space — via least-squares-linear-regression
+- Real exponential function — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, least-squares-linear-regression, principal-component-analysis-finite, up-and-in-barrier-option
+- Real inner-product space — via least-squares-linear-regression
+- Real number — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Real orthogonal matrix — via discrete-haar-transform-dyadic, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, householder-reflection, principal-component-analysis-finite
+- Real power of a positive real number — via asian-option-discrete-arithmetic, effective-dimension-truncation, least-squares-linear-regression, up-and-in-barrier-option
+- Real sequence — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-sine-transform-type-one, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, up-and-in-barrier-option
+- Real sine function — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-sine-transform-type-one, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, principal-component-analysis-finite, up-and-in-barrier-option
+- Real-valued random variable — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Riemann integral — via random-shift-qmc
+- Risk-neutral valuation of contingent claims — via asian-option-discrete-arithmetic, up-and-in-barrier-option
+- Sequence in a set — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-sine-transform-type-one, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, up-and-in-barrier-option
+- Set — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, kronecker-product-matrices, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Size-biased change of measure — via girsanov-constant-brownian-drift
+- Standard Brownian motion — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, girsanov-constant-brownian-drift, up-and-in-barrier-option
+- Stochastic process — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, girsanov-constant-brownian-drift, up-and-in-barrier-option
+- Stopping time for a filtration — via brownian-reflection-principle
+- Subgroup — via sobol-sequence
+- Subset — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Sum of a nonnegative series — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Symmetric matrix — via brownian-bridge-sampling, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, principal-component-analysis-finite
+- Tagged Riemann sum — via random-shift-qmc
+- Topological space — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Total order — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-haar-transform-dyadic, discrete-sine-transform-type-one, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, householder-reflection, law-total-variance, least-squares-linear-regression, lipschitz-map, principal-component-analysis-finite, random-shift-qmc, sobol-sequence, star-discrepancy, up-and-in-barrier-option
+- Uniform convergence of functions into a metric space — via brownian-reflection-principle
+- Uniform distribution on the unit interval — via random-shift-qmc
+- Union of a family of sets — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- Variance of a real random variable — via effective-dimension-truncation, law-total-variance, principal-component-analysis-finite
+- Vector space — via asian-option-discrete-arithmetic, brownian-bridge-sampling, effective-dimension-truncation, finite-dimensional-symmetric-spectral-theorem, gaussian-orthogonal-invariance, least-squares-linear-regression, principal-component-analysis-finite, up-and-in-barrier-option
+- Vector subspace — via least-squares-linear-regression
+- Wiener measure — via brownian-reflection-principle
+- π — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, discrete-sine-transform-type-one, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, principal-component-analysis-finite, up-and-in-barrier-option
+- σ-algebra — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+- σ-algebra generated by a family of subsets — via asian-option-discrete-arithmetic, brownian-bridge-sampling, brownian-drift-maximum-distribution, brownian-reflection-principle, effective-dimension-truncation, gaussian-orthogonal-invariance, girsanov-constant-brownian-drift, law-total-variance, least-squares-linear-regression, principal-component-analysis-finite, random-shift-qmc, up-and-in-barrier-option
+
+INTRODUCED CONCEPTS (2)
+
+- Householder completion preserving leading orthogonal columns
+- Regression-based Householder transform for Gaussian quadrature
+
+LOCATED CONCEPTS (31)
+
+1. Multivariate normal distribution
+   A distribution of a real vector X for which every real linear combination of coordinates is normally distributed; it is specified by its mean vector and positive semidefinite covariance matrix.
+   Source: relies_on, §§1–3
+   Note: Householder theory credited to Golub–VanLoan[2]; earlier dimension-reducing transforms Imai–Tan[3] and Wang–Sloan[13].
+
+2. Real orthogonal matrix
+   A real square matrix U with UᵀU=I, equivalently a linear map preserving the Euclidean inner product.
+   Source: relies_on, §§1–3
+   Note: Householder theory credited to Golub–VanLoan[2]; earlier dimension-reducing transforms Imai–Tan[3] and Wang–Sloan[13].
+
+3. Orthogonal invariance of the standard Gaussian distribution
+   If X has n independent N(0,1) coordinates and U is a real orthogonal n×n matrix, then UX has the same distribution as X.
+   Source: relies_on, §§1–3
+   Note: Householder theory credited to Golub–VanLoan[2]; earlier dimension-reducing transforms Imai–Tan[3] and Wang–Sloan[13].
+
+4. Householder reflection
+   For a nonzero real vector v, the orthogonal reflection H=I−2vvᵀ/(vᵀv) fixes the hyperplane perpendicular to v and negates v. Applying H to a vector uses O(n) arithmetic operations.
+   Source: relies_on, §§1–3
+   Note: Householder theory credited to Golub–VanLoan[2]; earlier dimension-reducing transforms Imai–Tan[3] and Wang–Sloan[13].
+
+5. Population least-squares linear regression
+   For a square-integrable response Y and real predictors X, choose coefficients a,b minimizing E(Y−aᵀX−b)². With independent standard normal predictors, b=EY and a_j=E(YX_j).
+   Source: relies_on, §§1–3
+   Note: Householder theory credited to Golub–VanLoan[2]; earlier dimension-reducing transforms Imai–Tan[3] and Wang–Sloan[13].
+
+6. Principal component analysis of a random vector
+   For a square-integrable real vector, choose orthonormal eigenvectors of its covariance matrix in decreasing eigenvalue order. Projection onto the first k such vectors captures the largest possible sum of coordinate variances among k-dimensional orthogonal projections.
+   Source: relies_on, §§1–3
+   Note: Householder theory credited to Golub–VanLoan[2]; earlier dimension-reducing transforms Imai–Tan[3] and Wang–Sloan[13].
+
+7. ANOVA decomposition on a product probability space
+   For square-integrable f(X₁,…,X_n) with independent inputs, define f_∅=Ef and f_u=E[f|X_u]−∑_{v⊊u}f_v. Then f=∑_uf_u; nonconstant components have zero conditional mean after integrating any one of their active coordinates, and distinct components are orthogonal in L².
+   Source: relies_on, §1 effective-dimension discussion; §3 Theorem3.5 and following bound
+   Note: Theorem3.5 is the ordinary conditional-variance decomposition, not a novel theorem identity. Effective dimension credited Caflisch–Morokoff–Owen[1]. Independence of regression residual and first component is an explicit extra hypothesis, not implied by zero covariance.
+
+8. Effective dimension in the truncation sense
+   For a nonconstant square-integrable function of n independent inputs and tolerance ε∈(0,1), the smallest k for which ANOVA components involving only the first k coordinates account for at least 1−ε of its variance.
+   Source: relies_on, §1 effective-dimension discussion; §3 Theorem3.5 and following bound
+   Note: Theorem3.5 is the ordinary conditional-variance decomposition, not a novel theorem identity. Effective dimension credited Caflisch–Morokoff–Owen[1]. Independence of regression residual and first component is an explicit extra hypothesis, not implied by zero covariance.
+
+9. Law of total variance
+   For square-integrable X and sub-σ-algebra G, Var(X)=E[Var(X|G)]+Var(E[X|G]).
+   Source: relies_on, §1 effective-dimension discussion; §3 Theorem3.5 and following bound
+   Note: Theorem3.5 is the ordinary conditional-variance decomposition, not a novel theorem identity. Effective dimension credited Caflisch–Morokoff–Owen[1]. Independence of regression residual and first component is an explicit extra hypothesis, not implied by zero covariance.
+
+10. Conditional expectation given a σ-algebra
+   For integrable X and a sub-σ-algebra G, E[X|G] is a G-measurable integrable random variable satisfying ∫_AE[X|G]dP=∫_AXdP for every A∈G, defined up to almost-sure equality.
+   Source: relies_on, §1 effective-dimension discussion; §3 Theorem3.5 and following bound
+   Note: Theorem3.5 is the ordinary conditional-variance decomposition, not a novel theorem identity. Effective dimension credited Caflisch–Morokoff–Owen[1]. Independence of regression residual and first component is an explicit extra hypothesis, not implied by zero covariance.
+
+11. Cauchy–Schwarz inequality for complex inner-product spaces
+   In a complex inner-product space, |⟨u,v⟩|²≤⟨u,u⟩⟨v,v⟩ for all u,v.
+   Source: relies_on, §1 effective-dimension discussion; §3 Theorem3.5 and following bound
+   Note: Theorem3.5 is the ordinary conditional-variance decomposition, not a novel theorem identity. Effective dimension credited Caflisch–Morokoff–Owen[1]. Independence of regression residual and first component is an explicit extra hypothesis, not implied by zero covariance.
+
+12. Lipschitz map between metric spaces
+   A map f:(X,d)→(Y,e) is Lipschitz if e(f(x),f(y))≤L d(x,y) for one finite constant L and all x,y∈X.
+   Source: relies_on, §1 effective-dimension discussion; §3 Theorem3.5 and following bound
+   Note: Theorem3.5 is the ordinary conditional-variance decomposition, not a novel theorem identity. Effective dimension credited Caflisch–Morokoff–Owen[1]. Independence of regression residual and first component is an explicit extra hypothesis, not implied by zero covariance.
+
+13. Quasi-Monte Carlo integration
+   Approximate an integral on [0,1]ˢ by the average of the integrand over a deterministic point set chosen for uniform coverage, typically of low discrepancy; other input laws can be sampled by a transformation of these points.
+   Source: relies_on, §§1,4 and Appendix
+   Note: Sobol sequences are used in the numerical experiments; their precise digital construction remains a missing reading concept, so requirements remain uncertified.
+
+14. Star discrepancy of a finite point set
+   For points x₁,…,x_N in [0,1]ˢ, D* is sup_{a∈[0,1]ˢ}|N⁻¹∑_i1_{x_i∈[0,a)}−∏_ja_j|.
+   Source: relies_on, §§1,4 and Appendix
+   Note: Sobol sequences are used in the numerical experiments; their precise digital construction remains a missing reading concept, so requirements remain uncertified.
+
+15. Randomly shifted quasi-Monte Carlo rule
+   Add one uniform random vector in [0,1]ˢ to every point of a deterministic quadrature set, reducing coordinates modulo one. Independent shifts give independent randomized estimates; digital shifts use digitwise addition in a fixed base instead.
+   Source: relies_on, §§1,4 and Appendix
+   Note: Sobol sequences are used in the numerical experiments; their precise digital construction remains a missing reading concept, so requirements remain uncertified.
+
+16. Standard Brownian motion
+   A continuous process B_t starting at zero with independent increments and B_t−B_s distributed N(0,t−s) for 0≤s<t. A d-dimensional standard Brownian motion has d independent standard components.
+   Source: relies_on, §§1,4 and Appendix
+   Note: Sobol sequences are used in the numerical experiments; their precise digital construction remains a missing reading concept, so requirements remain uncertified.
+
+17. Brownian-bridge sampling of discrete Brownian paths
+   Generate a Brownian path on a finite grid by first sampling its endpoint, then recursively sampling an interior value conditional on already generated bracketing values using its Gaussian bridge law.
+   Source: relies_on, §§1,4 and Appendix
+   Note: Sobol sequences are used in the numerical experiments; their precise digital construction remains a missing reading concept, so requirements remain uncertified.
+
+18. Reflection principle for Brownian motion
+   For standard Brownian motion, a≥0 and measurable A⊆(−∞,a), P(max_{s≤t}B_s≥a,B_t∈A)=P(B_t∈2a−A). Reflection of the path after first hitting a preserves Wiener measure.
+   Source: relies_on, §§1,4 and Appendix
+   Note: Sobol sequences are used in the numerical experiments; their precise digital construction remains a missing reading concept, so requirements remain uncertified.
+
+19. Girsanov change of measure for constant Brownian drift
+   On Brownian paths up to T, changing measure by exp(−νB_T−ν²T/2) makes B_t+νt standard Brownian motion for 0≤t≤T.
+   Source: relies_on, §§1,4 and Appendix
+   Note: Sobol sequences are used in the numerical experiments; their precise digital construction remains a missing reading concept, so requirements remain uncertified.
+
+20. Black–Scholes market model
+   A market with a bank account growing at constant rate r and a stock following geometric Brownian motion with constant volatility σ. Under its pricing measure the stock drift is r.
+   Source: explains, Examples3.2–3.4 and §4
+   Note: Numerical claims compare particular parameter sets and implementations; no universal improvement theorem is asserted.
+
+21. Geometric Brownian motion
+   The process S_t=S₀exp((μ−σ²/2)t+σB_t), equivalently the solution of dS_t=μS_tdt+σS_tdB_t for S₀>0.
+   Source: explains, Examples3.2–3.4 and §4
+   Note: Numerical claims compare particular parameter sets and implementations; no universal improvement theorem is asserted.
+
+22. Discretely monitored arithmetic Asian option
+   A contingent claim whose payoff depends on an arithmetic average of asset prices at a specified finite set of monitoring times, for example (n⁻¹∑_kS_{t_k}−K)⁺.
+   Source: explains, Examples3.2–3.4 and §4
+   Note: Numerical claims compare particular parameter sets and implementations; no universal improvement theorem is asserted.
+
+23. Up-and-in barrier option
+   A contingent claim activated only if the asset price reaches a specified upper barrier during the monitoring period; discrete and continuous monitoring are distinct contracts. A digital version pays a fixed amount upon activation.
+   Source: explains, Examples3.2–3.4 and §4
+   Note: Numerical claims compare particular parameter sets and implementations; no universal improvement theorem is asserted.
+
+24. Regression-based Householder transform for Gaussian quadrature
+   For square-integrable f under standard normal input X, compute a=E[Xf(X)] and reflect e₁ onto a/‖a‖, using identity if a=0 or the directions already agree. Then the fitted linear part of f(UX) is ‖a‖X₁, capturing variance ‖a‖². For f=g∘h the direction may instead use E[Xh(X)]; sequential residual-coordinate reflections accommodate several intermediate functions. Applying k reflections costs O(nk), excluding direction computation.
+   Source: introduces, Algorithms3.1,3.3,3.6, §3
+   Note: Exact coefficient computation may cost as much as the original integral; runtime O(nk) covers application only. U=I handles zero or already-aligned direction.
+   Origin evidence: Abstract and Introduction explicitly introduce the regression-based Householder method, contrasting it with prior Taylor-based[3] and projection-based[13] methods; §3 derives the coefficients and sequential extension.
+
+25. Householder completion preserving leading orthogonal columns
+   Given the first k orthonormal columns of an n×n orthogonal transform, successive Householder transformations on trailing coordinates yield an orthogonal matrix with exactly these columns. Applying its k factors costs O(nk), while the ANOVA variance attributed to the first k transformed Gaussian coordinates agrees with that of any orthogonal completion of those columns.
+   Source: introduces, §2 following Proposition2.2
+   Note: The Householder reflection itself is old; retained contribution is its fast leading-column completion and preserved effective-coordinate variance in this application.
+   Origin evidence: §2 explicitly proposes this completion to make transforms from[3,13] fast; those predecessors supply favorable columns rather than the application-cost construction described here. Priority is source-supported but exhaustive origin completeness remains false.
+
+26. Black–Scholes market model
+   A market with a bank account growing at constant rate r and a stock following geometric Brownian motion with constant volatility σ. Under its pricing measure the stock drift is r.
+   Source: relies_on, §4 actual example definitions
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+27. Geometric Brownian motion
+   The process S_t=S₀exp((μ−σ²/2)t+σB_t), equivalently the solution of dS_t=μS_tdt+σS_tdB_t for S₀>0.
+   Source: relies_on, §4 actual example definitions
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+28. Discretely monitored arithmetic Asian option
+   A contingent claim whose payoff depends on an arithmetic average of asset prices at a specified finite set of monitoring times, for example (n⁻¹∑_kS_{t_k}−K)⁺.
+   Source: relies_on, §4 actual example definitions
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+29. Up-and-in barrier option
+   A contingent claim activated only if the asset price reaches a specified upper barrier during the monitoring period; discrete and continuous monitoring are distinct contracts. A digital version pays a fixed amount upon activation.
+   Source: relies_on, §4 actual example definitions
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+30. Sobol sequence in a finite-dimensional unit cube
+   For each coordinate choose a primitive binary polynomial xˢ+a₁xˢ⁻¹+⋯+a_{s−1}x+1 and odd initial m_k<2ᵏ for1≤k≤s. Continue m_k=(⊕_{i=1}^{s−1}2ⁱa_im_{k−i})⊕2ˢm_{k−s}⊕m_{k−s}, and put v_k=m_k/2ᵏ. The n-th coordinate is ⊕_kn_kv_k, where n_k are binary digits of n. A standard first coordinate uses v_k=2⁻ᵏ. Gray-code indexing reorders each initial power-of-two block; polynomial and direction-number choices specify the sequence.
+   Source: relies_on, §§1,4 actual Sobol experiments and Brownian PCA/bridge transforms; Leobacher2012§2.1 identifies DST-I in dimension2n
+   Note: Actual source-specific input recorded during full statement-union review.
+
+31. Discrete sine transform of type I
+   The orthonormal real transform on ℝᴺ given by (Sy)_j=√(2/(N+1))∑_{k=1}ᴺy_k sin(πjk/(N+1)),1≤j≤N. Other discrete sine transform types are separate conventions.
+   Source: relies_on, §§1,4 actual Sobol experiments and Brownian PCA/bridge transforms; Leobacher2012§2.1 identifies DST-I in dimension2n
+   Note: Actual source-specific input recorded during full statement-union review.
+
+32. Discrete orthonormal Haar transform on a dyadic grid
+   For a vector of length2ᵐ, replace each consecutive pair by its normalized sum and difference, (a+b)/√2 and(a−b)/√2, then recursively transform the sums until a single average remains. Order the average and detail coefficients by scale.
+   Source: relies_on, §§1,4 actual Sobol experiments and Brownian PCA/bridge transforms; Leobacher2012§2.1 identifies DST-I in dimension2n
+   Note: Actual source-specific input recorded during full statement-union review.
+
+33. Spectral theorem for a real symmetric matrix
+   Every real symmetric matrix admits an orthonormal basis of real eigenvectors; equivalently A=UΛUᵀ with U orthogonal and Λ real diagonal.
+   Source: relies_on, §§1,4 actual Sobol experiments and Brownian PCA/bridge transforms; Leobacher2012§2.1 identifies DST-I in dimension2n
+   Note: Actual source-specific input recorded during full statement-union review.
+
+34. Distribution of the maximum of Brownian motion with drift
+   For standard Brownian motion B, μ∈ℝ,t>0 and a≥0, P(max_{0≤s≤t}(B_s+μs)≤a)=Φ((a−μt)/√t)−exp(2μa)Φ((−a−μt)/√t), where Φ is the standard normal distribution function. The probability is zero for a<0.
+   Source: relies_on, Appendix maximum regression: correct standard maximum law following its valid(8), replacing the invalid conditional-tail local expression after(9)
+   Note: Actual source-specific input recorded during full statement-union review.
+
+35. Kronecker product of matrices
+   For A=(a_ij)∈M_{m,n}(R) and B=(b_kl)∈M_{p,q}(R) over a commutative ring, A⊗B is the mp×nq block matrix whose(i,j) block is a_ijB; its((i,k),(j,l)) entry is a_ijb_kl.
+   Source: relies_on, §4.2 multi-asset covariance R⊗Σ and product PCA transforms V₁D₁⊗V₂D₂
+   Note: Actual source-specific input recorded during full statement-union review.
+
+ADDITIONAL PREREQUISITES (120)
+
+- Abelian group [definition]: A group whose operation is commutative.
+- Almost-everywhere property on a measure space [definition]: A property holds almost everywhere if the set where it fails is contained in a measurable set of measure zero.
+- Bijection between sets [definition]: A function for which each element of the codomain is the image of exactly one element of the domain.
+- Bilinear map [definition]: A map of two vector-space variables that is linear in each variable separately.
+- Binary expansion of a nonnegative number [definition]: For a nonnegative real number, a representation x=∑_kb_k2ᵏ with digits b_k∈{0,1}; integers use finitely many nonnegative powers, while fractional parts may use a convergent series of negative powers. Dyadic fractional values use the terminating convention when uniqueness is needed.
+- Binary operation on a set [definition]: A function S×S→S.
+- Binary relation on a set [definition]: A subset R⊆S×S; writing xRy means (x,y)∈R.
+- Bitwise exclusive-or [definition]: For finite binary strings of equal length, exclusive-or adds corresponding digits modulo2. Binary integers are padded with zeros, and binary fractions are aligned by place value before applying the same operation.
+- Borel σ-algebra of a topological space [definition]: The σ-algebra generated by the open subsets of the space.
+- Borel σ-algebra on the real line [definition]: The σ-algebra on ℝ generated by the open intervals.
+- Brownian bridge on a finite interval [definition]: The centered Gaussian process β_t=B_t−(t/T)B_T,0≤t≤T, with endpoints zero and covariance min(s,t)−st/T. A bridge from x to y adds x+(t/T)(y−x).
+- Cartesian product of sets [definition]: A×B is the set of ordered pairs (a,b) with a∈A and b∈B.
+- Cauchy sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) is Cauchy if for every ε>0 there is N such that d(xₙ,xₘ)<ε whenever n,m≥N.
+- Closure of a subset of a topological space [definition]: The closure of A is the intersection of all closed subsets containing A; a set is closed when its complement is open.
+- Commutative ring with identity [definition]: An abelian group under addition, together with an associative commutative multiplication with identity, distributing over addition. The zero ring is allowed.
+- Complement of a subset [definition]: For A⊆Ω, its complement Ω∖A consists of the elements of Ω that do not belong to A.
+- Complete measure [definition]: A measure is complete if every subset of a measurable null set is measurable and has measure zero.
+- Complete metric space [definition]: A metric space is complete if every Cauchy sequence in it converges to a point of that same space.
+- Complex Hilbert space [definition]: A complex inner-product space complete in the metric d(x,y)=∥x−y∥ induced by its inner product.
+- Complex conjugation [definition]: The complex conjugate of z=a+bi is z̄=a−bi.
+- Complex inner-product space [definition]: A complex vector space with a positive definite Hermitian form ⟨x,y⟩, linear in x and conjugate-linear in y. Its induced norm is ∥x∥=√⟨x,x⟩.
+- Complex number [definition]: A complex number is a pair of real numbers, written a+bi. Addition is componentwise and multiplication is (a+bi)(c+di)=(ac−bd)+(ad+bc)i, so i²=−1.
+- Conditional variance [definition]: For square-integrable X, Var(X|G)=E[(X−E[X|G])²|G]=E[X²|G]−E[X|G]².
+- Continuous map between topological spaces [definition]: A map is continuous if the preimage of every open subset of its target is open in its domain.
+- Continuous-time martingale [definition]: An integrable process M_t adapted to a filtration F_t, t≥0, with E[M_t|F_s]=M_s almost surely whenever s≤t. Right-continuity of paths is an additional regularity condition when needed.
+- Convergence in probability [definition]: Random variables X_n converge in probability to X if P(|X_n−X|>ε)→0 for every ε>0; metric-valued variables use their metric in place of absolute difference.
+- Convergence of a sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) converges to x∈X if for every ε>0 there is N such that d(xₙ,x)<ε whenever n≥N.
+- Convergent real series [definition]: The series ∑ₙ≥1aₙ converges to S if its sequence of partial sums converges to S.
+- Discrete-time martingale [definition]: An integrable process (M_n) adapted to an increasing sequence of σ-algebras (F_n) such that E[M_{n+1}|F_n]=M_n almost surely.
+- Disjoint sets [definition]: Two sets are disjoint when they have no common element; a family is pairwise disjoint when every two distinct members are disjoint.
+- Distribution of a real random variable [definition]: The distribution μₓ of X is defined by μₓ(B)=P(X∈B) for Borel B⊆ℝ.
+- Eigenvalue of a linear endomorphism [definition]: A scalar λ for which a linear endomorphism T has a nonzero vector v with Tv=λv.
+- Equivalence class [definition]: For an equivalence relation ~ on X, [x]={y∈X:y~x}; the quotient set X/~ consists of these classes.
+- Equivalence relation [definition]: A reflexive, symmetric and transitive binary relation.
+- Essential supremum of a measurable real function [definition]: The infimum of real a for which f≤a almost everywhere, allowing infinite values when no finite bound exists.
+- Euclidean space ℝᵈ [definition]: For d≥1, ℝᵈ consists of d-tuples of real numbers with distance dist(x,y)=(∑ᵢ(xᵢ−yᵢ)²)¹ᐟ².
+- Expectation of an integrable real random variable [definition]: If E abs(X)=∫abs(X)dP<∞, the expectation of X is EX=∫X dP.
+- Extended nonnegative real numbers [definition]: The nonnegative real numbers together with a greatest element ∞. Sums involving ∞ equal ∞, and 0·∞ is taken to be 0 when integrating simple functions.
+- Factorial [definition]: For n≥1, n!=1·2···n, and 0!=1.
+- Field [definition]: A commutative ring in which 1≠0 and every nonzero element is invertible.
+- Field with two elements [definition]: The field F₂={0,1} with1+1=0 and the usual identities0+a=a,1·a=a,0·a=0.
+- Filtration of σ-algebras [definition]: An increasing family (F_t) of sub-σ-algebras on a fixed probability space, indexed by ordered time: F_s⊆F_t for s≤t.
+- Finite field [definition]: A field whose underlying set is finite.
+- Finite set [definition]: A set X is finite if it is bijective with {1,…,n} for some natural number n≥0; its cardinality is n.
+- Function between sets [definition]: An assignment taking each element of a specified domain set to exactly one element of a specified codomain set.
+- Group [definition]: A set with an associative binary operation, an identity element, and a two-sided inverse for each element.
+- Ideal of a commutative ring [definition]: An additive subgroup I of a commutative ring R such that ri belongs to I for every r in R and i in I.
+- Independent family of random variables [definition]: For distinct i₁,…,iₖ and Borel A₁,…,Aₖ, independence requires P(⋂ⱼ{Xᵢⱼ∈Aⱼ})=∏ⱼP(Xᵢⱼ∈Aⱼ).
+- Independent σ-algebras [definition]: A family of sub-σ-algebras is independent if the probability of the intersection of events from any finite subfamily equals the product of their probabilities.
+- Indicator function of a subset [definition]: For A⊆Ω, the real function 1_A is 1 on A and 0 on its complement.
+- Intersection of a family of sets [definition]: Inside a specified ambient set, the elements belonging to every member of the family.
+- Irreducible polynomial [definition]: A nonzero nonunit polynomial over a specified coefficient ring that cannot be written as a product of two nonunits. Over a field, both factors would have smaller positive degree.
+- Itô integral with respect to Brownian motion [definition]: For an adapted process H with E∫₀ᵀ|H_s|²ds<∞, ∫H_s dB_s is the L² limit of left-endpoint adapted step-process sums. Localization extends the definition to locally square-integrable integrands.
+- Itô stochastic differential equation driven by Brownian motion [definition]: An adapted continuous process X solves dX_t=b(X_t)dt+σ(X_t)dB_t if it satisfies X_t=X₀+∫₀ᵗb(X_s)ds+∫₀ᵗσ(X_s)dB_s almost surely.
+- Least upper bound in a partially ordered set [definition]: For A⊆P, its least upper bound is an upper bound s satisfying s≤b for every upper bound b of A, when such an s exists.
+- Lebesgue Lᵖ space [definition]: For a measure space and 1≤p<∞, Lᵖ consists of measurable scalar functions modulo equality almost everywhere with ∫|f|ᵖ<∞, normed by (∫|f|ᵖ)¹ᐟᵖ. For p=∞ use the essential-supremum norm.
+- Lebesgue integral [definition]: For measurable f≥0, ∫f dμ is the supremum of integrals of nonnegative simple functions below f. For signed f with ∫abs(f)dμ<∞, define ∫f=∫f⁺−∫f⁻.
+- Lebesgue measure on Euclidean space [definition]: The completion of the Borel measure on ℝⁿ assigning each rectangular box the product of its side lengths.
+- Limit of a function between metric spaces [definition]: For f defined near an accumulation point a of a metric space, lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<d(x,a)<δ implies d(f(x),L)<ε.
+- Limit of a real function at a point [definition]: The relation lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<|x−a|<δ in the domain implies |f(x)−L|<ε.
+- Limit of a real sequence [definition]: A sequence (aₙ) converges to L∈ℝ if for every ε>0 there is N such that n≥N implies abs(aₙ−L)<ε.
+- Linear map between vector spaces [definition]: A map between vector spaces over the same field preserving addition and scalar multiplication.
+- Linearity of the Lebesgue integral [theorem]: If f and g are integrable real functions and a,b are real scalars, then af+bg is integrable and ∫(af+bg)dμ=a∫f dμ+b∫g dμ.
+- Matrix over a ring [definition]: A rectangular array of elements of a ring; addition is entrywise and matrix multiplication uses row-by-column sums.
+- Measurable map between measurable spaces [definition]: A function for which the preimage of each measurable subset of the codomain is measurable in the domain.
+- Measurable simple real function [definition]: A measurable real function with finite range. It can be written as a finite sum ∑ a_i 1_{A_i} with measurable level sets A_i.
+- Measurable space [definition]: A set equipped with a specified σ-algebra of subsets.
+- Measure [definition]: A measure μ maps a σ-algebra to [0,∞], sends ∅ to 0, and satisfies μ(⋃ₙAₙ)=∑ₙμ(Aₙ) for every pairwise disjoint sequence of measurable sets.
+- Metric induced by a norm [construction]: The metric induced by a norm on a real or complex vector space is d(x,y)=‖x−y‖.
+- Metric space [definition]: A set X with a function d:X×X→[0,∞) such that d(x,y)=0 exactly when x=y, d(x,y)=d(y,x), and d(x,z)≤d(x,y)+d(y,z).
+- Modulus of a complex number [definition]: For z=a+bi, its modulus is the nonnegative real number |z|=√(a²+b²).
+- Natural logarithm [definition]: The inverse ln:(0,∞)→ℝ of the real exponential function.
+- Natural number [definition]: One of 0, 1, 2, …; natural numbers count finite collections.
+- Nonnegative real square root [definition]: For t≥0, √t is the unique real number y≥0 satisfying y²=t.
+- Normal distribution [definition]: The real probability distribution N(m,σ²) with density (2πσ²)⁻¹ᐟ²exp(−(x−m)²/(2σ²)) for σ>0; variance zero gives a point mass at m.
+- Normed vector space [definition]: A real or complex vector space X with a function ∥·∥:X→[0,∞) that is positive except at zero, absolutely homogeneous, and subadditive.
+- Open interval in the real line [definition]: For real a<b, the set (a,b)={x∈ℝ:a<x<b}.
+- Ordered field [definition]: A field with a total order preserved by addition, in which the product of two positive elements is positive.
+- Ordered pair [definition]: A pair (x,y) with distinguished first and second entries; (x,y)=(x′,y′) exactly when x=x′ and y=y′.
+- Orthogonal projection onto a closed Hilbert subspace [definition]: For a closed subspace V of a Hilbert space H, Pᵥx is the unique v∈V for which x−v is orthogonal to V; Pᵥ is a bounded self-adjoint idempotent operator.
+- Partial order [definition]: A reflexive, antisymmetric and transitive binary relation, usually written ≤.
+- Polynomial ring over a commutative ring [definition]: The ring R[X₁,…,X_n] of formal finite sums of monomials with coefficients in R, with coefficientwise addition and the usual multiplication of monomials.
+- Positive semidefinite real matrix [definition]: A symmetric real matrix A such that xᵀAx≥0 for every real column vector x.
+- Predictable stochastic process [definition]: A process measurable for the σ-algebra on time×sample space generated by adapted left-continuous processes. This formalizes choosing an integrand from information available just before the integration time.
+- Preimage of a subset under a function [definition]: For f:A→B and E⊆B, f⁻¹(E)={x∈A:f(x)∈E}.
+- Primitive polynomial over a finite field [definition]: A monic irreducible polynomial p of degree s over F_q is primitive if the residue class of x generates the multiplicative group of the field F_q[x]/(p), which has qˢ elements.
+- Probability space [definition]: A probability space is (Ω,𝔽,P), where 𝔽 is a σ-algebra on Ω and P is a measure on 𝔽 with P(Ω)=1.
+- Quotient of a commutative ring by an ideal [definition]: For an ideal I of R, the cosets R/I form a ring under (r+I)+(s+I)=r+s+I and (r+I)(s+I)=rs+I.
+- Real Hilbert space [definition]: A real inner-product space complete for its induced norm metric.
+- Real exponential function [definition]: The real function exp(x)=∑_{n≥0}xⁿ/n!, whose series converges for every real x.
+- Real inner-product space [definition]: A real vector space with a symmetric bilinear form ⟨x,y⟩ that is positive on ⟨x,x⟩ for x≠0; its induced norm is √⟨x,x⟩.
+- Real number [definition]: A real number is an element of a complete ordered field ℝ; completeness means every nonempty subset bounded above has a least upper bound.
+- Real power of a positive real number [definition]: For x>0 and p∈ℝ, define xᵖ=exp(p log x). For p>0 extend by 0ᵖ=0.
+- Real sequence [definition]: A real sequence is a function a:ℕ₊→ℝ, written (aₙ)ₙ≥1.
+- Real sine function [definition]: The sine function is defined by the everywhere convergent power series sin(x)=∑ₖ≥0(−1)ᵏx²ᵏ⁺¹/(2k+1)!.
+- Real-valued random variable [definition]: A real-valued random variable is a measurable map from a probability space to ℝ with its Borel σ-algebra.
+- Riemann integral [definition]: A bounded f:[a,b]→ℝ has Riemann integral I if all tagged Riemann sums approach I as the maximum length of the partition intervals tends to zero.
+- Risk-neutral valuation of contingent claims [definition]: Under a specified probability measure making discounted traded asset prices martingales, the arbitrage-free price of a replicable claim is the conditional expectation of its discounted payoff, subject to the market model and integrability hypotheses.
+- Sequence in a set [definition]: A function from the natural numbers, or the positive natural numbers, to that set.
+- Set [definition]: A collection of distinct elements, regarded as one object.
+- Size-biased change of measure [definition]: Given a probability measure P and a nonnegative random variable W with 0<E_PW<∞, the W-biased measure is Q(A)=E_P[W·1_A]/E_PW; equivalently dQ/dP=W/E_PW.
+- Stochastic process [definition]: A family (X_t) indexed by a specified time set, with each X_t a measurable map from a probability space into a specified measurable state space. Adaptation, joint measurability and path regularity are additional conditions when required.
+- Stopping time for a filtration [definition]: A random time T taking values in the time index together with infinity, such that {T≤t}∈F_t for every t; by time t one can determine whether T has occurred.
+- Subgroup [definition]: A subset of a group containing the identity and closed under multiplication and inverses.
+- Subset [definition]: A⊆B means every element of A is an element of B.
+- Sum of a nonnegative series [definition]: For aₙ≥0, define ∑ₙ≥1aₙ as the supremum of its finite partial sums; the value may be infinite.
+- Symmetric matrix [definition]: A square matrix A equal to its transpose, so aᵢⱼ=aⱼᵢ.
+- Tagged Riemann sum [definition]: For a partition a=x₀<⋯<x_n=b and tags t_i∈[x_{i−1},x_i], the Riemann sum of f is ∑ᵢf(t_i)(x_i−x_{i−1}); the partition mesh is maxᵢ(x_i−x_{i−1}).
+- Topological space [definition]: A set X with a family τ of subsets, called open sets, containing ∅ and X and closed under arbitrary unions and finite intersections.
+- Total order [definition]: A partial order in which any two elements are comparable.
+- Uniform convergence of functions into a metric space [definition]: A sequence fₙ:X→(Y,d) converges uniformly to f if for every ε>0, d(fₙ(x),f(x))<ε for every x∈X once n is sufficiently large independently of x.
+- Uniform distribution on the unit interval [definition]: The real probability law on [0,1] whose probability of an interval [a,b]⊆[0,1] is b−a.
+- Union of a family of sets [definition]: The set of elements belonging to at least one member of the family.
+- Variance of a real random variable [definition]: If EX²<∞, then Var(X)=E[(X−EX)²].
+- Vector space [definition]: An abelian group with scalar multiplication by a field satisfying a(v+w)=av+aw, (a+b)v=av+bv, (ab)v=a(bv), and 1v=v.
+- Vector subspace [definition]: A subset of a vector space containing zero and closed under addition and scalar multiplication.
+- Wiener measure [definition]: The probability law of standard Brownian motion on continuous paths starting at zero, equipped with the Borel σ-algebra for uniform convergence on compact time intervals.
+- π [definition]: π is the least positive zero of the real sine function and equals the circumference-to-diameter ratio of a Euclidean circle.
+- σ-algebra [definition]: A σ-algebra on Ω contains Ω and is closed under complements in Ω and countable unions.
+- σ-algebra generated by a family of subsets [definition]: The smallest σ-algebra containing that family, equivalently the intersection of all σ-algebras on the ambient set that contain it.
+
+CITATIONS
+
+  [1] R. E. Caﬂisch, W. Morokoﬀ, and A. Owen. Valuation of mortgage-backed securities
+     using Brownian bridges to reduce eﬀective dimension. The Journal of Computational
+     Finance, 1(1):27–46, 1997.
+    Pedagogically necessary: unknown
+
+  [2] G. H. Golub and C. F. Van Loan. Matrix Computations. The Johns Hopkins Uni-
+     versity Press, Baltimore, third edition, 1996.
+    Pedagogically necessary: unknown
+
+  [3] J. Imai and K. S. Tan. A general dimension reduction technique for derivative pricing.
+     J. Comput. Finance, 10:129–155, 2007.
+    Pedagogically necessary: unknown
+
+  [4] J. Imai and K. S. Tan. An accelerating quasi-Monte Carlo method for option pricing
+     under the generalized hyperbolic Lévy process. SIAM J. Sci. Comput., 31(3):2282–
+     2302, 2009.
+    Pedagogically necessary: unknown
+
+  [5] G. Larcher, G. Leobacher, and K. Scheicher. On the tractability of the Brownian
+     bridge algorithm. J. Complexity, 19:511–528, 2003.
+    Pedagogically necessary: unknown
+
+  [6] P. L’Ecuyer and D. Munger. On Figures of Merit for Randomly-Shifted Lattice Rules.
+     In H. Woźniakowski and L. Plaskota, editors, Monte Carlo and Quasi Monte Carlo
+     Methods 2010, Berlin, 2012. Springer. to appear.
+    Pedagogically necessary: unknown
+
+  [7] P. L’Ecuyer, J.-S. Parent-Chartier, and M. Dion. Simulation of a Lévy process by
+     PCA sampling to reduce the eﬀective dimension. In Proceedings of the 2008 Winter
+     Simulation Conference, pages 436–443. IEEE Press, 2008.
+    Pedagogically necessary: unknown
+
+  [8] G. Leobacher. Stratiﬁed sampling and quasi-Monte Carlo simulation of Lévy pro-
+     cesses. Monte-Carlo methods and applications, 12(3-4):231–238, 2006.
+    Pedagogically necessary: unknown
+
+  [9] G. Leobacher. Fast orthogonal transforms and generation of brownian paths. Journal
+     of Complexity, 28(2):278–302, 2012.
+    Pedagogically necessary: unknown
+
+  [10] Art B. Owen. Eﬀective dimension for weighted function spaces. Technical report,
+     Department of Statistics, Stanford University, 2012.
+    Pedagogically necessary: unknown
+
+  [11] A. Papageorgiou. The Brownian bridge does not oﬀer a consistent advantage in
+     quasi-Monte Carlo integration. J. Complexity, 18(1):171–186, 2002.
+    Pedagogically necessary: unknown
+
+  [12] K. Scheicher. Complexity and eﬀective dimension of discrete Lévy areas. J. Com-
+     plexity, 23(2):152–168, 2007.
+    Pedagogically necessary: unknown
+
+  [13] X. Wang and I. H. Sloan. Quasi-Monte Carlo methods in ﬁnancial engineering: An
+     equivalence principle and dimension reduction. Operations Research, 59(1):80–95,
+     2011.
+    Pedagogically necessary: unknown
+

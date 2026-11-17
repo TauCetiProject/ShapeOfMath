@@ -1,0 +1,523 @@
+{
+  "batch_id": "batch-014",
+  "author": "category_galois_formalization",
+  "reviews": [
+    {
+      "concept": "hausdorff-measure",
+      "concept_id": "a8a50248-8d3c-5083-93f1-65eb0385c2e3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. OuterMeasure.mkMetric'.pre:248, mkMetric':254, mkMetric:259 construct countable diameter-bounded covers and their supremum as radius decreases; tendsto_pre:278 proves the radius-to-zero limit. Measure.hausdorffMeasure:535 uses r^s and hausdorffMeasure_apply:546 gives the explicit countable-cover infimum, including the nonempty-set guard needed at s=0. The library convention has normalization constant 1. The catalogue leaves its normalization constant unspecified; mkMetric_smul:364 proves how any fixed finite positive factor rescales the construction, rather than equating the raw measure with Euclidean normalized volume. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Hausdorff.lean",
+          "declarations": "OuterMeasure.mkMetric:259; OuterMeasure.mkMetric'.tendsto_pre:278; OuterMeasure.mkMetric_smul:364; Measure.hausdorffMeasure:535; Measure.hausdorffMeasure_apply:546",
+          "note": "Defines the diameter-cover measure, limit, and scaling/cover API."
+        }
+      ],
+      "search_notes": "Checked the convention warning in the file header. No claim of a specific Euclidean omega_s/2^s normalization; clarify that constant in the catalogue if intended."
+    },
+    {
+      "concept": "hausdorff-measure",
+      "concept_id": "a8a50248-8d3c-5083-93f1-65eb0385c2e3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency supplies the same checked cover construction/limit and normalization convention (the only source diff is a later Haar-measure proof tactic). Native TauCeti.hausdorffMeasure_zero_eq_count:79 proves the zero-dimensional counting identity by finite singleton additivity and arbitrary finite subsets; hausdorffMeasure_le_of_forall_exists_closedBall_cover:235 proves the ordinary cover upper bound by shrinking countable ball covers, diameter bounds, and liminf. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Measure/Hausdorff.lean",
+          "declarations": "TauCeti.hausdorffMeasure_zero_eq_count:79; TauCeti.hausdorffMeasure_le_of_forall_exists_closedBall_cover:235",
+          "note": "Native core counting and cover-estimate API; underlying measure is dependency-owned."
+        }
+      ],
+      "search_notes": "Exclude Hausdorff/Haar lower-dimensional null-set applications and Euclidean volume normalization as distinct endpoints. Constant-one versus normalized convention is explicit."
+    },
+    {
+      "concept": "heine-cantor-theorem",
+      "concept_id": "432cca5c-254c-5606-9325-bb27eb620790",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. CompactSpace.uniformContinuous_of_continuous:41 proves the theorem for compact uniform spaces via equality of uniformity with neighborhoods of the diagonal; IsCompact.uniformContinuousOn_of_continuous:51 gives the subset form. Metric spaces specialize these hypotheses. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/UniformSpace/HeineCantor.lean",
+          "declarations": "CompactSpace.uniformContinuous_of_continuous:41; IsCompact.uniformContinuousOn_of_continuous:51",
+          "note": "Actual Heine\u2013Cantor proof and compact-subset form."
+        }
+      ],
+      "search_notes": "No finite-dimensional or local compactness restriction."
+    },
+    {
+      "concept": "heine-cantor-theorem",
+      "concept_id": "432cca5c-254c-5606-9325-bb27eb620790",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency HeineCantor.lean is byte-identical to the standalone checked source: compact uniform-space theorem:41 and subset theorem:51 fully imply the metric theorem. Native Topology/UniformSpace/HeineCantor.lean proves uniform convergence of parameter families, using compact transverse uniformity; it does not reprove or give ordinary core API for the fixed-map theorem. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected native HeineCantor.lean in full and UniformConvergence/Comp.lean candidate context. Parameter-family convergence is a separate theorem, excluded; imports and uses do not count."
+    },
+    {
+      "concept": "hencl-pratelli-w11-approximation",
+      "concept_id": "fa44118d-f311-52a1-a34a-aa23a4280fc6",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. Checked Sobolev approximation candidates do not establish preservation of homeomorphism/injectivity, the simultaneous uniform and W1,1 topology, locally finite piecewise-affine approximation, or boundary-value preservation. These are substantive missing endpoints, so coverage remains unresolved. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Hencl/Pratelli, diffeomorphic/homeomorphic approximation in Analysis/Geometry. Tau Sobolev/W1p/Density.lean:277\u2013305 proves whole-space scalar W1,p test-function density via cutoff truncation and mollification; this is not injective planar approximation on arbitrary open domains. Mathlib smooth approximation and ContDiff candidates do not provide the homeomorphism/boundary theorem. No absence claim."
+    },
+    {
+      "concept": "hencl-pratelli-w11-approximation",
+      "concept_id": "fa44118d-f311-52a1-a34a-aa23a4280fc6",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked Sobolev approximation candidates do not establish preservation of homeomorphism/injectivity, the simultaneous uniform and W1,1 topology, locally finite piecewise-affine approximation, or boundary-value preservation. These are substantive missing endpoints, so coverage remains unresolved. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Hencl/Pratelli, diffeomorphic/homeomorphic approximation in Analysis/Geometry. Tau Sobolev/W1p/Density.lean:277\u2013305 proves whole-space scalar W1,p test-function density via cutoff truncation and mollification; this is not injective planar approximation on arbitrary open domains. Mathlib smooth approximation and ContDiff candidates do not provide the homeomorphism/boundary theorem. No absence claim."
+    },
+    {
+      "concept": "hereditarily-indecomposable-banach",
+      "concept_id": "6002e241-cbe1-55a3-a222-b6cb286dcc1d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. Topological direct-sum machinery is present, but a full hereditary infinite-dimensional closed-subspace predicate/ordinary API has not been verified. Submodule.IsTopCompl in Mathlib Topology/Algebra/Module/Complement.lean:81 means algebraic complements plus continuous projection, and its product equivalence is the right decomposition notion; that alone is not a checked implementation of the whole quantified hereditary condition. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched indecomposable/hereditarily/Gowers/Maurey across normed-space sources; inspected Complement definition, symmetry, continuous projection and product-equivalence context. Tau Complement.lean covers mapping complemented subspaces, scalar restriction and kernel projections, without a checked HI predicate. Generic assembly of nested closed subspaces, infinite dimensionality and absence of such complements remains an explicit definition-level frontier; not asserting nonexistence."
+    },
+    {
+      "concept": "hereditarily-indecomposable-banach",
+      "concept_id": "6002e241-cbe1-55a3-a222-b6cb286dcc1d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Topological direct-sum machinery is present, but a full hereditary infinite-dimensional closed-subspace predicate/ordinary API has not been verified. Submodule.IsTopCompl in Mathlib Topology/Algebra/Module/Complement.lean:81 means algebraic complements plus continuous projection, and its product equivalence is the right decomposition notion; that alone is not a checked implementation of the whole quantified hereditary condition. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched indecomposable/hereditarily/Gowers/Maurey across normed-space sources; inspected Complement definition, symmetry, continuous projection and product-equivalence context. Tau Complement.lean covers mapping complemented subspaces, scalar restriction and kernel projections, without a checked HI predicate. Generic assembly of nested closed subspaces, infinite dimensionality and absence of such complements remains an explicit definition-level frontier; not asserting nonexistence."
+    },
+    {
+      "concept": "hermitian-angle-vectors",
+      "concept_id": "49666ab6-d5f4-5e15-9c88-0ff6ee88b261",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. No checked construction yet gives the phase-invariant vector angle arccos(|complex inner|/(norm product)) in [0,pi/2] with existence/uniqueness. The actual Euclidean angle in Geometry/Euclidean/Angle/Unoriented/Basic.lean:41 is real-inner arccos with range [0,pi]; applying it to the underlying real space uses Re(inner), not abs(inner), so it does not match. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Hermitian angle/arccos/norm inner in complex inner-product and angle sources. Inspected Tau DoubleAngle/Vector, Projection/PrincipalAngle and AngleOperator candidates: subspace/eigenvector angles differ from the requested pair of complex vectors. Generic arccos and Cauchy\u2013Schwarz are ingredients, but the correct phase-invariant construction and uniqueness were not checked."
+    },
+    {
+      "concept": "hermitian-angle-vectors",
+      "concept_id": "49666ab6-d5f4-5e15-9c88-0ff6ee88b261",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. No checked construction yet gives the phase-invariant vector angle arccos(|complex inner|/(norm product)) in [0,pi/2] with existence/uniqueness. The actual Euclidean angle in Geometry/Euclidean/Angle/Unoriented/Basic.lean:41 is real-inner arccos with range [0,pi]; applying it to the underlying real space uses Re(inner), not abs(inner), so it does not match. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Hermitian angle/arccos/norm inner in complex inner-product and angle sources. Inspected Tau DoubleAngle/Vector, Projection/PrincipalAngle and AngleOperator candidates: subspace/eigenvector angles differ from the requested pair of complex vectors. Generic arccos and Cauchy\u2013Schwarz are ingredients, but the correct phase-invariant construction and uniqueness were not checked."
+    },
+    {
+      "concept": "hilbert-cstar-module",
+      "concept_id": "7d7fbdd0-5256-5c46-a2fb-19f896ed1f29",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. CStarModule:73 in Module/Defs.lean supplies the positive definite algebra-valued inner product and compatibility with the induced norm. It does not include completeness: the catalogue object is explicitly the conjunction CStarModule A E and CompleteSpace E. CompleteSpace is the checked existing Cauchy-completeness predicate, not an inferred property of every CStarModule. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/Module/Defs.lean",
+          "declarations": "CStarModule:73; CStarModule.inner\u209b\u2097:127",
+          "note": "Defines the algebra-valued inner structure and its norm compatibility; add the existing CompleteSpace condition for Hilbert modules."
+        }
+      ],
+      "search_notes": "Do not identify incomplete CStarModules with Hilbert modules. ModuleSelf/Gram constructions and representation theorems are separate endpoints."
+    },
+    {
+      "concept": "hilbert-cstar-module",
+      "concept_id": "7d7fbdd0-5256-5c46-a2fb-19f896ed1f29",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Module/Defs.lean is byte-identical and the complete subclass is CStarModule A E plus CompleteSpace E. Native CStarModule.ext_inner_left:27 and ext_inner_right:33 prove that equality against all inner products determines the vector, using inner(x-y,x-y)=0 and star symmetry. These ordinary defining-inner-product identities apply to the complete subclass without needing completeness in their proof. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/CStarAlgebra/Module/Basic.lean",
+          "declarations": "CStarModule.ext_inner_left:27; CStarModule.ext_inner_right:33",
+          "note": "Native ordinary inner-product extensionality API; structure and completeness conditions imported."
+        }
+      ],
+      "search_notes": "User-approved native API interpretation: a direct ordinary identity under weaker assumptions counts; mere superclass instances would not. Exclude Gram and special self-module constructions."
+    },
+    {
+      "concept": "hilbert-operator-range",
+      "concept_id": "7736851f-da20-50d3-9c7c-792f37ee647d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. Use the equivalent presentation H/ker A, not the default ambient subspace norm on A.range. LinearMap.quotKerEquivRange:38 with apply_mk:51 sends [x] to Ax. Quotient.quotient_norm_mk_eq:269 gives inf of norms over x+ker A, exactly the fiber Ax=y. Submodule.quotientEquivOrthogonal:143 in ProdL2 identifies that quotient isometrically with (ker A)^perp; instQuotientInnerProductSpace:179 transports the inner product, and Submodule.Quotient.completeSpace:436 gives completeness. The kernel of bounded A is closed, so Hilbert-space projection hypotheses hold. These checked generic constructors implement the requested equivalent presentation; no claim that ambient K norm coincides. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Isomorphisms.lean",
+          "declarations": "LinearMap.quotKerEquivRange:38; LinearMap.quotKerEquivRange_apply_mk:51",
+          "note": "Identifies quotient by kernel with the algebraic operator range."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Group/Quotient.lean",
+          "declarations": "quotient_norm_mk_eq:269; Submodule.Quotient.completeSpace:436",
+          "note": "Defines fiber-infimum quotient norm and complete quotient."
+        },
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/ProdL2.lean",
+          "declarations": "Submodule.quotientEquivOrthogonal:143; Submodule.instQuotientInnerProductSpace:179",
+          "note": "Exact isometric orthogonal-complement presentation and Hilbert inner product."
+        }
+      ],
+      "search_notes": "Inspected full isomorphism constructor, quotient norm proof and orthogonal-equivalence/inner-product proofs. Normed/Operator/Banach.lean closed-range inverse uses ambient norm and is not substituted."
+    },
+    {
+      "concept": "hilbert-operator-range",
+      "concept_id": "7736851f-da20-50d3-9c7c-792f37ee647d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The same exact quotient/orthogonal presentation is available in the actual dependency (ProdL2 byte-identical; quotient/isomorphism core declarations separately checked). Use the equivalent presentation H/ker A, not the default ambient subspace norm on A.range. LinearMap.quotKerEquivRange:38 with apply_mk:51 sends [x] to Ax. Quotient.quotient_norm_mk_eq:269 gives inf of norms over x+ker A, exactly the fiber Ax=y. Submodule.quotientEquivOrthogonal:143 in ProdL2 identifies that quotient isometrically with (ker A)^perp; instQuotientInnerProductSpace:179 transports the inner product, and Submodule.Quotient.completeSpace:436 gives completeness. The kernel of bounded A is closed, so Hilbert-space projection hypotheses hold. These checked generic constructors implement the requested equivalent presentation; no claim that ambient K norm coincides. Native ContinuousLinearMap.apply_projectionL_ker:89 proves A(P_q x)=Ax for a topological complement q of ker A, by the decomposition into q and kernel; q=(ker A)^perp gives the ordinary core identification of the minimal-norm representative. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Algebra/Module/Complement.lean",
+          "declarations": "ContinuousLinearMap.apply_projectionL_ker:89",
+          "note": "Native kernel-projection identification API for the quotient/orthogonal presentation; Hilbert norm and first isomorphism constructors are imported."
+        }
+      ],
+      "search_notes": "Normed/Operator/QuotientRange.lean instead studies quotient BY range for nearby split injections, so excluded. Gram/Rigidity proves ambient range isometries under equal Gram operators; not mistaken for the generally different operator-range norm."
+    },
+    {
+      "concept": "holder-variable-lebesgue",
+      "concept_id": "75e2cdd3-ddff-569a-af8f-0d05e3ecad75",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. The checked Holder APIs use constant exponents p q : ENNReal with p.HolderConjugate q. They do not establish Luxemburg norms for measurable exponent functions or the variable-exponent factor-2 bound. Tau Analysis/PDE/EnergyForm/VariableLp.lean:64 has variable coefficients with fixed L2 jets/L-infinity coefficients, not p(x). Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched variable-exponent/Luxemburg/modular and Holder candidates in both Analysis/MeasureTheory trees. Inspected native MeasureTheory/Function/Holder.lean:37\u201369 integrable_apply/bilinear_apply statements and proofs: fixed constant exponents. Constant-exponent Holder is a different hypothesis class and not mapped as implementation of the requested variable-exponent endpoint."
+    },
+    {
+      "concept": "holder-variable-lebesgue",
+      "concept_id": "75e2cdd3-ddff-569a-af8f-0d05e3ecad75",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The checked Holder APIs use constant exponents p q : ENNReal with p.HolderConjugate q. They do not establish Luxemburg norms for measurable exponent functions or the variable-exponent factor-2 bound. Tau Analysis/PDE/EnergyForm/VariableLp.lean:64 has variable coefficients with fixed L2 jets/L-infinity coefficients, not p(x). Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched variable-exponent/Luxemburg/modular and Holder candidates in both Analysis/MeasureTheory trees. Inspected native MeasureTheory/Function/Holder.lean:37\u201369 integrable_apply/bilinear_apply statements and proofs: fixed constant exponents. Constant-exponent Holder is a different hypothesis class and not mapped as implementation of the requested variable-exponent endpoint."
+    },
+    {
+      "concept": "holomorphic-function",
+      "concept_id": "6efac2a4-dd34-5251-9a7b-925c4b0fdeee",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. DifferentiableOn:166 is the pointwise derivative-existence predicate on a set; at points of an open complex domain its within derivative is the unrestricted derivative. DifferentiableAt:144 is derivative existence over the scalar field, and Deriv/Basic.lean:419/423 proves equivalence with existence of the scalar derivative/HasDerivAt. Specializing the scalar field and domain/codomain to complex numbers is exactly one-variable holomorphy, with no real-differentiability substitution. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/FDeriv/Defs.lean",
+          "declarations": "DifferentiableAt:144; DifferentiableOn:166",
+          "note": "Actual generic predicate whose complex specialization is holomorphy."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+          "declarations": "DifferentiableAt.hasDerivAt:419; hasDerivAt_deriv_iff:423",
+          "note": "Scalar derivative equivalence and ordinary derivative API."
+        }
+      ],
+      "search_notes": "Open-domain condition is essential to identifying within and unrestricted derivatives; no analytic extension outside the domain is required."
+    },
+    {
+      "concept": "holomorphic-function",
+      "concept_id": "6efac2a4-dd34-5251-9a7b-925c4b0fdeee",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency supplies the same derivative predicates (FDeriv/Defs differs only by a header blank line). Native holomorphicFunctions:39 is the subalgebra of continuous maps on an open U with ambient DifferentiableOn complex representatives; mem_holomorphicFunctions_iff_of_eqOn:62 and iff_extend:71 verify independence of values outside U. Constructor of:82 supplies any holomorphic representative. Thus this is precisely holomorphic functions on U, with algebra and representative API. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Complex/HolomorphicFunctions/Basic.lean",
+          "declarations": "TauCeti.holomorphicFunctions:39; mem_holomorphicFunctions_iff:57; mem_holomorphicFunctions_iff_of_eqOn:62; holomorphicFunctions.of:82",
+          "note": "Native holomorphic-function algebra and ordinary representative/constructor API."
+        }
+      ],
+      "search_notes": "The ambient representative need only be differentiable on U. This is not a requirement for a global entire extension."
+    },
+    {
+      "concept": "holomorphic-functional-calculus",
+      "concept_id": "9b29a6eb-75f0-57e8-ad8c-bcf2acf9a0b6",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. Checked resolvent differentiation and polynomial spectral mapping in Normed/Algebra/GelfandFormula.lean, and continuous functional calculus candidates, but did not verify a contour-defined calculus for arbitrary bounded complex Banach-space operators. Consequently its general compact-open continuity or unital algebra-homomorphism endpoint is not established by those candidates. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched holomorphic/Riesz/Dunford calculus, contour/resolvent evaluation and spectral mapping in normed algebras. Mathlib continuous functional calculus requires normal/C*-algebra conditions and is not the arbitrary Banach operator calculus. Polynomial evaluation alone is not charged to the full contour construction."
+    },
+    {
+      "concept": "holomorphic-functional-calculus-continuity",
+      "concept_id": "610f485c-df22-5e96-8b54-08fb3e3b8956",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. Checked resolvent differentiation and polynomial spectral mapping in Normed/Algebra/GelfandFormula.lean, and continuous functional calculus candidates, but did not verify a contour-defined calculus for arbitrary bounded complex Banach-space operators. Consequently its general compact-open continuity or unital algebra-homomorphism endpoint is not established by those candidates. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched holomorphic/Riesz/Dunford calculus, contour/resolvent evaluation and spectral mapping in normed algebras. Mathlib continuous functional calculus requires normal/C*-algebra conditions and is not the arbitrary Banach operator calculus. Polynomial evaluation alone is not charged to the full contour construction."
+    },
+    {
+      "concept": "holomorphic-functional-calculus-homomorphism",
+      "concept_id": "c8e03673-5495-52b3-a49f-a0e30f8cdb95",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. Checked resolvent differentiation and polynomial spectral mapping in Normed/Algebra/GelfandFormula.lean, and continuous functional calculus candidates, but did not verify a contour-defined calculus for arbitrary bounded complex Banach-space operators. Consequently its general compact-open continuity or unital algebra-homomorphism endpoint is not established by those candidates. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched holomorphic/Riesz/Dunford calculus, contour/resolvent evaluation and spectral mapping in normed algebras. Mathlib continuous functional calculus requires normal/C*-algebra conditions and is not the arbitrary Banach operator calculus. Polynomial evaluation alone is not charged to the full contour construction."
+    },
+    {
+      "concept": "holomorphic-functional-calculus",
+      "concept_id": "9b29a6eb-75f0-57e8-ad8c-bcf2acf9a0b6",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For any complete normed complex algebra A, holomorphicCalculusOn:153 is a unital complex algebra hom from functions holomorphic on U containing spectrum(a). Its value is the normalized cycle-resolvent integral, independent of admissible cycle; eq_integral:187 identifies any cycle in U avoiding the spectrum, null-homologous in U and winding once about the spectrum. holomorphicCalculus:261 gives the equivalent germ construction. Set A=E\u2192L[complex]E for a complex Banach space to obtain the exact operator case. Cycle.integral_smul_resolvent_eq_of_windingNumber_eq:80 proves contour independence using Cauchy and resolvent holomorphy; integral_resolvent:110 proves normalization by comparison with large circles and decay at infinity. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Algebra/HolomorphicFunctionalCalculus/Basic.lean",
+          "declarations": "TauCeti.holomorphicCalculusOn:153; holomorphicCalculusOn_eq_integral:187; holomorphicCalculus:261",
+          "note": "Native contour-defined evaluation, independence interface and ordinary calculus API."
+        },
+        {
+          "path": "TauCeti/Analysis/Normed/Algebra/HolomorphicFunctionalCalculus/Cycle.lean",
+          "declarations": "TauCeti.Contour.Cycle.integral_smul_resolvent_eq_of_windingNumber_eq:80; Cycle.integral_resolvent:110",
+          "note": "Native core independence/normalization proofs implementing Riesz\u2013Dunford evaluation."
+        }
+      ],
+      "search_notes": "Admissible cycles include the usual enclosing contours; their homology condition excludes enclosing points outside the holomorphy neighborhood. Grid/cycle and holomorphic-germ input data are prerequisites, not automatically all mapped files."
+    },
+    {
+      "concept": "holomorphic-functional-calculus-continuity",
+      "concept_id": "610f485c-df22-5e96-8b54-08fb3e3b8956",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For any complete normed complex algebra A, holomorphicCalculusOn:153 is a unital complex algebra hom from functions holomorphic on U containing spectrum(a). Its value is the normalized cycle-resolvent integral, independent of admissible cycle; eq_integral:187 identifies any cycle in U avoiding the spectrum, null-homologous in U and winding once about the spectrum. holomorphicCalculus:261 gives the equivalent germ construction. Set A=E\u2192L[complex]E for a complex Banach space to obtain the exact operator case. norm_holomorphicCalculusOn_le:197 bounds the integral by compact-cycle sup norms. continuous_holomorphicCalculusOn:216 factors through restriction to the compact cycle trace and a bounded linear evaluation map, giving continuity for the inherited compact-open topology. Applying continuity to compact-uniform convergence of f_n proves norm convergence of their operator evaluations. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Algebra/HolomorphicFunctionalCalculus/Basic.lean",
+          "declarations": "TauCeti.norm_holomorphicCalculusOn_le:197; TauCeti.continuous_holomorphicCalculusOn:216",
+          "note": "Native compact-open to norm continuity proof and controlling contour estimate."
+        }
+      ],
+      "search_notes": "Uses a common open neighborhood U, exactly as required; no moving-spectrum/uniform-in-operator claim."
+    },
+    {
+      "concept": "holomorphic-functional-calculus-homomorphism",
+      "concept_id": "c8e03673-5495-52b3-a49f-a0e30f8cdb95",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For any complete normed complex algebra A, holomorphicCalculusOn:153 is a unital complex algebra hom from functions holomorphic on U containing spectrum(a). Its value is the normalized cycle-resolvent integral, independent of admissible cycle; eq_integral:187 identifies any cycle in U avoiding the spectrum, null-homologous in U and winding once about the spectrum. holomorphicCalculus:261 gives the equivalent germ construction. Set A=E\u2192L[complex]E for a complex Banach space to obtain the exact operator case. The actual AlgHom fields prove zero/one/add/mul/scalars; multiplication uses nested-cycle double integration, the resolvent identity, Fubini and Cauchy in Cycle.integral_smul_resolvent_mul_integral_smul_resolvent:283. Cycle.integral_pow_smul_resolvent:160 and integral_eval_smul_resolvent:191 prove agreement with powers and polynomials; Basic.holomorphicCalculusOn_polynomial:173 transfers this to the algebra map. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Algebra/HolomorphicFunctionalCalculus/Basic.lean",
+          "declarations": "TauCeti.holomorphicCalculusOn:153; holomorphicCalculusOn_polynomial:173; holomorphicCalculus:261",
+          "note": "Native unital algebra-homomorphism construction and polynomial agreement."
+        },
+        {
+          "path": "TauCeti/Analysis/Normed/Algebra/HolomorphicFunctionalCalculus/Cycle.lean",
+          "declarations": "TauCeti.Contour.Cycle.integral_resolvent:110; integral_pow_smul_resolvent:160; integral_eval_smul_resolvent:191; integral_smul_resolvent_mul_integral_smul_resolvent:283",
+          "note": "Native unitality, polynomial normalization and multiplicativity proofs."
+        }
+      ],
+      "search_notes": "No normality/self-adjointness restriction. The domain is holomorphic functions on a fixed U (or germs), not arbitrary pointwise functions on the spectrum."
+    },
+    {
+      "concept": "holomorphic-spectral-mapping",
+      "concept_id": "59c3d587-ba63-50f1-9f46-1acaf9e3b3a9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. spectrum.map_polynomial_aeval:192 in GelfandFormula.lean proves exactly spectrum(p(a))=p(image spectrum(a)) for arbitrary complex polynomials in complete complex normed algebras; its proof invokes map_polynomial_aeval_of_nonempty after spectrum nonemptiness (with the trivial algebra handled separately). This is the direct polynomial restriction of the requested conclusion. General holomorphic f and a general contour calculus remain unverified. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Algebra/GelfandFormula.lean",
+          "declarations": "spectrum.map_polynomial_aeval:192",
+          "note": "Direct polynomial special case of spectral mapping; full holomorphic endpoint is missing."
+        }
+      ],
+      "search_notes": "Searched holomorphic/Riesz/Dunford calculus, contour/resolvent evaluation and spectral mapping in normed algebras. Mathlib continuous functional calculus requires normal/C*-algebra conditions and is not the arbitrary Banach operator calculus. Polynomial evaluation alone is not charged to the full contour construction. This restricted actual spectral-equality theorem is distinguished from prerequisite polynomial evaluation."
+    },
+    {
+      "concept": "holomorphic-spectral-mapping",
+      "concept_id": "59c3d587-ba63-50f1-9f46-1acaf9e3b3a9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native holomorphicCalculusOn_polynomial:173 identifies the contour calculus of p with aeval a p. The actual dependency spectrum.map_polynomial_aeval:192 proves the spectral equality for that value (its version assumes Nontrivial A; the trivial algebra case is elementary but not claimed from this theorem). This is a genuine implemented polynomial subcase of holomorphic spectral mapping. No proof of the equality for every function holomorphic near the spectrum was verified in the native Basic/Cycle calculus or spectrum searches. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Algebra/HolomorphicFunctionalCalculus/Basic.lean",
+          "declarations": "TauCeti.holomorphicCalculusOn_polynomial:173; holomorphicCalculus_polynomial:288",
+          "note": "Native identification of holomorphic calculus with polynomial evaluation, yielding the checked polynomial spectral-mapping subcase via the dependency theorem."
+        }
+      ],
+      "search_notes": "Searched spectrum with holomorphicCalculus in Tau normed algebra sources and inspected Basic/Cycle full relevant content. Full invertibility/factorization argument for arbitrary holomorphic f remains missing from this review; no assertion of absence."
+    },
+    {
+      "concept": "homeomorphism",
+      "concept_id": "2128f2e3-1503-5033-996e-624fe2b23233",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. Homeomorph:43 extends Equiv with continuity of both forward and inverse functions. Thus bijectivity is built into Equiv and the two continuity fields match the catalogue exactly; inspected the actual fields and basic coercion/extensionality API. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Homeomorph/Defs.lean",
+          "declarations": "Homeomorph:43; Homeomorph.toEquiv_injective:59",
+          "note": "Defines the bicontinuous bijection and basic bundled-map API."
+        }
+      ],
+      "search_notes": "No metric/compactness/Hausdorff hypotheses are imposed."
+    },
+    {
+      "concept": "homeomorphism",
+      "concept_id": "2128f2e3-1503-5033-996e-624fe2b23233",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency Homeomorph structure is unchanged (only a header blank-line diff, declaration at dependency:44). Native Homeomorph.setCongr_apply:31 and setCongr_symm_apply:38 prove the forward/inverse retyping formulas for the homeomorphism between equal subsets, by rfl. This is ordinary constructor API for homeomorphisms, rather than merely an imported use. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Homeomorph/SetCongr.lean",
+          "declarations": "Homeomorph.setCongr_apply:31; Homeomorph.setCongr_symm_apply:38",
+          "note": "Native core formulas for forward and inverse of the equal-subset homeomorphism."
+        }
+      ],
+      "search_notes": "Inspected native Semiconj.lean as well; its powers/semiconjugacy endpoint is not required for the bare concept and is excluded, as are all unrelated homeomorphism applications."
+    },
+    {
+      "concept": "homogeneous-real-polynomial",
+      "concept_id": "c4662627-0513-55e6-8497-24fcffc8a66f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. MvPolynomial.IsHomogeneous:46 is IsWeightedHomogeneous with all weights 1. The latter definition at WeightedHomogeneous:122 says every coefficient-nonzero monomial has weighted degree n; weightedTotalDegree_one:60 identifies weight-one with usual total degree by expanding finite support sums. Taking coefficients real and variables Fin m gives exactly finite-variable real homogeneous polynomials, with the zero polynomial vacuously allowed as in the catalogue wording. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/MvPolynomial/Homogeneous.lean",
+          "declarations": "MvPolynomial.IsHomogeneous:46; MvPolynomial.weightedTotalDegree_one:60",
+          "note": "Defines ordinary homogeneity and identifies the degree convention."
+        }
+      ],
+      "search_notes": "WeightedHomogeneous is the definition supplier but not separately charged as a prerequisite file; no real-rootedness or hyperbolicity endpoint included."
+    },
+    {
+      "concept": "homogeneous-real-polynomial",
+      "concept_id": "c4662627-0513-55e6-8497-24fcffc8a66f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency homogeneous and weighted-homogeneous files are byte-identical. Native MvPolynomial.IsHomogeneous.eval\u2082_const_mul:61 proves homogeneous scaling under arbitrary coefficient homomorphism, by expansion over support and the common monomial degree. Specializing to real scalars gives p(c*x)=c^n p(x), an ordinary defining homogeneity API. aeval_smul_of_algebra:77 is its algebra-valued form. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/MvPolynomial/Homogeneous.lean",
+          "declarations": "MvPolynomial.IsHomogeneous.eval\u2082_const_mul:61; MvPolynomial.IsHomogeneous.aeval_smul_of_algebra:77",
+          "note": "Native ordinary scaling/evaluation API for the imported homogeneous-polynomial definition."
+        }
+      ],
+      "search_notes": "No support for merely weighted homogeneity is substituted; weights are all one and variable set can be finite."
+    },
+    {
+      "concept": "hyperplane-reflection-euclidean",
+      "concept_id": "43dc0051-c033-52d4-9cbb-c62fc8248211",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. Submodule.reflection:52 is the linear isometry 2P_K-id, with norm preservation and involution checked. reflection_orthogonal_apply:101 negates the line reflection, and reflection_singleton_apply:109 computes its coefficient using inner(u,x)/norm(u)^2. For real unit u these yield reflection in u-perp as x-2 inner(x,u)u, exactly the Euclidean formula. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Projection/Reflection.lean",
+          "declarations": "Submodule.reflection:52; reflection_apply:67; reflection_orthogonal_apply:101; reflection_singleton_apply:109",
+          "note": "Actual reflection and orthogonal-hyperplane formula via ordinary singleton/orthogonal API."
+        }
+      ],
+      "search_notes": "The orthogonal projection exists for the complete finite-dimensional line and its complement; do not confuse reflection fixing the line with reflection fixing its orthogonal hyperplane."
+    },
+    {
+      "concept": "hyperplane-reflection-euclidean",
+      "concept_id": "43dc0051-c033-52d4-9cbb-c62fc8248211",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The dependency reflection source is byte-identical. Native TauCeti.reflection_orthogonal_singleton_apply:167 states the exact real unit-normal formula x-2*inner(v,x) smul v; its proof combines line reflection, norm-one, and orthogonal sign. The norm-squared formula:176 and normal-inner sign identity:182 are immediate core API. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Reflection.lean",
+          "declarations": "TauCeti.reflection_orthogonal_singleton_apply:167; reflection_orthogonal_singleton_apply_div_norm_sq:176; inner_reflection_orthogonal_singleton:182",
+          "note": "Native exact hyperplane-reflection formula and immediate normal-coordinate API."
+        }
+      ],
+      "search_notes": "Affine HyperplaneReflection.lean adds an offset parameter; not automatically counted for the linear-hyperplane concept."
+    },
+    {
+      "concept": "hyperplane-trace-function-space",
+      "concept_id": "9c4516ec-7f50-55dd-ac07-0e09e269df4c",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. Searched derivative/Sobolev/hyperplane restriction candidates, but no checked continuous extension of smooth restriction to an existing larger function space was identified in this snapshot. Ordinary function composition/restriction expresses the initial operation but does not by itself establish a continuous function-space trace construction. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected scalar derivative/smooth-map restriction context; absence of a Sobolev trace alias alone is not the conclusion. The remaining issue is an actual topology/domain/codomain with a verified continuous extension agreeing with hyperplane restriction."
+    },
+    {
+      "concept": "hyperplane-trace-function-space",
+      "concept_id": "9c4516ec-7f50-55dd-ac07-0e09e269df4c",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. W1p.hyperplaneTrace:227 is a continuous linear map from whole-space W1,p on WithLp2(real times E) to Lp(E), for 1<=p<infinity. It is extendOfNorm of restriction of test functions; the preceding proof bounds its Lp norm by p^(1/p) times the Sobolev norm using the hyperplane integral estimate. Agreement with restriction:232 and uniqueness among continuous linear extensions:259 are proved using test-function density. Setting a=0 and exchanging coordinate order gives the stated hyperplane. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Sobolev/Trace/Hyperplane.lean",
+          "declarations": "TauCeti.W1p.hyperplaneTrace:227; hyperplaneTrace_ofTestFunction_apply_ae:232; hyperplaneTrace_unique:259",
+          "note": "Native initial restriction, bounded continuous extension, agreement and uniqueness API."
+        }
+      ],
+      "search_notes": "This establishes the definition via a concrete W1,p trace, not universal existence on every function space. Hyperplane integral-estimate and Sobolev-density files are proof inputs, not automatically mapped; Distribution/TestFunction/Hyperplane.lean is a different cutoff/divergence construction."
+    },
+    {
+      "concept": "induced-metric-embedded-surface",
+      "concept_id": "94ab60ba-9a25-5157-b0c1-57e62fbdf4c3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. The checked Riemannian/Basic.lean and vector-bundle Riemannian machinery supply abstract metrics and standard model-space inner products, but a smooth pullback/immersion construction with g(v,w)=inner(df v,df w) was not verified in this snapshot. Pointwise induced inner-product structures alone do not establish the required smooth tangent-bundle metric. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched inducedRiemannian and pullback Riemannian across Mathlib Geometry, and inspected Riemannian/Basic plus bundle-metric candidates. Missing bridge is the smooth positive tangent metric along an embedding and chart derivative formula; no claim the concept cannot be assembled generically."
+    },
+    {
+      "concept": "induced-metric-embedded-surface",
+      "concept_id": "94ab60ba-9a25-5157-b0c1-57e62fbdf4c3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. TauCeti.inducedRiemannianMetric:62 constructs a C^n tangent metric for a C^(n+1) map f to a real inner-product space with injective derivative at every point and finite-dimensional source model. Its inner form is inner(df v,df w); injectivity proves positivity, finite-dimensional antilipschitz bounds give metric equivalence, and the source proof establishes regularity. inducedRiemannianMetric_inner:91 is the exact formula. For a smooth embedded surface and Euclidean target, evaluating on coordinate basis gives g_ij=partial_i m dot partial_j m. Source statements and relevant proof bodies inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Manifold/Riemannian/Induced.lean",
+          "declarations": "TauCeti.inducedRiemannianMetric:62; TauCeti.inducedRiemannianMetric_inner:91",
+          "note": "Native smooth induced metric and exact differential/inner formula."
+        }
+      ],
+      "search_notes": "An embedding is stronger than the injective-derivative hypothesis used here. Pullback/Basic supplies generic regularity input and is not additionally charged merely as a proof prerequisite; sphere-specific metrics are separate specializations."
+    }
+  ]
+}

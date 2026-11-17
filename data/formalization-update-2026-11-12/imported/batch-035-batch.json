@@ -1,0 +1,853 @@
+{
+  "note": "Whole-catalogue formalization update batch-035: independent source review by algebra_formalization of category_galois_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "module-homomorphism",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Module/LinearMap/Defs.lean",
+          "declarations": "LinearMap:84; linear-map notation:98",
+          "note": "Actual additive scalar-compatible map constructor and ordinary linear map operations."
+        }
+      ],
+      "evidence": "LinearMap:84 extends AddHom and MulActionHom sigma. Set sigma=RingHom.id R, exactly the notation M ->linear[R] N: additivity and f(r m)=r f(m), over the SAME scalar ring. The commutative-ring/modules specialization meets the generic semiring assumptions. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Semilinearity over a different scalar hom is the generic supplier, not the requested specialization. No continuity or finite-dimensionality is imposed; unrelated duality/rank theorems excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "module-homomorphism",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Module/LinearMap/Defs.lean",
+          "declarations": "LinearMap.toAddMonoidHom_comp:26",
+          "note": "Native ordinary composition identity for the underlying additive map of module homomorphisms."
+        }
+      ],
+      "evidence": "Dependency LinearMap constructor agrees. Native LinearMap.toAddMonoidHom_comp:26 proves forgetting scalar compatibility preserves composition, literally rfl on the actual semilinear composite. Specialize all three scalar homomorphisms to the identity: direct ordinary module-homomorphism composition/forgetful API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Do not count endomorphism quotient construction or finite-rank/index results merely because they use linear maps.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "monotone-real-sequence-convergence",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Order/MonotoneConvergence.lean",
+          "declarations": "tendsto_atTop_ciSup:121; tendsto_atTop_ciInf:155",
+          "note": "Actual completed bounded monotone/antitone convergence proofs, specialized to real sequences."
+        }
+      ],
+      "evidence": "tendsto_atTop_ciSup:121 proves a monotone bounded-above function converges to its conditional supremum; the completed proof obtains the actual least upper bound of the directed range and applies tendsto_atTop_isLUB. tendsto_atTop_ciInf:155 proves the decreasing/bounded-below case by duality. Instantiate the index to Nat and target to Real; both increasing and decreasing meanings of monotone are covered, with the appropriate bound. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Real conditional completeness and its order topology supply the stated hypotheses. An unbounded sequence tending to infinity is a separate endpoint, not convergence to a real limit.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "monotone-real-sequence-convergence",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Order/MonotoneConvergence.lean",
+          "declarations": "TauCeti.tendsto_atTop_ciSup_of_monotoneOn_Ici:37; tendsto_atTop_ciInf_of_antitoneOn_Ici:49",
+          "note": "Native actual tail/half-line variants of bounded monotone convergence and its decreasing dual."
+        }
+      ],
+      "evidence": "Dependency bounded monotone/antitone convergence proofs agree. Native tendsto_atTop_ciSup_of_monotoneOn_Ici:37 and its infimum dual:49 prove the same convergence with monotonicity and boundedness only on a tail [a,infinity). Read the proofs restricting the domain to Ici a and transporting the atTop limit, including the degenerate-filter branch. Instantiate Nat/Real for the ordinary eventual-monotonicity API of this theorem. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The core global theorem remains Mathlib-owned. Native measure-monotone convergence is a different theorem and excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "multiplicative-algebraic-group",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Polynomial/Laurent.lean",
+          "declarations": "LaurentPolynomial:85; LaurentPolynomial.eval₂:530; eval₂_T:550",
+          "note": "Actual Laurent coordinate ring and evaluation on an arbitrary unit."
+        },
+        {
+          "path": "Mathlib/Algebra/MonoidAlgebra/Basic.lean",
+          "declarations": "AddMonoidAlgebra.lift:593; lift_symm_apply:611",
+          "note": "Actual generic representing algebra-map equivalence, specialized to the free cyclic group."
+        },
+        {
+          "path": "Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean",
+          "declarations": "LaurentPolynomial.instHopfAlgebra:65; antipode_T:77",
+          "note": "Actual multiplicative-group Laurent Hopf structure and inversion."
+        },
+        {
+          "path": "Mathlib/RingTheory/Coalgebra/MonoidAlgebra.lean",
+          "declarations": "LaurentPolynomial.comul_C_mul_T_self:87",
+          "note": "Actual generator coproduct formula defining multiplication on represented points."
+        }
+      ],
+      "evidence": "The exact coordinate model is LaurentPolynomial F, literally AddMonoidAlgebra F Int:85. LaurentPolynomial.instHopfAlgebra:65 gives the actual Hopf structure; comul_C_mul_T_self:87 specializes at coefficient1 and exponent1 to Delta(T)=T tensor T, with antipode_T:77 giving T inverse. The generic AddMonoidAlgebra.lift:593 is an actual equivalence between algebra maps out of this coordinate algebra and monoid maps Multiplicative Int -> R. Checked MonoidHom.toHomUnitsMulEquiv:192 and zpowersHom:280 identify these maps with R units by the value at1; their inverse formulas are completed in source. This gives the stated representing coordinate algebra for the primary unit-group functor, for arbitrary commutative F-algebras R. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The primary group functor is R units with its existing unit multiplication. No claim uses AlgHom.convGroup with an arbitrary target: that Mathlib interface imposes a target Bialgebra and is unnecessary here. Generic cyclic-hom/unit equivalences are checked suppliers, not separately allocated superclass files. General diagonalizable-group/scheme classification excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "multiplicative-algebraic-group",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Polynomial/Laurent/Basic.lean",
+          "declarations": "TauCeti.laurentEval:144; laurentEval_unique:163; laurentEvalEquiv:172",
+          "note": "Native exact Laurent representing-unit equivalence, inversion and elementary evaluation API."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/DiagonalizableGroup/Basic.lean",
+          "declarations": "TauCeti.DiagonalizableGroup.pointEquiv:123; charOfPoint_convMul:141; pointsMulEquiv:162; charOfPoint_ofAdd_one:210",
+          "note": "Native ordinary represented group-point multiplication and exact comparison of the Gm coordinate models."
+        }
+      ],
+      "evidence": "Dependency Laurent Hopf model agrees; MonoidAlgebra/Basic adds a header blank, so its AddMonoidAlgebra.lift:594/lift_symm_apply:612; the Hopf and coalgebra Laurent proofs agree byte-for-byte. Native laurentEval:144 and laurentEvalEquiv:172 give EXACTLY units of an arbitrary algebra A equivalent to F[T,T inverse] algebra maps; read both inverse proofs using T1*T(-1)=1 and uniqueness from the free cyclic group. Native DiagonalizableGroup.pointEquiv:123 identifies group-algebra points with unit-valued characters; charOfPoint_convMul:141 proves convolution is pointwise multiplication, and actual pointsMulEquiv:162 packages this as a multiplicative equivalence with inverse given by evaluation. charOfPoint_ofAdd_one:210 checks agreement of the Laurent and cyclic group-algebra models. Thus the full unit group and coproduct conventions match. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Native scheme-valued Gm point equivalence Scheme/Points:400 was located as an additional model, but the coordinate-functor definition is already complete without allocating that scheme comparison file. Higher diagonalizable-group classification/power endomorphisms are separate endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "nilpotent-ideal",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/GroupWithZero/Basic.lean",
+          "declarations": "IsNilpotent:152; pow_eq_zero_of_le:228",
+          "note": "Actual nilpotence predicate and monotonic vanishing-power API instantiated on ideals."
+        },
+        {
+          "path": "Mathlib/RingTheory/Ideal/Operations.lean",
+          "declarations": "Ideal.mul_le:283; pow_mem_pow:280; pow_eq_zero_of_mem:541",
+          "note": "Actual ideal multiplication/powers and their direct vanishing-power consequences."
+        }
+      ],
+      "evidence": "Use IsNilpotent I on the existing ideal multiplicative semiring; IsNilpotent:152 is exists n, I^n=0, and the exact catalogue positive-exponent predicate is exists n>0,I^n=0. These agree: a zero exponent forces 1=0, so exponent1 also vanishes; otherwise n is positive. Ideal.mul_le:283 characterizes ideal products by all pairwise products, and pow_eq_zero_of_mem:541 proves that elements of a nilpotent ideal have the corresponding vanishing powers. The ideal power, rather than pointwise elementwise nilpotence with no uniform bound, is essential. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The positive-exponent refinement avoids relying on n=0 in a nontrivial ring; trivial rings are still allowed. Nil ideals without a uniform exponent, nilradicals and nilpotent group notions are not substituted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "nilpotent-ideal",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Ideal/Operations.lean",
+          "declarations": "Ideal.mul_pow_mem_pow:114; list_prod_mem_pow:118; mul_mem_pow_add:133",
+          "note": "Native ordinary product/ideal-power membership API directly expressing the uniform-product meaning of nilpotent ideals."
+        }
+      ],
+      "evidence": "Dependency nilpotent-ideal predicate/ideal power semantics agree; IsNilpotent:153 and pow_eq_zero_of_le:229 have a header offset, while the ideal-power source is byte-identical. Native Ideal.list_prod_mem_pow:118 proves by induction that every product of a list of elements of I belongs to I^(list length); hence for a vanishing nth ideal power all products of length n vanish, exactly the catalogue explanatory clause. mul_pow_mem_pow:114 and mul_mem_pow_add:133 give ordinary defining ideal-power API, with their actual general semiring hypotheses. Read these completed elementary proofs. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: No new theorem about all ideals being nilpotent is asserted. Exclude the separately significant stabilization criterion PowerStabilization and nilpotent elements in quotient rings as prerequisites/applications outside this core power API.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "nonabelian-continuous-one-cocycle",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/ContinuousMap/Defs.lean",
+          "declarations": "ContinuousMap:32; continuous_toFun:36",
+          "note": "Actual continuous-map constructor used in the exact cocycle subtype; the cocycle identity and coboundary relation are the explicit generic predicates in evidence."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact generic bare definition: take c:C(Γ,H), where ContinuousMap:32 stores a function and Continuous proof, with groups Γ,H and a continuous automorphism action represented by MulDistribMulAction Γ H (Action.Defs:626) and ContinuousSMul Γ H. Restrict by ∀σ τ, c(σ*τ)=cσ*(σ•cτ). Define the stated relation literally by ∃h:H, ∀σ, c′σ=h⁻¹*cσ*(σ•h). These expressions retain their noncommuting order and impose no commutativity on H. The action class supplies multiplication-preserving actions and group action inverses, exactly the stipulated action. This primary definition/relation needs no named cocycle alias, bundled Setoid or new classification theorem. Actual defining source data inspected; no unproved twist or cocycle-classification result is asserted.\nSearch and boundary notes: Independent literal-predicate review resolves the prior interface uncertainty. Checked ContinuousMap:32 and MulDistribMulAction:626/ContinuousSMul supplier; the latter is input action machinery rather than extra allocated files. GroupCohomology.LowDegree.IsMulCocycle1:628 requires commutativity and is not used. Tau Nonabelian/Basic:75/139/157 independently implements the identical order but remains separate native ownership; no Tau file is attributed to standalone Mathlib.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "nonabelian-continuous-one-cocycle",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RepresentationTheory/Homological/ContCohomology/Nonabelian/Basic.lean",
+          "declarations": "TauCeti.NonabelianH1.Cocycle:75; Cocycle.setoid:139; twist:157; equiv_iff_exists_twist_eq:175",
+          "note": "Native full continuous nonabelian cocycle, coboundary equivalence and ordinary twist/quotient API."
+        }
+      ],
+      "evidence": "Native NonabelianH1.Cocycle:75 stores a continuous map and EXACTLY c(g*h)=c(g)*(g acts c(h)), with no commutativity assumption on H. Its setoid:139 is cprime(g)=a inverse*c(g)*(g acts a), and the completed reflexive/symmetric/transitive proofs preserve this order. twist:157 proves continuous twisting is again a cocycle using the actual ContinuousMul/ContinuousSMul hypotheses; equiv_iff_exists_twist_eq:175 identifies the same relation. Specialize to the catalogue topological groups and continuous action; the constructor itself allows weaker topological assumptions. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The target can be nonabelian. Purely algebraic GroupExtension/NonabelianH1 is not a substitute for continuity; inflation/surjectivity and torsor classifications are separate endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "nonarchimedean-local-field",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/LocalField/Basic.lean",
+          "declarations": "IsNonarchimedeanLocalField:44; valueGroupWithZeroIsoInt:115; discrete valuation instance:132; finite residue instance:140; complete field instance:157",
+          "note": "Actual local-field predicate and completed discrete/finite-residue/complete API."
+        },
+        {
+          "path": "Mathlib/Topology/Algebra/Valued/LocallyCompact.lean",
+          "declarations": "Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField:312; properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField:335",
+          "note": "Actual equivalence certifying the complete discrete finite-residue definition against the topological constructor."
+        }
+      ],
+      "evidence": "IsNonarchimedeanLocalField:44 uses a compatible valuative topology, local compactness and a nontrivial valuation. The completed native valueGroupWithZeroIsoInt:115 identifies the value group with multiplicative Int-with-zero; discrete valuation:132, finite residue field:140 and completeness:157 are actually proved. Conversely Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField:335 proves precisely complete DVR field plus finite residue field iff properness, with compact valuation-ring criterion:312. This certifies the equivalence with the catalogue complete, nontrivial discrete valuation formulation, rather than mistaking any complete nonarchimedean field for a local field. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Rank-one/nontrivial hypotheses of these equivalences are explicit and satisfied by a nontrivial discrete valuation. C_p has infinite residue field and is not substituted. Characteristic0 is not imposed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "nonarchimedean-local-field",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/LocalField/NormedField.lean",
+          "declarations": "TauCeti.normalizedNormedField:57; normalizedNormedField_topology_eq:81; normalizedNormedField_isUltrametricDist:107; normalizedNormedField_completeSpace:117",
+          "note": "Native completed norm/topology/completeness interface for the same general nonarchimedean local field."
+        }
+      ],
+      "evidence": "Dependency local-field constructor:45, valueGroupWithZeroIsoInt:116 and complete-field instance:158 agree with a header blank; the valued LocallyCompact equivalence is byte-identical. Native normalizedNormedField:57 equips the SAME field with the residue-normalized absolute-value norm; normalizedNormedField_topology_eq:81 proves equality with the given valuative topology using both neighborhood-basis refinements. normalizedNormedField_isUltrametricDist:107 and normalizedNormedField_completeSpace:117 prove its ultrametric and complete properties. Read the actual full proofs, including the topology identification used in completeness. This is direct ordinary normalization/completeness API of the general local field. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The residue-normalized valuation is defined in native NormalizedValuation114/123 and was inspected as a supplier. Exclude local class field theory, Hilbert symbols and ramification classification endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "nonnegatively-graded-commutative-ring",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/GradedAlgebra/Basic.lean",
+          "declarations": "GradedRing:65; DirectSum.decomposeRingEquiv:73; decompose_mul:87",
+          "note": "Actual internal grading predicate and elementary homogeneous/direct-sum ring API."
+        }
+      ],
+      "evidence": "GradedRing:65 combines SetLike.GradedMonoid and DirectSum.Decomposition. Checked GradedOne:484/one_mem:486 and GradedMul:502 ensure1 in degree0 and component multiplication in summed degree; Decomposition:55 gives a map to the finite-support direct sum with BOTH inverse identities, hence actual unique additive decomposition. Instantiate the index to Nat and the ambient ring to a COMMUTATIVE ring; take additive subgroups (or integer submodules). decomposeRingEquiv:73 certifies the decomposition respects the ordinary multiplication. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The superclass sources GradedMonoid and DirectSum/Decomposition were inspected as defining suppliers, not additional allocated files. No Koszul sign rule or finite-support assumption on the total list of nonzero grades is imposed; each element individually has finite support.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "nonnegatively-graded-commutative-ring",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/GradedAlgebra/Basic.lean",
+          "declarations": "TauCeti.GradedAlgebra.mul_le_grade_add:50; coe_decompose_mul_zero_of_nonneg:63",
+          "note": "Native direct component-product law and elementary degree-zero multiplicativity API."
+        }
+      ],
+      "evidence": "Dependency internal GradedRing/decomposition agrees. Native GradedAlgebra.mul_le_grade_add:50 directly proves the defining homogeneous-component product inclusion under generic graded multiplication. Specialize scalar ring to Int and grades to Nat for an arbitrary commutative ring. Native coe_decompose_mul_zero_of_nonneg:63 proves multiplicativity of degree0 in the alternate Int-graded, negative-degrees-zero presentation; its complete double direct-sum induction was inspected. The general Nat grading is already the exact primary representation. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The Int-graded theorem retains its actual negative-degree-vanishing hypothesis. Ordinary commutativity is inherited from the ambient commutative ring; graded-commutative superalgebras are not substituted. Idempotent vanishing is an extra consequence, not needed to select the file.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "normal-field-extension",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/FieldTheory/Normal/Defs.lean",
+          "declarations": "Normal:34; normal_iff:45; Normal.tower_top_of_normal:66",
+          "note": "Actual algebraic normality predicate and direct minimal-polynomial/tower recognition API."
+        }
+      ],
+      "evidence": "Normal:34 extends Algebra.IsAlgebraic and says every element minimal polynomial splits in L; normal_iff:45 proves integrality plus this splitting condition. Checked minpoly.eq_of_irreducible:151 identifies a rooted irreducible polynomial with its minimal polynomial up to leading coefficient; thus the actual definition is exactly every rooted irreducible splits, with algebraicity explicit. Normal.tower_top_of_normal:66 gives elementary tower API, without finite degree or separability requirements. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Do not replace normality by separable normality/Galois or by finite splitting fields only. Minpoly/Field151 is a checked identity supplier, not an allocated prerequisite file.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "normal-field-extension",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/Normal/Embeddings.lean",
+          "declarations": "AlgHom.liftNormal_equivFieldRange_apply:89; AlgEquiv.isPretransitiveAlgHom:103",
+          "note": "Native ordinary normal-extension lifting and conjugacy-on-embeddings API."
+        }
+      ],
+      "evidence": "Dependency Normal predicate agrees. Native AlgHom.liftNormal_equivFieldRange_apply:89 proves the lifted isomorphism between two embedded images carries one embedding to the other, directly using the actual normal lifting theorem. AlgEquiv.isPretransitiveAlgHom:103 packages the ordinary extension/conjugacy property of embeddings in a normal extension; read the completed field-range/lift proof. This is direct normal-extension embedding API, allowing infinite algebraic normal extensions and vacuous absence of embeddings. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Do not claim this asserts existence of an embedding. Counting degrees, orbit-index formulas and faithful permutation representations later in the file are separately significant endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "normal-subgroup",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Subgroup/Defs.lean",
+          "declarations": "Subgroup.Normal:601; Subgroup.Normal.conj_mem':629; Normal.mem_comm:635",
+          "note": "Actual conjugation-stability predicate and direct elementary normal-subgroup API."
+        }
+      ],
+      "evidence": "Subgroup.Normal:601 requires closure under g*n*g inverse for every g. Normal.conj_memprime:629 supplies inverse-conjugation closure, so conjugation gives equality gHg inverse=H rather than only inclusion. Read its actual inverse-substitution proof. This is exactly catalogue normality, for arbitrary groups and not merely abelian/finite ones. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The two conjugation directions establish equality. Normal closure and quotient existence are adjacent separate constructions, not imported files to allocate automatically.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "normal-subgroup",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Group/Subgroup/Normalizer.lean",
+          "declarations": "TauCeti.normal_of_commute_of_sup_eq_top:63; Subgroup.closure_normal_of_forall_conj_mem:73",
+          "note": "Native normality construction and elementary conjugation/normalizer recognition API."
+        }
+      ],
+      "evidence": "Dependency conjugation normality agrees. Native Subgroup.closure_normal_of_forall_conj_mem:73 proves the subgroup generated by a conjugation-stable set is normal using the actual normalizer criterion; normal_of_commute_of_sup_eq_top:63 recognizes normality when a commuting subgroup joins it to all of G. Read the complete normalizer/sup argument. These are direct ordinary construction/recognition API for normal subgroups. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Exclude Frobenius/p-group/simplicity and Reidemeister-Schreier normal-generation endpoints. Quotient action laws that only assume normality belong to the quotient concept, not extra normality ownership.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "normalized-place-norm-number-field",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean",
+          "declarations": "NumberField.InfinitePlace.norm_embedding_eq:112; mult:274; IsReal.mult_eq_one:276; IsComplex.mult_eq_two:279",
+          "note": "Actual real/complex place values and normalized multiplicity defining the infinite local factors."
+        },
+        {
+          "path": "Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean",
+          "declarations": "HeightOneSpectrum.adicAbv:134; FinitePlace.norm_def:182",
+          "note": "Actual residue-cardinality-normalized finite-place multiplicative norm and its completion formula."
+        }
+      ],
+      "evidence": "At an infinite place w the exact generic normalized multiplicative function is (w x)^(w.mult). InfinitePlace.mult:274 is1 at real and2 at complex places (:276/:279), and norm_embedding_eq:112 / real embedding equality:248 identify w with the usual real absolute/complex modulus. At a finite place HeightOneSpectrum.adicAbv:134 and FinitePlace.norm_def:182 use the prime ideal absolute norm raised through its integer valuation to give residue-cardinality^(-ord), with0 sent to0 by the actual valuation/absolute-value map. Absolute ideal norm is the cardinality of the residue quotient, checked in Ideal/Norm/AbsNorm. These supply exactly the stated family, not a triangle inequality for the squared complex value. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The infinite normalized function is an existing power of the place hom, with the checked multiplicities; a dedicated normalized alias is unnecessary. It is multiplicative and positive off0, while squared complex modulus is not asserted to satisfy the ordinary triangle inequality.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "normalized-place-norm-number-field",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/NumberField/InfinitePlace/Completion/Basic.lean",
+          "declarations": "NumberField.InfinitePlace.completionNormalizedAbsValue:66; completionNormalizedAbsValue_apply:71; completionNormalizedAbsValue_of_isReal:111; completionNormalizedAbsValue_of_isComplex:117",
+          "note": "Native exact normalized infinite local multiplicative norms and elementary comparison/continuity API."
+        }
+      ],
+      "evidence": "Dependency finite-place normalization agrees. Native completionNormalizedAbsValue:66 is explicitly norm^placeMultiplicity as a MonoidWithZeroHom; apply:71 exposes the formula. algebraMap_of_isReal:99 and algebraMap_of_isComplex:105 prove the real and complex-square normalizations on the dense number field; of_isReal:111/of_isComplex:117 give the completion formulas. Read the completed norm/coefficient-power comparisons and continuity proof:124. Thus native ordinary all-infinite-place normalization complements the inherited finite-place factor. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The complex square is bundled multiplicatively, not as an AbsoluteValue with an invalid triangle inequality. Native local-field normalized valuations are related suppliers, not automatically extra files for this number-field place family.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "number-field-discriminant",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/NumberField/Discriminant/Defs.lean",
+          "declarations": "NumberField.discr:36; coe_discr:38; discr_eq_discr:45",
+          "note": "Actual integer field discriminant and completed integral-basis independence API."
+        },
+        {
+          "path": "Mathlib/RingTheory/Discriminant.lean",
+          "declarations": "Algebra.discr:68; discr_def:71",
+          "note": "Actual defining trace-pairing determinant and ordinary basis-change discriminant API."
+        }
+      ],
+      "evidence": "NumberField.discr:36 is Algebra.discr Int on an actual integral basis. Algebra.discr:68 is det(traceMatrix); traceMatrix_apply:343 is Trace(b_i*b_j). coe_discr:38 identifies the integer value with the rational trace-form discriminant after localization, and discr_eq_discr:45 proves independence of EVERY chosen integral basis by reindexing and the actual basis-change discriminant theorem. Read the completed proofs. Thus the sign and integral/rational trace conventions match, not just an absolute discriminant bound. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Trace/Basic338/343 was checked as the supplier of the exact pairwise-trace matrix, not an extra generic prerequisite file. Norm of different, analytic bounds and ramification classifications are separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "number-field-discriminant",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/NumberField/Discriminant/OfIntegralBasis.lean",
+          "declarations": "NumberField.discr_eq_of_integralBasis:64; discr_eq_of_basis_isIntegral_of_span_eq_top:75",
+          "note": "Native exact integral-basis evaluation and canonical discriminant equality API."
+        }
+      ],
+      "evidence": "Dependency integer field-discriminant definition agrees. Native NumberField.discr_eq_of_integralBasis:64 proves that the rational trace determinant of ANY integral basis equals the canonical integer dF, via the actual localization trace-discriminant theorem. discr_eq_of_basis_isIntegral_of_span_eq_top:75 constructs the integral basis from the supplied rational basis/spanning condition and proves the same equality. Read the complete proofs. This is direct ordinary evaluation/basis recognition API for the exact discriminant. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: A basis of a proper order/sub-lattice contributes an index square instead and is not silently an integral basis. The later lattice-index formula/bounds and ramification consequences are additional endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "number-field-product-formula",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/NumberField/ProductFormula.lean",
+          "declarations": "NumberField.FinitePlace.prod_eq_inv_abs_norm_int:46; prod_eq_inv_abs_norm:77; NumberField.prod_abs_eq_one:98",
+          "note": "Actual completed normalized all-place product formula and finite-product support/proof API."
+        }
+      ],
+      "evidence": "NumberField.prod_abs_eq_one:98 proves product over infinite places of (w x)^w.mult times the finite-place finprod equals1 for x nonzero. The proof combines the ACTUAL finite product equals inverse absolute field norm:77 with InfinitePlace.prod_eq_abs_norm, canceling the nonzero norm. Finite proof uses integral-prime factorization then passes from integral elements to a fraction:46/77, and hence certifies finiteness of the nontrivial factors. The real/complex multiplicities and finite residue-normalized absolute values are exactly the catalogue ones. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: A product with unnormalized complex modulus would be wrong; w.mult is explicit. Exclude global reciprocity/idele-class compactness and distribution-of-primes endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "number-field-product-formula",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/NumberField/Global/Ideles/Norm/Basic.lean",
+          "declarations": "TauCeti.GlobalNumberFields.ideleNorm_unitEmbedding:363; principalSubgroup_le_ker_ideleNorm:385",
+          "note": "Native exact principal-idele product formula and immediate kernel reformulation."
+        }
+      ],
+      "evidence": "Dependency normalized product formula agrees. Native ideleNorm_unitEmbedding:363 proves the exact product formula on principal ideles, evaluating the all-place norm formula and reducing its finite product to inverse absolute field norm. Read the full coordinate-rewrite/cancellation proof; the input is x:K units, exactly nonzero a. principalSubgroup_le_ker_ideleNorm:385 is the immediate homomorphism reformulation. This is a genuine direct native version of the SAME product formula, not a downstream class field application. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The general idelic norm/continuity construction is separately catalogued. Here the selected actual proof endpoint is the principal product equals1, with its correct finite support and infinite normalization.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "p-adic-valuation-rational",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/Padics/PadicVal/Basic.lean",
+          "declarations": "padicValRat:126; padicValRat_def:129; padicValRat.zero:144; mul:230",
+          "note": "Actual nonzero rational p-adic integer order and elementary arithmetic API."
+        },
+        {
+          "path": "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+          "declarations": "Rat.padicValuation:70",
+          "note": "Actual zero-aware valuation with correct infinity encoded by multiplicative zero and exponent sign explicit."
+        }
+      ],
+      "evidence": "padicValRat:126 is the difference of p multiplicities in the reduced numerator and denominator, giving the exact integer for a nonzero rational; its source deliberately gives a junk value0 at rational0. For the FULL catalogue convention use Rat.padicValuation:70, whose actual formula is0 at rational0 and WithZero.exp(-padicValRat p x) otherwise. This multiplicative decreasing valuation represents additive v_p with 0 of the value group corresponding to additive +infinity, and exp(-r) corresponding to r; its completed multiplicativity/ultrametric proofs were inspected. This is an equivalent value-group presentation, not a claim padicValRat(0)=infinity. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Checked WithZero.exp:381 and exp/log encoding in Algebra/GroupWithZero/WithZero; log0 is junk0 and is NOT used as an additive infinity. p is assumed prime. No p-adic completion is substituted for the rational valuation.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "p-adic-valuation-rational",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/Padics/PadicValRat.lean",
+          "declarations": "padicValRat.eq_zero_iff:33; eq_zero_of_add_eq_one_of_pos:45; eq_of_add_eq_one_of_neg:57",
+          "note": "Native exact rational prime-unit criterion and elementary valuation addition API."
+        }
+      ],
+      "evidence": "Dependency rational integer-order and zero-aware Rat.padicValuation constructors agree. Native padicValRat.eq_zero_iff:33 proves for a NONZERO rational that order0 is exactly p divides neither reduced numerator nor denominator; its proof explicitly compares both multiplicities and uses coprimality. Native addition-to1 laws:45/57 prove ordinary positive/negative valuation arithmetic with actual nonzero guards. These are direct core API for the same rational valuation; the full0=infinity convention is supplied by the checked inherited multiplicative valuation encoding. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Do not transport the junk integer value at0 as if it were infinity. The native criterion assumes q!=0 and is used only there; binary quadratic/abc or factorial-specific endpoints are not counted.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "point-cone-strict-separation",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Convex/Cone/InnerDual.lean",
+          "declarations": "ProperCone.hyperplane_separation':96",
+          "note": "Actual strict point-versus-closed-convex-cone separation in real Hilbert spaces, including Euclidean space."
+        }
+      ],
+      "evidence": "ProperCone.hyperplane_separationprime:96 proves EXACTLY exists y, all c in C have inner(c,y)>=0 and inner(b,y)<0 when b is outside a proper cone. ProperCone is ClosedSubmodule(nonnegative reals), encoding a closed cone containing0 and closed under positive scaling/addition; a nonempty convex cone has this representation. The actual completed proof applies cone continuous-linear separation then Riesz duality, and the Euclidean real finite-dimensional specialization meets completeness. Symmetry of the real dot product gives the catalogue orientation. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: This is strict only at b, nonnegative on the whole cone, with no spurious uniform positive lower bound on C containing0. No finite-generation/polyhedral assumption is added to the general theorem.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "point-cone-strict-separation",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Convex/Cone/FiniteDuality.lean",
+          "declarations": "Submodule.FG.exists_cone_dual_nonneg_and_lt_zero:39",
+          "note": "Native actual strict-separation proof for the finite-generation variant of the same cone theorem."
+        }
+      ],
+      "evidence": "Dependency arbitrary closed-cone Hilbert separation agrees. Native Submodule.FG.exists_cone_dual_nonneg_and_lt_zero:39 proves the SAME strict point/cone separator for finitely generated cones over arbitrary ordered fields, with actual coefficients/case proof using an algebraic alternative theorem. Read the complete proof: if the distinguished nonnegative coefficient were positive then x lies in the cone, otherwise the strict functional inequality gives f(x)<0 and dual membership gives nonnegativity on C. Over Real finite-dimensional space f is a dot product with a vector; this is direct native finite-cone separation API alongside full inherited general coverage. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Finite generation is a hypothesis of native API ONLY, not substituted for full arbitrary closed-cone dependency coverage. PositiveDual order reconstruction, Minkowski-Weyl classification and open-set containment applications are separate endpoints; prerequisite alternative theorem not allocated.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "polynomial-ring-commutative-ring",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/MvPolynomial/Basic.lean",
+          "declarations": "MvPolynomial:79; monomial:90; mul_def:98; monomial_mul_monomial:230",
+          "note": "Actual finite formal multivariate polynomial carrier, monomial operations and elementary coefficient API."
+        }
+      ],
+      "evidence": "MvPolynomial:79 is AddMonoidAlgebra R (sigma finitely-supported Nat), hence a finite coefficient sum of formal finite-exponent monomials. Set sigma=Fin n. monomial:90, mul_def:98 and monomial_mul_monomial:230 give precisely coefficient addition and exponent-sum/coefficient-product multiplication. The generic commutative-semiring model specializes to a commutative ring, with no evaluation quotient identifying distinct formal polynomials. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Finsupp/monoid-algebra machinery is an inspected representation supplier, not an import list to allocate. Integer-coefficient polynomial refinements, symmetric-function classification and ideals of zero loci are separately catalogued.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "polynomial-ring-commutative-ring",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/MvPolynomial/Monomial.lean",
+          "declarations": "TauCeti.prod_map_X_eq_monomial:50; prod_X_pow_eq_monomial_equivFunOnFinite_symm:58",
+          "note": "Native direct monomial product/exponent representation and coefficient API."
+        },
+        {
+          "path": "TauCeti/Algebra/MvPolynomial/Coeff.lean",
+          "declarations": "MvPolynomial.eq_zero_of_smul_eq_zero_of_sum_coeff_mul_eq_one:30",
+          "note": "Native direct scalar/coefficient cancellation API under the explicit coefficient-unimodularity condition."
+        }
+      ],
+      "evidence": "Dependency finite formal MvPolynomial:80 model agrees with one header blank; monomial:91 and multiplication:99/231 match exactly. Native prod_map_X_eq_monomial:50 proves that a product of variables with multiplicity is exactly the corresponding formal monomial; prod_X_pow_eq_monomial_equivFunOnFinite_symm:58 gives the uniform exponent variant. Read these finite-multiplicity proofs. Native coefficient cancellation theorem:30 in Coeff uses the actual coefficient formula for scalar multiplication. These are ordinary defining monomial/coefficient API for the same polynomial ring. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: No assumptions on a field or infinite evaluation domain are introduced. Division algorithms, irreducibility/resultants and vanishing ideals are distinct endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "product-topology",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Constructions.lean",
+          "declarations": "Pi.topologicalSpace:64; isOpen_set_pi:1078; isOpen_pi_iff:1082",
+          "note": "Actual arbitrary product topology constructor and completed finite-coordinate open-box basis criterion."
+        }
+      ],
+      "evidence": "Pi.topologicalSpace:64 is the infimum of the induced coordinate topologies, the coarsest topology making all evaluations continuous. isOpen_pi_iff:1082 proves EXACTLY that every open neighborhood contains a box restricting a FINITE Finset of coordinates to open sets; isOpen_set_pi:1078 proves each such finite-coordinate box open. Read the actual neighborhood/filter proof in both directions, including leaving all other coordinates univ. This is the arbitrary Cartesian product topology, not the box topology. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Index and factors may be infinite; unrestricted-coordinate basic sets are explicit. Compactness/Tychonoff, metrization and topological-group product instances are separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "product-topology",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Constructions/Pi.lean",
+          "declarations": "TauCeti.isOpen_setOf_forall_abs_lt_one:49; isOpen_setOf_injective:60",
+          "note": "Native ordinary finite-coordinate box and evaluation-inequality open-set API."
+        }
+      ],
+      "evidence": "Dependency arbitrary product topology:65 and finite-coordinate basis:1083 agree with one header blank. Native isOpen_setOf_forall_abs_lt_one:49 proves the actual finite-product coordinate-box openness by rewriting as a finite pi of open intervals. isOpen_setOf_injective:60 proves finite Hausdorff tuples are open via finite coordinate inequalities and evaluation continuity; read its completed finite-intersection proof. These are ordinary native basic-open-set recognition API of the product topology, under their explicit finite-index/T2 hypotheses. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Full arbitrary-index coverage is inherited; finite index is only a hypothesis of these direct native recognition lemmas. The later dense-open shrinking/Mycielski construction is an additional endpoint, not required to select this file. Fibre-product and graph-interior theorems are separate constructions.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "quotient-commutative-ring",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Ideal/Quotient/Defs.lean",
+          "declarations": "Ideal.Quotient.ringCon:57; ring:65; commRing:73; mk:83; mk_eq_mk_iff_sub_mem:114",
+          "note": "Actual ideal-coset quotient commutative ring, operations and elementary equality/projection API."
+        }
+      ],
+      "evidence": "Ideal.Quotient.ringCon:57 is the additive coset relation x-y in I, with a completed multiplication-compatibility proof using mul_sub_mul_mem. ring:65 and commRing:73 put the actual ring operations on these cosets. mk:83 is the quotient ring homomorphism, and mk_eq_mk_iff_sub_mem:114 is the exact equality criterion; map_add/map_mul yield the displayed coset formulas. Thus both addition and multiplication are well-defined modulo every ideal of a commutative ring. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Two-sidedness is automatic under the catalogue commutativity assumption. Do not substitute the quotient field/localization; finite/residue-field properties require additional hypotheses and are not asserted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "quotient-commutative-ring",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Ideal/Quotient/Representative.lean",
+          "declarations": "Ideal.Quotient.exists_ne_zero_mk_eq:33",
+          "note": "Native elementary nonzero representative construction for ideal quotient classes."
+        }
+      ],
+      "evidence": "Dependency ideal-coset quotient ring agrees. Native Ideal.Quotient.exists_ne_zero_mk_eq:33 proves every residue class modulo a NONZERO ideal has a nonzero representative, using an actual nonzero ideal element for the zero class and the given representative otherwise. Read the full quotient-surjectivity and case proof. This is ordinary native representative API for the same quotient ring, retaining its ideal!=bottom hypothesis. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The zero ideal hypothesis is not silently dropped. Quotient ring automorphism descent, prime correspondence, semilocality and completion are additional endpoints, not allocated merely for their imports.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "quotient-group",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/GroupTheory/QuotientGroup/Defs.lean",
+          "declarations": "QuotientGroup.con:61; QuotientGroup.Quotient.group:72; mk_mul:163; mk_inv:167",
+          "note": "Actual normal-subgroup quotient group and ordinary coset operation/projection API."
+        }
+      ],
+      "evidence": "QuotientGroup.con:61 puts the left-coset relation into a multiplicative congruence when N is normal. Its completed proof explicitly uses conjugation closure; Quotient.group:72 yields the group structure. mk_mul:163 is literally class(a*b)=class(a)*class(b), and mk_inv:167 similarly treats inverses. This is exactly the catalogue coset multiplication, with normality essential. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: The underlying quotient set exists for every subgroup, but its group multiplication here requires normality. Do not infer a group structure on arbitrary left cosets; third isomorphism and finite index formulas are separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    },
+    {
+      "concept": "quotient-group",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/GroupTheory/QuotientGroup/Basic.lean",
+          "declarations": "QuotientGroup.out_mul_out_mul_inv_mem:247; mk_list_prod:254",
+          "note": "Native elementary quotient representative defect and finite product/projection identities."
+        }
+      ],
+      "evidence": "Dependency normal coset multiplication agrees. Native QuotientGroup.out_mul_out_mul_inv_mem:247 proves chosen representatives preserve multiplication modulo the normal subgroup, by the exact quotient equality criterion; mk_list_prod:254 proves projection commutes with finite list products by induction. Read these actual completed proofs. They are direct ordinary quotient multiplication/representative API, with N.Normal explicit. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant committed declarations, hypotheses and completed source bodies checked; no fresh Lean build or transitive proof audit.\nSearch and boundary notes: Do not allocate the stabilizer/orbit counting, central-word corrections or third-isomorphism endpoints merely because they share the same file or imports. Full core constructor remains Mathlib-owned.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-035.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/GroupWithZero/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 540,
+      "sha256": "fcf2b8cdc6453d604d3af040f29ab4f06d663c32602f4861cf7864ac2b88fb9e",
+      "measured_at": "2026-11-13T01:55:39.675325+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/MonoidAlgebra/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 744,
+      "sha256": "3b50af7606930c3c56275d4c9d22c1695139873b68b3866289b8953aad036389",
+      "measured_at": "2026-11-13T01:55:39.680414+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Polynomial/Laurent.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 694,
+      "sha256": "9e0dd5f299634ee8a7ff71532faa999fff0fe7793ec15fd77b16db9a7a9690fa",
+      "measured_at": "2026-11-13T01:55:39.685664+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Convex/Cone/InnerDual.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 142,
+      "sha256": "b95fd7981819f71c3b6d0b7ec06038798be430b7d5ec5a2b50e452c76125b794",
+      "measured_at": "2026-11-13T01:55:39.689125+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/FieldTheory/Normal/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 268,
+      "sha256": "131279d5867651ea15aecc6442076b7ff3d4b165265cec7533cfbc504a164389",
+      "measured_at": "2026-11-13T01:55:39.693400+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/GroupTheory/QuotientGroup/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 443,
+      "sha256": "923101db4b84563d2a88ecc69ec1b871306d05faa9d6575fffba9affd9b4a41e",
+      "measured_at": "2026-11-13T01:55:39.696767+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/NumberTheory/LocalField/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 191,
+      "sha256": "0d72646c64f9880c51691c5e4a9371456d7a7f6d4cce8cc6deffb12823557f05",
+      "measured_at": "2026-11-13T01:55:39.700318+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 452,
+      "sha256": "8bf456ad5a76a5fc14831514da496c2780534fd7c80adf72ea9471bb762f8c3f",
+      "measured_at": "2026-11-13T01:55:39.703657+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/NumberTheory/NumberField/Discriminant/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 123,
+      "sha256": "f77569aab06be3e18ab24d34ea678de4b77d12016a7af4ca642305af7c13922d",
+      "measured_at": "2026-11-13T01:55:39.707762+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 626,
+      "sha256": "68b93e20aed0654b827740b3ff6ea47347c66dfe7a2607610a01d04c255113fb",
+      "measured_at": "2026-11-13T01:55:39.711107+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/NumberTheory/NumberField/ProductFormula.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 102,
+      "sha256": "2e455921e3500a75dae3095965c88c49788334e57e724b470afe8dd5455e0a0f",
+      "measured_at": "2026-11-13T01:55:39.714111+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1270,
+      "sha256": "8165abe9f99b52e24ecb747d513b5441da3f43960ccc079ebc8471c24db9422b",
+      "measured_at": "2026-11-13T01:55:39.717172+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/NumberTheory/Padics/PadicVal/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 816,
+      "sha256": "ed78644eea5e9a78719c52caabd014b25e482842dc73e675654662e10a736728",
+      "measured_at": "2026-11-13T01:55:39.720264+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/Coalgebra/MonoidAlgebra.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 101,
+      "sha256": "10f983c0fc0aac89c8e669f2d4a9d06485aa726e4b96743cdd9f6ef75a1d0832",
+      "measured_at": "2026-11-13T01:55:39.723913+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/Discriminant.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 308,
+      "sha256": "e40a5ae0dadad714756f858b94a03e3a802a3424984f935e1bd7f09cfbcc4033",
+      "measured_at": "2026-11-13T01:55:39.726850+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/GradedAlgebra/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 371,
+      "sha256": "ed03bde83cb5a96267f5471e700d867881846b3aa06089dbc8df3c9f0de16373",
+      "measured_at": "2026-11-13T01:55:39.729884+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 88,
+      "sha256": "273b8405fae7dc82b099520b9fa639ac981de0833fb36b35c0473d20f721e7d3",
+      "measured_at": "2026-11-13T01:55:39.732877+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/Ideal/Operations.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1389,
+      "sha256": "5c939545fd3c927bb890da2b8c44b7767c9ea7a298b15631c735d47d7954e81d",
+      "measured_at": "2026-11-13T01:55:39.736098+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/Ideal/Quotient/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 230,
+      "sha256": "194ac19a4c3c98e7177c683bb89dd8ac09a0f597833f3223b6ee8e944b99bcfa",
+      "measured_at": "2026-11-13T01:55:39.739891+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Algebra/Valued/LocallyCompact.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 345,
+      "sha256": "7f67bad477413d9d720ae09d90cf2a247db3050a05df56bd43cbd9dd6437ea24",
+      "measured_at": "2026-11-13T01:55:39.743181+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Constructions.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1451,
+      "sha256": "df2c42ead7d3ab360f12c6cc3c48f49cdb1732073a7586f8e1e4f100eb216be0",
+      "measured_at": "2026-11-13T01:55:39.745967+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/ContinuousMap/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 159,
+      "sha256": "a0a62837ec226df5203b9028219e5e277b9e2a441331e363fa5ba79b3e2235fd",
+      "measured_at": "2026-11-13T01:55:39.748955+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Order/MonotoneConvergence.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 370,
+      "sha256": "30dc9ee6a078b9c0a60040e6550f65c634c74c929d59db925001af0e1d89a83f",
+      "measured_at": "2026-11-13T01:55:39.752052+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/AlgebraicGroup/DiagonalizableGroup/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 222,
+      "sha256": "296bf92beef51dc967f65d6eb79d065c50b9dd20eb9340795e29d54bae1bb13a",
+      "measured_at": "2026-11-13T01:55:39.757505+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/Group/Subgroup/Normalizer.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 126,
+      "sha256": "3421eae723c0b84e7ee9f05434c750eca81cc9f7052f25315dd7b5e2095290c9",
+      "measured_at": "2026-11-13T01:55:39.761986+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/Module/LinearMap/Defs.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 30,
+      "sha256": "912f39b0c0d6c2c7e86102fc2aba660d987bc1ac254f7f48d1999bc08e8b3504",
+      "measured_at": "2026-11-13T01:55:39.767240+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/MvPolynomial/Coeff.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 37,
+      "sha256": "ed6e08b0fbdae4d4fb021822b3a9b8d70fde3bc1049952c98bd03d0ce3db8977",
+      "measured_at": "2026-11-13T01:55:39.771703+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/Polynomial/Laurent/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 465,
+      "sha256": "c98304b213a262091d69ee38a9d3af40ede1de4bb376822cb5bde2498c8c567a",
+      "measured_at": "2026-11-13T01:55:39.781604+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/FieldTheory/Normal/Embeddings.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 334,
+      "sha256": "14c4db610abcae45c1e90d602b5d0acee3230e0bde6d2b8f149f615917c5baa3",
+      "measured_at": "2026-11-13T01:55:39.787009+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Geometry/Convex/Cone/FiniteDuality.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 86,
+      "sha256": "cf16d17e7b82ca7c0c7d53915bc9338faeb65ff645b3ea9b743edd75e98e57ae",
+      "measured_at": "2026-11-13T01:55:39.792037+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/GroupTheory/QuotientGroup/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 334,
+      "sha256": "d25ab502f03793a4fc6e3a3c991d6ecc0249250c3202ded51dda8daed3f86baf",
+      "measured_at": "2026-11-13T01:55:39.796439+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/NumberTheory/LocalField/NormedField.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 139,
+      "sha256": "54c8fdaff133abebfd96a35ae246a0eb83e55890cca908cfd1d8134276eafe5d",
+      "measured_at": "2026-11-13T01:55:39.801665+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/NumberTheory/NumberField/Discriminant/OfIntegralBasis.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 153,
+      "sha256": "7cd18d9361cb42798b822cf2814cc14be8d385295e6c069897c675d732ff6df6",
+      "measured_at": "2026-11-13T01:55:39.807071+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/NumberTheory/NumberField/InfinitePlace/Completion/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 131,
+      "sha256": "0182c372912fdf9adc2f1d58759f9ddceac6766e0e8bbaa54db4c8ef2ae99d23",
+      "measured_at": "2026-11-13T01:55:39.817485+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/NumberTheory/Padics/PadicValRat.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 81,
+      "sha256": "fe709a4d649d9b5973da5673d50b6e5146685dc37b73a9aaeebfa3d60637a1e7",
+      "measured_at": "2026-11-13T01:55:39.821939+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RepresentationTheory/Homological/ContCohomology/Nonabelian/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 346,
+      "sha256": "c6d3e66a3b53861ec34c3928bc0cc1c5c1a01bee3ce99d70fb1f0102a8cf874d",
+      "measured_at": "2026-11-13T01:55:39.827989+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RingTheory/GradedAlgebra/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 164,
+      "sha256": "7182603f34204dd95bab27684a7ec4a39fafeaa4db63f3e06e5eb8488d3701de",
+      "measured_at": "2026-11-13T01:55:39.832846+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RingTheory/Ideal/Operations.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 576,
+      "sha256": "1b7436d3b79b93328fb0e6dcb170018608e0970e2a9946537447ba08424214fd",
+      "measured_at": "2026-11-13T01:55:39.838075+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RingTheory/Ideal/Quotient/Representative.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 42,
+      "sha256": "a78eae1586b4c02f188223d1d05c3e642db5e4f7642ac5ba0edca52391a08013",
+      "measured_at": "2026-11-13T01:55:39.843262+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Constructions/Pi.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 145,
+      "sha256": "1edf7fbc924a869c2fec205e5e5ccf44b0103358f4d2d90b2266d247ed355f4e",
+      "measured_at": "2026-11-13T01:55:39.847801+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Order/MonotoneConvergence.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 59,
+      "sha256": "d911958f0e595f5b52fa61ee06db13d0671dc327c9879c1ecdfb53417d2c95ca",
+      "measured_at": "2026-11-13T01:55:39.853096+00:00"
+    }
+  ]
+}

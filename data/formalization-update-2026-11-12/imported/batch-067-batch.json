@@ -1,0 +1,865 @@
+{
+  "note": "Whole-catalogue formalization update batch-067: independent source review by category_galois_formalization of analysis_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "real-exponential-function",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Complex/Exponential.lean",
+          "declarations": "Complex.isCauSeq_exp:51; exp':57; exp:62; Real.exp:82",
+          "note": "Series-limit definition and convergence of the actual scalar real/complex exponential."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Algebra/Exponential.lean",
+          "declarations": "NormedSpace.expSeries_div_summable:636; expSeries_div_hasSum_exp:639",
+          "note": "Actual globally summable factorial-power series and its sum in complete real normed algebras."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Exponential.lean",
+          "declarations": "Real.exp_eq_exp_ℝ:213; Complex.exp_eq_exp_ℂ:208",
+          "note": "Proves actual scalar-series limit equals the algebra exponential; direct implementation bridge."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/ExpDeriv.lean",
+          "declarations": "Real.hasDerivAt_exp:267; Complex.hasDerivAt_exp:87",
+          "note": "Ordinary scalar derivative/smoothness API of exp."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual Complex.exp57/62 is the Cauchy limit of factorial-power partial sums, with completed convergence proof51. Real.exp82 is its real part. NormedSpace.expSeries_div_hasSum_exp639 and Real.exp_eq_exp_ℝ213 identify it with HasSum(n↦x^n/n!) (Real.exp x) for EVERY real x, not merely a totalized tsum outside its convergence radius. Ordinary real derivative267 and native API indicated below checked against completed source bodies.\nSearch and boundary notes: Enumerated native Exp and Exponential subtrees. Selected ordinary scalar normalization, derivative, continuity and elementary bounds. Exclude matrix/noncommutative exponential derivative construction, exponential-polynomial classification, lattice-sum/periodic/number-theoretic applications and probabilistic concentration endpoints; no import-tree allocation. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "real-exponential-function",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Exp/Half.lean",
+          "declarations": "Real.exp_half_mul_exp_half:28; exp_neg_half_mul_exp_neg_half:32; exp_half_mul_exp_neg_half:37",
+          "note": "Elementary halving/product/inverse identities."
+        },
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Exp/Deriv.lean",
+          "declarations": "Real.deriv_exp_mul:40; norm_fderiv_exp_mul:45; TauCeti.differentiableAt_comp_exp_iff:70; deriv_comp_exp:80",
+          "note": "Actual elementary derivative, differentiability and chain-rule API, including totalized-derivative cases."
+        },
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Exp/Bounds.lean",
+          "declarations": "TauCeti.exp_neg_le_div_exp_sub_one:48; div_exp_sub_one_le_one:54; abs_exp_sub_one_le_mul_exp_abs:71",
+          "note": "Elementary scalar exp bounds and first-order remainder estimate."
+        },
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Exp/Shift.lean",
+          "declarations": "TauCeti.exp_neg_mul_sub:38",
+          "note": "Direct scalar exponential shift/product normalization law."
+        },
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Exp/Limits.lean",
+          "declarations": "Real.tendsto_mul_exp_mul_nhds_zero:33; tendsto_exp_mul_sub_one_div:40",
+          "note": "Scalar continuity and derivative difference-quotient limits."
+        },
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Exp/Chord.lean",
+          "declarations": "Real.exp_mul_le_add_mul:26",
+          "note": "Actual convex-chord bound for the scalar exponential."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency supplies the same scalar definition, global series convergence and identification (selected differences audited). Native Exp/Half28–38, Deriv40–84, Bounds48–93, Shift38–41, Limits33–42 and Chord26–38 have completed proofs of direct scalar algebraic/differential/limit/bound API; no definition ownership is inferred from imports. Exact dependency anchors: Complex.isCauSeq_exp52/Real.exp83, NormedSpace.expSeries_div_hasSum_exp640, Real.exp_eq_exp_ℝ214; scalar ExpDeriv267 unchanged. The dependency lacks later independent binomial-count bounds, which are not supplying this definition.\nSearch and boundary notes: Enumerated native Exp and Exponential subtrees. Selected ordinary scalar normalization, derivative, continuity and elementary bounds. Exclude matrix/noncommutative exponential derivative construction, exponential-polynomial classification, lattice-sum/periodic/number-theoretic applications and probabilistic concentration endpoints; no import-tree allocation. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "real-logarithm",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Log/Basic.lean",
+          "declarations": "Real.log:44; log_of_pos:50; exp_log:59; log_exp:75",
+          "note": "Actual positive-domain inverse definition and inverse identities; extended real log conventions are explicit."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Log/Deriv.lean",
+          "declarations": "Real.hasStrictDerivAt_log_of_pos:39; hasDerivAt_log:53",
+          "note": "Actual local inverse/chain-rule differential API of log."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Real.log44 uses expOrderIso.symm on positive inputs (log_of_pos50); actual completed exp_log59–61 and log_exp75–76 prove both inverse identities exactly on (0,∞). Outside this domain Mathlib extends by log|x| and log0=0; these extensions are not the concept. Actual inverse-function derivative proof39–54 checked.\nSearch and boundary notes: Enumerated native Log siblings. Keep ordinary inverse-domain/scalar differential/sign/bound/series API; exclude factorial/divisibility, entropy/mulLog convexity, Birkhoff cross-ratio and growth-scale classification as distinct concepts/applications. InvLog is included for its direct scalar reciprocal continuity law, not a new special function theory. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "real-logarithm",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Log/Deriv.lean",
+          "declarations": "TauCeti.differentiableAt_comp_log_iff:34; mul_deriv_comp_log:55",
+          "note": "Differential inverse-coordinate and Euler-derivative identities."
+        },
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Log/DivLeIff.lean",
+          "declarations": "Real.log_div_le_iff:31; neg_log_div_le_iff:35",
+          "note": "Direct positive-domain inverse log/exp bound transformations."
+        },
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Log/DivSub.lean",
+          "declarations": "Real.sub_div_sub_le_log_div_sub:29",
+          "note": "Elementary scalar log-ratio lower bound."
+        },
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Log/TwoAdd.lean",
+          "declarations": "Real.one_half_le_log_two_add:28",
+          "note": "Elementary scalar monotonicity/lower-bound API."
+        },
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Log/OneDivSub.lean",
+          "declarations": "Real.tendsto_log_one_div_sub_atTop:46",
+          "note": "Positive-side logarithmic divergence under scalar translation/inversion."
+        },
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Log/InvLog.lean",
+          "declarations": "Real.continuousAt_inv_log_zero:29",
+          "note": "Ordinary reciprocal-log limit/continuity API."
+        },
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Log/NegLogOneSub.lean",
+          "declarations": "Real.neg_log_one_sub_sub_nonneg:55; neg_log_one_sub_sub_le:61; neg_log_one_sub_le_iff:140; hasSum_pow_div_natCast:148",
+          "note": "Direct real logarithm sign/inverse-bound/Taylor-remainder and series API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency positive-domain inverse and derivative suppliers checked; native indicated Log files give completed scalar inverse-bound, ratio, derivative, limit and real Taylor API. E.g DivLeIff31–38 uses actual positive x,c; Deriv34–63 uses x!=0 but includes the positive domain; NegLogOneSub148–162 has genuine HasSum and exact absolute-convergence radius.\nSearch and boundary notes: Enumerated native Log siblings. Keep ordinary inverse-domain/scalar differential/sign/bound/series API; exclude factorial/divisibility, entropy/mulLog convexity, Birkhoff cross-ratio and growth-scale classification as distinct concepts/applications. InvLog is included for its direct scalar reciprocal continuity law, not a new special function theory. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "reduced-palm-distribution",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Concrete reduced-Campbell characterization is understood, but the full configuration-space implementation was not certified: integer-valued locally finite Radon configurations with bounded-count-generated sigma algebra cannot silently be replaced by all-evaluation Giry Measure X. Generic Kernel54, lower-integral48, finite condKernel and measure subtraction72 provide ingredients, but the equality of configuration sigma algebras, measurable removal on that actual configuration space and resulting reduced-Campbell kernel assembly remain unverified.\nSearch and boundary notes: Searched Palm/reduced Campbell, kernels/measure subtraction/disintegration and point-process configuration trees. Read native Sub37–56, SigmaFinite48–134 completed weighting/disintegration proofs and Mecke50–82 finite iid occurrence formula. Mecke is a specific sampling/Poisson theorem, not general Palm construction. Reuse065 checked configuration sigma frontier; no null-event conditioning or named alias requirement. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "reduced-palm-distribution",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Kernel/Sub.lean",
+          "declarations": "ProbabilityTheory.Kernel.measurable_sub_dirac:45; measurable_apply_singleton:37",
+          "note": "Actual measurable one-occurrence erasure component used in reduced Palm kernels."
+        },
+        {
+          "path": "TauCeti/Probability/Kernel/Disintegration/SigmaFinite.lean",
+          "declarations": "MeasureTheory.Measure.exists_isMarkovKernel_compProd_eq:72; sigmaFiniteCondKernel:84; compProd_fst_sigmaFiniteCondKernel:92; eq_sigmaFiniteCondKernel_of_measure_eq_compProd:102",
+          "note": "Actual sigma-finite joint-measure disintegration/AE uniqueness; configuration-target assembly frontier explicit."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native ProbabilityTheory.Kernel.measurable_sub_dirac45–56 proves measurable ONE-occurrence erasure for a supplied s-finite kernel into a measurable-equality point space (multiple atoms lose one copy). Native Measure.exists_isMarkovKernel_compProd_eq72–79, sigmaFiniteCondKernel84/92 and uniqueness102–127 genuinely construct/characterize a disintegration of a SUPPLIED joint measure with sigma-finite first marginal and nonempty standard-Borel second target. These are genuine erasure/disintegration components of Palm coverage. Full generic reduced-Campbell assembly on the catalogue actual locally finite Radon configuration space remains unverified: bounded-count sigma algebra is not silently identified with Giry/all-evaluation sigma, and standard-Borel configuration structure is not assumed proved.\nSearch and boundary notes: Searched Palm/reduced Campbell, kernels/measure subtraction/disintegration and point-process configuration trees. Read native Sub37–56, SigmaFinite48–134 completed weighting/disintegration proofs and Mecke50–82 finite iid occurrence formula. Mecke is a specific sampling/Poisson theorem, not general Palm construction. Reuse065 checked configuration sigma frontier; no null-event conditioning or named alias requirement. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "reflexive-banach-space",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Module/DoubleDual.lean",
+          "declarations": "NormedSpace.inclusionInDoubleDual:58; dual_def:62; inclusionInDoubleDualLi:87",
+          "note": "Actual canonical evaluation bidual map and isometry; exact reflexivity predicate is its surjectivity."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact bare predicate on supplied real/complex Banach E is Function.Surjective (NormedSpace.inclusionInDoubleDual 𝕜 E). Actual58/62 evaluates x at f as f(x); actual inclusionInDoubleDualLi87–93 proves its isometry via the norming dual functional. This is the continuous strong double dual, not algebraic Module.IsReflexive, and completeness is the specified Banach input.\nSearch and boundary notes: Enumerated native DoubleDual, Dual/Reflexive, Bases/Reflexive and Lp/Reflexive. Selected central general reflexivity API; exclude James characterization, weak compactness theorem, local reflexivity, basis/Lp-specific reflexivity and operator applications as distinct substantial endpoints. No algebraic-dual shortcut. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "reflexive-banach-space",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Module/Dual/Reflexive/Basic.lean",
+          "declarations": "TauCeti.surjective_inclusionInDoubleDual_strongDual:46; completeSpace_of_surjective_inclusionInDoubleDual:81; surjective_inclusionInDoubleDual_strongDual_iff:112; ContinuousLinearEquiv.surjective_inclusionInDoubleDual_iff:130",
+          "note": "Native direct bidual surjectivity/reflexivity duality, completeness, finite-dimensional and isomorphism-invariance API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency continuous bidual/evaluation/isometry supplier checked. Native Reflexive/Basic46–53 proves reflexive dual,64–71 finite-dimensional surjectivity,81–84 completeness,94–116 Banach dual converse/equivalence and130–139 bounded-isomorphism invariance, with completed actual proofs. These directly concern the defining surjectivity predicate.\nSearch and boundary notes: Enumerated native DoubleDual, Dual/Reflexive, Bases/Reflexive and Lp/Reflexive. Selected central general reflexivity API; exclude James characterization, weak compactness theorem, local reflexivity, basis/Lp-specific reflexivity and operator applications as distinct substantial endpoints. No algebraic-dual shortcut. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "regular-dirichlet-form",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Defs.lean",
+          "declarations": "InnerProductSpace.Core:155; Core.toNormedAddCommGroup:473",
+          "note": "Actual new E1 inner/norm constructor for the closed Dirichlet domain."
+        },
+        {
+          "path": "Mathlib/Topology/UniformSpace/Cauchy.lean",
+          "declarations": "CompleteSpace:369",
+          "note": "Completeness in the new form-norm uniformity."
+        },
+        {
+          "path": "Mathlib/Topology/Defs/Basic.lean",
+          "declarations": "Dense:149",
+          "note": "Domain density in the original L2 topology."
+        },
+        {
+          "path": "Mathlib/Topology/ContinuousMap/CompactlySupported.lean",
+          "declarations": "CompactlySupportedContinuousMap:40",
+          "note": "Actual continuous compact-support constructor in both regularity density clauses."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. On a supplied real L2(E,m), use the exact closed symmetric Dirichlet predicate independently reviewed069: D ambient-L2-dense, symmetric/nonnegative E, NEW E1 inner/norm inner_L2+E via Core155/473, completeness369 for that new norm, and AE real clamp membership/energy contraction (no constant1 L2 assumption). For regularity add two literal epsilon-density clauses for pairs (u:D,g:C_c(E,R)) with u=AE g: (1) every f:D is approximated in the NEW E1 norm; (2) every h:C_c is approximated uniformly, explicitly forall x, |g(x)-h(x)|<epsilon. This is uniform norm density, NOT the LF topology of test functions. Actual C_c structure40 has continuity and compact support; the AE equality relation avoids an unproved C_c→Lp coercion. Assume the stated locally compact separable metric E and full-support Radon m; no theorem of regularity for a particular energy is asserted.\nSearch and boundary notes: Searched regular Dirichlet/Hunt/Markov forms and compact-support/Sobolev energies. Complete generic bare predicate plus direct same-energy ordinary API accepted under reviewed053/069 weaker-parent policy. Do not allocate all PDE/form-specific energies or infer general Hunt correspondence. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "regular-dirichlet-form",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/BilinearForm/Basic.lean",
+          "declarations": "LinearMap.BilinForm.IsSymm.apply_add_self:179",
+          "note": "Actual same-energy quadratic polarization ordinary API applicable to the regular symmetric Dirichlet subclass; no arbitrary pullback preservation claim."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency Core/Cauchy/Dense/C_c constructors checked. On a supplied real L2(E,m), use the exact closed symmetric Dirichlet predicate independently reviewed069: D ambient-L2-dense, symmetric/nonnegative E, NEW E1 inner/norm inner_L2+E via Core155/473, completeness369 for that new norm, and AE real clamp membership/energy contraction (no constant1 L2 assumption). For regularity add two literal epsilon-density clauses for pairs (u:D,g:C_c(E,R)) with u=AE g: (1) every f:D is approximated in the NEW E1 norm; (2) every h:C_c is approximated uniformly, explicitly forall x, |g(x)-h(x)|<epsilon. This is uniform norm density, NOT the LF topology of test functions. Actual C_c structure40 has continuity and compact support; the AE equality relation avoids an unproved C_c→Lp coercion. Assume the stated locally compact separable metric E and full-support Radon m; no theorem of regularity for a particular energy is asserted. Native BilinForm.IsSymm.apply_add_self179–183 is direct ordinary same-E quadratic polarization, valid under weaker symmetric-bilinear hypotheses and hence for this regular Dirichlet subclass. It does not assert preservation of Markov/closedness/regularity under arbitrary pullback. Exact Core/Cauchy/Dense supplier files byte-identical; C_c definition is41 at dependency pin (header+1), with the same fields.\nSearch and boundary notes: Searched regular Dirichlet/Hunt/Markov forms and compact-support/Sobolev energies. Complete generic bare predicate plus direct same-energy ordinary API accepted under reviewed053/069 weaker-parent policy. Do not allocate all PDE/form-specific energies or infer general Hunt correspondence. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "regular-dirichlet-form-hunt-process-existence",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Searched regular/Dirichlet/Hunt process correspondence. Actual generic closed/regular form constructors and general Markov/cadlag process predicates do not certify construction of an associated symmetric Hunt process, properly exceptional set and equality with the form L2 semigroup. No such complete bridge was certified in bounded source review.\nSearch and boundary notes: Searched Hunt/Dirichlet-form/exceptional/capacity and native PDE/Energy/Semigroups/Markov trees. Lie-theoretic Hunt lemma hits are unrelated. Existing analytic semigroups and stopped Markov APIs are prerequisite/other endpoints; no new existence proof developed or absence asserted. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "regular-dirichlet-form-hunt-process-existence",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual native Sobolev energy/Dirichlet PDE, semigroup and Markov strong-law sources do not by themselves supply regular-form→Hunt construction with properly exceptional set and semigroup identification. General correspondence and configuration/capacity process interface remain unverified after scoped search; inherited generic form definition is not inherited proof of this theorem.\nSearch and boundary notes: Searched Hunt/Dirichlet-form/exceptional/capacity and native PDE/Energy/Semigroups/Markov trees. Lie-theoretic Hunt lemma hits are unrelated. Existing analytic semigroups and stopped Markov APIs are prerequisite/other endpoints; no new existence proof developed or absence asserted. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "regularity-lemma-probability-cubes",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual graph Szemeredi regularity is a finite GRAPH edge-density theorem; its objects and conclusions do not supply the probability-cube state/coordinate conditional empirical-spin TV regularity, mass/coordinate exceptions and bounded simultaneous refinement/diameter requirements. That exact probability-cube theorem remains unverified after targeted source review.\nSearch and boundary notes: Searched probability cubes/spin regularity/Bapst/Coja/state partition and enumerated native Regularity/Partition/Graph/Graphon. Read actual StrongRegularity160–177 statement/initial construction, compared graph cut-density witnesses with the different probability-cube target. Unknown is a concrete object/conclusion gap, not absence. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "regularity-lemma-probability-cubes",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native strong graph regularity exists_strong_regular160 has actual finite graph/equipartition/energy refinement hypotheses and graph-uniformity conclusion. It does not implement general measures on finite Omega^n and state-conditioning empirical spin distributions with the catalogue simultaneous exceptional-mass/coordinate/diameter conditions. This exact theorem remains unverified; no graphon analogy promoted to proof.\nSearch and boundary notes: Searched probability cubes/spin regularity/Bapst/Coja/state partition and enumerated native Regularity/Partition/Graph/Graphon. Read actual StrongRegularity160–177 statement/initial construction, compared graph cut-density witnesses with the different probability-cube target. Unknown is a concrete object/conclusion gap, not absence. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "relative-entropy-finite",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Log/Basic.lean",
+          "declarations": "Real.log:44; exp_log:59",
+          "note": "Actual scalar logarithm in the finite entropy summand."
+        },
+        {
+          "path": "Mathlib/Data/EReal/Basic.lean",
+          "declarations": "EReal:36; Real.toEReal:43",
+          "note": "Actual extended-value constructor for singular positive-p/zero-q terms."
+        },
+        {
+          "path": "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean",
+          "declarations": "Finset.prod/generated Finset.sum:66",
+          "note": "Actual finite sum defining the extended-valued entropy expression."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For supplied finite probability vectors p,q, use the EXACT EReal-valued finite sum with summand 0 if p(w)=0, top if p(w)>0 and q(w)=0, and otherwise coe(p(w)*Real.log(p(w)/q(w))). All weights are nonnegative with sums1, so these are precisely the specified zero conventions and no minus-infinity summand occurs. Actual EReal36/43 supplies positive infinity and real inclusion; actual Real.log44 supplies the positive log ratio, and the Finset finite sum supplies the literal definition. No invocation of real log0 can erase a singular positive-p term. This bare finite definition does not assert a general measure-theoretic Radon-Nikodym formula.\nSearch and boundary notes: Read actual M klDiv55 with absolute continuity/integrability and finite-measure correction, compared with the simpler literal probability-vector definition. Native Finite41–68/82–116 completed singleton/RN proofs inspected. Exclude Pinsker, variational formula, chain rule, information projection and transport-entropy endpoints as distinct theorems; Matrix.relEntropy alone would mishandle singular references. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "relative-entropy-finite",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/InformationTheory/KullbackLeibler/Finite.lean",
+          "declarations": "TauCeti.klDiv_eq_sum_klFun_singleton:41; klDiv_eq_ofReal_sum_log_singleton:53; MeasureTheory.Measure.klDiv_eq_ofReal_relEntropy_add_mass_correction_of_real_singleton:82",
+          "note": "Native exact finite KL normal-form API, with full-support/absolute-continuity hypotheses and finite-measure mass correction explicit."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency finite constructors checked. For supplied finite probability vectors p,q, use the EXACT EReal-valued finite sum with summand 0 if p(w)=0, top if p(w)>0 and q(w)=0, and otherwise coe(p(w)*Real.log(p(w)/q(w))). All weights are nonnegative with sums1, so these are precisely the specified zero conventions and no minus-infinity summand occurs. Actual EReal36/43 supplies positive infinity and real inclusion; actual Real.log44 supplies the positive log ratio, and the Finset finite sum supplies the literal definition. No invocation of real log0 can erase a singular positive-p term. This bare finite definition does not assert a general measure-theoretic Radon-Nikodym formula. Native TauCeti.klDiv_eq_ofReal_sum_log_singleton53–68 proves finite full-support reference log-ratio form. For probability inputs its actual finite-measure mass correction ν(univ)−μ(univ) cancels. Zero reference coordinates outside p-support are retained by the generic piecewise definition; the full-support hypothesis of this native theorem is NOT presented as general. Native finite-product82–116 also covers references vanishing only where p=0. Exact dependency Log/Basic and EReal/Basic byte-identical; finite sum generated at67 (header+1) with unchanged constructor.\nSearch and boundary notes: Read actual M klDiv55 with absolute continuity/integrability and finite-measure correction, compared with the simpler literal probability-vector definition. Native Finite41–68/82–116 completed singleton/RN proofs inspected. Exclude Pinsker, variational formula, chain rule, information projection and transport-entropy endpoints as distinct theorems; Matrix.relEntropy alone would mishandle singular references. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "relatively-compact-subset",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Defs/Basic.lean",
+          "declarations": "closure:127",
+          "note": "Actual closure operation in relative compactness."
+        },
+        {
+          "path": "Mathlib/Topology/Defs/Filter.lean",
+          "declarations": "IsCompact:294",
+          "note": "Actual compactness/cluster-point constructor applied to the closure."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact literal predicate is IsCompact (closure S). Actual closure127 is the intersection of closed supersets, and IsCompact294 is the nontrivial-filter cluster-point criterion. No Hausdorff, completeness or metric assumption is inserted; compact closure is the paragraph definition.\nSearch and boundary notes: Enumerated native Compactness/Compact, ClusterSet, FilledHull, Montel and weak-compactness candidates. Retain generic closure compactness and its ordinary ultrafilter limit API; exclude filled-hull, component, analytic Montel and reflexive Banach compactness theorems as independently significant special endpoints. No equivalence with precompactness without ambient completeness is asserted. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "relatively-compact-subset",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Compactness/Compact.lean",
+          "declarations": "IsCompact.exists_tendsto_of_eventually_mem:80",
+          "note": "Ordinary actual compact-closure ultrafilter convergence/cluster-limit API, instantiated to closure S; no specialized compactness theorem allocated."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency closure/IsCompact constructors checked. Native IsCompact.exists_tendsto_of_eventually_mem80–84 proves actual ultrafilter convergence into a compact set; instantiated to closure S it is ordinary core cluster-limit API for relatively compact S, with weaker generic compactness hypotheses. The native proof maps an ultrafilter and uses compactness, not a specialized application theorem.\nSearch and boundary notes: Enumerated native Compactness/Compact, ClusterSet, FilledHull, Montel and weak-compactness candidates. Retain generic closure compactness and its ordinary ultrafilter limit API; exclude filled-hull, component, analytic Montel and reflexive Banach compactness theorems as independently significant special endpoints. No equivalence with precompactness without ambient completeness is asserted. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "rellich-h10-l2-compactness",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual M Analysis/Distribution/Sobolev and FunctionalSpaces/SobolevInequality provide distributional/power integrability inequalities, not a certified H01 bounded-domain compact inclusion. Complete zero-boundary weak-Sobolev and uniform-translation/compactness bridge remain unverified after targeted Rellich/Sobolev/compact-operator search. Tau-owned Rellich is not a standalone supplier.\nSearch and boundary notes: Read actual native W1p/Zero191/208 definition/inclusion and Rellich93–163 completed proof. W1p/Zero/Extension/Translation and Lp FrechetKolmogorov establish the spaces and compactness criterion; they are checked ingredients, not allocated wholesale here. LipschitzDomain stronger/general-exponent embeddings and eigenvalue applications excluded; no standalone proof inferred from the word Sobolev. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "rellich-h10-l2-compactness",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Sobolev/RellichKondrachov.lean",
+          "declarations": "TauCeti.W1p0.isCompactOperator_valueL:142; private isCompactOperator_valueExtendByZeroL:93",
+          "note": "Actual general bounded-open-domain compact inclusion proof via zero extension and uniform translation criterion."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual W1p0.isCompactOperator_valueL142–163 proves compactness for EVERY bounded open Omega in finite-dimensional real inner-product E, arbitrary additive Haar measure and 1<=p<infinity. Instantiate p=2 and Euclidean volume. W1p/Zero191 defines W1p0 as closure of compactly supported smooth test functions in W1p and valueL208 is the exact canonical inclusion into restricted Lp. Read complete zero-extension norm/support/translation proof93–135 and restriction factorization144–163. No Lipschitz boundary assumption is added. The target H01→L2 is exactly this p2 zero-boundary realization.\nSearch and boundary notes: Read actual native W1p/Zero191/208 definition/inclusion and Rellich93–163 completed proof. W1p/Zero/Extension/Translation and Lp FrechetKolmogorov establish the spaces and compactness criterion; they are checked ingredients, not allocated wholesale here. LipschitzDomain stronger/general-exponent embeddings and eigenvalue applications excluded; no standalone proof inferred from the word Sobolev. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "reversible-markov-chain-finite",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Kernel/Invariance.lean",
+          "declarations": "ProbabilityTheory.Kernel.IsReversible:57; IsReversible.invariant:62",
+          "note": "Actual detailed-balance definition and completed stationarity consequence; finite-path reversal frontier explicit."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual Kernel.IsReversible57 is detailed balance on all measurable rectangles, and IsReversible.invariant62–70 proves stationarity for a Markov kernel. On a finite state space, require supplied probability pi with pi{x}>0 for every state; no strict positivity comes from reversibility alone. This certifies the defining detailed-balance/stationarity component. The paragraph additionally asserts invariance of ALL stationary finite PATH laws under full time reversal; only the one-step pair balance was certified, not the general finite path-product/reversal identity.\nSearch and boundary notes: Searched reversible/detailed balance and reverse/path-product laws across both Probability trees. Actual native Matrix/Invariance52 proof constructs swap invariance for the PAIR measure pi⊗kernel. General MarkovChain/Stationary shift-invariance concerns a different time transformation. Native hard-core detailed balance is a particular model application, excluded; preserve material finite-path endpoint frontier. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "reversible-markov-chain-finite",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Kernel/Invariance.lean",
+          "declarations": "ProbabilityTheory.Kernel.isReversible_iff_singleton:67; isReversible_ofPMF_toMeasure_iff:94",
+          "note": "Actual finite/countable singleton detailed-balance and PMF dictionary."
+        },
+        {
+          "path": "TauCeti/Probability/Kernel/Matrix/Invariance.lean",
+          "declarations": "ProbabilityTheory.Kernel.isReversible_iff_isSymm_diagonal_mul:52; Matrix.rowStochastic.isReversible_toKernel_toMeasure_iff_isSymm_diagonal_mul:114",
+          "note": "Actual weighted-matrix detailed-balance dictionary and one-step product-measure swap, not full path reversal."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency detailed balance/stationarity checked. Native Kernel.isReversible_iff_singleton67 and Matrix/Invariance.isReversible_iff_isSymm_diagonal_mul52–80 give exact finite singleton/weighted-matrix dictionaries; PMF form114–120 uses actual row-stochastic matrix. Completed proofs of singleton product-measure swap and finite matrix symmetry checked. Positive pi remains an explicit catalogue input. General finite-path reversal law remains uncertified beyond one-step joint-law swap; no new induction developed. Actual dependency IsReversible58/invariant63 has only header+1; the selected proof bodies match.\nSearch and boundary notes: Searched reversible/detailed balance and reverse/path-product laws across both Probability trees. Actual native Matrix/Invariance52 proof constructs swap invariance for the PAIR measure pi⊗kernel. General MarkovChain/Stationary shift-invariance concerns a different time transformation. Native hard-core detailed balance is a particular model application, excluded; preserve material finite-path endpoint frontier. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "riesz-markov-compact-representation",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/RieszMarkovKakutani/Basic.lean",
+          "declarations": "rieszContent:274; contentRegular_rieszContent:284",
+          "note": "Actual content construction/regularity implementing the representing Riesz measure."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Integral/RieszMarkovKakutani/Real.lean",
+          "declarations": "RealRMK.rieszMeasure:66; integral_rieszMeasure:341; Measure.ext_of_integral_eq_on_compactlySupported:408; compact IsFiniteMeasure instance:441",
+          "note": "Actual positive real representation, regularity, uniqueness and compact finite-mass proof."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For compact Hausdorff X, actual C(X,R)≃C_c(X,R) continuousMapEquiv123 sends every continuous function to a compactly supported one. A positive linear functional becomes the actual positive map Λ on C_c without assumed boundedness. RealRMK.rieszMeasure66 via rieszContent274 is regular353; integral_rieszMeasure341–350 gives representation. Compact instance441–447 proves finite mass using constant1. Measure.ext_of_integral_eq_on_compactlySupported408–417 proves uniqueness among regular measures; via the same equivalence it applies to all C(X,R) test functions. Thus all existence/finite/regular/unique clauses are checked.\nSearch and boundary notes: Read actual content constructor274, Real341/353/408/441 completed endpoint proofs, compact equivalence123 and native Compact42–70/ContinuousMap75–94 proofs. Exclude signed/complex measure representation as another substantial theorem, and probability/free-probability applications. No uniqueness beyond regular finite Borel measures or arbitrary non-Hausdorff extension claimed. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "riesz-markov-compact-representation",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Integral/RieszMarkovKakutani/Compact.lean",
+          "declarations": "LinearMap.exists_regular_integral_eq:42; exists_isProbabilityMeasure_integral_eq_div:57",
+          "note": "Actual compact C(X,R) positive-linear-functional representation and normalization ordinary API."
+        },
+        {
+          "path": "TauCeti/MeasureTheory/Integral/ContinuousMap.lean",
+          "declarations": "ContinuousMap.integralPositiveLinearMap:75; integralPositiveLinearMap_apply:84; integralPositiveLinearMap_one:91",
+          "note": "Actual inverse integration-as-positive-functional constructor on compact continuous functions and mass identity."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency content/real representation and uniqueness/finite compact instance checked. Native LinearMap.exists_regular_integral_eq42–52 directly implements the EXACT compact Hausdorff positive arbitrary-linear-functional statement using C_c equivalence, with no extra continuity assumption. Finiteness is supplied by the actual chosen RealRMK compact instance, uniqueness by dependency408. Native ContinuousMap.integralPositiveLinearMap75/84/91 constructs the inverse integration functional with genuine finite-measure integrability and constant1 mass identity. Actual dependency rieszContent275 has header+1; RealRMK66/341/408/441 is byte-identical, as are the relevant uniqueness/finite-mass proofs. C_c definition41/equivalence124 shift+1.\nSearch and boundary notes: Read actual content constructor274, Real341/353/408/441 completed endpoint proofs, compact equivalence123 and native Compact42–70/ContinuousMap75–94 proofs. Exclude signed/complex measure representation as another substantial theorem, and probability/free-probability applications. No uniqueness beyond regular finite Borel measures or arbitrary non-Hausdorff extension claimed. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "riesz-representation-hilbert",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Dual.lean",
+          "declarations": "InnerProductSpace.toDualMap:67; toDual:136; toDual_symm_apply:178",
+          "note": "Actual complete Hilbert dual isometric representation proof with uniqueness/norm implicit in the equivalence."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual InnerProductSpace.toDualMap67/77 maps y to (x↦inner y x) isometrically. On a complete real inner-product space, toDual136–170 proves surjectivity by kernel-orthogonal construction, and isometry/injectivity gives uniqueness and norm preservation. Source inner has the displayed y,x order, but REAL inner is symmetric, so exactly catalogue x,y. toDual_symm_apply178–180 verifies the representing vector equation; complex conjugate-linear conventions are not substituted.\nSearch and boundary notes: Read complete actual M toDual136–170 proof and native104–111 inverse laws. Native bilinear Riesz-operator, dual metric, Lax–Milgram and spectral applications are separately meaningful endpoints; file selected for direct actual inverse API. Continuous strong dual, not algebraic dual without boundedness. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "riesz-representation-hilbert",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Dual.lean",
+          "declarations": "InnerProductSpace.toDual_symm_innerSL:104; innerSL_toDual_symm:110",
+          "note": "Native actual inverse Riesz-map and inner-functional normalization identities; ordinary associated API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency complete Hilbert Riesz isometry/equivalence checked. Native toDual_symm_innerSL104–105 and innerSL_toDual_symm110–111 prove actual two inverse Riesz normalization identities for arbitrary complete RCLike Hilbert spaces, specialized to REAL here. These are immediate defining inverse API, not a representation application. No finite-dimensional hypothesis.\nSearch and boundary notes: Read complete actual M toDual136–170 proof and native104–111 inverse laws. Native bilinear Riesz-operator, dual metric, Lax–Milgram and spectral applications are separately meaningful endpoints; file selected for direct actual inverse API. Continuous strong dual, not algebraic dual without boundedness. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "riffle-shuffle",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/ProbabilityMassFunction/Binomial.lean",
+          "declarations": "PMF.binomial:35; binomial_apply:48",
+          "note": "Actual finite binomial cut law, including endpoints."
+        },
+        {
+          "path": "Mathlib/Probability/UniformOn.lean",
+          "declarations": "ProbabilityTheory.uniformOn:60; isProbabilityMeasure_uniformOn′:87",
+          "note": "Actual conditional uniform law on the nonempty finite packet-order preserving interleavings."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/GiryMonad.lean",
+          "declarations": "MeasureTheory.Measure.bind:235; bind_apply:242",
+          "note": "Actual cut-then-interleaving probability mixture constructor; final transition measure."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For deck size n, cut k~PMF.binomial(1/2,n) on Fin(n+1), actual35/48. For that k, let S_k be the finite set of permutations sigma:Fin n≃Fin n that are strictly increasing on the first k labels and on the remaining labels. S_k contains identity, including k=0,n and n=0. Conditional uniformOn(S_k), actual60/87 probability criterion, is precisely uniform interleaving preserving both packet orders: sigma sends each old label to its new position. Actual Measure.bind235/242 mixes over k; from current deck pi (position→label), map sigma to pi∘sigma.symm. This is an exact finite-state Markov transition; repeat its kernel powers. No mixing-rate/cardinality theorem or binary-label equivalence is asserted. All spaces here are finite discrete, so kernel/bind maps are genuinely measurable.\nSearch and boundary notes: Searched riffle/Gilbert–Shannon–Reeds and actual shuffle constructors. Generic exact finite construction suffices without named alias. Native categorical shuffle is selected for its actual increasing-block bijection, not Day-convolution/categorical coherence endpoints. Packet choice law remains binomial then uniform; no unproved equivalence with independent binary labels or convergence speed. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "riffle-shuffle",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/FiniteBijection/Shuffle.lean",
+          "declarations": "TauCeti.FiniteBijection.shuffle:77; toEquiv_shuffle_castAdd:81; toEquiv_shuffle_natAdd:86",
+          "note": "Actual order-preserving two-packet interleaving constructor and position formulas, applicable to the riffle construction."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency cut/uniform/bind constructors checked. For deck size n, cut k~PMF.binomial(1/2,n) on Fin(n+1), actual35/48. For that k, let S_k be the finite set of permutations sigma:Fin n≃Fin n that are strictly increasing on the first k labels and on the remaining labels. S_k contains identity, including k=0,n and n=0. Conditional uniformOn(S_k), actual60/87 probability criterion, is precisely uniform interleaving preserving both packet orders: sigma sends each old label to its new position. Actual Measure.bind235/242 mixes over k; from current deck pi (position→label), map sigma to pi∘sigma.symm. This is an exact finite-state Markov transition; repeat its kernel powers. No mixing-rate/cardinality theorem or binary-label equivalence is asserted. All spaces here are finite discrete, so kernel/bind maps are genuinely measurable. Native FiniteBijection.shuffle77 and exact increasing packet formulas81/86 construct the same interleaving from a chosen position subset S, using orderEmbOfFin on S and its complement. Read actual constructor and simp proofs. This is direct combinatorial interleaving implementation, while probability weights remain checked generic suppliers; no categorical tensor convolution is counted as a probability theorem.\nSearch and boundary notes: Searched riffle/Gilbert–Shannon–Reeds and actual shuffle constructors. Generic exact finite construction suffices without named alias. Native categorical shuffle is selected for its actual increasing-block bijection, not Day-convolution/categorical coherence endpoints. Packet choice law remains binomial then uniform; no unproved equivalence with independent binary labels or convergence speed. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "right-continuous-path",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Order/Cadlag.lean",
+          "declarations": "IsRightContinuous:35; IsRightContinuous.continuous_comp:44",
+          "note": "Actual right-limit continuity predicate and continuous target-map transport API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For actual path x:R≥0→E, use IsRightContinuous x, actual Cadlag35–36: forall t, Tendsto x (nhdsWithin t (Ioi t)) (nhds(x t)). Since t is nonnegative and h>0, the translation u=t+h identifies the same right-neighborhood filter; in a metric target this is precisely dist(x(t+h),x(t))→0 as h↓0. No existence of left limits, cadlag assumption or joint time continuity is inserted.\nSearch and boundary notes: Read actual source definitions/proofs35/44, native41–87 and55–67; reuse independently reviewed052 cadlag source checks. Jump/cadlag left-limit existence and martingale maximal applications are separate endpoints, excluded. The endpoint t=0 is handled by the positive-increment filter on R≥0. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "right-continuous-path",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Order/LeftRight.lean",
+          "declarations": "Dense.exists_mem_insert_inter_Iic_lt:41; TopologicalSpace.exists_countable_subset_Iic_exists_mem_lt:59; TauCeti.le_of_forall_rat_add_le:77",
+          "note": "Actual ordinary dense-time and rational-increment API for right-continuous paths."
+        },
+        {
+          "path": "TauCeti/Topology/Order/LeftRightLim.lean",
+          "declarations": "Homeomorph.rightLim_comp:55",
+          "note": "Actual right-limit transport under homeomorphism; one-sided continuity API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency right-continuity constructor checked (declaration36 after header shift). For actual path x:R≥0→E, use IsRightContinuous x, actual Cadlag35–36: forall t, Tendsto x (nhdsWithin t (Ioi t)) (nhds(x t)). Since t is nonnegative and h>0, the translation u=t+h identifies the same right-neighborhood filter; in a metric target this is precisely dist(x(t+h),x(t))→0 as h↓0. No existence of left limits, cadlag assumption or joint time continuity is inserted. Native LeftRight41–68 gives direct dense/countable-time detection of strict inequalities of right-continuous real/ordered paths, and77–87 extends rational increment bounds by actual right continuity. Native rightLim_comp55 transports the actual right limit under a target homeomorphism, including fallback cases.\nSearch and boundary notes: Read actual source definitions/proofs35/44, native41–87 and55–67; reuse independently reviewed052 cadlag source checks. Jump/cadlag left-limit existence and martingale maximal applications are separate endpoints, excluded. The endpoint t=0 is handled by the positive-increment filter on R≥0. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "risk-neutral-pricing",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual Martingale.condExp_ae_eq91 gives the conditional-terminal-value identity IF discounted replicating wealth is already a genuine integrable martingale. This is a checked prerequisite, but general self-financing replication→martingale and arbitrage-free price identification under an actual market/admissibility model were not certified in standalone Mathlib. A bare real conditional expectation, whose nonintegrable case is totalized0, is not promoted to general risk-neutral finance coverage.\nSearch and boundary notes: Searched risk-neutral/replication/arbitrage across native Finance/Pricing, SimpleStrategy and BlackScholes. Read actual ValueProcess82–124 complete conditional/time-maturity proof and Pricing/Equation25–28 explicit scope: no asset/martingale-measure/replicating-strategy construction. SimpleStrategy self-financing accounting alone does not certify general price uniqueness/arbitrage freedom. No new finance proof. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "risk-neutral-pricing",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Finance/BlackScholes/ValueProcess.lean",
+          "declarations": "TauCeti.Probability.IsFilteredPreBrownianReal.discounted_riskNeutralPrice_ae_eq_condExp:82; martingale_discounted_riskNeutralPrice:112",
+          "note": "Actual integrable terminal-claim discounted conditional valuation and value-martingale proof in the Brownian stock subcase; general replication/arbitrage frontier explicit."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native IsFilteredPreBrownianReal.discounted_riskNeutralPrice_ae_eq_condExp82–106 proves exact discounted terminal payoff conditional-expectation identity for a supplied filtered Brownian stock with drift r and measurable INTEGRABLE terminal claim h(S_T), for all times stopped at T; martingale112–124 proves resulting discounted price is a genuine martingale. This is a true Black–Scholes risk-neutral valuation component, not general completeness/no-arbitrage/replicating strategy construction. General arbitrary-market/admissible replicable-claim identification remains uncertified.\nSearch and boundary notes: Searched risk-neutral/replication/arbitrage across native Finance/Pricing, SimpleStrategy and BlackScholes. Read actual ValueProcess82–124 complete conditional/time-maturity proof and Pricing/Equation25–28 explicit scope: no asset/martingale-measure/replicating-strategy construction. SimpleStrategy self-financing accounting alone does not certify general price uniqueness/arbitrage freedom. No new finance proof. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "rolle-theorem",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/LocalExtr/Rolle.lean",
+          "declarations": "exists_hasDerivAt_eq_zero:54; exists_deriv_eq_zero:61",
+          "note": "Actual Rolle theorem under indispensable strict endpoint-order hypothesis."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual exists_hasDerivAt_eq_zero54–57 proves the exact differentiable Rolle endpoint and exists_deriv_eq_zero61–64 its ordinary derivative version, but BOTH require a<b. The catalogue paragraph omits this hypothesis; for a=b a constant function satisfies the written hypotheses and the open interval is empty. Preserve the current identity, record actual conventional STRICT-INTERVAL coverage, and leave the written missing-domain convention as an explicit specification frontier rather than claim the literally false unrestricted theorem.\nSearch and boundary notes: Read actual M54–64 and native51–91 completed proofs. Source deriv theorem can conclude a totalized derivative0 even without explicit differentiability, but hasDerivAt54 gives the genuine differentiable formulation. IMPORTANT specification issue: add/clarify a<b in a separate curation task; no live identity edit during coverage. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "rolle-theorem",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Calculus/LocalExtr/Rolle.lean",
+          "declarations": "TauCeti.exists_finset_deriv_eq_zero:51",
+          "note": "Actual finite-zero Rolle interlacing/count API by strict-gap induction, not an unrelated polynomial-only theorem."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency exact conventional Rolle theorem checked. Native TauCeti.exists_finset_deriv_eq_zero51–91 proves ordinary finite-zero interlacing by completed max-insertion induction and strict-interval Rolle applications71–74. These are genuine associated Rolle API. The current catalogue missing a<b is not silently repaired: conventional strict-interval theorem is present, unrestricted written statement is not certified.\nSearch and boundary notes: Read actual M54–64 and native51–91 completed proofs. Source deriv theorem can conclude a totalized derivative0 even without explicit differentiability, but hasDerivAt54 gives the genuine differentiable formulation. IMPORTANT specification issue: add/clarify a<b in a separate curation task; no live identity edit during coverage. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "rooted-locally-finite-graph",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Combinatorics/Graph/Basic.lean",
+          "declarations": "Graph:90; Graph.Inc:191",
+          "note": "Actual incidence/edge-identity constructor and defining finite-incident-edge condition."
+        },
+        {
+          "path": "Mathlib/Combinatorics/Graph/Simple.lean",
+          "declarations": "Graph.toSimpleGraph:100",
+          "note": "Actual underlying simple adjacency for reachability/graph distance, without erasing original neighborhood edges."
+        },
+        {
+          "path": "Mathlib/Combinatorics/SimpleGraph/Connectivity/Connected.lean",
+          "declarations": "SimpleGraph.Preconnected:234",
+          "note": "Actual all-pairs finite-path connectivity; chosen root supplies nonempty vertex type."
+        },
+        {
+          "path": "Mathlib/Combinatorics/SimpleGraph/Metric.lean",
+          "declarations": "SimpleGraph.ball:413",
+          "note": "Actual finite-radius graph-distance vertex selection."
+        },
+        {
+          "path": "Mathlib/Combinatorics/Graph/Delete.lean",
+          "declarations": "Graph.induce:154",
+          "note": "Actual induced graph retains all original edge identities linking selected endpoints."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Use an actual Graph alpha beta (Basic90), permitting edge identities, loops and parallel edges: choose root r in V(G), require G.toSimpleGraph.Preconnected (Connected234 on actual vertex subtype; root supplies nonempty), and forall v:V(G), {e | G.Inc e v}.Finite (Inc191). Thus finiteness is of INCIDENT EDGES, not merely distinct neighbors. The underlying SimpleGraph100 is used only for graph distances/connectivity; original edges are retained. The radius-R neighborhood uses actual underlying edist ball413 of radius R+1 (integer distances), then G.induce154 on its original vertices; its IsLink predicate retains EXACTLY edges of G with both endpoints selected, including loops/multiplicities. This is a literal rooted locally-finite graph/neighborhood representation, not a rooted tree or finite-graph-only alias.\nSearch and boundary notes: Read actual Graph90/Inc191/toSimpleGraph100/induce154 and native59–85 completed subtype/adjacency proof. Finitely many INCIDENT edges avoids multigraph with infinitely many parallel edges incorrectly accepted from finite neighbor count. Rooted-tree acyclicity, finite-global-vertex hypotheses and separate end/random-root/local-limit compactness theorems excluded. No finiteness-of-neighborhood theorem beyond the literal induced finite-radius definition is asserted. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    },
+    {
+      "concept": "rooted-locally-finite-graph",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Combinatorics/Graph/Delete.lean",
+          "declarations": "Graph.toSimpleGraphDeleteVertsIso:59; coe_toSimpleGraphDeleteVertsIso_apply:78; coe_toSimpleGraphDeleteVertsIso_symm_apply:83",
+          "note": "Actual induced/deleted vertex restriction compatibility between original graph and underlying simple graph; preserves the rooted neighborhood vertex values."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency graph incidence/underlying adjacency/connectivity/ball/induce constructors checked. Use an actual Graph alpha beta (Basic90), permitting edge identities, loops and parallel edges: choose root r in V(G), require G.toSimpleGraph.Preconnected (Connected234 on actual vertex subtype; root supplies nonempty), and forall v:V(G), {e | G.Inc e v}.Finite (Inc191). Thus finiteness is of INCIDENT EDGES, not merely distinct neighbors. The underlying SimpleGraph100 is used only for graph distances/connectivity; original edges are retained. The radius-R neighborhood uses actual underlying edist ball413 of radius R+1 (integer distances), then G.induce154 on its original vertices; its IsLink predicate retains EXACTLY edges of G with both endpoints selected, including loops/multiplicities. This is a literal rooted locally-finite graph/neighborhood representation, not a rooted tree or finite-graph-only alias. Native toSimpleGraphDeleteVertsIso59–85 gives actual induced-neighborhood/vertex-deletion simplification compatibility, with point-preserving forward/inverse formulas. This is ordinary restriction/induction API for the defining rooted neighborhoods and works for arbitrary graphs, not just finite/simple graphs. Exact dependency Graph Basic/Simple/Delete and Connected supplying files byte-identical; Metric.ball414 is header+1 with unchanged graph-distance predicate.\nSearch and boundary notes: Read actual Graph90/Inc191/toSimpleGraph100/induce154 and native59–85 completed subtype/adjacency proof. Finitely many INCIDENT edges avoids multigraph with infinitely many parallel edges incorrectly accepted from finite neighbor count. Rooted-tree acyclicity, finite-global-vertex hypotheses and separate end/random-root/local-limit compactness theorems excluded. No finiteness-of-neighborhood theorem beyond the literal induced finite-radius definition is asserted. Actual relevant declarations/hypotheses and indicated completed bodies inspected; bounded source review without developing new proofs or rebuilding Lean. All18 current concept paragraphs/revisions verified at publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-067.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Calculus/LocalExtr/Rolle.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 85,
+      "sha256": "30e76f2c08ee6d0f19c6eeb93f2484154accb9862b4563d040664efa32f0057b",
+      "measured_at": "2026-11-13T06:12:46.490926+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/SpecialFunctions/Exponential.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 414,
+      "sha256": "f4dee78b166838a4bec5c47ef19f77e71debd5af54c6e18b9ce4b4656b1c875c",
+      "measured_at": "2026-11-13T06:12:46.530464+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/SpecialFunctions/Log/Deriv.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 426,
+      "sha256": "09eb4a39077348d27168fdfaf02db61120690e1b87fc5d6c42fdd0c49aad994e",
+      "measured_at": "2026-11-13T06:12:46.541739+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Combinatorics/Graph/Delete.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 200,
+      "sha256": "cea2efb70469109d0af205b8e15f5ef70376a1f0503251fff95f24fbbb40ab60",
+      "measured_at": "2026-11-13T06:12:46.549751+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Combinatorics/Graph/Simple.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 140,
+      "sha256": "170e5b0db8628f76023f91ce3a2000a413965a674b5809f8a768b97e223ea03f",
+      "measured_at": "2026-11-13T06:12:46.553882+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Combinatorics/SimpleGraph/Connectivity/Connected.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1047,
+      "sha256": "b0d8e4b4f9d3221e368b1e07ed2673d587f557d5a866f1c67b0bc84143b32735",
+      "measured_at": "2026-11-13T06:12:46.557107+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Integral/RieszMarkovKakutani/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 351,
+      "sha256": "d00b610183c51568547d7d91e223e10277785ecdf68e7aa77196c5ea4457d498",
+      "measured_at": "2026-11-13T06:12:46.568888+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Integral/RieszMarkovKakutani/Real.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 490,
+      "sha256": "7b1f5cc6950a4d9d911b9b2e131d2ad949725a4a40214201876de77a6e910cac",
+      "measured_at": "2026-11-13T06:12:46.572325+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/ProbabilityMassFunction/Binomial.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 84,
+      "sha256": "b0c5796576f1daa15b94605f78f2215c8ec9f0030d6151c7fe6479fa237cf1b3",
+      "measured_at": "2026-11-13T06:12:46.583746+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Calculus/LocalExtr/Rolle.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 112,
+      "sha256": "04319f665cc00c1868bdcb5f990d1d40b84fb44bb3107dd1dddbb405887cc012",
+      "measured_at": "2026-11-13T06:12:46.620298+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/Dual.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 355,
+      "sha256": "be3539d405c5159f56285f304ca251eecea4a1ffbbc7612e52a286b9265b89a5",
+      "measured_at": "2026-11-13T06:12:46.629385+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Normed/Module/Dual/Reflexive/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 141,
+      "sha256": "d19c382689ed61483b97fec8fcb74ea84a18b5c4cc212bcb23137a84dec58ecf",
+      "measured_at": "2026-11-13T06:12:46.640352+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Sobolev/RellichKondrachov.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 165,
+      "sha256": "19f96bba95cae338a43fd15564111882552894cfdf92a903c54fabbf83271eee",
+      "measured_at": "2026-11-13T06:12:46.646063+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Exp/Bounds.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 95,
+      "sha256": "78c6363381ef075983752cb55c26d6e43455851c55c399c00742d31ff33a5a09",
+      "measured_at": "2026-11-13T06:12:46.653343+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Exp/Chord.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 40,
+      "sha256": "a6fd17581063251c0fd1685a317adacc944d4555681269cac788ab82e9b3bd48",
+      "measured_at": "2026-11-13T06:12:46.660045+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Exp/Deriv.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 105,
+      "sha256": "490b995ca61676bd2361769a5e63e58f0cddb1fa9847a8b85df58d3e3a8a5988",
+      "measured_at": "2026-11-13T06:12:46.670556+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Exp/Half.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 40,
+      "sha256": "e3f7fac47efe23bc68884eca7a8ea552a7b30b863738a7d7f664cd4454e3a1be",
+      "measured_at": "2026-11-13T06:12:46.676662+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Exp/Limits.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 44,
+      "sha256": "b322806f2f4687d2639c22d2dc9ab27d86fe70f5a0ba15279769df8290c03ebc",
+      "measured_at": "2026-11-13T06:12:46.682602+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Exp/Shift.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 98,
+      "sha256": "93b82ecfbfb64a0985cfa0f4b1801693701dff2b845797d1cd02fe3b874bd3eb",
+      "measured_at": "2026-11-13T06:12:46.688931+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Log/Deriv.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 67,
+      "sha256": "71daaf8a239fc5bf633d82e8967b5232ee494d6d2459eb66278e40ecfbb74ecf",
+      "measured_at": "2026-11-13T06:12:46.695335+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Log/DivLeIff.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 40,
+      "sha256": "99804fd1fa1aea974405710169fcd8da1a69d342bf230653f434b7fc932c7ace",
+      "measured_at": "2026-11-13T06:12:46.700296+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Log/DivSub.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 34,
+      "sha256": "57be5cb9956e1f1204c82438092425d40a989a0a0e14063d995763de9ab5a072",
+      "measured_at": "2026-11-13T06:12:46.706998+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Log/InvLog.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 45,
+      "sha256": "e2147c85aeefa0b2f48c310e9493cd91e22f5864ed323753a69e70d9091c57c9",
+      "measured_at": "2026-11-13T06:12:46.714318+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Log/NegLogOneSub.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 182,
+      "sha256": "c7e752bf33bbd33b52e8c51fe3ed8b7e6c54696f85e98e3e12385bf4878ba838",
+      "measured_at": "2026-11-13T06:12:46.719586+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Log/OneDivSub.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 51,
+      "sha256": "d519f8b4d15610f59966471121f30dc7b8e4ce550889d45c55f9e0eaaa30aa70",
+      "measured_at": "2026-11-13T06:12:46.725327+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Log/TwoAdd.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 39,
+      "sha256": "3c69e9e8dd99d9787a6152f9a3c5968d4f5f0f0658ed8814e9948abd5486e7b0",
+      "measured_at": "2026-11-13T06:12:46.731311+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/FiniteBijection/Shuffle.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 375,
+      "sha256": "94cba8bf29bf883d9d232e0378f4faeb7740427ee941adf0c8804cc1ff68b820",
+      "measured_at": "2026-11-13T06:12:46.740848+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Combinatorics/Graph/Delete.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 87,
+      "sha256": "0db0ef66fc65f096dc7d9ea6ff02a6fb4c7c0cb22626ee9bbef57ba3b95cc211",
+      "measured_at": "2026-11-13T06:12:46.748272+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/InformationTheory/KullbackLeibler/Finite.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 127,
+      "sha256": "5ec71c6a6ac7da8416f6057c9ed56b0b91d6d44b5b6283a8a5febdd76f0bced9",
+      "measured_at": "2026-11-13T06:12:46.756475+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Integral/ContinuousMap.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 129,
+      "sha256": "204e823150e8bdebe37fa291d732c1950b146fee6091abe0162d0788cdf04760",
+      "measured_at": "2026-11-13T06:12:46.767514+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Integral/RieszMarkovKakutani/Compact.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 72,
+      "sha256": "bb3cdf00cd93e7072f70c779979940ca7c34437224c9c9ab982429de8735d118",
+      "measured_at": "2026-11-13T06:12:46.773825+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Finance/BlackScholes/ValueProcess.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 317,
+      "sha256": "1e83f0abed2be62291780f7dbc9b8116db21cea29c318a145a9a0a971772a2c8",
+      "measured_at": "2026-11-13T06:12:46.780980+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Kernel/Disintegration/SigmaFinite.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 136,
+      "sha256": "adf397d7ad48cd7ea0f6eabc1282cda63710d8ff3aa323a46f3d575ea0c1df15",
+      "measured_at": "2026-11-13T06:12:46.788052+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Kernel/Sub.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 58,
+      "sha256": "ff903b2905f933699cc4039ff951f72c89cb35cebdfd54434c4c003944c544f4",
+      "measured_at": "2026-11-13T06:12:46.807934+00:00"
+    }
+  ]
+}

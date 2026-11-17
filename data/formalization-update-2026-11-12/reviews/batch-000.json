@@ -1,0 +1,260 @@
+{
+  "batch_id": "batch-000",
+  "reviewer": "analysis_formalization",
+  "proposal_sha256": "135358c456180ce93700b2ee6778fc0a54711a7020d228ef58307f1c9590758d",
+  "decisions": [
+    {
+      "concept": "algebra-module",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Module axioms and the scalar tower section give the unital A-action and k-linearity, with no finite-dimensional restriction; checked Module/Defs:54 and Algebra/Basic:404\u2013426 actual laws."
+    },
+    {
+      "concept": "algebra-module",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked native IsSMulRegular.eq_smul_add_one_sub_smul_iff proof: regularity of u is an explicit hypothesis, then distributivity/cancellation gives the direct action equation. Exact dependency supplying Module/scalar compatibility is identical."
+    },
+    {
+      "concept": "algebra-unit",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Units/Defs:49 and isUnit_iff_exists:370 require both inverse equations in an arbitrary monoid; this matches noncommutative algebra units."
+    },
+    {
+      "concept": "algebra-unit",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native Units conjugation cancellation and Ring/Units:41/46 swap 1-ab and 1-ba invertibility with no commutativity requirement. Read spectrum reduction and plus-version proof; dependency Units definition identical."
+    },
+    {
+      "concept": "associative-algebra",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Checked Algebra central algebraMap, smul_def and ofModule/toModule constructors: Ring A plus Field k realizes precisely associative unital bilinear multiplication, including zero algebra."
+    },
+    {
+      "concept": "associative-algebra",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Pinned Algebra/Defs differs only by blank lines, so the same checked definition applies. Native Operations handles submodule powers and Hom introduces homomorphisms; their exclusion respects the declared definition boundary."
+    },
+    {
+      "concept": "commutative-ring",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "CommRing extends Ring and CommMonoid at Ring/Defs:413 and has no Nontrivial field, correctly permitting the zero ring."
+    },
+    {
+      "concept": "commutative-ring",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Dependency Ring/Defs identical. Inspected stronger unit/division candidates: they add extra structures or specialize to fields, rather than a selected generic commutative-ring contribution."
+    },
+    {
+      "concept": "field",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Field/Defs:180 extends CommRing and DivisionRing; inherited nontriviality and inverses provide exactly field axioms. Basic fraction identities retain their actual weak hypotheses."
+    },
+    {
+      "concept": "field",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native sub_inv_eq_zero_iff and inv_div_one_sub_inv_sq: nonzero condition explicit for the former, latter proves zero case separately and uses a direct noncommutative inverse calculation; both qualify ordinary field API. Dependency definition identical."
+    },
+    {
+      "concept": "idempotent-element",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "IsIdempotentElem is exactly e*e=e; inspected ordinary commuting-product and positive-power proofs, without importing a stronger primitive/orthogonal condition."
+    },
+    {
+      "concept": "idempotent-element",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native mul_mul_of_mul_eq_one: associativity and b*a=1 reduce (a*e*b)^2 to a*e*b using e idempotent. This is direct presentation invariance, and exact dependency predicate is identical."
+    },
+    {
+      "concept": "orthogonal-idempotents",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "OrthogonalIdempotents fields idem and Pairwise make the Bool-index instance require ef=0 and fe=0; distinct indices do not demand distinct values, so the zero pair is included. Checked sum/map API."
+    },
+    {
+      "concept": "orthogonal-idempotents",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Pinned family definition identical; inspected Refinement recursive construction and Hom corner dictionary. These are extra finite-family/projective constructions rather than ordinary two-idempotent API selected in this pass."
+    },
+    {
+      "concept": "split-semisimple-algebra",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "General Wedderburn division-ring factors do not establish splitting over an arbitrary field; IsAlgClosed route adds a real restriction. Unknown accurately records unresolved arbitrary-base predicate/recognition, not absence."
+    },
+    {
+      "concept": "split-semisimple-algebra",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Presentation:123 exact finite product of base-field matrix algebras and Split:46/113 proofs: endomorphism coefficients become k through finrank=1, with no algebraic-closedness hypothesis. Positive sizes/empty product preserve the intended finite-product cases."
+    },
+    {
+      "concept": "splitting-field-algebra",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Polynomial splitting-field predicate includes polynomial/root-minimality data and does not implement the semisimple-algebra identity. Arbitrary scalar-extension split endpoint remains an honest unresolved frontier."
+    },
+    {
+      "concept": "splitting-field-algebra",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "CHANGE: independently checked a generic constructor omitted from the author match: Nonempty (SplitWedderburnAlgebraPresentation L (L\u2297[K]A)) is exactly the catalogue finite-product matrix condition, with native Presentation:123 and dependency TensorProduct.Basic leftAlgebra:231. No one-block or algebraically-closed restriction occurs.",
+      "replacement": {
+        "concept": "splitting-field-algebra",
+        "concept_id": "9d518e0c-579c-593c-bf38-630cafaafebc",
+        "concept_revision": 2,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "At Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, Presentation.lean:123 defines SplitWedderburnAlgebraPresentation F B for arbitrary Field F and F-algebra B by a finite family of positive matrix sizes and an F-algebra equivalence B \u2243 \u03a0_i Matrix (Fin (degree i)) (Fin (degree i)) F. Instantiate F=L and B=L\u2297[K]A, and take Nonempty of this chosen presentation: this is exactly a splitting field for the catalogue finite-dimensional semisimple K-algebra A. The actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 supplies the tensor-product ring and L-algebra via RingTheory/TensorProduct/Basic.lean:200\u2013242, leftAlgebra:231; its algebraMap is l\u21a6l\u22971. There is no one-block or algebraically-closed-field restriction. Positive sizes discard zero factors without changing the finite product; empty product permits the zero algebra. This is a checked generic native definition instantiated exactly, not a separately named multi-block IsSplittingField alias. Source definitions, tensor structure and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+        "files": [
+          {
+            "path": "TauCeti/RingTheory/Semisimple/Wedderburn/Presentation.lean",
+            "declarations": "TauCeti.SplitWedderburnAlgebraPresentation L123; equiv field L133",
+            "note": "Native exact finite-product-matrix presentation, instantiated on the scalar extension L\u2297[K]A. The required tensor-product ring/L-algebra is dependency-owned and is not counted natively."
+          }
+        ],
+        "search_notes": "Compared the exact scalar-extension parameters and actual tensor algebra structure, not just similar names. CentralSimple/Splitting IsSplittingField is the narrower single-matrix-block variant and is excluded from this selected general multi-block definition boundary. Wedderburn/Split provides an optional recognition criterion when the scalar extension is already semisimple; no such additional criterion is needed to define the catalogue condition. Polynomial.IsSplittingField is a distinct concept."
+      }
+    },
+    {
+      "concept": "closed-orbit-existence-algebraic-group-action",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Scoped AlgebraicGeometry/group-action search does not produce a checked finite-type algebraic closed-orbit endpoint. Unknown is limited to this unresolved bridge, rather than asserting absence."
+    },
+    {
+      "concept": "closed-orbit-existence-algebraic-group-action",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read ClosedOrbit hypotheses and boundary descent: finite-type group and action schemes over alg-closed k, minimal orbit dimension, nonclosed boundary rational point, then closed orbit. LocallyOfFiniteType plus quasi-compact CompactSpace expresses finite type, not Hausdorff compactness."
+    },
+    {
+      "concept": "connected-smooth-algebraic-group-irreducible",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "General connected topological groups do not imply irreducibility; no checked Mathlib smooth-group/local-domain-stalk bridge was found in this scoped search. Unknown is appropriate."
+    },
+    {
+      "concept": "connected-smooth-algebraic-group-irreducible",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "CHANGE: native Smooth/Irreducible:54 supplies the nonaffine route directly: smooth connected X over any regular locally noetherian S is irreducible, with proof via regular local stalks. S=Spec k meets these hypotheses; KrullDimension/Irreducible:106 gives the proper-closed dimension conclusion.",
+      "replacement": {
+        "concept": "connected-smooth-algebraic-group-irreducible",
+        "concept_id": "ec34cd68-9c8c-5546-b26e-036b05eaae71",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "At Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, AlgebraicGeometry/Morphisms/Smooth/Irreducible.lean:54 proves Smooth.irreducibleSpace_of_connectedSpace for any smooth connected scheme X over a locally noetherian base S with regular local stalks. Its proof obtains local noetherianity and regular stalks of X, then uses the connected-domain-stalk irreducibility theorem. Instantiate S=Spec k and f the structure morphism of the catalogue connected smooth algebraic group over an algebraically closed field: field stalks are regular, so this covers nonaffine groups as well. No group-specific affine hypothesis is needed. Topology/KrullDimension/Irreducible.lean:106 proves strict dimension decrease for every proper closed subset of an irreducible finite-dimensional space, giving the stated finite-type variety consequence. The actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; selected proofs are native Tau. Source statements/proofs inspected, no fresh Lean build or transitive axiom audit.",
+        "files": [
+          {
+            "path": "TauCeti/AlgebraicGeometry/Morphisms/Smooth/Irreducible.lean",
+            "declarations": "TauCeti.AlgebraicGeometry.Smooth.irreducibleSpace_of_connectedSpace L54",
+            "note": "Native general connected-smooth-scheme irreducibility theorem; specializes directly to arbitrary smooth connected algebraic groups over fields, without affineness."
+          },
+          {
+            "path": "TauCeti/Topology/KrullDimension/Irreducible.lean",
+            "declarations": "IsClosed.topologicalKrullDim_lt L106; topologicalKrullDim_add_one_le L99",
+            "note": "Native immediate proper-closed-subvariety dimension consequence for irreducible spaces; finite Krull dimension is explicit for strict inequality."
+          }
+        ],
+        "search_notes": "Independent review expanded beyond the author\u2019s affine Hopf-algebra route and inspected Smooth/Irreducible in full, including its regular-local-stalk proof. Connected/Irreducible affine theorem proves a useful stronger reduced/perfect-field variant, but is unnecessary for this chosen smooth-group implementation and is not retained. Smooth/Regular and IrreducibleOfConnectedDomainStalk are proof suppliers, not an unbounded import-tree allocation. The independent Mathlib snapshot has no checked matching bridge in this pass."
+      }
+    },
+    {
+      "concept": "fiber-dimension-theorem-varieties",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Inspected available fiber/dimension candidates and found no checked generic-open dimension theorem plus constant-fiber consequence. Unknown explicitly leaves this theorem unverified."
+    },
+    {
+      "concept": "fiber-dimension-theorem-varieties",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Generalizing.Dimension:64 hypothesis GeneralizingMap and local coheight conclusion; Fibers.Dimension computes quotient heights; Spectrum/Prime/FiberDimension computes module ranks. These do not themselves prove arbitrary dominant-variety generic fiber dimension, so unresolved bridge remains honest."
+    },
+    {
+      "concept": "finite-field-absolute-galois-frobenius",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Extension.frob and exists_frob_pow_eq:121 proof, which generates finite extension automorphisms only. Search did not verify the infinite closure/dense-powers passage. Unknown preserves that specific topological gap."
+    },
+    {
+      "concept": "finite-field-absolute-galois-frobenius",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read SepClosedSubfield:173/190 proofs computing fixed-field cardinality and degree for Frobenius powers. They do not themselves assert dense integer powers in the absolute group; the unresolved infinite Galois closure bridge is accurately recorded."
+    },
+    {
+      "concept": "fundamental-lemma-calculus-variations",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Actual IsOpen.ae_eq_zero_of_integral_contDiff_smul_eq_zero proof supplies a.e. zero on \u03a9; eqOn_open_of_ae_eq upgrades under continuity and positive-on-open Lebesgue measure. This gives the catalogue pointwise endpoint, rather than silently weakening to a.e."
+    },
+    {
+      "concept": "fundamental-lemma-calculus-variations",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native Inner:69 proof using \u03c8\u2022w test functions and inner-self positivity. Complete real scalar target satisfies hypotheses; checked dependency distribution theorem is identical and OpenPos differs only by blank lines, retaining the pointwise upgrade."
+    },
+    {
+      "concept": "cauchy-sequence-metric-space",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read filter definition CauchySeq and Metric.cauchySeq_iff:59: with index \u2115 its \u03b5/N condition is exactly pairwise distance <\u03b5 for all m,n\u2265N."
+    },
+    {
+      "concept": "cauchy-sequence-metric-space",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Both exact supplying dependency files are identical. Native UniformSpace/Complete uses Cauchy sequences to conclude completeness and belongs to that endpoint, rather than defining the sequence criterion."
+    },
+    {
+      "concept": "complete-metric-space",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read CompleteSpace Cauchy-filter definition, cauchySeq_tendsto_of_complete and Metric.complete_of_cauchySeq_tendsto converse. Metric countability validates exact equivalence with sequence completeness."
+    },
+    {
+      "concept": "complete-metric-space",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native Complete:28 proof transfers Cauchy sequence limits through a continuous identity, then uses target countable generation. This is direct completeness API; the extra assumptions are explicit and satisfied for metric uniformities when instantiated."
+    },
+    {
+      "concept": "complex-conjugation",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read actual StarRing \u2102 coordinate operation and conj_re/conj_im laws: real part unchanged, imaginary negated; involutive ring proof supplies scalar conjugation exactly."
+    },
+    {
+      "concept": "complex-conjugation",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Dependency scalar implementation identical. Native Complex/Conjugation constructs vector-space real forms and tensor conjugations, which introduce additional structures and are appropriately excluded from scalar conjugation."
+    },
+    {
+      "concept": "complex-modulus",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read norm definition sqrt(normSq) and coordinate formula norm_eq_sqrt_sq_add_sq: nonnegative real norm is precisely catalogue modulus."
+    },
+    {
+      "concept": "complex-modulus",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native norm_sq_add_I_mul_div_sqrt_two and norm_sub_eq_of_normSq_sub_eq: the latter explicitly requires nonnegative radius before removing a square. Direct scalar norm identities qualify; separate circle geometry in the mixed file is outside selected scope."
+    }
+  ]
+}

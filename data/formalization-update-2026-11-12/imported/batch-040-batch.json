@@ -1,0 +1,510 @@
+{
+  "note": "Whole-catalogue formalization update batch-040: independent source review by category_galois_formalization of analysis_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "asymptotic-expansion",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Asymptotics/Defs.lean",
+          "declarations": "Asymptotics.IsLittleO:171; IsBigOWith:72",
+          "note": "Defines the exact remainder and smaller-scale relation used in every finite-truncation clause."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. An exact generic predicate along filter l is: for every n, (f−∑j∈range(n+1),a_j φ_j)=o[l]φ_n, and for every n, φ_(n+1)=o[l]φ_n. IsLittleO:171 is the actual arbitrarily-small eventual norm bound, so this works for real/complex functions (and scalar multiplication in normed target spaces). Finite truncation includes the nth term. No sum convergence or value of an infinite series is imposed.\nSearch and boundary notes: Exclude pseudodifferential Symbol.IsAsymptoticSum:588: its remainders are controlled in symbol-order classes, a different stronger structured summation endpoint. Taylor, elliptic-integral and specific L-function expansions are applications, not generic-definition files.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "asymptotic-expansion",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Asymptotics/Lemmas.lean",
+          "declarations": "Asymptotics.isLittleO_sub_mul_iff_tendsto_div:99",
+          "note": "Proves the direct scalar coefficient/remainder limit criterion for asymptotic expansions."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The same generic predicate is supplied by the actual dependency (IsLittleO172 after one header line). Native Asymptotics.isLittleO_sub_mul_iff_tendsto_div:99 proves f−a*g=o(g) iff f/g→a when g is eventually nonzero, with a complete ratio-congruence proof. Applied to each preceding finite remainder, it gives the ordinary coefficient-extraction criterion of this expansion. Eventual nonzeroness is the explicit hypothesis of this API, not an extra unconditional convergence assertion.\nSearch and boundary notes: Exclude pseudodifferential Symbol.IsAsymptoticSum:588: its remainders are controlled in symbol-order classes, a different stronger structured summation endpoint. Taylor, elliptic-integral and specific L-function expansions are applications, not generic-definition files.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "automorphic-cusp-form",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The full general reductive-group automorphic input has smooth/finite-level, moderate-growth, K-infinity-finite and infinitesimal-center-finite requirements. The checked genus-one ModularForm/CuspForm constructors impose holomorphy and boundedness/vanishing of elliptic cusp expansions instead. Native Tau HopfIdeal.IsParabolic:248 and unipotentRadicalDefiningIdeal:69 supply genuine algebraic parabolic/radical inputs, but the complete adelic unipotent LEFT quotient, induced constant-term integrand and all-proper-F-parabolic cancellation predicate have not been assembled from checked existing interfaces. This remains an explicit frontier, not absence.\nSearch and boundary notes: Searched automorphic/cuspidal/constantTerm and enumerated native algebraic-group Parabolic/Unipotent/Radical plus modular-form namespaces. Tau-owned algebraic inputs are not credited to standalone Mathlib. The separate cuspidal L2 Hilbert closure is not substituted, nor are finite-group Harish–Chandra functors or ordinary elliptic q-expansion zero constants.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "automorphic-cusp-form",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The full general reductive-group automorphic input has smooth/finite-level, moderate-growth, K-infinity-finite and infinitesimal-center-finite requirements. The checked genus-one ModularForm/CuspForm constructors impose holomorphy and boundedness/vanishing of elliptic cusp expansions instead. Native Tau HopfIdeal.IsParabolic:248 and unipotentRadicalDefiningIdeal:69 supply genuine algebraic parabolic/radical inputs, but the complete adelic unipotent LEFT quotient, induced constant-term integrand and all-proper-F-parabolic cancellation predicate have not been assembled from checked existing interfaces. This remains an explicit frontier, not absence.\nSearch and boundary notes: Searched automorphic/cuspidal/constantTerm and enumerated native algebraic-group Parabolic/Unipotent/Radical plus modular-form namespaces. Tau-owned algebraic inputs are not credited to standalone Mathlib. The separate cuspidal L2 Hilbert closure is not substituted, nor are finite-group Harish–Chandra functors or ordinary elliptic q-expansion zero constants.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "automorphic-period-integral",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/GroupTheory/GroupAction/Defs.lean",
+          "declarations": "MulAction.orbitRel:286; orbitRel.Quotient:348",
+          "note": "Constructs the exact left rational-subgroup orbit quotient, with the norm-one intersection as input."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+          "declarations": "MeasureTheory.integral:157",
+          "note": "Defines the actual complex period of the descended χφ function, conditional on absolute integrability."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For the stated input groups/embeddings let H1 be the inverse image of G(A_F)^1 under H(A_F)→G(A_F), and let Q be the LEFT H(F)-orbit quotient of H1, using orbitRel:286/Quotient:348. Rational H(F)→H1 and the quotient Haar measure are the specified mathematical inputs. The function h↦χ(h)φ(h) descends to Q because χ is trivial on H(F) and φ is left G(F)-invariant. Define its period to be Bochner.integral:157 on Q, under Integrable:57 (a.e. measurability plus finite norm integral:92). The twist is χ, NOT χ inverse. This is the exact conditional integral definition; it proves no existence of cuspidal forms, invariant measures or convergence.\nSearch and boundary notes: Given-input interpretation is the same as reviewed033 automorphic L2: the norm-one subgroup/rational embeddings and chosen quotient Haar measure are inputs to this integral definition. No extra global quotient-measure existence, product formula or absolute-convergence theorem is claimed. Exclude inverse-character normalization and integration over the larger H(F)\\H(A_F) when H(A_F) is not contained in G(A_F)^1.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "automorphic-period-integral",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The checked actual dependency has the same quotient/integral bodies with one inserted header line (orbitRel287, quotient349, integral158); Integrable and finite-norm-integral inputs are checked separately. The same explicit H1 and LEFT rational quotient construction gives the exact conditional period definition. Native adelic/idèle norms, ray-class characters and quotient Haar factorization are input or additional theorems; no native period-specific cancellation/transform API was certified. Therefore availability is inherited with zero native files/LOC. The defining absolute-integrability anchors are Integrable58 and HasFiniteIntegral93 in this actual dependency; their relevant definitions agree after one header insertion.\nSearch and boundary notes: Given-input interpretation is the same as reviewed033 automorphic L2: the norm-one subgroup/rational embeddings and chosen quotient Haar measure are inputs to this integral definition. No extra global quotient-measure existence, product formula or absolute-convergence theorem is claimed. Exclude inverse-character normalization and integration over the larger H(F)\\H(A_F) when H(A_F) is not contained in G(A_F)^1.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "benatar-goldbach-prime-difference-dichotomy",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The actual inspected Bertrand theorem Nat.exists_prime_lt_and_le_two_mul:225 provides a prime in (n,2n], with a completed binomial-bound/finite-prime-cover proof. Native Tau fixed-congruence prime counting gives PNT for one modulus, not the catalogue dichotomy. No checked theorem supplies either eventual bounded gaps between Goldbach numbers OR the full-even-relative-density/power-saving exceptional count for infinitely recurring positive prime differences. The distinction from consecutive prime gaps is preserved.\nSearch and boundary notes: Searched Benatar/Goldbach/recurring prime differences, bounded gaps and sieve directories in both libraries; ordinary Fermat-number Goldbach coprimality is a different theorem. The exact D set, either-or alternative and N^kappa with kappa<1 remain unverified after concrete candidate comparison; no absence assertion.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "benatar-goldbach-prime-difference-dichotomy",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual inspected Bertrand theorem Nat.exists_prime_lt_and_le_two_mul:225 provides a prime in (n,2n], with a completed binomial-bound/finite-prime-cover proof. Native Tau fixed-congruence prime counting gives PNT for one modulus, not the catalogue dichotomy. No checked theorem supplies either eventual bounded gaps between Goldbach numbers OR the full-even-relative-density/power-saving exceptional count for infinitely recurring positive prime differences. The distinction from consecutive prime gaps is preserved.\nSearch and boundary notes: Searched Benatar/Goldbach/recurring prime differences, bounded gaps and sieve directories in both libraries; ordinary Fermat-number Goldbach coprimality is a different theorem. The exact D set, either-or alternative and N^kappa with kappa<1 remain unverified after concrete candidate comparison; no absence assertion.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "benatar-normalized-gap-limit-density",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked Bertrand:225 and native TauCeti/NumberTheory/PrimeCounting.lean, Nat.primeCounting_nth_prime:90 give prime-location/counting ingredients but no Lebesgue-density theorem for FINITE limit points of (p_(n+1)−p_n)/log p_n. Neither the liminf1/4, the all-T3/25 nor the specified level-one-distribution improvement1/2 was certified. Fixed-modulus PNT asymptotics do not prove these normalized consecutive-gap limit-set bounds.\nSearch and boundary notes: Searched normalized prime gaps, limit-point density, Benatar/Maynard and prime-counting/measure candidates. Lebesgue measure and generic liminf constructors merely express the conclusion; they do not prove its constants. The specific distribution hypothesis must not be replaced by a generic unlabelled level-of-distribution assumption.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "benatar-normalized-gap-limit-density",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked Bertrand:225 and native TauCeti/NumberTheory/PrimeCounting.lean, Nat.primeCounting_nth_prime:90 give prime-location/counting ingredients but no Lebesgue-density theorem for FINITE limit points of (p_(n+1)−p_n)/log p_n. Neither the liminf1/4, the all-T3/25 nor the specified level-one-distribution improvement1/2 was certified. Fixed-modulus PNT asymptotics do not prove these normalized consecutive-gap limit-set bounds.\nSearch and boundary notes: Searched normalized prime gaps, limit-point density, Benatar/Maynard and prime-counting/measure candidates. Lebesgue measure and generic liminf constructors merely express the conclusion; they do not prove its constants. The specific distribution hypothesis must not be replaced by a generic unlabelled level-of-distribution assumption.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "bezout-identity-integers",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Int/GCD.lean",
+          "declarations": "Int.gcdA:162; gcdB:167; gcd_eq_gcd_ab:172; Nat.gcd_eq_gcd_ab:124",
+          "note": "Constructs integer Bézout coefficients and proves the exact signed identity."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Int.gcd_eq_gcd_ab:172 constructs gcdA and gcdB and proves (gcd a b:ℤ)=a*gcdA a b+b*gcdB a b. The complete four signed-input cases reduce to Nat extended-GCD identity:124. Set u=gcdA a b,v=gcdB a b and commute multiplication to obtain the stated ua+vb convention. The theorem even covers (0,0); no positivity of a,b or sign-changing gcd is imposed.\nSearch and boundary notes: Read actual signed coefficient proof, not just gcd divisibility. Exclude Smith normal form and specialized cusp congruence solvability; no coprimeness assumption is added to the arbitrary-a,b identity.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "bezout-identity-integers",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency supplies the same signed Bézout proof and coefficients (relevant body comparison checked). Native Data/Int/GCD proves coprime quotients and specialized mixed cusp congruences using Bézout; native Data/Nat/GCD has coprime power/product consequences. These are prerequisite arithmetic or further congruence endpoints rather than an additional direct integer coefficient-identity API. Full availability is inherited, with zero native files.\nSearch and boundary notes: Read actual signed coefficient proof, not just gcd divisibility. Exclude Smith normal form and specialized cusp congruence solvability; no coprimeness assumption is added to the arbitrary-a,b identity.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "bombieri-vinogradov-theorem",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Native Tau Chebotarev/PrimeCounting/PrimesCongruent.primeCount_primesCongruent_isEquivalent_logIntegral:50 and tendsto_primeCount_primesCongruent:63 prove PNT in an invertible residue for a FIXED modulus m. Their completed log-integral/error comparison proofs were checked. They do not certify the von-Mangoldt ψ error MAXIMUM over coprime residues, A-dependent constants, or its average over ALL positive moduli growing to x^(1/2)/(log x)^B. That exact uniform averaged endpoint remains unresolved in both libraries.\nSearch and boundary notes: Searched Bombieri–Vinogradov, large sieve, distribution level, uniform prime-progressions and weighted Chebotarev/PNT candidates. Bombieri–Vaaler height bounds are unrelated. Native powered Frobenius von-Mangoldt weights are actual nonnegative prime-power indicators, not this all-modulus uniform estimate. Tau source is separate ownership in the standalone judgment.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "bombieri-vinogradov-theorem",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native Tau Chebotarev/PrimeCounting/PrimesCongruent.primeCount_primesCongruent_isEquivalent_logIntegral:50 and tendsto_primeCount_primesCongruent:63 prove PNT in an invertible residue for a FIXED modulus m. Their completed log-integral/error comparison proofs were checked. They do not certify the von-Mangoldt ψ error MAXIMUM over coprime residues, A-dependent constants, or its average over ALL positive moduli growing to x^(1/2)/(log x)^B. That exact uniform averaged endpoint remains unresolved in both libraries.\nSearch and boundary notes: Searched Bombieri–Vinogradov, large sieve, distribution level, uniform prime-progressions and weighted Chebotarev/PNT candidates. Bombieri–Vaaler height bounds are unrelated. Native powered Frobenius von-Mangoldt weights are actual nonnegative prime-power indicators, not this all-modulus uniform estimate. Tau source is separate ownership in the standalone judgment.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "borcherds-automorphic-product",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The checked theta candidates are genus-one: Mathlib jacobiTheta2_term:46 and native Tau siegelFunction:95/def:102 give a scalar theta sum and q-Pochhammer modular unit. No complete orthogonal symmetric-domain REGULARIZED vector-valued theta lift together with its automorphic infinite product and divisor multiplicities from negative coefficients was certified. A generic infinite product alone does not supply these coupled requirements.\nSearch and boundary notes: Searched Borcherds/regularized theta lift/orthogonal modular product and genus-two Siegel-domain candidates, including native theta, Weil-representation and modular-form neighbors. Tau one-variable Siegel functions are not the genus-two orthogonal realization. Unknown denotes this concrete lift/product/divisor frontier, not absence.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "borcherds-automorphic-product",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The checked theta candidates are genus-one: Mathlib jacobiTheta2_term:46 and native Tau siegelFunction:95/def:102 give a scalar theta sum and q-Pochhammer modular unit. No complete orthogonal symmetric-domain REGULARIZED vector-valued theta lift together with its automorphic infinite product and divisor multiplicities from negative coefficients was certified. A generic infinite product alone does not supply these coupled requirements.\nSearch and boundary notes: Searched Borcherds/regularized theta lift/orthogonal modular product and genus-two Siegel-domain candidates, including native theta, Weil-representation and modular-form neighbors. Tau one-variable Siegel functions are not the genus-two orthogonal realization. Unknown denotes this concrete lift/product/divisor frontier, not absence.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "bounded-prime-clusters",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Nat.exists_prime_lt_and_le_two_mul:225 proves primes in dyadic intervals; fixed-modulus PNT supplies infinitely many primes in one progression. Neither theorem implies the universal admissible-shift-set assertion: one k0 works for EVERY admissible H of size≥k0, with infinitely many translations containing at least TWO primes. No checked bounded-prime-cluster/sieve theorem with that quantifier structure was certified.\nSearch and boundary notes: Searched bounded clusters, Maynard/Tao, admissible prime tuples, sieve and prime progression/interval sources in both projects. A prime-tuple predicate was defined generically in039, but its definition does not establish this deep infinitude theorem. Do not replace arbitrary H with a specially chosen pair, or the conclusion with infinitude of single primes.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "bounded-prime-clusters",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Nat.exists_prime_lt_and_le_two_mul:225 proves primes in dyadic intervals; fixed-modulus PNT supplies infinitely many primes in one progression. Neither theorem implies the universal admissible-shift-set assertion: one k0 works for EVERY admissible H of size≥k0, with infinitely many translations containing at least TWO primes. No checked bounded-prime-cluster/sieve theorem with that quantifier structure was certified.\nSearch and boundary notes: Searched bounded clusters, Maynard/Tao, admissible prime tuples, sieve and prime progression/interval sources in both projects. A prime-tuple predicate was defined generically in039, but its definition does not establish this deep infinitude theorem. Do not replace arbitrary H with a specially chosen pair, or the conclusion with infinitude of single primes.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "choquet-simplex",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean",
+          "declarations": "MeasureTheory.ProbabilityMeasure:102",
+          "note": "Supplies the exact Borel probability measures quantified in the simplex condition."
+        },
+        {
+          "path": "Mathlib/Analysis/Convex/Function.lean",
+          "declarations": "ConvexOn:54; ConcaveOn:59",
+          "note": "Supplies convex comparison tests and exact affine tests (both inequalities)."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+          "declarations": "MeasureTheory.integral:157",
+          "note": "Supplies defining real moment equalities and Choquet-order inequalities."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. On a given compact convex K in a locally convex real space, use ProbabilityMeasure K:102 with its Borel sigma-algebra. Rep(μ,x) is ∀continuous affine f on K, integral f μ=f(x), as checked036. Define μ≼ν by ∀continuous convex real f on K, integral f μ≤integral f ν, as checked030. The exact simplex predicate is ∀x:K,∃!μ, Rep(μ,x) AND ∀ν,μ≼ν→ν≼μ. This uses actual convex/concave equality predicates:54/59 and integral:157; compact continuity ensures test integrability. It is a bare unique-maximal-representing-measure definition, not a theorem asserting a given K is a simplex.\nSearch and boundary notes: Primary definition is exact uniqueness of maximal representing probability measures, including nonmetrizable K. The explanatory metrizable extreme-boundary representation equivalence is not claimed as a separately verified theorem here. Do not substitute uniqueness among ALL representing measures, or require K to be a finite geometric simplex.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "choquet-simplex",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The complete exact generic predicate is supplied by the actual dependency (ProbabilityMeasure103, integral158 after header insertions; convex predicates unchanged). Actual030/036 comparison/representing-measure suppliers were independently checked. Native finite-dimensional geometric simplexes, continuous-function positivity and C-star state-space existence results do not by themselves prove a new unique-maximal representing-measure API for arbitrary K. Therefore inherited availability, zero native LOC.\nSearch and boundary notes: Primary definition is exact uniqueness of maximal representing probability measures, including nonmetrizable K. The explanatory metrizable extreme-boundary representation equivalence is not claimed as a separately verified theorem here. Do not substitute uniqueness among ALL representing measures, or require K to be a finite geometric simplex.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "classical-jacobi-form",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The current revision requires the COMPLETE scalar trivial-multiplier Jacobi transformation laws for both modular γ and all integer r,s, holomorphy on H×C, and all-cusp Fourier support4mn−ell²≥0. Actual one-variable SlashInvariantForm:36 and theta2_term:46 do not provide that whole integer-index Jacobi-form class; native siegelFunction:95 is a one-variable modular unit. The exact elliptic phases and support interface remain unresolved after source inspection.\nSearch and boundary notes: Searched JacobiForm, elliptic/modular slash, theta-index and Fourier-discriminant support in both full source trees and enumerated native modular/theta neighbors. An individual theta series with special characteristic/weight is not the arbitrary integer k,index m scalar class; no absence claim or weakening to a generic HasSum formula.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "classical-jacobi-form",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The current revision requires the COMPLETE scalar trivial-multiplier Jacobi transformation laws for both modular γ and all integer r,s, holomorphy on H×C, and all-cusp Fourier support4mn−ell²≥0. Actual one-variable SlashInvariantForm:36 and theta2_term:46 do not provide that whole integer-index Jacobi-form class; native siegelFunction:95 is a one-variable modular unit. The exact elliptic phases and support interface remain unresolved after source inspection.\nSearch and boundary notes: Searched JacobiForm, elliptic/modular slash, theta-index and Fourier-discriminant support in both full source trees and enumerated native modular/theta neighbors. An individual theta series with special characteristic/weight is not the arbitrary integer k,index m scalar class; no absence claim or weakening to a generic HasSum formula.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "complete-bipartite-graph",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Combinatorics/SimpleGraph/Basic.lean",
+          "declarations": "completeBipartiteGraph:154; completeBipartiteGraph_adj (generated)",
+          "note": "Defines the exact complete bipartite graph on the disjoint sum of its two vertex sets."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. completeBipartiteGraph V W:154 is the simple graph on V⊕W with adjacency exactly opposite sides. Take V=Fin s,W=Fin t: the injections make the vertex sets disjoint with the required sizes, and there are all/no edges across/within respectively. Zero-size sides are allowed without adding nonempty hypotheses.\nSearch and boundary notes: Do not require s,t>0 or add edges within sides. Exclude extremal complete-bipartite subgraph existence and uniqueness of graph colorings as independent theorem endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "complete-bipartite-graph",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Combinatorics/SimpleGraph/Bipartite.lean",
+          "declarations": "SimpleGraph.between_eq_inf_top_between:43; top_between_symmDiff:50",
+          "note": "Proves direct complete-bipartite cut/restriction identities."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The dependency complete-bipartite constructor has the same relevant definition. Native SimpleGraph.between_eq_inf_top_between:43 proves the graph-between restriction equals intersection with the corresponding complete bipartite cut. top_between_symmDiff:50 proves the complete-graph cut symmetric-difference law by explicit adjacency/set membership equivalence. For a partition these are direct ordinary complete-bipartite cut API.\nSearch and boundary notes: Do not require s,t>0 or add edges within sides. Exclude extremal complete-bipartite subgraph existence and uniqueness of graph colorings as independent theorem endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "complex-partial-derivative",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+          "declarations": "deriv:153; HasDerivAt (same file)",
+          "note": "Defines the ordinary one-variable complex derivative used on the fixed-coordinate slice."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/Deriv/Pi.lean",
+          "declarations": "deriv_update:38; deriv_single:43",
+          "note": "Proves the exact coordinate replacement direction for the slice."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For f:(Fin n→ℂ)→ℂ at x and coordinate i, use deriv (fun z:ℂ↦f(Function.update x i z)) (x i). This is literally the complex derivative with other coordinates fixed. Deriv.Basic.deriv:153 is the ℂ-Fréchet derivative applied to1; Deriv.Pi.deriv_update:38 proves the coordinate slice has derivative Pi.single i1. Existence is recorded by HasDerivAt; the library totalized deriv is zero if it does not exist, not an assertion of holomorphy.\nSearch and boundary notes: Do not replace a complex derivative with a real coordinate derivative, or infer joint holomorphy from arbitrary separate behavior. The default zero value outside differentiability is not a coverage theorem.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "complex-partial-derivative",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Calculus/FDeriv/Pi/Basic.lean",
+          "declarations": "DifferentiableWithinAt.comp_update:62; DifferentiableAt.comp_update:73",
+          "note": "Proves direct differentiability of coordinate slices, over arbitrary normed fields including ℂ."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency coordinate derivative source supplies the same exact construction (relevant bodies compared). Native DifferentiableWithinAt.comp_update:62 and DifferentiableAt.comp_update:73 prove that a differentiable multivariable map is differentiable in the chosen fixed coordinate; their chain-rule/update proofs work for 𝕜=ℂ. This is direct ordinary coordinate-partial derivative API, with the joint differentiability hypothesis retained.\nSearch and boundary notes: Do not replace a complex derivative with a real coordinate derivative, or infer joint holomorphy from arbitrary separate behavior. The default zero value outside differentiability is not a coverage theorem.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "congruence",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Int/ModEq.lean",
+          "declarations": "Int.modEq_iff_dvd:104; modEq_iff_add_fac:108; natCast_modEq_iff:92",
+          "note": "Proves the exact divisibility/translation characterization and integer-natural congruence dictionary."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Int.ModEq uses equality of remainders, and modEq_iff_dvd:104 proves a≡b modulo m iff m∣b−a. Divisibility is invariant under negation, so this is exactly m∣a−b. The proof via emod subtraction and divisibility was checked; negative integers/moduli and m=0 are handled by the same relation.\nSearch and boundary notes: The full integer definition is inherited, with native residue API under its stated natural-number bounds. Exclude isolated mod4 factorization identities as separate arithmetic applications; do not treat truncated Nat subtraction as integer subtraction without the hypothesis.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "congruence",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Nat/ModEq.lean",
+          "declarations": "Nat.not_dvd_mul_add_sub:34; eq_of_dvd_sub_one_mul_add:43",
+          "note": "Proves ordinary residue equality/noncongruence arithmetic for nonnegative integers."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency supplies the same congruence criterion:105 and natCast_modEq_iff:93. Native Nat.not_dvd_mul_add_sub:34 proves distinct residues a,b<p cannot differ by a multiple of p in the specified natural-subtraction range; Nat.eq_of_dvd_sub_one_mul_add:43 proves an equivalent residue equality criterion. The completed remaindering/divisibility proofs were read. These are direct natural-residue specializations of the same congruence notion; the integer/natural dictionary:93 is explicit, so no false integer-native declaration is claimed.\nSearch and boundary notes: The full integer definition is inherited, with native residue API under its stated natural-number bounds. Exclude isolated mod4 factorization identities as separate arithmetic applications; do not treat truncated Nat subtraction as integer subtraction without the hypothesis.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "congruence-subgroup-sl2",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean",
+          "declarations": "CongruenceSubgroup.Gamma:41; Gamma_mem:50; IsCongruenceSubgroup:163; isCongruenceSubgroup_trans:166",
+          "note": "Defines principal level kernels and the exact containing-positive-level congruence subgroup predicate."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. CongruenceSubgroup.Gamma:41 is precisely the kernel of SL₂ integer reduction modulo N; Gamma_mem:50 proves entrywise identity congruences. IsCongruenceSubgroup:163 is ∃N≠0,Gamma N≤Γ, equivalent to positive N for naturals, exactly the paragraph. Read kernel/entry membership and containing-subgroup transport:166.\nSearch and boundary notes: The containing subgroup need not itself equal Γ(N). Exclude index, cusp counts, normalizer and Hecke double-coset calculations as additional endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "congruence-subgroup-sl2",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/ModularForms/CongruenceSubgroups/Basic.lean",
+          "declarations": "CongruenceSubgroup.Gamma_le_Gamma_of_dvd:179; map_eq_one_of_mem_Gamma:187",
+          "note": "Proves direct level-inclusion and defining reduction identities for principal congruence kernels."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency CongruenceSubgroups adds one header line, so the defining anchors are42/51/164/167. Native Gamma_le_Gamma_of_dvd:179 proves level antitonicity via factorization of reductions; map_eq_one_of_mem_Gamma:187 exposes exact identity reduction. These are direct ordinary principal congruence subgroup API, without requiring a stronger special Γ0/Γ1 form.\nSearch and boundary notes: The containing subgroup need not itself equal Γ(N). Exclude index, cusp counts, normalizer and Hecke double-coset calculations as additional endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "congruence-subgroup-symplectic",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/SymplecticGroup.lean",
+          "declarations": "SymplecticGroup.map_mem:160; Group instance:214",
+          "note": "Implements symplectic matrices and proves entrywise ring reduction preserves them."
+        },
+        {
+          "path": "Mathlib/Algebra/Group/Subgroup/Ker.lean",
+          "declarations": "MonoidHom.ker:238",
+          "note": "Constructs the exact principal reduction-kernel subgroup."
+        },
+        {
+          "path": "Mathlib/Data/Nat/Find.lean",
+          "declarations": "Nat.find:67; find_spec:70; find_min:75",
+          "note": "Constructs and certifies the least positive level from the congruence witness."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Use Matrix.symplecticGroup (Fin g) ℤ, Group instance:214. RingHom.mapMatrix:613 applies integer reduction entrywise; map_mem:160 proves it lands in Sp(2g,ZMod N), so composing with the subtype inclusion gives the exact reduction hom. MonoidHom.ker:238 supplies ΓSp(N), and the literal congruence predicate is ∃N:ℕ,0<N AND ker(redN)≤Γ. Given that witness, Nat.find:67/find_min:75 gives the LEAST such positive N as the level. No congruence subgroup property is inferred for an arbitrary subgroup.\nSearch and boundary notes: Read actual symplectic map_mem/group proofs, entrywise ring-hom map and kernel plus least-witness constructors. Exclude false geometric/J-holomorphic congruence and symplectic reduction hits; no Sp→SL determinant or congruence subgroup property theorem is required by this bare definition.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "congruence-subgroup-symplectic",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The same generic reduction-kernel/least-positive-level definition is complete in the actual dependency, with exact relevant source comparisons. Native J/symplectic matrix block/conjugation identities are genuine symplectic-group API, but do not implement the extra reduction-kernel/level predicate. No native ordinary symplectic congruence-subgroup API was certified; availability is inherited with zero native LOC.\nSearch and boundary notes: Read actual symplectic map_mem/group proofs, entrywise ring-hom map and kernel plus least-witness constructors. Exclude false geometric/J-holomorphic congruence and symplectic reduction hits; no Sp→SL determinant or congruence subgroup property theorem is required by this bare definition.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "connected-reductive-algebraic-group",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Coordinate commutative Hopf groups, smoothness and connected prime spectra are supplied. However this pass did not certify a complete standalone geometric UNIPOTENT closed-subgroup/radical constructor matching the largest connected normal unipotent subgroup of the algebraic-closure fibre. A reductive Lie algebra, semisimple representation or anisotropic quadratic form is a different object. The exact general affine reductive-group predicate remains an unresolved interface frontier.\nSearch and boundary notes: Searched reductive/unipotent radical/connected Hopf and algebraic subgroup sources; native Tau Reductive.Basic71/79 and Unipotent/Radical/Construction69/115 were checked separately and retain Tau ownership. No absence claim or definition by Lie reductivity.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "connected-reductive-algebraic-group",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Unipotent/Radical/Construction.lean",
+          "declarations": "TauCeti.FiniteTypeCommHopfAlgCat.unipotentRadicalDefiningIdeal:69; eq_unipotentRadicalDefiningIdeal_iff:99; unipotentRadicalDefiningIdeal_eq_augmentation_iff:115",
+          "note": "Constructs the maximal connected normal unipotent subgroup and proves the exact trivial-radical criterion."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Reductive/Basic.lean",
+          "declarations": "TauCeti.reductiveCommHopfAlgProperty:71; reductiveCommHopfAlgProperty_iff:79",
+          "note": "Implements the geometric radical-free coordinate predicate and the ordinary reductive-group constructor with explicit geometric-connectedness hypothesis."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. An exact literal predicate on a finite-type coordinate Hopf algebra H is Algebra.Smooth F H, ConnectedSpace(PrimeSpectrum H), AND unipotentRadicalDefiningIdeal(H base-changed to AlgebraicClosure F)=augmentation. Native radical construction:69 chooses the GREATEST connected normal smooth unipotent subgroup (least defining ideal), and criterion:115 proves triviality iff every such candidate is the identity, not the zero ideal. Unipotent/Radical/Basic.lean:73 spells out normality, connectedness and smooth geometric unipotence. Native Reductive.Basic71/iff79 packages the common GEOMETRICALLY connected variant. The literal predicate here retains ordinary connectedness in the catalogue and does not silently claim a separately unverified general connected/geometrically-connected bridge; over the algebraic closure those candidate notions agree by Connected/AlgebraicallyClosed:85. Exact construction namespace is TauCeti.FiniteTypeCommHopfAlgCat; declaration-start anchor for IsUnipotentRadicalCandidate is73 (72 is documentation).\nSearch and boundary notes: The primary generic predicate is explicitly Smooth + ordinary connected spectrum + trivial geometric radical. Do not merely drop the connectedness hypothesis or identify the identity subgroup with the zero Hopf ideal. Exclude reductivity of Lie algebras, maximal tori, root data and structure/classification theorems. Over AlgebraicClosure the actual connected/geometrically-connected criterion is checked, without asserting an unlocated arbitrary-base theorem.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "continuous-affine-function-space",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/ContinuousMap/Algebra.lean",
+          "declarations": "ContinuousMap.evalCLM:631",
+          "note": "Supplies the linear point-evaluation combinations defining the exact affine-on-K subspace."
+        },
+        {
+          "path": "Mathlib/Topology/ContinuousMap/Compact.lean",
+          "declarations": "ContinuousMap norm instance:159; norm_le:205; norm_eq_iSup_norm:238",
+          "note": "Supplies the precise compact-domain supremum norm inherited by Aff(K)."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Inside C(K,ℝ), define Aff(K) as the intersection, over x,y∈K and t∈[0,1], of kernels of ev_((1−t)x+ty)−(1−t)ev_x−t ev_y. Actual evalCLM:631 supplies the linear evaluations, LinearMap.ker:58 and Submodule.mem_iInf:237 supply the exact affine-equality subspace. Continuity is already part of C(K,ℝ), and the source compact-function norm instance:159/norm_eq_iSup_norm:238 gives precisely sup_K|f|; a submodule inherits that norm (Normed/Group/Submodule:40). Pointwise partial order is the subtype restriction, with no claim of lattice closure. This works on a compact CONVEX set without assuming it is an affine space or proving an ambient extension theorem.\nSearch and boundary notes: Do not use the ambient ContinuousAffineMap operator-type norm max(|f0|,||linearpart||): K need not be an affine torsor and that norm is different. Exclude Hahn–Banach functionals and representing-measure existence; maxima/minima of affine functions need not be affine, so only pointwise partial order is asserted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    },
+    {
+      "concept": "continuous-affine-function-space",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/ContinuousMap/Compact.lean",
+          "declarations": "ContinuousMap.convex_uniformlyPositive:41; isOpen_uniformlyPositive:54",
+          "note": "Proves direct pointwise-order/supnorm positivity laws, restricting to the affine-function subspace."
+        },
+        {
+          "path": "TauCeti/Analysis/Convex/AffineOn.lean",
+          "declarations": "Convex.convexOn_and_concaveOn_iff:29",
+          "note": "Proves the exact equivalent presentation of preserving convex combinations as being both convex and concave on the given convex set; continuity is supplied by the ambient C(K,Real) space."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency supplies the same exact intersection-of-evaluation-kernels representation and restricted supremum norm. Native ContinuousMap.convex_uniformlyPositive:41 and isOpen_uniformlyPositive:54 prove convexity/openness of the uniformly positive functions, the latter by a δ/2 SUP-norm ball and pointwise distance bound. Restrict along the actual Aff(K) subspace inclusion (continuous with the inherited norm) to obtain the ordinary pointwise-order/supnorm positivity API of this space. Weaker generic continuous-function hypotheses are retained; no affine extension theorem is assumed. Exact dependency kernel/lattice supplier anchors are LinearMap.ker59 and Submodule.mem_iInf238; the defining bodies are unchanged after header insertions, while compact C-map norm/evaluation sources are byte-identical. Native AffineOn.lean29 independently proves convex AND concave iff preserving every nonnegative convex combination on K. Complete proof33-35 uses order antisymmetry and both equality directions; requires neither ambient affine torsor nor extension of the function outside K. It directly recognizes the defining affine predicate, hence belongs to this function space’s bounded core API.\nSearch and boundary notes: Do not use the ambient ContinuousAffineMap operator-type norm max(|f0|,||linearpart||): K need not be an affine torsor and that norm is different. Exclude Hahn–Banach functionals and representing-measure existence; maxima/minima of affine functions need not be affine, so only pointwise partial order is asserted. Added directly contributing AffineOn equivalent-presentation file after actual sibling enumeration; it is not merely recognizing an auxiliary test for a separate representing-measure concept.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-040.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Group/Subgroup/Ker.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 643,
+      "sha256": "a85728844bf80d5f07ad888d0e434a32d0fec424833b2a3ae952720a5a41c644",
+      "measured_at": "2026-11-13T02:59:25.337207+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Calculus/Deriv/Pi.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 45,
+      "sha256": "cca96ad02c2836f38785087c24912d5c07bc50f8f94f401ed6c7873ccb426993",
+      "measured_at": "2026-11-13T02:59:25.351248+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Int/GCD.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 323,
+      "sha256": "1f8c51ab25fe22b3486fb4879f24567609f68244c2a2eddc00ae6a6d115c25ae",
+      "measured_at": "2026-11-13T02:59:25.363224+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Int/ModEq.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 405,
+      "sha256": "d6b9234a738b0385fd6cb8e9eef3c82e417aa6a9ef6272f2a8935e043299f326",
+      "measured_at": "2026-11-13T02:59:25.366749+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/LinearAlgebra/SymplecticGroup.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 393,
+      "sha256": "0196d74e5068509ba90247d6b96c3a6a3bcfd7f41c12312814a3920742b75e23",
+      "measured_at": "2026-11-13T02:59:25.376073+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/ContinuousMap/Algebra.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 903,
+      "sha256": "61df7245ef005ba47207151d6df8b7700203aee654bd61f7a354ca01c4e55cec",
+      "measured_at": "2026-11-13T02:59:25.389027+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/AlgebraicGroup/Unipotent/Radical/Construction.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 206,
+      "sha256": "e280803d0798267c9f27267d9c34433d6b3ea2fd0dd74c55de963b15484a63a2",
+      "measured_at": "2026-11-13T02:59:25.419867+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Asymptotics/Lemmas.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 230,
+      "sha256": "0df8f35231e64c28d98def722dc65ea030a6fa15826db618018913515efb6f8a",
+      "measured_at": "2026-11-13T02:59:25.426508+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Calculus/FDeriv/Pi/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 161,
+      "sha256": "b041d714d5effff425a6a3cc10fe15edbafe83216b1e6b57c5fa963ef9d41127",
+      "measured_at": "2026-11-13T02:59:25.432385+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Convex/AffineOn.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 35,
+      "sha256": "d57709a209403240a17653cd57fd73f6fe195b56abbeab05f1b568e64ab7e87e",
+      "measured_at": "2026-11-13T02:59:25.437628+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Combinatorics/SimpleGraph/Bipartite.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 91,
+      "sha256": "4c9495ae5eb95d9f9e6b4e5e127492e1e0bbe8f308b8a6e02cc3595b5b8d35b8",
+      "measured_at": "2026-11-13T02:59:25.442253+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Data/Nat/ModEq.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 65,
+      "sha256": "995edd5f5fa02f773185bc71c1af1959339f39aa874d894f3f4394f7a3bbb760",
+      "measured_at": "2026-11-13T02:59:25.447503+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/ContinuousMap/Compact.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 98,
+      "sha256": "0bcb56d8696cf0649a02f3fa5eef95e8cbc2d72b52dc1ceaeb142755ada24299",
+      "measured_at": "2026-11-13T02:59:25.457399+00:00"
+    }
+  ]
+}

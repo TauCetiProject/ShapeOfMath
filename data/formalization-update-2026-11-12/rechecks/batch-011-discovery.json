@@ -1,0 +1,52 @@
+{
+  "batch_id": "batch-011-discovery",
+  "author": "category_galois_formalization",
+  "original_batch_id": "batch-011",
+  "original_proposal_sha256": "91b84c48260925e82da767cf07ece4e7db618a2185a3f764e1664ddad01571d6",
+  "original_review_sha256": "f219364359b0522cb359d5f81c5611b2d7a83f2c93f5842c6ecc2b36b6be6c94",
+  "reason": "Newly located exact native closed-span iff and supplying generic extension resolve the earlier explicitly unverified endpoint.",
+  "reviews": [
+    {
+      "concept": "equivalent-basic-sequences",
+      "concept_id": "72accd0d-cc58-55f9-955e-c34f9853ddcb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Mutual domination is exactly the two reversed Asymptotics.IsBigO comparisons at the top filter on \u2115\u2192\u2080\ud835\udd5c, with linearCombination:54/apply:59 and isBigO_iff:99. Newly checked LinearEquiv.extend:237 is an actual completed continuous-linear-equivalence constructor from two dense linear maps and the corresponding two finite-coefficient bounds; its body constructs both bounded extensions and proves inverse laws by dense induction. Instantiate f as the identity equivalence on \u2115\u2192\u2080\ud835\udd5c and e1/e2 as the two combination maps into their closed spans. range_linearCombination:123 identifies their ranges with spans, and denseRange_inclusion_iff:502 makes inclusion of each span into its closure dense. Closed spans in the Banach ambient setting are complete by Submodule.topologicalClosure.completeSpace:212. extend_eq:269 sends each finite combination, hence each basis vector, to its counterpart; norm_extend_le:280 and inverse:285 give both uniform bounds. Conversely ContinuousLinearMap.bound:130 applied to the isomorphism and its inverse gives precisely the reversed finite-sum bounds. These existing generic constructors resolve the previously unverified extension/inverse endpoint without requiring a named basic-sequence alias. Relevant actual source bodies and hypotheses inspected; no new Lean proof, fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Asymptotics/Defs.lean",
+          "declarations": "Asymptotics.IsBigOWith:72; IsBigO:86; isBigO_iff:99",
+          "note": "Actual uniform comparison predicate, applied in both directions to finite coefficient combinations."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/Finsupp/LinearCombination.lean",
+          "declarations": "Finsupp.linearCombination:54; linearCombination_apply:59; range_linearCombination:123",
+          "note": "Exact finite-coefficient sum constructor and span-range presentation used by the coordinate correspondence."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/Extend.lean",
+          "declarations": "LinearEquiv.extend:237; extend_eq:269; extend_symm_eq:275; norm_extend_le:280; norm_extend_symm_le:285",
+          "note": "Existing completed two-sided bounded extension with inverse/equality/norm API, specialized to closed-span coordinate isomorphism."
+        }
+      ],
+      "search_notes": "This is a targeted discovery/recheck superseding only the earlier equivalent-basic-sequences unknown pair, not a rewrite of imported batch011. Actual complete closed spans are required: catalogue Schauder bases are explicitly bases of Banach spaces; no extension claim is made for arbitrary incomplete normed ambient spaces. The two-sided bound may use nonnegative constants (enlarge any real witness to max(C,0)); the isomorphism direction supplies positive norm bounds directly. Native topological dense-span and Finsupp coercion helper files are prerequisites and excluded from native file shares. Parent should obtain fresh independent review by original reviewer algebra_formalization before any audited live update."
+    },
+    {
+      "concept": "equivalent-basic-sequences",
+      "concept_id": "72accd0d-cc58-55f9-955e-c34f9853ddcb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Newly located native continuousLinearEquivOfLinearCombinationBounds:56 applies the checked dependency LinearEquiv.extend to identity on coefficient families and the two Finsupp combination maps. Native exists_continuousLinearEquiv_topologicalClosure_span_of_bounds:117 explicitly constructs the continuously linearly isomorphic closed spans, mapping each family vector to its counterpart and retaining forward/inverse operator-norm bounds. The full exists_continuousLinearEquiv_topologicalClosure_span_iff:152 proof proves the converse using operator norms and apply_linearCombination. All complete bodies inspected, including inverse construction and closed-span subtype/coefficient comparison. This exactly supplies the catalogue equivalence for basic sequences in the Banach setting, indeed under the weaker hypothesis that just the two closed spans are complete; no unconditionality or finite-dimensionality hypothesis. Full dependency availability is checked at the actual pin, and only genuine native correspondence API is counted. Source inspection only; no new proof, fresh build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Operator/Span.lean",
+          "declarations": "TauCeti.continuousLinearEquivOfLinearCombinationBounds:56; exists_continuousLinearEquiv_topologicalClosure_span_of_bounds:117; exists_continuousLinearEquiv_topologicalClosure_span_iff:152",
+          "note": "Native actual closed-span coordinate-isomorphism construction and complete iff with two-sided finite-combination domination; ordinary bounds, generator and uniqueness API."
+        }
+      ],
+      "search_notes": "This is a targeted discovery/recheck superseding only the earlier equivalent-basic-sequences unknown pair, not a rewrite of imported batch011. Actual complete closed spans are required: catalogue Schauder bases are explicitly bases of Banach spaces; no extension claim is made for arbitrary incomplete normed ambient spaces. The two-sided bound may use nonnegative constants (enlarge any real witness to max(C,0)); the isomorphism direction supplies positive norm bounds directly. Native topological dense-span and Finsupp coercion helper files are prerequisites and excluded from native file shares. Parent should obtain fresh independent review by original reviewer algebra_formalization before any audited live update."
+    }
+  ]
+}

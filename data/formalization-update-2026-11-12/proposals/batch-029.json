@@ -1,0 +1,591 @@
+{
+  "batch_id": "batch-029",
+  "author": "category_galois_formalization",
+  "reviews": [
+    {
+      "concept": "affine-group-scheme-finite-presentation",
+      "concept_id": "5597a714-a473-5c22-8838-bfb574b2ca1d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "The exact coordinate representation is H:CommHopfAlgCat R with Algebra.FinitePresentation R H. CommHopfAlgCat:30 bundles a COMMUTATIVE R-Hopf algebra; FinitePresentation:43 requires a surjection from finitely many polynomial variables with finitely generated kernel, not just finite type. The group-valued functor is actually available without the restrictive concrete convolution instance: CommAlgCat.grpObjOpOf:173 makes op(H) a group object and Cartesian/Grp.yonedaGrpObj:75 sends op(B) to Hom(op(B),op(H))=Hom_Ralg(H,B), with Hom.group:58 supplying inverses. Read the antipode/group-object axiom proofs and Yoneda construction. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Category/CommHopfAlgCat.lean",
+          "declarations": "CommHopfAlgCat:30; CommAlgCat.grpObjOpOf:173; commHopfAlgCatEquivCogrpCommAlgCat:211",
+          "note": "Actual commutative Hopf coordinate category and opposite-algebra group-object realization."
+        },
+        {
+          "path": "Mathlib/RingTheory/FinitePresentation.lean",
+          "declarations": "Algebra.FinitePresentation:43",
+          "note": "Actual finite-presentation predicate defining the coordinate refinement over arbitrary commutative rings."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Monoidal/Cartesian/Grp.lean",
+          "declarations": "CategoryTheory.Hom.group:58; yonedaGrpObj:75; yonedaGrpObjRepresentableBy:84",
+          "note": "Actual group-valued representable functor specialized to the opposite commutative-algebra category."
+        }
+      ],
+      "search_notes": "Do not substitute finite type for finite presentation over an arbitrary ring. General schemes are unnecessary for the exact paragraph. Mathlib AlgHom.convGroup:169 additionally assumes the VALUE algebra is a bialgebra; that restricted instance alone is insufficient, so the checked group-object/Yoneda route is essential. Exclude general scheme infrastructure and special smooth/reductive groups."
+    },
+    {
+      "concept": "affine-group-scheme-finite-presentation",
+      "concept_id": "5597a714-a473-5c22-8838-bfb574b2ca1d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The exact dependency supplies CommHopfAlgCat plus Algebra.FinitePresentation:44 (same mathematical body; one documentation blank line differs). Native HopfAlgebra.pointsFunctor:135 explicitly sends every commutative R-algebra B to the convolution group WithConv(H\u2192alg B). Native AlgHom.convGroupOfSemiring:119 proves the inverse axiom using the antipode with NO bialgebra assumption on B; mapValue:143 proves postcomposition multiplicative. These provide genuine ordinary functor-of-points API for the finitely presented subclass. Read the actual group-inverse and functoriality proofs. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/FunctorOfPoints.lean",
+          "declarations": "AlgHom.antipodeComp:78; convGroupOfSemiring:119; mapValue:143",
+          "note": "Native convolution inverse/group and value-algebra functoriality under the correct arbitrary commutative value-algebra hypotheses."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/PointsFunctor.lean",
+          "declarations": "TauCeti.HopfAlgebra.points:56; pointsFunctor:135; pointsFunctor_obj:152",
+          "note": "Native actual group-valued points functor and elementary point evaluation API."
+        }
+      ],
+      "search_notes": "The finite-presentation restriction remains dependency-owned and can be imposed directly on the coordinate algebra. Native FiniteTypeCommHopfAlgCat is not silently treated as finite presentation over arbitrary rings. Exclude special presentations of classical groups and downstream scheme transport."
+    },
+    {
+      "concept": "algebra-homomorphism-field",
+      "concept_id": "31fa5ee7-de3b-5cb7-8e24-12e1b26ecab7",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "AlgHom:30 is a unital ring homomorphism commuting with scalar structure maps. toLinearMap:292 supplies exact scalar linearity; ofLinearMap:325 constructs AlgHom from a linear map preserving 1 and multiplication, with round trips:334/339. Read its scalar-commutation proof via c\u20221. Over a field this is exactly the catalogue definition; no commutativity of either algebra is assumed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Algebra/Hom.lean",
+          "declarations": "AlgHom:30; AlgHom.toLinearMap:292; AlgHom.ofLinearMap:325; ofLinearMap_toLinearMap:334",
+          "note": "Actual algebra-map definition, equivalent linear-multiplicative-unital presentation and elementary composition/evaluation API."
+        }
+      ],
+      "search_notes": "Use unital associative algebras, not nonunital algebra maps or semilinear maps. The base-field requirement is a specialization of CommSemiring, not an additional theorem."
+    },
+    {
+      "concept": "algebra-homomorphism-field",
+      "concept_id": "31fa5ee7-de3b-5cb7-8e24-12e1b26ecab7",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The exact dependency AlgHom definition and linear-map constructor are byte-identical. Native AlgHom.descend:259 explicitly constructs the descended algebra homomorphism along a surjective map when the original map is constant on fibers, and verifies 0,+,1,*, scalar commutation. descend_apply:272/descend_comp:278/descend_unique:283 prove the expected evaluation and uniqueness laws. Read these complete proofs. This is ordinary algebra-hom API valid over fields as well as weaker semirings. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Algebra/Hom.lean",
+          "declarations": "AlgHom.descend:259; descend_apply:272; descend_comp:278; descend_unique:283",
+          "note": "Native ordinary algebra-map descent, evaluation and uniqueness API; underlying AlgHom remains Mathlib-owned."
+        }
+      ],
+      "search_notes": "Exclude purely integer-algebra coercion installations, Lie-algebra applications and independently significant dimension comparisons. The native descended map is a direct core map construction, not a mere use/import."
+    },
+    {
+      "concept": "algebraic-character-group",
+      "concept_id": "6d8c495a-9b3c-5d9f-9e1a-91fd19e30f67",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "The checked coordinate realization is GroupLike k H for the coordinate commutative Hopf algebra H over the SPECIFIED field k: \u03b5(a)=1 and \u0394(a)=a\u2297a. A character is its regular invertible coordinate function; toUnits:37 proves invertibility with inverse S(a), and multiplication is multiplication in H, hence pointwise after every algebra-valued point. This is the regular G\u2192Gm coordinate condition, not an arbitrary abstract homomorphism on k-points. Checked the Laurent-polynomial Hopf target (MonoidAlgebra Hopf instance:65, antipode_T:77), the existing group-like lift constructor Bialgebra/MonoidAlgebra:159, and the actual inverse/commutative-group proofs.  Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Coalgebra/GroupLike.lean",
+          "declarations": "IsGroupLikeElem:37; GroupLike:66",
+          "note": "Actual coordinate character condition \u03b5(a)=1 and \u0394(a)=a\u2297a."
+        },
+        {
+          "path": "Mathlib/RingTheory/Bialgebra/GroupLike.lean",
+          "declarations": "IsGroupLikeElem.mul:35; GroupLike Mul:72",
+          "note": "Actual multiplication of coordinate characters."
+        },
+        {
+          "path": "Mathlib/RingTheory/HopfAlgebra/GroupLike.lean",
+          "declarations": "GroupLike.toUnits:37; Group instance:64; instCommGroup:72",
+          "note": "Antipode inverse, unit realization and abelian group of coordinate characters."
+        }
+      ],
+      "search_notes": "The coordinate description is an equivalent bare-definition representation, not a claim of a newly proved Laurent-polynomial character-bijection theorem. Native geometricCharacterGroup:73 instead uses AlgebraicClosure k\u2297H; do not substitute that larger geometric character group for k-defined characters. Exclude character-lattice Galois actions, character kernels and classifications of diagonalizable groups. Checked native MultiplicativeGroup.pointsMulEquiv:56 identifies the target points with units, but that target-carrier prerequisite is not allocated as a character-group file."
+    },
+    {
+      "concept": "algebraic-character-group",
+      "concept_id": "6d8c495a-9b3c-5d9f-9e1a-91fd19e30f67",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The checked coordinate realization is GroupLike k H for the coordinate commutative Hopf algebra H over the SPECIFIED field k: \u03b5(a)=1 and \u0394(a)=a\u2297a. A character is its regular invertible coordinate function; toUnits:37 proves invertibility with inverse S(a), and multiplication is multiplication in H, hence pointwise after every algebra-valued point. This is the regular G\u2192Gm coordinate condition, not an arbitrary abstract homomorphism on k-points. Checked the Laurent-polynomial Hopf target (MonoidAlgebra Hopf instance:65, antipode_T:77), the existing group-like lift constructor Bialgebra/MonoidAlgebra:159, and the actual inverse/commutative-group proofs. Native mapGroupLike:36 carries these defining coordinates along a coordinate Hopf map and proves identity/composition and multiplicative-equivalence laws; this is direct ordinary character pullback API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Bialgebra/GroupLike/Map.lean",
+          "declarations": "BialgHom.mapGroupLike:36; val_mapGroupLike:44; mapGroupLike_comp:55; BialgEquiv.mapGroupLike:65",
+          "note": "Native ordinary pullback/functoriality of the character group, over the specified base ring itself."
+        }
+      ],
+      "search_notes": "The coordinate description is an equivalent bare-definition representation, not a claim of a newly proved Laurent-polynomial character-bijection theorem. Native geometricCharacterGroup:73 instead uses AlgebraicClosure k\u2297H; do not substitute that larger geometric character group for k-defined characters. Exclude character-lattice Galois actions, character kernels and classifications of diagonalizable groups. Checked native MultiplicativeGroup.pointsMulEquiv:56 identifies the target points with units, but that target-carrier prerequisite is not allocated as a character-group file."
+    },
+    {
+      "concept": "algebraic-closure",
+      "concept_id": "3436844f-1c13-5e72-9fb6-0d25b2f60cba",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "IsAlgClosure:279 has precisely IsAlgClosed K and Algebra.IsAlgebraic F K; isAlgClosure_iff:286 proves that exact conjunction. For field F the scalar injectivity/torsion-free input is automatic. This matches the OBJECT definition and does not include existence or uniqueness. Read the class and both implication constructors. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+          "declarations": "IsAlgClosure:279; isAlgClosure_iff:286",
+          "note": "Actual algebraic-extension plus algebraic-closedness predicate and elementary object recognition API."
+        }
+      ],
+      "search_notes": "Exclude AlgebraicClosure.lean construction/existence and uniqueness/equivOfEquiv theorems as separately named endpoints. A relative algebraic closure inside an arbitrary extension is not necessarily an algebraically closed field."
+    },
+    {
+      "concept": "algebraic-closure",
+      "concept_id": "3436844f-1c13-5e72-9fb6-0d25b2f60cba",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Actual dependency IsAlgClosure:280/isAlgClosure_iff:287 has the same object-defining conjunction (only documentation whitespace shifts these anchors). The native IsAlgClosed/AlgebraicClosure file installs FaithfulSMul by transitivity; this is a pure inherited instance installation, not a new defining or ordinary mathematical closure operation. Native FieldTheory/AlgebraicClosure concerns relative closure/linear disjointness, and native absolute Galois comparisons concern the separately catalogued Galois group. No qualifying native file selected for this narrow object definition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Zero native LOC. Exclude existence/uniqueness theorem proofs and transcendence-basis automorphism classifications, which add separate endpoints to the expressly object-only paragraph."
+    },
+    {
+      "concept": "algebraic-group-base-change",
+      "concept_id": "fa1fdca2-88b0-5a5d-8b7b-bc9480741758",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "TensorProduct HopfAlgebra instance:29 constructs an S-Hopf algebra on B\u2297[R]A from an R-Hopf algebra A and an S-Hopf algebra B with compatible scalar towers. Set B=S using CommSemiring.toHopfAlgebra:137 (antipode=id): the result is exactly S\u2297[R]A over S, with antipode id\u2297S_A and the induced coproduct/counit. Read both antipode tensor identities in the completed instance. The commutative coordinate tensor algebra bundles via CommHopfAlgCat.of. Specialize R,F and S,L to fields for the field-extension paragraph. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/HopfAlgebra/TensorProduct.lean",
+          "declarations": "TensorProduct HopfAlgebra instance:29; antipode_def:53",
+          "note": "Actual tensor Hopf operations and full antipode proofs giving arbitrary scalar-ring base change via first factor S."
+        }
+      ],
+      "search_notes": "The tensor instance is genuinely over S, not merely the tensor of two R-Hopf algebras. The base-ring self-Hopf instance is a prerequisite and not allocated as an additional file. Exclude geometric fiber properties, flatness preservation and restriction of scalars."
+    },
+    {
+      "concept": "algebraic-group-base-change",
+      "concept_id": "fa1fdca2-88b0-5a5d-8b7b-bc9480741758",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency HopfAlgebra/TensorProduct:30 supplies the same S-Hopf tensor construction (documentation whitespace only). Native CommHopfAlgCat.baseChange:70 directly bundles K\u2297[k]H over arbitrary COMMUTATIVE RINGS; baseChangeAlgEquiv:78 is the literal identity on this carrier, and baseChangeMap:84 tensors a coordinate map with id_K, with pure-tensor formula:99. Read the constructor, map and pure-tensor proof. Native TensorProduct.antipode_rTensor:35 proves compatibility of this antipode with maps on the new base by tensor induction. Field extension is a specialization. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/CommHopfAlgCat/BaseChange.lean",
+          "declarations": "TauCeti.CommHopfAlgCat.baseChange:70; CommHopfAlgCat.baseChangeAlgEquiv:78; baseChangeMap:84; baseChangeMap_apply_tmul:99",
+          "note": "Native exact coordinate scalar-extension construction and immediate map/tower/points API."
+        },
+        {
+          "path": "TauCeti/Algebra/HopfAlgebra/BaseChange.lean",
+          "declarations": "TensorProduct.antipode_rTensor:35",
+          "note": "Native ordinary compatibility of the induced antipode with a scalar-factor linear map."
+        }
+      ],
+      "search_notes": "Bounded core is the coordinate tensor construction and its ordinary maps; exclude Borel/smooth/reductive fiber specializations. Flatness hypotheses later in the file concern injectivity preservation, not the definition; do not impose them on arbitrary base change."
+    },
+    {
+      "concept": "base-change-affine-group-ring",
+      "concept_id": "d3000527-0146-5ec7-90b9-333c71c968f8",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "TensorProduct HopfAlgebra instance:29 constructs an S-Hopf algebra on B\u2297[R]A from an R-Hopf algebra A and an S-Hopf algebra B with compatible scalar towers. Set B=S using CommSemiring.toHopfAlgebra:137 (antipode=id): the result is exactly S\u2297[R]A over S, with antipode id\u2297S_A and the induced coproduct/counit. Read both antipode tensor identities in the completed instance. The commutative coordinate tensor algebra bundles via CommHopfAlgCat.of. The assumptions are arbitrary commutative rings; S=R/\ud835\udd2a is the residue-field fiber, with no flatness requirement for the construction. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/HopfAlgebra/TensorProduct.lean",
+          "declarations": "TensorProduct HopfAlgebra instance:29; antipode_def:53",
+          "note": "Actual tensor Hopf operations and full antipode proofs giving arbitrary scalar-ring base change via first factor S."
+        }
+      ],
+      "search_notes": "The tensor instance is genuinely over S, not merely the tensor of two R-Hopf algebras. The base-ring self-Hopf instance is a prerequisite and not allocated as an additional file. Exclude geometric fiber properties, flatness preservation and restriction of scalars."
+    },
+    {
+      "concept": "base-change-affine-group-ring",
+      "concept_id": "d3000527-0146-5ec7-90b9-333c71c968f8",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency HopfAlgebra/TensorProduct:30 supplies the same S-Hopf tensor construction (documentation whitespace only). Native CommHopfAlgCat.baseChange:70 directly bundles K\u2297[k]H over arbitrary COMMUTATIVE RINGS; baseChangeAlgEquiv:78 is the literal identity on this carrier, and baseChangeMap:84 tensors a coordinate map with id_K, with pure-tensor formula:99. Read the constructor, map and pure-tensor proof. Native TensorProduct.antipode_rTensor:35 proves compatibility of this antipode with maps on the new base by tensor induction. Residue fibers are obtained by taking K=k/\ud835\udd2a; neither field nor flatness is required merely to define the object. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/CommHopfAlgCat/BaseChange.lean",
+          "declarations": "TauCeti.CommHopfAlgCat.baseChange:70; CommHopfAlgCat.baseChangeAlgEquiv:78; baseChangeMap:84; baseChangeMap_apply_tmul:99",
+          "note": "Native exact coordinate scalar-extension construction and immediate map/tower/points API."
+        },
+        {
+          "path": "TauCeti/Algebra/HopfAlgebra/BaseChange.lean",
+          "declarations": "TensorProduct.antipode_rTensor:35",
+          "note": "Native ordinary compatibility of the induced antipode with a scalar-factor linear map."
+        }
+      ],
+      "search_notes": "Bounded core is the coordinate tensor construction and its ordinary maps; exclude Borel/smooth/reductive fiber specializations. Flatness hypotheses later in the file concern injectivity preservation, not the definition; do not impose them on arbitrary base change."
+    },
+    {
+      "concept": "algebraic-group-morphism",
+      "concept_id": "f99a0865-67ff-588d-baa8-db8a9dcbc24d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "CommHopfAlgCat.Hom:56 wraps an R-bialgebra homomorphism in the coordinate direction. BialgHom:37 contains linearity, multiplication/1 and the CoalgHom coproduct/counit laws. The opposite categorical map in commHopfAlgCatEquivCogrpCommAlgCat:211 is a morphism of group objects; checked the completed general GrpObj.inv_hom:314 proof that such a morphism preserves inverse, together with CommAlgCat.inv_op_of_unop_hom:198 identifying that inverse as the antipode. Thus the actual category covers the requested coproduct/counit/antipode-preserving coordinate maps, contravariantly. Alternatively the explicit antipode-commutation guard can be imposed directly on BialgHom without any extra object construction. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Category/CommHopfAlgCat.lean",
+          "declarations": "CommHopfAlgCat.Hom:56; CommAlgCat.inv_op_of_unop_hom:198; commHopfAlgCatEquivCogrpCommAlgCat:211",
+          "note": "Actual coordinate Hopf morphism category, opposite group-object interpretation and antipode identification."
+        },
+        {
+          "path": "Mathlib/RingTheory/Bialgebra/Hom.lean",
+          "declarations": "BialgHom:37; BialgHomClass:52",
+          "note": "Actual coproduct/counit and unital multiplicative linear-map constructor with elementary hom API."
+        }
+      ],
+      "search_notes": "Do not confuse an arbitrary algebra homomorphism with a Hopf morphism. The actual general inverse-preservation helper was checked, but is not allocated as another broad prerequisite file. No general-scheme bridge is required for this exact coordinate paragraph; native Tau map_antipode is separate ownership."
+    },
+    {
+      "concept": "algebraic-group-morphism",
+      "concept_id": "f99a0865-67ff-588d-baa8-db8a9dcbc24d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency provides the coordinate Hopf category. Native BialgHomClass.coe_comp_antipode:43 proves antipode compatibility by uniqueness of left/right convolution inverses, and map_antipode:59 evaluates it pointwise for EVERY bialgebra-hom-like map between Hopf algebras. Native CommHopfAlgCat.Hom.grpObjMap:74 is the literal opposite underlying algebra map; :100 proves injectivity of this representation, :117 reverses composition, and mapPointsFunctor:143 acts on points by precomposition. Read the actual convolution-inverse and coordinate/pullback proofs. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/HopfAlgebra/Basic.lean",
+          "declarations": "BialgHomClass.coe_comp_antipode:43; map_antipode:59",
+          "note": "Native direct proof that coordinate bialgebra maps preserve the antipode."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/CommHopfAlgCat/Basic.lean",
+          "declarations": "CommHopfAlgCat.Hom.grpObjMap:74; grpObjMap_injective:100; grpObjMap_comp:117; mapPointsFunctor:143",
+          "note": "Native contravariant coordinate/group-object and points-morphism construction with immediate API."
+        }
+      ],
+      "search_notes": "Preservation of all Hopf operations is checked, not inferred just from the name Hom. Exclude kernel/image subgroup classifications and unrelated geometric properties of morphisms."
+    },
+    {
+      "concept": "algebraic-representation-affine-group",
+      "concept_id": "055b7395-28dc-5207-8d6a-72ad794133e2",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Checked CommHopfAlgCat group-object equivalence and ordinary Representation:48 (an abstract group\u2192linear-endomorphism map). The latter does NOT impose regular matrix coefficients. Standalone searches did not certify the exact finite-dimensional regular G\u2192GL(V) construction and the faithful closed-immersion criterion. The native Tau point-representation/comodule/coordinate-GL constructions are separate ownership, not Mathlib availability. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped affine/algebraic representation, comodule, GL-coordinate and faithful-immersion searches. No standalone Comodule implementation was located in this pinned Mathlib. Generic abstract group representations plus finite dimensionality alone leave the essential regularity bridge unresolved; unknown is not an absence claim."
+    },
+    {
+      "concept": "algebraic-representation-affine-group",
+      "concept_id": "055b7395-28dc-5207-8d6a-72ad794133e2",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "PointRepresentation:69 is an actual natural transformation from the group-valued points functor of H to the scalar-extension linear-automorphism functor of V. Specializing to a finite-dimensional k-space gives a regular affine-group representation, with naturality over ALL value algebras, rather than just an abstract k-point action. Coordinate.coordinateBialgHom:107 constructs O(GL_n)\u2192H from a finite-basis comodule; :115 proves entries are precisely the regular coefficient matrix, and the actual counit/coproduct proofs:83/91 were read. Faithful.Basic.IsFaithful:238 is exactly that this finite-basis coordinate group-scheme map is a closed immersion; :271/281 prove basis independence, and :293 equates it to coordinate-map surjectivity. Read those completed proofs. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Representation/Comodule/Basic.lean",
+          "declarations": "TauCeti.HopfAlgebra.PointRepresentation:69; PointRepresentation.action:88; action_naturality:124",
+          "note": "Native exact natural group-valued representation constructor and ordinary action/naturality API."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Representation/Coordinate.lean",
+          "declarations": "TauCeti.Comodule.coordinateBialgHom:107; coordinateBialgHom_X:115; AlgHom.pointsMulEquiv_comp_coordinateBialgHom:124",
+          "note": "Native actual GL coordinate morphism with regular coefficients and proved Hopf compatibility."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Representation/Faithful/Basic.lean",
+          "declarations": "TauCeti.Comodule.IsFaithful:238; isClosedImmersion_coordinateGroupSchemeHom_iff_of_bases:271; coordinateBialgHom_surjective_iff_isFaithful:293",
+          "note": "Native faithful finite-dimensional representation/closed-immersion definition and ordinary coordinate/basis recognition API."
+        }
+      ],
+      "search_notes": "Finite dimensionality is imposed explicitly; arbitrary module natural actions in the generic constructor are not silently assumed finite. The faithful clause is an extra predicate on a representation, not a claim every representation is faithful. Exclude existence of a faithful representation for every finite-type group, Tannaka reconstruction, stabilizers and Jordan decomposition as separate endpoints."
+    },
+    {
+      "concept": "algebraically-closed-field",
+      "concept_id": "52a53111-da0a-5f96-8efb-917c914cd3f8",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "IsAlgClosed:62 says all polynomials split; exists_root:78 proves a root when degree\u22600, which covers all nonconstant polynomials (and harmlessly the zero polynomial). of_exists_root:181 proves the converse from roots of monic irreducibles by normalization, factorization and degree-one splitting; read its whole completed proof. Thus the class is equivalent to the exact catalogue condition, not a stronger algebraic-closure-extension definition. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+          "declarations": "IsAlgClosed:62; IsAlgClosed.exists_root:78; IsAlgClosed.of_exists_root:181",
+          "note": "Actual algebraically closed field class, root characterization and ordinary splitting/root/power API."
+        }
+      ],
+      "search_notes": "Distinguish the separate algebraic-closure extension object and its existence/uniqueness. No assumption of characteristic zero or uncountability is added."
+    },
+    {
+      "concept": "algebraically-closed-field",
+      "concept_id": "52a53111-da0a-5f96-8efb-917c914cd3f8",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency IsAlgClosed:63, exists_root:79, of_exists_root:182 have the identical mathematical bodies. Native unitsRootableByNat:27 proves every unit has an n-th root for each nonzero n: it obtains a field root, proves nonzero from the unit, and constructs Units.mk0. This is genuine ordinary root API, rather than a pure superclass or imported instance installation. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/IsAlgClosed/Units.lean",
+          "declarations": "TauCeti.IsAlgClosed.unitsRootableByNat:27",
+          "note": "Native ordinary nth-root existence for units of an algebraically closed field, with nonzero and unit proofs."
+        }
+      ],
+      "search_notes": "The underlying closed-field class is Mathlib-owned. Exclude relative closure, power-class cardinality refinements and automorphism classifications as separate endpoints; a genuine new root proof qualifies under the native core API policy."
+    },
+    {
+      "concept": "almost-holomorphic-half-integral-weight-jacobi-form",
+      "concept_id": "6f088c74-bc53-567e-9414-44b170497ccc",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Actual checked ModularForm:80 is HOLomorphic with integer weight k:\u2124 and boundedness at cusps; SlashAction:38 supplies only a generic slash operation. These do not give the half-integral metaplectic/multiplier transformations and polynomial antiholomorphic corrections in the catalogue. Native HeckeSlash/Basic concerns finite right-coset sums for integer weights and explicitly stops before even its own automorphic-invariance endpoint. Searches did not certify the full requested constructor. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped AlmostHolomorphic/almostHolomorphic/Metaplectic/JacobiForm and half-weight searches in both trees and actual modular/Hecke candidates. Need the two-variable polynomial correction, half-index/multiplier laws and Gaussian cusp growth in translation strips after every cusp normalization; Jacobi theta functions, Jacobi sums and Riemannian Jacobi fields are not this notion. Unknown leaves these concrete interfaces unresolved, not asserted absent."
+    },
+    {
+      "concept": "almost-holomorphic-half-integral-weight-jacobi-form",
+      "concept_id": "6f088c74-bc53-567e-9414-44b170497ccc",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Actual checked ModularForm:80 is HOLomorphic with integer weight k:\u2124 and boundedness at cusps; SlashAction:38 supplies only a generic slash operation. These do not give the half-integral metaplectic/multiplier transformations and polynomial antiholomorphic corrections in the catalogue. Native HeckeSlash/Basic concerns finite right-coset sums for integer weights and explicitly stops before even its own automorphic-invariance endpoint. Searches did not certify the full requested constructor. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped AlmostHolomorphic/almostHolomorphic/Metaplectic/JacobiForm and half-weight searches in both trees and actual modular/Hecke candidates. Need the two-variable polynomial correction, half-index/multiplier laws and Gaussian cusp growth in translation strips after every cusp normalization; Jacobi theta functions, Jacobi sums and Riemannian Jacobi fields are not this notion. Unknown leaves these concrete interfaces unresolved, not asserted absent."
+    },
+    {
+      "concept": "almost-holomorphic-half-integral-weight-modular-form",
+      "concept_id": "0bb4e398-6e4e-519c-8df5-d3b27ba89a8d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Actual checked ModularForm:80 is HOLomorphic with integer weight k:\u2124 and boundedness at cusps; SlashAction:38 supplies only a generic slash operation. These do not give the half-integral metaplectic/multiplier transformations and polynomial antiholomorphic corrections in the catalogue. Native HeckeSlash/Basic concerns finite right-coset sums for integer weights and explicitly stops before even its own automorphic-invariance endpoint. Searches did not certify the full requested constructor. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped AlmostHolomorphic/almostHolomorphic/Metaplectic/JacobiForm and half-weight searches in both trees and actual modular/Hecke candidates. Need finite-image multiplier, metaplectic half-weight law, polynomial 1/Im \u03c4 expansion and polynomial growth at EVERY cusp; ordinary holomorphic integer-weight modular forms do not certify these clauses. Unknown leaves these concrete interfaces unresolved, not asserted absent."
+    },
+    {
+      "concept": "almost-holomorphic-half-integral-weight-modular-form",
+      "concept_id": "0bb4e398-6e4e-519c-8df5-d3b27ba89a8d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Actual checked ModularForm:80 is HOLomorphic with integer weight k:\u2124 and boundedness at cusps; SlashAction:38 supplies only a generic slash operation. These do not give the half-integral metaplectic/multiplier transformations and polynomial antiholomorphic corrections in the catalogue. Native HeckeSlash/Basic concerns finite right-coset sums for integer weights and explicitly stops before even its own automorphic-invariance endpoint. Searches did not certify the full requested constructor. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped AlmostHolomorphic/almostHolomorphic/Metaplectic/JacobiForm and half-weight searches in both trees and actual modular/Hecke candidates. Need finite-image multiplier, metaplectic half-weight law, polynomial 1/Im \u03c4 expansion and polynomial growth at EVERY cusp; ordinary holomorphic integer-weight modular forms do not certify these clauses. Unknown leaves these concrete interfaces unresolved, not asserted absent."
+    },
+    {
+      "concept": "analytic-manifold-local-field",
+      "concept_id": "92518124-0d83-56b9-bccb-ef544d3b61ca",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "The exact existing representation is a Hausdorff charted space modelled on E=Fin n\u2192K, with IsManifold \ud835\udcd8(K,E) \u03c9 M. ChartedSpace:141 supplies open partial homeomorphisms covering M. contDiffPregroupoid:634 uses coordinate ContDiffOn; IsManifold:777 is precisely compatibility of chart transitions. ContDiffWithinAt:130 has a distinct analytic \u03c9 branch; contDiffWithinAt_omega_iff_analyticWithinAt:156 proves equivalence with convergent-power-series analyticity for complete target E. Read the actual Taylor-series conversion proof and contDiffOn_omega_iff_analyticOn:772. Local fields and finite powers are complete; use the boundaryless identity model, not a corners model or the smooth parameter \u221e. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Geometry/Manifold/ChartedSpace.lean",
+          "declarations": "ChartedSpace:141",
+          "note": "Actual open charts, covering and preferred chart constructor."
+        },
+        {
+          "path": "Mathlib/Geometry/Manifold/IsManifold/Basic.lean",
+          "declarations": "contDiffPregroupoid:634; contDiffGroupoid:673; IsManifold:777; isManifold_of_contDiffOn:791",
+          "note": "Actual compatible atlas definition with analytic regularity parameter \u03c9."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+          "declarations": "ContDiffWithinAt:130; contDiffWithinAt_omega_iff_analyticWithinAt:156; contDiffOn_omega_iff_analyticOn:772",
+          "note": "Actual analytic parameter/power-series equivalence used to match the atlas transition condition."
+        }
+      ],
+      "search_notes": "Hausdorff T2Space:83 is supplied separately (the chart class alone does not imply global Hausdorffness); its general separation file is a prerequisite rather than another manifold implementation. Checked AnalyticAt:109 is existence of a FormalMultilinearSeries with HasFPowerSeriesAt. No second countability, compactness or Archimedean-field restriction is silently added. Distinguish analytic \u03c9 from merely smooth \u221e."
+    },
+    {
+      "concept": "analytic-manifold-local-field",
+      "concept_id": "92518124-0d83-56b9-bccb-ef544d3b61ca",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The exact dependency chart/IsManifold/ContDiff definitions agree. Native ModelWithCorners.analyticOnNhd_extendCoordChange:81 proves maximal-atlas transitions are convergent-power-series analytic on their OPEN source for arbitrary NontriviallyNormedField, using ContDiffOn \u03c9\u2194AnalyticOn and openness. :101 gives preferred charts, :90 pointwise version. Read those complete direct proofs and their boundaryless hypothesis. Specialize to finite-dimensional K^n for any local field and separately impose Hausdorffness, exactly as in the paragraph. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Manifold/ContMDiff/Analytic.lean",
+          "declarations": "ModelWithCorners.analyticOnNhd_extendCoordChange:81; analyticAt_extendCoordChange:91; TauCeti.analyticOnNhd_ext_coord_change:101",
+          "note": "Native direct analytic chart-transition and equivalent C\u03c9 coordinate-expression API, over general nontrivially normed fields."
+        }
+      ],
+      "search_notes": "The native chart-transition theorem is direct core atlas API; do not count downstream complex submanifold, isothermal/Riemannian or Lie-group examples merely using it. The identity model is boundaryless. Finite-dimensional local-field models are complete where the converse power-series dictionary needs completeness."
+    },
+    {
+      "concept": "artin-l-function",
+      "concept_id": "656d57ce-d9e5-50ca-a957-e8397de5812b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Checked ordinary L-series and native NumberTheory/Chebotarev/GaloisCharacter/Cyclotomic/Series.lean. cyclotomicCharacterSeriesC:78 chooses a continuation of a ONE-dimensional character ideal series to a specific half-plane if one exists, otherwise falls back to that L-series. Its guaranteed holomorphy near1 is under cyclotomic/nontrivial-character assumptions. This is not yet a certified arbitrary finite-dimensional Artin determinant Euler product at ALL finite places with inertia invariants and global meromorphic continuation. The AINTLIB Artin-series name in its documentation is an external comparison, not an imported implementation. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped ArtinL/artinLSeries/ArtinRepresentation, Frobenius/inertia Euler factors and Chebotarev character candidates. Need the actual V^I ramified local-factor representation and arbitrary-dimensional meromorphic continuation bridge; neither an unramified prime sum nor finite-group Artin induction by itself closes it. Leave unknown, not a negative existence assertion."
+    },
+    {
+      "concept": "artin-l-function",
+      "concept_id": "656d57ce-d9e5-50ca-a957-e8397de5812b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Checked ordinary L-series and native NumberTheory/Chebotarev/GaloisCharacter/Cyclotomic/Series.lean. cyclotomicCharacterSeriesC:78 chooses a continuation of a ONE-dimensional character ideal series to a specific half-plane if one exists, otherwise falls back to that L-series. Its guaranteed holomorphy near1 is under cyclotomic/nontrivial-character assumptions. This is not yet a certified arbitrary finite-dimensional Artin determinant Euler product at ALL finite places with inertia invariants and global meromorphic continuation. The AINTLIB Artin-series name in its documentation is an external comparison, not an imported implementation. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped ArtinL/artinLSeries/ArtinRepresentation, Frobenius/inertia Euler factors and Chebotarev character candidates. Need the actual V^I ramified local-factor representation and arbitrary-dimensional meromorphic continuation bridge; neither an unramified prime sum nor finite-group Artin induction by itself closes it. Leave unknown, not a negative existence assertion."
+    },
+    {
+      "concept": "artin-representation-number-field",
+      "concept_id": "22e5c8fb-fa1d-5ef0-a900-bf8b986cd0d2",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "An exact generic bare-definition specialization is a finite-dimensional complex representation \u03c1 of G_F with Continuous(fun p:G_F\u00d7V\u21a6\u03c1(p.1)(p.2)) and Set.Finite(Set.range \u03c1). Representation:48 is precisely G\u2192*End_\u2102(V); its inverse-action lemmas:92/97 and apply_bijective:105 verify that the group acts by linear automorphisms. Field.absoluteGaloisGroup:41 (dependency:42) has the derived Krull topology, not a discrete topology chosen for convenience. For finite-dimensional complex V the usual module topology gives the specified continuous finite-image representation. The primary continuous finite-image definition is represented directly; no new alias is required. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/RepresentationTheory/Basic.lean",
+          "declarations": "Representation:48; inv_self_apply:92; self_inv_apply:97; apply_bijective:105",
+          "note": "Actual representation constructor and ordinary group-action/invertibility API, specialized by the explicit continuity/finite-image predicates."
+        }
+      ],
+      "search_notes": "The record uses the PRIMARY exact continuous finite-image definition. The alternate finite-Galois-quotient description is not separately certified here as a new factorization theorem; no Artin induction, L-function or integral-lattice construction is claimed. Finite dimensionality and finite image are explicit conditions, not inferred from continuity. Absolute-Galois construction and generic finite-set/topological predicates are inputs, not allocated as extra representation files. Native \u2124-Galois lattices and \u2113-adic integral models have different scalar/action hypotheses and are excluded."
+    },
+    {
+      "concept": "artin-representation-number-field",
+      "concept_id": "22e5c8fb-fa1d-5ef0-a900-bf8b986cd0d2",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "An exact generic bare-definition specialization is a finite-dimensional complex representation \u03c1 of G_F with Continuous(fun p:G_F\u00d7V\u21a6\u03c1(p.1)(p.2)) and Set.Finite(Set.range \u03c1). Representation:48 is precisely G\u2192*End_\u2102(V); its inverse-action lemmas:92/97 and apply_bijective:105 verify that the group acts by linear automorphisms. Field.absoluteGaloisGroup:41 (dependency:42) has the derived Krull topology, not a discrete topology chosen for convenience. For finite-dimensional complex V the usual module topology gives the specified continuous finite-image representation. Native ContinuousRep:82 bundles exactly the first two data with a jointly continuous action and continuous_orbit:140 proves its pointwise continuity; impose the finite-image predicate explicitly. This native constructor directly applies to the primary catalogue definition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/RepresentationTheory/Continuous/ContinuousRep.lean",
+          "declarations": "TauCeti.ContinuousRep:82; continuous_apply:135; continuous_orbit:140",
+          "note": "Native jointly continuous linear-representation constructor and ordinary action continuity API."
+        }
+      ],
+      "search_notes": "The record uses the PRIMARY exact continuous finite-image definition. The alternate finite-Galois-quotient description is not separately certified here as a new factorization theorem; no Artin induction, L-function or integral-lattice construction is claimed. Finite dimensionality and finite image are explicit conditions, not inferred from continuity. Absolute-Galois construction and generic finite-set/topological predicates are inputs, not allocated as extra representation files. Native \u2124-Galois lattices and \u2113-adic integral models have different scalar/action hypotheses and are excluded."
+    },
+    {
+      "concept": "automorphic-form-reductive-group",
+      "concept_id": "7f7f3ccc-745e-5910-b7f4-216c7bcd7cc3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Actual ordinary ModularForm:80 is a function on the upper half-plane with integer-weight slash invariance, holomorphy and cusp boundedness. Native HeckeSlash/Basic defines right-coset slash sums on upper-half-plane functions; its stated scope stops before automorphic invariance. Neither candidate supplies the adelic G(A_F) function space with ALL left-rational invariance, archimedean smoothness, finite-level open-compact invariance, moderate growth, K\u221e finiteness and center-of-enveloping-algebra finiteness required here. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped automorphic/adelic form/reductive form/K-finite/center finite searches and actual modular/Hecke declarations. A generic adele ring, reductive coordinate group or smooth Lie representation is only a prerequisite; the simultaneous automorphic-function constructor remains unverified. Unknown is bounded uncertainty, not absence."
+    },
+    {
+      "concept": "automorphic-form-reductive-group",
+      "concept_id": "7f7f3ccc-745e-5910-b7f4-216c7bcd7cc3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Actual ordinary ModularForm:80 is a function on the upper half-plane with integer-weight slash invariance, holomorphy and cusp boundedness. Native HeckeSlash/Basic defines right-coset slash sums on upper-half-plane functions; its stated scope stops before automorphic invariance. Neither candidate supplies the adelic G(A_F) function space with ALL left-rational invariance, archimedean smoothness, finite-level open-compact invariance, moderate growth, K\u221e finiteness and center-of-enveloping-algebra finiteness required here. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped automorphic/adelic form/reductive form/K-finite/center finite searches and actual modular/Hecke declarations. A generic adele ring, reductive coordinate group or smooth Lie representation is only a prerequisite; the simultaneous automorphic-function constructor remains unverified. Unknown is bounded uncertainty, not absence."
+    },
+    {
+      "concept": "basis-extension-finite-dimensional",
+      "concept_id": "9f04ea0b-f0ef-5a4d-ba5d-3d54c12d89a6",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Basis.extend:51 constructs a basis extending a linearly independent set from its maximal independent extension; :89 proves inclusion of the original set. Basis.sumExtend:77 preserves an indexed family by adjoining a disjoint index set, via its injective-range equivalence. Read both completed constructions and reindexing. FiniteDimensional.fintypeBasisIndex:111 turns ANY such basis index into a Fintype in a finite-dimensional space; its body uses Module.Finite.finite_basis. This yields a finite basis, not only an arbitrary possibly infinite basis. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+          "declarations": "Module.Basis.extend:51; sumExtend:77; subset_extend:89",
+          "note": "Actual independent-set/family basis-extension constructions and inclusion API."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/FiniteDimensional/Defs.lean",
+          "declarations": "FiniteDimensional.fintypeBasisIndex:111",
+          "note": "Actual index-finiteness bridge giving a finite extended basis in the finite-dimensional case."
+        }
+      ],
+      "search_notes": "No assumption that the initial family is already spanning. The constructions work in arbitrary vector spaces/division rings; finite dimensionality is used precisely for the finiteness conclusion. Exclude Zorn as a separate prerequisite and special triangular/flag basis classifications."
+    },
+    {
+      "concept": "basis-extension-finite-dimensional",
+      "concept_id": "9f04ea0b-f0ef-5a4d-ba5d-3d54c12d89a6",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency Basis.extend:52/sumExtend:78 and fintypeBasisIndex:111 have the same mathematical bodies, with the former file shifted by documentation whitespace. Native Module.Basis.sumExtend_apply_inl:26 proves the extended basis agrees with EVERY original indexed vector. Read the actual reindex/sumDiffSubset proof; this is direct ordinary API for the same extension theorem, and dependency finiteness supplies a finite resulting index when V is finite-dimensional. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Basis/SumExtend.lean",
+          "declarations": "Module.Basis.sumExtend_apply_inl:26",
+          "note": "Native actual preservation-of-original-vectors theorem for the extended basis."
+        }
+      ],
+      "search_notes": "The native statement works without finite dimensionality, so specializes to this theorem under the accepted weaker-hypothesis ordinary API policy. General basis-coordinate identities are not themselves proofs of extension and are not allocated here."
+    },
+    {
+      "concept": "basis-free-module",
+      "concept_id": "da09b1fd-2034-5ef2-a510-755f9cfae32f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Basis:88 is M\u2243linear(\u03b9\u2192\u2080R); its vector at i is repr.symm(single i 1). repr_symm_apply:138 identifies the inverse with finite linear combination; repr_linearCombination:150 and linearCombination_repr:155 prove complementary coefficient/vector inverse laws, giving EXISTENCE AND UNIQUENESS of finite expansions. Module.Free:44 states that some such basis exists. Read the actual inverse-law proofs; specialize to commutative rings, with no finite-rank assumption. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Basis/Defs.lean",
+          "declarations": "Module.Basis:88; repr_symm_apply:138; repr_linearCombination:150; linearCombination_repr:155",
+          "note": "Actual basis coordinate equivalence and complementary expansion/uniqueness laws."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/FreeModule/Basic.lean",
+          "declarations": "Module.Free:44; Free.exists_set:47",
+          "note": "Actual free-module existence-of-basis predicate and set-indexed presentation."
+        }
+      ],
+      "search_notes": "A basis need not be finite; each coefficient family is Finsupp. A spanning family without independence would not suffice. Exclude independent basis-extension theorem and special integer lattices/triangular flags."
+    },
+    {
+      "concept": "basis-free-module",
+      "concept_id": "da09b1fd-2034-5ef2-a510-755f9cfae32f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency Basis:89 and repr inverse laws:139/151/156, plus Module.Free:44, are the same mathematical definitions. Native Basis.eq_smul_of_repr_support_subset_singleton:61 proves the ordinary expansion for support in one coordinate; repr_map_eq_of_map_basis:69 proves coordinate preservation under a basis-preserving linear map; repr_comp_apply_apply:83 is the direct finite intermediate-basis coefficient expansion. Read these complete proofs. All hold over semirings and therefore apply to the specified commutative-ring free modules. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Basis/Basic.lean",
+          "declarations": "Module.Basis.eq_smul_of_repr_support_subset_singleton:61; repr_map_eq_of_map_basis:69; repr_comp_apply_apply:83",
+          "note": "Native direct basis-coordinate expansion and ordinary map/composition API; core basis definition remains Mathlib-owned."
+        }
+      ],
+      "search_notes": "Bounded to basic coordinates and linear-map evaluation. Exclude extra flag/triangular/lattice properties and the independent extension theorem; no finiteness of the whole basis is imposed except where an individual finite sum identity requires it."
+    },
+    {
+      "concept": "borel-subgroup",
+      "concept_id": "e93a335d-3151-5f93-b89f-f02b0eb9cf20",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Checked commutative Hopf coordinate/group-object infrastructure and general algebraic geometry/group solvability candidates, but did not certify the closed-subgroup Hopf-ideal/smooth/geometric connected-solvable MAXIMAL predicate with algebraic-closure base change as an existing exact standalone construction. Abstract maximal solvable subgroups would miss smoothness, closedness and geometric rather than rational-point maximality. The checked native Tau IsBorel implementation is separate ownership. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped Borel/Borel subgroup, Hopf ideals, smooth/connected solvable coordinate quotients and base-change candidates. Generic predicates might encode these clauses, but the exact existing closed-subgroup/fiber representation remains unverified; do not claim absence or substitute topological Borel sets/Borel sigma algebras."
+    },
+    {
+      "concept": "borel-subgroup",
+      "concept_id": "e93a335d-3151-5f93-b89f-f02b0eb9cf20",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "HopfIdeal.IsBorelCandidate:82 imposes smoothness, GEOMETRIC connectedness and solvability of algebraic-closure points on the quotient coordinate group. IsBorelOverAlgClosed:148 asserts IsAlgClosed k and MINIMALITY of its Hopf ideal, the correct reversed order for MAXIMAL closed subgroups. IsBorel:196 base changes BOTH coordinate algebra and Hopf ideal to AlgebraicClosure k before this test. isBorel_iff:220 explicitly expands all three geometric conditions plus reversed-order maximality; read both directions of its completed proof. Checked actual suppliers: Smooth/CommHopfAlgCat:34 is Algebra.Smooth; Connected/CommHopfAlgCat:59 tests connected spectrum after every field extension; Solvable/Basic:61 uses algebraic-closure-valued convolution points. These match the geometric Borel condition for smooth finite-type affine groups. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual definitions, hypotheses and completed source bodies inspected; no new proof development, build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Borel/Basic.lean",
+          "declarations": "TauCeti.HopfIdeal.IsBorelCandidate:82; IsBorelOverAlgClosed:148; IsBorel:196; isBorel_iff:220",
+          "note": "Native exact smooth/geometrically connected-solvable maximal closed-subgroup predicates and algebraic-closure base-change definition/recognition API."
+        }
+      ],
+      "search_notes": "The coordinate input is finite type, appropriate for an affine algebraic group; connectedness of the ambient group is an allowed restriction of the generic predicate. No rational-point-only maximality is substituted. Supporting smooth/connected/solvable constructors are prerequisite properties, not separately allocated files. Exclude Borel existence/conjugacy, parabolics and general-ring Borel fibers in Borel/Over as additional endpoints."
+    }
+  ]
+}

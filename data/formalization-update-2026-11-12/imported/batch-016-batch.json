@@ -1,0 +1,827 @@
+{
+  "note": "Whole-catalogue formalization update batch-016: independent source review by category_galois_formalization of analysis_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "lipschitz-map",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/EMetricSpace/Lipschitz.lean",
+          "declarations": "LipschitzWith L59; uniformContinuous/composition API",
+          "note": "Actual finite-constant extended-distance Lipschitz predicate and elementary laws."
+        },
+        {
+          "path": "Mathlib/Topology/MetricSpace/Lipschitz.lean",
+          "declarations": "lipschitzWith_iff_dist_le_mul L44; LipschitzWith.of_dist_le'",
+          "note": "Exact ordinary metric inequality and real-constant constructor."
+        }
+      ],
+      "evidence": "LipschitzWith:59 takes a finite NNReal K and bounds all edist pairs. Metric.lipschitzWith_iff_dist_le_mul:44 is the exact real-distance inequality. Therefore ∃K:ℝ≥0,LipschitzWith K f is exactly the catalogue existence of a finite global constant; a real bound may be enlarged to max(L,0) by of_dist_le'. No local Lipschitz or infinite constant is substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Works in arbitrary metric spaces; completeness/linearity unnecessary. Core = defining inequality, equivalent constants, composition/restriction/standard elementary Lipschitz maps. Exclude extension theorems, differentiability AE and geometric parametrization endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "lipschitz-map",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/EMetricSpace/Lipschitz.lean",
+          "declarations": "TauCeti.lipschitzWith_toReal_edist L36; LipschitzWith.inclusion L63",
+          "note": "Native distance/inclusion Lipschitz examples and elementary local restriction/composition laws."
+        },
+        {
+          "path": "TauCeti/Topology/MetricSpace/Lipschitz/Basic.lean",
+          "declarations": "TauCeti.lipschitzWith_max_sub_const_zero L25",
+          "note": "Native real clipping Lipschitz constructor with actual metric proof."
+        }
+      ],
+      "evidence": "Actual dependency Lipschitz files are byte-identical to the finite-constant predicate and dist inequality. Native EMetricSpace/Lipschitz:36 proves fixed-point real distance is1-Lipschitz, treating infinite-distance components explicitly, and :63 proves subset inclusions1-Lipschitz. Native Metric/Lipschitz/Basic:25 proves shifted positive-part clipping1-Lipschitz using the actual max-distance inequality. These are ordinary direct constructions of the same concept. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read complete distance and clipping proofs; metric specialization removes infinite distances. Exclude Lipschitz extension/length/parametrization endpoints. Generic definition remains Mathlib-owned.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "local-numerical-radius-norm-estimate",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Inspected ordinary complex Hilbert operator/adjoint and native holomorphic-functional-calculus contexts. No checked theorem under w(T)≤1 supplies the precise vector-local bound ||Tx||²≤2+2sqrt(1−|inner(Tx,x)|²) for ||x||≤1. General Cauchy–Schwarz or a global operator-norm bound does not certify this sharper interpolation formula. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped numericalRadius/numericalRange/numerical-radius/local norm searches in inner-product/operator/CStar source. The actual square-root vector endpoint and its nonnegative radicand hypotheses remain unverified, not asserted absent; no new derivation undertaken.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "local-numerical-radius-norm-estimate",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Inspected ordinary complex Hilbert operator/adjoint and native holomorphic-functional-calculus contexts. No checked theorem under w(T)≤1 supplies the precise vector-local bound ||Tx||²≤2+2sqrt(1−|inner(Tx,x)|²) for ||x||≤1. General Cauchy–Schwarz or a global operator-norm bound does not certify this sharper interpolation formula. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped numericalRadius/numericalRange/numerical-radius/local norm searches in inner-product/operator/CStar source. The actual square-root vector endpoint and its nonnegative radicand hypotheses remain unverified, not asserted absent; no new derivation undertaken.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "locally-convex-topological-vector-space",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/Module/LocallyConvex.lean",
+          "declarations": "LocallyConvexSpace L50; locallyConvexSpace_iff_zero L94",
+          "note": "Native convex-neighborhood basis predicate and zero/translation equivalence."
+        },
+        {
+          "path": "Mathlib/Analysis/LocallyConvex/WithSeminorms.lean",
+          "declarations": "WithSeminorms L288; WithSeminorms.toLocallyConvexSpace L1081",
+          "note": "Actual seminorm-generated topology and finite-ball convex-basis direction."
+        },
+        {
+          "path": "Mathlib/Analysis/LocallyConvex/AbsConvexOpen.lean",
+          "declarations": "gaugeSeminormFamily L92; with_gaugeSeminormFamily L109; LocallyConvexSpace.toPolynormableSpace L133",
+          "note": "Completed reverse gauge-seminorm construction and topology identification for real/complex spaces."
+        }
+      ],
+      "evidence": "LocallyConvexSpace:50 stores a convex neighborhood basis and locallyConvexSpace_iff_zero:94 proves zero-neighborhood basis suffices in a topological additive group. Retain TVS continuity flags. Over ℝ or ℂ, WithSeminorms:288 encodes topology from seminorms; AbsConvexOpen.with_gaugeSeminormFamily:109 constructs the gauge family from absolutely convex open neighborhoods and :133 gives polynormability. Conversely WithSeminorms.toLocallyConvexSpace:1081 constructs the real convex zero basis from finite seminorm balls. With the usual real convexity of a complex vector space this is exactly the stated equivalence. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read actual basis translations, gauge unit-ball identity and topology proof. Complex convexity is the usual real convexity (the nonnegative ComplexOrder coefficients are real nonnegative); no Hausdorff or first-countability hypothesis introduced. Exclude Hahn–Banach/separation, barrelled/nuclear topology and specific operator topologies.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "locally-convex-topological-vector-space",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/LocallyConvex/WithSeminorms.lean",
+          "declarations": "Seminorm.IsBounded.comp L40; Seminorm.map_tsum_le L56",
+          "note": "Native finite-seminorm map-bound composition and ordinary continuous-seminorm sum inequality."
+        }
+      ],
+      "evidence": "Exact dependency WithSeminorms is byte-identical; LocallyConvex and gauge-construction files differ only a documentation blank line. Full TVS convex/seminorm topology equivalence is inherited. Native Seminorm.IsBounded.comp:40 proves composition of finite-seminorm-family map bounds by multiplying constants and taking finite suprema, while map_tsum_le:56 proves the ordinary seminorm bound on an existing convergent sum via finite subadditivity and continuity. These are direct seminorm-coordinate map/limit API for locally convex spaces. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: The complete-space absolute-series existence theorem later in this mixed file is a further endpoint, not an extra assumption on local convexity. Selected ordinary map/seminorm laws, not pure superclass instance installation. Exclude special weak/strong/operator/final topology constructions.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "locally-finite-euclidean-triangulation",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Convex/SimplicialComplex/Basic.lean",
+          "declarations": "Geometry.SimplicialComplex L59; space L77; convexHull_inter_convexHull L90; down_closed L96",
+          "note": "Native affine simplices, carrier union and exact common-face gluing/face closure."
+        },
+        {
+          "path": "Mathlib/Topology/LocallyFinite.lean",
+          "declarations": "LocallyFinite L31",
+          "note": "Native every-point finite-intersection-neighborhood family predicate, applied to simplex carriers."
+        }
+      ],
+      "evidence": "SimplicialComplex:59 stores finite vertex faces, affine independence and the geometric intersection condition. space:77 is their convex-hull union; down_closed:96 proves every nonempty face is present, and convexHull_inter_convexHull:90 proves intersections are the hull of common vertices. Add K.space=S and LocallyFinite(fun s:K.faces↦convexHull ℝ s):31, which literally gives a neighborhood meeting finitely many simplices at every ambient point. This exact generic conjunction represents the catalogue Euclidean locally finite triangulation without an existence theorem or new alias. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Actual face closure derives from PreAbstractSimplicialComplex:51, whose nonempty-face convention merely omits the empty simplex. Carrier equality supplies coverage. Does not assert every Euclidean set admits such a triangulation. Exclude triangulation conjecture, subdivisions/barycentric refinements and PL topology endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "locally-finite-euclidean-triangulation",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/SimplicialComplex/Restrict.lean",
+          "declarations": "Geometry.SimplicialComplex.finite_faces_restrict L107; restriction carrier API",
+          "note": "Native restriction constructor and ordinary compact/local finite-face consequence."
+        },
+        {
+          "path": "TauCeti/Analysis/Convex/SimplicialComplex/Glue.lean",
+          "declarations": "Geometry.SimplicialComplex.locallyFinite_convexHull_glue L122; locallyFinite_convexHull_of_finite_restrict L177",
+          "note": "Native compatible gluing and actual local-finiteness proof/recognition for simplex families."
+        }
+      ],
+      "evidence": "Exact dependency geometric complex and locally finite definitions are byte-identical. Native finite_faces_restrict:107 proves only finitely many simplices of a locally finite complex have all vertices in a compact set, using actual finite intersection and a chosen face vertex. Native Glue:122 proves a locally finite family of finite compatible complexes has locally finite simplex carriers, and :177 gives the ordinary local recognition criterion. Thus the full inherited triangulation representation has native direct restriction/gluing/local-finiteness API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read finite-face proof and complete finite-index-neighborhood gluing argument. Extra compatibility hypotheses are on the gluing constructor, not the definition. Exclude relative/common/barycentric subdivision and triangulation existence endpoints; no import-tree expansion.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "locally-path-connected-space",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Connected/LocallyPathConnected.lean",
+          "declarations": "LocallyPathConnectedSpace L61; isOpen_isPathConnected_basis L162",
+          "note": "Native neighborhood-basis predicate, exact open-basis presentation and ordinary subspace/product/quotient API."
+        }
+      ],
+      "evidence": "LocallyPathConnectedSpace:61 requires a basis of path-connected neighborhoods, initially not necessarily open. isOpen_isPathConnected_basis:162 proves an equivalent OPEN path-connected basis by taking the path component of a contained open neighborhood. Its actual proof supplies openness, point membership, path connectedness and containment, so the catalogue exact neighborhood condition is checked rather than inferred from the class name. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: No local compactness, metrizability or global connectedness imposed. Components theorem is separately catalogued. Exclude compact connected interpolation, fundamental groups and local simply-connectedness endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "locally-path-connected-space",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Actual dependency LocallyPathConnected file is byte-identical, including the open path-connected basis proof:162, giving the complete arbitrary-space definition. No native bare basis/restriction API selected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Inspected native Topology/Connected/LocallyPathConnected:42: it constructs a compact preconnected interpolation between a compact set and preconnected open set under R1/local compactness. This is a further endpoint with additional structures, not the local path-connected definition or its basic basis API. Other homotopy/manifold applications excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "locally-uniform-convergence",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/UniformSpace/UniformConvergence.lean",
+          "declarations": "TendstoUniformlyOn L90",
+          "note": "Actual uniform-on-a-set convergence predicate, specialized to each compact subset."
+        },
+        {
+          "path": "Mathlib/Topology/UniformSpace/UniformConvergenceTopology.lean",
+          "declarations": "UniformOnFun; UniformOnFun.tendsto_iff_tendstoUniformlyOn L1033",
+          "note": "Native family-uniform topology/convergence constructor giving exactly compact-uniform convergence, without continuity/local compactness assumptions."
+        }
+      ],
+      "evidence": "The catalogue explicitly means uniform convergence on every compact subset. Use UniformOnFun with family {K|IsCompact K}; tendsto_iff_tendstoUniformlyOn:1033 is literally that quantified condition for arbitrary functions and arbitrary topological domain. UniformConvergence.TendstoUniformlyOn:90 gives the exact entourage-uniform convergence. This avoids substituting Mathlib TendstoLocallyUniformly, whose neighborhood-uniform meaning is equivalent here only under extra local compactness. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read exact quantified equivalence and its neighborhood-filter proof. Sequences are filters atTop. On continuous maps CompactConvergence gives the compact-open topology; weak local compactness is needed only for its separate neighborhood-local equivalence and is not silently added to the catalogue.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "locally-uniform-convergence",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/UniformSpace/UniformConvergence/Comp.lean",
+          "declarations": "TauCeti.tendstoUniformlyOn_const L56; TendstoUniformlyOn.prodMk_same L64; graph L71",
+          "note": "Native direct uniform limit/product/graph and compact-image composition API, applied per compact set."
+        },
+        {
+          "path": "TauCeti/Topology/UniformSpace/UniformConvergence/ENorm.lean",
+          "declarations": "TendstoUniformlyOn.tendsto_iSup_enorm_sub L30",
+          "note": "Native ordinary supremum-norm error form of uniform convergence, valid on every compact subset."
+        }
+      ],
+      "evidence": "Exact dependency uniform-convergence/family-topology files are byte-identical, supplying exact uniform-on-compacts meaning for arbitrary functions. Native UniformConvergence/Comp:56/64 proves constant/product/graph uniform limit laws; apply on each compact subset to obtain direct compact-uniform API. ENorm:30 proves the supremum of the extended difference norm on any such compact set tends to zero. The complete short filter proofs were checked. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Native LocallyUniformConvergence:46 continuous-convergence iff concerns neighborhood-local uniformity; do not identify it with the paragraph on arbitrary domains. Native ContinuousMap/CompactConvergence only installs a uniform-group instance by transport, so not a separate mathematical contribution selected. Exclude PDE/holomorphic normal-family endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "log-holder-exponent",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked ordinary HolderWith:50, which uses the POWER modulus C*d(x,y)^r, and native Hölder/convolution/Sobolev contexts. That is not the requested inverse-logarithmic modulus, and this pass did not verify a committed exact generic representation with one uniform constant together with the global p-infinity decay clause. The weighted logarithmic-oscillation/at-infinity interface remains unresolved. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped logHolder/logHoelder/log-Hölder/variable-exponent searches, inspecting actual power-Hölder fields to exclude the homonymous regularity condition. Generic logarithm and distance primitives do not here certify that the two displayed inequalities and limiting exponent have been jointly matched; no absence assertion or new proof development.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "log-holder-exponent",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked ordinary HolderWith:50, which uses the POWER modulus C*d(x,y)^r, and native Hölder/convolution/Sobolev contexts. That is not the requested inverse-logarithmic modulus, and this pass did not verify a committed exact generic representation with one uniform constant together with the global p-infinity decay clause. The weighted logarithmic-oscillation/at-infinity interface remains unresolved. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped logHolder/logHoelder/log-Hölder/variable-exponent searches, inspecting actual power-Hölder fields to exclude the homonymous regularity condition. Generic logarithm and distance primitives do not here certify that the two displayed inequalities and limiting exponent have been jointly matched; no absence assertion or new proof development.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "logarithmic-fundamental-solution-plane",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Inspected logarithm/integrability and harmonic Laplacian ingredients, but no checked standalone Mathlib proof of the exact normalized distributional identity −ΔΓ=δ0 in dimension2 was verified. The native Tau Planar/DistributionalLaplacian proof is a separate project contribution, not Mathlib ownership. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped planar Newtonian/fundamental solution/log norm/distributional Laplacian searches in complex/harmonic/distribution code. Pointwise harmonicity off0 alone does not determine the delta mass or sign; those are the explicit unresolved theorem endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "logarithmic-fundamental-solution-plane",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/PDE/FundamentalSolution/Planar/Basic.lean",
+          "declarations": "TauCeti.planarNewtonianKernel L60; planarNewtonianKernel_def L64",
+          "note": "Native exact normalized logarithmic singular kernel and off-pole calculus."
+        },
+        {
+          "path": "TauCeti/Analysis/PDE/FundamentalSolution/Planar/DistributionalLaplacian.lean",
+          "declarations": "TauCeti.locallyIntegrable_planarNewtonianKernel L79; integral_laplacian_mul_planarNewtonianKernel L280; translated identity L302",
+          "note": "Native local integrability and completed negative-Laplacian delta identity with exact sign/normalization."
+        }
+      ],
+      "evidence": "Planar/Basic:60 defines Γ(z)=−(2π)^−1log‖z‖, exactly (2π)^−1log(1/|z|) away from0. DistributionalLaplacian:79 proves local integrability, and :280 proves ∫Δφ·Γ=−φ(0) for every compactly supported C² test φ, hence in particular C∞ tests and −ΔΓ=δ0. The actual proof integrates the weak gradient against second derivatives and uses the normalized planar radial flux; :302 gives translated poles. Totalized finite value at0 is immaterial for this locally integrable distribution identity (unlike the separately catalogued pointwise +∞ Green kernel). Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Complex plane is isometric real Euclidean2. Read local-integrability and full target weak-identity proofs. Flux/Gradient files are proof ingredients, not automatically charged; potential regularity/Schauder/Green representation are distinct endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "lower-semicontinuous-function",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Semicontinuity/Defs.lean",
+          "declarations": "LowerSemicontinuous L292",
+          "note": "Native ordered-threshold semicontinuity predicate."
+        },
+        {
+          "path": "Mathlib/Topology/Semicontinuity/Basic.lean",
+          "declarations": "lowerSemicontinuous_iff_isOpen_preimage L175",
+          "note": "Exact open-superlevel equivalence and ordinary comparison/supremum/composition API."
+        }
+      ],
+      "evidence": "LowerSemicontinuous:292 is the eventual strict-lower-threshold predicate; Basic.lowerSemicontinuous_iff_isOpen_preimage:175 proves exact equivalence to every strict superlevel open. Choose codomain WithTop ℝ to represent (−∞,∞] without −∞. Every finite threshold is real, and the threshold+∞ has empty superlevel, so the generic all-threshold condition is exactly the paragraph. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read predicate and both directions of open-superlevel proof; no domain separation/metric assumption. WithTop ℝ supplies the required excluded−∞ convention explicitly; EReal without a range restriction would be broader. Exclude compact minimum attainment and metric approximation as separately catalogued results.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "lower-semicontinuous-function",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Semicontinuity/Basic.lean",
+          "declarations": "TauCeti.lowerSemicontinuous_iSup_nhds L34; LowerSemicontinuous.le_tsum_of_hasSum L52",
+          "note": "Native direct lower-semicontinuous envelope construction and ordinary subadditive extended-value sum bound; defining predicate inherited."
+        }
+      ],
+      "evidence": "Actual dependency semicontinuity definitions differ only a comment and Basic is byte-identical to exact open-superlevel equivalence. Native lowerSemicontinuous_iSup_nhds:34 proves neighborhood-supremum envelopes are lower semicontinuous, by finding one strict-threshold neighborhood and propagating its neighborhood membership. In particular with β=ENNReal it constructs nonnegative extended-real examples, a legitimate subclass of the catalogue range. Full arbitrary-sign WithTop ℝ predicate is inherited; the envelope theorem does not narrow that definition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read complete short envelope proof and identify its CompleteLinearOrder output hypothesis; do not falsely instantiate that typeclass on WithTop ℝ itself. ENNReal outputs have no−∞, so the native ordinary constructor qualifies without a new restriction on the general concept. Metric continuous approximation and compact minimum are further endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "lp-space",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/AEEqFun.lean",
+          "declarations": "AEEqFun L103; AEEqFun.mk_eq_mk L165",
+          "note": "Actual AE measurable-function quotient and representative/equality API."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/LpSeminorm/Defs.lean",
+          "declarations": "eLpNorm' L68; eLpNormEssSup L79; eLpNorm L97; MemLp L168",
+          "note": "Native finite-p integral/root and infinity essential-supremum seminorm definitions/identifications."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/LpSpace/Basic.lean",
+          "declarations": "Lp L89; Lp.norm_def L231; norm_toLp L251",
+          "note": "Actual finite-norm quotient subspace and normed scalar function-space structure."
+        }
+      ],
+      "evidence": "AEEqFun:103 is the quotient of AE strongly measurable functions by AE equality, with mk_eq_mk:165 exact equality criterion and measurable representatives. For scalar ℝ/ℂ this is precisely measurable scalar functions modulo AE. Lp:89 selects finite eLpNorm classes and norm_def:231 is its real value. LpSeminorm/Defs:68/97/128 gives the integral p-power and root for finite positive p; :79/157 gives essential-supremum norm at∞. The p≥1 normed-space structures use these actual norms; no finite total measure assumption. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read quotient and exact p cases, not only a generic normed-space use. p=0 and p<1 exist in the broader library but are outside the stated normed catalogue range; do not add such cases. Exclude duality, Hölder/Minkowski named inequalities, interpolation and geometric uniform-convexity endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "lp-space",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Function/Lp/ExtendByZero.lean",
+          "declarations": "TauCeti.extendByZeroLpₗᵢ L80; coeFn_extendByZeroLpₗᵢ L92",
+          "note": "Native actual zero-extension linear isometry, AE values and restriction/naturality laws."
+        },
+        {
+          "path": "TauCeti/MeasureTheory/Function/Lp/Star.lean",
+          "declarations": "MeasureTheory.Lp.instStarAddMonoid L32; instNormedStarGroup L39; instStarModule L42",
+          "note": "Native actual AE pointwise conjugation addition/scalar/norm laws on complex Lp."
+        }
+      ],
+      "evidence": "Exact dependency LpSpace/Basic is byte-identical; AE quotient and seminorm definitions differ only a comment line. Native extendByZeroLpₗᵢ:80 constructs an actual linear isometry Lp(s)→Lp(t) for measurable s⊆t, with the norm equality proved by indicator/restricted measure identity and AE representative formula:92. Native Lp/Star proves additive conjugation, exact norm-star isometry and conjugate scalar law by AE representatives. These are ordinary pointwise/natural-map Lp API, not merely imported superclass instances. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read constructor map-add/scalar and norm proof plus actual conjugation AE proofs. Domain restrictions do not impose finite total measure. Exclude restriction-to-L1 under finite measure, duality, group convolution, density and subsequence compactness endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "marginal-density",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Marginal.lean",
+          "declarations": "MeasureTheory.lmarginal L77; Measurable.lmarginal; lmarginal_congr; lmarginal_singleton L112; lmarginal_union",
+          "note": "Native actual integrate-out-coordinates marginal and ordinary independence/iteration/measurability API."
+        }
+      ],
+      "evidence": "lmarginal:77 literally integrates a nonnegative joint function over a finite coordinate subset against the corresponding product measure, retaining a function in the other coordinates. lmarginal_congr:101 proves eliminated coordinates no longer matter, singleton:112 is the one-coordinate integral, and union:132 proves iterated elimination equals combined elimination. Measurable.lmarginal:90 gives the usual measurable density under sigma-finite component measures. This is exact finite-product marginal construction, including ordinary two-factor products; the definition itself does not assume sigma-finiteness. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read integral/updateFinset definition and singleton/union change-of-coordinates proofs. Catalogue does not spell out product measurability hypotheses; the usual density interpretation is certified under the checked sigma-finite/measurable hypotheses, while raw nonnegative marginal construction is general. Infinite unretained products/conditional densities are not asserted; exclude Markov kernel disintegration and log-concavity endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "marginal-density",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Integral/Pi.lean",
+          "declarations": "TauCeti.lintegral_pi_update L73; one-coordinate/finite-product Fubini API",
+          "note": "Native ordinary total-mass invariance under coordinate marginalization/refresh, with actual lmarginal proof; full definition inherited."
+        }
+      ],
+      "evidence": "Actual dependency Marginal differs only a comment and retains exact integrate-out definition, independence and iteration proofs. Native lintegral_pi_update:73 proves refreshing one coordinate under product probability measures preserves total mass, by applying lmarginal_singleton and the integral-equality-from-equal-marginals theorem. This is direct normalization/coordinate-refresh API for the same marginal operation, with the probability hypothesis confined to that corollary. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read the entire update proof and dependency marginal constructor. Finite product includes the standard joint-density setting; no arbitrary conditional probability/kernel reconstruction claimed. Extra Chernoff/sample-moment and optimal transport uses excluded; retain standard sigma-finite/measurable qualifications for density interpretation.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "maximum-modulus-principle",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Complex/AbsMax.lean",
+          "declarations": "Complex.eventually_eq_of_isLocalMax_norm L353; eqOn_of_isPreconnected_of_isMaxOn_norm L283",
+          "note": "Actual local and global maximum-modulus constancy proof and ordinary boundary maximum comparison API."
+        },
+        {
+          "path": "Mathlib/Analysis/Analytic/Uniqueness.lean",
+          "declarations": "AnalyticOnNhd.eqOn_of_preconnected_of_eventuallyEq L224",
+          "note": "Completed propagation of the local constant from an interior neighborhood over the connected domain."
+        }
+      ],
+      "evidence": "AbsMax.eventually_eq_of_isLocalMax_norm:353 proves a complex holomorphic function with a local modulus maximum is constant in a neighborhood. AnalyticOnNhd.eqOn_of_preconnected_of_eventuallyEq:224 then propagates this equality with the constant to the connected open domain, using the checked holomorphic-to-analytic fact. Thus a nonconstant holomorphic function cannot have such an interior maximum; it is the function itself, not just its modulus, that becomes constant. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read local closed-ball proof and analytic connected-identity proof; no boundary compactness needed for the interior statement. Cauchy analytic conversion is checked convention evidence, not an import-tree allocation. Exclude open mapping, Schwarz–Pick and other distinct consequences.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "maximum-modulus-principle",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Complex/AbsMax.lean",
+          "declarations": "DiffContOnCl.one_le_of_forall_mem_sphere_norm_le_mul L38; Complex.norm_le_of_forall_mem_sphere_norm_mul_le L49",
+          "note": "Native ordinary relative boundary/disk maximum-modulus estimates, with actual scalar cofactor proof; interior constancy inherited."
+        }
+      ],
+      "evidence": "Exact dependency AbsMax and analytic uniqueness files are byte-identical to checked full local/global constancy proof. Native DiffContOnCl.one_le_of_forall_mem_sphere_norm_le_mul:38 gives a relative boundary bound at the center, and Complex.norm_le_of_forall_mem_sphere_norm_mul_le:49 removes a boundary cofactor and derives the disk bound. The actual proofs apply maximum modulus and handle the negative-bound case separately. These are ordinary boundary comparison forms of the same maximum-modulus API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: No boundary regularity is imposed on the general interior theorem; it is explicit only for these boundary corollaries. Exclude standalone Schwarz/automorphism/open mapping endpoint files. A bounded Hilbert-valued maximum norm can require strict convexity, but scalar ℂ meets the actual hypotheses.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "meagre-subset",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/GDelta/Basic.lean",
+          "declarations": "IsNowhereDense L204; IsMeagre L293; isMeagre_iff_eq_countable_union_isNowhereDense L343",
+          "note": "Actual nowhere-dense/meagre predicates and exact countable-union presentation, ordinary countable ideal API."
+        }
+      ],
+      "evidence": "IsNowhereDense:204 is interior(closure s)=empty, and IsMeagre:293 is the residual-complement predicate. isMeagre_iff_eq_countable_union_isNowhereDense:343 proves EXACT equality with a countable union, by intersecting a countable nowhere-dense cover with s; this is stronger evidence than merely a countable covering superset. No Baire/T1/completeness assumption on the ambient space. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read residual-cover equivalence and exact-union intersection argument. Empty set and subsets are allowed. Exclude Baire category theorem, descriptive measurability and Cantor-set construction endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "meagre-subset",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/OpenPartialHomeomorph/Baire.lean",
+          "declarations": "OpenPartialHomeomorph.isMeagre_image L29",
+          "note": "Native local-coordinate preservation of meagreness with essential source restriction."
+        },
+        {
+          "path": "TauCeti/Topology/Baire/Perfect.lean",
+          "declarations": "TauCeti.isNowhereDense_singleton L46; Set.Countable.isMeagre L52",
+          "note": "Native ordinary singleton/countable-set meagreness recognition under explicit perfect T1 hypotheses."
+        },
+        {
+          "path": "TauCeti/Topology/Baire/KuratowskiUlam.lean",
+          "declarations": "IsMeagre.prod_left L152; IsMeagre.prod_right L156",
+          "note": "Native immediate product preservation for a meagre factor; stronger section theorems in mixed file are not the ownership rationale."
+        }
+      ],
+      "evidence": "Exact dependency GDelta/Basic is byte-identical to checked countable-union meaning. Native OpenPartialHomeomorph.isMeagre_image:29 proves meagreness transported within a chart source; Baire/Perfect:52 proves countable subsets of perfect T1 spaces meagre via singleton nowhere-density; KuratowskiUlam:152/156 proves a product with a meagre factor is meagre using open coordinate projection. These are ordinary recognition/natural-map/product laws of the same predicate. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read complete short proofs and check product laws have no second-countability hypothesis (that hypothesis belongs to earlier section theorems). Exclude Mycielski/perfect-antichain constructions and Baire-measurable map classifications. No added assumptions on bare meagreness.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "mean-support-function-sphere",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Inspected actual compact-body/convex-hull data and Measure.toSphere:52, whose mass is n times ball volume:88, NOT already probability-normalized. Its finite-measure instance:107 holds in finite dimension, and its nonzero theorem:104 additionally requires a nontrivial space. This pass did not certify a complete exact support-function supremum construction together with normalized spherical average and the half-mean-width identification, including antipodal invariance. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped meanWidth/meanSupport/supportFunction and convex support searches, distinguishing support of a function or supporting height-sequence slopes from compact-set h_K(u). Generic inner products, Bochner integral and unnormalized sphere measure are candidates; exact normalization/support/width bridge unresolved. Dimension n0 would need separate convention; no absence claim.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "mean-support-function-sphere",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Inspected actual compact-body/convex-hull data and Measure.toSphere:52, whose mass is n times ball volume:88, NOT already probability-normalized. Its finite-measure instance:107 holds in finite dimension, and its nonzero theorem:104 additionally requires a nontrivial space. This pass did not certify a complete exact support-function supremum construction together with normalized spherical average and the half-mean-width identification, including antipodal invariance. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped meanWidth/meanSupport/supportFunction and convex support searches, distinguishing support of a function or supporting height-sequence slopes from compact-set h_K(u). Generic inner products, Bochner integral and unnormalized sphere measure are candidates; exact normalization/support/width bridge unresolved. Dimension n0 would need separate convention; no absence claim.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "metric-completion",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/UniformSpace/Completion.lean",
+          "declarations": "Completion.completeSpace L301; coe' L308; denseRange_coe L325",
+          "note": "Actual separated Cauchy-filter completion, complete structure and dense canonical map."
+        },
+        {
+          "path": "Mathlib/Topology/MetricSpace/Completion.lean",
+          "declarations": "Completion.instMetricSpace L153; coe_isometry L163; Isometry.completion_extension L199",
+          "note": "Native complete metric compatibility, dense isometric embedding and distance-preserving extension proof."
+        },
+        {
+          "path": "Mathlib/Topology/UniformSpace/AbstractCompletion.lean",
+          "declarations": "AbstractCompletion L60; extend_unique L162; compare L260; compareEquiv L279",
+          "note": "Completed dense-extension universal property and inverse comparison fixing the original copy; metric isometry supplied by checked metric extension theorem."
+        }
+      ],
+      "evidence": "UniformSpace.Completion constructs the separated Cauchy-filter completion, proves CompleteSpace:301 and denseRange_coe:325. MetricSpace/Completion:153 supplies the compatible complete metric and coe_isometry:163. For any other complete metric target containing a dense isometric copy, AbstractCompletion compareEquiv:279 supplies the mutually inverse dense-extension maps fixing the original copy; Isometry.completion_extension:199 proves the extension preserves actual distances. Thus comparison with the canonical completion is an isometry, and composing comparisons gives the required unique isometry between any two completions. extend_unique:162 supplies uniqueness fixing the dense copy. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read actual construction/completeness/density statements, two-point closed distance extension proof and comparison inverse/uniqueness proofs. A uniform equivalence alone would be too weak: explicit isometry extension is retained. Exclude ring/group/module completions and product preservation as additional structures.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "metric-completion",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/UniformSpace/Completion.lean",
+          "declarations": "UniformSpace.Completion.isCountablyGenerated_nhds_coe L39; coe_eq_coe_iff_inseparable L46",
+          "note": "Native exact canonical embedding equality and neighborhood API; full metric completion/uniqueness inherited."
+        }
+      ],
+      "evidence": "Actual dependency three completion files are byte-identical to the checked complete metric, dense isometric copy and unique distance-preserving comparison. Native Completion.coe_eq_coe_iff_inseparable:46 proves equality of canonical images iff original points are inseparable using the dense inducing map; for metric spaces this is exactly injectivity/equality recognition. Native :39 also preserves countably generated neighborhoods at original points. These are direct ordinary embedding/topology API, not a separate algebraic completion. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read both complete short proofs. Broader inseparable formulation correctly collapses to equality in metric spaces. Native AbstractCompletion.piEquiv and ring/module/valuative completion files introduce additional structures; excluded from bare metric completion.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "metric-spaces-normal",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/GDelta/MetrizableSpace.lean",
+          "declarations": "NormalSpace instance for PseudoMetrizableSpace L27",
+          "note": "Actual all-metric normality specialization, stronger pseudometrizable scope."
+        },
+        {
+          "path": "Mathlib/Topology/UniformSpace/Separation.lean",
+          "declarations": "UniformSpace.completelyNormalSpace_of_hasAntitoneBasis L124; countably-generated instance L156",
+          "note": "Completed entourage-neighborhood separation proof underlying metric normality."
+        }
+      ],
+      "evidence": "GDelta/MetrizableSpace:27 derives NormalSpace for every pseudometrizable space from countably generated uniformity. UniformSpace/Separation:124/156 proves the stronger complete normality by choosing antitone entourage balls around separated sets and proving the resulting neighborhood unions disjoint. NormalSpace:511 explicitly separates disjoint closed sets by neighborhoods, hence disjoint open neighborhoods. Every metric space meets these hypotheses without separability/completeness. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read actual disjoint-union neighborhood proof and metric-uniformity specialization. No compactness, second-countability or complete metric assumption. Exclude Urysohn/Tietze/continuous-radius constructions as further endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "metric-spaces-normal",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Actual dependency UniformSpace/Separation is byte-identical; GDelta/MetrizableSpace differs only a comment line. It supplies the full disjoint-closed neighborhood separation theorem for every metric space. No selected native direct metric-normality proof or equivalent closed-set separation file contributes under this theorem boundary. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped native metric/separation/normality candidates. ContinuousRadius assumes normal/paracompactness to construct continuous positive radii, and other separation files concern extra bundle/quotient/zero-dimensional structures. Such applications do not acquire native LOC for the inherited metric-normality theorem.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "minimum-attainment-lsc-compact",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Semicontinuity/Basic.lean",
+          "declarations": "LowerSemicontinuousOn.exists_isMinOn L77; bddBelow_of_isCompact L106",
+          "note": "Actual compact lower-semicontinuous minimum attainment proof and ordinary lower-bound consequence."
+        }
+      ],
+      "evidence": "LowerSemicontinuousOn.exists_isMinOn:77 assumes ONLY a linearly ordered target, nonempty compact s and lower semicontinuity, and constructs a minimizing point from the nontrivial filter of all lower sublevel sets plus compactness. Choose β=WithTop ℝ, s=univ to match (−∞,∞] exactly; no finiteness somewhere or boundedness hypothesis is needed, and the all+∞ function is covered. The achieved minimum equals the infimum since it is a lower bound belonging to the range. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read full sublevel-filter compactness/contradiction proof. Domain need not be metric or Hausdorff, target need not be a complete lattice. Preserve Nonempty; do not replace extended values by real-only finite functions. Parametric minimizer selection is a separate construction.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "minimum-attainment-lsc-compact",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Semicontinuity/CompactInfimum.lean",
+          "declarations": "LowerSemicontinuous.exists_iInf_eq L53; lt_ciInf_iff L61",
+          "note": "Native exact infimum-attainment and ordinary pointwise strict-bound formulations; underlying existence inherited."
+        }
+      ],
+      "evidence": "Exact dependency Semicontinuity/Basic is byte-identical to the checked general minimum-attainment proof. Native LowerSemicontinuous.exists_iInf_eq:53 turns that minimum into a literal iInf equality on any nonempty compact X and conditionally complete linearly ordered β; WithTop ℝ qualifies. lt_ciInf_iff:61 proves the ordinary strict-lower-bound pointwise criterion via the actual minimizing point. This includes the all+∞ case and no additional regularity of X. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read complete min-to-iInf equality and strict-bound proofs; no unjustified finite-value assumption. Later compact parameter infimum semicontinuity is adjacent API in the mixed file, but minimizing-lift selections/Gamma convergence are further endpoints not added.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "minimum-principle-superharmonic",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Inspected harmonic and maximum principles but did not certify the full lower-semicontinuous possibly infinite superharmonic minimum principle with liminf boundary condition and interior-minimum constancy in standalone Mathlib. Harmonic/complex-analytic special cases do not cover arbitrary superharmonic functions. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped superharmonic/subharmonic/minimum/strong maximum and distributional Laplacian candidates. The general value-range/boundary-liminf/strong principle bridge remains unresolved; native Tau continuous/C2 results are not standalone Mathlib ownership.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    },
+    {
+      "concept": "minimum-principle-superharmonic",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Harmonic/Subharmonic.lean",
+          "declarations": "TauCeti.SubharmonicOn.le_of_le_frontier_of_subharmonicOn_neg L318",
+          "note": "Native actual boundary comparison giving continuous-on-closure superharmonic nonnegativity."
+        },
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Laplacian/StrongMaximumPrinciple.lean",
+          "declarations": "TauCeti.eventually_eq_of_laplacian_nonpos_of_isLocalMin L254; eqOn_const_of_laplacian_nonpos_of_isMinOn L288",
+          "note": "Native C² strong local/global minimum constancy, with exact Δu≤0 sign and negative-function proof."
+        }
+      ],
+      "evidence": "Native SubharmonicOn.le_of_le_frontier_of_subharmonicOn_neg:318 proves the first conclusion for a real continuous-on-closure superharmonic w by comparing u=0 against w with nonnegative boundary values; actual bounded/open hypotheses match that restricted case. Native eqOn_const_of_laplacian_nonpos_of_isMinOn:288 proves interior-minimum constancy for C² functions with Δu≤0 on preconnected opens, by applying the maximum principle to−u. General possibly infinite lower-semicontinuous superharmonic functions and mere lower boundary limits are not covered by these stronger continuity/C² assumptions; keep partial. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed declarations/hypotheses and representative completed proofs inspected; no fresh build or transitive axiom audit.\nSearch and boundary notes: Read comparison maximum-set proof context and complete C² negative-function derivation. Do not treat the continuous SubharmonicOn predicate as the full LSC potential-theoretic class. Missing general extended values, liminf boundary and nonsmooth strong principle are explicit; barrier/Perron/Weyl developments not automatically charged.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-016.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Analytic/Uniqueness.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 240,
+      "sha256": "7bc0c4be04536b0cde16eb199efcf59a12e6c1c03446b4920bdbe1d376b54e47",
+      "measured_at": "2026-11-13T00:29:20.002835+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Complex/AbsMax.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 440,
+      "sha256": "8ca05953d1036a54b94526c671563929b7b4482529df0437e9d9f190843335da",
+      "measured_at": "2026-11-13T00:29:20.006194+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Convex/SimplicialComplex/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 242,
+      "sha256": "0320cb91cbfc675132e0dbfbe7f2a6f090190e4e0a38864c77fdee85d80e361a",
+      "measured_at": "2026-11-13T00:29:20.011220+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/LocallyConvex/AbsConvexOpen.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 134,
+      "sha256": "b1ec60c46a6147fefaa2158757301b2da59c6ed7b9497b1b5bed2157240c839b",
+      "measured_at": "2026-11-13T00:29:20.015187+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/LocallyConvex/WithSeminorms.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1294,
+      "sha256": "905d22c0a2cd6e9775685271c72fb0ff7a718501f53683a441e1009418e00140",
+      "measured_at": "2026-11-13T00:29:20.018528+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Function/AEEqFun.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1035,
+      "sha256": "731c7404a4c5d9a585f454531dc50b64915e14426a9f0c86b8e8ac6a1d7e97b7",
+      "measured_at": "2026-11-13T00:29:20.024000+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Function/LpSeminorm/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 281,
+      "sha256": "21f813f619e3acd35edc95f7abc70f5581ae8188a998fb3182b06f5495c2f449",
+      "measured_at": "2026-11-13T00:29:20.027064+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Integral/Marginal.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 248,
+      "sha256": "339cc57002298848d1d20a7e01461e28d8e9c07aab4d6bb3091acb03683cf83c",
+      "measured_at": "2026-11-13T00:29:20.033044+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Algebra/Module/LocallyConvex.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 267,
+      "sha256": "9dcf7644d655ba8aadaab3d586bb65be7932b021382ba0e0982cd810937de582",
+      "measured_at": "2026-11-13T00:29:20.036359+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/GDelta/MetrizableSpace.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 65,
+      "sha256": "de6697bfdce707d151ec18a202e094b4ddd1a252b4835cef36bc9dcedfc3c64e",
+      "measured_at": "2026-11-13T00:29:20.050087+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/LocallyFinite.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 225,
+      "sha256": "793175859bab1d9c372aa3b7477a4f85c8b1a1f14821792190fc7d8b1c438cce",
+      "measured_at": "2026-11-13T00:29:20.053039+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/MetricSpace/Completion.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 240,
+      "sha256": "b3cadc6bebb2206a2324c6d0aad2dd5e19f29c187e97547abc3efa47159575cb",
+      "measured_at": "2026-11-13T00:29:20.055360+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/MetricSpace/Lipschitz.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 355,
+      "sha256": "d4217c572cd53037830229ed1414c64a4b9b21d2caa91b7867e01d813f7be732",
+      "measured_at": "2026-11-13T00:29:20.057753+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Semicontinuity/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1296,
+      "sha256": "79cae1132146e885eb261725f268f24bcf5d8ac5f939a44e262da203c1eb6489",
+      "measured_at": "2026-11-13T00:29:20.060678+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Semicontinuity/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1094,
+      "sha256": "f25c95af0f2be92ca0ef700f39cea3a3612304ab28e41da92d65b9e62fcc99a4",
+      "measured_at": "2026-11-13T00:29:20.063043+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/UniformSpace/AbstractCompletion.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 426,
+      "sha256": "4e8115d7839f24f0aa7f536ff4f03f120e6855fb796109eb408da54472aaff52",
+      "measured_at": "2026-11-13T00:29:20.066177+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/UniformSpace/Completion.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 603,
+      "sha256": "d4ef704d7e9eb952691649b908563b26a9457372cf7f74568d63dc2e09558f86",
+      "measured_at": "2026-11-13T00:29:20.070005+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/UniformSpace/Separation.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 364,
+      "sha256": "a44d6ee8da7d3de32b62302937d05bd70775f21a72179354f8edf42d1fb47450",
+      "measured_at": "2026-11-13T00:29:20.072837+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/UniformSpace/UniformConvergence.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 631,
+      "sha256": "97c25e929b5587f0e15ee5a7f6071a2dc8484dbfc7d06de3cafb219afb01106c",
+      "measured_at": "2026-11-13T00:29:20.076343+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/UniformSpace/UniformConvergenceTopology.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1229,
+      "sha256": "ff3f3570e50bf2c0297312dc886868134e487c4a6dbfa215552ab7d78ab18f45",
+      "measured_at": "2026-11-13T00:29:20.079370+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Complex/AbsMax.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 77,
+      "sha256": "e15e0ad2894c175b288c194b31bad65d13b9ef80d83fa6ff6794e66eff362638",
+      "measured_at": "2026-11-13T00:29:20.085237+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Convex/SimplicialComplex/Glue.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 285,
+      "sha256": "0739926c34477342dacd2b7c92a9fa7a6405a4de0731b0feab909d0d8dcedf0c",
+      "measured_at": "2026-11-13T00:29:20.091061+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Convex/SimplicialComplex/Restrict.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 167,
+      "sha256": "c283a692da5cb1687717098350bc5a58527784696270f4915dea6ffe008a1ceb",
+      "measured_at": "2026-11-13T00:29:20.095627+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/Harmonic/Subharmonic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 361,
+      "sha256": "71fce7789c7575e25fa74dd4e6c08e6756d6621410aef2c8718705259b7117fc",
+      "measured_at": "2026-11-13T00:29:20.100612+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/Laplacian/StrongMaximumPrinciple.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 427,
+      "sha256": "d177dbf8a010c18fcc4970469f6cc1ab089fb0b22b2a5abf19322cd992da09fc",
+      "measured_at": "2026-11-13T00:29:20.105675+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/LocallyConvex/WithSeminorms.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 91,
+      "sha256": "889d7faff3ec9e97dafaee10b72b331fb232bd969ff420a6ce5a51573b05f897",
+      "measured_at": "2026-11-13T00:29:20.110183+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/PDE/FundamentalSolution/Planar/DistributionalLaplacian.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 368,
+      "sha256": "c72164848dd046a72b8ef9e6a718b35046b5975309af466281b2051d43023008",
+      "measured_at": "2026-11-13T00:29:20.118985+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Function/Lp/ExtendByZero.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 168,
+      "sha256": "72573671494d510e9f7bb48cee6b107795503cae5422960e49d2566627794a8e",
+      "measured_at": "2026-11-13T00:29:20.123591+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Function/Lp/Star.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 50,
+      "sha256": "db114473b3e93c79ae11ed5c9e96524ef5da1a4a1dc4cc8ff8ac9954ed9d50d7",
+      "measured_at": "2026-11-13T00:29:20.128481+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Integral/Pi.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 318,
+      "sha256": "bb63ce86149ef0689511713c505db5239a3381f361a9bdd579c6cb0f68f17c54",
+      "measured_at": "2026-11-13T00:29:20.132762+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Baire/KuratowskiUlam.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 253,
+      "sha256": "14db730dc39a5db2fdd9c6004d457a28b9d7dc6e9b4a356fdf4918cd007e5404",
+      "measured_at": "2026-11-13T00:29:20.137176+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/EMetricSpace/Lipschitz.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 107,
+      "sha256": "72ceb871f6ca8dfef28b92438dce4b004d145b4cb35de2c09503bd1a195ed92c",
+      "measured_at": "2026-11-13T00:29:20.145431+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/MetricSpace/Lipschitz/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 30,
+      "sha256": "f2b0cb6e4a9cc8fa5b386c0e6c97884ba19542e2eb17698e42dd9995d6c7b6c7",
+      "measured_at": "2026-11-13T00:29:20.151174+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/OpenPartialHomeomorph/Baire.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 35,
+      "sha256": "b815c04f4fae44aae5b7ad157a95d0bea89450ecbb2b51d9170989e30b3b791e",
+      "measured_at": "2026-11-13T00:29:20.156537+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Semicontinuity/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 58,
+      "sha256": "4a4c3a7304da51000ec82a0ced187c3695f969e87767c0352a2f5864cb7992e8",
+      "measured_at": "2026-11-13T00:29:20.161356+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Semicontinuity/CompactInfimum.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 105,
+      "sha256": "bf81125cbfec4900869f41830bc9c8b862cfa9ce1201eb7f6a46b28ed3e488cc",
+      "measured_at": "2026-11-13T00:29:20.165895+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/UniformSpace/Completion.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 52,
+      "sha256": "e99c47d97935bebb93201858fce33983048ca39043a1b87652c6a89721558985",
+      "measured_at": "2026-11-13T00:29:20.170194+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/UniformSpace/UniformConvergence/Comp.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 87,
+      "sha256": "e3afa7228891206ad30191a608781ec4fd47eca38b1918ebd3065d072ff229e4",
+      "measured_at": "2026-11-13T00:29:20.174764+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/UniformSpace/UniformConvergence/ENorm.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 36,
+      "sha256": "86a57ec50ad131fecdbc1d60d31caab41ed9bf7a80ef68bb2c5a4f0ef4d6fe6e",
+      "measured_at": "2026-11-13T00:29:20.178755+00:00"
+    }
+  ]
+}

@@ -1,0 +1,565 @@
+{
+  "batch_id": "batch-025",
+  "author": "analysis_formalization",
+  "reviews": [
+    {
+      "concept": "unconditional-schauder-basis",
+      "concept_id": "cf8ac8ef-9741-53d2-93b1-8c6a4ae9e292",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "UnconditionalSchauderBasis:136 is exactly GeneralSchauderBasis:104 specialized to SummationFilter.unconditional, the directed net of finite subset sums, with actual continuous coordinate maps and expansion equal to each x. Specialize the index to ℕ for the classical Schauder sequence. Thus the primary unconditional expansion definition is literal, not conditional partial-sum convergence mislabeled unconditional. Arbitrary index equivalence preserves HasSum; native reindex:57 explicitly proves unchanged expansions under all reindexings (in particular permutations). The usual sequential-rearrangement description is the conventional mathematical characterization of this same unconditional definition; this record does not claim a separately named Lean theorem for its reverse implication. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Module/Bases.lean",
+          "declarations": "GeneralSchauderBasis L104; UnconditionalSchauderBasis L136; UnconditionalSchauderBasis.proj",
+          "note": "Native precise unconditional finite-subset expansion basis and projection/basis-constant API."
+        }
+      ],
+      "search_notes": "Unconditional means finite-subset-net summation; absolute scalar-norm summability is not imposed and would be stronger in infinite-dimensional spaces. No special unconditional Banach-space example or decomposition theorem charged."
+    },
+    {
+      "concept": "unconditional-schauder-basis",
+      "concept_id": "cf8ac8ef-9741-53d2-93b1-8c6a4ae9e292",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "UnconditionalSchauderBasis:137 is exactly GeneralSchauderBasis:105 specialized to SummationFilter.unconditional, the directed net of finite subset sums, with actual continuous coordinate maps and expansion equal to each x. Specialize the index to ℕ for the classical Schauder sequence. Thus the primary unconditional expansion definition is literal, not conditional partial-sum convergence mislabeled unconditional. Arbitrary index equivalence preserves HasSum; native reindex:57 explicitly proves unchanged expansions under all reindexings (in particular permutations). The usual sequential-rearrangement description is the conventional mathematical characterization of this same unconditional definition; this record does not claim a separately named Lean theorem for its reverse implication. Actual dependency basis definitions checked. Native reindex:57/coord_reindex:73/proj_reindex:78 prove the exact coordinate/rearrangement API. multiplier:178 constructs the bounded coordinate-multiplier map for Banach X, and hasSum_multiplier:196/coord_multiplier:217 prove its unconditional expansion/coordinate actions; completed bilinear construction and bounds inspected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development. Supplier offsets reflect checked header blank differences from the separately reviewed Mathlib snapshot.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Module/Bases/Unconditional.lean",
+          "declarations": "UnconditionalSchauderBasis.reindex L57; coord_reindex L73; proj_reindex L78; multiplier L178; hasSum_multiplier L196; coord_multiplier L217",
+          "note": "Native ordinary permutation, finite-coordinate projection and bounded coordinate-multiplier API of an unconditional basis."
+        }
+      ],
+      "search_notes": "Completeness hypotheses are retained for multiplier existence; reindexing itself needs no completeness. Independently significant tight-support/strictly-singular decomposition and special-space constructions excluded."
+    },
+    {
+      "concept": "uniform-convergence",
+      "concept_id": "529970ba-1183-5240-9671-22d7f67275aa",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Metric.tendstoUniformly_iff:149 proves TendstoUniformly F f atTop exactly iff ∀ε>0, eventually n, ∀x, dist(f x,F n x)<ε. Eventually along ℕ.atTop means one N works for every n≥N, independently of x, and symmetry of dist matches the catalogue order. The domain X need not have a topology. The underlying TendstoUniformly entourage definition in UniformConvergence is checked, not pointwise or locally uniform convergence substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/UniformSpace/UniformConvergence.lean",
+          "declarations": "TendstoUniformly L116; TendstoUniformlyOn L90",
+          "note": "Native uniform convergence/filter definitions and ordinary restriction/limit/operation API."
+        },
+        {
+          "path": "Mathlib/Topology/MetricSpace/Pseudo/Basic.lean",
+          "declarations": "Metric.tendstoUniformly_iff L149; tendstoUniformlyOn_iff L134",
+          "note": "Native exact epsilon-uniform metric presentation with the correct quantifier order."
+        }
+      ],
+      "search_notes": "Source metric iff proof inspected via dist entourages. Empty X is vacuous; no compactness assumption imposed. Locally uniform strip convergence and analytic convergence endpoints are distinct."
+    },
+    {
+      "concept": "uniform-convergence",
+      "concept_id": "529970ba-1183-5240-9671-22d7f67275aa",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Metric.tendstoUniformly_iff:150 proves TendstoUniformly F f atTop exactly iff ∀ε>0, eventually n, ∀x, dist(f x,F n x)<ε. Eventually along ℕ.atTop means one N works for every n≥N, independently of x, and symmetry of dist matches the catalogue order. The domain X need not have a topology. The underlying TendstoUniformly entourage definition in UniformConvergence is checked, not pointwise or locally uniform convergence substituted. Actual dependency metric/uniform definitions checked. Native Comp.tendstoUniformlyOn_const:56, prodMk_same:64 and graph:71 are direct constant/product/graph laws; compact-image composition:47 has its stated compactness/continuous-at hypothesis. ENorm.tendsto_iSup_enorm_sub:30 proves the ordinary uniform-error-supremum limit. UniformFun.isClosed_setOfPred_tendsto:33 proves that a prescribed ordinary filter limit is preserved under uniform limits, with its actual equicontinuity proof. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development. Supplier offsets reflect checked header blank differences from the separately reviewed Mathlib snapshot.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/UniformSpace/UniformConvergence/Comp.lean",
+          "declarations": "TauCeti.tendstoUniformlyOn_const L56; TendstoUniformlyOn.prodMk_same L64; graph L71",
+          "note": "Native direct constant, product, graph and composition API of uniform convergence."
+        },
+        {
+          "path": "TauCeti/Topology/UniformSpace/UniformConvergence/ENorm.lean",
+          "declarations": "TendstoUniformlyOn.tendsto_iSup_enorm_sub L30",
+          "note": "Native actual supremum-error characterization in extended norms."
+        },
+        {
+          "path": "TauCeti/Topology/UniformSpace/UniformConvergence/Limit.lean",
+          "declarations": "UniformFun.isClosed_setOfPred_tendsto L33",
+          "note": "Native ordinary prescribed-filter-limit stability under uniform convergence."
+        }
+      ],
+      "search_notes": "Actual short proofs read, including no separation/completeness required for prescribed-limit closedness. Translate strip/window results add compact translated-domain geometry and are applications, excluded."
+    },
+    {
+      "concept": "uniformly-continuous-map-metric",
+      "concept_id": "97893009-65cd-56e5-9dc3-41b1414bdf7f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Metric.uniformContinuous_iff:758 is literally UniformContinuous f iff ∀ε>0,∃δ>0,∀a b,dist(a,b)<δ→dist(f a,f b)<ε. Source derives this from uniformity_basis_dist on both spaces, preserving one δ for all point pairs. This is exactly the bare metric definition, without compactness, boundedness, completeness or separate local radii. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/MetricSpace/Pseudo/Defs.lean",
+          "declarations": "Metric.uniformContinuous_iff L758; uniformContinuousOn_iff L762",
+          "note": "Native exact metric epsilon-delta presentation and ordinary uniform continuity definitions/API."
+        }
+      ],
+      "search_notes": "Continuous maps on compact sets become uniformly continuous by an extra theorem, not by this definition. Norm-Lipschitz bounds are sufficient refinements, not required."
+    },
+    {
+      "concept": "uniformly-continuous-map-metric",
+      "concept_id": "97893009-65cd-56e5-9dc3-41b1414bdf7f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Metric.uniformContinuous_iff:758 is literally UniformContinuous f iff ∀ε>0,∃δ>0,∀a b,dist(a,b)<δ→dist(f a,f b)<ε. Source derives this from uniformity_basis_dist on both spaces, preserving one δ for all point pairs. This is exactly the bare metric definition, without compactness, boundedness, completeness or separate local radii. Actual dependency iff checked. Native BoundedContinuousFunction.isClosed_setOf_uniformContinuous:29 proves preservation under uniform/supremum limits using actual sequence closedness and uniform-limit continuity; uniformContinuousSubmodule:38 and membership:50 package the direct bounded uniformly continuous subspace with exactly this predicate. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/ContinuousMap/Bounded/UniformContinuous.lean",
+          "declarations": "BoundedContinuousFunction.isClosed_setOf_uniformContinuous L29; uniformContinuousSubmodule L38; mem_uniformContinuousSubmodule L50",
+          "note": "Native ordinary uniform-limit closedness and bounded-function-space carrier of the same uniform-continuity predicate."
+        }
+      ],
+      "search_notes": "Boundedness is a condition on this API carrier, not the general definition. Heat-semigroup generator and PDE applications of BUC are distinct endpoints; not selected."
+    },
+    {
+      "concept": "unit-normal-field-surface",
+      "concept_id": "9633ca86-cb87-554d-9fcb-576300f74812",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Exact generic definition on a smooth embedded surface M: n:M→Metric.sphere (0:EuclideanSpace ℝ(Fin3))1 with ContMDiff I (𝓡2) ∞ n, and for every x and every smooth local ambient surface curve γ through x, real inner((n x:EuclideanSpace ℝ(Fin3)),deriv γ0)=0. The local curves are exactly ContDiffOn∞ γ(Ioo(-ε)ε), ε>0, MapsTo γ interval M, γ0=x, as checked024; thus orthogonality is literal to all catalogue tangent velocities, not to arbitrary coordinates of the intrinsic model. ContMDiff:211 supplies smoothness; sphere is the actual unit sphere, and contMDiff_coe_sphere:423/codRestrict_sphere:443 prove the ordinary smooth-ambient/smooth-sphere presentations agree. Existence of a GLOBAL such n is an assumption, not asserted for nonorientable surfaces. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Geometry/Manifold/ContMDiff/Defs.lean",
+          "declarations": "ContMDiff L211",
+          "note": "Native precise smooth manifold-map predicate for the exact unit-normal field carrier."
+        },
+        {
+          "path": "Mathlib/Geometry/Manifold/Instances/Sphere.lean",
+          "declarations": "contMDiff_coe_sphere L423; ContMDiff.codRestrict_sphere L443",
+          "note": "Native smooth unit-sphere target and actual ambient/sphere restriction comparison."
+        }
+      ],
+      "search_notes": "Derivative153/ContDiffOn471/inner-product and sphere-membership suppliers checked; no newly invented normal-field alias required. This records the bare global-choice definition, not an orientation-existence theorem or intrinsic/ambient tangent-subspace dimension theorem."
+    },
+    {
+      "concept": "unit-normal-field-surface",
+      "concept_id": "9633ca86-cb87-554d-9fcb-576300f74812",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact generic definition on a smooth embedded surface M: n:M→Metric.sphere (0:EuclideanSpace ℝ(Fin3))1 with ContMDiff I (𝓡2) ∞ n, and for every x and every smooth local ambient surface curve γ through x, real inner((n x:EuclideanSpace ℝ(Fin3)),deriv γ0)=0. The local curves are exactly ContDiffOn∞ γ(Ioo(-ε)ε), ε>0, MapsTo γ interval M, γ0=x, as checked024; thus orthogonality is literal to all catalogue tangent velocities, not to arbitrary coordinates of the intrinsic model. ContMDiff:211 supplies smoothness; sphere is the actual unit sphere, and contMDiff_coe_sphere:423/codRestrict_sphere:443 prove the ordinary smooth-ambient/smooth-sphere presentations agree. Existence of a GLOBAL such n is an assumption, not asserted for nonorientable surfaces. Dependency smooth-map/sphere constructors checked. Native TauCeti.Manifold.inner_normalize_mgradient:47 pairs a normalized gradient with v as norm(grad f)^-1 df(v), hence vanishes on regular-level velocities. contMDiffAt_normalize_mgradient:65 and contMDiff_normalize_mgradient:83 prove actual smoothness when the gradient is nonzero; dependency NormedSpace.norm_normalize_eq_one_iff:46 proves it is unit length. Specialize the ambient manifold to Euclidean3 and restrict to a regular level surface: this is the ordinary local unit-normal constructor, with the df(v)=0 level-set condition explicit, not a claim that every surface has a global defining function. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Manifold/Riemannian/Gradient/Unit.lean",
+          "declarations": "TauCeti.Manifold.inner_normalize_mgradient L47; contMDiffAt_normalize_mgradient L65; contMDiff_normalize_mgradient L83",
+          "note": "Native direct normalized-gradient orthogonality/smoothness API constructing unit normals on regular level surfaces; generic unit-normal definition supplied by dependency."
+        }
+      ],
+      "search_notes": "Actual normalization/smoothness proof uses nonzero gradient, smooth Riemannian metric, and C∞ specialization of n+1, not a boundary orientation theorem. Higher Morse/flow/normal-geodesic endpoints excluded; no global orientation existence claim."
+    },
+    {
+      "concept": "unitization-banach-algebra",
+      "concept_id": "0d5a2d99-fc60-5132-82c6-3b471ce05ffc",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Unitization ℂ A is stored as ℂ×A, the reverse order of the catalogue A⊕ℂ. instMul:442 and fst_mul:454/snd_mul:459 give (λμ,λb+μa+ab), and one:439 is(1,0), exactly the displayed multiplication/identity after swapping coordinates. The requested norm is the L1 wrapper WithLp1(Unitization ℂ A), NOT the minimal split-left-multiplication norm on bare Unitization in Normed/Algebra/Unitization. unitization_norm_def:63 proves norm=absλ+norma, instCompleteSpace:55 proves completeness when A is Banach, instUnitizationNormedRing and NormedAlgebra:136 give the Banach-algebra structure. No Cstar identity is asserted for this L1 norm. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Algebra/Unitization.lean",
+          "declarations": "Unitization.instOne L439; instMul L442; fst_mul L454; snd_mul L459",
+          "note": "Native exact algebraic scalar/nonunital product and unital extension, with coordinate order made explicit."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Algebra/UnitizationL1.lean",
+          "declarations": "WithLp.instCompleteSpace L55; unitization_norm_def L63; unitization_mul L97; instUnitizationNormedAlgebra L136",
+          "note": "Native exact L1 Banach-algebra unitization norm/completeness and elementary inclusion/API."
+        }
+      ],
+      "search_notes": "Read actual L1 norm and ring norm-bound proof. Bare minimal norm and Cstar unitization are equivalent or stronger specialized constructions with DIFFERENT norm formula; not silently substituted. Gelfand spectrum endpoints not counted."
+    },
+    {
+      "concept": "unitization-banach-algebra",
+      "concept_id": "0d5a2d99-fc60-5132-82c6-3b471ce05ffc",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Unitization ℂ A is stored as ℂ×A, the reverse order of the catalogue A⊕ℂ. instMul:442 and fst_mul:454/snd_mul:459 give (λμ,λb+μa+ab), and one:439 is(1,0), exactly the displayed multiplication/identity after swapping coordinates. The requested norm is the L1 wrapper WithLp1(Unitization ℂ A), NOT the minimal split-left-multiplication norm on bare Unitization in Normed/Algebra/Unitization. unitization_norm_def:63 proves norm=absλ+norma, instCompleteSpace:55 proves completeness when A is Banach, instUnitizationNormedRing and NormedAlgebra:136 give the Banach-algebra structure. No Cstar identity is asserted for this L1 norm. Actual dependency L1 construction checked. Native WithLp.unitizationInrL:158 and unitizationSndL:169 bundle the actual isometric inclusion/nonunital-coordinate bounded projection with evaluation and multiplication identities. NonUnitalSubalgebra.norm_unitization_le:52/continuous_unitization:69 prove natural realization-map boundedness; unitizationContinuousAlgEquiv:99 identifies a closed nonunital subalgebra omitting1 with its unital closure by the exact L1 norm and an actual continuous inverse proof. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Algebra/Unitization/Basic.lean",
+          "declarations": "NonUnitalSubalgebra.norm_unitization_le L52; unitizationContinuousAlgEquiv L99; WithLp.unitizationInrL L158; unitizationSndL L169",
+          "note": "Native direct L1-unitization inclusion/projection, natural realization and ordinary ambient unital-closure comparison API."
+        }
+      ],
+      "search_notes": "Closedness and omitted-identity assumptions belong to the realization equivalence only, not unitization existence. Unitization/LeftAction proves a minimal-norm left-action formula under nonunitality/star hypotheses, a different norm convention/endpoint; excluded."
+    },
+    {
+      "concept": "variable-convolution-inequality",
+      "concept_id": "eacf87e9-dde9-50e8-ac8f-3f8a7f52e4b8",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected actual Tau-owned Convolution/Young.eLpNorm_convolution_le:167 and general Young bound:341: their p,r,q are CONSTANT ENNReal exponents, not functions of x. Tau-owned MaximalFunction:180 defines the actual ball maximal function and its later scalar/constant-exponent vector estimates:780/867 use fixed real exponents. EnergyForm/VariableLp.energyFormLpVariable:64 is variable COEFFICIENTS in fixed L², not variable exponents. None of those checked statements certifies the mixed L^{p(x)}(ell^{q(x)}) bound for dyadically scaled eta kernels with the exact m>n threshold and variable q(x). No qualifying completed partial proof of this exact variable-exponent endpoint was verified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped logHolder/log-Holder/Luxemburg/variable-exponent searches across both analysis/measure trees and actual Young/MaximalFunction/VariableLp contexts; native Tau results are not standalone Mathlib ownership. Modular generic definitions do not prove Jensen/maximal/mixed-vector estimates. The exponent bounds/log-Holder hypotheses and constants/thresholds are not weakened; unresolved endpoint, not absence."
+    },
+    {
+      "concept": "variable-convolution-inequality",
+      "concept_id": "eacf87e9-dde9-50e8-ac8f-3f8a7f52e4b8",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected actual Tau-owned Convolution/Young.eLpNorm_convolution_le:167 and general Young bound:341: their p,r,q are CONSTANT ENNReal exponents, not functions of x. Tau-owned MaximalFunction:180 defines the actual ball maximal function and its later scalar/constant-exponent vector estimates:780/867 use fixed real exponents. EnergyForm/VariableLp.energyFormLpVariable:64 is variable COEFFICIENTS in fixed L², not variable exponents. None of those checked statements certifies the mixed L^{p(x)}(ell^{q(x)}) bound for dyadically scaled eta kernels with the exact m>n threshold and variable q(x). No qualifying completed partial proof of this exact variable-exponent endpoint was verified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped logHolder/log-Holder/Luxemburg/variable-exponent searches across both analysis/measure trees and actual Young/MaximalFunction/VariableLp contexts; native Tau results are not standalone Mathlib ownership. Modular generic definitions do not prove Jensen/maximal/mixed-vector estimates. The exponent bounds/log-Holder hypotheses and constants/thresholds are not weakened; unresolved endpoint, not absence."
+    },
+    {
+      "concept": "variable-exponent-jensen-averages",
+      "concept_id": "e75e9b44-4841-57eb-bb0a-734390909ce9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected actual Tau-owned Convolution/Young.eLpNorm_convolution_le:167 and general Young bound:341: their p,r,q are CONSTANT ENNReal exponents, not functions of x. Tau-owned MaximalFunction:180 defines the actual ball maximal function and its later scalar/constant-exponent vector estimates:780/867 use fixed real exponents. EnergyForm/VariableLp.energyFormLpVariable:64 is variable COEFFICIENTS in fixed L², not variable exponents. None of those checked statements certifies the pointwise x-dependent modular Jensen estimate with beta and its exact ball-size/spatial-decay error for every ball. No qualifying completed partial proof of this exact variable-exponent endpoint was verified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped logHolder/log-Holder/Luxemburg/variable-exponent searches across both analysis/measure trees and actual Young/MaximalFunction/VariableLp contexts; native Tau results are not standalone Mathlib ownership. Modular generic definitions do not prove Jensen/maximal/mixed-vector estimates. The exponent bounds/log-Holder hypotheses and constants/thresholds are not weakened; unresolved endpoint, not absence."
+    },
+    {
+      "concept": "variable-exponent-jensen-averages",
+      "concept_id": "e75e9b44-4841-57eb-bb0a-734390909ce9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected actual Tau-owned Convolution/Young.eLpNorm_convolution_le:167 and general Young bound:341: their p,r,q are CONSTANT ENNReal exponents, not functions of x. Tau-owned MaximalFunction:180 defines the actual ball maximal function and its later scalar/constant-exponent vector estimates:780/867 use fixed real exponents. EnergyForm/VariableLp.energyFormLpVariable:64 is variable COEFFICIENTS in fixed L², not variable exponents. None of those checked statements certifies the pointwise x-dependent modular Jensen estimate with beta and its exact ball-size/spatial-decay error for every ball. No qualifying completed partial proof of this exact variable-exponent endpoint was verified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped logHolder/log-Holder/Luxemburg/variable-exponent searches across both analysis/measure trees and actual Young/MaximalFunction/VariableLp contexts; native Tau results are not standalone Mathlib ownership. Modular generic definitions do not prove Jensen/maximal/mixed-vector estimates. The exponent bounds/log-Holder hypotheses and constants/thresholds are not weakened; unresolved endpoint, not absence."
+    },
+    {
+      "concept": "variable-lebesgue-modular",
+      "concept_id": "9713dfb6-1dac-5171-aa61-213949cb7f21",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Exact existing generic constructor: rho_p(f)=lintegral(volume)(fun x => (ENNReal.ofReal(norm(f x)))^(p x)), with p:X→ℝ strictly positive. MeasureTheory.lintegral:48 is the lower integral of a nonnegative extended function, and ENNReal.rpow:485 is the actual REAL power with natural zero/infinity values; no totalized Bochner integral loses divergent values. Its finite-base value is the ordinary norm(f x)^(p x), so this is literally the displayed variable modular. Luxemburg gauge is sInf{t:ENNReal | ∃λ:ℝ,0<λ ∧ t=ofReal λ ∧ rho_p(f/λ)≤1}; the existing complete lattice on ENNReal gives inf empty=∞. Thus the actual ≤1-after-scaling test is preserved, rather than requiring rho(f)≤1 before scaling. No p(x)≥1 restriction imposed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Lebesgue/Basic.lean",
+          "declarations": "MeasureTheory.lintegral L48; lintegral_congr_ae L277",
+          "note": "Native exact nonnegative possibly infinite integral constructor and a.e. invariance for the explicit variable modular."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Pow/NNReal.lean",
+          "declarations": "ENNReal.rpow L485",
+          "note": "Native actual pointwise real exponent on ENNReal, instantiated with the varying p(x)."
+        }
+      ],
+      "search_notes": "Explicit checked generic instantiation needs no named variable-modular alias. No quasi-triangle/completeness or variable Holder theorem asserted. Tau VariableLp energy forms are fixed-L2 variable coefficients, and constant-exponent eLpNorm is not substituted."
+    },
+    {
+      "concept": "variable-lebesgue-modular",
+      "concept_id": "9713dfb6-1dac-5171-aa61-213949cb7f21",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Exact existing generic constructor: rho_p(f)=lintegral(volume)(fun x => (ENNReal.ofReal(norm(f x)))^(p x)), with p:X→ℝ strictly positive. MeasureTheory.lintegral:48 is the lower integral of a nonnegative extended function, and ENNReal.rpow:485 is the actual REAL power with natural zero/infinity values; no totalized Bochner integral loses divergent values. Its finite-base value is the ordinary norm(f x)^(p x), so this is literally the displayed variable modular. Luxemburg gauge is sInf{t:ENNReal | ∃λ:ℝ,0<λ ∧ t=ofReal λ ∧ rho_p(f/λ)≤1}; the existing complete lattice on ENNReal gives inf empty=∞. Thus the actual ≤1-after-scaling test is preserved, rather than requiring rho(f)≤1 before scaling. No p(x)≥1 restriction imposed. Exact dependency lower-integral/real-power constructors checked; no native variable-exponent modular API certified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development. The exact dependency ENNReal.rpow definition485 is unchanged; unrelated NNReal inverse-power aliases/late rpow lemma refinements are not used.",
+      "files": [],
+      "search_notes": "Explicit checked generic instantiation needs no named variable-modular alias. No quasi-triangle/completeness or variable Holder theorem asserted. Tau VariableLp energy forms are fixed-L2 variable coefficients, and constant-exponent eLpNorm is not substituted."
+    },
+    {
+      "concept": "variable-lebesgue-space",
+      "concept_id": "9f3278a3-2a72-5345-8d70-48dc7803d643",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Exact existing generic constructor: rho_p(f)=lintegral(volume)(fun x => (ENNReal.ofReal(norm(f x)))^(p x)), with p:X→ℝ strictly positive. MeasureTheory.lintegral:48 is the lower integral of a nonnegative extended function, and ENNReal.rpow:485 is the actual REAL power with natural zero/infinity values; no totalized Bochner integral loses divergent values. Its finite-base value is the ordinary norm(f x)^(p x), so this is literally the displayed variable modular. Luxemburg gauge is sInf{t:ENNReal | ∃λ:ℝ,0<λ ∧ t=ofReal λ ∧ rho_p(f/λ)≤1}; the existing complete lattice on ENNReal gives inf empty=∞. Thus the actual ≤1-after-scaling test is preserved, rather than requiring rho(f)≤1 before scaling. No p(x)≥1 restriction imposed. For measurable positive p with the stated essential positive lower and finite upper bounds, form the subtype {f:AEEqFun X ℝ volume | LuxemburgGauge_p(f)<∞} with that displayed gauge. AEEqFun:103 is precisely the quotient of a.e. strongly measurable scalar functions by a.e. equality; measurable real/complex scalar functions have such representatives. lintegral_congr_ae:277 proves rho and each scaled test independent of representatives, hence the infimum gauge is also independent. This is the literal finite-Luxemburg-gauge quotient-space definition. The catalogue requests this definition, not a proof of completeness or a particular equivalent quasi-triangle constant. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/AEEqFun.lean",
+          "declarations": "MeasureTheory.AEEqFun L103; Measure.aeEqSetoid L94",
+          "note": "Native exact measurable-function a.e. quotient for the generic finite Luxemburg gauge carrier."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Lebesgue/Basic.lean",
+          "declarations": "MeasureTheory.lintegral L48; lintegral_congr_ae L277",
+          "note": "Native actual integral and quotient invariance of all scaled variable modular tests."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Pow/NNReal.lean",
+          "declarations": "ENNReal.rpow L485",
+          "note": "Native pointwise varying real-power constructor inside the actual modular/gauge."
+        }
+      ],
+      "search_notes": "Essential exponent bounds and measurability retained as parameter hypotheses; do not replace p(x) by essinf/esssup or fixed-p Lp. Generic subtype/infimum carriers are existing constructors; no dedicated alias needed. Norm separation/completeness/variable-exponent analytic estimates are not inferred."
+    },
+    {
+      "concept": "variable-lebesgue-space",
+      "concept_id": "9f3278a3-2a72-5345-8d70-48dc7803d643",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Exact existing generic constructor: rho_p(f)=lintegral(volume)(fun x => (ENNReal.ofReal(norm(f x)))^(p x)), with p:X→ℝ strictly positive. MeasureTheory.lintegral:48 is the lower integral of a nonnegative extended function, and ENNReal.rpow:485 is the actual REAL power with natural zero/infinity values; no totalized Bochner integral loses divergent values. Its finite-base value is the ordinary norm(f x)^(p x), so this is literally the displayed variable modular. Luxemburg gauge is sInf{t:ENNReal | ∃λ:ℝ,0<λ ∧ t=ofReal λ ∧ rho_p(f/λ)≤1}; the existing complete lattice on ENNReal gives inf empty=∞. Thus the actual ≤1-after-scaling test is preserved, rather than requiring rho(f)≤1 before scaling. No p(x)≥1 restriction imposed. For measurable positive p with the stated essential positive lower and finite upper bounds, form the subtype {f:AEEqFun X ℝ volume | LuxemburgGauge_p(f)<∞} with that displayed gauge. AEEqFun:104 is precisely the quotient of a.e. strongly measurable scalar functions by a.e. equality; measurable real/complex scalar functions have such representatives. lintegral_congr_ae:277 proves rho and each scaled test independent of representatives, hence the infimum gauge is also independent. This is the literal finite-Luxemburg-gauge quotient-space definition. The catalogue requests this definition, not a proof of completeness or a particular equivalent quasi-triangle constant. Exact dependency quotient/integral/power constructors checked; no native variable-exponent space API certified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development. Supplier offsets reflect checked header blank differences from the separately reviewed Mathlib snapshot. The exact dependency ENNReal.rpow definition485 is unchanged; unrelated NNReal inverse-power aliases/late rpow lemma refinements are not used.",
+      "files": [],
+      "search_notes": "Essential exponent bounds and measurability retained as parameter hypotheses; do not replace p(x) by essinf/esssup or fixed-p Lp. Generic subtype/infimum carriers are existing constructors; no dedicated alias needed. Norm separation/completeness/variable-exponent analytic estimates are not inferred."
+    },
+    {
+      "concept": "variable-triebel-lizorkin-type-space",
+      "concept_id": "cefd0f93-63d0-5224-bf8d-e8e83185c596",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Actual Tau-owned BesovSpace.MemBesov:126 is a constant smoothness/exponent lp-of-Lp Littlewood-Paley-block construction; its memBesov_iff:134 and proof explicitly use fixed p,q,s and a global Lp norm of each block. It is not the displayed pointwise ell^{q(x)} sum inside a variable-Luxemburg norm over each dyadic cube, nor the cube-weighted supremum with scale cutoff/low-frequency term. Generic modular and distribution ingredients are available, but their complete exact convolution/cube/local-gauge assembly with the prescribed admissible Schwartz family was not certified in this pass. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped Triebel/Lizorkin/variable-exponent/phi-space searches and actual Tau Besov126/134, dyadicCube Euclidean40/48, tempered-distribution53 and generic Luxemburg contexts checked. Sequence-of-constant-Lp norms cannot replace the variable pointwise mixed norm; p,q<1 cases are not excluded. Native Tau sources are not Mathlib ownership. Exact whole predicate/admissibility/low-frequency calibration remains unresolved; no absence claim."
+    },
+    {
+      "concept": "variable-triebel-lizorkin-type-space",
+      "concept_id": "cefd0f93-63d0-5224-bf8d-e8e83185c596",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Actual Tau-owned BesovSpace.MemBesov:126 is a constant smoothness/exponent lp-of-Lp Littlewood-Paley-block construction; its memBesov_iff:134 and proof explicitly use fixed p,q,s and a global Lp norm of each block. It is not the displayed pointwise ell^{q(x)} sum inside a variable-Luxemburg norm over each dyadic cube, nor the cube-weighted supremum with scale cutoff/low-frequency term. Generic modular and distribution ingredients are available, but their complete exact convolution/cube/local-gauge assembly with the prescribed admissible Schwartz family was not certified in this pass. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped Triebel/Lizorkin/variable-exponent/phi-space searches and actual Tau Besov126/134, dyadicCube Euclidean40/48, tempered-distribution53 and generic Luxemburg contexts checked. Sequence-of-constant-Lp norms cannot replace the variable pointwise mixed norm; p,q<1 cases are not excluded. Native Tau sources are not Mathlib ownership. Exact whole predicate/admissibility/low-frequency calibration remains unresolved; no absence claim."
+    },
+    {
+      "concept": "vector-valued-maximal-variable-lp",
+      "concept_id": "8b4bc40c-3e7f-500d-afb0-76de73bf4f28",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected actual Tau-owned Convolution/Young.eLpNorm_convolution_le:167 and general Young bound:341: their p,r,q are CONSTANT ENNReal exponents, not functions of x. Tau-owned MaximalFunction:180 defines the actual ball maximal function and its later scalar/constant-exponent vector estimates:780/867 use fixed real exponents. EnergyForm/VariableLp.energyFormLpVariable:64 is variable COEFFICIENTS in fixed L², not variable exponents. None of those checked statements certifies the variable-p Luxemburg mixed-sequence maximal inequality with a fixed q and globally log-Holder p. No qualifying completed partial proof of this exact variable-exponent endpoint was verified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped logHolder/log-Holder/Luxemburg/variable-exponent searches across both analysis/measure trees and actual Young/MaximalFunction/VariableLp contexts; native Tau results are not standalone Mathlib ownership. Modular generic definitions do not prove Jensen/maximal/mixed-vector estimates. The exponent bounds/log-Holder hypotheses and constants/thresholds are not weakened; unresolved endpoint, not absence."
+    },
+    {
+      "concept": "vector-valued-maximal-variable-lp",
+      "concept_id": "8b4bc40c-3e7f-500d-afb0-76de73bf4f28",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected actual Tau-owned Convolution/Young.eLpNorm_convolution_le:167 and general Young bound:341: their p,r,q are CONSTANT ENNReal exponents, not functions of x. Tau-owned MaximalFunction:180 defines the actual ball maximal function and its later scalar/constant-exponent vector estimates:780/867 use fixed real exponents. EnergyForm/VariableLp.energyFormLpVariable:64 is variable COEFFICIENTS in fixed L², not variable exponents. None of those checked statements certifies the variable-p Luxemburg mixed-sequence maximal inequality with a fixed q and globally log-Holder p. No qualifying completed partial proof of this exact variable-exponent endpoint was verified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped logHolder/log-Holder/Luxemburg/variable-exponent searches across both analysis/measure trees and actual Young/MaximalFunction/VariableLp contexts; native Tau results are not standalone Mathlib ownership. Modular generic definitions do not prove Jensen/maximal/mixed-vector estimates. The exponent bounds/log-Holder hypotheses and constants/thresholds are not weakened; unresolved endpoint, not absence."
+    },
+    {
+      "concept": "vitali-covering-lemma-balls",
+      "concept_id": "72390673-4c23-5fcf-bf88-8c6e3d1230c2",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Vitali.exists_disjoint_subfamily_covering_enlargement_ball:198 gives, for ANY bounded-above real radius family and any tau>3, a pairwise-disjoint selected subfamily such that EACH original ball lies in one tau-enlarged selected ball. Set tau=5 to obtain exactly union covered by fivefold concentric dilations. Completed proof handles empty families and nonpositive/empty balls explicitly, then the positive-radius case by disjoint selection and triangle/radius comparison. Euclidean spaces satisfy the weaker PseudoMetricSpace hypothesis; no countability or fixed minimum radius is added. closedBall:161 is the ordinary closed-ball version. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Covering/Vitali.lean",
+          "declarations": "Vitali.exists_disjoint_subfamily_covering_enlargement L62; exists_disjoint_subfamily_covering_enlargement_closedBall L161; exists_disjoint_subfamily_covering_enlargement_ball L198",
+          "note": "Native exact disjoint enlarged-ball covering selection, including requested fivefold constant and ordinary closed/open variants."
+        }
+      ],
+      "search_notes": "This is the 5r bounded-family covering lemma, not the a.e. fine Vitali differentiation theorem farther down. Source actually proves tau>3, so fivefold follows directly without altering disjointness or covering the wrong centers-only set."
+    },
+    {
+      "concept": "vitali-covering-lemma-balls",
+      "concept_id": "72390673-4c23-5fcf-bf88-8c6e3d1230c2",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Vitali.exists_disjoint_subfamily_covering_enlargement_ball:198 gives, for ANY bounded-above real radius family and any tau>3, a pairwise-disjoint selected subfamily such that EACH original ball lies in one tau-enlarged selected ball. Set tau=5 to obtain exactly union covered by fivefold concentric dilations. Completed proof handles empty families and nonpositive/empty balls explicitly, then the positive-radius case by disjoint selection and triangle/radius comparison. Euclidean spaces satisfy the weaker PseudoMetricSpace hypothesis; no countability or fixed minimum radius is added. closedBall:161 is the ordinary closed-ball version. Actual dependency selection statements/proofs checked. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Native Covering/Vitali.exists_superset_setLIntegral_le56 and two-measure estimate96 USE the disjoint-covering selection to derive nonnegative integral/measure inequalities. These are distinct measure-estimate endpoints, not a new ball selection implementation; native MongeAmpere/complex Vitali theorems are different notions. No native allocation selected."
+    },
+    {
+      "concept": "weak-continuity-surface-area-measure",
+      "concept_id": "ff19db8f-2a8c-56a4-96d5-a2062fd0f74e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib ConvexBody:44 and hausdorffDist_coe:192 provide actual convex-body Hausdorff convergence, but not the surface-area measure assignment on the sphere nor its continuity. Checked Tau-owned convex affine-normalization and geometric kernel candidates do not implement the support/surface-area measure weak limit against every continuous spherical test. No completed endpoint at this exact general full-dimensional convex-body scope was certified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped surfaceAreaMeasure/areaMeasure/surface-area/Hausdorff-continuity/Minkowski-measure searches in both convex/geometry trees; actual ConvexBody metric and Tau AffineNormalization228 contexts inspected. Uniform weak convergence of probability measures is generic machinery, not a proof of continuity of K↦S_K. Surface measure on a single smooth manifold is not automatically the general convex-body surface-area measure; unknown, not absence."
+    },
+    {
+      "concept": "weak-continuity-surface-area-measure",
+      "concept_id": "ff19db8f-2a8c-56a4-96d5-a2062fd0f74e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Mathlib ConvexBody:44 and hausdorffDist_coe:192 provide actual convex-body Hausdorff convergence, but not the surface-area measure assignment on the sphere nor its continuity. Checked Tau-owned convex affine-normalization and geometric kernel candidates do not implement the support/surface-area measure weak limit against every continuous spherical test. No completed endpoint at this exact general full-dimensional convex-body scope was certified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Scoped surfaceAreaMeasure/areaMeasure/surface-area/Hausdorff-continuity/Minkowski-measure searches in both convex/geometry trees; actual ConvexBody metric and Tau AffineNormalization228 contexts inspected. Uniform weak convergence of probability measures is generic machinery, not a proof of continuity of K↦S_K. Surface measure on a single smooth manifold is not automatically the general convex-body surface-area measure; unknown, not absence."
+    },
+    {
+      "concept": "weak-convergence-banach",
+      "concept_id": "cb014b64-6a59-5e77-85b0-1c405cd8f9f4",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Exact bare predicate is ∀ell:StrongDual k E,Tendsto(fun n=>ell(x_n)) atTop (nhds(ell x)), for k=ℝ orℂ. StrongDual is the bounded continuous-linear scalar functional space. WeakSpace:198 equips the same carrier with the initial topology for (topDualPairing k E).flip, exactly the family of all such functionals; WeakBilin.tendsto_iff_forall_eval_tendsto:112 proves its evaluation limit criterion (in normed real/complex E the dual separates points). This is weak convergence in E, not weak-star convergence of its dual. No reflexivity, separability or completeness is needed for the definition. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/Module/Spaces/WeakDual.lean",
+          "declarations": "WeakSpace L198; toWeakSpace L250",
+          "note": "Native exact weak topology carrier and identity transport for the functional-limit definition."
+        },
+        {
+          "path": "Mathlib/Topology/Algebra/Module/Spaces/WeakBilin.lean",
+          "declarations": "WeakBilin.tendsto_iff_forall_eval_tendsto L112",
+          "note": "Native actual initial-topology functional evaluation convergence criterion."
+        }
+      ],
+      "search_notes": "Native WeakDual.evalClosedBall is a weak-STAR dual-ball embedding, and WeakSpace/SeqCompact proves named Smulian extraction, a further theorem. Neither is charged merely for using a weak topology. No norm convergence substitution."
+    },
+    {
+      "concept": "weak-convergence-banach",
+      "concept_id": "cb014b64-6a59-5e77-85b0-1c405cd8f9f4",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Exact bare predicate is ∀ell:StrongDual k E,Tendsto(fun n=>ell(x_n)) atTop (nhds(ell x)), for k=ℝ orℂ. StrongDual is the bounded continuous-linear scalar functional space. WeakSpace:199 equips the same carrier with the initial topology for (topDualPairing k E).flip, exactly the family of all such functionals; WeakBilin.tendsto_iff_forall_eval_tendsto:113 proves its evaluation limit criterion (in normed real/complex E the dual separates points). This is weak convergence in E, not weak-star convergence of its dual. No reflexivity, separability or completeness is needed for the definition. Exact dependency weak-space/evaluation constructors checked; no native bare weak-convergence API allocated. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development. Supplier offsets reflect checked header blank differences from the separately reviewed Mathlib snapshot.",
+      "files": [],
+      "search_notes": "Native WeakDual.evalClosedBall is a weak-STAR dual-ball embedding, and WeakSpace/SeqCompact proves named Smulian extraction, a further theorem. Neither is charged merely for using a weak topology. No norm convergence substitution."
+    },
+    {
+      "concept": "weak-lp-space",
+      "concept_id": "8a2a76aa-d91c-5cd6-98f1-f017e8c744af",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "For 0<p:ℝ, use AEEqFun X ℝ μ and the exact extended gauge sup_{λ:ℝ,λ>0} ENNReal.ofReal λ * (μ {x | λ<norm(f x)})^(1/p). ENNReal.rpow:485 gives the genuine real exponent and infinity behavior; the complete-lattice supremum is the existing iSup (over positive thresholds, not λ=0). The finite-gauge subtype is exactly the stated weak Lp quotient carrier, without substituting the strong Lp integral. AEEqFun:103 supplies the measurable scalar a.e. quotient; equality a.e. gives equal strict-superlevel sets a.e. for each threshold and equal measures, so the gauge is representative-independent. No claim this particular gauge has the ordinary triangle inequality for all p is made. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/AEEqFun.lean",
+          "declarations": "MeasureTheory.AEEqFun L103; Measure.aeEqSetoid L94",
+          "note": "Native exact a.e. quotient carrier of measurable scalar functions for the explicit finite weak gauge."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Pow/NNReal.lean",
+          "declarations": "ENNReal.rpow L485",
+          "note": "Native actual (possibly infinite) measure-to-real-power constructor in the exact weak-tail gauge."
+        }
+      ],
+      "search_notes": "Measure/superlevel/iSup supplied directly; equality of measures for a.e.-equal sets uses standard measure_congr. Native CalderonZygmund/WeakType and maximal weak11 inequalities are separately significant operator bounds; no claim of strong-Lp integrability or p≥1 is added."
+    },
+    {
+      "concept": "weak-lp-space",
+      "concept_id": "8a2a76aa-d91c-5cd6-98f1-f017e8c744af",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "For 0<p:ℝ, use AEEqFun X ℝ μ and the exact extended gauge sup_{λ:ℝ,λ>0} ENNReal.ofReal λ * (μ {x | λ<norm(f x)})^(1/p). ENNReal.rpow:485 gives the genuine real exponent and infinity behavior; the complete-lattice supremum is the existing iSup (over positive thresholds, not λ=0). The finite-gauge subtype is exactly the stated weak Lp quotient carrier, without substituting the strong Lp integral. AEEqFun:104 supplies the measurable scalar a.e. quotient; equality a.e. gives equal strict-superlevel sets a.e. for each threshold and equal measures, so the gauge is representative-independent. No claim this particular gauge has the ordinary triangle inequality for all p is made. Actual dependency quotient/real-power constructors checked; no native general weak-Lp carrier/API certified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development. Supplier offsets reflect checked header blank differences from the separately reviewed Mathlib snapshot. The exact dependency ENNReal.rpow definition485 is unchanged; unrelated NNReal inverse-power aliases/late rpow lemma refinements are not used.",
+      "files": [],
+      "search_notes": "Measure/superlevel/iSup supplied directly; equality of measures for a.e.-equal sets uses standard measure_congr. Native CalderonZygmund/WeakType and maximal weak11 inequalities are separately significant operator bounds; no claim of strong-Lp integrability or p≥1 is added."
+    },
+    {
+      "concept": "weak-partial-derivative",
+      "concept_id": "8eda0d28-beb4-52d9-a62b-153eb81d45cb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Exact generic predicate on locally integrable scalar u,v on the open Ω is ∀φ:TestFunction Ω ℝ ∞, integral_Ω u(x)*lineDeriv ℝ φ x e_i = -integral_Ω v(x)*φ(x). TestFunction:67 is literally smooth compact support inside Ω, lineDeriv:109 is the directional derivative along the i-th Euclidean basis vector, and LocallyIntegrableOn explicitly prevents totalized nonintegrable integrals from faking a derivative. Since tests and their derivatives vanish off compact subsets of Ω, the restricted/unrestricted integral formulations agree. Both u and v are locally integrable, the conventional weak-derivative setting; no global Lp or classical differentiability is added. Open-set fundamental lemma:205 is the checked direct a.e.-uniqueness supplier. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Distribution/TestFunction.lean",
+          "declarations": "TestFunction L67",
+          "note": "Native exact smooth compactly-supported testing family on the given open set."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/LineDeriv/Basic.lean",
+          "declarations": "lineDeriv L109",
+          "note": "Native i-th coordinate partial derivative of each smooth test."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/LocallyIntegrable.lean",
+          "declarations": "LocallyIntegrableOn L50; LocallyIntegrable L244",
+          "note": "Native actual local-integrability predicate required for the weak integration identity."
+        },
+        {
+          "path": "Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean",
+          "declarations": "IsOpen.ae_eq_zero_of_integral_contDiff_smul_eq_zero L205",
+          "note": "Native open-set testing/fundamental lemma supplying immediate uniqueness of the weak derivative a.e."
+        }
+      ],
+      "search_notes": "Explicit generic testing predicate is sufficient without a named weak derivative alias. Totalized Bochner integrals cannot replace local integrability; zero-dimensional source coordinate index is empty. W1p Lp bounds, distributions of higher order and regularity theorems are additional structures/endpoints."
+    },
+    {
+      "concept": "weak-partial-derivative",
+      "concept_id": "8eda0d28-beb4-52d9-a62b-153eb81d45cb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact generic predicate on locally integrable scalar u,v on the open Ω is ∀φ:TestFunction Ω ℝ ∞, integral_Ω u(x)*lineDeriv ℝ φ x e_i = -integral_Ω v(x)*φ(x). TestFunction:67 is literally smooth compact support inside Ω, lineDeriv:109 is the directional derivative along the i-th Euclidean basis vector, and LocallyIntegrableOn explicitly prevents totalized nonintegrable integrals from faking a derivative. Since tests and their derivatives vanish off compact subsets of Ω, the restricted/unrestricted integral formulations agree. Both u and v are locally integrable, the conventional weak-derivative setting; no global Lp or classical differentiability is added. Open-set fundamental lemma:205 is the checked direct a.e.-uniqueness supplier. Native HasWeakLineDerivOn:221 is exactly this identity with a direction v and explicit local integrability/completeness; specialize to scalar ℝ and direction e_i with Euclidean volume. HasWeakFDerivOn:260 records all directions. Coordinates:48/71 proves actual target-coordinate reduction; Local:80/104 proves equivalence to testing on relatively compact open subdomains, using each test support in one such domain; its completed proof was inspected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Sobolev/WeakDeriv/Basic.lean",
+          "declarations": "TauCeti.HasWeakLineDerivOn L221; hasWeakLineDerivOn_iff_testFunction L228; HasWeakFDerivOn L260",
+          "note": "Native exact locally integrable weak directional/Frechet testing predicates and elementary linearity/uniqueness API."
+        },
+        {
+          "path": "TauCeti/Analysis/Sobolev/WeakDeriv/Coordinates.lean",
+          "declarations": "TauCeti.hasWeakLineDerivOn_iff_coordinates L48; hasWeakFDerivOn_iff_coordinates L71",
+          "note": "Native direct componentwise detection of weak derivatives."
+        },
+        {
+          "path": "TauCeti/Analysis/Sobolev/WeakDeriv/Local.lean",
+          "declarations": "TauCeti.hasWeakLineDerivOn_iff_forall_isCompact_closure L80; hasWeakFDerivOn_iff_forall_isCompact_closure L104; hasWeakLineDerivOn_iff_locally L125",
+          "note": "Native ordinary restriction/locality/open-cover API of the same weak-testing definition."
+        }
+      ],
+      "search_notes": "Haar measure specialization matters: for arbitrary weighted measure the identity defines the corresponding adjoint-weighted derivative, not an ordinary Euclidean derivative. Native Classical98 continuous-weak⇒classical regularity, nonlinear Sobolev chain rules, extensions, slicing and PDE results are distinct endpoints; not extra mappings."
+    },
+    {
+      "concept": "weak-sequential-compactness",
+      "concept_id": "c2adecaa-8665-55ac-b582-1b349f427be3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Exact bare predicate is ∀ell:StrongDual k E,Tendsto(fun n=>ell(x_n)) atTop (nhds(ell x)), for k=ℝ orℂ. StrongDual is the bounded continuous-linear scalar functional space. WeakSpace:198 equips the same carrier with the initial topology for (topDualPairing k E).flip, exactly the family of all such functionals; WeakBilin.tendsto_iff_forall_eval_tendsto:112 proves its evaluation limit criterion (in normed real/complex E the dual separates points). This is weak convergence in E, not weak-star convergence of its dual. No reflexivity, separability or completeness is needed for the definition. IsSeqCompact:71 on (toWeakSpace k E) image S is literally ∀sequences in S,∃a∈S,∃strictly increasing φ, weak convergence of x_{φ(n)} to a. Because toWeakSpace is an identity linear equivalence, this preserves the original subset and the limit-in-the-S requirement. Empty S is vacuous, and relative weak compactness with limit only in the closure is not substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/Module/Spaces/WeakDual.lean",
+          "declarations": "WeakSpace L198; toWeakSpace L250",
+          "note": "Native exact weak topology used by the generic sequential-subset compactness constructor."
+        },
+        {
+          "path": "Mathlib/Topology/Defs/Sequences.lean",
+          "declarations": "IsSeqCompact L71",
+          "note": "Native exact strictly increasing subsequence/limit-in-same-subset predicate."
+        }
+      ],
+      "search_notes": "Native WeakSpace/SeqCompact.isSeqCompact_toWeakSpace_of_isCompact106 is Smulian weak-compact⇒weak-sequential compactness, a separately significant named theorem, and136 is its relative form. Definition does not assert this equivalence or require compactness/separability/reflexivity; no application-only native LOC."
+    },
+    {
+      "concept": "weak-sequential-compactness",
+      "concept_id": "c2adecaa-8665-55ac-b582-1b349f427be3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Exact bare predicate is ∀ell:StrongDual k E,Tendsto(fun n=>ell(x_n)) atTop (nhds(ell x)), for k=ℝ orℂ. StrongDual is the bounded continuous-linear scalar functional space. WeakSpace:199 equips the same carrier with the initial topology for (topDualPairing k E).flip, exactly the family of all such functionals; WeakBilin.tendsto_iff_forall_eval_tendsto:113 proves its evaluation limit criterion (in normed real/complex E the dual separates points). This is weak convergence in E, not weak-star convergence of its dual. No reflexivity, separability or completeness is needed for the definition. IsSeqCompact:71 on (toWeakSpace k E) image S is literally ∀sequences in S,∃a∈S,∃strictly increasing φ, weak convergence of x_{φ(n)} to a. Because toWeakSpace is an identity linear equivalence, this preserves the original subset and the limit-in-the-S requirement. Empty S is vacuous, and relative weak compactness with limit only in the closure is not substituted. Actual dependency weak-space and sequential-compact predicate checked; no native defining/elementary closure API selected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development. Supplier offsets reflect checked header blank differences from the separately reviewed Mathlib snapshot.",
+      "files": [],
+      "search_notes": "Native WeakSpace/SeqCompact.isSeqCompact_toWeakSpace_of_isCompact106 is Smulian weak-compact⇒weak-sequential compactness, a separately significant named theorem, and136 is its relative form. Definition does not assert this equivalence or require compactness/separability/reflexivity; no application-only native LOC."
+    },
+    {
+      "concept": "weakly-sequentially-lsc-functional",
+      "concept_id": "9c11f6da-ae79-5656-a97c-542513c73496",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Exact bare predicate is ∀ell:StrongDual k E,Tendsto(fun n=>ell(x_n)) atTop (nhds(ell x)), for k=ℝ orℂ. StrongDual is the bounded continuous-linear scalar functional space. WeakSpace:198 equips the same carrier with the initial topology for (topDualPairing k E).flip, exactly the family of all such functionals; WeakBilin.tendsto_iff_forall_eval_tendsto:112 proves its evaluation limit criterion (in normed real/complex E the dual separates points). This is weak convergence in E, not weak-star convergence of its dual. No reflexivity, separability or completeness is needed for the definition. For R:E→EReal (or ENNReal in the nonnegative convention), the exact existing generic predicate is ∀(u:ℕ→E)(x:E), [∀ell,Tendsto(ell∘u)atTop(nhds(ell x))]→R x≤Filter.liminf(fun n=>R(u n))atTop. Order/LiminfLimsup:74 generates liminf as the supremum of eventual lower bounds via order duality of limsup; on complete extended reals it includes ±∞ (or∞) correctly. This uses sequences exactly; general topological LowerSemicontinuous on a possibly nonsequential weak topology would be stronger and is NOT substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/Module/Spaces/WeakDual.lean",
+          "declarations": "WeakSpace L198; toWeakSpace L250",
+          "note": "Native exact weak convergence topology for the explicit all-sequence liminf predicate."
+        },
+        {
+          "path": "Mathlib/Order/LiminfLimsup.lean",
+          "declarations": "Filter.liminf (generated order dual of limsup) L74; Filter.limsInf (generated dual of limsSup) L61",
+          "note": "Native actual complete-order liminf construction with extended-real infinite values."
+        }
+      ],
+      "search_notes": "No reflexivity, convexity or full lower-semicontinuity equivalence assumed. Native convex closure/sublevel separation or weakly compact minimizer theorems are distinct criteria/applications and do not automatically implement this all-sequence definition."
+    },
+    {
+      "concept": "weakly-sequentially-lsc-functional",
+      "concept_id": "9c11f6da-ae79-5656-a97c-542513c73496",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Exact bare predicate is ∀ell:StrongDual k E,Tendsto(fun n=>ell(x_n)) atTop (nhds(ell x)), for k=ℝ orℂ. StrongDual is the bounded continuous-linear scalar functional space. WeakSpace:199 equips the same carrier with the initial topology for (topDualPairing k E).flip, exactly the family of all such functionals; WeakBilin.tendsto_iff_forall_eval_tendsto:113 proves its evaluation limit criterion (in normed real/complex E the dual separates points). This is weak convergence in E, not weak-star convergence of its dual. No reflexivity, separability or completeness is needed for the definition. For R:E→EReal (or ENNReal in the nonnegative convention), the exact existing generic predicate is ∀(u:ℕ→E)(x:E), [∀ell,Tendsto(ell∘u)atTop(nhds(ell x))]→R x≤Filter.liminf(fun n=>R(u n))atTop. Order/LiminfLimsup:74 generates liminf as the supremum of eventual lower bounds via order duality of limsup; on complete extended reals it includes ±∞ (or∞) correctly. This uses sequences exactly; general topological LowerSemicontinuous on a possibly nonsequential weak topology would be stronger and is NOT substituted. Actual dependency weak-functional limits and generated liminf constructors checked; no native general sequential-functional definition API selected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development. Supplier offsets reflect checked header blank differences from the separately reviewed Mathlib snapshot.",
+      "files": [],
+      "search_notes": "No reflexivity, convexity or full lower-semicontinuity equivalence assumed. Native convex closure/sublevel separation or weakly compact minimizer theorems are distinct criteria/applications and do not automatically implement this all-sequence definition."
+    }
+  ]
+}

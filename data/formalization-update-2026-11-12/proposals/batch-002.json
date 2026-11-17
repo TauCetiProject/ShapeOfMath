@@ -1,0 +1,543 @@
+{
+  "batch_id": "batch-002",
+  "author": "category_galois_formalization",
+  "reviews": [
+    {
+      "concept": "monoidal-equivalence",
+      "concept_id": "d44c583c-99ab-597d-b066-5dc3ae3a8970",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. A category equivalence e:C≌D with e.functor.Monoidal has the strong tensor/unit isomorphisms and equivalent underlying functor required by the paragraph. Equivalence.inverseMonoidal at 1136 constructs inverse monoidality and its proof makes the comparison maps invertible; IsMonoidal at 1148 and subsequent unit/counit formulas supply ordinary equivalence API. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+          "declarations": "Functor.Monoidal (:387); Equivalence.inverseMonoidal (:1136); Equivalence.IsMonoidal (:1148)",
+          "note": "Defines strong monoidal functors and proves inverse-equivalence monoidal structure, unit/counit comparison and composition API; the selected tensor-equivalence implementation is in this file."
+        }
+      ],
+      "search_notes": "Inspected Monoidal fields, εIso/μIso and inverseMonoidal proof, rather than requiring a dedicated named TensorEquivalence structure. Generic category-equivalence infrastructure is a prerequisite; braided/pivotal equivalences are extra structures and excluded."
+    },
+    {
+      "concept": "monoidal-equivalence",
+      "concept_id": "d44c583c-99ab-597d-b066-5dc3ae3a8970",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. The definition is supplied by Mathlib Monoidal/Functor.lean in the pinned dependency (Monoidal :387). Native Equivalence.isMonoidal_of_isMonoidal_unit at :497 proves compatibility from a monoidal unit and precomposeLaxMonoidalEquivalence at :591 constructs the induced equivalence on monoidal functors with explicit quasi-inverses and natural isomorphisms. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Functor.lean",
+          "declarations": "Equivalence.isMonoidal_of_isMonoidal_unit (:497); Equivalence.precomposeLaxMonoidalEquivalence (:591)",
+          "note": "Native compatibility and precomposition/inverse API for strong monoidal equivalences. Count this native file, not the supplying dependency definition."
+        }
+      ],
+      "search_notes": "Read :482–503 and :546–621 construction and naturality proofs. Exclude rigid/pivotal/braided-equivalence specializations. Availability uses the checked dependency; native API is not an import-only wrapper."
+    },
+    {
+      "concept": "monoidal-functor",
+      "concept_id": "357d9b20-e29e-5868-aa1c-282813c52c18",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Functor.Monoidal at :387 consists of coherent lax and oplax tensor/unit comparisons with two-sided inverse equations. εIso :403 and μIso :409 package the required coherent isomorphisms. Ordinary identity/composition/transport API is developed in the same file. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+          "declarations": "Functor.Monoidal (:387); Functor.Monoidal.εIso (:403); Functor.Monoidal.μIso (:409)",
+          "note": "Defines the strong monoidal structure and actual tensor/unit isomorphisms, with ordinary law and composition API."
+        }
+      ],
+      "search_notes": "Compared strong versus lax: lax alone is insufficient, but Monoidal explicitly imposes both inverse equations for ε/η and μ/δ. Exclude unrelated braided/closed enhancements and generic functor prerequisites."
+    },
+    {
+      "concept": "monoidal-functor",
+      "concept_id": "357d9b20-e29e-5868-aa1c-282813c52c18",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. Full strong structure comes from the checked dependency Monoidal :387. The native file proves tensor comparison naturality formulas, isIso_δ_tensorUnit_left/right from invertible unit comparison, and FullyFaithful.tensorHomEquiv (:329) with evaluation formulas (:338,:345) for strong monoidal F. This is direct tensor-comparison/transport API rather than use in a particular category. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Functor.lean",
+          "declarations": "Functor.oplaxCommTensorRight (:110); Functor.OplaxMonoidal.isIso_δ_tensorUnit_left (:135); Functor.FullyFaithful.tensorHomEquiv (:329)",
+          "note": "Native ordinary tensor-comparison and fully faithful map API over dependency-defined monoidal functors; no dependency file LOC is charged here."
+        }
+      ],
+      "search_notes": "Read definitions :95–169 and strong section :325–349. Fully faithful correspondence is a natural map between Hom presentations, not a standalone specialized endpoint. Extra doctrinal-adjunction statements occur in the same mixed file; whole-file counting remains rough."
+    },
+    {
+      "concept": "monoidal-natural-transformation",
+      "concept_id": "bd88114d-1dde-51cd-bcb8-13efc11b0a11",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. NatTrans.IsMonoidal :45 is exactly unit and tensor compatibility of an underlying natural transformation. It is defined for lax monoidal functors, hence specializes to the required strong ones; id, composition, horizontal composition and inverse-isomorphism compatibility are proved at :53–118. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+          "declarations": "NatTrans.IsMonoidal (:45); NatTrans.IsMonoidal.comp (:55); NatTrans.IsMonoidal.hcomp (:58)",
+          "note": "Defines monoidal compatibility and ordinary composition/whiskering/inverse API, directly specializing to strong monoidal functors."
+        }
+      ],
+      "search_notes": "Checked both displayed equations against the paragraph. A natural transformation is not required to be invertible. Exclude extra braided or action-linear transformation notions."
+    },
+    {
+      "concept": "monoidal-natural-transformation",
+      "concept_id": "bd88114d-1dde-51cd-bcb8-13efc11b0a11",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. The checked dependency IsMonoidal :45 supplies the general definition. Native LaxMonoidalFunctor.forgetAut (:41) forgets monoidal compatibility for a monoidal natural automorphism and proves injectivity (:67) and preservation of IsMonoidal (:71). These are direct forgetting/equality criteria for invertible instances of the same transformation concept. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/NaturalTransformation.lean",
+          "declarations": "LaxMonoidalFunctor.forgetAut (:41); forgetAut_injective (:67); isMonoidal_forgetAut_apply_asIso_hom (:71)",
+          "note": "Native ordinary forgetful-map and equality API for monoidal natural automorphisms. The full transformation definition remains dependency-owned."
+        }
+      ],
+      "search_notes": "Read the complete 80-line file. General noninvertible transformations are provided by the dependency, not falsely inferred from this automorphism case. No additional category-specific application is selected."
+    },
+    {
+      "concept": "natural-isomorphism",
+      "concept_id": "7c267857-2d37-5db9-bb1f-7fba565fa6ee",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. NatIso.ofComponents :178 constructs the inverse natural transformation from objectwise isomorphisms and forward naturality, proving inverse naturality by conjugation. NatTrans.isIso_app_of_isIso :161 and NatIso.isIso_of_isIso_app :196 establish both directions of componentwise invertibility. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/NatIso.lean",
+          "declarations": "NatIso.ofComponents (:178); NatIso.isIso_of_isIso_app (:196); NatTrans.isIso_app_of_isIso (:161)",
+          "note": "Defines component isomorphisms and the objectwise criterion, with inverse/naturality API."
+        }
+      ],
+      "search_notes": "Inspected inverse construction and cancellation proof; no assumption that every transformation is invertible. The functor-category Iso presentation is equivalent to the paragraph. Exclude specialized DG/enriched transformations."
+    },
+    {
+      "concept": "natural-isomorphism",
+      "concept_id": "7c267857-2d37-5db9-bb1f-7fba565fa6ee",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. The actual dependency NatIso.lean is byte-identical to the separately inspected standalone file. ofComponents :178 and isIso_of_isIso_app :196 prove the complete componentwise criterion and inverse naturality. No native generic natural-isomorphism file is selected under this core boundary. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched native filenames NatIso/NatTrans/Natural and namespace NatTrans. Inspected Thin.lean:60ff (thin-target specialized naturality) and monoidal natural-automorphism forgetting; these add specialized structure rather than generic componentwise-isomorphism definition/API. Inherited means positive dependency availability, not absence."
+    },
+    {
+      "concept": "natural-transformation",
+      "concept_id": "22fe3268-6fa6-5eae-84db-7e252ba2d47f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. NatTrans :53 defines app X:F(X)→G(X) and naturality for every source morphism; id :80 and vcomp :92 define ordinary vertical composition. Functor.category :54 makes these transformations the morphisms between functors and proves componentwise identities/composition. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/NatTrans.lean",
+          "declarations": "CategoryTheory.NatTrans (:53); NatTrans.id (:80); NatTrans.vcomp (:92)",
+          "note": "Actual natural-family definition and its identity/vertical-composition construction."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Functor/Category.lean",
+          "declarations": "Functor.category (:54); NatTrans.comp_app (:85); NatTrans.naturality_inv (:105)",
+          "note": "Functor-category structure and componentwise composition/equality/naturality API for transformations."
+        }
+      ],
+      "search_notes": "Compared the family and commutative-square clause directly. Bounded selection is definition plus ordinary vertical/equality API, not every functor construction that happens to use transformations."
+    },
+    {
+      "concept": "natural-transformation",
+      "concept_id": "22fe3268-6fa6-5eae-84db-7e252ba2d47f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. At the exact dependency, NatTrans :54 has the same app/naturality fields and id/vcomp definitions as required. Dependency Functor/Category.lean is byte-identical to the inspected standalone file and supplies the composition API. This review selects no generic native transformation file. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched native namespace NatTrans and NatTrans/Natural filenames. Thin.lean adds a thin-target rearrangement, OfCubeEdges builds particular diagram functors, and DG/enriched/monoidal transformations add separate structures; these are excluded from the plain-family core selection, not mistaken for definitions."
+    },
+    {
+      "concept": "product-category",
+      "concept_id": "4d8db4ed-f3e9-5880-b043-3ce69ab8c490",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. CategoryStruct.prod :44 sets Hom((X,Y),(X′,Y′)) to pairs of component morphisms, identities to pairs and composition componentwise. CategoryTheory.prod′ :109 proves category laws; projection/pairing functors and product transformations are defined in the same file. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Products/Basic.lean",
+          "declarations": "CategoryStruct.prod (:44); CategoryTheory.prod′ (:109); Functor.prod (:264); Functor.prod′ (:272)",
+          "note": "Defines the product category and ordinary projections, pairing and componentwise morphism/functor API."
+        }
+      ],
+      "search_notes": "Distinguished product OF categories from categorical products of objects. No finite-product existence assumption is needed. Exclude tensor-product categories and additional preadditive/limit structures."
+    },
+    {
+      "concept": "product-category",
+      "concept_id": "4d8db4ed-f3e9-5880-b043-3ce69ab8c490",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. Dependency Products/Basic.lean is byte-identical to the checked standalone definition and proves the complete componentwise category construction. No native file is selected for this plain product-category boundary. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read native Products/Basic.lean: it adds zero objects/morphisms, smallness and componentwise pullback/pushout structure; Products/Preadditive adds additive structure. These require extra structure/endpoints and are deliberately outside the generic product-category selection. They are real mathematics but not new ownership of the plain product definition."
+    },
+    {
+      "concept": "quotient-linear-category",
+      "concept_id": "13f510b1-f4f6-57ea-af0a-801ad0c95b16",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. The equivalent congruence presentation is implemented generically: Quotient :124 retains the objects and quotients each Hom by a composition-stable relation; Quotient.preadditive and Quotient.linear descend addition and scalar multiplication when the relation respects them. For a linear two-sided ideal I the relation is f∼g iff f−g∈I; its equivalence/additive/scalar/composition compatibility follows from the ideal laws. Mathlib provides the quotient constructor and descent proofs, though the bundled MorphismIdeal-to-relation packaging is supplied by Tau, not claimed here. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Quotient.lean",
+          "declarations": "CategoryTheory.Quotient (:124); Quotient.Hom (:134); Quotient.category (:154)",
+          "note": "Actual category quotient by a hom congruence, with unchanged object carrier and descended composition."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Quotient/Preadditive.lean",
+          "declarations": "Quotient.preadditive (:62); Quotient.functor_additive (:84)",
+          "note": "Descends hom addition/inverses and proves bilinearity of composition for an additive congruence."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Quotient/Linear.lean",
+          "declarations": "Quotient.linear (:92); Quotient.linear_functor (:108)",
+          "note": "Descends scalar multiplication and linear quotient-functor API; applied to congruence modulo a linear ideal."
+        }
+      ],
+      "search_notes": "Inspected general construction and its hypotheses rather than requiring an Ideal-named alias. The ideal↔linear-congruence equivalence is explicit in the evidence; the Mathlib file does not define TauCeti.MorphismIdeal. Reviewers may require a narrower packaging criterion; no new concept identity is invented."
+    },
+    {
+      "concept": "quotient-linear-category",
+      "concept_id": "13f510b1-f4f6-57ea-af0a-801ad0c95b16",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. MorphismIdeal Basic :87 stores additive hom subgroups stable under both-sided composition; rel :204 is f−g∈I, and the following Congruence proof checks equivalence and composition. Quotient :237 and its preadditive/linear instances :245,:381 give C/I. Linear.lean:108 proves homLinearEquiv identifying actual quotient Homs with Hom_C(X,Y)/I(X,Y), with the representative and naturality formulas. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Preadditive/MorphismIdeal/Basic.lean",
+          "declarations": "MorphismIdeal (:87); MorphismIdeal.rel (:204); Quotient (:237); quotientFunctor (:242); homAddEquiv (:298)",
+          "note": "Native ideal and quotient packaging, actual congruence and descended additive/linear structures, plus quotient universal-property API."
+        },
+        {
+          "path": "TauCeti/CategoryTheory/Preadditive/MorphismIdeal/Linear.lean",
+          "declarations": "MorphismIdeal.homSubmodule (:46); homLinearEquiv (:108); homLinearEquiv_mk (:115)",
+          "note": "Identifies quotient hom spaces with the stated linear-space quotients and proves ordinary representative/naturality API."
+        }
+      ],
+      "search_notes": "Read ideal closure fields, rel Congruence proof and linear quotient Hom equivalence. Exclude radical, Karoubi and matrix-ideal applications and Additive.lean’s extra zero/biproduct structure. Dependency code is not charged to Tau."
+    },
+    {
+      "concept": "representable-functor",
+      "concept_id": "e3c96329-f914-5af8-aa85-9f2be5b4c34b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Functor.IsRepresentable :514 and IsCorepresentable :537 express existence of natural Hom bijections. RepresentableBy/CorepresentableBy equivalence with (co)Yoneda natural isomorphisms is constructed before those classes, and mk′ :524/:547 converts natural isomorphisms into witnesses. This covers both variances in the paragraph. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Yoneda.lean",
+          "declarations": "Functor.IsRepresentable (:514); Functor.IsCorepresentable (:537); IsRepresentable.mk′ (:524); reprX (:562)",
+          "note": "Defines both variances of representability, natural Hom-bijection/isomorphism conversion and representing-object uniqueness/evaluation API."
+        }
+      ],
+      "search_notes": "A covariant Hom(A,−) is called corepresentable in Mathlib while the catalogue includes it under representable; record this convention explicitly. Exclude sheaf- or DG-specific representability criteria."
+    },
+    {
+      "concept": "representable-functor",
+      "concept_id": "e3c96329-f914-5af8-aa85-9f2be5b4c34b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. The exact dependency Yoneda.lean :514/:537 supplies both (co)representability classes and Hom-bijection witnesses. Native Adjunction.representableByComp :48 transports a representation along a left adjoint through the explicit adjunction Hom equivalence. RepresentableBy.autMulEquiv :110 identifies automorphisms of a represented presheaf with those of its representing object, with inverse and universal-element formulas proved from naturality. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Adjunction/Representable.lean",
+          "declarations": "Adjunction.representableByComp (:48); representableByComp_homEquiv_apply (:57)",
+          "note": "Native natural representation transport along an adjunction, directly using the representing universal property."
+        },
+        {
+          "path": "TauCeti/CategoryTheory/Aut/Representable.lean",
+          "declarations": "Functor.RepresentableBy.autMulEquiv (:110); homEquiv_uniqueUpToIso_hom (:90); autMulEquiv_symm_hom_app (:156)",
+          "note": "Native generic uniqueness/evaluation/automorphism correspondence of a represented presheaf; no scheme or DG application is selected."
+        }
+      ],
+      "search_notes": "Read Hom-equivalence composition proof and autMulEquiv inverse/multiplication proofs. The native results target the contravariant presentation; the checked dependency supplies the covariant presentation as well. Exclude moduli/sheaf and DG-specific endpoints."
+    },
+    {
+      "concept": "subobject",
+      "concept_id": "cea1ea90-7181-5d66-a6b5-49a91ae1eef3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Subobject :101 is ThinSkeleton(MonoOver X), quotienting monomorphisms into X by isomorphism. mk :114 and lift :140 explicitly enforce invariance under isomorphisms commuting with the arrows. FactorThru defines factoring through a represented subobject and proves uniqueness through its monic arrow. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Subobject/Basic.lean",
+          "declarations": "Subobject (:101); Subobject.mk (:114); Subobject.lift (:140)",
+          "note": "Defines monomorphism classes, their canonical arrow and equality/order/representative API."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Subobject/FactorThru.lean",
+          "declarations": "Subobject.Factors; factorThru (:104); factorThru_arrow (:109)",
+          "note": "Ordinary factorization universal-property API through a subobject representative."
+        }
+      ],
+      "search_notes": "Checked thin-skeleton quotient and lift invariance against the exact domain-isomorphism equivalence in the paragraph. Exclude subobject classifier, noetherian/artinian, and abelian quotient constructions."
+    },
+    {
+      "concept": "subobject",
+      "concept_id": "cea1ea90-7181-5d66-a6b5-49a91ae1eef3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. Dependency Subobject/Basic.lean :102 has the checked same ThinSkeleton(MonoOver X) definition. Native factors_iff_existsUnique (:74) proves the factorization universal property using cancellation by the representative arrow; Equivalence.subobjectOrderIso (:43) transports subobjects along a category equivalence and computes it on representatives. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Subobject/FactorThru.lean",
+          "declarations": "Subobject.factors_mapIsoToOrderIso_iff (:53); factors_iff_existsUnique (:74)",
+          "note": "Native ordinary factorization/uniqueness and ambient-isomorphism transport of subobjects."
+        },
+        {
+          "path": "TauCeti/CategoryTheory/Subobject/Equivalence.lean",
+          "declarations": "Equivalence.subobjectOrderIso (:43); subobjectOrderIso_mk (:51)",
+          "note": "Natural order-isomorphism and representative computation under equivalence of categories."
+        }
+      ],
+      "search_notes": "Inspected cancellation proof and thin-skeleton equivalence construction. Cokernel.lean is an additional abelian/quotient endpoint and excluded. Count native files only; definition belongs to checked dependency."
+    },
+    {
+      "concept": "zero-object",
+      "concept_id": "2c54dd95-6236-5b79-89e5-323ecbf70d2d",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Limits.IsZero :46 requires Nonempty(Unique(X→Y)) and Nonempty(Unique(Y→X)) for every Y, exactly the paragraph. IsZero.iso constructs the unique isomorphism between zero objects and the file gives initial/terminal and zero-object choice API. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Limits/Shapes/ZeroObjects.lean",
+          "declarations": "Limits.IsZero (:46); Limits.IsZero.iso (:88); Limits.HasZeroObject",
+          "note": "Actual zero-object predicate, uniqueness/isomorphism proof and ordinary universal-property API."
+        }
+      ],
+      "search_notes": "Uniqueness is represented by Unique rather than separate existence/uniqueness clauses. No preadditivity is required for the basic predicate; exclude particular zero objects in module or product categories."
+    },
+    {
+      "concept": "zero-object",
+      "concept_id": "2c54dd95-6236-5b79-89e5-323ecbf70d2d",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. Dependency ZeroObjects.lean is byte-identical to the inspected full definition. Native Functor.isZero_of_isZero_obj :48 proves reflection of zero objects by a faithful functor from a category with zero morphisms, via the ordinary identity-equals-zero characterization and injectivity of map. This is direct generic zero-object recognition/transport API. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean",
+          "declarations": "Functor.isZero_of_isZero_obj (:48)",
+          "note": "Native generic recognition of a zero object under a faithful functor, with the definition inherited from Mathlib. The whole mixed file also contains a quotient-composition zero lemma."
+        }
+      ],
+      "search_notes": "Read the two-line faithful-functor proof and its exact HasZeroMorphisms hypothesis. Particular zero objects of Products/Basic and MorphismIdeal/Additive are extra construction instances and excluded here."
+    },
+    {
+      "concept": "center-base-change",
+      "concept_id": "45340ee0-9ea9-52bd-969b-f8978b512241",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. The selected candidates do not establish the rational-form theorem or its characteristic-zero fusion hypotheses; no complete or direct partial implementation has been verified. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Center, rational forms, scalar extension, baseChange and dominance in Mathlib CategoryTheory and Tau Monoidal/Center; inspected center construction and Tau induction/ribbon developments. These provide center structure but no checked scalar-extension comparison with fully faithful, dominant and induction-commuting conclusions. Generic exact-category base-change files concern different mathematical base-change operations."
+    },
+    {
+      "concept": "center-base-change",
+      "concept_id": "45340ee0-9ea9-52bd-969b-f8978b512241",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. The selected candidates do not establish the rational-form theorem or its characteristic-zero fusion hypotheses; no complete or direct partial implementation has been verified. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Center, rational forms, scalar extension, baseChange and dominance in Mathlib CategoryTheory and Tau Monoidal/Center; inspected center construction and Tau induction/ribbon developments. These provide center structure but no checked scalar-extension comparison with fully faithful, dominant and induction-commuting conclusions. Generic exact-category base-change files concern different mathematical base-change operations."
+    },
+    {
+      "concept": "dual-fusion-category",
+      "concept_id": "d0c9265f-001b-5525-b1e5-92e424280d3f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Module-functor class definitions alone are prerequisites, not a verified implementation of the specified dual fusion category. The endofunctor packaging and semisimple module scope remain unresolved. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched dual fusion, module endofunctors, Monoidal/Action/LinearFunctor and End; inspected Mathlib LeftLinear strong-functor fields and actionOfMonoidalFunctorToEndofunctor. These supply module functor/action machinery, but a checked category of C-linear endofunctors with composition tensor and the finite-semisimple fusion context was not located."
+    },
+    {
+      "concept": "dual-fusion-category",
+      "concept_id": "d0c9265f-001b-5525-b1e5-92e424280d3f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. Module-functor class definitions alone are prerequisites, not a verified implementation of the specified dual fusion category. The endofunctor packaging and semisimple module scope remain unresolved. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched dual fusion, module endofunctors, Monoidal/Action/LinearFunctor and End; inspected Mathlib LeftLinear strong-functor fields and actionOfMonoidalFunctorToEndofunctor. These supply module functor/action machinery, but a checked category of C-linear endofunctors with composition tensor and the finite-semisimple fusion context was not located."
+    },
+    {
+      "concept": "internal-hom",
+      "concept_id": "660867e6-2171-5d1b-aa7f-6e0336cda9eb",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. The candidate is a particular internal-module category with right tensor action, whereas the paragraph concerns an arbitrary module category and Hom_M(X⊗M,N), including existence in the finite semisimple setting. A checked general action/orientation/finite-existence identification has not been verified. It is not safe to substitute the candidate on name similarity. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected Mathlib Monoidal/Closed/Basic as the internal-Hom notion for a monoidal category itself, and Tau Monoidal/Mod/InternalHom.lean :152–259. Tau constructs an equalizer and adjunction Hom_Mod(M⊗K,N)≃Hom_C(K,Hom_A(M,N)) for modules over an internal monoid under closed/equalizer hypotheses."
+    },
+    {
+      "concept": "internal-hom",
+      "concept_id": "660867e6-2171-5d1b-aa7f-6e0336cda9eb",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. The candidate is a particular internal-module category with right tensor action, whereas the paragraph concerns an arbitrary module category and Hom_M(X⊗M,N), including existence in the finite semisimple setting. A checked general action/orientation/finite-existence identification has not been verified. It is not safe to substitute the candidate on name similarity. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected Mathlib Monoidal/Closed/Basic as the internal-Hom notion for a monoidal category itself, and Tau Monoidal/Mod/InternalHom.lean :152–259. Tau constructs an equalizer and adjunction Hom_Mod(M⊗K,N)≃Hom_C(K,Hom_A(M,N)) for modules over an internal monoid under closed/equalizer hypotheses."
+    },
+    {
+      "concept": "modular-category",
+      "concept_id": "2344fe36-e36c-5b30-a036-07ce42850a5e",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Braided/ribbon center structure is only prerequisite mathematics. A checked ribbon fusion category with complex S-matrix invertibility, or a direct implementation of that predicate, remains unresolved; no negative absence claim is made. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched ModularCategory, fusion, SMatrix/sMatrix, invertibility and ribbon in both CategoryTheory snapshots. Inspected Tau Center/Ribbon.lean: its ribbon construction has spherical and semisimplicity hypotheses but no S-matrix-invertibility endpoint."
+    },
+    {
+      "concept": "modular-category",
+      "concept_id": "2344fe36-e36c-5b30-a036-07ce42850a5e",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. Braided/ribbon center structure is only prerequisite mathematics. A checked ribbon fusion category with complex S-matrix invertibility, or a direct implementation of that predicate, remains unresolved; no negative absence claim is made. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched ModularCategory, fusion, SMatrix/sMatrix, invertibility and ribbon in both CategoryTheory snapshots. Inspected Tau Center/Ribbon.lean: its ribbon construction has spherical and semisimplicity hypotheses but no S-matrix-invertibility endpoint."
+    },
+    {
+      "concept": "module-dual-base-change",
+      "concept_id": "93a1117f-2cd3-5947-8851-dc559b78e486",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. No checked fully faithful dominant scalar-extension comparison Fun_Dk(Mk,Mk)⊗K→Fun_DK(MK,MK) was found among these candidates. The required compatibility and dual rational-form endpoint remain unresolved; generic functor/action prerequisites are not a partial proof of it. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched rational forms/baseChange/scalar extension in CategoryTheory, Tau monoidal action/linear-functor files and center subtree. Inspected action-compatible functor classes and Tau exact-category base-change candidates, whose scope differs from scalar extension of a semisimple module-functor category."
+    },
+    {
+      "concept": "module-dual-base-change",
+      "concept_id": "93a1117f-2cd3-5947-8851-dc559b78e486",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. No checked fully faithful dominant scalar-extension comparison Fun_Dk(Mk,Mk)⊗K→Fun_DK(MK,MK) was found among these candidates. The required compatibility and dual rational-form endpoint remain unresolved; generic functor/action prerequisites are not a partial proof of it. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched rational forms/baseChange/scalar extension in CategoryTheory, Tau monoidal action/linear-functor files and center subtree. Inspected action-compatible functor classes and Tau exact-category base-change candidates, whose scope differs from scalar extension of a semisimple module-functor category."
+    },
+    {
+      "concept": "center-induction",
+      "concept_id": "8d77ed72-2992-5e33-b138-32c48d1749bc",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. Mathlib Monoidal/Center.lean defines the center and forgetful functor, but no inspected declaration constructs the finite-simple-sum induction functor or a left adjunction to forget. Generic adjunction machinery does not establish that endpoint. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Center.induction, inductionForget, leftAdjoint and half-braiding induction in CategoryTheory; inspected Monoidal/Center.lean forget and its monoidal structure. The actual fusion-category finite-sum construction and left adjunction remain unverified, so this is unknown rather than a claim of absence."
+    },
+    {
+      "concept": "center-induction",
+      "concept_id": "8d77ed72-2992-5e33-b138-32c48d1749bc",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. Native Induction/Basic.lean :319–329 defines ⨁ S,S⊗X⊗Sᘁ and :437–479 its half-braiding and induction functor under rigid, algebraically closed, finite semisimple linear hypotheses. End.lean supplies the dinatural universal end projections. Adjunction.lean :392 proves forget ⊣ induction, a RIGHT adjunction. The catalogue specifically says induction is LEFT adjoint to forget. Searches found no induction ⊣ forget declaration, and equivalence of the left/right constructions is not inferred. The specified object/functor is implemented, but its requested left-adjoint characterization remains unverified. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Center/Induction/Basic.lean",
+          "declarations": "Center.inductionObj (:324); inductionHalfBraiding (:437); induction (:468)",
+          "note": "Actual native finite-simple-sum center object, half-braiding and functor; genuine direct partial construction of the target."
+        },
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Center/Induction/End.lean",
+          "declarations": "Center.inductionEndπ (:167); inductionLift (:326); inductionObj_hom_ext_endπ (:394)",
+          "note": "General dinatural end projections, lifting and uniqueness API for this same induction object."
+        },
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Center/Induction/Adjunction.lean",
+          "declarations": "Center.forgetInductionAdjunction (:392); instIsRightAdjointInduction (:418)",
+          "note": "Proves the right-adjoint characterization, additive/linear maps, unit/counit and triangle laws. It is explicitly not claimed to prove the catalogue’s left adjunction."
+        }
+      ],
+      "search_notes": "Inspected finite-simple-class assumptions (:226–290), functor/half-braiding definitions and the actual Adjunction.mkOfUnitCounit construction with both triangles. Searched the entire center subtree for induction ⊣/leftAdjoint; all adjunction hits point to forget ⊣ induction. Do not alter the concept paragraph to make this fit."
+    },
+    {
+      "concept": "half-braiding",
+      "concept_id": "32a27433-eb68-5ae7-aac1-7d61e5d6194d",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. HalfBraiding at Monoidal/Center.lean :53 stores β:∀U,X⊗U≅U⊗X, its tensor compatibility with inserted associators and naturality. The unit equation follows from those axioms (explicit proof checked in Tau); no extra assumption that the ambient category is braided is made. This is the same mathematical half-braiding convention. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Monoidal/Center.lean",
+          "declarations": "CategoryTheory.HalfBraiding (:53); HalfBraiding.monoidal; HalfBraiding.naturality",
+          "note": "Actual family-of-isomorphisms definition with tensor/naturality axioms. The same mixed file also constructs the center, so it is legitimately shared with the separate center concept."
+        }
+      ],
+      "search_notes": "Read actual field formulas, not just Center naming. Lack of an independent unit field is not a missing axiom: tensor/naturality force it; Tau Basic supplies that explicit consequence. Exclude arbitrary braidings on all object pairs as a different concept."
+    },
+    {
+      "concept": "half-braiding",
+      "concept_id": "32a27433-eb68-5ae7-aac1-7d61e5d6194d",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. The exact dependency Monoidal/Center.lean supplies HalfBraiding :53. Native Center/Basic.lean :53 proves the required unit formula, :73 the inverse tensor formula, :82 inverse naturality and :89 the contraction identity, under only a monoidal ambient category. These are direct ordinary API for the same half-braiding object, not merely uses in a rigid application. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Center/Basic.lean",
+          "declarations": "HalfBraiding.β_tensorUnit_hom (:53); monoidal_inv (:73); naturality_inv (:82)",
+          "note": "Native general unit and inverse compatibility consequences of the half-braiding axioms, shared directly with Drinfeld center API."
+        }
+      ],
+      "search_notes": "Checked unit proof by naturality at the tensor unit and cancellation, then inverse formulas. OfHom.lean additionally constructs half-braidings from noninvertible families under left rigidity; excluded from this generic core selection together with rigid/pivotal center enhancements."
+    },
+    {
+      "concept": "module-category",
+      "concept_id": "80a24b24-208f-5f61-b4b6-b55f86ddc051",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Inspected committed mathlib snapshot 26573066084e6e2aa8526ea358bc43b66d96f970. MonoidalLeftActionStruct at :47 gives the action on objects and both morphism variables, associativity and unit isomorphisms. MonoidalLeftAction at :118 imposes functoriality, naturality, pentagon and unitor compatibilities. curriedAction :323 and actionLeft :333 package the ordinary action functors; the paragraph asks for precisely this coherent category action, not extra semisimplicity. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Monoidal/Action/Basic.lean",
+          "declarations": "MonoidalCategory.MonoidalLeftActionStruct (:47); MonoidalLeftAction (:118); curriedAction (:323)",
+          "note": "Defines the coherent left category action and ordinary action-functor/naturality API. The right-action half of this mixed file is counted under whole-file rules."
+        }
+      ],
+      "search_notes": "Compared left C×M action and associator/unit clauses directly. Do not confuse this with modules over an internal algebra object or require unstated linear/finite/semisimple hypotheses."
+    },
+    {
+      "concept": "module-category",
+      "concept_id": "80a24b24-208f-5f61-b4b6-b55f86ddc051",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected committed tau-ceti snapshot 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its actual Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; supplying definitions were inspected there when used. The exact dependency Action/Basic.lean :48/:119 supplies the full coherent action. Native actionLeftTensorIso :36 packages the action associator as the ordinary natural isomorphism comparing action by c⊗c′ with composition; actionLeftEquivOfIso :55 proves invertible acting objects induce action equivalences, with projection formulas. These are general action API, not a special module-category definition. Source inspection of relevant declarations/proofs; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Action/Basic.lean",
+          "declarations": "MonoidalLeftAction.actionLeftTensorIso (:36); actionLeftEquivOfIso (:55)",
+          "note": "Native ordinary composition/inversion API for action functors over the dependency-defined coherent category action."
+        }
+      ],
+      "search_notes": "Read natural-isomorphism formula and equivalence unit/counit construction. Keep the order c⊗c′ ↦ action(c′)⋙action(c), as forced by functor composition convention. Exclude exactness/colimit/pseudofunctor enhancements and module-endofunctor fusion conclusions."
+    }
+  ]
+}

@@ -1,0 +1,524 @@
+{
+  "batch_id": "batch-012",
+  "author": "algebra_formalization",
+  "reviews": [
+    {
+      "concept": "finite-blaschke-composition",
+      "concept_id": "dd59cbe3-f4a3-519a-b8b6-2c6e522ca95f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked the actual factor and finite-product implementations: independent Mathlib canonicalFactor:54 is reciprocal-oriented, and native Tau blaschkeProduct:174 has concatenation/product laws:191/198 and analytic/zero characterizations:206/260. None of those checked declarations proves composition closure with degree multiplication m*n or degree preservation by disk automorphisms. The product-of-families law concerns multiplication of functions, not composition. The nonconstant-degree endpoint remains unverified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Blaschke/blaschkeProduct/compose/comp/degree and conformal disk automorphism candidates in the exact complex-analysis trees. Read the full relevant Tau BlaschkeProduct definition/API section. No alias absence claim: the unresolved step is the actual composition and degree theorem. The separate Tau implementation is not native Mathlib ownership."
+    },
+    {
+      "concept": "finite-blaschke-composition",
+      "concept_id": "dd59cbe3-f4a3-519a-b8b6-2c6e522ca95f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked the actual factor and finite-product implementations: independent Mathlib canonicalFactor:54 is reciprocal-oriented, and native Tau blaschkeProduct:174 has concatenation/product laws:191/198 and analytic/zero characterizations:206/260. None of those checked declarations proves composition closure with degree multiplication m*n or degree preservation by disk automorphisms. The product-of-families law concerns multiplication of functions, not composition. The nonconstant-degree endpoint remains unverified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Blaschke/blaschkeProduct/compose/comp/degree and conformal disk automorphism candidates in the exact complex-analysis trees. Read the full relevant Tau BlaschkeProduct definition/API section. No alias absence claim: the unresolved step is the actual composition and degree theorem. The separate Tau implementation is not native Mathlib ownership."
+    },
+    {
+      "concept": "finite-blaschke-product",
+      "concept_id": "46c3c754-9837-5434-bd8b-fa6b9d644635",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Complex.canonicalFactor:54 and canonicalFactor_apply:61 in Analysis/Complex/CanonicalDecomposition.lean define (R^2-conj(a)*z)/(R*(z-a)). At R=1 its pointwise reciprocal is exactly (z-a)/(1-conj(a)*z), including totalized values at z=a. Taking a finite product of these actual factor constructors with interior parameters and multiplying by c of norm one gives precisely the catalogue definition. The empty product is one, so n=0 permits every unimodular constant via the multiplier. This uses checked generic product/inverse constructors; no composition-degree theorem is inferred. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Complex/CanonicalDecomposition.lean",
+          "declarations": "Complex.canonicalFactor (:54); Complex.canonicalFactor_apply (:61); Complex.norm_canonicalFactor_eval_circle_eq_one (:163)",
+          "note": "Native canonical rational factor; its reciprocal at radius one is the exact individual Blaschke factor, and the circle norm law is immediate factor API."
+        }
+      ],
+      "search_notes": "Inspected actual defining rational expression and norm-one-on-circle proof context. The file uses a pole-oriented reciprocal convention, explicitly corrected here. Meromorphic decomposition theorems are not separately allocated. Full finite Blaschke composition/degree theorem reviewed independently below."
+    },
+    {
+      "concept": "finite-blaschke-product",
+      "concept_id": "46c3c754-9837-5434-bd8b-fa6b9d644635",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native blaschkeFactor:72, of_norm_lt_one:78 and blaschkeProduct:174/178 implement exactly the rational factors and finite product with multiplicities. Use interior parameters and a norm-one scalar multiplier c; n=0 or an empty index family gives c, since blaschkeProduct_of_isEmpty:184 proves the empty product is one. Native product concatenation:191/198 and analytic/zero API:206/260 have completed proofs. The native extension also accepts boundary parameters as constant factors; those are not needed for the catalogue strict-interior presentation. The actual dependency canonical-factor file is byte-identical to the independent snapshot. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Complex/Conformal/BlaschkeProduct.lean",
+          "declarations": "TauCeti.blaschkeFactor (:72); blaschkeFactor_of_norm_lt_one (:78); blaschkeProduct (:174); blaschkeProduct_of_isEmpty (:184); blaschkeProduct_finAppend (:198); blaschkeProduct_eq_zero_iff (:260)",
+          "note": "Native finite-product definition, empty-family convention, product normal forms and immediate zero/analytic API; the unimodular scalar is an ordinary pointwise multiplier."
+        }
+      ],
+      "search_notes": "Checked the actual piecewise definition and strict-interior branch, not only the Blaschke filename. Excluded native disk-automorphism construction as prerequisite machinery and Nevanlinna applications. No product composition-degree result is claimed."
+    },
+    {
+      "concept": "finitely-supported-sequence",
+      "concept_id": "74c38618-5c9b-56b6-b50a-c0689f0b7df2",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Finsupp:88 in Data/Finsupp/Defs.lean stores a Finset support, a function, and the exact equivalence support membership iff coefficient nonzero. mem_support_iff:158 and hasFiniteSupport:194 verify finite nonzero support. Take the index type to be naturals and coefficient field to be real or complex. Data/Finsupp/SMul.lean module:125 defines pointwise module structure with completed scalar laws, so this is precisely the vector space c00, with no norm/completion asserted. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Finsupp/Defs.lean",
+          "declarations": "Finsupp (:88); Finsupp.mem_support_iff (:158); Finsupp.hasFiniteSupport (:194)",
+          "note": "Native finitely supported function structure and exact support API, specialized to scalar sequences."
+        },
+        {
+          "path": "Mathlib/Data/Finsupp/SMul.lean",
+          "declarations": "Finsupp.module (:125)",
+          "note": "Native pointwise scalar/module structure on finitely supported functions, giving c00 its vector-space operations."
+        }
+      ],
+      "search_notes": "Definition and scalar laws inspected. Coordinate type can be naturals without a new alias. Excluded lp completions, c0 topology and arbitrary importers."
+    },
+    {
+      "concept": "finitely-supported-sequence",
+      "concept_id": "74c38618-5c9b-56b6-b50a-c0689f0b7df2",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Finsupp:88 in Data/Finsupp/Defs.lean stores a Finset support, a function, and the exact equivalence support membership iff coefficient nonzero. mem_support_iff:158 and hasFiniteSupport:194 verify finite nonzero support. Take the index type to be naturals and coefficient field to be real or complex. Data/Finsupp/SMul.lean module:125 defines pointwise module structure with completed scalar laws, so this is precisely the vector space c00, with no norm/completion asserted. Actual dependency files differ only in whitespace. Native Finsupp.injOn_add_of_disjoint:33 in Data/Finsupp/Filter.lean proves recovery of disjoint-support summands by filtering; LinearMap.apply_eq_finsuppSum_smul:36 in LinearAlgebra/Finsupp/LSum.lean proves the ordinary finite-coordinate evaluation normal form for any semilinear map out of this space. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Data/Finsupp/Filter.lean",
+          "declarations": "Finsupp.injOn_add_of_disjoint (:33)",
+          "note": "Native direct finite-support arithmetic/decomposition law, with keep/kill filter proof."
+        },
+        {
+          "path": "TauCeti/LinearAlgebra/Finsupp/LSum.lean",
+          "declarations": "LinearMap.apply_eq_finsuppSum_smul (:36); apply_apply_eq_finsuppSum_mul (:42)",
+          "note": "Native ordinary finite-coordinate evaluation normal form for maps from c00/free finitely supported modules."
+        }
+      ],
+      "search_notes": "Checked full filter proof and both LSum proof bodies. Supported-submodule filtering is natural adjacent API but not additionally selected; Noetherian finite-generation applications and basis/topology constructions excluded."
+    },
+    {
+      "concept": "first-mixed-volume-integral-formula",
+      "concept_id": "eddae53e-f4c2-5388-a30e-29859cdf97e2",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked the existing convex-body constructors (Mathlib Analysis/Convex/Body.ConvexBody:44) and bounded searches for mixed volume, first variation, surface-area measure and support-function integral endpoints. The inspected convex-body/set-sum machinery does not verify a mixed-volume construction with its multiplicities and surface-area measure S_K, nor the displayed n^(-1) integral identity for full-dimensional bodies. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched mixedVolume/mixed volume/first mixed/quermass/surfaceAreaMeasure in exact Analysis/Convex, Geometry and MeasureTheory trees, including the actual dependency. Convex-body definitions alone are prerequisites. No name match is treated as a proof and unknown does not assert absence; missing is the actual first mixed-volume/surface-area integral bridge."
+    },
+    {
+      "concept": "first-mixed-volume-integral-formula",
+      "concept_id": "eddae53e-f4c2-5388-a30e-29859cdf97e2",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked the existing convex-body constructors (Mathlib Analysis/Convex/Body.ConvexBody:44) and bounded searches for mixed volume, first variation, surface-area measure and support-function integral endpoints. The inspected convex-body/set-sum machinery does not verify a mixed-volume construction with its multiplicities and surface-area measure S_K, nor the displayed n^(-1) integral identity for full-dimensional bodies. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched mixedVolume/mixed volume/first mixed/quermass/surfaceAreaMeasure in exact Analysis/Convex, Geometry and MeasureTheory trees, including the actual dependency. Convex-body definitions alone are prerequisites. No name match is treated as a proof and unknown does not assert absence; missing is the actual first mixed-volume/surface-area integral bridge."
+    },
+    {
+      "concept": "florentin-segal-star-symmetrization-rate",
+      "concept_id": "49981a47-bfd9-543b-963e-8acec383caa2",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Scoped searches for Florentin, quantitative Minkowski symmetrization, mean width and star symmetrization did not verify the C*n*abs(log epsilon) two-sided ball approximation theorem. Actual Tau Lebesgue/Steiner/Perimeter.perimeter_steinerSymmetrization_le_liminf:193 controls perimeter by outer Minkowski content for a Steiner symmetral; it does not iterate reflection-averaging Minkowski symmetrizations, preserve M-star, or prove the stated rate. The native Convex/Sequence/Minkowski file instead convolves scalar sequences in the min-plus sense, a different object. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read actual Steiner-perimeter theorem hypotheses/conclusion and scalar-sequence Minkowski definitions to exclude false matches. Checked compact star/convex-body/reflection prerequisites from earlier batches; none is allocated as the quantitative approximation theorem. Full dimension/rate/mean-width endpoint remains unresolved in each library."
+    },
+    {
+      "concept": "florentin-segal-star-symmetrization-rate",
+      "concept_id": "49981a47-bfd9-543b-963e-8acec383caa2",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Scoped searches for Florentin, quantitative Minkowski symmetrization, mean width and star symmetrization did not verify the C*n*abs(log epsilon) two-sided ball approximation theorem. Actual Tau Lebesgue/Steiner/Perimeter.perimeter_steinerSymmetrization_le_liminf:193 controls perimeter by outer Minkowski content for a Steiner symmetral; it does not iterate reflection-averaging Minkowski symmetrizations, preserve M-star, or prove the stated rate. The native Convex/Sequence/Minkowski file instead convolves scalar sequences in the min-plus sense, a different object. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read actual Steiner-perimeter theorem hypotheses/conclusion and scalar-sequence Minkowski definitions to exclude false matches. Checked compact star/convex-body/reflection prerequisites from earlier batches; none is allocated as the quantitative approximation theorem. Full dimension/rate/mean-width endpoint remains unresolved in each library."
+    },
+    {
+      "concept": "formal-adjoint-surface-differential-operator",
+      "concept_id": "4c1ac514-3d88-52b7-806f-418bbaca7449",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Mathlib LinearPMap.IsFormalAdjoint:72 is the genuine unbounded partial-operator pairing predicate, with symmetry:78; it makes no boundedness claim. However the realization of arbitrary Euclidean-vector-valued surface differential operators on compactly supported smooth test fields as such partial L2 maps, and the induced-surface-measure integral identification, was not verified. Native Tau Riemannian/Adjoint proves regularity of the pointwise adjoint of a differential, a distinct operation; Riemannian/DivergenceTheorem:312/337 proves particular scalar Laplacian integration-by-parts identities, not the general differential-operator formal-adjoint constructor. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read actual LinearPMap pairing definition, native mfderiv_adjoint_apply proof and scalar Riemannian integration identities. Searched formalAdjoint/formal adjoint and surface/differential-operator sources. The missing bridge is the compact-test-field L2 realization/general pairing predicate with the correct surface density, not bounded operator adjoint existence. Separate Tau candidate files are not native Mathlib ownership."
+    },
+    {
+      "concept": "formal-adjoint-surface-differential-operator",
+      "concept_id": "4c1ac514-3d88-52b7-806f-418bbaca7449",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Mathlib LinearPMap.IsFormalAdjoint:72 is the genuine unbounded partial-operator pairing predicate, with symmetry:78; it makes no boundedness claim. However the realization of arbitrary Euclidean-vector-valued surface differential operators on compactly supported smooth test fields as such partial L2 maps, and the induced-surface-measure integral identification, was not verified. Native Tau Riemannian/Adjoint proves regularity of the pointwise adjoint of a differential, a distinct operation; Riemannian/DivergenceTheorem:312/337 proves particular scalar Laplacian integration-by-parts identities, not the general differential-operator formal-adjoint constructor. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read actual LinearPMap pairing definition, native mfderiv_adjoint_apply proof and scalar Riemannian integration identities. Searched formalAdjoint/formal adjoint and surface/differential-operator sources. The missing bridge is the compact-test-field L2 realization/general pairing predicate with the correct surface density, not bounded operator adjoint existence. Separate Tau candidate files are not native Mathlib ownership."
+    },
+    {
+      "concept": "fourier-inversion-schwartz",
+      "concept_id": "0f8f3154-eede-54fa-9fe8-99ce2b213ca4",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. SchwartzSpace/Fourier.lean fourierTransformCLM:52 constructs the continuous transform using smoothness and explicit finite-seminorm bounds; continuous inverse:118 and FourierPair:131/FourierInvPair:138 give both inverse laws. These proofs apply the complete-space function inversion theorem to Schwartz-integrable f and its Schwartz-integrable transform. Analysis/Fourier/Inversion.lean Integrable.fourierInv_fourier_eq:166 identifies the Gaussian regularization limit and Continuous.fourierInv_fourier_eq:175 gives equality everywhere. The checked library convention is F2pi(f)(eta)=integral exp(-2*pi*i*inner(x,eta))*f(x). The catalogue convention is F0(f)(xi)=F2pi(f)((2*pi)^(-1) smul xi). This is an exact frequency rescaling, not a sign change. Real.fourier_eq':437 expands the kernel. SchwartzMap.compCLMOfContinuousLinearEquiv (SchwartzSpace/Basic:1008; dependency:996) supplies the continuous invertible frequency-rescaling map on Schwartz space. Measure.integral_comp_smul (Haar/NormedSpace:91) proves the Jacobian |R^n|^(-1), giving the catalogue inverse factor (2*pi)^(-n) after xi=2*pi*eta. These actual constructor and change-of-variables statements were inspected. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean",
+          "declarations": "SchwartzMap.fourierTransformCLM (:52); instContinuousFourier (:98); instContinuousFourierInv (:118); instFourierPair (:131); instFourierInvPair (:138)",
+          "note": "Native Schwartz continuous transform and inverse laws proving a continuous onto automorphism."
+        },
+        {
+          "path": "Mathlib/Analysis/Fourier/Inversion.lean",
+          "declarations": "MeasureTheory.Integrable.fourierInv_fourier_eq (:166); Continuous.fourierInv_fourier_eq (:175)",
+          "note": "Actual function inversion proof used to establish the Schwartz inverse identity."
+        }
+      ],
+      "search_notes": "Checked scalar complex specialization and finite-dimensional real Euclidean domain. Frequency-rescaling and Haar-scaling files are evidence for convention equivalence, not additionally charged as unrelated prerequisites. Excluded Plancherel/Poisson and multiplier applications."
+    },
+    {
+      "concept": "fourier-inversion-schwartz",
+      "concept_id": "0f8f3154-eede-54fa-9fe8-99ce2b213ca4",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. SchwartzSpace/Fourier.lean fourierTransformCLM:52 constructs the continuous transform using smoothness and explicit finite-seminorm bounds; continuous inverse:118 and FourierPair:131/FourierInvPair:138 give both inverse laws. These proofs apply the complete-space function inversion theorem to Schwartz-integrable f and its Schwartz-integrable transform. Analysis/Fourier/Inversion.lean Integrable.fourierInv_fourier_eq:166 identifies the Gaussian regularization limit and Continuous.fourierInv_fourier_eq:175 gives equality everywhere. The checked library convention is F2pi(f)(eta)=integral exp(-2*pi*i*inner(x,eta))*f(x). The catalogue convention is F0(f)(xi)=F2pi(f)((2*pi)^(-1) smul xi). This is an exact frequency rescaling, not a sign change. Real.fourier_eq':437 expands the kernel. SchwartzMap.compCLMOfContinuousLinearEquiv (SchwartzSpace/Basic:1008; dependency:996) supplies the continuous invertible frequency-rescaling map on Schwartz space. Measure.integral_comp_smul (Haar/NormedSpace:91) proves the Jacobian |R^n|^(-1), giving the catalogue inverse factor (2*pi)^(-n) after xi=2*pi*eta. These actual constructor and change-of-variables statements were inspected. The exact dependency Schwartz Fourier file uses an earlier mkCLM proof syntax; actual inverse bodies at dependency:130/137 are unchanged. Native Continuous.eq_zero_of_fourier_eq_zero:34 directly proves the inversion uniqueness consequence, and native SchwartzMap.exists_seminorm_fourier_le_sum_seminorm:302 packages the ordinary finite-seminorm continuity bound. Native ChangeOfVariables.exp_inner_mul_I_eq_fourierChar:196 explicitly confirms the 1/(2*pi) frequency convention. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Fourier/Inversion.lean",
+          "declarations": "Continuous.eq_zero_of_fourier_eq_zero (:34)",
+          "note": "Native immediate inversion uniqueness consequence: apply inversion to the zero transform."
+        },
+        {
+          "path": "TauCeti/Analysis/Distribution/SchwartzSpace/Fourier.lean",
+          "declarations": "SchwartzMap.fourierInv_apply_eq_fourier_neg (:130); SchwartzMap.exists_seminorm_fourier_le_sum_seminorm (:302)",
+          "note": "Native ordinary inverse/reflection identity and finite-seminorm continuity API on Schwartz space."
+        }
+      ],
+      "search_notes": "Actual dependency general function inversion is byte-identical; actual Schwartz pair and rescaling constructor separately inspected. Theorem-specific reconstruction beyond inversion, weighted Plancherel and specialized spectral multipliers excluded."
+    },
+    {
+      "concept": "fourier-transform",
+      "concept_id": "f9e817f7-2b9b-5c4b-863a-2a39bb87bb2e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. VectorFourier.fourierIntegral:81 in Analysis/Fourier/FourierTransform.lean is the actual integral of e(-L x xi) acting on f; the Euclidean instance:428 and expanded kernel:437 use the real inner product and volume. SchwartzSpace/Fourier.lean fourierTransformCLM:52 supplies the Schwartz-space extension. TemperedDistribution.instFourierTransform:469 is continuous linear precomposition by the Schwartz transform; fourier_apply:482 is exactly F(T)(phi)=T(F(phi)), with completed additive/scalar/continuity and inverse laws. The checked library convention is F2pi(f)(eta)=integral exp(-2*pi*i*inner(x,eta))*f(x). The catalogue convention is F0(f)(xi)=F2pi(f)((2*pi)^(-1) smul xi). This is an exact frequency rescaling, not a sign change. Real.fourier_eq':437 expands the kernel. SchwartzMap.compCLMOfContinuousLinearEquiv (SchwartzSpace/Basic:1008; dependency:996) supplies the continuous invertible frequency-rescaling map on Schwartz space. Measure.integral_comp_smul (Haar/NormedSpace:91) proves the Jacobian |R^n|^(-1), giving the catalogue inverse factor (2*pi)^(-n) after xi=2*pi*eta. These actual constructor and change-of-variables statements were inspected. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Fourier/FourierTransform.lean",
+          "declarations": "VectorFourier.fourierIntegral (:81); Real.instFourierTransform (:428); Real.fourier_eq' (:437)",
+          "note": "Native integral definition and explicit Euclidean kernel/convention."
+        },
+        {
+          "path": "Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean",
+          "declarations": "SchwartzMap.fourierTransformCLM (:52); SchwartzMap.instFourierTransform (:89)",
+          "note": "Native continuous Schwartz-space transform, preserving smooth rapid decay."
+        },
+        {
+          "path": "Mathlib/Analysis/Distribution/TemperedDistribution.lean",
+          "declarations": "TemperedDistribution.instFourierTransform (:469); TemperedDistribution.fourier_apply (:482)",
+          "note": "Native duality extension on tempered distributions and evaluation formula."
+        }
+      ],
+      "search_notes": "The catalogue convention is identified by exact frequency rescaling; the kernel is not silently treated as exp(-i inner) without its 2*pi. Distribution duality is bilinear transpose, matching the standard distribution convention. Excluded arbitrary Lp Plancherel extensions, summation formulas and applications."
+    },
+    {
+      "concept": "fourier-transform",
+      "concept_id": "f9e817f7-2b9b-5c4b-863a-2a39bb87bb2e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. VectorFourier.fourierIntegral:81 in Analysis/Fourier/FourierTransform.lean is the actual integral of e(-L x xi) acting on f; the Euclidean instance:428 and expanded kernel:437 use the real inner product and volume. SchwartzSpace/Fourier.lean fourierTransformCLM:52 supplies the Schwartz-space extension. TemperedDistribution.instFourierTransform:469 is continuous linear precomposition by the Schwartz transform; fourier_apply:482 is exactly F(T)(phi)=T(F(phi)), with completed additive/scalar/continuity and inverse laws. The checked library convention is F2pi(f)(eta)=integral exp(-2*pi*i*inner(x,eta))*f(x). The catalogue convention is F0(f)(xi)=F2pi(f)((2*pi)^(-1) smul xi). This is an exact frequency rescaling, not a sign change. Real.fourier_eq':437 expands the kernel. SchwartzMap.compCLMOfContinuousLinearEquiv (SchwartzSpace/Basic:1008; dependency:996) supplies the continuous invertible frequency-rescaling map on Schwartz space. Measure.integral_comp_smul (Haar/NormedSpace:91) proves the Jacobian |R^n|^(-1), giving the catalogue inverse factor (2*pi)^(-n) after xi=2*pi*eta. These actual constructor and change-of-variables statements were inspected. Exact dependency function-transform and tempered-duality files are byte-identical. The checked dependency Schwartz definition has a proof-syntax refactor only in the standalone source. Native ChangeOfVariables.fourier_comp_smul:93, fourier_comp_sub_const:161 and exp_inner_mul_I_eq_fourierChar:196 give genuine ordinary dilation, translation and convention API; native Schwartz Fourier:206/214 gives the directional-derivative symbol normal forms. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Fourier/ChangeOfVariables.lean",
+          "declarations": "ContinuousLinearEquiv.fourier_comp (:67); TauCeti.fourier_comp_smul (:93); fourier_comp_sub_const (:161); exp_inner_mul_I_eq_fourierChar (:196)",
+          "note": "Native ordinary linear-coordinate, dilation, translation and exponential convention formulas."
+        },
+        {
+          "path": "TauCeti/Analysis/Distribution/SchwartzSpace/Fourier.lean",
+          "declarations": "SchwartzMap.fourierInv_apply_eq_fourier_neg (:130); fourier_lineDerivOp_apply (:206); fourier_iteratedLineDerivOp_apply (:214)",
+          "note": "Native ordinary inverse/reflection and differentiation symbol API for Schwartz transforms."
+        }
+      ],
+      "search_notes": "Read actual change-of-variables proofs using Haar Jacobian and character expansion, and Schwartz directional-derivative induction. Underlying definitions and tempered extension are dependency-owned. Specialized multiplier estimates/Calderon/LittlewoodPaley/Plancherel extra endpoints excluded."
+    },
+    {
+      "concept": "frazier-jawerth-phi-transform",
+      "concept_id": "ece00e5c-3661-5a2b-9a4e-b183803a6a41",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked actual Tau TemperedDistribution.littlewoodPaleyBlock:128 and tendsto_sum_littlewoodPaleyBlock:158: these are continuous Fourier-multiplier blocks and reconstruction by scale only. Checked SchwartzSpace/ZLattice.summable_norm_poisson_left:65: it proves summability of lattice translates of an already supplied Schwartz function. Neither is a discrete distribution analysis map sampled at dyadic corners with the admissible band-limited dual-atom reconstruction required here. The full Frazier-Jawerth sampled reconstruction remains unverified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Frazier/Jawerth/phi transform/sampled dyadic/atomic reconstruction in both Fourier/distribution trees and actual dependency; inspected LP reconstruction proof and lattice-summability statement. Fourier/Calderon/LP continuous reconstruction and bandlimited estimates are prerequisites or different endpoints; no files charged without the discrete analysis/synthesis identity."
+    },
+    {
+      "concept": "frazier-jawerth-phi-transform",
+      "concept_id": "ece00e5c-3661-5a2b-9a4e-b183803a6a41",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked actual Tau TemperedDistribution.littlewoodPaleyBlock:128 and tendsto_sum_littlewoodPaleyBlock:158: these are continuous Fourier-multiplier blocks and reconstruction by scale only. Checked SchwartzSpace/ZLattice.summable_norm_poisson_left:65: it proves summability of lattice translates of an already supplied Schwartz function. Neither is a discrete distribution analysis map sampled at dyadic corners with the admissible band-limited dual-atom reconstruction required here. The full Frazier-Jawerth sampled reconstruction remains unverified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Frazier/Jawerth/phi transform/sampled dyadic/atomic reconstruction in both Fourier/distribution trees and actual dependency; inspected LP reconstruction proof and lattice-summability statement. Fourier/Calderon/LP continuous reconstruction and bandlimited estimates are prerequisites or different endpoints; no files charged without the discrete analysis/synthesis identity."
+    },
+    {
+      "concept": "frechet-derivative",
+      "concept_id": "d1d632d6-a0a2-53cd-a5b4-2adce0809d4b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. HasFDerivAtFilter:109 and HasFDerivAt:122 in FDeriv/Defs.lean use an actual continuous linear map and little-o remainder along the neighborhood of x. FDeriv/Basic.lean hasFDerivAt_iff_tendsto:811 proves equivalence with norm(xprime-x)^(-1)*norm(f(xprime)-f(x)-A(xprime-x)) tending to zero; hasFDerivAt_iff_isLittleO_nhds_zero:816 gives the exact increment h version. At h=0 the totalized ratio is zero, so the neighborhood and punctured-limit formulations agree; continuous linear is bounded for normed spaces. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/FDeriv/Defs.lean",
+          "declarations": "HasFDerivAtFilter (:109); HasFDerivAt (:122)",
+          "note": "Native derivative-existence relation with continuous linear remainder approximation."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/FDeriv/Basic.lean",
+          "declarations": "hasFDerivAt_iff_tendsto (:811); hasFDerivAt_iff_isLittleO_nhds_zero (:816)",
+          "note": "Native exact norm-remainder and increment equivalences plus ordinary derivative API."
+        }
+      ],
+      "search_notes": "Inspected actual remainder structure, norm-limit equivalence proof and x+h translation. No finite-dimensional, smoothness or real-only hypothesis is silently introduced."
+    },
+    {
+      "concept": "frechet-derivative",
+      "concept_id": "d1d632d6-a0a2-53cd-a5b4-2adce0809d4b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. HasFDerivAtFilter:109 and HasFDerivAt:122 in FDeriv/Defs.lean use an actual continuous linear map and little-o remainder along the neighborhood of x. FDeriv/Basic.lean hasFDerivAt_iff_tendsto:811 proves equivalence with norm(xprime-x)^(-1)*norm(f(xprime)-f(x)-A(xprime-x)) tending to zero; hasFDerivAt_iff_isLittleO_nhds_zero:816 gives the exact increment h version. At h=0 the totalized ratio is zero, so the neighborhood and punctured-limit formulations agree; continuous linear is bounded for normed spaces. Exact dependency FDeriv files differ only in whitespace. Native differentiableAt_of_fderiv_ne_zero:36 proves a direct criterion for the totalized derivative, by contradiction with fderiv_zero_of_not_differentiableAt. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Calculus/FDeriv/Basic.lean",
+          "declarations": "TauCeti.differentiableAt_of_fderiv_ne_zero (:36)",
+          "note": "Native ordinary totalized-derivative/differentiability criterion, with completed proof; definition imported."
+        }
+      ],
+      "search_notes": "The companion two-combination differentiability theorem is adjacent API in the selected whole file; no downstream chain-rule applications or manifold derivative files automatically selected."
+    },
+    {
+      "concept": "frobenius-matrix-norm",
+      "concept_id": "6b361469-900a-5f6c-a882-ed3780ec12de",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Matrix.frobeniusSeminormedAddCommGroup:553 and frobeniusNormedAddCommGroup:562 in Analysis/Matrix/Normed.lean use nested finite L2 norms; frobenius_norm_def:605 gives exactly (sum_i sum_j norm(Aij)^2)^(1/2), proved from nested PiLp L2 formulas. With real or complex scalar entries the coefficient norm is abs/modulus. This is a scoped norm choice, not the default maximum-entry/operator norm. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Matrix/Normed.lean",
+          "declarations": "Matrix.frobeniusSeminormedAddCommGroup (:553); Matrix.frobeniusNormedAddCommGroup (:562); Matrix.frobenius_norm_def (:605)",
+          "note": "Native Frobenius norm structure and exact finite sum-of-squares formula; ordinary entry/transpose/submultiplicativity API."
+        }
+      ],
+      "search_notes": "Explicitly checked scoped Matrix.Norms.Frobenius convention. Do not substitute L-infinity operator norm for this matrix norm."
+    },
+    {
+      "concept": "frobenius-matrix-norm",
+      "concept_id": "6b361469-900a-5f6c-a882-ed3780ec12de",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Matrix.frobeniusSeminormedAddCommGroup:553 and frobeniusNormedAddCommGroup:562 in Analysis/Matrix/Normed.lean use nested finite L2 norms; frobenius_norm_def:605 gives exactly (sum_i sum_j norm(Aij)^2)^(1/2), proved from nested PiLp L2 formulas. With real or complex scalar entries the coefficient norm is abs/modulus. This is a scoped norm choice, not the default maximum-entry/operator norm. Exact dependency norm file is byte-identical. Native Analysis/Matrix/Frobenius.lean frobeniusInnerProductSpace:63 defines the compatible entrywise inner product with norm identity proof; trace formula:112 and frobenius_norm_sq_eq_sum_normSq:120 prove the ordinary Gram/entry normal forms. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Matrix/Frobenius.lean",
+          "declarations": "Matrix.frobeniusInnerProductSpace (:63); Matrix.frobenius_inner_eq_trace_conjTranspose_mul (:112); Matrix.frobenius_norm_sq_eq_sum_normSq (:120)",
+          "note": "Native immediate inner/trace/squared-entry descriptions of the imported Frobenius norm."
+        }
+      ],
+      "search_notes": "Read actual compatible inner-product fields and sum-of-normSq proof. Native Analysis/Matrix/Normed.lean concerns L-infinity operator topology and is excluded; Hoffman-Wielandt and spectral-measure bounds are separate endpoints."
+    },
+    {
+      "concept": "fubini-theorem",
+      "concept_id": "a16f42d2-9b64-547b-b37b-f7facc839e42",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. MeasureTheory.Integrable.prod_left_ae:245 and prod_right_ae:249 in Integral/Prod.lean give AE integrable sections; integral_prod:443 proves equality with an iterated Bochner integral by Integrable.induction, handling finite indicators, addition, closedness and AE congruence. integral_prod_symm:466 proves the other order by product swap. SFinite hypotheses used in the source are supplied by the catalogue sigma-finite measures; no finite-measure assumption is added. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Prod.lean",
+          "declarations": "MeasureTheory.Integrable.prod_left_ae (:245); MeasureTheory.Integrable.prod_right_ae (:249); MeasureTheory.integral_prod (:443); MeasureTheory.integral_prod_symm (:466)",
+          "note": "Native AE-section integrability and both iterated-integral equalities, with completed Fubini proof."
+        }
+      ],
+      "search_notes": "Read section integrability criterion and full product-integral proof. Scalar functions specialize the more general Bochner theorem. Tonelli for unrestricted nonnegative functions is a distinct endpoint."
+    },
+    {
+      "concept": "fubini-theorem",
+      "concept_id": "a16f42d2-9b64-547b-b37b-f7facc839e42",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. MeasureTheory.Integrable.prod_left_ae:245 and prod_right_ae:249 in Integral/Prod.lean give AE integrable sections; integral_prod:443 proves equality with an iterated Bochner integral by Integrable.induction, handling finite indicators, addition, closedness and AE congruence. integral_prod_symm:466 proves the other order by product swap. SFinite hypotheses used in the source are supplied by the catalogue sigma-finite measures; no finite-measure assumption is added. The actual dependency has the same section and Fubini bodies; only a separate earlier integrable bilinear-product finiteness tactic differs. Native integrable_and_integral_prod_le:264 proves the ordinary slice-majorant criterion and product-integral bound by the integrability criterion and actual Fubini equality. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Integral/Prod.lean",
+          "declarations": "TauCeti.integrable_and_integral_prod_le (:264)",
+          "note": "Native ordinary Fubini slice-majorant integrability/bound interface; underlying equality imported."
+        }
+      ],
+      "search_notes": "Inspected entire proof: AE nonnegativity identifies norm-integral slices with their integrals, then the majorant gives product integrability and Fubini gives the bound. Kernel/transport applications excluded."
+    },
+    {
+      "concept": "fundamental-theorem-algebra",
+      "concept_id": "d109c3a9-9ed6-5e8e-8575-85f071bdbd1a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Complex.exists_root:37 in Analysis/Complex/Polynomial/Basic.lean proves every positive-degree complex polynomial has a root: a root-free reciprocal is entire and tends to zero at infinity, so Liouville makes it zero, contradicting positive degree. Complex.isAlgClosed:52 derives algebraic closedness from irreducibles. This gives the equivalent complete linear factorization through the existing splitting API, without separability or distinct-root requirements. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Complex/Polynomial/Basic.lean",
+          "declarations": "Complex.exists_root (:37); Complex.isAlgClosed (:52)",
+          "note": "Actual complex root-existence proof and algebraically closed instance, supplying splitting/factorization."
+        }
+      ],
+      "search_notes": "Read the completed reciprocal/Liouville proof and IsAlgClosed construction. Quadratic formulas, stability half-plane factorizations and root-location applications are separate endpoints."
+    },
+    {
+      "concept": "fundamental-theorem-algebra",
+      "concept_id": "d109c3a9-9ed6-5e8e-8575-85f071bdbd1a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Complex.exists_root:37 in Analysis/Complex/Polynomial/Basic.lean proves every positive-degree complex polynomial has a root: a root-free reciprocal is entire and tends to zero at infinity, so Liouville makes it zero, contradicting positive degree. Complex.isAlgClosed:52 derives algebraic closedness from irreducibles. This gives the equivalent complete linear factorization through the existing splitting API, without separability or distinct-root requirements. Exact dependency complex-polynomial file is byte-identical. Native Polynomial.exists_isRootEnumeration_iff_splits:208 builds a finite enumeration with multiplicities from splitting, via the roots multiset and a finite-cardinality equivalence. IsRootEnumeration.eq_C_mul_prod_X_sub_C:136 gives the exact leading-coefficient-times-linear-factors normal form. Specializing R=L=complex and index Fin degree supplies ordinary full-factorization API for the imported FTA. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Polynomial/RootEnumeration.lean",
+          "declarations": "Polynomial.IsRootEnumeration.eq_C_mul_prod_X_sub_C (:136); Polynomial.exists_isRootEnumeration_iff_splits (:208)",
+          "note": "Native ordinary finite-enumeration and complete linear-factorization presentation, retaining multiplicities and leading coefficient; root existence is dependency-owned."
+        }
+      ],
+      "search_notes": "Read the full factorization and enumeration-existence proofs. Excluded native imaginary-axis stable/unstable factorization, discriminant formulas and specialized real-root locations as independently significant endpoints."
+    },
+    {
+      "concept": "generalized-mean-good-density-approximation",
+      "concept_id": "5dafe095-a02a-5bef-b4af-9afa3a478e02",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked finite coordinate-subset averaging constructors separately, but scoped generalized-mean/symmetric-density/marginal-lower-bound searches did not verify approximation of symmetric probability densities by strictly positive densities satisfying Q(slice)>=gamma*Q_marginal, nor an open dense L-infinity subset in the finite-measure case. General test-function/L1 density and generic probability-kernel normalization do not preserve the specific symmetry and marginal domination condition. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected finite average construction, MeasureTheory integral-product/slice API and native Kernel normalization/recovery candidate context. Excluded the power-mean inequality lexical match and arbitrary Markov kernels. Missing is the actual density construction and simultaneous L1/L-infinity topology conclusions under the stated nonzero sigma-finite hypotheses; unknown is not absence."
+    },
+    {
+      "concept": "generalized-mean-good-density-approximation",
+      "concept_id": "5dafe095-a02a-5bef-b4af-9afa3a478e02",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked finite coordinate-subset averaging constructors separately, but scoped generalized-mean/symmetric-density/marginal-lower-bound searches did not verify approximation of symmetric probability densities by strictly positive densities satisfying Q(slice)>=gamma*Q_marginal, nor an open dense L-infinity subset in the finite-measure case. General test-function/L1 density and generic probability-kernel normalization do not preserve the specific symmetry and marginal domination condition. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected finite average construction, MeasureTheory integral-product/slice API and native Kernel normalization/recovery candidate context. Excluded the power-mean inequality lexical match and arbitrary Markov kernels. Missing is the actual density construction and simultaneous L1/L-infinity topology conclusions under the stated nonzero sigma-finite hypotheses; unknown is not absence."
+    },
+    {
+      "concept": "generalized-mean-operator",
+      "concept_id": "fb1ec29c-eb87-5235-9c82-0e28954a5f21",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked generic constructors implement the exact coordinate-subset average: Finset.expect:60 in Algebra/BigOperators/Expect.lean is inverse cardinal times a finite sum; Finset.powersetCard:197, mem_powersetCard:201 and card_powersetCard:211 in Data/Finset/Powerset.lean enumerate all m-subsets of univ:Finset(Fin N) and count them as choose(N,m). For each such subset s, Finset.orderEmbOfFin:195 in Data/Finset/Sort.lean is the strictly increasing enumeration Fin m→Fin N, with exact range theorem:217. Evaluate u at x composed with this increasing enumeration and average over these subsets. Thus each strictly increasing index tuple occurs exactly once and the coefficient is choose(N,m)^(-1); no symmetry of u is assumed. Dependent membership witnesses supply s.card=m; an off-family zero value is immaterial. This is an exact instantiation of the existing finite-subset averaging/ordering constructors, not a claim of any kernel-recovery theorem. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/BigOperators/Expect.lean",
+          "declarations": "Finset.expect (:60)",
+          "note": "Native finite averaging constructor giving inverse-cardinality normalization."
+        },
+        {
+          "path": "Mathlib/Data/Finset/Powerset.lean",
+          "declarations": "Finset.powersetCard (:197); Finset.mem_powersetCard (:201); Finset.card_powersetCard (:211)",
+          "note": "Native exact m-subset indexing and binomial cardinal normalization for the generalized mean."
+        },
+        {
+          "path": "Mathlib/Data/Finset/Sort.lean",
+          "declarations": "Finset.orderEmbOfFin (:195); Finset.range_orderEmbOfFin (:217)",
+          "note": "Native increasing tuple enumeration preserves the order of nonsymmetric kernel arguments."
+        }
+      ],
+      "search_notes": "Checked actual definitions/cardinality/order-bijection proofs. This is not the power/generalized mean inequality, and not a Markov kernel normalization. Measure-theoretic AE convergence, bounded recovery and weighted integrability are separate catalogue entries and remain independently reviewed."
+    },
+    {
+      "concept": "generalized-mean-operator",
+      "concept_id": "fb1ec29c-eb87-5235-9c82-0e28954a5f21",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked generic constructors implement the exact coordinate-subset average: Finset.expect:60 in Algebra/BigOperators/Expect.lean is inverse cardinal times a finite sum; Finset.powersetCard:197, mem_powersetCard:201 and card_powersetCard:211 in Data/Finset/Powerset.lean enumerate all m-subsets of univ:Finset(Fin N) and count them as choose(N,m). For each such subset s, Finset.orderEmbOfFin:195 in Data/Finset/Sort.lean is the strictly increasing enumeration Fin m→Fin N, with exact range theorem:217. Evaluate u at x composed with this increasing enumeration and average over these subsets. Thus each strictly increasing index tuple occurs exactly once and the coefficient is choose(N,m)^(-1); no symmetry of u is assumed. Dependent membership witnesses supply s.card=m; an off-family zero value is immaterial. This is an exact instantiation of the existing finite-subset averaging/ordering constructors, not a claim of any kernel-recovery theorem. All three constructor files are byte-identical in the actual dependency. Native Finset.sum_powersetCard_succ_insert is generated by to_additive from prod_powersetCard_succ_insert:60 in Algebra/BigOperators/Finset/Powerset.lean. The inspected proof splits the (m+1)-subsets of insert(a,s) into those omitting a and those containing a, with completed disjoint-union and insertion-injectivity checks. Applied to the ordered kernel value, this is the ordinary numerator recursion for the coordinate-subset average. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/BigOperators/Finset/Powerset.lean",
+          "declarations": "Finset.prod_powersetCard_succ_insert (:60); generated Finset.sum_powersetCard_succ_insert (to_additive at :57)",
+          "note": "Native ordinary finite-subset-sum splitting normal form, directly applicable to the generalized-mean numerator; normalized average/ordering constructors imported."
+        }
+      ],
+      "search_notes": "Read the actual generated additive declaration request and full multiplicative proof used by to_additive. Counting marked subsets, noncommutative specializations and general sorted-list API are not additionally allocated. No kernel convergence/recovery theorem inferred."
+    },
+    {
+      "concept": "generalized-means-ae-kernel-convergence",
+      "concept_id": "1ed744ff-f697-5fc0-9f5d-1ee5cc4969ab",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The finite-subset averaging constructor is checked independently, but no checked theorem transfers an almost-everywhere finite limit of these N-coordinate means back to an almost-everywhere finite limit of arbitrary m-coordinate kernels, or proves the full converse/AE uniqueness. Fubini section integrability and AE product slicing do not alone provide the kernel-recovery induction for fixed m<=N on a nonzero complete sigma-finite space. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched generalized means/U-statistic/kernel convergence/recovery with finite-coordinate/marginal terms in both exact measure/probability snapshots and dependency. Read actual Fubini section/AE proof contexts and native Markov-kernel recovery false matches. Finite averaging alone is not mapped as this theorem; the recovery and uniqueness endpoint remains unverified."
+    },
+    {
+      "concept": "generalized-means-ae-kernel-convergence",
+      "concept_id": "1ed744ff-f697-5fc0-9f5d-1ee5cc4969ab",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The finite-subset averaging constructor is checked independently, but no checked theorem transfers an almost-everywhere finite limit of these N-coordinate means back to an almost-everywhere finite limit of arbitrary m-coordinate kernels, or proves the full converse/AE uniqueness. Fubini section integrability and AE product slicing do not alone provide the kernel-recovery induction for fixed m<=N on a nonzero complete sigma-finite space. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched generalized means/U-statistic/kernel convergence/recovery with finite-coordinate/marginal terms in both exact measure/probability snapshots and dependency. Read actual Fubini section/AE proof contexts and native Markov-kernel recovery false matches. Finite averaging alone is not mapped as this theorem; the recovery and uniqueness endpoint remains unverified."
+    },
+    {
+      "concept": "generalized-means-measurable-bounded-recovery",
+      "concept_id": "d3d5c0e1-85f8-5867-ae65-d83e4bc7987d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact finite-subset averaging is available, but the checked measure/product/AE and kernel candidates do not establish both directions of measurable kernel recovery and L-infinity recovery with a constant C(m,N). One-way measurability of finite sums and elementary upper bounds do not supply inverse recovery for arbitrary nonsymmetric kernels modulo null sets. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped generalized-mean/measurable/essential bounded/kernel recovery searches, comparing with Fubini slices, essential-supremum API and probability-kernel normalization. No exact inverse lower bound or measurability reconstruction proof was verified. Neither a named alias nor a false absence claim is required; the converse is the explicit unresolved bridge."
+    },
+    {
+      "concept": "generalized-means-measurable-bounded-recovery",
+      "concept_id": "d3d5c0e1-85f8-5867-ae65-d83e4bc7987d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact finite-subset averaging is available, but the checked measure/product/AE and kernel candidates do not establish both directions of measurable kernel recovery and L-infinity recovery with a constant C(m,N). One-way measurability of finite sums and elementary upper bounds do not supply inverse recovery for arbitrary nonsymmetric kernels modulo null sets. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped generalized-mean/measurable/essential bounded/kernel recovery searches, comparing with Fubini slices, essential-supremum API and probability-kernel normalization. No exact inverse lower bound or measurability reconstruction proof was verified. Neither a named alias nor a false absence claim is required; the converse is the explicit unresolved bridge."
+    },
+    {
+      "concept": "generalized-means-weighted-integrability",
+      "concept_id": "6706bf5f-1d4a-56a5-aeff-533142354e86",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked the finite average construction and actual Fubini slice-majorant criterion; neither proves the weighted inverse Lr estimate for arbitrary m-coordinate kernels from a symmetric N-coordinate strictly positive density satisfying the specified marginal lower bound. The marginal measures P_m and uniform-in-u reverse comparison need an actual recovery estimate, not ordinary fixed-measure Holder or Jensen alone. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched generalized means/weighted kernel recovery/marginal lower/symmetric density in exact MeasureTheory/Probability trees and dependency. Native probability-kernel row normalization and fixed-exponent integral bounds are distinct. Missing is both directions and comparable constants for every 1<=r<infinity under the catalogue slice-domination assumption."
+    },
+    {
+      "concept": "generalized-means-weighted-integrability",
+      "concept_id": "6706bf5f-1d4a-56a5-aeff-533142354e86",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked the finite average construction and actual Fubini slice-majorant criterion; neither proves the weighted inverse Lr estimate for arbitrary m-coordinate kernels from a symmetric N-coordinate strictly positive density satisfying the specified marginal lower bound. The marginal measures P_m and uniform-in-u reverse comparison need an actual recovery estimate, not ordinary fixed-measure Holder or Jensen alone. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched generalized means/weighted kernel recovery/marginal lower/symmetric density in exact MeasureTheory/Probability trees and dependency. Native probability-kernel row normalization and fixed-exponent integral bounds are distinct. Missing is both directions and comparable constants for every 1<=r<infinity under the catalogue slice-domination assumption."
+    }
+  ]
+}

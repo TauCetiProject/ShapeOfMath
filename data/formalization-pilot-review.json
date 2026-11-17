@@ -1,0 +1,684 @@
+{
+  "reviewed_at": "2026-11-12T22:55:53Z",
+  "snapshots": {
+    "mathlib": {
+      "repository": "/home/kim/mathlib4",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "snapshot": "/tmp/nix-shell.RiFG0P/shape-formalization-pilot-p55a5fb9/mathlib"
+    },
+    "tau-ceti": {
+      "repository": "/home/kim/TauCeti",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "snapshot": "/tmp/nix-shell.RiFG0P/shape-formalization-pilot-p55a5fb9/tau-ceti"
+    }
+  },
+  "dependency_pin": {
+    "project": "tau-ceti",
+    "project_revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+    "library": "mathlib",
+    "revision": "2ddf59c8f14245864e6c0ed227a2dab76b9efea2"
+  },
+  "method": "Three delegated source reviews; coordinator inspected the central definitions, theorem formulations and representative proof bodies, reviewed scope and exclusions, independently re-read each selected git blob and verified every LOC/hash against the immutable snapshot. No fresh Lean builds or transitive axiom audit.",
+  "parent_decisions": [
+    "Accepted complete generic Group/CommGroup implementations: opposite-side inverse is proved, not an extra missing axiom; additive presentation is supported.",
+    "Accepted Tau Pow native law API for Group and Abelian group, sharing only its 71 owned lines; underlying class definitions belong to checked Mathlib dependency.",
+    "Accepted generic convex-hull core API and excluded independent Caratheodory/compactness/extreme-point endpoints.",
+    "Accepted exact complex Cauchy-Schwarz coverage via real-part/modulus identities; actual core proof is in Defs, public/equality forms in Basic. Excluded weighted Young and operator applications. Tau status inherited, not absent.",
+    "Accepted full braided Drinfeld center under only monoidal ambient assumptions. Rejected different categorical centers and extra rigid/pivotal/ribbon center structures.",
+    "Accepted separable-closure absolute Galois group with Krull topology. Checked that algebraic-closure and separable-closure groups are equivalent while their ambient fixed fields differ over imperfect fields. Do not credit Tau comparison proof to Mathlib.",
+    "Narrowed Tau absolute-Galois selection from seven to three files: Basic/Map/Congr. Excluded fixing-subgroup/finite-index/correspondence/quotient endpoints and their subordinate compatibility files from this bounded core selection."
+  ],
+  "parent_removed_files": [
+    {
+      "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Extension.lean",
+      "declarations": "TauCeti.separableClosureRingEquiv; TauCeti.absoluteGaloisGroupEquivFixingSubgroup; TauCeti.absoluteGaloisGroupMap_separableClosureAlgEquiv",
+      "note": "Lines 68–110 construct a separable-closure identification for an extension L/K equipped with an embedding into K^sep. Lines 118–193 construct the fixing-subgroup isomorphism with actual continuity proofs. Lines 224–241 compare it with the general restriction map. No finiteness or special arithmetic base field is assumed."
+    },
+    {
+      "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/FiniteExtension.lean",
+      "declarations": "TauCeti.galoisSubgroup; TauCeti.galoisSubgroup_index; TauCeti.galoisSubgroupEquiv; TauCeti.absoluteGaloisGroupExtend; TauCeti.quotientGaloisSubgroupEquiv",
+      "note": "Lines 135–240 package G_L as an open subgroup of G_K along a specified embedding, with index [L:K], for finite separable extensions. Lines 252 onward transport the subgroup maps to the algebraic-closure model, and 392–512 provide normal-extension quotient formulas. This is general finite-subextension API, not a number-field specialization. Whole-file accounting also includes some secondary quadratic/root-of-unity lemmas in the same file."
+    },
+    {
+      "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Subextension.lean",
+      "declarations": "TauCeti.restrictNormalHom_equivFixingSubgroup",
+      "note": "Lines 34–61 prove compatibility of restriction to normal subextensions with the fixing-subgroup identification. It proves a general group-theoretic naturality square; no cohomology object or arithmetic specialization occurs in the theorem."
+    },
+    {
+      "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Quotient.lean",
+      "declarations": "TauCeti.absoluteGaloisGroupQuotientEquiv; TauCeti.absoluteGaloisGroupQuotientEquivOfEq",
+      "note": "Lines 43–69 identify quotients of the named absolute Galois group by fixing subgroups with Galois groups of normal subextensions, as topological groups. Lines 76–113 supply equality-of-subgroup transport and evaluation formulas. The derived opaque Mathlib model requires these dedicated API lemmas."
+    }
+  ],
+  "agent_proposals": {
+    "algebra": {
+      "reviews": [
+        {
+          "concept": "group",
+          "library": "mathlib",
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "status": "formalized",
+          "evidence": "Inspected upstream Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. Group at Mathlib/Algebra/Group/Defs.lean:33 extends DivInvMonoid with left inverse cancellation; mul_inv_cancel at :62 proves right inverse cancellation, and toCancelMonoid at :102 proves cancellation, matching the catalogue group definition. AddGroup (:44) is the same mathematical structure in additive notation. Basic.lean supplies immediate group identity API at :607–909. MinimalAxioms.lean:39 and :66 prove equivalent minimal-axiom constructors. Inspected selected proof bodies and found no sorry/admit/axiom declarations in these three files. File selection is the defining group layer and immediate identity/constructor API; no downstream group theory, transport, opposite/product structures, homomorphism theory or parent monoid hierarchy is charged here.",
+          "files": [
+            {
+              "path": "Mathlib/Algebra/Group/Defs.lean",
+              "declarations": "Group (:33), AddGroup (:44), mul_inv_cancel (:62), Group.toDivisionMonoid (:93), Group.toCancelMonoid (:102)",
+              "note": "Defines multiplicative/additive groups and derives right inverses and cancellation from the class axioms (lines 25–106). This same file also defines commutative groups, so it is shared with abelian-group; the entire mixed file is counted as requested."
+            },
+            {
+              "path": "Mathlib/Algebra/Group/Basic.lean",
+              "declarations": "mul_inv_eq_one (:689), div_mul_div_cancel (:739), zpow_induction_left (:882), zpow_induction_right (:899)",
+              "note": "Develops immediate group arithmetic, equation rearrangement, cancellation and integer-power induction (Group section 607–909). The file also contains monoid and commutative-group material; this rough mapping counts the whole file and shares it with abelian-group."
+            },
+            {
+              "path": "Mathlib/Algebra/Group/MinimalAxioms.lean",
+              "declarations": "Group.ofLeftAxioms (:39), Group.ofRightAxioms (:66); generated AddGroup.ofLeftAxioms/AddGroup.ofRightAxioms",
+              "note": "Constructs a Group from associativity plus one-sided identity and inverse laws, proving the missing side, with additive counterparts. This is an alternate presentation of the same group concept rather than a product, opposite or downstream theory."
+            }
+          ]
+        },
+        {
+          "concept": "abelian-group",
+          "library": "mathlib",
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "status": "formalized",
+          "evidence": "Inspected upstream Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. CommGroup at Mathlib/Algebra/Group/Defs.lean:116 extends Group and CommMonoid, exactly a group with commutative multiplication; AddCommGroup at :111 is its additive form. CommGroup.toCancelCommMonoid (:124) and toDivisionCommMonoid (:129) provide the immediate commutative hierarchy. Basic.lean has explicit commutative inverse/division/power identities under DivisionCommMonoid at :516–605 and CommGroup at :912–1016, including mul_inv (:523), mul_zpow (:593), div_div_cancel (:943), and div_eq_div_iff_mul_eq_mul (:996). Proof bodies inspected; no sorry/admit/axiom declarations in these two files. Only defining and immediate law API files are selected, not every general-group file whose facts apply by inheritance.",
+          "files": [
+            {
+              "path": "Mathlib/Algebra/Group/Defs.lean",
+              "declarations": "AddCommGroup (:111), CommGroup (:116), CommGroup.toCancelCommMonoid (:124), CommGroup.toDivisionCommMonoid (:129)",
+              "note": "Defines commutative groups in both additive and multiplicative notation and supplies the immediate cancellation/division hierarchy (lines 110–145). Shared with group because this same file independently defines both concepts."
+            },
+            {
+              "path": "Mathlib/Algebra/Group/Basic.lean",
+              "declarations": "mul_inv (:523), mul_zpow (:593), div_div_cancel (:943), div_eq_div_iff_mul_eq_mul (:996)",
+              "note": "Proves immediate commutative inverse, product-power and division laws (DivisionCommMonoid section 516–605; CommGroup section 912–1016). Shared with group because the file contains direct API for both concepts; the whole mixed file is counted."
+            }
+          ]
+        },
+        {
+          "concept": "group",
+          "library": "tau-ceti",
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "status": "formalized",
+          "evidence": "Inspected Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its lake-manifest.json pins Mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; inspected that dependency commit directly and confirmed Group/AddGroup at Mathlib/Algebra/Group/Defs.lean:33/:44 and both inverse laws. Tau Ceti supplies no new generic Group definition, but its own TauCeti/Algebra/Group/Pow.lean:58–60 proves eq_mul_zpow_sub_iff_mul_zpow_eq for an arbitrary Group, an immediate integer-power equation law. The proof is an explicit derivation from zpow_sub, associativity and inverse cancellation, without placeholders or an assumed endpoint. On the agreed pilot interpretation, formalized means the definition is available (including dependencies) and this project owns qualifying direct API; only Tau Ceti-owned API files contribute its LOC. It does not receive Mathlib file LOC. Other uses, specific-group constructions and higher group theory are excluded.",
+          "files": [
+            {
+              "path": "TauCeti/Algebra/Group/Pow.lean",
+              "declarations": "TauCeti.eq_mul_zpow_sub_iff_mul_zpow_eq (:58–60)",
+              "note": "Adds the generic Group identity a = b * h^(n-m) iff a*h^m = b*h^n. The underlying Group definition is supplied by the pinned Mathlib dependency, not this file. Count only this native direct-API extension; share the mixed file with abelian-group for its distinct commutative-group law at lines 50–54."
+            }
+          ]
+        },
+        {
+          "concept": "abelian-group",
+          "library": "tau-ceti",
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "status": "formalized",
+          "evidence": "Inspected Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its lake-manifest.json pins Mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; inspected that dependency commit directly and confirmed CommGroup and AddCommGroup at Mathlib/Algebra/Group/Defs.lean:116/:111. Tau Ceti inherits these definitions. In its own TauCeti/Algebra/Group/Pow.lean:50–54, mul_zpow_mul_mul_zpow proves the immediate exponent-vector arithmetic identity for arbitrary CommGroup elements and integer exponents using mul_zpow, zpow_mul, zpow_add and associativity/commutativity. This is direct elementary API for commutative groups, not an application to a special group or a conditional surrogate. On the agreed pilot interpretation, formalized means the concept is available with qualifying native direct API. Its LOC counts only Tau Ceti-owned files, not Mathlib dependency files. The finite-abelian-primary-decomposition, powers-subgroup and finite-difference results are separate topics and excluded.",
+          "files": [
+            {
+              "path": "TauCeti/Algebra/Group/Pow.lean",
+              "declarations": "TauCeti.mul_zpow_mul_mul_zpow (:50–54)",
+              "note": "Adds generic commutative-group monomial arithmetic by adding integer exponent vectors. CommGroup/AddCommGroup definitions are inherited from pinned Mathlib. Count this native immediate API extension and share the whole mixed file with group for its separate arbitrary-Group rearrangement law at lines 58–60."
+            }
+          ]
+        }
+      ],
+      "measurements": [
+        {
+          "library": "mathlib",
+          "path": "Mathlib/Algebra/Group/Defs.lean",
+          "loc": 155,
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "sha256": "2862e96c66aea952864a5016bb106ca4cf043000a8915d89e24623132e12fb6c",
+          "measured_at": "2026-11-12T22:50:35Z"
+        },
+        {
+          "library": "mathlib",
+          "path": "Mathlib/Algebra/Group/Basic.lean",
+          "loc": 1099,
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "sha256": "48a12b3df43fb8b5ea5b75677ae93a5f16f9ad9c74dba0befc2ef45b85b1eabe",
+          "measured_at": "2026-11-12T22:50:35Z"
+        },
+        {
+          "library": "mathlib",
+          "path": "Mathlib/Algebra/Group/MinimalAxioms.lean",
+          "loc": 82,
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "sha256": "f1879a7e70c25a97aa33d22ec026c96d94c7be8c92197d0a1adb9f06cd8e9611",
+          "measured_at": "2026-11-12T22:50:35Z"
+        },
+        {
+          "library": "tau-ceti",
+          "path": "TauCeti/Algebra/Group/Pow.lean",
+          "loc": 71,
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "sha256": "ed2d39088183a4cdafea8094190ba2209128e05d4d556f7ef23042733de9e250",
+          "measured_at": "2026-11-12T22:50:35Z"
+        }
+      ],
+      "semantics_note": "Tau statuses require making dependency availability plus native direct API explicit in the specification. Without that clarification, leave those statuses unknown rather than claiming not formalized. Native contribution and concept availability are distinct dimensions.",
+      "estimated_loc_if_only_these_mappings": {
+        "mathlib": {
+          "group": 709,
+          "abelian-group": 627
+        },
+        "tau_ceti": {
+          "group": 35.5,
+          "abelian-group": 35.5
+        }
+      }
+    },
+    "analysis": {
+      "reviews": [
+        {
+          "concept": "convex-hull",
+          "library": "mathlib",
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "status": "formalized",
+          "evidence": "Inspected Mathlib at 26573066084e6e2aa8526ea358bc43b66d96f970. Analysis/Convex/Hull.lean:48 defines convexHull as the minimum convex superset; :52–77 proves containment, convexity, minimality, monotonicity and fixed-point API. The generalized ordered-semiring/module definition includes ordinary real vector spaces. Selected core API includes finite convex-combination membership/characterization and image/union/insertion transport. Separate named Caratheodory, compactness, extreme-point and application endpoints are outside this reviewed core file set.",
+          "files": [
+            {
+              "path": "Mathlib/Analysis/Convex/Hull.lean",
+              "declarations": "convexHull (L48); subset_convexHull; convex_convexHull; convexHull_min (L66); mem_convexHull_iff; convexHull_mono; LinearMap.image_convexHull; AffineMap.image_convexHull",
+              "note": "Defines the minimum convex superset and proves its universal property, monotonicity, elementary hulls and generic linear/affine image/translation API (L48–218)."
+            },
+            {
+              "path": "Mathlib/Analysis/Convex/Combination.lean",
+              "declarations": "Finset.centerMass_mem_convexHull (L256); convexHull_range_eq_exists_affineCombination (L309); convexHull_eq (L345); mem_convexHull_iff_exists_fintype (L381); Finset.mem_convexHull; convexHull_prod; convexHull_add",
+              "note": "Finite convex-combination membership and converse descriptions of hull points; finite-hull, product and Minkowski-sum API (L256–503). Whole file also contains the convex-combination object and other material."
+            },
+            {
+              "path": "Mathlib/Analysis/Convex/Join.lean",
+              "declarations": "convexHull_union (L174); convexHull_insert (L179); convexJoin_subset_convexHull (L111)",
+              "note": "Generic union/insertion descriptions of convex hulls using convex joins, rather than a use of hulls for an unrelated endpoint (L111, L168–196)."
+            }
+          ]
+        },
+        {
+          "concept": "convex-hull",
+          "library": "tau-ceti",
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "status": "formalized",
+          "evidence": "Inspected Tau Ceti at 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The convexHull definition and minimum-property implementation are supplied by Mathlib (checked Hull.lean:49–76 at that exact dependency commit). Tau Ceti owns generic associated API: Combination.lean:83/96 extends linear bounds and affine image transport to hulls, :161/219–273 develops centroid and injectivity API; Join.lean:35 proves insertion membership without a nonempty assumption. Count only these native files; do not charge the imported Mathlib implementation to Tau Ceti. Exclude distinct Caratheodory/compactness endpoints and particular geometric applications.",
+          "files": [
+            {
+              "path": "TauCeti/Analysis/Convex/Combination.lean",
+              "declarations": "IsLinearMap.le_of_mem_convexHull (L83); Set.EqOn.image_convexHull (L96); Finset.exists_lineMap_centroid_mem_convexHull (L161); AffineMap.eq_zero_of_injOn_convexHull (L219); AffineMap.injOn_affineSpan_iff_injOn_convexHull (L257); AffineIndependent.map_of_injOn_convexHull (L270)",
+              "note": "Native generic hull API: linear bounds, affine image interoperability, centroid/ray and affine injectivity properties. The underlying definition is imported from Mathlib; only this native extension file receives Tau Ceti LOC."
+            },
+            {
+              "path": "TauCeti/Analysis/Convex/Join.lean",
+              "declarations": "TauCeti.mem_convexHull_insert (L35)",
+              "note": "Native generic insertion-membership eliminator for convex hulls, including the empty-set case omitted by the imported nonempty formulation (L35–44)."
+            }
+          ],
+          "dependency_evidence": {
+            "library": "mathlib",
+            "revision": "2ddf59c8f14245864e6c0ed227a2dab76b9efea2",
+            "files": [
+              "Mathlib/Analysis/Convex/Hull.lean"
+            ],
+            "declarations": "convexHull; convexHull_min"
+          }
+        },
+        {
+          "concept": "cauchy-schwarz-inner-product",
+          "library": "mathlib",
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "status": "formalized",
+          "evidence": "Inspected Mathlib at 26573066084e6e2aa8526ea358bc43b66d96f970. InnerProductSpace/Defs.lean:355–374 contains the completed discriminant proof; Basic.lean:280–282 exposes it for RCLike inner-product spaces, including complex spaces, without finite-dimensionality or completeness assumptions. Its real-valued bound ||inner x y||*||inner y x|| ≤ Re(inner x x)*Re(inner y y) is exactly the catalogue square-modulus inequality by norm_inner_symm (Basic:226) and real nonnegative diagonal identities (Basic:202–221). Basic:454 gives the equivalent norm form and :722–845 the conventional equality/proportionality and normalized variants. Keep the catalogue diagonal factors interpreted as nonnegative real numbers. Exclude new weighted Young/operator defect/energy endpoints.",
+          "files": [
+            {
+              "path": "Mathlib/Analysis/InnerProductSpace/Defs.lean",
+              "declarations": "InnerProductSpace.Core.cauchy_schwarz_aux'; InnerProductSpace.Core.cauchy_schwarz_aux; InnerProductSpace.Core.inner_mul_inner_self_le (L355); InnerProductSpace.Core.norm_inner_le_norm (L391)",
+              "note": "Contains the actual general Cauchy–Schwarz proof via nonnegative quadratic discriminant (L317–374), not just prerequisite inner-product definitions. Core norm-form API at L391."
+            },
+            {
+              "path": "Mathlib/Analysis/InnerProductSpace/Basic.lean",
+              "declarations": "inner_mul_inner_self_le (L280); norm_inner_symm (L226); inner_self_ofReal_re (L207); norm_inner_le_norm (L454); norm_inner_eq_norm_tfae (L722); norm_inner_eq_norm_iff (L749)",
+              "note": "Public Cauchy–Schwarz theorem, equivalent norm/real forms, conversion identities, conventional equality/proportionality and normalized cases (L280–287, L454–479, L722–845). Whole file also contains other inner-product API."
+            }
+          ]
+        },
+        {
+          "concept": "cauchy-schwarz-inner-product",
+          "library": "tau-ceti",
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "status": "inherited",
+          "evidence": "Inspected Tau Ceti at 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its lake-manifest.json pins Mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; checked actual dependency Basic.lean:281–283 (public inequality), :455 (norm variant), :208–227 (real-diagonal/norm symmetry identities), and Defs.lean:355–374 (completed core proof). Thus the complete complex inner-product theorem is available through that dependency. Native Tau Ceti searches of Cauchy/Schwarz/norm_inner_le_norm/inner_mul_inner_self_le/equality variants and inspected inner-product files found applications or different endpoints, not another generic implementation. Excluded Young.lean:39 as a separate weighted Young inequality, Contraction.lean:97 and OpNormDefect.lean:43 as operator-specific endpoints, and QuadraticForm/TwoVector.lean:67 as a packaged application. No native LOC should be allocated to these uses.",
+          "files": [],
+          "dependency_evidence": {
+            "library": "mathlib",
+            "revision": "2ddf59c8f14245864e6c0ed227a2dab76b9efea2",
+            "files": [
+              "Mathlib/Analysis/InnerProductSpace/Defs.lean",
+              "Mathlib/Analysis/InnerProductSpace/Basic.lean"
+            ],
+            "declarations": "InnerProductSpace.Core.inner_mul_inner_self_le; inner_mul_inner_self_le; norm_inner_le_norm"
+          },
+          "requires_schema_extension": "inherited status is not accepted by schema9; do not downgrade this availability claim to not_formalized."
+        }
+      ],
+      "measurements": [
+        {
+          "library": "mathlib",
+          "path": "Mathlib/Analysis/Convex/Hull.lean",
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "loc": 224,
+          "sha256": "a90d188e1d4d20d4d4191dfb7dac67d1c4a1a601f9da991f594c6b20e82e5759"
+        },
+        {
+          "library": "mathlib",
+          "path": "Mathlib/Analysis/Convex/Combination.lean",
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "loc": 641,
+          "sha256": "0f67ab269bc5cce01edcab6b096fed38dee5bbbf98566678b7a75596708044cf"
+        },
+        {
+          "library": "mathlib",
+          "path": "Mathlib/Analysis/Convex/Join.lean",
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "loc": 197,
+          "sha256": "d198a82f3c58e6290d5f3a736dca73befa23a795b0d23f54a4f96d0c8cef14f8"
+        },
+        {
+          "library": "tau-ceti",
+          "path": "TauCeti/Analysis/Convex/Combination.lean",
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "loc": 378,
+          "sha256": "ec6724734d0d790aa74291ac5f5e6ac1cc6e27cea669afacaf1d08b47c9fa5f3"
+        },
+        {
+          "library": "tau-ceti",
+          "path": "TauCeti/Analysis/Convex/Join.lean",
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "loc": 62,
+          "sha256": "4bac6ed2f4a91500ba245bfaf5d09036b539675a63ba538ed68540dd97e6379b"
+        },
+        {
+          "library": "mathlib",
+          "path": "Mathlib/Analysis/InnerProductSpace/Defs.lean",
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "loc": 620,
+          "sha256": "1cd82a3742b60afb50e16c42d6a9b14bb96a047e9c1f852e9509bce40236201d"
+        },
+        {
+          "library": "mathlib",
+          "path": "Mathlib/Analysis/InnerProductSpace/Basic.lean",
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "loc": 1042,
+          "sha256": "e775fe26f95425ce3f8a995b2d935ec9e484cccfb76f796522f1d9d8e0e37884"
+        }
+      ],
+      "notes": "analysis-notes.txt"
+    },
+    "category-galois": {
+      "reviews": [
+        {
+          "concept": "drinfeld-center",
+          "library": "mathlib",
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "status": "formalized",
+          "evidence": "At 26573066084e6e2aa8526ea358bc43b66d96f970: Inspected complete Center.lean definition and structural proofs. Its ambient category needs only Category and MonoidalCategory; the BraidedCategory C assumption appears later solely for ofBraided, not for braidedCategoryCenter. Objects are X with half-braidings, morphisms commute with them, and the center is monoidal and braided, matching the database paragraph.",
+          "files": [
+            {
+              "path": "Mathlib/CategoryTheory/Monoidal/Center.lean",
+              "declarations": "CategoryTheory.HalfBraiding; CategoryTheory.Center; CategoryTheory.Center.Hom; CategoryTheory.Center.braidedCategoryCenter; CategoryTheory.Center.forget; CategoryTheory.Center.ofBraided",
+              "note": "Lines 44–62: HalfBraiding under Category and MonoidalCategory only. Lines 72–119: objects, compatible morphisms, category and isomorphism API. Lines 124–315: tensor, unit and monoidal structure. Lines 325–362: forgetful monoidal functor and braidedCategoryCenter; only the separate ofBraided construction at 368 onward assumes BraidedCategory C."
+            }
+          ]
+        },
+        {
+          "concept": "drinfeld-center",
+          "library": "tau-ceti",
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "status": "formalized",
+          "evidence": "At 3780371ca1bebf9f1c2bb3d753e4bb56c9526023: The core center definition and braided structure are inherited from Mathlib pinned by lake-manifest.json at 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native Center/Basic.lean proves genuine general immediate half-braiding and braiding API under the same ambient MonoidalCategory assumptions. Native LOC counts only this file, not its Mathlib import. Classification assumes the coordinator policy allowing inherited definitions with substantive native core API. Independently inspected the actual pinned dependency with git show: Center.lean at 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 defines HalfBraiding at line 53, Center at 72 and braidedCategoryCenter at 362 under MonoidalCategory C; the extra BraidedCategory C assumption begins only at 368.",
+          "files": [
+            {
+              "path": "TauCeti/CategoryTheory/Monoidal/Center/Basic.lean",
+              "declarations": "CategoryTheory.HalfBraiding.β_tensorUnit_hom; CategoryTheory.HalfBraiding.monoidal_inv; CategoryTheory.HalfBraiding.naturality_inv; CategoryTheory.HalfBraiding.inv_whiskerRight_comp_whiskerLeft; CategoryTheory.Center.braiding_hom_f'; CategoryTheory.Center.braiding_inv_f'",
+              "note": "Lines 45–97 prove general unit, inverse, naturality and contraction identities for half-braidings under MonoidalCategory C only; lines 103–117 supply simp-facing formulas for the actual braiding on Center C. The definition and braided-category structure are imported from Mathlib, not redefined here; these are genuine native immediate API additions."
+            }
+          ]
+        },
+        {
+          "concept": "absolute-galois-group",
+          "library": "mathlib",
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "status": "formalized",
+          "evidence": "At 26573066084e6e2aa8526ea358bc43b66d96f970: Mathlib has the named Field.absoluteGaloisGroup based on an algebraic closure with the Krull topology and continuous maps. The exact database carrier Gal(SeparableClosure K/K) is directly expressible using Mathlib SeparableClosure, generic Gal and krullTopology; Galois/Profinite supplies its profinite structure. The named algebraic-closure presentation is mathematically topologically equivalent; an explicit general proof of that comparison is checked in Tau Ceti Basic, not falsely attributed to this Mathlib snapshot. There is no assumption that K is perfect.",
+          "files": [
+            {
+              "path": "Mathlib/FieldTheory/AbsoluteGaloisGroup.lean",
+              "declarations": "Field.absoluteGaloisGroup; Field.instTopologicalSpaceAbsoluteGaloisGroup; Field.absoluteGaloisGroup.mapOfAlgebra; Field.absoluteGaloisGroup.map",
+              "note": "Lines 41–45 define the named algebraic-closure model of the absolute Galois group and derive its Krull topology and topological-group structure; lines 58–90 construct continuous restriction maps for field embeddings. The separable-closure model in the database is an equivalent presentation, not literally this named definition; for an imperfect field the ambient fixed-field statements must not be transferred without translation."
+            },
+            {
+              "path": "Mathlib/FieldTheory/KrullTopology.lean",
+              "declarations": "galGroupBasis; krullTopology; krullTopology_mem_nhds_one_iff; IntermediateField.fixingSubgroup_isOpen; krullTopology_t2; stabilizer_isOpen_of_isIntegral",
+              "note": "Lines 105–151 construct the Krull topology on Gal(L/K) and its neighbourhood basis, including its topological-group structure; lines 173–239 provide open fixing subgroups, Hausdorff and totally-separated API. This is actual topology construction explicitly needed by the concept, not a downstream use. It applies in particular to L = SeparableClosure K."
+            },
+            {
+              "path": "Mathlib/FieldTheory/Galois/Profinite.lean",
+              "declarations": "InfiniteGalois.restrictNormalHom_continuous; InfiniteGalois.continuousMulEquivToLimit; InfiniteGalois.profiniteGalGrp",
+              "note": "Lines 151–168 prove continuity of restriction; lines 319–340 identify an algebraic Galois group with the inverse limit of finite Galois groups and provide its compact/profinite structure. This is included as the general topological Galois-group API, specialized to the separable closure; no arithmetic application is included."
+            }
+          ]
+        },
+        {
+          "concept": "absolute-galois-group",
+          "library": "tau-ceti",
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "status": "formalized",
+          "evidence": "At 3780371ca1bebf9f1c2bb3d753e4bb56c9526023: Basic.lean directly defines TauCeti.AbsoluteGaloisGroup K as Gal(SeparableClosure K/K), using the actual Krull topology, and proves the continuous two-sided restriction equivalence with Mathlib's algebraic-closure model. General maps, field-isomorphism transport, extension/fixing-subgroup, finite-open-subgroup and normal-quotient API are implemented in the seven selected native files. Inspected the displayed proof bodies and scanned for placeholders/axioms; did not rebuild Lean. No arithmetic specialization or cohomology file is assigned. The imported named algebraic-closure definition was also checked at Tau Ceti's exact Mathlib dependency commit 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 (AbsoluteGaloisGroup.lean lines 42–43).",
+          "files": [
+            {
+              "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Basic.lean",
+              "declarations": "TauCeti.AbsoluteGaloisGroup; TauCeti.separableClosureRestrictEquiv; TauCeti.absoluteGaloisGroupRestrictEquiv; TauCeti.intermediateFieldEquivClosedSubgroup; TauCeti.mem_perfectClosure_iff_fixed",
+              "note": "Directly defines Gal(SeparableClosure K/K) with the inherited Krull topology; proves continuity in both directions of the algebraic-to-separable closure restriction equivalence, compactness/profinite structure, separably-closed-field triviality, and the corresponding closed-subgroup API. It explicitly explains the imperfect-field fixed-field distinction. Primary declarations: AbsoluteGaloisGroup at 327; absoluteGaloisGroupRestrictEquiv at 340; separableClosureRestrictEquiv at 150."
+            },
+            {
+              "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Map.lean",
+              "declarations": "TauCeti.absoluteGaloisGroupMap; TauCeti.absoluteGaloisGroupMap_commutes; TauCeti.absoluteGaloisGroupMap_comp; TauCeti.absoluteGaloisGroupMap_compSeparableClosure; TauCeti.absoluteGaloisGroupMapEquiv",
+              "note": "Lines 74–168 construct and prove continuity of the restriction homomorphism along arbitrary field extensions and explicit choices of embeddings of separable closures, describe conjugacy dependence, and prove composition formulas; lines 179–261 provide corresponding algebraic-closure-model transport. This is general functorial API of the group."
+            },
+            {
+              "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Extension.lean",
+              "declarations": "TauCeti.separableClosureRingEquiv; TauCeti.absoluteGaloisGroupEquivFixingSubgroup; TauCeti.absoluteGaloisGroupMap_separableClosureAlgEquiv",
+              "note": "Lines 68–110 construct a separable-closure identification for an extension L/K equipped with an embedding into K^sep. Lines 118–193 construct the fixing-subgroup isomorphism with actual continuity proofs. Lines 224–241 compare it with the general restriction map. No finiteness or special arithmetic base field is assumed."
+            },
+            {
+              "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Congr.lean",
+              "declarations": "RingEquiv.absoluteGaloisGroupCongr; RingEquiv.absoluteGaloisGroupCongr_apply; RingEquiv.restrictNormalHom_congr; IntermediateField.separableClosureCongr",
+              "note": "Lines 43–143 construct topological absolute-Galois-group equivalences along field isomorphisms and restriction compatibility; lines 158–307 transport intermediate fields, their automorphism groups, normality and fixing subgroups. This identifies presentations of the same absolute Galois object."
+            },
+            {
+              "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/FiniteExtension.lean",
+              "declarations": "TauCeti.galoisSubgroup; TauCeti.galoisSubgroup_index; TauCeti.galoisSubgroupEquiv; TauCeti.absoluteGaloisGroupExtend; TauCeti.quotientGaloisSubgroupEquiv",
+              "note": "Lines 135–240 package G_L as an open subgroup of G_K along a specified embedding, with index [L:K], for finite separable extensions. Lines 252 onward transport the subgroup maps to the algebraic-closure model, and 392–512 provide normal-extension quotient formulas. This is general finite-subextension API, not a number-field specialization. Whole-file accounting also includes some secondary quadratic/root-of-unity lemmas in the same file."
+            },
+            {
+              "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Subextension.lean",
+              "declarations": "TauCeti.restrictNormalHom_equivFixingSubgroup",
+              "note": "Lines 34–61 prove compatibility of restriction to normal subextensions with the fixing-subgroup identification. It proves a general group-theoretic naturality square; no cohomology object or arithmetic specialization occurs in the theorem."
+            },
+            {
+              "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Quotient.lean",
+              "declarations": "TauCeti.absoluteGaloisGroupQuotientEquiv; TauCeti.absoluteGaloisGroupQuotientEquivOfEq",
+              "note": "Lines 43–69 identify quotients of the named absolute Galois group by fixing subgroups with Galois groups of normal subextensions, as topological groups. Lines 76–113 supply equality-of-subgroup transport and evaluation formulas. The derived opaque Mathlib model requires these dedicated API lemmas."
+            }
+          ]
+        }
+      ],
+      "measurements": [
+        {
+          "library": "mathlib",
+          "path": "Mathlib/CategoryTheory/Monoidal/Center.lean",
+          "loc": 411,
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "sha256": "8698842a62ff09e10be79798b301046015b980fd90f3d9275394906b3f7f7dab"
+        },
+        {
+          "library": "mathlib",
+          "path": "Mathlib/FieldTheory/AbsoluteGaloisGroup.lean",
+          "loc": 104,
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "sha256": "78f1b974858ca761b1e822343625ef36c96d4dcb86929e756e140794ff1dfd18"
+        },
+        {
+          "library": "mathlib",
+          "path": "Mathlib/FieldTheory/Galois/Profinite.lean",
+          "loc": 343,
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "sha256": "e7125738b1b154789b6cbeee4a441cc8a665f988c2f6c32d8de304a2481c99d8"
+        },
+        {
+          "library": "mathlib",
+          "path": "Mathlib/FieldTheory/KrullTopology.lean",
+          "loc": 270,
+          "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+          "sha256": "2de23536f3f6b0376b53ffc8be26e5b919050d1704fc71d2a5f533a755661e2c"
+        },
+        {
+          "library": "tau-ceti",
+          "path": "TauCeti/CategoryTheory/Monoidal/Center/Basic.lean",
+          "loc": 121,
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "sha256": "76ae010d4f50987e50a058a666bf2d19488a7c59c1fcf1d621ceccc59cdc02cd"
+        },
+        {
+          "library": "tau-ceti",
+          "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Basic.lean",
+          "loc": 397,
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "sha256": "e742cc919503c1c92273709b681ddc48da38aa2c54ed31f9a7661ad4cabb0f54"
+        },
+        {
+          "library": "tau-ceti",
+          "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Congr.lean",
+          "loc": 312,
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "sha256": "43ac98ab1e90f4865e4c9a48a0984400d3a6d20bb3d113a20c5638a0bebdefbf"
+        },
+        {
+          "library": "tau-ceti",
+          "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Extension.lean",
+          "loc": 244,
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "sha256": "193c52b622e488899a4af97bf67739ec430e4f334d3851c7dca6b0692d285b7a"
+        },
+        {
+          "library": "tau-ceti",
+          "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/FiniteExtension.lean",
+          "loc": 647,
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "sha256": "7e2c416327143d68b37e14de65cf77bf9734b19b9391b4b0989e133dd128bd64"
+        },
+        {
+          "library": "tau-ceti",
+          "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Map.lean",
+          "loc": 264,
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "sha256": "6dc55252b9ab2a22e4ec062d2515da2874c16fdf360739a502d1a3095596c3e7"
+        },
+        {
+          "library": "tau-ceti",
+          "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Quotient.lean",
+          "loc": 115,
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "sha256": "d7316396d59c75b5fae16a9dacb5969878f5633d818189bdb474da717cd63ae1"
+        },
+        {
+          "library": "tau-ceti",
+          "path": "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Subextension.lean",
+          "loc": 63,
+          "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+          "sha256": "9822a640c32ff8214d657a830b12dff17f80cf20f4cba5d3598609179b4fb33a"
+        }
+      ],
+      "excluded_candidates": [
+        {
+          "concept": "drinfeld-center",
+          "library": "mathlib",
+          "paths": [
+            "Mathlib/CategoryTheory/Center/Basic.lean",
+            "Mathlib/CategoryTheory/Center/Linear.lean",
+            "Mathlib/CategoryTheory/Center/Preadditive.lean"
+          ],
+          "reason": "These concern CatCenter C = End(𝟭 C), a different mathematical center; name/path resemblance is insufficient."
+        },
+        {
+          "concept": "drinfeld-center",
+          "library": "tau-ceti",
+          "paths": [
+            "TauCeti/CategoryTheory/Monoidal/Center/OfHom.lean",
+            "TauCeti/CategoryTheory/Monoidal/Center/Preadditive.lean",
+            "TauCeti/CategoryTheory/Monoidal/Center/Limits.lean",
+            "TauCeti/CategoryTheory/Monoidal/Center/Rigid.lean",
+            "TauCeti/CategoryTheory/Monoidal/Center/Pivotal.lean",
+            "TauCeti/CategoryTheory/Monoidal/Center/Abelian.lean",
+            "TauCeti/CategoryTheory/Monoidal/Center/Simple.lean",
+            "TauCeti/CategoryTheory/Monoidal/Center/Ribbon.lean"
+          ],
+          "reason": "Genuine center developments, but add rigid/additive/limit/pivotal/semisimple hypotheses and extra structures beyond the generic core definition. Deliberately excluded from this bounded generic-core/API estimate; not mistaken for absent mathematics. OfHom is a useful builder under LeftRigidCategory and is the closest inclusion-boundary case."
+        },
+        {
+          "concept": "drinfeld-center",
+          "library": "tau-ceti",
+          "paths": [
+            "TauCeti/CategoryTheory/Monoidal/Rigid/Drinfeld.lean"
+          ],
+          "reason": "The Drinfeld double-dual isomorphism in an already braided rigid category is not the Drinfeld center construction."
+        },
+        {
+          "concept": "absolute-galois-group",
+          "library": "mathlib",
+          "paths": [
+            "Mathlib/FieldTheory/IsSepClosed.lean",
+            "Mathlib/FieldTheory/SeparableClosure.lean",
+            "Mathlib/FieldTheory/Galois/Basic.lean",
+            "Mathlib/Topology/Algebra/Group/TopologicalAbelianization.lean"
+          ],
+          "reason": "Closure/automorphism-group prerequisite infrastructure and a separate generic topological-abelianization concept are excluded; actual Krull-topology construction is retained because the concept specifically includes that structure."
+        },
+        {
+          "concept": "absolute-galois-group",
+          "library": "tau-ceti",
+          "paths": [
+            "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/ULift.lean",
+            "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/ProP.lean",
+            "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Inflation.lean",
+            "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Norm.lean",
+            "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/TwistedBoundary.lean",
+            "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/ClassModule.lean",
+            "TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Cyclotomic/Character.lean",
+            "TauCeti/NumberTheory/Padics/MultiplicativeCompletion/Reciprocity.lean",
+            "TauCeti/Algebra/AlgebraicGroup/CommHopfAlgCat/CharacterLattice/Basic.lean"
+          ],
+          "reason": "Universe packaging, pro-p quotients, cohomology/norm constructions, cyclotomic/arithmetic applications and representations on other mathematical objects are outside the bounded general absolute-Galois-group API. The CharacterLattice file contains a small generic action/conversion section, but its main contribution is a separate application; whole-file counting is deliberately not expanded to every such mixed-use occurrence."
+        }
+      ],
+      "specification_findings": [
+        "Record the full inspected commit independently of the checkout HEAD: the supplied old working checkout has a single AbsoluteGaloisGroup.lean path, whereas the pinned upstream snapshot reorganizes it into a directory. The measurement command currently always reads HEAD, which could count the wrong revision for a reviewed proposal.",
+        "A concept can be available through Mathlib while Tau Ceti has genuine native API; distinguish library ownership of files from dependency availability. Center/Basic is an exact example. Pure imports should not acquire Tau LOC or be called mathematically absent.",
+        "Equivalent presentations need an explicit mathematical comparison and a record of which library actually proves it. Here algebraic and separable closure models are topologically equivalent, but the fixed fields of their ambient actions differ over imperfect fields. Do not infer equality of descent statements from equality of groups.",
+        "Associated API needs a declared stopping boundary. General evaluation/naturality/conversion/maps are retained. Additional structures with new hypotheses (rigid, abelian, pivotal, ribbon center) and arithmetic/cohomological uses are excluded even when adjacent in the same subtree. A filename directory is not the boundary.",
+        "Generic constructors instantiated at the desired parameters can establish coverage even without a concept-specific alias. Conversely, a named alias with a different ambient structure does not establish full matching by name alone.",
+        "Mixed-use files remain a roughness limit: FiniteExtension contains subgroup API plus some roots-of-unity side lemmas; CharacterLattice/Basic contains a few useful generic action lemmas but primarily builds another object. Record why the whole file was included/excluded rather than silently treating every declaration mentioning a type as API.",
+        "Use structured declaration anchors/roles and reviewed mathematical scope in evidence, rather than optional unstructured names only, to make human re-review easier. Do not conflate inspected source with a fresh Lean build."
+      ],
+      "method": "Immutable git-archive snapshots of upstream commits; actual source declarations and relevant proofs inspected; no Lean build and no database/library mutations."
+    }
+  },
+  "agent_notes": {
+    "algebra": "Pilot: Group and Abelian group\n\nScope and immutable revisions\nMathlib: 26573066084e6e2aa8526ea358bc43b66d96f970.\nTau Ceti: 3780371ca1bebf9f1c2bb3d753e4bb56c9526023.\nTau Ceti's checked Mathlib dependency: 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 (lake-manifest.json:11).\nQueried actual catalogue paragraphs read-only; no identity changes proposed.\nRead-only inspection and proposal files only: no DB or repository code edits.\n\nEvidence and file decisions\n1. Mathlib group: Defs.lean (Group:33, AddGroup:44, mul_inv_cancel:62, Group.toCancelMonoid:102); Basic.lean (immediate identities in Group section 607–909, including div_mul_div_cancel:739 and integer-power induction:882/899); MinimalAxioms.lean (Group.ofLeftAxioms:39, Group.ofRightAxioms:66, and generated additive counterparts). These implement textbook group axioms and immediate law/constructor API. Group's apparent one-sided inverse axiom does not weaken the match: the other inverse is proved at Defs:62.\n2. Mathlib abelian-group: shared Defs.lean (AddCommGroup:111, CommGroup:116, cancellation/division instances:124/129) plus shared Basic.lean (explicit commutative inverse/power laws 516–605, CommGroup-specific division identities 912 onward, mul_zpow:593 and div_eq_div_iff_mul_eq_mul:996). These files genuinely develop both concepts; do not infer sharing merely because abelian groups inherit general-group API.\n3. Tau Ceti group: native Pow.lean:58–60 proves a generic integer-power equation rearrangement for arbitrary Group, so the file is direct associated API, even though the definition is inherited. The exact dependency definition was inspected using git show at its pinned commit, rather than assuming the newer standalone Mathlib snapshot matches.\n4. Tau Ceti abelian-group: native Pow.lean:50–54 proves a generic integer exponent-vector multiplication law for arbitrary CommGroup; direct elementary algebra API. It shares this 71-line file with group because the file separately contributes to each concept.\nNo selected source file contained sorry/admit or an axiom declaration; this was a source review rather than a rebuild or transitive axiom audit.\n\nReviewed exclusions and boundary decisions\n- Mathlib Algebra/Group/DivInvMonoid.lean and Algebra/Group/Monoid.lean: parent structures and their generic arithmetic are prerequisites, not automatically all charged to Group. Defs supplies the Group layer over that hierarchy.\n- Mathlib Algebra/Group/InjSurj.lean: injective/surjective group and commGroup transport constructors at 281/294/413/426. Legitimate structure-transfer API, but a separate transport task, not needed to implement the catalogue definition plus its immediate laws. Excluded under this pilot's bounded core-law selection; a broader policy could deliberately include it.\n- Mathlib Algebra/Group/TransferInstance.lean: Equiv.group:175 and Equiv.commGroup:186 transport structure across equivalences. Same boundary as InjSurj; excluded together to avoid inconsistent class-plumbing expansion.\n- Mathlib Algebra/Group/Opposite.lean: MulOpposite.instGroup:163 and instCommGroup:168 implement opposite-group structures, a distinct construction. Excluded rather than automatically mapping every realization of a group.\n- Mathlib Algebra/Group/Prod.lean: Prod.instGroup:135 and instCommGroup:180 implement product-group structures; remaining file is primarily homomorphism/equivalence/product API. Distinct construction; excluded from generic groups.\n- Mathlib Algebra/Group/Hom/Defs.lean, Hom/Basic.lean, Equiv/Defs.lean, Equiv/Basic.lean: group/monoid homomorphisms and isomorphisms are separate vocabulary. Excluded from generic group/abelian-group mapping.\n- Mathlib subgroup, quotient, free-group, group-action, center, conjugacy and torsion trees: distinct mathematical concepts/theorems, not immediate identities defining a group. Excluded.\n- TauCeti/Algebra/Group/Prod.lean: product homomorphisms/equivalences; excluded just as Mathlib product machinery.\n- TauCeti/Algebra/Group/MulOpposite.lean: unopMulEquivOfComm:32 is a generic commutative multiplication/opposite equivalence, not a new group definition or a group-law identity. Excluded along with opposite construction.\n- TauCeti/Algebra/Group/Bool.lean: Bool.cond_cond_inv:26 assumes only InvolutiveInv; specialized Boolean-sign operation, excluded from generic group definition/core laws.\n- TauCeti/Algebra/Group/Hom/Defs.lean: map_comp_smul:27 is multiplicative-homomorphism API for bare Mul, not group-specific. Excluded.\n- TauCeti/Algebra/Group/MapMulMulEqOne.lean: MonoidHom.ofMapMulMulEqOne:53 implements homomorphism recognition from ternary relations, while later theorem needs infinitely many squares. Own homomorphism/recognition concept, excluded from generic group.\n- TauCeti/Algebra/Group/AffineSequence.lean: finite sequences with vanishing second differences, a distinct finite-difference result. AddCommGroup assumption is a use, not ownership of all abelian group API.\n- TauCeti/Algebra/Group/IterateOneParameter.lean: its main parameter variable is a Monoid and G a bare type; file placement under Group is insufficient evidence. Excluded.\n- TauCeti/Algebra/Group/Idempotent.lean: conjugating idempotents in a Monoid, its own concept. Excluded.\n- TauCeti/Algebra/Group/PowMonoidHom.lean and Primary/: powers subgroups, finite abelian primary decomposition and cardinality statements are separate topics. Excluded.\n- TauCeti/ModelTheory/Algebra/Group/Basic.lean: groupOfModel:388 obtains Group from models of a first-order theory. This is a model-theory/group-language bridge, not another generic algebraic Group definition; excluded.\n- Tau Ceti Heisenberg/sporadic group instances: specialized group constructions, excluded.\n\nMeasurements (physical lines including comments/blank lines, exact immutable bytes)\nMathlib/Algebra/Group/Defs.lean: 155; sha256 2862e96c66aea952864a5016bb106ca4cf043000a8915d89e24623132e12fb6c.\nMathlib/Algebra/Group/Basic.lean: 1099; sha256 48a12b3df43fb8b5ea5b75677ae93a5f16f9ad9c74dba0befc2ef45b85b1eabe.\nMathlib/Algebra/Group/MinimalAxioms.lean: 82; sha256 f1879a7e70c25a97aa33d22ec026c96d94c7be8c92197d0a1adb9f06cd8e9611.\nTauCeti/Algebra/Group/Pow.lean: 71; sha256 ed2d39088183a4cdafea8094190ba2209128e05d4d556f7ef23042733de9e250.\nIf no other current mappings use them: Mathlib group 709 LOC, abelian-group 627 LOC; Tau Ceti group and abelian-group 35.5 LOC each. Defs/Basic/Pow are mixed-topic files; this is exactly the requested whole-file approximation, not a claim that all their lines prove that concept.\n\nSpecification/prompt recommendations\nA. Distinguish concept availability from native contribution. A concept can be defined entirely by an imported dependency while a project extends its direct API. Permit positive project status in that case, with dependency source/revision explicit and LOC restricted to project-owned files. If there are no qualifying native files, use an explicit inherited status instead of either 'not formalized' or 'unknown'. Negative judgments otherwise imply falsely that imported group concepts are unavailable in Tau Ceti.\nB. Require a declared API boundary. For this pilot: definition plus immediate algebraic identities and equivalent minimal-axiom constructors; stop at products, opposites, structure transport, morphisms, specialized theories and applications. Decide once whether structure-transfer files belong; otherwise agent choices alone vary estimates by hundreds of lines. Do not label file selection exhaustive merely because the definition is formalized.\nC. Prevent inheritance inflation. Do not map every Group file to Abelian group solely because CommGroup inherits Group. A shared file needs a direct declaration/section or a specific reason for each mapped concept. Group MinimalAxioms is not added to abelian-group merely by specialization.\nD. Require actual statement/axiom comparison. Mathlib's one-sided inverse class definition is equivalent to the catalogue's two-sided definition because the missing side is proved; to_additive creates additive counterparts whose names may not occur literally in source. Searches alone miss both points.\nE. Require checked dependency pins. Tau Ceti's dependency is not the standalone Mathlib HEAD and the separate repositories can move concurrently. Review immutable bytes, retain the manifest's dependency revision, and measure those same bytes. Existing 'measure at local HEAD' cannot safely measure a review at an arbitrary pinned commit without a detached checkout or a revision option.\nF. Keep exclusions with evidence in a reusable manifest. Future curators need to see why nearby low-level files were omitted, so 'all associated API' does not grow arbitrarily on each pass. These should support the file-mapping judgment separately from the mathematical availability status.\n",
+    "analysis": "Analysis pilot review — no database/library/documentation edits made\n\nSnapshots\nMathlib: 26573066084e6e2aa8526ea358bc43b66d96f970\nTau Ceti: 3780371ca1bebf9f1c2bb3d753e4bb56c9526023\nTau Ceti's lake-manifest.json pins Mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. This is NOT the separate Mathlib snapshot. I checked actual declarations at the pinned dependency commit with git show, not merely the manifest.\n\nConcept convex-hull\nCatalogue paragraph: The smallest convex set containing a given set of points.\nMathlib full match: Mathlib/Analysis/Convex/Hull.lean:48 defines convexHull as the closure operator for Convex, giving exactly the minimum convex superset. Its domain is broader (ordered semiring/module), including the ordinary real vector space case. Lines 52–77 prove extensivity, convexity, universal property, monotonicity and idempotent/fixed-point characterizations; 125–126 identifies a two-point hull with the segment; 155–218 prove image and translation API. No hypotheses making the catalogue concept incomplete.\nAdditional core API: Combination.lean:256–445 proves finite convex-combination membership and the converse descriptions, with product/Minkowski-sum facts at 453–503. Join.lean:174–181 gives union and insertion elimination formulae. Those deserve inclusion as alternate descriptions and generic constructors/eliminators, despite the distinct auxiliary structures developed in the same files. Under the deliberately whole-file allocation model, all 224+641+197=1062 lines are initially allocated here; the files also contain other concepts, and later mappings will lower this estimate. This is a core-API selection, not a claim that every theorem mentioning convexHull has been inventoried.\nTau Ceti: imported definition/minimum-property verified at pinned Mathlib Hull.lean:49–76. Native generic API exists in TauCeti/Analysis/Convex/Combination.lean:83 (linear bound extends to hull), :96 (a map agreeing with an affine map carries hull onto hull of image), :161 (centroid-interior ray property), :219–273 (affine injectivity on a hull and affine span, preservation of affine independence); :296 onward gives simplex coordinate interoperability. Join.lean:35 gives the generic insertion membership formula without a nonempty hypothesis. These are real native API contributions, not mere downstream usage; map 378+62=440 native lines and never copy the imported Mathlib files into Tau Ceti's path namespace.\n\nExplicit convex-hull exclusions\n- Mathlib Analysis/Convex/Basic.lean defines convexity (prerequisite concept); generic ClosureOperator machinery and field/module files are prerequisites, not implementing-file closure.\n- Mathlib Analysis/Convex/Caratheodory.lean proves a separate substantial named theorem (dimension/independence bounds), so excluded from this concept's core API map.\n- Mathlib Analysis/Convex/Topology.lean concerns convex set topology, closedConvexHull, finite-hull compactness/closedness; distinct topological statements/new object, excluded under the pilot's deliberately narrow core-API boundary. Same exclusion for TauCeti/Analysis/Convex/Caratheodory.lean (IsCompact.convexHull:44 is a completed proof, but a separate compactness endpoint), not because it is absent or unproved.\n- Mathlib Analysis/Convex/StdSimplex.lean develops the standard simplex/abstract convex-space interoperability. The finite-combination characterization already appears in Combination.lean; avoid adding all alternative object representations recursively. This is an editorial boundary choice worth exposing to future reviewers.\n- Mathlib Analysis/Convex/Extreme.lean and TauCeti/Analysis/Convex/Extreme.lean develop extreme points/sets (different concepts).\n- Tau AffineNormalization.lean:143 looks like generic hull membership but is a specific homothetic simplex normalization statement; the file's main result uses maximal-volume simplices/John-type geometry, not core hull API.\n- Tau CurveChord.lean:75–93 applies generic hull minimality to curve triangles; a downstream application.\n- Tau Geometry/Symplectic/BottSamelson/FixedMoment.lean:366 computes one particular moment polygon's hull; unrelated application.\n- Tau simplicial-complex, PL-topology, isodiametric-measure, polyhedral-cochain and Schur–Horn files use hulls for other mathematical endpoints; excluded.\n\nConcept cauchy-schwarz-inner-product\nCatalogue paragraph: In a complex inner-product space, |⟨u,v⟩|²≤⟨u,u⟩⟨v,v⟩ for all u,v.\nThe intended inequality is between real nonnegative quantities: the diagonal Hermitian inner products are real. The current informal formula is conventional but its right side is syntactically complex-valued without that explanation. No identity split is needed; optionally clarify that the diagonal factors are viewed as nonnegative real numbers. Do NOT mark coverage partial merely because Lean makes Re explicit or proves an equivalent norm-product version.\nMathlib proof in Defs.lean:355–374 is a completed discriminant proof on the inner-product core. Basic.lean:280–282 lifts it to public inner-product spaces, with the inequality ‖inner x y‖*‖inner y x‖ ≤ Re(inner x x)*Re(inner y y). Basic.lean:226 proves norm_inner_symm and :207–221 proves real/nonnegative diagonal identities; hence exact equivalence to the squared complex catalogue statement. This is over RCLike, including ℂ; no finite-dimensionality/completeness/nonzero-vector extra assumptions are imposed for the inequality itself.\nMathlib Basic.lean:454 proves the unsquared norm form; :722–845 develops equality criteria, normalized forms, proportionality and unit-vector cases. Those are conventional equivalent formulations/equality API of this theorem, so belong to the same concept. Defs (620 LOC) is essential even though named Defs: it contains the actual proof, not just prerequisite definitions. Basic (1042 LOC) contains public statement and API. Whole-file estimate initially 1662 LOC, acknowledging both files contain much unrelated inner-product structure API and should eventually share allocation with other concepts.\nTau Ceti availability: pinned dependency Mathlib Basic.lean:281–283, :455 and Defs.lean:355–374 were inspected directly, including actual proof. Thus the theorem is available through that dependency.\nNative search: searched declarations and references to Cauchy/Schwarz, norm_inner_le_norm, inner_mul_inner_self_le, norm_inner_eq_norm across TauCeti/Analysis/InnerProductSpace, plus repository-wide references. No separate generic native implementation of this theorem or its conventional equality API found in inspected hits. Do not classify the theorem as not_formalized in Tau Ceti: it is provided by its dependency.\n\nExplicit Cauchy–Schwarz exclusions\n- TauCeti/Analysis/InnerProductSpace/Young.lean:39 is a genuinely proved, three-line CS + scalar Young corollary, but its endpoint is a new named inequality with a free weight ε. Classify under Young's inequality, not every theorem it follows from. This is a useful regression example for stopping 'immediate consequences' from swallowing new theorems.\n- TauCeti/Analysis/InnerProductSpace/Contraction.lean:97 is a contraction contact-point inequality with an operator-norm/norm-attainment hypothesis and its own substantial proof; distinct endpoint.\n- TauCeti/Analysis/InnerProductSpace/OpNormDefect.lean:43 is CS for an operator defect form with a new bounded-operator parameter, again a different structured theorem, not a second proof of the generic catalogue concept.\n- TauCeti/Analysis/InnerProductSpace/QuadraticForm/TwoVector.lean:67 bounds an inner coefficient using a supplied norm bound; it directly calls Mathlib CS. It is a packaged application intended for block operator perturbation theory, not conventional CS statement/equality API.\n- Tau measure/Lp, sphere-cap, Gram/Hadamard, Hilbert–Schmidt columns, weak operator topology, eigenvalue perturbation and energy-estimate files apply CS or prove new endpoints; excluded.\n\nSpecification/prompt changes supported by these examples\n1. Separate library-owned contribution from availability through dependencies. Add inherited/available_via_dependency with a structured supplying library, the exact dependency revision and precise declaration evidence. Inherited-only records need no native files; a project with a borrowed definition and qualifying native API can remain formalized while attributing definition origin to the dependency and counting only its own files.\n2. For every candidate file require evidence of a declared definition, theorem, equivalent formulation, conventional equality case or generic constructor/eliminator/transport API. Finding a use in a proof body does not qualify. File titles such as Defs do not rule out a full proof.\n3. Declare the selected core API boundary and explicitly exclude other independently significant named theorems, even short corollaries. Examples: CS equality cases included; weighted Young excluded. Hull membership/finite-combination/image/insertion API included; Caratheodory/compactness/extreme-point and particular polygon geometry excluded. Do not require an unbounded enumeration of all associated results.\n4. Whole-file LOC is sample-density dependent: the first mapped concept gets all lines of mixed files. Label the denominator as 'catalogued mapped concepts', not a census of mathematical content. A large number does not mean the theorem itself needs that many proof lines.\n5. Review, measurement and dependency snapshots must be pinned independently and consistently. The current measure command's implicit HEAD is unsafe for a review carried out against an older immutable snapshot or a working checkout at a different commit. Accept an explicit revision and verify file hashes/counts against the reviewed revision; do not silently measure newer HEAD.\n6. Normalize equivalent mathematical formulations explicitly. In particular complex inner-product inequalities must compare real-valued forms, and importing the same theorem through a broader RCLike statement is full coverage of its ℂ specialization, not partial coverage.\n",
+    "category-galois": "drinfeld-center / mathlib: formalized; 1 selected files; 411 physical LOC before any sharing with other concepts.\ndrinfeld-center / tau-ceti: formalized; 1 selected files; 121 physical LOC before any sharing with other concepts.\nabsolute-galois-group / mathlib: formalized; 3 selected files; 717 physical LOC before any sharing with other concepts.\nabsolute-galois-group / tau-ceti: formalized; 7 selected files; 2042 physical LOC before any sharing with other concepts.\n\nSPECIFICATION FINDINGS\nRecord the full inspected commit independently of the checkout HEAD: the supplied old working checkout has a single AbsoluteGaloisGroup.lean path, whereas the pinned upstream snapshot reorganizes it into a directory. The measurement command currently always reads HEAD, which could count the wrong revision for a reviewed proposal.\nA concept can be available through Mathlib while Tau Ceti has genuine native API; distinguish library ownership of files from dependency availability. Center/Basic is an exact example. Pure imports should not acquire Tau LOC or be called mathematically absent.\nEquivalent presentations need an explicit mathematical comparison and a record of which library actually proves it. Here algebraic and separable closure models are topologically equivalent, but the fixed fields of their ambient actions differ over imperfect fields. Do not infer equality of descent statements from equality of groups.\nAssociated API needs a declared stopping boundary. General evaluation/naturality/conversion/maps are retained. Additional structures with new hypotheses (rigid, abelian, pivotal, ribbon center) and arithmetic/cohomological uses are excluded even when adjacent in the same subtree. A filename directory is not the boundary.\nGeneric constructors instantiated at the desired parameters can establish coverage even without a concept-specific alias. Conversely, a named alias with a different ambient structure does not establish full matching by name alone.\nMixed-use files remain a roughness limit: FiniteExtension contains subgroup API plus some roots-of-unity side lemmas; CharacterLattice/Basic contains a few useful generic action lemmas but primarily builds another object. Record why the whole file was included/excluded rather than silently treating every declaration mentioning a type as API.\nUse structured declaration anchors/roles and reviewed mathematical scope in evidence, rather than optional unstructured names only, to make human re-review easier. Do not conflate inspected source with a fresh Lean build.\n\nFile-level exclusions and evidence are in category-galois-proposal.json.\n"
+  },
+  "sample_density_note": "Equal whole-file shares use catalogued current mappings only; these are not proof lengths, exhaustive content censuses or stable estimates as the catalogue grows.",
+  "saved_results": [
+    {
+      "concept": "abelian-group",
+      "library": "mathlib",
+      "status": "formalized",
+      "file_count": 2,
+      "estimated_loc": 627.0
+    },
+    {
+      "concept": "abelian-group",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "file_count": 1,
+      "estimated_loc": 35.5
+    },
+    {
+      "concept": "absolute-galois-group",
+      "library": "mathlib",
+      "status": "formalized",
+      "file_count": 3,
+      "estimated_loc": 717.0
+    },
+    {
+      "concept": "absolute-galois-group",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "file_count": 3,
+      "estimated_loc": 973.0
+    },
+    {
+      "concept": "cauchy-schwarz-inner-product",
+      "library": "mathlib",
+      "status": "formalized",
+      "file_count": 2,
+      "estimated_loc": 1662.0
+    },
+    {
+      "concept": "cauchy-schwarz-inner-product",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "file_count": 0,
+      "estimated_loc": 0.0
+    },
+    {
+      "concept": "convex-hull",
+      "library": "mathlib",
+      "status": "formalized",
+      "file_count": 3,
+      "estimated_loc": 1062.0
+    },
+    {
+      "concept": "convex-hull",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "file_count": 2,
+      "estimated_loc": 440.0
+    },
+    {
+      "concept": "drinfeld-center",
+      "library": "mathlib",
+      "status": "formalized",
+      "file_count": 1,
+      "estimated_loc": 411.0
+    },
+    {
+      "concept": "drinfeld-center",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "file_count": 1,
+      "estimated_loc": 121.0
+    },
+    {
+      "concept": "group",
+      "library": "mathlib",
+      "status": "formalized",
+      "file_count": 3,
+      "estimated_loc": 709.0
+    },
+    {
+      "concept": "group",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "file_count": 1,
+      "estimated_loc": 35.5
+    }
+  ],
+  "unrelated_tables_unchanged": [
+    "citation",
+    "citation_identifier",
+    "concept",
+    "concept_alias",
+    "concept_dependency",
+    "concept_embedding",
+    "concept_related",
+    "embedding_model",
+    "source",
+    "source_artifact",
+    "source_concept",
+    "source_identifier",
+    "source_relation"
+  ]
+}

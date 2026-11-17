@@ -1,0 +1,517 @@
+{
+  "batch_id": "batch-007",
+  "author": "analysis_formalization",
+  "reviews": [
+    {
+      "concept": "affine-map",
+      "concept_id": "0556c281-110b-50b5-9231-202cf3fa96b0",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "AffineMap:60 stores a linear part with f(v+p)=A(v)+f(p). decomp:668 proves f(x)=f.linear(x)+f(0) on vector spaces; mk':209 conversely constructs an affine map from that basepoint formula. Specializing k=\u211d therefore gives exactly x\u21a6Ax+b in both directions, without a continuity assumption. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/AffineSpace/AffineMap.lean",
+          "declarations": "AffineMap L60; AffineMap.mk' L209; decomp L668",
+          "note": "Native affine structure, exact linear-plus-constant presentation and composition/line-map API."
+        }
+      ],
+      "search_notes": "No boundedness or finite-dimensionality required. Exclude continuous affine maps, barycentric optimization and affine-subspace geometry endpoints."
+    },
+    {
+      "concept": "affine-map",
+      "concept_id": "0556c281-110b-50b5-9231-202cf3fa96b0",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The actual dependency AffineMap:56 and decomp:632 retain the checked linear-plus-constant formula (newer standalone file adds unrelated FunLike instances). Native AffineSpace/AffineMap:56 proves apply_eq_linear_add_apply_zero by the actual decomp equality, and :61 proves the real-line endpoint formula by line-map preservation. These are exact ordinary affine-map normal forms. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/AffineSpace/AffineMap.lean",
+          "declarations": "AffineMap.ext_of_ne L44; apply_eq_linear_add_apply_zero L56; apply_eq_add_mul_sub L61",
+          "note": "Native affine-map uniqueness and linear/constant computations, with weaker generic ring hypotheses valid for real vector spaces."
+        }
+      ],
+      "search_notes": "AffineSubspace avoidance at the end adds geometry applications and is not the ownership rationale; continuous affine bundles add a topological requirement beyond the catalogue."
+    },
+    {
+      "concept": "aleksandrov-clark-probability-measures",
+      "concept_id": "a70a3b6e-f296-5786-9f8f-a186b131304c",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "The concrete promising native candidate is Tau Analysis/Complex/Herglotz:260: it represents holomorphic F with nonnegative real part by a finite positive circle measure plus Im(F0)i. herglotzTransform_zero:150 computes total mass and its kernel is (\u03b6+z)/(\u03b6\u2212z), not the catalogue reciprocal kernel. I did not certify the complete Schur/Cayley substitution F=(1+conj \u03b3 f)/(1\u2212conj \u03b3 f), probability normalization, reciprocal-kernel conversion and uniqueness under the exact disk hypotheses. These remaining bridges are explicit; no full Clark implementation is inferred from Herglotz alone. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Clark/Aleksandrov/Schur in complex analysis and measure sources, inspected actual Herglotz representation/mass proof and positive-real-part hypotheses. Mathlib circle Cauchy/Poisson ingredients do not themselves supply this measure family; unresolved, not absence."
+    },
+    {
+      "concept": "aleksandrov-clark-probability-measures",
+      "concept_id": "a70a3b6e-f296-5786-9f8f-a186b131304c",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "The concrete promising native candidate is Tau Analysis/Complex/Herglotz:260: it represents holomorphic F with nonnegative real part by a finite positive circle measure plus Im(F0)i. herglotzTransform_zero:150 computes total mass and its kernel is (\u03b6+z)/(\u03b6\u2212z), not the catalogue reciprocal kernel. I did not certify the complete Schur/Cayley substitution F=(1+conj \u03b3 f)/(1\u2212conj \u03b3 f), probability normalization, reciprocal-kernel conversion and uniqueness under the exact disk hypotheses. These remaining bridges are explicit; no full Clark implementation is inferred from Herglotz alone. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Clark/Aleksandrov/Schur in complex analysis and measure sources, inspected actual Herglotz representation/mass proof and positive-real-part hypotheses. Mathlib circle Cauchy/Poisson ingredients do not themselves supply this measure family; unresolved, not absence."
+    },
+    {
+      "concept": "aleksandrov-fenchel-mixed-volume",
+      "concept_id": "4abdb2c0-6d40-59b8-8ae4-80df60b31e6d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected ConvexBody as compact nonempty convex sets and its Minkowski-operation context; no checked polarized mixed-volume map V and the full d-body reverse-Cauchy inequality were verified. Tau Matrix/MinkowskiDeterminant:83 is an ordinary determinant-root inequality for two PSD matrices, and its name is not a mixed-volume proof. The mixed-volume construction/normalization and inequality endpoint remain unresolved. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped mixed volume/Aleksandrov\u2013Fenchel searches across actual convex/measure/linear algebra code, distinguishing ordinary convex bodies and matrix determinant concavity from the full mixed-volume statement. Do not count prerequisites as partial theorem implementation."
+    },
+    {
+      "concept": "aleksandrov-fenchel-mixed-volume",
+      "concept_id": "4abdb2c0-6d40-59b8-8ae4-80df60b31e6d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected ConvexBody as compact nonempty convex sets and its Minkowski-operation context; no checked polarized mixed-volume map V and the full d-body reverse-Cauchy inequality were verified. Tau Matrix/MinkowskiDeterminant:83 is an ordinary determinant-root inequality for two PSD matrices, and its name is not a mixed-volume proof. The mixed-volume construction/normalization and inequality endpoint remain unresolved. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped mixed volume/Aleksandrov\u2013Fenchel searches across actual convex/measure/linear algebra code, distinguishing ordinary convex bodies and matrix determinant concavity from the full mixed-volume statement. Do not count prerequisites as partial theorem implementation."
+    },
+    {
+      "concept": "alexandrov-mixed-discriminant-inequality",
+      "concept_id": "8c123240-c990-5b6f-a61e-cd12c03dbfd9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Tau Matrix/MinkowskiDeterminant:83 proves det(A)^(1/n)+det(B)^(1/n)\u2264det(A+B)^(1/n) for PSD A,B; PosSemidef/Determinant proves ordinary determinant/trace monotonicity. Neither inspected declaration polarizes determinant into D(A,B,M3,...,Mn) or proves the requested inequality with A arbitrary symmetric and the remaining matrices positive definite. A generic determinant-name match would miss both the n-linear endpoint and the A hypothesis. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched mixed discriminant/Alexandrov and inspected actual Minkowski determinant hypotheses/conclusion/proof reduction plus ordinary PSD determinant API. No absence claim; mixed polarization/inequality bridge remains unchecked."
+    },
+    {
+      "concept": "alexandrov-mixed-discriminant-inequality",
+      "concept_id": "8c123240-c990-5b6f-a61e-cd12c03dbfd9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Matrix/MinkowskiDeterminant:83 proves det(A)^(1/n)+det(B)^(1/n)\u2264det(A+B)^(1/n) for PSD A,B; PosSemidef/Determinant proves ordinary determinant/trace monotonicity. Neither inspected declaration polarizes determinant into D(A,B,M3,...,Mn) or proves the requested inequality with A arbitrary symmetric and the remaining matrices positive definite. A generic determinant-name match would miss both the n-linear endpoint and the A hypothesis. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched mixed discriminant/Alexandrov and inspected actual Minkowski determinant hypotheses/conclusion/proof reduction plus ordinary PSD determinant API. No absence claim; mixed polarization/inequality bridge remains unchecked."
+    },
+    {
+      "concept": "almost-everywhere-convergence",
+      "concept_id": "61f078b9-52c2-59b0-8f94-ba32589b0c20",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "For measurable fn and f, instantiate the actual ae predicate with p(x)=Tendsto (fun n\u21a6fn x) atTop (nhds(f x)). OuterMeasure/AE:133 equates it to measure of the failure set zero, and MeasureSpaceDef:227\u2013232 supplies a measurable null superset. Thus it is exactly convergence outside one measurable null set, not separate exceptional sets depending on an index. ConvergenceInMeasure:207 uses this exact generic predicate as its hypothesis; no stronger convergence mode is substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/OuterMeasure/AE.lean",
+          "declarations": "MeasureTheory.ae L48; ae_iff L133",
+          "note": "Native conull filter and exact null-exception-set meaning of an almost-everywhere predicate."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/MeasureSpaceDef.lean",
+          "declarations": "exists_measurable_superset_of_null L227; exists_measurable_superset_iff_measure_eq_zero L230",
+          "note": "Native measurable-null-hull equivalence, preserving the catalogue requirement of a measurable exceptional superset."
+        }
+      ],
+      "search_notes": "Definition/ordinary exception-set API only. Convergence in measure, Egorov, dominated convergence and subsequence extraction are separately significant endpoints. Measurability assumptions in catalogue are retained as input conditions."
+    },
+    {
+      "concept": "almost-everywhere-convergence",
+      "concept_id": "61f078b9-52c2-59b0-8f94-ba32589b0c20",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "The supplying ae file is identical; the exact dependency MeasureSpaceDef has the same null-hull proof with line shifts (the newer standalone addition is a separate bounded-hull lemma). Applying ae to the pointwise Tendsto predicate gives exactly the checked common measurable-null-set definition. No native generic AE-convergence definition/exception-set API selected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native Function/ConvergenceInMeasure supplies rate criteria for a different convergence mode, and DominatedConvergence proves integral-limit exchange. Those do not get charged to the bare AE-convergence concept."
+    },
+    {
+      "concept": "almost-everywhere-property",
+      "concept_id": "63d6baf1-3b09-5d02-bfeb-92407cc61d43",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "OuterMeasure/AE:48 defines the conull filter from \u03bc-null sets, and ae_iff:133 is literally (\u2200\u1d50x,p x)\u2194\u03bc{x|\u00acp x}=0. MeasureSpaceDef:227\u2013232 proves this iff that failure set has a measurable null superset, exactly the catalogue definition even on a noncomplete measure space. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/OuterMeasure/AE.lean",
+          "declarations": "MeasureTheory.ae L48; ae_iff L133",
+          "note": "Native conull filter and exact null-exception-set meaning of an almost-everywhere predicate."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/MeasureSpaceDef.lean",
+          "declarations": "exists_measurable_superset_of_null L227; exists_measurable_superset_iff_measure_eq_zero L230",
+          "note": "Native measurable-null-hull equivalence, preserving the catalogue requirement of a measurable exceptional superset."
+        }
+      ],
+      "search_notes": "Do not require the failure set itself to be measurable. Elementary countable intersections/filter API is included; exclude integration, Radon\u2013Nikodym and statistical laws."
+    },
+    {
+      "concept": "almost-everywhere-property",
+      "concept_id": "63d6baf1-3b09-5d02-bfeb-92407cc61d43",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "The actual dependency has identical ae definition and the same checked measurable-null-hull theorem, giving the complete catalogue predicate without completeness assumptions. No selected native generic conull/null-exception operator file contributes under this boundary. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected native OuterMeasure/Basic (set proportions), SymmDiff (finite-mass approximation estimates), BorelCantelli (limsup endpoint) and Function/AEEqFun (quotient arithmetic). These add other structures/endpoints rather than implement the generic property itself."
+    },
+    {
+      "concept": "baire-category-theorem",
+      "concept_id": "eb8ba79a-88ad-5642-8ded-471bce63e4b8",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Topology/Baire/CompleteMetrizable:27 proves BaireSpace for every completely pseudometrizable space. Its actual proof chooses nested closed balls with geometrically decaying radii inside each dense open, obtains a Cauchy sequence, uses completeness for its limit, and checks the limit belongs to every chosen open and arbitrary initial neighborhood. Complete metric spaces satisfy the typeclass, so the result is exactly the catalogue countable-intersection theorem. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Baire/CompleteMetrizable.lean",
+          "declarations": "BaireSpace.of_completelyPseudoMetrizable L27; nested closed-ball/Cauchy proof L30\u2013119",
+          "note": "Actual Baire category proof for complete metrizable spaces, slightly generalized to pseudometrics."
+        }
+      ],
+      "search_notes": "No local compactness/second countability/separability assumed. Exclude uniform boundedness/open mapping/perfect-set theorems and descriptive-set applications as distinct named endpoints."
+    },
+    {
+      "concept": "baire-category-theorem",
+      "concept_id": "eb8ba79a-88ad-5642-8ded-471bce63e4b8",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Pinned CompleteMetrizable is byte-identical, including the actual nested-ball Cauchy-limit proof. This supplies complete metric spaces directly. No native proof or immediate conventional equivalent formulation of this completeness\u2192Baire endpoint selected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native Baire/Perfect gives uncountability under perfectness, Mycielski and KuratowskiUlam give substantial descriptive endpoints, Module/Baire is an application. Their Baire-space input is not ownership of this theorem."
+    },
+    {
+      "concept": "baire-topological-space",
+      "concept_id": "eb31f4d9-816c-55cf-8ea9-1d619a5fbc2d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Topology/Defs/Basic:245 defines BaireSpace by exactly \u2200f:\u2115\u2192Set X, each f n open and dense\u2192their intersection dense. Baire/Lemmas:167 extends it to arbitrary countable index types and gives ordinary hereditary/quotient/equivalent meagre formulations. No completeness axiom is part of the definition. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Defs/Basic.lean",
+          "declarations": "BaireSpace L245; baire_property",
+          "note": "Native exact countable dense-open-intersection predicate."
+        },
+        {
+          "path": "Mathlib/Topology/Baire/Lemmas.lean",
+          "declarations": "dense_iInter_of_isOpen_nat L77; dense_iInter_of_isOpen L167; IsOpen.baireSpace L127",
+          "note": "Native ordinary countable-index, open-subspace and quotient/equivalent-presentation API."
+        }
+      ],
+      "search_notes": "Separate Baire-space definition from the complete-metric theorem and from Baire measurability of functions."
+    },
+    {
+      "concept": "baire-topological-space",
+      "concept_id": "eb31f4d9-816c-55cf-8ea9-1d619a5fbc2d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Both supplying definition/Lemmas files are identical at the exact dependency and give the complete dense-open-intersection predicate and its ordinary transformations. No native generic BaireSpace file selected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected native Baire/Lindelof local-meagre image theorem, Perfect residual uncountability and OpenPartialHomeomorph/Baire isMeagre_image. These develop meagreness or extra endpoint structures rather than the selected bare BaireSpace API; pure BaireSpace assumptions do not earn LOC."
+    },
+    {
+      "concept": "banach-algebra",
+      "concept_id": "deb5c3f7-f75f-5874-938b-eb30eb57f90a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Use NonUnitalNormedRing A (Ring/Basic:68), NormedSpace \u2102 A, IsScalarTower \u2102 A A, SMulCommClass \u2102 A A and CompleteSpace A. Ring supplies associative distributive multiplication and norm_mul_le; the two scalar-action laws are precisely left/right complex bilinearity, with no One/identity requirement. Operator/Mul:39 builds the actual continuous bilinear multiplication using norm_mul_le and :61 the left multiplication homomorphism. Completeness is the metric Cauchy-filter class and is equivalent to norm-Cauchy-sequence convergence in metric spaces. This is the exact possibly nonunital concept, not only the more restrictive unital NormedAlgebra. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Ring/Basic.lean",
+          "declarations": "NonUnitalNormedRing L68; norm_mul_le",
+          "note": "Native associative nonunital normed-ring structure and submultiplicative norm."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Module/Basic.lean",
+          "declarations": "NormedSpace L37; NormedSpace.toNormSMulClass",
+          "note": "Native complex norm-compatible vector-space structure."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/Mul.lean",
+          "declarations": "ContinuousLinearMap.mul L39; opNorm_mul_le L50; NonUnitalAlgHom.Lmul L61",
+          "note": "Actual bounded bilinear multiplication and ordinary left-regular presentation, explicitly nonunital."
+        },
+        {
+          "path": "Mathlib/Topology/UniformSpace/Cauchy.lean",
+          "declarations": "CompleteSpace L369",
+          "note": "Native completeness structure imposed on the norm-induced metric, without extra algebra axioms."
+        }
+      ],
+      "search_notes": "Exclude Unitization, CStar star/norm identity, spectra, holomorphic functional calculus, Hochschild cohomology and automatic continuity as added structures/named endpoints. Scalar tower/commuting actions are retained, not silently replacing nonunital algebra by arbitrary ring."
+    },
+    {
+      "concept": "banach-algebra",
+      "concept_id": "deb5c3f7-f75f-5874-938b-eb30eb57f90a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The exact dependency normed-ring, module, bounded multiplication and completeness implementations are identical to the checked classes. Native Normed/Ring/LinearForms:39 proves half_max_norm_le_norm_sub_of_mul_le in a NonUnitalSeminormedRing: if 2(\u2016\u03b1\u2016+1)\u2016y\u2016\u2264\u2016x\u2016 then max(\u2016x\u2016,\u2016y\u2016)/2\u2264\u2016x\u2212\u03b1y\u2016. Its proof uses norm_mul_le and the reverse triangle inequality, an ordinary multiplicative norm-arithmetic law applying directly to all catalogue nonunital Banach algebras without imposing a unit. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Ring/LinearForms.lean",
+          "declarations": "TauCeti.half_max_norm_le_norm_sub_of_mul_le L39",
+          "note": "Native direct product/difference norm estimate under weak nonunital hypotheses; complete complex algebra structure remains dependency-owned."
+        }
+      ],
+      "search_notes": "Later Cramer/Diophantine applications in the mixed file are not generic-algebra scope. Unitization, separating ideals, quotient rings and functional calculi introduce additional objects/endpoints and are excluded."
+    },
+    {
+      "concept": "banach-mazur-distance-symmetric-bodies",
+      "concept_id": "4867f292-5a5b-5d8d-a60e-13860a2f2bd1",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Tau Normed/Module/BanachMazur:69 defines inf over continuous linear equivalences of \u2016T\u2016\u2016T\u22121\u2016; its no-isomorphism value is 0, and lower bound 1 needs nontrivial topology. This is a real implemented NORMED-SPACE invariant, whereas catalogue uses convex-body inclusions L\u2286TK\u2286tL. I did not verify the exact gauge norm/unit-ball construction for arbitrary origin-symmetric bodies and rescaling equivalence of these two infimum sets. Therefore the catalogue body identity remains unresolved rather than automatically identified by its name. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read actual normed-space infimum, its range bound, nonisomorphic junk case, and native rescaling theorem. Inspected ConvexBody compact/convex/nonempty definition; note it does not itself ensure nonempty interior or origin symmetry. Need a checked gauge/unit-ball correspondence and degenerate-dimension convention before body coverage. John ellipsoid distance bound is a separate endpoint."
+    },
+    {
+      "concept": "banach-mazur-distance-symmetric-bodies",
+      "concept_id": "4867f292-5a5b-5d8d-a60e-13860a2f2bd1",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Normed/Module/BanachMazur:69 defines inf over continuous linear equivalences of \u2016T\u2016\u2016T\u22121\u2016; its no-isomorphism value is 0, and lower bound 1 needs nontrivial topology. This is a real implemented NORMED-SPACE invariant, whereas catalogue uses convex-body inclusions L\u2286TK\u2286tL. I did not verify the exact gauge norm/unit-ball construction for arbitrary origin-symmetric bodies and rescaling equivalence of these two infimum sets. Therefore the catalogue body identity remains unresolved rather than automatically identified by its name. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read actual normed-space infimum, its range bound, nonisomorphic junk case, and native rescaling theorem. Inspected ConvexBody compact/convex/nonempty definition; note it does not itself ensure nonempty interior or origin symmetry. Need a checked gauge/unit-ball correspondence and degenerate-dimension convention before body coverage. John ellipsoid distance bound is a separate endpoint."
+    },
+    {
+      "concept": "banach-riemann-integral-norm-bound",
+      "concept_id": "4e14e0ad-473f-5211-b1ce-6f770afe68f7",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "BoxIntegral/Basic:357 proves norm_integral_le_of_norm_le for any integration parameters, including Riemann, by applying triangle inequality to every tagged sum and passing to both limits. Set g(x)=\u2016f(x)\u2016 so the pointwise bound is equality. ContinuousOn f and its norm on a compact one-dimensional box are Riemann integrable by integrable_of_continuousOn:757 under CompleteSpace X, giving exactly \u2016\u222bf\u2016\u2264\u222b\u2016f\u2016 on [a,b]. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/BoxIntegral/Basic.lean",
+          "declarations": "BoxIntegral.norm_integral_le_of_norm_le L357; integrable_of_continuousOn L757",
+          "note": "Actual tagged-sum triangle inequality and passage to the integral, with continuous Banach-valued integrability."
+        }
+      ],
+      "search_notes": "Use Riemann parameters from the checked Partition/Filter:236; no need to replace tagged integration by Bochner-only statements. Exclude oscillation/error rates and Riemann\u2013Stieltjes changes of integrator as distinct endpoints."
+    },
+    {
+      "concept": "banach-riemann-integral-norm-bound",
+      "concept_id": "4e14e0ad-473f-5211-b1ce-6f770afe68f7",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "The pinned BoxIntegral/Basic file differs only in blank lines; the same norm comparison and continuous integrability give the full Banach-valued tagged Riemann triangle inequality. No selected native proof/equality-case API for this exact norm bound found. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native VectorMeasure/RiemannSums proves norm of APPROXIMATION ERROR bounded by oscillation and variation, an additional quantitative theorem; it is assigned to the integral construction rather than this particular triangle inequality. Native BoxIntegral interval bridge requires non-Riemann parameters."
+    },
+    {
+      "concept": "banach-space",
+      "concept_id": "39e04e75-91ad-5e1f-afed-05349eb8c37f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "NormedAddCommGroup (Group/Defs:282) gives the genuine norm-induced metric, NormedSpace (Module/Basic:37) supplies scalar compatibility over \u211d or \u2102, and CompleteSpace (UniformSpace/Cauchy:369) requires Cauchy-filter convergence. In metric spaces the same Cauchy file and MetricSpace/Cauchy prove the equivalent sequence-completeness criterion. This exact conjunction is the catalogue Banach space, including infinite dimensions; no literal BanachSpace alias is needed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Group/Defs.lean",
+          "declarations": "NormedAddCommGroup L282; dist_eq",
+          "note": "Native additive norm and induced metric structure."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Module/Basic.lean",
+          "declarations": "NormedSpace L37; norm_smul",
+          "note": "Native norm-compatible real/complex vector-space structure and ordinary norm arithmetic."
+        },
+        {
+          "path": "Mathlib/Topology/UniformSpace/Cauchy.lean",
+          "declarations": "CompleteSpace L369; cauchySeq_tendsto_of_complete",
+          "note": "Native completeness condition of the norm metric and its ordinary Cauchy-limit API."
+        }
+      ],
+      "search_notes": "Keep NormedAddCommGroup, since NormedSpace alone permits seminorms. Exclude Hilbert inner products, duality, weak compactness, Hahn\u2013Banach and finite-dimensional-only constructions."
+    },
+    {
+      "concept": "banach-space",
+      "concept_id": "39e04e75-91ad-5e1f-afed-05349eb8c37f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The exact dependency normed-group/module/completeness files are identical. Native Normed/Module/Basic:45 proves norm_sum_smul_le_sum_div_mul by triangle inequality and norm_smul with explicit positive weights, and :63 proves norm_smul_sq_div_add_norm_smul_sq by scalar norm cancellation for a nonzero scalar. These are direct normed-vector ordinary arithmetic valid in every real/complex Banach space; no completeness-dependent named theorem is substituted for the base definition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Module/Basic.lean",
+          "declarations": "TauCeti.norm_sum_smul_le_sum_div_mul L45; norm_smul_sq_div_add_norm_smul_sq L63",
+          "note": "Native norm/scalar/finite-sum identities with genuine vector-space content, definition/completeness inherited."
+        }
+      ],
+      "search_notes": "Generic complete-uniformity transfer alone is not selected merely because CompleteSpace is a superclass. Exclude tensor completions, complexification, Hahn\u2013Banach, weak/dual/compactness and Banach\u2013Mazur invariants."
+    },
+    {
+      "concept": "banach-space-isomorphism",
+      "concept_id": "b7142137-f11a-5999-9bb7-0517c6d7cc53",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "ContinuousLinearEquiv (Topology/Algebra/Module/Equiv/Basic:47) is a linear equivalence with continuous forward and inverse maps. Operator/Basic:130 proves continuous linear maps between real/complex normed spaces are bounded. Conversely LinearEquiv.toContinuousLinearEquivOfBounds (Operator/ContinuousLinearMap:117) constructs this bundle from explicit bounds in both directions. Thus on Banach spaces it is exactly the catalogue bounded linear bijection with bounded inverse; no isometry requirement introduced. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/Module/Equiv/Basic.lean",
+          "declarations": "ContinuousLinearEquiv L47; continuous_toFun; continuous_invFun",
+          "note": "Native two-sided continuous linear equivalence structure."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/Basic.lean",
+          "declarations": "ContinuousLinearMap.bound L130; SemilinearMapClass.bound_of_continuous",
+          "note": "Actual boundedness implication for continuous real/complex linear maps."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/ContinuousLinearMap.lean",
+          "declarations": "LinearEquiv.toContinuousLinearEquivOfBounds L117",
+          "note": "Actual converse constructor from forward/inverse norm bounds."
+        }
+      ],
+      "search_notes": "No need finite-dimensionality or open-mapping theorem since inverse boundedness is part of the requested definition. Exclude merely algebraic equivalences and norm-preserving isometries as stricter notions."
+    },
+    {
+      "concept": "banach-space-isomorphism",
+      "concept_id": "b7142137-f11a-5999-9bb7-0517c6d7cc53",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency ContinuousLinearEquiv and bound-converse constructor are identical; Operator/Basic changed an unrelated sphere-range lemma, not bound. Native Operator/ContinuousLinearEquiv:39 proves rescaling to norm\u22641 with controlled inverse norm and unchanged product, using exists_coe_eq_smul and explicit inverse-scalar norm calculation. This is ordinary normalization API for the same two-sided bounded linear equivalence, valid for \u211d/\u2102 Banach spaces. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Operator/ContinuousLinearEquiv.lean",
+          "declarations": "ContinuousLinearEquiv.exists_norm_le_one_and_norm_symm_le L39",
+          "note": "Native two-sided bounded-equivalence rescaling and finite-coordinate equivalence norm API; structures inherited."
+        }
+      ],
+      "search_notes": "The Banach\u2013Mazur distance is a separate invariant; selection is the actual equivalence normalization lemma, not merely its use inside a distance proof."
+    },
+    {
+      "concept": "banach-valued-riemann-integral",
+      "concept_id": "179e5042-6a21-572c-8643-2dd689e82442",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "One-dimensional BoxIntegral with IntegrationParams.Riemann:236 restricts tags to their cells and uses constant positive gauges, exactly vanishing partition mesh. Basic integralSum:79 sums cell volume acting by scalar multiplication on f(tag); HasIntegral:162 is its norm-topology limit, and integrable_of_continuousOn:757 constructs it for continuous compact-interval Banach-valued f. Existence is genuine, not only a conditional interface. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/BoxIntegral/Partition/Filter.lean",
+          "declarations": "IntegrationParams.Riemann L236; RCond L291; toFilter L304",
+          "note": "Native tagged vanishing-mesh filter, distinguished from variable Henstock gauges."
+        },
+        {
+          "path": "Mathlib/Analysis/BoxIntegral/Basic.lean",
+          "declarations": "BoxIntegral.integralSum L79; HasIntegral L162; hasIntegral_iff L195; integrable_of_continuousOn L757",
+          "note": "Actual Banach-valued tagged-sum limit, uniqueness/linearity and continuous-function existence."
+        }
+      ],
+      "search_notes": "Closed-interval scalar weights are lengths for one-dimensional volume; degenerate interval has the usual zero empty sum convention. Exclude improper integration, arbitrary gauge and separately significant change-of-variable endpoints."
+    },
+    {
+      "concept": "banach-valued-riemann-integral",
+      "concept_id": "179e5042-6a21-572c-8643-2dd689e82442",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Checked exact dependency supplies the complete Riemann box construction. Native VectorMeasure/RiemannSums:154 proves convergence along EVERY tagged partition family with mesh\u21920 for continuous Banach-valued f: monotone endpoints, initial a/final b and tags in closed cells are explicit. Specialize the integrator to the signed measure of volume restricted to [a,b] and the bilinear pairing to scalar multiplication; its cell values are interval lengths. Dependency VectorMeasure/Operations:54\u201360 gives signed-measure cell values and SetIntegral:551 identifies this integral with the ordinary integral. The restricted measure has finite variation; no atom changes arise for Lebesgue measure. This is an exact generic tagged-Riemann proof, not a filename-only Stieltjes analogy. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/VectorMeasure/RiemannSums.lean",
+          "declarations": "MeasureTheory.VectorMeasure.norm_sum_sub_setIntegral_Ioc_le L49; tendsto_sum_tagged_Ioc L154",
+          "note": "Native actual tagged-sum norm convergence theorem with arbitrary vanishing mesh; scalar finite Lebesgue-measure specialization is the catalogue Banach Riemann integral."
+        }
+      ],
+      "search_notes": "Read norm-error/oscillation proof and terminal-time convergence derivation. Use finite restricted Lebesgue measure, not unrestricted infinite-variation volume. Stieltjes atoms/jump applications and other vector-measure files are extra endpoints. Native BoxIntegral/IntervalIntegral requiring bRiemann=false is not selected."
+    },
+    {
+      "concept": "berezin-transform-disk",
+      "concept_id": "e01f64c9-8a06-51e7-83d0-9b4b90a9f5f2",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Inspected native Bergman/Basic L\u00b2 holomorphic subspace and Hardy/ReproducingKernel context, but no checked disk operator integrating against (1\u2212|z|\u00b2)\u00b2/|1\u2212z conj w|\u2074 with the stated normalized area was verified. A generic integral or Hilbert projection can express other kernels; it does not certify the specific normalized Bergman-density transform and its integrable-weight domain here. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped Berezin/Bergman/kernel searches in complex, Fourier and measure sources. Need exact disk-kernel/density normalization and weight-integrability conditions. Hardy boundary reproducing kernels are a different measure/domain, not this disk transform; no absence claim."
+    },
+    {
+      "concept": "berezin-transform-disk",
+      "concept_id": "e01f64c9-8a06-51e7-83d0-9b4b90a9f5f2",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected native Bergman/Basic L\u00b2 holomorphic subspace and Hardy/ReproducingKernel context, but no checked disk operator integrating against (1\u2212|z|\u00b2)\u00b2/|1\u2212z conj w|\u2074 with the stated normalized area was verified. A generic integral or Hilbert projection can express other kernels; it does not certify the specific normalized Bergman-density transform and its integrable-weight domain here. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped Berezin/Bergman/kernel searches in complex, Fourier and measure sources. Need exact disk-kernel/density normalization and weight-integrability conditions. Hardy boundary reproducing kernels are a different measure/domain, not this disk transform; no absence claim."
+    },
+    {
+      "concept": "berger-stampfli",
+      "concept_id": "4642201c-273b-54f0-bb1e-bf5784b7934c",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Tau HolomorphicFunctionalCalculus/Basic constructs a unital algebra homomorphism for holomorphic germs near spectrum via contour integrals. This does not by itself implement the disk-algebra radial operator-norm limit with numerical-radius bound w(f(T))\u2264\u2016f\u2016\u221e and f(0)=0. The numerical-radius-specific estimate and extension from near-spectrum holomorphic germs to boundary-continuous disk functions remain unverified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Berger/Stampfli/numericalRadius and inspected actual holomorphic functional-calculus domain/construction. CStar continuous calculus assumes different operator structures, while a norm estimate from functional calculus is not the stated numerical-radius theorem; no prerequisite-only partial claim."
+    },
+    {
+      "concept": "berger-stampfli",
+      "concept_id": "4642201c-273b-54f0-bb1e-bf5784b7934c",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau HolomorphicFunctionalCalculus/Basic constructs a unital algebra homomorphism for holomorphic germs near spectrum via contour integrals. This does not by itself implement the disk-algebra radial operator-norm limit with numerical-radius bound w(f(T))\u2264\u2016f\u2016\u221e and f(0)=0. The numerical-radius-specific estimate and extension from near-spectrum holomorphic germs to boundary-continuous disk functions remain unverified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Berger/Stampfli/numericalRadius and inspected actual holomorphic functional-calculus domain/construction. CStar continuous calculus assumes different operator structures, while a norm estimate from functional calculus is not the stated numerical-radius theorem; no prerequisite-only partial claim."
+    },
+    {
+      "concept": "bergman-projection-disk",
+      "concept_id": "02af619b-773a-5303-8c98-8fef1cc6c144",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "The inspected generic orthogonalProjectionOnto constructor projects onto a complete Hilbert submodule, but this pass did not verify a native Mathlib closed L\u00b2 holomorphic disk subspace together with the catalogue kernel/area convention. Fourier and projection infrastructure alone do not identify this particular subspace/operator. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Bergman in actual complex/Fourier/inner-product code; Tau has a genuine Bergman space but native Tau definitions are not standalone Mathlib ownership. Exact holomorphic L\u00b2 subspace/kernel bridge remains unresolved."
+    },
+    {
+      "concept": "bergman-projection-disk",
+      "concept_id": "02af619b-773a-5303-8c98-8fef1cc6c144",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Native HolomorphicFunctions/Bergman/Basic:43 defines the exact L\u00b2 submodule of functions admitting a holomorphic representative on an arbitrary open U. Its actual isClosed proof :64\u201376 uses local uniform compactness plus AE subsequence uniqueness and :78 gives CompleteSpace. With scalar \u2102 and U=unit disk, the checked dependency Submodule.orthogonalProjectionOnto (Projection/Basic:120, closed/complete submodule instance:90) therefore constructs the Hilbert projection onto this space. However no explicit normalized-area disk formula Q\u03c8(z)=\u222b\u03c8(w)/(1\u2212z conj w)\u00b2 was checked, nor a formal area-rescaling comparison; keep partial for that explicit additional paragraph scope. The implementing subspace and generic orthogonal projection are available, not merely assumed. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Complex/HolomorphicFunctions/Bergman/Basic.lean",
+          "declarations": "TauCeti.bergmanSpace L43; BergmanSpace.isClosed L64; CompleteSpace instance L78",
+          "note": "Native actual closed holomorphic L\u00b2 subspace, furnishing the target and existence of its generic Hilbert projection; disk normalized kernel formula not certified."
+        }
+      ],
+      "search_notes": "Selected genuine projection-target/existence portion only; L\u00b2 uses volume.restrict U (unnormalized ordinary area). Projection is mathematically invariant under positive constant rescaling of area, but no claimed Lean bridge/kernel proof here. Cech and restriction finiteness/sheaf applications are excluded. Needs exact kernel and normalized-area comparison for full paragraph certification."
+    },
+    {
+      "concept": "beurling-invariant-subspace-theorem",
+      "concept_id": "1de2d047-60fa-5bb6-881c-c23c5cabf96a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Tau Fourier/Hardy/Multiplier proves bounded symbols preserve the Hardy submodule iff negative Fourier coefficients vanish, and its commutant comparison describes operators commuting with the shift. Neither inspected result classifies EVERY nonzero closed shift-invariant subspace as \u03b8H\u00b2 for an inner \u03b8 with unimodular uniqueness. This invariant-subspace/inner-factor existence and uniqueness remains unverified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Beurling/invariant/inner-function in actual Hardy/Fourier/operator sources; read the multiplier preservation theorem and Hardy L\u00b2 submodule context. Complex/Wirtinger/Beurling is the planar singular-integral transform, an unrelated homonym. Toeplitz/Hankel and reproducing kernels are prerequisites/additional operator endpoints, not this classification."
+    },
+    {
+      "concept": "beurling-invariant-subspace-theorem",
+      "concept_id": "1de2d047-60fa-5bb6-881c-c23c5cabf96a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Fourier/Hardy/Multiplier proves bounded symbols preserve the Hardy submodule iff negative Fourier coefficients vanish, and its commutant comparison describes operators commuting with the shift. Neither inspected result classifies EVERY nonzero closed shift-invariant subspace as \u03b8H\u00b2 for an inner \u03b8 with unimodular uniqueness. This invariant-subspace/inner-factor existence and uniqueness remains unverified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed definitions/statements and representative proofs inspected; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Beurling/invariant/inner-function in actual Hardy/Fourier/operator sources; read the multiplier preservation theorem and Hardy L\u00b2 submodule context. Complex/Wirtinger/Beurling is the planar singular-integral transform, an unrelated homonym. Toeplitz/Hankel and reproducing kernels are prerequisites/additional operator endpoints, not this classification."
+    }
+  ]
+}

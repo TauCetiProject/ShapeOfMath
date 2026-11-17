@@ -1,0 +1,307 @@
+{
+  "batch_id": "batch-004",
+  "reviewer": "category_galois_formalization",
+  "proposal_sha256": "b294ab035dad2dfef3b14eac72fdaf2c682efc996fdae45e69a16c87ce1d4ca3",
+  "decisions": [
+    {
+      "concept": "monotone-subsequence",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "StrictMono/StrictAnti definitions (:86,:92) impose strict comparisons, and Fin.strictMono_iff_lt_succ (:149) proves the exact finite adjacent test. Applying these separately to the increasing index map and a\u2218i precisely preserves both clauses."
+    },
+    {
+      "concept": "monotone-subsequence",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read StrictMonoOn.update proof in full: the three cases at the changed point preserve strict inequality under the stated bounds; specialize the ordered finite domain, and use order-dual target for decreasing values. This directly contributes strict-sequence update API."
+    },
+    {
+      "concept": "planar-general-position",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "The checked affineIndependent_iff_not_collinear (:619) already resolves the finite quantifier packaging: require it for every injection Fin 3\u2192P. This ranges exactly over distinct triples. A separate alias is unnecessary; upgrade from unknown using the existing exact predicate and equivalence.",
+      "replacement": {
+        "concept": "planar-general-position",
+        "concept_id": "783dc576-4817-5cb8-ac40-bd085cbe9741",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. LinearAlgebra/AffineSpace/FiniteDimensional.lean:619\u2013640 proves affineIndependent_iff_not_collinear and its explicit three-point-set form by finrank vector span. For the finite set P\u2286\u211d\u00b2, the exact general-position predicate is \u2200 e:Fin 3\u2192P, Function.Injective e \u2192 \u00acCollinear \u211d (Set.range (fun i => (e i:\u211d\u00b2))). Every injected triple is three distinct members and every such triple arises, so this generic specialization exactly gives no-three-collinear; a separate named alias is unnecessary. The source equivalence gives the ordinary triple-independence criterion, without imposing affine independence of all of P. Source inspection only; no fresh Lean build or transitive axiom audit.",
+        "files": [
+          {
+            "path": "Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean",
+            "declarations": "affineIndependent_iff_not_collinear (:619); affineIndependent_iff_not_collinear_set (:633)",
+            "note": "Native exact three-point collinearity/affine-independence equivalence; universal instantiation over injected triples of P is precisely planar general position."
+          }
+        ],
+        "search_notes": "Resolved the author\u2019s quantifier/homogeneous-coordinate frontier by explicit mathematical comparison. Require injections Fin 3\u2192P; do not require global affine independence of all P, which fails for large planar sets. Homogeneous determinant expansion identifies the correct native generic declaration; no roadmap/identity changes made."
+      }
+    },
+    {
+      "concept": "planar-general-position",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Native InGeneralPosition applies exactly after homogeneous lifting p\u21a6(1,p\u2081,p\u2082) in dimension three. The source\u2019s every-injected-Fin3 predicate and maximal determinant criterion match the no-collinear-triples property; do not specialize dimension two. Full replacement records the explicit elementary equivalence.",
+      "replacement": {
+        "concept": "planar-general-position",
+        "concept_id": "783dc576-4817-5cb8-ac40-bd085cbe9741",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native LinearIndependent/GeneralPosition.lean:39 defines InGeneralPosition L by independence of every injected Fin n subfamily; :55 proves its maximal-determinant equivalence by the row-independence criterion. Use n=3 and L(p)=(1,p\u2081,p\u2082), p\u2208P. Subtracting the first row from the other two identifies its determinant with det(b-a,c-a); it is nonzero exactly when the three planar points are not collinear. Thus the homogeneous n=3 specialization (not the unrelated n=2 linear condition) exactly implements the catalogue finite planar predicate, including vacuity when fewer than three points exist. This homogeneous-coordinate equivalence is the reviewer\u2019s mathematical identification of the actual generic declaration, not a claim the file contains a separately named Lean bridge. Dependency triple-affine equivalence supplies the ordinary alternative criterion. Source inspection only; no fresh Lean build or transitive axiom audit.",
+        "files": [
+          {
+            "path": "TauCeti/LinearAlgebra/LinearIndependent/GeneralPosition.lean",
+            "declarations": "TauCeti.InGeneralPosition (:39); TauCeti.inGeneralPosition_iff_det_ne_zero (:55)",
+            "note": "Native every-injected-subfamily predicate and exact determinant criterion. Dimension three on the homogeneous lift (1,x,y) gives no three collinear planar points; plain dimension two does not."
+          }
+        ],
+        "search_notes": "Resolved the author\u2019s quantifier/homogeneous-coordinate frontier by explicit mathematical comparison. Require injections Fin 3\u2192P; do not require global affine independence of all P, which fails for large planar sets. Homogeneous determinant expansion identifies the correct native generic declaration; no roadmap/identity changes made."
+      }
+    },
+    {
+      "concept": "ramsey-number",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "The bounded unknown accurately distinguishes r-subset homogeneous coloring from Hales\u2013Jewett combinatorial lines, and does not certify the missing least extended-natural threshold from existence alone."
+    },
+    {
+      "concept": "ramsey-number",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Dependency and native candidate scopes do not verify the least-N/\u221e definition with arbitrary r,s,t. This is concrete unknown rather than a negative theorem or mere no-name match."
+    },
+    {
+      "concept": "rooted-tree",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Inspected PredOrder (:62\u201370), IsPredArchimedean (:34\u201336) and RootedTree (:105). Every vertex has a finite unique parent path to bottom, so the undirected cover graph is connected acyclic; conversely unique root paths give this ancestor order and meet. Covers are exactly children; the generic order representation resolves the prior bridge uncertainty.",
+      "replacement": {
+        "concept": "rooted-tree",
+        "concept_id": "cfedb953-1413-5993-bdb6-8c089442d17a",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. SimpleGraph/Acyclic.IsTree (:58) literally means connected acyclic, so adding a chosen vertex gives the graph presentation. Order/SuccPred/Tree.RootedTree (:105) is the equivalent ancestor-order presentation: bottom is the root, PredOrder (:62\u201370 in Basic) makes pred b the greatest strict ancestor, and IsPredArchimedean (:34\u201336) reaches every ancestor by finitely many predecessor steps. Consequently each vertex has a unique finite parent chain to root; its undirected cover graph is connected and acyclic. Conversely unique finite root paths in a rooted tree give the ancestor order, greatest common prefix/meet and those predecessor axioms. Children are precisely a\u22d6x, equivalently pred x=a with x nonroot, so finite branching is exactly \u2200a,{x|a\u22d6x}.Finite (the actual finite-cover predicate also used in Order/KonigLemma:64). Along a cover the root distance increments by one. This explicit mathematical equivalence resolves the prior bridge uncertainty; no separate Lean alias is required. Native root/subtree/parent API is supplied in the selected defining files. Source inspection only; no fresh Lean build or transitive axiom audit.",
+        "files": [
+          {
+            "path": "Mathlib/Order/SuccPred/Tree.lean",
+            "declarations": "RootedTree (:105); RootedTree.subtree; RootedTree.subtrees (:177); IsPredArchimedean.findAtom",
+            "note": "Native ancestor-order rooted-tree structure and ordinary root/subtree API; finite branching uses finite cover-successor sets."
+          },
+          {
+            "path": "Mathlib/Combinatorics/SimpleGraph/Acyclic.lean",
+            "declarations": "SimpleGraph.IsAcyclic (:54); SimpleGraph.IsTree (:58)",
+            "note": "Native connected-acyclic graph predicate, with a chosen root vertex giving the literal catalogue graph presentation."
+          }
+        ],
+        "search_notes": "Explicitly checked equivalent graph/ancestor-order meanings using finite unique root paths and greatest strict predecessor, not name matching. Distinguish children from all graph neighbors: root-distance-increasing neighbors are covers. No claim every rooted tree is finitely branching; the finite-cover condition is an extra predicate. Reduced planar no-unary trees, arborescences with extra edge data and G-trees are excluded."
+      }
+    },
+    {
+      "concept": "rooted-tree",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Checked actual dependency RootedTree and Archimedean files are identical, and PredOrder fields unchanged despite later successor-helper differences. Native reduced planar trees add finiteness/planarity/no-unary restrictions; no generic native core file qualifies. Dependency-only availability is inherited.",
+      "replacement": {
+        "concept": "rooted-tree",
+        "concept_id": "cfedb953-1413-5993-bdb6-8c089442d17a",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "inherited",
+        "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. SimpleGraph/Acyclic.IsTree (:58) literally means connected acyclic, so adding a chosen vertex gives the graph presentation. Order/SuccPred/Tree.RootedTree (:105) is the equivalent ancestor-order presentation: bottom is the root, PredOrder (:62\u201370 in Basic) makes pred b the greatest strict ancestor, and IsPredArchimedean (:34\u201336) reaches every ancestor by finitely many predecessor steps. Consequently each vertex has a unique finite parent chain to root; its undirected cover graph is connected and acyclic. Conversely unique finite root paths in a rooted tree give the ancestor order, greatest common prefix/meet and those predecessor axioms. Children are precisely a\u22d6x, equivalently pred x=a with x nonroot, so finite branching is exactly \u2200a,{x|a\u22d6x}.Finite (the actual finite-cover predicate also used in Order/KonigLemma:64). Along a cover the root distance increments by one. This explicit mathematical equivalence resolves the prior bridge uncertainty; no separate Lean alias is required. The supplying RootedTree/Archimedean/Acyclic files are byte-identical; PredOrder core fields are unchanged despite later successor-helper differences. Native reduced planar trees and group-action trees add special structures, so this generic concept is dependency-only and has no native files. Source inspection only; no fresh Lean build or transitive axiom audit.",
+        "files": [],
+        "search_notes": "Explicitly checked equivalent graph/ancestor-order meanings using finite unique root paths and greatest strict predecessor, not name matching. Distinguish children from all graph neighbors: root-distance-increasing neighbors are covers. No claim every rooted tree is finitely branching; the finite-cover condition is an extra predicate. Reduced planar no-unary trees, arborescences with extra edge data and G-trees are excluded."
+      }
+    },
+    {
+      "concept": "subset-coloring",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "powersetCard (:32) is the subtype of Finsets of cardinal r; card_eq/ncard_eq prove the exact domain. A map from this type to C is precisely the stated coloring, without ordering each subset or requiring finite X."
+    },
+    {
+      "concept": "subset-coloring",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native map_injective via Finset.map_inj and finChooseEquiv via powersetCard.card. These are exact domain reindexing/enumeration API for arbitrary color maps, not a Ramsey existence claim. Dependency only whitespace differs."
+    },
+    {
+      "concept": "temperley-lieb-algebra",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "The scoped unknown leaves the particular three-relation quotient unverified in Mathlib; general FreeAlgebra/RingQuot alone is a prerequisite. This matches the stated verification limit."
+    },
+    {
+      "concept": "temperley-lieb-algebra",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read actual Rel constructors (:107), quotient, all three relation proofs, lift/hom_ext and the full tower span/sandwich mutual induction (:60\u2013190). The catalogue explicitly accepts the generator presentation, so lack of a Catalan diagram basis is not a gap in this concept identity. The semiring result specializes to algebras over a field."
+    },
+    {
+      "concept": "field-embedding",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "RingHom (:308) includes addition/multiplication/zero/one, and explicit Injective for fields gives exactly the paragraph. Restriction to fields and the predicate retain the entire meaning without importing algebraic/normal-extension hypotheses."
+    },
+    {
+      "concept": "field-embedding",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native ringHom_pow and natCast_pow_mul_apply_mem complete proofs (:54,:64). They express iterate and natural scalar-power preservation of every unital map, hence are direct elementary API for field embeddings under their explicit injectivity restriction; no false ownership of the definition."
+    },
+    {
+      "concept": "field-extension",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Subfield (:132), induced Field instance (:271), subtype RingHom and subtype_injective (:315). A literal inclusion of fields is precisely captured without finite-degree or algebraic restrictions."
+    },
+    {
+      "concept": "field-extension",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native ScalarTower.le_of_isScalarTower and restrictScalarsAlgEquiv (:45\u201374), including all identity-on-carrier inverse/map proofs. These are ordinary compatible inclusion/presentation maps; hypotheses are preserved rather than asserting every arbitrary action is a tower."
+    },
+    {
+      "concept": "galois-correspondence",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read actual inverse identities (:282,:334) and intermediateFieldEquivSubgroup (:370), including finite degree/cardinality arguments and order-dual target. Exactly all subgroups in the finite Galois theorem, not a normal-subgroup or infinite-topology variant."
+    },
+    {
+      "concept": "galois-correspondence",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native fixing/fixed Galois connection, fixedField_fixingSubgroup using fixed-by-all characterization, finite-H converse using FixedPoints.toAlgAut_surjective, and SubfieldDictionary order-iso/inverse evaluation formulas. Weakened hypotheses remain sufficient and ordinary core correspondence API."
+    },
+    {
+      "concept": "galois-group",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "AlgEquiv (:31) is an invertible unital ring map commuting with base scalars. Its aut Group (:647) uses composition, refl and symm, with inverse equation supplied by symm_apply_apply; exactly base-fixing field automorphisms."
+    },
+    {
+      "concept": "galois-group",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read restrictNormalHom (:75) construction after the induced algebra/tower, commutation square (:83), and range_restrictScalarsHom_eq_ker_restrictNormalHom (:261). These are ordinary restriction/kernel APIs under normality and tower hypotheses; no claim all embeddings preserve arbitrary intermediate fields."
+    },
+    {
+      "concept": "normal-closure",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read normalClosure definition as supremum of embedding ranges (:49), le_normalClosure (:230), normalClosureOperator (:257) and fixed-point normality equivalence (:265). In the fixed algebraic closure of \u211a the ambient normality conditions hold, yielding exactly minimal normal containment."
+    },
+    {
+      "concept": "normal-closure",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "The comparison file is valid, but its imported native Normal/Closure file also proves direct normal-closure generation, root-set presentation and ambient map compatibility. Read their complete short proofs; add this missing native core API file, excluding its later finite-Galois envelope endpoint as the reason for inclusion.",
+      "replacement": {
+        "concept": "normal-closure",
+        "concept_id": "1b737e3c-c071-529a-813b-bb21b5204461",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Dependency normal-closure implementation is byte-identical. Native GaloisGroups/NormalClosure:39 constructs splittingFieldEquivNormalClosure for the minimal polynomial of x in a normal ambient extension, using the exact splitting-field comparison; :47 derives its Galois-group comparison by conjugation. This is a natural alternate presentation of the normal closure of a simple extension. Number fields are finite separable and simple, while the full non-simple definition remains available in dependency. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions and representative proofs inspected; no fresh Lean build or transitive axiom audit. Independent reviewer also inspected native FieldTheory/Normal/Closure.lean:48 normalClosure_iSup_fieldRange_eq_top proves its embedding ranges generate the closure by map_iSup and algHomEquiv; :93 normalClosure_adjoin_simple_eq_adjoin_rootSet proves the root-generated presentation by both containment directions; :174 AlgHom.map_normalClosure_le proves natural ambient homomorphisms carry normal closures into normal closures by composing embedding ranges. These directly implement ordinary generation/presentation/transport API and must also be counted.",
+        "files": [
+          {
+            "path": "TauCeti/FieldTheory/Normal/Closure.lean",
+            "declarations": "TauCeti.normalClosure_iSup_fieldRange_eq_top (:48); normalClosure_adjoin_simple_eq_adjoin_rootSet (:93); isSplittingField_normalClosure_adjoin_simple (:113); AlgHom.map_normalClosure_le (:174)",
+            "note": "Native normal-closure embedding generation, root-generated presentation, splitting-field characterization and generic ambient-map transport. Definition remains Mathlib-owned; later finite-Galois-envelope applications are not the inclusion justification."
+          },
+          {
+            "path": "TauCeti/FieldTheory/GaloisGroups/NormalClosure.lean",
+            "declarations": "TauCeti.splittingFieldEquivNormalClosure L39; galEquivNormalClosure L47; galEquivNormalClosure_apply L54",
+            "note": "Native natural field/group comparisons identifying normal closure with the minimal-polynomial splitting-field presentation for simple extensions."
+          }
+        ],
+        "search_notes": "Exclude stabilizer/counting applications when describing the selected concept; the whole mixed comparison file is selected for its direct field comparison. TitsSystem/Subgroup NormalClosure names refer to groups, not field extensions. Added the actual native Normal/Closure core API file imported by the comparison file. Excluded later exists_isGalois_superset as a distinct finite-envelope endpoint; mixed selected files are counted whole."
+      }
+    },
+    {
+      "concept": "root-of-unity",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read subgroup predicate (:59), mkOfPowEq (:96) converting positive-power field elements into units, and primitive-root divisor/orderOf uniqueness (:211\u2013217). Restricting n>0 gives the least positive exponent and avoids the zero-order convention trap."
+    },
+    {
+      "concept": "root-of-unity",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read injectivity of induced root maps, characteristic-sensitive primitive -1 proof, and primitive-fourth-root square identity (:201). These are direct low-order/core API with hypotheses intact; Tate modules/cyclotomic and character orthogonality endpoints remain excluded."
+    },
+    {
+      "concept": "bijection",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Function.Bijective is injective and surjective; bijective_iff_existsUnique (:332) proves both directions of the exact unique-preimage paragraph, including empty domain/codomain cases."
+    },
+    {
+      "concept": "bijection",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read the complete bijective_of_retract proof (:23): injectivity through ambient injectivity/retraction and surjectivity through the codomain embedding and its retraction. All square/retraction conditions are explicit. Dependency definitions and equivalence identical."
+    },
+    {
+      "concept": "binary-operation",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read uncurry_def and curry/uncurry injectivity/flip identities (:976\u2013985). Generic S\u00d7S\u2192S is literally a binary operation and equivalent to curried S\u2192S\u2192S, without any semigroup/unit axioms."
+    },
+    {
+      "concept": "binary-operation",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Exact dependency Logic/Function/Basic is identical. Native retract-bijection, iterate/update/triangular results constrain extra properties or endpoints rather than generic binary-operation presentation; inherited is appropriate."
+    },
+    {
+      "concept": "binary-relation",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "SetRel (:85) is literally Set(\u03b1\u00d7\u03b2), with pair membership notation and inv (:98) as coordinate swap; mem_inv and inv_inv are rfl. Specialization \u03b1=\u03b2 exactly matches the paragraph."
+    },
+    {
+      "concept": "binary-relation",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Actual dependency Basic/Rel is identical. Native Logic/Relation closure/connectedness and functional graph recovery add separate predicates/endpoints rather than ordinary bare relation converse/domain APIs."
+    },
+    {
+      "concept": "cartesian-product",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Set.prod (:218), mem_prod (:231), mk_mem_prod and prod_mono. This is precisely ordered pairs with each coordinate in its specified subset; not an abstract categorical product."
+    },
+    {
+      "concept": "cartesian-product",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read graphOn_const (:30) proof by pair extensionality and membership simplification. It is a direct slice/product normal form; later fiber-product equivalences are not the justification. Dependency definitions identical."
+    },
+    {
+      "concept": "disjoint-sets",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Set.disjoint_iff_inter_eq_empty and elementwise disjoint_left (:31\u201338) match no common elements; PairwiseDisjoint (:259) compares distinct indices. Both clauses of the paragraph are actually present."
+    },
+    {
+      "concept": "disjoint-sets",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Exact dependency files identical. Native InjOn.union_of_disjoint_image uses disjointness to prove a distinct injectivity endpoint; no mapped native bare disjoint/pairwise characterization was verified."
+    },
+    {
+      "concept": "function",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Function.graph (:592), graph_injective (:597) and SetRel.exists_graph_eq_iff (:614) prove the exact unique total functional graph equivalence. These supply native presentation API while correctly attributing arrow types to Lean."
+    },
+    {
+      "concept": "function",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read graphValue (:30) defined only on first-projection image, graphValue_mem and graphValue_eq_iff (:53) using inverse projection equivalence, and eq_graphValue (:83) pointwise uniqueness. No extraneous nonempty target or extension outside the specified domain is introduced."
+    }
+  ]
+}

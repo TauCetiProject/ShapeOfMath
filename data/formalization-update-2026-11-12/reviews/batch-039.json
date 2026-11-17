@@ -1,0 +1,306 @@
+{
+  "batch_id": "batch-039",
+  "reviewer": "analysis_formalization",
+  "proposal_sha256": "105196e4bbb4e69dc4e34f477e2f50489672d3b13a4141759f1eda144a6aaf48",
+  "decisions": [
+    {
+      "concept": "igusa-cusp-form-humbert-divisors",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read TwoVariable.theta summand46 and native siegelFunction95/102: ordinary one-dimensional theta/q-product data do not supply genus-two Humbert divisors or multiplicities. The H1/H4 simple-divisor frontier is accurately unknown."
+    },
+    {
+      "concept": "igusa-cusp-form-humbert-divisors",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read TwoVariable.theta summand46 and native siegelFunction95/102: ordinary one-dimensional theta/q-product data do not supply genus-two Humbert divisors or multiplicities. The H1/H4 simple-divisor frontier is accurately unknown."
+    },
+    {
+      "concept": "koecher-principle",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "ModularForm80 explicitly includes boundedness at cusps on the ordinary upper half-plane. This cannot prove higher-genus automatic Fourier-support/growth; the stated unresolved higher-genus interface is sound."
+    },
+    {
+      "concept": "koecher-principle",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "ModularForm80 explicitly includes boundedness at cusps on the ordinary upper half-plane. This cannot prove higher-genus automatic Fourier-support/growth; the stated unresolved higher-genus interface is sound."
+    },
+    {
+      "concept": "multiplicative-hecke-operator-siegel",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Native heckeSlashSum186 is literally a SUM of GL2(Q) slash transforms, not a Siegel product with resulting character. No exact higher-genus slash/character input is certified; retain the bounded unknown."
+    },
+    {
+      "concept": "multiplicative-hecke-operator-siegel",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native heckeSlashSum186 is literally a SUM of GL2(Q) slash transforms, not a Siegel product with resulting character. No exact higher-genus slash/character input is certified; retain the bounded unknown."
+    },
+    {
+      "concept": "adele-ring",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "AdeleRing56 is the infinite-completion product times the cofinite finite-adic restricted product95. The finite reference rings and all-place factors are exact; native fst_mul195 and local inclusion continuity209/216 have completed coordinate proofs. Classification/product-formula endpoints are properly excluded."
+    },
+    {
+      "concept": "adele-ring",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "AdeleRing56 is the infinite-completion product times the cofinite finite-adic restricted product95. The finite reference rings and all-place factors are exact; native fst_mul195 and local inclusion continuity209/216 have completed coordinate proofs. Classification/product-formula endpoints are properly excluded."
+    },
+    {
+      "concept": "adelic-points-algebraic-group",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "The exact given local groups/reference compact-open subgroups instantiate RestrictedProduct78 and its principal-stage topology148; native RestrictedProductGroup72/integralSubgroupOf85 and stage-open52 are direct API, already source-checked in036. Existence of an integral model/reference subgroups is explicitly not asserted."
+    },
+    {
+      "concept": "adelic-points-algebraic-group",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "The exact given local groups/reference compact-open subgroups instantiate RestrictedProduct78 and its principal-stage topology148; native RestrictedProductGroup72/integralSubgroupOf85 and stage-open52 are direct API, already source-checked in036. Existence of an integral model/reference subgroups is explicitly not asserted."
+    },
+    {
+      "concept": "adelic-smooth-compact-test-function",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "ContMDiffMap41, LocallyConstant217 and compact topological support215 give the standard joint adelic test-function convention. The native compact-family lemma26 assumes the WHOLE product map locally constant, so cannot handle nonconstant smooth archimedean dependence. Make joint/uniform finite-variable meaning explicit; separate slice regularity is weaker and no equivalence is claimed.",
+      "replacement": {
+        "concept": "adelic-smooth-compact-test-function",
+        "concept_id": "4fa0c283-85a7-5f27-9e68-50e252d5d9ca",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Given G(A_F)=G_infty\u00d7G_f with its archimedean smooth Lie models and the finite restricted-product topology, an exact generic presentation is F:LocallyConstant G_f (ContMDiffMap I modelSelf G_infty \u2102 infinity), with HasCompactSupport of (a,b)\u21a6F b a. ContMDiffMap:41 is literally the CMDiff infinity subtype, LocallyConstant:217/IsLocallyConstant:39 imposes local constancy of the WHOLE smooth function in the finite variable, and HasCompactSupport:215 is compact closure of the support. This avoids a weaker pointwise separate-slice interpretation. Factorizable functions can be restricted to actual pure tensors of given local test functions, with characteristic functions of the chosen compact-open integral subgroups as the almost-all reference factors; the bare restricted-tensor generators-and-relations supplier was checked in036. No assertion that all test functions are a single pure tensor, nor an unproved adelic Lie-model existence theorem, is made. Interpretation required by the standard adelic test-function terminology: local constancy in the finite variable is joint/uniform for the archimedean function (equivalently the usual common finite level on compact support). The displayed constructor records that convention. Mere separate slice smoothness/local constancy is weaker and no equivalence with that weaker condition is claimed.",
+        "files": [
+          {
+            "path": "Mathlib/Geometry/Manifold/ContMDiffMap.lean",
+            "declarations": "ContMDiffMap:41",
+            "note": "Actual smooth-map values for the archimedean test-function variable."
+          },
+          {
+            "path": "Mathlib/Topology/LocallyConstant/Basic.lean",
+            "declarations": "IsLocallyConstant:39; LocallyConstant:217",
+            "note": "Actual locally constant family of whole smooth archimedean functions."
+          },
+          {
+            "path": "Mathlib/Topology/Algebra/Support.lean",
+            "declarations": "HasCompactSupport (generated at HasCompactMulSupport:215)",
+            "note": "Exact compact topological support of the uncurried complex test function."
+          }
+        ],
+        "search_notes": "Enumerated Global/Adeles, native ContMDiffMap tree and every LocallyConstant sibling. Read native LocallyConstant/Compact:26: its WHOLE X\u00d7P map is locally constant, also in the archimedean variable, so it is not the general smooth test-function API. Schwartz rapid decay and analytic Fourier/Petersson applications are different conditions/endpoints. Factorizable refers to the pure restricted generators with specified local test data, not arbitrary completed Hilbert tensors. Specification refinement: spell out the joint/uniform finite-variable convention when defining mixed archimedean/nonarchimedean test functions. Compact support alone does not justify upgrading arbitrary separate slice regularity."
+      }
+    },
+    {
+      "concept": "adelic-smooth-compact-test-function",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "ContMDiffMap41, LocallyConstant217 and compact topological support215 give the standard joint adelic test-function convention. The native compact-family lemma26 assumes the WHOLE product map locally constant, so cannot handle nonconstant smooth archimedean dependence. Make joint/uniform finite-variable meaning explicit; separate slice regularity is weaker and no equivalence is claimed.",
+      "replacement": {
+        "concept": "adelic-smooth-compact-test-function",
+        "concept_id": "4fa0c283-85a7-5f27-9e68-50e252d5d9ca",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "inherited",
+        "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Given G(A_F)=G_infty\u00d7G_f with its archimedean smooth Lie models and the finite restricted-product topology, an exact generic presentation is F:LocallyConstant G_f (ContMDiffMap I modelSelf G_infty \u2102 infinity), with HasCompactSupport of (a,b)\u21a6F b a. ContMDiffMap:41 is literally the CMDiff infinity subtype, LocallyConstant:217/IsLocallyConstant:39 imposes local constancy of the WHOLE smooth function in the finite variable, and HasCompactSupport:215 is compact closure of the support. This avoids a weaker pointwise separate-slice interpretation. Factorizable functions can be restricted to actual pure tensors of given local test functions, with characteristic functions of the chosen compact-open integral subgroups as the almost-all reference factors; the bare restricted-tensor generators-and-relations supplier was checked in036. No assertion that all test functions are a single pure tensor, nor an unproved adelic Lie-model existence theorem, is made. These complete generic constructors are supplied by the checked dependency. No native specific adelic test-function constructor or direct smooth/locally-constant compact-support API was certified. Exact dependency comparisons: selected supplier bodies agree. Header/documentation shifts put ZMod at139/integer cast210, FiniteType39, Hopf tensor instance30, and BigOWith73/BigO87; LocallyConstant.Basic removed a five-line TODO before its declarations, so IsLocallyConstant34 and LocallyConstant212 are the actual dependency anchors. InfiniteAdeleRing54 matches; only later completion-coercion/dense-range proof expressions differ, unrelated to the defining product. Interpretation required by the standard adelic test-function terminology: local constancy in the finite variable is joint/uniform for the archimedean function (equivalently the usual common finite level on compact support). The displayed constructor records that convention. Mere separate slice smoothness/local constancy is weaker and no equivalence with that weaker condition is claimed.",
+        "files": [],
+        "search_notes": "Enumerated Global/Adeles, native ContMDiffMap tree and every LocallyConstant sibling. Read native LocallyConstant/Compact:26: its WHOLE X\u00d7P map is locally constant, also in the archimedean variable, so it is not the general smooth test-function API. Schwartz rapid decay and analytic Fourier/Petersson applications are different conditions/endpoints. Factorizable refers to the pure restricted generators with specified local test data, not arbitrary completed Hilbert tensors. Specification refinement: spell out the joint/uniform finite-variable convention when defining mixed archimedean/nonarchimedean test functions. Compact support alone does not justify upgrading arbitrary separate slice regularity."
+      }
+    },
+    {
+      "concept": "admissible-prime-tuple",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "ZMod138 and its integer cast209 realize exactly forall prime p an omitted residue class of the distinct Finset shifts. Empty tuples and p-positive cases behave correctly. Native residue-fiber/CRT counts are prerequisite arithmetic, not direct tuple admissibility API."
+    },
+    {
+      "concept": "admissible-prime-tuple",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "ZMod138 and its integer cast209 realize exactly forall prime p an omitted residue class of the distinct Finset shifts. Empty tuples and p-positive cases behave correctly. Native residue-fiber/CRT counts are prerequisite arithmetic, not direct tuple admissibility API."
+    },
+    {
+      "concept": "affine-algebraic-group",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "FiniteType38 is finite algebra generation; CommHopfAlgCat and the actual opposite-category group object173/Hom.group58/yoneda75 give all commutative value-algebra points. Native finite-type full subcategory52/68 and antipode/group119/maps143 match the primary coordinate definition. No value algebra Hopf structure is required."
+    },
+    {
+      "concept": "affine-algebraic-group",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "FiniteType38 is finite algebra generation; CommHopfAlgCat and the actual opposite-category group object173/Hom.group58/yoneda75 give all commutative value-algebra points. Native finite-type full subcategory52/68 and antipode/group119/maps143 match the primary coordinate definition. No value algebra Hopf structure is required."
+    },
+    {
+      "concept": "affine-function-real",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "ConvexOn54 AND ConcaveOn59 on the given convex C give equality for a=1\u2212t,b=t and conversely all a+b=1. No continuity or ambient affine extension is needed. Native ZeroLocus assumes an ambient AffineMap and proves a further simultaneous-zero selection endpoint; it does not invalidate dependency-only coverage of the bare affine-on-C predicate."
+    },
+    {
+      "concept": "affine-function-real",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "ConvexOn54 AND ConcaveOn59 on the given convex C give equality for a=1\u2212t,b=t and conversely all a+b=1. No continuity or ambient affine extension is needed. Native ZeroLocus assumes an ambient AffineMap and proves a further simultaneous-zero selection endpoint; it does not invalidate dependency-only coverage of the bare affine-on-C predicate."
+    },
+    {
+      "concept": "affine-representation-ordered-group",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "The evaluation homomorphism can be expressed on normalized monotone additive states, but the order-unit infinitesimal/kernel equality is a genuine extra unverified endpoint. C-star algebra states impose different linear/positivity data. Retain unknown, without defining away that identification."
+    },
+    {
+      "concept": "affine-representation-ordered-group",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "The evaluation homomorphism can be expressed on normalized monotone additive states, but the order-unit infinitesimal/kernel equality is a genuine extra unverified endpoint. C-star algebra states impose different linear/positivity data. Retain unknown, without defining away that identification."
+    },
+    {
+      "concept": "algebraic-integer",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "IsIntegralDefs39/53 is exactly existence of a monic integer polynomial annihilating a complex number. Native trans_common102 has a completed compatible-image/adjoin-tower proof and is ordinary integrality transport; it does not replace monic integrality by rational algebraicity."
+    },
+    {
+      "concept": "algebraic-integer",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "IsIntegralDefs39/53 is exactly existence of a monic integer polynomial annihilating a complex number. Native trans_common102 has a completed compatible-image/adjoin-tower proof and is ordinary integrality transport; it does not replace monic integrality by rational algebraicity."
+    },
+    {
+      "concept": "algebraic-torus",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independently read tensor Hopf instance29 and group-algebra antipode49, MonoidAlgebra.lift230 inverse laws, Finsupp.liftAddHom375 inverse laws and zmultiplesHom269. Their fixed finite free character lattice identifies points with (Fin n\u2192R-units), with coproduct pointwise multiplication. Closure scalar extension is essential. Native torus105/113 and SplitTorus.pointsMulEquiv80 use precisely that closure-split model; rank0 is allowed."
+    },
+    {
+      "concept": "algebraic-torus",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independently read tensor Hopf instance29 and group-algebra antipode49, MonoidAlgebra.lift230 inverse laws, Finsupp.liftAddHom375 inverse laws and zmultiplesHom269. Their fixed finite free character lattice identifies points with (Fin n\u2192R-units), with coproduct pointwise multiplication. Closure scalar extension is essential. Native torus105/113 and SplitTorus.pointsMulEquiv80 use precisely that closure-split model; rank0 is allowed."
+    },
+    {
+      "concept": "almost-holomorphic-jacobi-form",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Checked one-variable modular/slash data and two-variable theta summand: they do not certify the stated integer-index elliptic/modular phases plus BOTH inverse-imaginary polynomial variables and Gaussian strip bound. This is an accurately specified unresolved exact-domain/action frontier."
+    },
+    {
+      "concept": "almost-holomorphic-jacobi-form",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked one-variable modular/slash data and two-variable theta summand: they do not certify the stated integer-index elliptic/modular phases plus BOTH inverse-imaginary polynomial variables and Gaussian strip bound. This is an accurately specified unresolved exact-domain/action frontier."
+    },
+    {
+      "concept": "almost-holomorphic-modular-form",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "SlashInvariantForm36 imposes only scalar slash invariance; SL_slash167/171 fixes normalization, MDifferentiable278 specifies holomorphic coefficients, and BigO72/86 quantifies the all-cusp polynomial bound. Native slash_adjugate56 is valid for arbitrary functions, hence this nonholomorphic class. Clarify that inverse-Im is a complex inverse raised to a NATURAL power, not a negative Nat exponent.",
+      "replacement": {
+        "concept": "almost-holomorphic-modular-form",
+        "concept_id": "6d1c8a25-a21b-5692-81f5-3f469d5bce54",
+        "concept_revision": 2,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact generic primary predicate on f:SlashInvariantForm \u0393 k (SlashInvariantForms:36, which imposes NO holomorphy) is \u2203N and holomorphic coefficient functions a_j:\u210d\u2192\u2102, j:Fin(N+1), with \u2200\u03c4,f\u03c4=\u2211j,a_j\u03c4*((\u03c4.im:\u2102)\u207b\u00b9)^(j.val); holomorphic means the actual MDifferentiable \u2102 map predicate used by ordinary modular forms. The real Im \u03c4 is strictly positive on \u210d, so the finite polynomial in its inverse is literal. Require after EVERY cusp normalization \u03b3 (equivalently all SL2Z normalizations for the given congruence group), \u2203N\u03b3:\u2115, (f|[k]\u03b3)=O[comap UpperHalfPlane.im atTop](\u03c4\u21a6(\u03c4.im)^N\u03b3). Actual SL_slash_apply:171 gives the precise scalar weight-k slash; IsBigO:86/IsBigOWith:72 is the exact eventual constant-times-power norm bound. This is the paragraph\u2019s bare almost-holomorphic convention and excludes cusp poles through the explicit growth condition, without falsely requiring f itself holomorphic. The polynomial exponent j.val is a nonnegative integer; the inverse is taken BEFORE that natural power. This makes the coefficient-field and exponent convention explicit.",
+        "files": [
+          {
+            "path": "Mathlib/NumberTheory/ModularForms/SlashInvariantForms.lean",
+            "declarations": "SlashInvariantForm:36",
+            "note": "Actual scalar modular transformation-law constructor without holomorphy."
+          },
+          {
+            "path": "Mathlib/NumberTheory/ModularForms/SlashActions.lean",
+            "declarations": "ModularForm.SL_slash_def:167; SL_slash_apply:171",
+            "note": "Actual weight-k cusp normalization action on arbitrary complex functions."
+          },
+          {
+            "path": "Mathlib/Analysis/Asymptotics/Defs.lean",
+            "declarations": "Asymptotics.IsBigOWith:72; IsBigO:86",
+            "note": "Exact eventual polynomial cusp-growth predicate; finite inverse-Im condition is stated explicitly."
+          },
+          {
+            "path": "Mathlib/Geometry/Manifold/MFDeriv/Defs.lean",
+            "declarations": "MDifferentiable:278",
+            "note": "Actual complex manifold differentiability predicate specifying the holomorphic coefficient functions on the upper half-plane."
+          }
+        ],
+        "search_notes": "Current revision2 checked; the explicit inverse-Im finite polynomial and all-cusp polynomial bound are essential. Read SlashInvariantForm fields, SL slash formula, BigO definition and native actual identity proof. Ordinary ModularForm:80 adds holomorphy/boundedness and is not used as the whole constructor; no cusp-pole or weakly holomorphic convention substituted."
+      }
+    },
+    {
+      "concept": "almost-holomorphic-modular-form",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "SlashInvariantForm36 imposes only scalar slash invariance; SL_slash167/171 fixes normalization, MDifferentiable278 specifies holomorphic coefficients, and BigO72/86 quantifies the all-cusp polynomial bound. Native slash_adjugate56 is valid for arbitrary functions, hence this nonholomorphic class. Clarify that inverse-Im is a complex inverse raised to a NATURAL power, not a negative Nat exponent.",
+      "replacement": {
+        "concept": "almost-holomorphic-modular-form",
+        "concept_id": "6d1c8a25-a21b-5692-81f5-3f469d5bce54",
+        "concept_revision": 2,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact generic primary predicate on f:SlashInvariantForm \u0393 k (SlashInvariantForms:36, which imposes NO holomorphy) is \u2203N and holomorphic coefficient functions a_j:\u210d\u2192\u2102, j:Fin(N+1), with \u2200\u03c4,f\u03c4=\u2211j,a_j\u03c4*((\u03c4.im:\u2102)\u207b\u00b9)^(j.val); holomorphic means the actual MDifferentiable \u2102 map predicate used by ordinary modular forms. The real Im \u03c4 is strictly positive on \u210d, so the finite polynomial in its inverse is literal. Require after EVERY cusp normalization \u03b3 (equivalently all SL2Z normalizations for the given congruence group), \u2203N\u03b3:\u2115, (f|[k]\u03b3)=O[comap UpperHalfPlane.im atTop](\u03c4\u21a6(\u03c4.im)^N\u03b3). Actual SL_slash_apply:171 gives the precise scalar weight-k slash; IsBigO:86/IsBigOWith:72 is the exact eventual constant-times-power norm bound. This is the paragraph\u2019s bare almost-holomorphic convention and excludes cusp poles through the explicit growth condition, without falsely requiring f itself holomorphic. Native ModularForm.slash_adjugate:56 proves the actual adjugate/inverse slash identity for ANY f:\u210d\u2192\u2102, including this nonholomorphic class. Its completed proof uses the scalar-matrix slash, group action and complex integer powers; it is ordinary cusp-normalization/transformation API with weaker hypotheses, not a theorem declaring such functions holomorphic. Exact dependency comparisons: selected supplier bodies agree. Header/documentation shifts put ZMod at139/integer cast210, FiniteType39, Hopf tensor instance30, and BigOWith73/BigO87; LocallyConstant.Basic removed a five-line TODO before its declarations, so IsLocallyConstant34 and LocallyConstant212 are the actual dependency anchors. InfiniteAdeleRing54 matches; only later completion-coercion/dense-range proof expressions differ, unrelated to the defining product. The polynomial exponent j.val is a nonnegative integer; the inverse is taken BEFORE that natural power. This makes the coefficient-field and exponent convention explicit.",
+        "files": [
+          {
+            "path": "TauCeti/NumberTheory/ModularForms/SlashAdjugate.lean",
+            "declarations": "ModularForm.slash_adjugate:56",
+            "note": "Native ordinary scalar slash-normalization identity valid for the exact almost-holomorphic functions too."
+          }
+        ],
+        "search_notes": "Current revision2 checked; the explicit inverse-Im finite polynomial and all-cusp polynomial bound are essential. Read SlashInvariantForm fields, SL slash formula, BigO definition and native actual identity proof. Ordinary ModularForm:80 adds holomorphy/boundedness and is not used as the whole constructor; no cusp-pole or weakly holomorphic convention substituted."
+      }
+    },
+    {
+      "concept": "alternating-tensor-square-module",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "TensorProduct.comm264/269 and eigenspace423/467 give exactly the -1 eigensubmodule. Native antisymmetric128/135, z\u2212flip(z)141 and f-tensor-f restriction152 are complete direct proofs over arbitrary commutative rings. No invertibility of2 or quotient-exterior identification enters."
+    },
+    {
+      "concept": "alternating-tensor-square-module",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "TensorProduct.comm264/269 and eigenspace423/467 give exactly the -1 eigensubmodule. Native antisymmetric128/135, z\u2212flip(z)141 and f-tensor-f restriction152 are complete direct proofs over arbitrary commutative rings. No invertibility of2 or quotient-exterior identification enters."
+    },
+    {
+      "concept": "anisotropic-algebraic-group",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Native reductive iff79 quantifies normal smooth connected geometric unipotent subgroups; the separate anisotropy test quantifies ALL surjective coordinate maps onto positive-rank F-split torus models. ClosedImmersion59 proves the contravariant subgroup criterion, and rank0 iso206 is trivial. No normality restriction is accidentally imposed on excluded split subtori. Standalone reductive-interface frontier is honestly unresolved."
+    },
+    {
+      "concept": "anisotropic-algebraic-group",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native reductive iff79 quantifies normal smooth connected geometric unipotent subgroups; the separate anisotropy test quantifies ALL surjective coordinate maps onto positive-rank F-split torus models. ClosedImmersion59 proves the contravariant subgroup criterion, and rank0 iso206 is trivial. No normality restriction is accidentally imposed on excluded split subtori. Standalone reductive-interface frontier is honestly unresolved."
+    },
+    {
+      "concept": "arithmetic-progression",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read exact stock Lean commit b35cb10 Prelude.Fin2456 and Int.add163/mul186. The dependent function Fin k\u2192Int, i\u21a6a+i*d, with k>0 and optional d\u22600, is the entire bare sequence. Integer arithmetic supplier is Lean-owned; zero native LOC in both libraries is appropriate. Nonzero d does not falsely make k=1 nonconstant."
+    },
+    {
+      "concept": "arithmetic-progression",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read exact stock Lean commit b35cb10 Prelude.Fin2456 and Int.add163/mul186. The dependent function Fin k\u2192Int, i\u21a6a+i*d, with k>0 and optional d\u22600, is the entire bare sequence. Integer arithmetic supplier is Lean-owned; zero native LOC in both libraries is appropriate. Nonzero d does not falsely make k=1 nonconstant."
+    },
+    {
+      "concept": "asymptotic-density-integers",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Nat finite interval37/51, Finset.card47 and Tendsto415 give exactly count(S\u2229[1,N])/N tending to d. Excluding0 and the N=0 tail convention are harmless atTop. No logarithmic/Dirichlet/prime-relative weights are substituted, and native weighted prime limits do not qualify as ordinary arbitrary-set density API."
+    },
+    {
+      "concept": "asymptotic-density-integers",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Nat finite interval37/51, Finset.card47 and Tendsto415 give exactly count(S\u2229[1,N])/N tending to d. Excluding0 and the N=0 tail convention are harmless atTop. No logarithmic/Dirichlet/prime-relative weights are substituted, and native weighted prime limits do not qualify as ordinary arbitrary-set density API."
+    }
+  ]
+}

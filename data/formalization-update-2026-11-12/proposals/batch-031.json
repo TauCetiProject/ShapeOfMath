@@ -1,0 +1,593 @@
+{
+  "batch_id": "batch-031",
+  "author": "analysis_formalization",
+  "reviews": [
+    {
+      "concept": "convolution-locally-compact-group",
+      "concept_id": "759adda9-467f-5984-bc2f-cc7074e748c8",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "MeasureTheory.convolution:401 is the actual integral ∫y,L(f y)(g(x-y)). Its AddGroup parameter need NOT be commutative. Instantiate it on Additive(Gᵐᵒᵖ): in the opposite multiplication, x-y is y⁻¹*x in the original group, so L scalar multiplication gives EXACTLY the ordered paragraph formula f(y)g(y⁻¹x), not g(xy⁻¹) in a noncommutative group. Transport the chosen left Haar measure along the definitional type-synonym equivalence; the actual HasCompactSupport.convolutionExists_left_of_continuous_right:325 only needs local integrability of f and continuity of g and makes NO left/right invariance assumption on that transported measure. Continuous compactly supported functions are locally integrable for locally finite Haar measure. This checks both the general existing-integral definition and the named compact-support case without a change-of-variable/unimodularity assumption. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Convolution.lean",
+          "declarations": "MeasureTheory.ConvolutionExistsAt:154; convolution:401; HasCompactSupport.convolutionExists_left_of_continuous_right:325",
+          "note": "Native actual ordered group integral and compact-support existence theorem, instantiated on the opposite group to match the exact convention."
+        }
+      ],
+      "search_notes": "The group-opposite instantiation is essential: naive additive notation on Additive G gives xy⁻¹. Measure convolution of two measures is a different type. Compact-operator/Peter-Weyl spectral endpoints excluded."
+    },
+    {
+      "concept": "convolution-locally-compact-group",
+      "concept_id": "759adda9-467f-5984-bc2f-cc7074e748c8",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "MeasureTheory.convolution:401 is the actual integral ∫y,L(f y)(g(x-y)). Its AddGroup parameter need NOT be commutative. Instantiate it on Additive(Gᵐᵒᵖ): in the opposite multiplication, x-y is y⁻¹*x in the original group, so L scalar multiplication gives EXACTLY the ordered paragraph formula f(y)g(y⁻¹x), not g(xy⁻¹) in a noncommutative group. Transport the chosen left Haar measure along the definitional type-synonym equivalence; the actual HasCompactSupport.convolutionExists_left_of_continuous_right:325 only needs local integrability of f and continuity of g and makes NO left/right invariance assumption on that transported measure. Continuous compactly supported functions are locally integrable for locally finite Haar measure. This checks both the general existing-integral definition and the named compact-support case without a change-of-variable/unimodularity assumption. Exact dependency constructor/existence file is byte-identical. Native TauCeti.convolutionCLM_apply_eq_integral_inv_mul:226 proves exactly ∫z,k(z)f(z⁻¹x) on compact groups with normalized Haar, and convolutionCLM_toLp_apply:237 gives actual continuous representatives. The completed proof230-233 changes variables using compact Haar inversion/right invariance, stated only in its valid compact scope. This is ordinary convolution formula/operator API for that subclass, while full locally compact availability remains dependency supplied. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/RepresentationTheory/Compact/Convolution.lean",
+          "declarations": "TauCeti.convolutionCLM:206; convolutionCLM_apply_eq_integral_inv_mul:226; convolutionCLM_toLp_apply:237",
+          "note": "Native direct compact-group convolution operator and exact ordered kernel/translated-function formulas."
+        }
+      ],
+      "search_notes": "Native compactness assumptions remain explicit and are not used to replace general locally compact G. Later compactness/eigenspace/Peter-Weyl theorems in this file are independent endpoints, not mapping reasons."
+    },
+    {
+      "concept": "cuspidal-l2-space",
+      "concept_id": "08453044-8359-50a4-b507-f1c73785206f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Scoped searches for cuspidal/smooth automorphic forms, the adelic norm-one quotient and right regular L² action. Actual Mathlib ModularForms/CuspFormSubmodule.toModularFormₗ:52 embeds classical upper-half-plane cusp forms for a subgroup of GL₂(ℝ), with injectivity:64; it does not supply square-integrable cuspidal automorphic forms on arbitrary G(F)\\G(A_F)^1. Native Tau Global/Adeles/CompactQuotient:87 proves compactness of the ADDITIVE adele class group A_F/F, not the required reductive-group quotient or its cuspidal right-unitary subspace. Generic Lp and closed spans are available, but the specified smooth cuspidal input class and its quotient action were not certified. These concrete endpoints remain unknown, not absent. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Classical holomorphic cusp forms, additive adele quotient compactness and generic Hilbert closed spans are actual inspected candidates with different scope. Tau candidates have separate ownership. No claim they define the general cuspidal spectrum or prove right-unitary invariance."
+    },
+    {
+      "concept": "cuspidal-l2-space",
+      "concept_id": "08453044-8359-50a4-b507-f1c73785206f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Scoped searches for cuspidal/smooth automorphic forms, the adelic norm-one quotient and right regular L² action. Actual Mathlib ModularForms/CuspFormSubmodule.toModularFormₗ:52 embeds classical upper-half-plane cusp forms for a subgroup of GL₂(ℝ), with injectivity:64; it does not supply square-integrable cuspidal automorphic forms on arbitrary G(F)\\G(A_F)^1. Native Tau Global/Adeles/CompactQuotient:87 proves compactness of the ADDITIVE adele class group A_F/F, not the required reductive-group quotient or its cuspidal right-unitary subspace. Generic Lp and closed spans are available, but the specified smooth cuspidal input class and its quotient action were not certified. These concrete endpoints remain unknown, not absent. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Classical holomorphic cusp forms, additive adele quotient compactness and generic Hilbert closed spans are actual inspected candidates with different scope. Tau candidates have separate ownership. No claim they define the general cuspidal spectrum or prove right-unitary invariance."
+    },
+    {
+      "concept": "decomposition-group-number-field",
+      "concept_id": "f0a118d4-bc81-52c5-8019-2edc904e243a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "For G=Gal(L/F) acting on O_L and prime ideal Q=w, the exact representation is MulAction.stabilizer G Q. GroupAction/Defs.stabilizer:514 bundles precisely σ•Q=Q as a subgroup, with actual inverse-closure proof:516. Ideal.pointwiseDistribMulAction:41 in RingTheory/Ideal/Pointwise applies the automorphism to every ideal element via Ideal.map, so this is preserving the prime, not fixing every residue element. Its element-membership equivalences:129/132 check this action. The standard ring-of-integers action is compatible with field automorphisms; IsGaloisGroup.of_isFractionRing:88 in RingTheory/IsGaloisGroup/Basic passes Galois invariance to the integral-closure rings. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/GroupTheory/GroupAction/Defs.lean",
+          "declarations": "MulAction.stabilizer:514; mem_stabilizer_iff:523",
+          "note": "Native prime-stabilizing subgroup constructor instantiated with the Galois action."
+        },
+        {
+          "path": "Mathlib/RingTheory/Ideal/Pointwise.lean",
+          "declarations": "Ideal.pointwiseDistribMulAction:41; pointwise_smul_eq_comap:122; smul_mem_pointwise_smul_iff:129",
+          "note": "Native actual ideal-image action and exact preservation membership API."
+        }
+      ],
+      "search_notes": "Finite Galois number-field hypotheses are retained; no normality of D in the full Galois group is claimed. Inertia fixes residues and is a distinct subgroup. Decomposition fields/local-completion comparison are additional endpoints."
+    },
+    {
+      "concept": "decomposition-group-number-field",
+      "concept_id": "f0a118d4-bc81-52c5-8019-2edc904e243a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "For G=Gal(L/F) acting on O_L and prime ideal Q=w, the exact representation is MulAction.stabilizer G Q. GroupAction/Defs.stabilizer:515 bundles precisely σ•Q=Q as a subgroup, with actual inverse-closure proof:517. Ideal.pointwiseDistribMulAction:42 in RingTheory/Ideal/Pointwise applies the automorphism to every ideal element via Ideal.map, so this is preserving the prime, not fixing every residue element. Its element-membership equivalences:130/133 check this action. The standard ring-of-integers action is compatible with field automorphisms; IsGaloisGroup.of_isFractionRing:88 in RingTheory/IsGaloisGroup/Basic passes Galois invariance to the integral-closure rings. Exact dependency bodies checked; only those two headers add1. Native Ideal.stabilizerEquivResidueAut:158 constructs D≃Aut(residue extension) at an UNRAMIFIED prime, by actual injectivity-from-trivial-inertia and existing surjectivity. The evaluation and inverse formulas:167/177 check its ordinary restriction map. This is direct decomposition-group residue-action API with unramifiedness explicit, not an extra hypothesis on the general D definition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/NumberField/Frobenius/DecompositionGroup.lean",
+          "declarations": "Ideal.stabilizerEquivResidueAut:158; stabilizerEquivResidueAut_apply:167; stabilizerHom_stabilizerEquivResidueAut_symm_apply:177",
+          "note": "Native direct unramified residue-action equivalence and its forward/inverse recognition API for the exact decomposition subgroup."
+        }
+      ],
+      "search_notes": "Actual source group is L≃ₐ[K]L acting on prime Q of O_L, matching number-field meaning. Unramified residue equivalence does not assert D=Gal(L/F) or D normal. Prime splitting/counting/class-field applications excluded."
+    },
+    {
+      "concept": "derivation-algebra",
+      "concept_id": "2a9a6127-5721-5eba-b7e7-230df2484364",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "An exact generic representation is the subtype of LinearMap F A A consisting of D satisfying ∀a b,D(a*b)=D(a)*b+a*D(b), using ordinary associative multiplication. LinearMap (Algebra/Module/LinearMap/Defs.lean:84) literally extends additive and scalar-action homomorphisms; choosing scalar homomorphism id gives precisely F-linearity. Actual structure fields read; dependency file is byte-identical. Mathlib Derivation:47 itself assumes CommSemiring A and its b•D(a) term uses left multiplication, so that named class is NOT substituted for arbitrary associative A. The bare literal linear-Leibniz predicate has precisely the catalogue hypotheses; over a unital algebra D1=0 follows from the rule at1 and additive cancellation. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Module/LinearMap/Defs.lean",
+          "declarations": "LinearMap:84",
+          "note": "Native exact generic linear-map constructor instantiated with the associative two-sided Leibniz predicate."
+        }
+      ],
+      "search_notes": "Named Mathlib Derivation requires a commutative algebra, so the literal LinearMap Leibniz subtype is used for general associative algebras. No existence/classification/flow theorem is claimed. Native bimodule derivation uses ordinary right multiplication through Aop, not a star action."
+    },
+    {
+      "concept": "derivation-algebra",
+      "concept_id": "2a9a6127-5721-5eba-b7e7-230df2484364",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "An exact generic representation is the subtype of LinearMap F A A consisting of D satisfying ∀a b,D(a*b)=D(a)*b+a*D(b), using ordinary associative multiplication. LinearMap (Algebra/Module/LinearMap/Defs.lean:84) literally extends additive and scalar-action homomorphisms; choosing scalar homomorphism id gives precisely F-linearity. Actual structure fields read; dependency file is byte-identical. Mathlib Derivation:47 itself assumes CommSemiring A and its b•D(a) term uses left multiplication, so that named class is NOT substituted for arbitrary associative A. The bare literal linear-Leibniz predicate has precisely the catalogue hypotheses; over a unital algebra D1=0 follows from the rule at1 and additive cancellation. Native TauCeti.BimoduleDerivation:42 supplies the NONCOMMUTATIVE bundled version: left A action and right Aop action give D(ab)=a D(b)+D(a)b on M=A. map_one45 is automatic over field algebras by the exact rule, and leibniz88/map_smul94/map_algebraMap100 expose the checked laws. All actual structure fields and scalar-vanishing proof inspected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Derivation/Bimodule.lean",
+          "declarations": "TauCeti.BimoduleDerivation:42; BimoduleDerivation.leibniz:88; map_smul:94; map_algebraMap:100",
+          "note": "Native exact associative bimodule derivation structure and ordinary Leibniz/linearity/scalar API, instantiated to A itself with right multiplication."
+        }
+      ],
+      "search_notes": "Named Mathlib Derivation requires a commutative algebra, so the literal LinearMap Leibniz subtype is used for general associative algebras. No existence/classification/flow theorem is claimed. Native bimodule derivation uses ordinary right multiplication through Aop, not a star action."
+    },
+    {
+      "concept": "direct-sum-abelian-groups",
+      "concept_id": "b25d6f82-51f7-5610-9301-21e0ffab29cf",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "DirectSum:38 is literally the dependent finitely supported function type Π₀i,A_i, with pointwise addition and zero. With each A_i an AddCommGroup this is the algebraic subgroup of the Cartesian product consisting of finite-support tuples; an infinite index family is allowed. The exact same native carrier/additive constructor was actually checked for027 vector sums, where extra scalar structure was needed; here no scalar structure is required. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/DirectSum/Basic.lean",
+          "declarations": "DirectSum:38; DirectSum.of",
+          "note": "Native exact finite-support additive tuple object, coordinatewise group laws and summand inclusions."
+        }
+      ],
+      "search_notes": "No unrestricted product, finite-family assumption or topology. Direct-sum linear module structure is not necessary for the abelian-group identity."
+    },
+    {
+      "concept": "direct-sum-abelian-groups",
+      "concept_id": "b25d6f82-51f7-5610-9301-21e0ffab29cf",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "DirectSum:38 is literally the dependent finitely supported function type Π₀i,A_i, with pointwise addition and zero. With each A_i an AddCommGroup this is the algebraic subgroup of the Cartesian product consisting of finite-support tuples; an infinite index family is allowed. The exact same native carrier/additive constructor was actually checked for027 vector sums, where extra scalar structure was needed; here no scalar structure is required. Exact dependency carrier checked. Native restrictLinearEquiv:56 and componentLinearEquiv:97 were fully read for027: apply them over ℤ, whose canonical module structure is carried by every abelian group. Their actual summandwise inverse proofs identify restriction to all nonzero coordinates and the one-surviving-coordinate normal form. Underlying additive equivalences are exactly ordinary direct-sum API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/DirectSum/FiniteSupport.lean",
+          "declarations": "TauCeti.DirectSum.restrictLinearEquiv:56; restrictLinearEquiv_lof:72; componentLinearEquiv:97",
+          "note": "Native direct-sum coordinate restriction and surviving-summand additive normal forms via the canonical integer module structure."
+        }
+      ],
+      "search_notes": "Canonical ℤ-module usage adds no hypothesis on an abelian group. Internal geometric/homological decomposition endpoints excluded."
+    },
+    {
+      "concept": "directed-ordered-abelian-group",
+      "concept_id": "807115af-69a6-523f-9e6d-fc42818d9073",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "IsDirected:144 is literally ∀a b,∃c,a≤c∧b≤c and IsDirectedOrder:150 specializes its relation to ≤. Combine this with AddCommGroup G, PartialOrder G and ordered-group translation-compatible order; this is an exact generic representation of the primary paragraph condition. The usual difference-of-nonnegative formulation is the same order representation: choose c≥x,0 and write x=c-(c-x), with both terms≥0. Conversely for x-y=a-b with a,b≥0, y+a=x+b is an upper bound for x and y. This is the explicit mathematical equivalence comparison, not a claim of a separately named Lean alias. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Order/Directed.lean",
+          "declarations": "IsDirected:144; IsDirectedOrder:150; directed_of:152",
+          "note": "Native exact generic upper-directed partial-order predicate, instantiated on an ordered abelian group."
+        }
+      ],
+      "search_notes": "No linear/lattice order is imposed; arbitrary partial orders with translation compatibility are allowed. Translation compatibility is the actual IsOrderedAddMonoid:26 supplier, not a total-order assumption."
+    },
+    {
+      "concept": "directed-ordered-abelian-group",
+      "concept_id": "807115af-69a6-523f-9e6d-fc42818d9073",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "IsDirected:144 is literally ∀a b,∃c,a≤c∧b≤c and IsDirectedOrder:150 specializes its relation to ≤. Combine this with AddCommGroup G, PartialOrder G and ordered-group translation-compatible order; this is an exact generic representation of the primary paragraph condition. The usual difference-of-nonnegative formulation is the same order representation: choose c≥x,0 and write x=c-(c-x), with both terms≥0. Conversely for x-y=a-b with a,b≥0, y+a=x+b is an upper bound for x and y. This is the explicit mathematical equivalence comparison, not a claim of a separately named Lean alias. Exact dependency Order/Directed is byte-identical. Ordered-group translation compatibility is IsOrderedAddMonoid (Algebra/Order/Monoid/Defs.lean:27 in dependency; standalone:26), whose monotonicity fields were read. Native Order/Directed.exists_eq_iInf:40 has WellFoundedLT and an actual infimum as extra hypotheses; its completed minimal-family proof is not ordinary API for a general directed ordered abelian group, so no native file is charged. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Searched native ordered-group/directed candidates. Well-founded infimum attainment and convex-subgroup archimedean classifications are additional structures/endpoints; no native bare directed-group API selected."
+    },
+    {
+      "concept": "discrete-subgroup-locally-compact-group",
+      "concept_id": "d70304f3-6d0d-5fb8-80b2-76d543a799f8",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Take H:Subgroup G with its inherited subtype topology and DiscreteTopology H. Topology/Algebra/Group/Basic.discreteTopology_iff_isOpen_singleton_one:123 proves exactly identity isolated iff the WHOLE group H is discrete; its actual translation-action proof applies to H. IsUniformGroup/DiscreteSubgroup.subgroupOfContinuousMulEquivOfLe:35 verifies the induced topology agrees whether H is viewed in G or an intermediate subgroup. finiteIndex iff:61 and commensurable iff:77 are ordinary discreteness transport API. No finiteness or normality is part of the definition. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/Group/Basic.lean",
+          "declarations": "discreteTopology_iff_isOpen_singleton_one:123",
+          "note": "Native exact isolated-identity/discrete-topology equivalence for the subgroup."
+        },
+        {
+          "path": "Mathlib/Topology/Algebra/IsUniformGroup/DiscreteSubgroup.lean",
+          "declarations": "Subgroup.subgroupOfContinuousMulEquivOfLe:35; discreteTopology_iff_of_finiteIndex:61; Commensurable.discreteTopology_iff:77",
+          "note": "Native induced-subgroup-topology identification and ordinary discreteness transport laws."
+        }
+      ],
+      "search_notes": "Local compactness of the ambient G is permitted but not needed for the exact definition/identity equivalence. Lattice finite covolume and quotient manifold structures are additional concepts."
+    },
+    {
+      "concept": "discrete-subgroup-locally-compact-group",
+      "concept_id": "d70304f3-6d0d-5fb8-80b2-76d543a799f8",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Take H:Subgroup G with its inherited subtype topology and DiscreteTopology H. Topology/Algebra/Group/Basic.discreteTopology_iff_isOpen_singleton_one:123 proves exactly identity isolated iff the WHOLE group H is discrete; its actual translation-action proof applies to H. IsUniformGroup/DiscreteSubgroup.subgroupOfContinuousMulEquivOfLe:35 verifies the induced topology agrees whether H is viewed in G or an intermediate subgroup. finiteIndex iff:61 and commensurable iff:77 are ordinary discreteness transport API. No finiteness or normality is part of the definition. Both selected dependency files are byte-identical. Native Subgroup.properlyDiscontinuousSMul_of_discreteTopology:53 actually applies the discrete-subgroup proper-action theorem to left multiplication; Subgroup.infinite_quotient_of_discreteTopology:73 proves the immediate infinite-index consequence in a Hausdorff group with nonisolated identity, by finite-index discreteness contradiction. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Algebra/Group/DiscontinuousSubgroup.lean",
+          "declarations": "Subgroup.properlyDiscontinuousSMul_of_discreteTopology:53; infinite_quotient_of_discreteTopology:73",
+          "note": "Native direct translation/proper-discontinuity API and elementary infinite-index corollary for discrete subgroups."
+        }
+      ],
+      "search_notes": "The native instance contains an actual proper-action deduction, rather than a pure superclass installer. Nonisolated ambient identity is only a hypothesis of the ordinary infinite-index corollary. Later complex-torus/manifold endpoints not mapped here."
+    },
+    {
+      "concept": "discrete-valuation-field",
+      "concept_id": "cab8dfb2-63ac-5777-a785-ff7fed07052e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Use AddValuation K (WithTop ℤ) with Function.Surjective v. AddValuation.of:1102 in Valuation/Basic explicitly constructs v from v0=top,v1=0,v(xy)=vx+vy and min(vx,vy)≤v(x+y). top_iff:1206 proves v(x)=top iff x=0 on a field. Thus surjectivity on WithTop ℤ is exactly surjectivity K×→ℤ together with the specified value at0; no trivial valuation or merely cyclic proper value subgroup is substituted. The displayed inequality includes x+y=0 via top. Actual fields, zero criterion and inverse law:1289 were checked. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Valuation/Basic.lean",
+          "declarations": "AddValuation.of:1102; top_iff:1206; map_inv:1289; map_div:1293",
+          "note": "Native exact additive valuation constructor and field nonzero/infinity/inverse API, with surjectivity explicitly imposed."
+        }
+      ],
+      "search_notes": "Normalized integer surjectivity is required, unlike a generic nondiscrete real valuation. Completeness, rank-one norm and discrete valuation ring endpoints are separate concepts."
+    },
+    {
+      "concept": "discrete-valuation-field",
+      "concept_id": "cab8dfb2-63ac-5777-a785-ff7fed07052e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Use AddValuation K (WithTop ℤ) with Function.Surjective v. AddValuation.of:1102 in Valuation/Basic explicitly constructs v from v0=top,v1=0,v(xy)=vx+vy and min(vx,vy)≤v(x+y). top_iff:1206 proves v(x)=top iff x=0 on a field. Thus surjectivity on WithTop ℤ is exactly surjectivity K×→ℤ together with the specified value at0; no trivial valuation or merely cyclic proper value subgroup is substituted. The displayed inequality includes x+y=0 via top. Actual fields, zero criterion and inverse law:1289 were checked. Exact dependency is byte-identical. Native AddValuation.map_prod:47 proves the full finite-product-to-sum law by induction, including the empty product; map_neg_one_pow:63 proves signs have valuation0. They specialize to this surjective integer-valued valuation under weaker hypotheses, hence ordinary valuation arithmetic API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Valuation/AddValuation.lean",
+          "declarations": "AddValuation.map_prod:47; map_prod_castLE:56; map_neg_one_pow:63",
+          "note": "Native direct finite-product/sign/prefix arithmetic for additive valuations, including the discrete field subclass."
+        }
+      ],
+      "search_notes": "No extra normalization or 1∈submodule condition is imposed. Arithmetic integrality and ramification/height applications excluded."
+    },
+    {
+      "concept": "exterior-power-module",
+      "concept_id": "4130a4ad-ebaa-5b58-8e3a-55ac130fbe3a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "exteriorPower.ιMulti:55 and alternatingMapLinearEquiv:211 in ExteriorPower/Basic supply the universal alternating multilinear map and the exact bijection with linear maps out of Λ^n. Its relations:133 have additivity, scalar linearity and an alt relation killing EACH repeated-input tensor; relationsSolutionEquiv:152 proves precisely those relations are alternating maps, and isPresentationCore:183 constructs the universal lift from the ExteriorAlgebra. comp_ιMulti:219 and evaluation:227 check the universal map. This certifies the alternating QUOTIENT convention, including characteristic2 and n=0, without replacing it by an antisymmetric invariant submodule. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/ExteriorPower/Basic.lean",
+          "declarations": "exteriorPower.ιMulti:55; relations:133; relationsSolutionEquiv:152; isPresentationCore:183; alternatingMapLinearEquiv:211; alternatingMapLinearEquiv_comp_ιMulti:219",
+          "note": "Native actual exterior power alternating presentation, universal map/lift and uniqueness dictionary."
+        }
+      ],
+      "search_notes": "CommRing R and arbitrary R-module M, no free/finite-rank assumption. Basis, determinant/Hodge and exterior representations are additional structures/endpoints."
+    },
+    {
+      "concept": "exterior-power-module",
+      "concept_id": "4130a4ad-ebaa-5b58-8e3a-55ac130fbe3a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "exteriorPower.ιMulti:56 and alternatingMapLinearEquiv:212 in ExteriorPower/Basic supply the universal alternating multilinear map and the exact bijection with linear maps out of Λ^n. Its relations:134 have additivity, scalar linearity and an alt relation killing EACH repeated-input tensor; relationsSolutionEquiv:153 proves precisely those relations are alternating maps, and isPresentationCore:184 constructs the universal lift from the ExteriorAlgebra. comp_ιMulti:220 and evaluation:228 check the universal map. This certifies the alternating QUOTIENT convention, including characteristic2 and n=0, without replacing it by an antisymmetric invariant submodule. Actual dependency differs only by preceding documentation newline; relevant completed presentation proofs match. Native RepresentationTheory/ExteriorPower:48 supplies an extra group representation by calling the inherited exterior map; its degree0/1 equivalences:70/84 retain inherited underlying linear equivalences. Those extra equivariance wrappers are not a native implementation of the bare module universal property, so no native file is charged. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Read actual native action48/56/64 and equivariance constructors70/84. Vector-bundle exterior powers and classical-group determinant representations add independent structure, not bare alternating-quotient API. Zero native LOC for inherited supplier."
+    },
+    {
+      "concept": "field-characteristic",
+      "concept_id": "ae383576-20bb-5527-b635-84bf435e14cb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "CharP:47 says exactly (n:K)=0 iff p divides n for every n. ringChar:154 chooses the UNIQUE such p; spec:159, eq:163, eq_zero:181 and Nat.cast_ringChar:184 expose the actual condition. For a field, if p>0 this divisibility law gives the least positive n killing1, while p=0 means none exists (only0 divisible by0). This is the exact generic characteristic, without assuming positive characteristic or finite K. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/CharP/Defs.lean",
+          "declarations": "CharP:47; ringChar:154; ringChar.spec:159; ringChar.eq_zero:181; Nat.cast_ringChar:184",
+          "note": "Native exact characteristic predicate, unique chosen value and vanishing/zero-characteristic API."
+        }
+      ],
+      "search_notes": "Primality of positive field characteristic and Frobenius are separately proved facts, not extra defining hypotheses. No finite-field-only substitute."
+    },
+    {
+      "concept": "field-characteristic",
+      "concept_id": "ae383576-20bb-5527-b635-84bf435e14cb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "CharP:47 says exactly (n:K)=0 iff p divides n for every n. ringChar:154 chooses the UNIQUE such p; spec:159, eq:163, eq_zero:181 and Nat.cast_ringChar:184 expose the actual condition. For a field, if p>0 this divisibility law gives the least positive n killing1, while p=0 means none exists (only0 divisible by0). This is the exact generic characteristic, without assuming positive characteristic or finite K. Defining dependency file is byte-identical. Native TauCeti.FiniteField.natCard_coprime_of_natCast_ne_zero:33 uses the actual prime-power characteristic/cardinality dictionary to prove a finite field order is coprime to n nonzero in K; ringChar_ne_two_of_odd_card:50 is the elementary characteristic/parity consequence. These are ordinary arithmetic of the same characteristic with explicit FINITE-field hypotheses. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/Finite/Card.lean",
+          "declarations": "TauCeti.FiniteField.natCard_coprime_of_natCast_ne_zero:33; ringChar_ne_two_of_odd_card:50",
+          "note": "Native direct elementary characteristic/cardinality and parity API for finite-field specializations."
+        }
+      ],
+      "search_notes": "Finiteness only belongs to native corollaries, not the available generic definition. Characteristic-dependent Lie/geometry applications are excluded."
+    },
+    {
+      "concept": "field-trace-finite-extension",
+      "concept_id": "b6c095be-e88b-5e14-9f66-11c714ca407d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Algebra.trace:69 in RingTheory/Trace/Defs is literally (LinearMap.trace K L).comp(lmul K L), so trace_apply:76 is EXACTLY trace of x↦a*x on L. trace_eq_matrix_trace:85 and trace_algebraMap_of_basis:90 prove the ordinary finite-basis and scalar-field dictionaries. Finite-dimensional L/K supplies a finite basis; no separability, normality or characteristic0 is required for this definition. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Trace/Defs.lean",
+          "declarations": "Algebra.trace:69; trace_apply:76; trace_eq_matrix_trace:85; trace_algebraMap_of_basis:90",
+          "note": "Native actual multiplication-endomorphism trace and ordinary basis/scalar API."
+        }
+      ],
+      "search_notes": "No sum-over-embeddings formula without its separability hypotheses. Totalized infinite-extension trace convention is not used for the finite-extension paragraph. Discriminants/nondegenerate trace forms are separate endpoints."
+    },
+    {
+      "concept": "field-trace-finite-extension",
+      "concept_id": "b6c095be-e88b-5e14-9f66-11c714ca407d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Algebra.trace:70 in RingTheory/Trace/Defs is literally (LinearMap.trace K L).comp(lmul K L), so trace_apply:77 is EXACTLY trace of x↦a*x on L. trace_eq_matrix_trace:86 and trace_algebraMap_of_basis:91 prove the ordinary finite-basis and scalar-field dictionaries. Finite-dimensional L/K supplies a finite basis; no separability, normality or characteristic0 is required for this definition. Exact dependency body-identical with header+1. Native IsGaloisGroup.algebraMap_trace_eq_sum:45 proves the elementary sum-over-Galois-actions formula for any abstract finite Galois group, by the actual group/AlgEquiv bijection and checked trace sum formula. Its stronger Galois hypothesis is explicit and does not alter the general finite trace definition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/Galois/Trace.lean",
+          "declarations": "IsGaloisGroup.algebraMap_trace_eq_sum:45",
+          "note": "Native direct finite Galois action-sum dictionary for the same field trace, with completed group-index reindex proof."
+        }
+      ],
+      "search_notes": "Native square-root trace/discriminant calculations, idempotent block decomposition and integral regular traces were inspected as added arithmetic/structure, and are not extra mapped files."
+    },
+    {
+      "concept": "finite-field",
+      "concept_id": "8dfc2212-09b2-5d81-835c-0434aae3b545",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "The exact representation is a Field K with Finite K (or equivalent Fintype K), literally finiteness of the underlying set. Native FiniteField.pow_card:227 proves x^q=x by the nonzero unit-group order proof:218 and the zero case; card:253 proves q=p^n with p prime and n>0 from the actual prime-field vector-space dictionary. These are ordinary finite-field arithmetic/recognition API; no specific field size or chosen enumeration is imposed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/FieldTheory/Finite/Basic.lean",
+          "declarations": "FiniteField.pow_card_sub_one_eq_one:218; pow_card:227; card:253",
+          "note": "Native elementary finite-field power/cardinality API for the exact Field+Finite representation."
+        }
+      ],
+      "search_notes": "Finite is a property of the field carrier, not merely a finite-dimensional extension of an infinite field. Algebraic closures, Galois cohomology and character classification excluded."
+    },
+    {
+      "concept": "finite-field",
+      "concept_id": "8dfc2212-09b2-5d81-835c-0434aae3b545",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The exact representation is a Field K with Finite K (or equivalent Fintype K), literally finiteness of the underlying set. Native FiniteField.pow_card:228 proves x^q=x by the nonzero unit-group order proof:219 and the zero case; card:254 proves q=p^n with p prime and n>0 from the actual prime-field vector-space dictionary. These are ordinary finite-field arithmetic/recognition API; no specific field size or chosen enumeration is imposed. Exact dependency file has header+1 and identical mathematical bodies. Native cardinal coprimality:33 and characteristic-parity:44/50 in FieldTheory/Finite/Card are elementary finite-field arithmetic. Native Finite/Frobenius.sub_pow_natCard:72 and frobeniusAlgHom_pow_apply:82 give direct q-power arithmetic/iterate laws, with complete actual homomorphism proofs. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/Finite/Card.lean",
+          "declarations": "TauCeti.FiniteField.natCard_coprime_of_natCast_ne_zero:33; odd_card_of_not_isSquare:44; ringChar_ne_two_of_odd_card:50",
+          "note": "Native direct finite-field size/characteristic arithmetic."
+        },
+        {
+          "path": "TauCeti/FieldTheory/Finite/Frobenius.lean",
+          "declarations": "TauCeti.FiniteField.sub_pow_natCard:72; frobeniusAlgHom_pow_apply:82",
+          "note": "Native elementary q-power and iteration arithmetic for finite-field algebras."
+        }
+      ],
+      "search_notes": "Fixed-field/cohomological and finite classical-group applications are extra endpoints. No confusing Finite K with finite extension degree over a general base."
+    },
+    {
+      "concept": "finitely-generated-commutative-algebra",
+      "concept_id": "0c26af30-fc81-5e40-b7bf-29df1ef43030",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Algebra.FiniteType:38 is finite generation of top subalgebra. iff_quotient_mvPolynomial:131 proves precisely finite generators iff surjection from the polynomial algebra on that finite family; iff_quotient_mvPolynomial'':169 reindexes through Fintype.equivFin to a finite n-variable polynomial ring. Both directions and actual generator evaluation are checked, so the catalogue equivalence is fully available over an arbitrary commutative base R. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/FiniteType.lean",
+          "declarations": "Algebra.FiniteType:38; FiniteType.iff_quotient_mvPolynomial:131; iff_quotient_mvPolynomial'':169",
+          "note": "Native finite algebra-generator predicate and exact finite polynomial-quotient presentation theorem."
+        }
+      ],
+      "search_notes": "Specialize ambient algebra to commutative; no Noetherian base or finite module condition. Finite presentation requires additional finite relations, and is not silently identified."
+    },
+    {
+      "concept": "finitely-generated-commutative-algebra",
+      "concept_id": "0c26af30-fc81-5e40-b7bf-29df1ef43030",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Algebra.FiniteType:39 is finite generation of top subalgebra. iff_quotient_mvPolynomial:132 proves precisely finite generators iff surjection from the polynomial algebra on that finite family; iff_quotient_mvPolynomial'':170 reindexes through Fintype.equivFin to a finite n-variable polynomial ring. Both directions and actual generator evaluation are checked, so the catalogue equivalence is fully available over an arbitrary commutative base R. Exact dependency header+1, proofs identical. Native Algebra.FiniteType.finite_algHom:29 proves algebra maps into a FINITE target form a finite type, by injective evaluation on the finite algebra generating set. This is ordinary finite-generator morphism recognition API with its finite-target hypothesis explicit. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/FiniteType/AlgHom.lean",
+          "declarations": "Algebra.FiniteType.finite_algHom:29",
+          "note": "Native direct finite-generators determine algebra maps proof and finite-target map-cardinality corollary."
+        }
+      ],
+      "search_notes": "Actual proof uses finite generator values plus AlgHom.ext_of_adjoin_eq_top, not a bare finite instance installer. Point-separation/Jacobson and geometric classification are separate endpoints."
+    },
+    {
+      "concept": "finitely-presented-commutative-algebra",
+      "concept_id": "c4506482-90f0-52dc-924e-6d56c31e3140",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Algebra.FinitePresentation:43 is ∃n, a surjective map R[X_i:i:Fin n]→A with FINITELY GENERATED kernel. FinitePresentation.iff:127 proves equivalence to the quotient by such an ideal with actual quotient-kernel AlgEquiv. A finite list of generators of that ideal is exactly (f1,...,fm); no Noetherian hypothesis is needed. iff_quotient_mvPolynomial':139 checks finite variable reindexing in both directions. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/FinitePresentation.lean",
+          "declarations": "Algebra.FinitePresentation:43; Algebra.FinitePresentation.iff:127; iff_quotient_mvPolynomial':139",
+          "note": "Native finite polynomial-generator/finite-relation presentation and exact quotient-isomorphism characterization."
+        }
+      ],
+      "search_notes": "The base R may be non-Noetherian. The Noetherian theorem finiteType iff finitePresentation is an extra hypothesis/result, not the definition."
+    },
+    {
+      "concept": "finitely-presented-commutative-algebra",
+      "concept_id": "c4506482-90f0-52dc-924e-6d56c31e3140",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Algebra.FinitePresentation:44 is ∃n, a surjective map R[X_i:i:Fin n]→A with FINITELY GENERATED kernel. FinitePresentation.iff:128 proves equivalence to the quotient by such an ideal with actual quotient-kernel AlgEquiv. A finite list of generators of that ideal is exactly (f1,...,fm); no Noetherian hypothesis is needed. iff_quotient_mvPolynomial':140 checks finite variable reindexing in both directions. Exact dependency header+1, relevant bodies identical. Native RingHom.exists_factorization_localizationAway:34 proves the direct finite-presentation map-factorization property: a compatible map to M^-1R factors through ONE finite denominator localization R[1/s], s∈M. The actual proof uses the localization-away filtered diagram and finite-presentation compactness, with base compatibility and representative factorization equations proved. This is ordinary finite-relation natural-map API, not a mere localization import. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Localization/FinitePresentation.lean",
+          "declarations": "RingHom.exists_factorization_localizationAway:34",
+          "note": "Native direct finite-presentation factorization of compatible algebra/ring maps through a finite-denominator stage, with actual equations."
+        }
+      ],
+      "search_notes": "The finite denominator stage is the standard finite-equation consequence counted as associated map API. No flatness/descent/smoothness or completed analytic-presentation endpoint is claimed."
+    },
+    {
+      "concept": "first-variation-functional",
+      "concept_id": "1c42f307-08c5-5e06-acde-7641cf836a23",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "HasLineDerivAt:81 in LineDeriv/Basic is EXACTLY HasDerivAt (fun t:ℝ=>J(u+t•φ)) value 0, allowing E to be the actual vector space of functions and a specified set of allowed directions. HasLineDerivAt.unique:157 gives its unique value and lineDeriv:109/HasLineDerivAt.lineDeriv:161 selects it when it EXISTS. Stationarity is literally ∀φ∈allowed,HasLineDerivAt ℝ J 0 u φ, so existence is retained; totalized lineDeriv=0 alone is not used to label a nondifferentiable functional stationary. No full Frechet differentiability of J is imposed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/LineDeriv/Basic.lean",
+          "declarations": "HasLineDerivAt:81; lineDeriv:109; HasLineDerivAt.unique:157; HasLineDerivAt.lineDeriv:161",
+          "note": "Native exact derivative-along-variation constructor and unique first-variation value API."
+        }
+      ],
+      "search_notes": "General allowed function variations are explicit data, not automatically all directions. Euler-Lagrange equations, higher variations and variational existence/minimization endpoints are separate."
+    },
+    {
+      "concept": "first-variation-functional",
+      "concept_id": "1c42f307-08c5-5e06-acde-7641cf836a23",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "HasLineDerivAt:81 in LineDeriv/Basic is EXACTLY HasDerivAt (fun t:ℝ=>J(u+t•φ)) value 0, allowing E to be the actual vector space of functions and a specified set of allowed directions. HasLineDerivAt.unique:157 gives its unique value and lineDeriv:109/HasLineDerivAt.lineDeriv:161 selects it when it EXISTS. Stationarity is literally ∀φ∈allowed,HasLineDerivAt ℝ J 0 u φ, so existence is retained; totalized lineDeriv=0 alone is not used to label a nondifferentiable functional stationary. No full Frechet differentiability of J is imposed. Exact dependency file is byte-identical. Native TauCeti.lineDeriv_of_notMem_tsupport:48 proves the directional value zero outside the functional support by an actual locally-zero LINE germ, and TauCeti.lineDeriv_one:42 gives the one-dimensional identity. These are ordinary first-directional-variation value laws; the actual generic existence predicate remains the dependency HasLineDerivAt, so no default-value stationarity error is introduced. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Calculus/LineDeriv/Basic.lean",
+          "declarations": "TauCeti.lineDeriv_one:42; lineDeriv_of_notMem_tsupport:48",
+          "note": "Native ordinary first-directional-variation identity and locally-zero functional value API."
+        }
+      ],
+      "search_notes": "The later interval-integral directional FTC calculation:61 was also read but is an added functional calculation, not an extra file mapping. Complete existence is supplied by HasLineDerivAt, never inferred merely from the junk lineDeriv value."
+    },
+    {
+      "concept": "fixed-subspace-group-representation",
+      "concept_id": "d638f78d-d305-5a08-803d-7840f0f41274",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Representation.invariants:73 has carrier ∀h,ρ(h)v=v and proves zero/add/scalar closure directly; mem_invariants:80 is the exact elementwise condition. Restrict the original representation to H by composing its monoid homomorphism with Subgroup.subtype H, or equivalently put h:H directly in this same carrier formula. This is POINTWISE fixed vectors, not a subspace that is only carried into itself. No finiteness, compactness, continuity or averaging division is part of the definition. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/RepresentationTheory/Invariants.lean",
+          "declarations": "Representation.invariants:73; mem_invariants:80; invariants_eq_inter:82",
+          "note": "Native exact fixed-vector submodule and elementwise/equalizer API, instantiated on H."
+        }
+      ],
+      "search_notes": "Do not confuse an invariant subspace with vectors fixed by every h. Maschke averaging and Reynolds projections need extra invertible group-order hypotheses and are separate endpoints."
+    },
+    {
+      "concept": "fixed-subspace-group-representation",
+      "concept_id": "d638f78d-d305-5a08-803d-7840f0f41274",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Representation.invariants:73 has carrier ∀h,ρ(h)v=v and proves zero/add/scalar closure directly; mem_invariants:80 is the exact elementwise condition. Restrict the original representation to H by composing its monoid homomorphism with Subgroup.subtype H, or equivalently put h:H directly in this same carrier formula. This is POINTWISE fixed vectors, not a subspace that is only carried into itself. No finiteness, compactness, continuity or averaging division is part of the definition. Exact dependency file is byte-identical. Native FDRep.map_mem_invariants:57 proves equivariant maps preserve fixed vectors; tensorUnitHomEquivInvariants:64 and evaluation:71/inverse:81 identify them with maps from the trivial representation. These are direct natural-map/fixed-vector API in the finite-dimensional subclass, with no finite-group or characteristic division hypothesis. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/RepresentationTheory/FDRep/Invariants.lean",
+          "declarations": "FDRep.map_mem_invariants:57; tensorUnitHomEquivInvariants:64; coe_tensorUnitHomEquivInvariants_apply:71; tensorUnitHomEquivInvariants_symm_apply_hom_hom_hom:81",
+          "note": "Native ordinary fixed-vector preservation and trivial-representation natural-map dictionary, with actual evaluation/inverse formulas."
+        }
+      ],
+      "search_notes": "Finite-dimensionality belongs only to this native packaging; arbitrary V is already available from dependency. Finite-group averaging, orbit-sum quotient applications and cohomology endpoints excluded."
+    },
+    {
+      "concept": "frobenius-element-number-field",
+      "concept_id": "bf4d4d13-0633-57a5-8284-ebe3db402c0f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "RingTheory/Frobenius.AlgHom.IsArithFrobAt:55 is the EXACT residue congruence σx≡x^q mod Q, q=Nat.card(O_F/p). IsArithFrobAt.mem_stabilizer:195 puts σ in D_Q; mul_inv_mem_inertia:201 proves uniqueness MOD I_Q, and conj:206 transports it under a prime-moving automorphism. exists_of_isInvariant:222 and arithFrobAt:261 construct representatives, with isConj_arithFrobAt:273 proving conjugacy independently of chosen prime. RingTheory/Invariant/Basic.stabilizerQuotientInertiaEquiv:392 is the actual D/I≃Aut(residue extension), with representative:399. Specialize R=O_F,S=O_L and G=Gal(L/F); checked IsGaloisGroup.of_isFractionRing:88 supplies invariant integral rings from the finite Galois extension, whose residue fields at nonzero primes are finite. At an UNRAMIFIED prime AlgHom.IsArithFrobAt.eq_of_isUnramifiedAt:165 gives uniqueness of representatives, so the quotient class is the usual element and prime-independent conjugacy class. No inverse/geometric Frobenius convention is substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Frobenius.lean",
+          "declarations": "AlgHom.IsArithFrobAt:55; IsArithFrobAt.mem_stabilizer:195; mul_inv_mem_inertia:201; conj:206; exists_of_isInvariant:222; arithFrobAt:261; isConj_arithFrobAt:273",
+          "note": "Native actual arithmetic residue Frobenius predicate/representative, inertia-coset uniqueness and prime-change conjugacy."
+        },
+        {
+          "path": "Mathlib/RingTheory/Invariant/Basic.lean",
+          "declarations": "Ideal.Quotient.stabilizerHom_surjective:367; stabilizerQuotientInertiaEquiv:392; stabilizerQuotientInertiaEquiv_mk:399",
+          "note": "Native exact residue-action D/I isomorphism and quotient-class representative dictionary."
+        }
+      ],
+      "search_notes": "Finite Galois number-field and NONZERO finite prime hypotheses are explicit; zero ideal is not a finite residue field. Check actual q-power (arithmetic) convention. Chebotarev density, cycle type and class-field reciprocity are separate endpoints."
+    },
+    {
+      "concept": "frobenius-element-number-field",
+      "concept_id": "bf4d4d13-0633-57a5-8284-ebe3db402c0f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "RingTheory/Frobenius.AlgHom.IsArithFrobAt:55 is the EXACT residue congruence σx≡x^q mod Q, q=Nat.card(O_F/p). IsArithFrobAt.mem_stabilizer:195 puts σ in D_Q; mul_inv_mem_inertia:201 proves uniqueness MOD I_Q, and conj:206 transports it under a prime-moving automorphism. exists_of_isInvariant:222 and arithFrobAt:261 construct representatives, with isConj_arithFrobAt:273 proving conjugacy independently of chosen prime. RingTheory/Invariant/Basic.stabilizerQuotientInertiaEquiv:392 is the actual D/I≃Aut(residue extension), with representative:399. Specialize R=O_F,S=O_L and G=Gal(L/F); checked IsGaloisGroup.of_isFractionRing:88 supplies invariant integral rings from the finite Galois extension, whose residue fields at nonzero primes are finite. At an UNRAMIFIED prime AlgHom.IsArithFrobAt.eq_of_isUnramifiedAt:165 gives uniqueness of representatives, so the quotient class is the usual element and prime-independent conjugacy class. No inverse/geometric Frobenius convention is substituted. Relevant actual dependency Frobenius file is byte-identical; invariant dictionary checked separately. Native IsArithFrobAt.mul_of_mem_inertia:129 proves the converse coset closure by actual residue congruence, and mk_pow_smul:115 the iterated q-power action. Native Ideal.stabilizerHom_eq_frobeniusAlgEquivOfAlgebraic:194 explicitly identifies the induced residue automorphism with the actual finite-field Frobenius, without requiring unramifiedness; unramified D-residue equivalence:158 gives the element-level dictionary. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Frobenius.lean",
+          "declarations": "IsArithFrobAt.eq_of_isUnramifiedAt:94; mk_pow_smul:115; mul_of_mem_inertia:129",
+          "note": "Native ordinary residue-power and inertia-coset Frobenius recognition API, including unramified uniqueness."
+        },
+        {
+          "path": "TauCeti/NumberTheory/NumberField/Frobenius/DecompositionGroup.lean",
+          "declarations": "Ideal.stabilizerEquivResidueAut:158; stabilizerHom_eq_frobeniusAlgEquivOfAlgebraic:194",
+          "note": "Native exact number-field decomposition/residue Frobenius dictionary and unramified element-level equivalence."
+        }
+      ],
+      "search_notes": "Native completed194 proof evaluates on a lifted residue representative and uses hσ.mk_apply, so it proves the requested q-power convention. Prime-counting, inertia-degree/order formulas and Chebotarev are not extra mapped files."
+    },
+    {
+      "concept": "frobenius-map-finite-field",
+      "concept_id": "e13e08e5-1a95-5cff-afcc-61ba65a2e3bb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Algebra/CharP/Lemmas.frobenius:325 is the ring homomorphism x↦x^p; map_add is actually add_pow_expChar and multiplication is powMonoidHom. iterateFrobenius:331 has x↦x^(p^n). Algebra/CharP/Frobenius.frobenius_def:32, iterateFrobenius_def:34 and iterate_frobenius:36 expose those formulas. For a characteristic-p FIELD, p is prime (p>0); for F_q with q=p^n, choose exactly the n-th iterate to get the q-power map. This is arithmetic Frobenius, not its inverse, and no algebraic-closure hypothesis is needed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/CharP/Lemmas.lean",
+          "declarations": "frobenius:325; iterateFrobenius:331",
+          "note": "Native exact p-power and p^n-power ring-endomorphism constructors, with actual additive/multiplicative laws."
+        },
+        {
+          "path": "Mathlib/Algebra/CharP/Frobenius.lean",
+          "declarations": "frobenius_def:32; iterateFrobenius_def:34; iterate_frobenius:36",
+          "note": "Native ordinary exact iterate/value arithmetic for the same Frobenius endomorphism."
+        }
+      ],
+      "search_notes": "The paragraph characteristic-p map assumes positive prime p; characteristic0 has no prime Frobenius. Finite-field Frobenius may be identity on F_q itself while acting nontrivially on extensions. Frobenius elements at primes and scheme/curve isogenies are separate concepts."
+    },
+    {
+      "concept": "frobenius-map-finite-field",
+      "concept_id": "e13e08e5-1a95-5cff-afcc-61ba65a2e3bb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Algebra/CharP/Lemmas.frobenius:325 is the ring homomorphism x↦x^p; map_add is actually add_pow_expChar and multiplication is powMonoidHom. iterateFrobenius:331 has x↦x^(p^n). Algebra/CharP/Frobenius.frobenius_def:32, iterateFrobenius_def:34 and iterate_frobenius:36 expose those formulas. For a characteristic-p FIELD, p is prime (p>0); for F_q with q=p^n, choose exactly the n-th iterate to get the q-power map. This is arithmetic Frobenius, not its inverse, and no algebraic-closure hypothesis is needed. Both selected defining dependency files are byte-identical. Native TauCeti.FiniteField.sub_pow_natCard:72 and frobeniusAlgHom_pow_apply:82 prove q-power additivity and exact iteration exponent. Native FrobeniusFixed.pow_card_eq_self_iff_mem_range_algebraMap:80 proves the direct fixed-point recognition law in an arbitrary domain over F_q, by actual split polynomial X^q-X and the finite-field power law. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source definitions, hypotheses and relevant completed proof bodies inspected; no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/Finite/Frobenius.lean",
+          "declarations": "TauCeti.FiniteField.sub_pow_natCard:72; frobeniusAlgHom_pow_apply:82; frobeniusFixedSubalgebra:93; mem_frobeniusFixedSubalgebra:107",
+          "note": "Native direct q-power/iterate arithmetic and exact fixed-subalgebra equalizer API."
+        },
+        {
+          "path": "TauCeti/FieldTheory/Finite/FrobeniusFixed.lean",
+          "declarations": "TauCeti.FiniteField.pow_card_eq_self_iff_mem_range_algebraMap:80",
+          "note": "Native ordinary Frobenius fixed-point/base-field recognition, with completed polynomial-root proof."
+        }
+      ],
+      "search_notes": "Native fixed-point criterion has an explicit finite base/domain hypothesis and is not claimed for arbitrary nonreduced algebras. Frobenius geometric counting/Galois cohomology endpoints excluded."
+    }
+  ]
+}

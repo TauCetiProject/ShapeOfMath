@@ -1,0 +1,197 @@
+{
+  "reviewed_at": "2026-11-12T23:08:09Z",
+  "reviewer": "algebra_formalization (independent of analysis author)",
+  "scope": {
+    "concepts": [
+      "convex-hull",
+      "cauchy-schwarz-inner-product"
+    ],
+    "libraries": [
+      "mathlib",
+      "tau-ceti"
+    ],
+    "pairs_reviewed": 4
+  },
+  "baseline": [
+    {
+      "id": "aea8790e-1b14-5397-af64-a3ca028b75f6",
+      "slug": "convex-hull",
+      "title": "Convex hull",
+      "kind": "definition",
+      "description": "The smallest convex set containing a given set of points.",
+      "status": "active",
+      "revision": 1
+    },
+    {
+      "id": "238207e3-45e3-5d7b-876f-244cac936194",
+      "slug": "cauchy-schwarz-inner-product",
+      "title": "Cauchy–Schwarz inequality for complex inner-product spaces",
+      "kind": "theorem",
+      "description": "In a complex inner-product space, |⟨u,v⟩|²≤⟨u,u⟩⟨v,v⟩ for all u,v.",
+      "status": "active",
+      "revision": 1
+    }
+  ],
+  "repository_revisions": {
+    "mathlib": "26573066084e6e2aa8526ea358bc43b66d96f970",
+    "tau-ceti": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023"
+  },
+  "dependency_pin": {
+    "importer": "tau-ceti",
+    "supplier": "mathlib",
+    "revision": "2ddf59c8f14245864e6c0ed227a2dab76b9efea2",
+    "checked_manifest": "lake-manifest.json:11"
+  },
+  "method": "Read current concept paragraphs/revisions and existing/pilot reviews, independently inspected selected committed source definitions, representative proof bodies and adjacent excluded candidates; checked exact dependency blobs with git show. No fresh Lean builds or transitive axiom audit. No database/code/docs changes.",
+  "decisions": [
+    {
+      "concept": "convex-hull",
+      "library": "mathlib",
+      "review_id": 5,
+      "decision": "accept",
+      "statement_check": "convexHull at Hull.lean:48 is the closure of Convex; subset_convexHull:52, convex_convexHull:55 and convexHull_min:66 establish exactly the smallest convex superset. Semiring/module generality specializes to real vector spaces. Finite affine/center-mass membership descriptions in Combination:256,309,345,381 have the required nonnegative weights and weight sum one. Join:174/179 gives ordinary union/insertion formulas under the stated nonempty assumptions.",
+      "ownership": "All three selected files are native Mathlib code.",
+      "file_decision": "Retain Hull.lean, Combination.lean and Join.lean. These directly define or give ordinary membership/image/union/product/sum API for the same hull operation; no prerequisite-only file is added. Retain exclusion of Caratheodory, compactness, extreme points and geometric applications as separate endpoints.",
+      "proof_check": "Inspected universal-property derivation, finite-combination converse/membership proof, affine/linear image proofs, product/sum hull proofs and join insertion proof; no placeholder endpoint or extra finite-dimensionality/completeness assumption is used for the concept."
+    },
+    {
+      "concept": "convex-hull",
+      "library": "tau-ceti",
+      "review_id": 6,
+      "decision": "change",
+      "change_kind": "evidence_anchor_only",
+      "statement_check": "Exact pinned dependency implements convexHull at Hull.lean:48, not line 49. Its containment/minimum API occupies 52–77. Native Combination:83 and :96 are generic hull bounds/affine-image compatibility; Join:35–44 proves the generic insertion membership form and correctly handles empty s separately. These qualify as core API under the confirmed native-API interpretation.",
+      "ownership": "Definition belongs to manifest-pinned Mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; only TauCeti/Analysis/Convex/Combination.lean and Join.lean receive Tau Ceti LOC.",
+      "file_decision": "Retain both native files; native affine injectivity and centroid/ray supporting API in Combination does not require charging other files. Whole-file apportionment also includes unrelated simplex/cross-polytope content but that is explicitly the approximation, not additional selected endpoints. Do not add Caratheodory or simplex applications.",
+      "proof_check": "Inspected finite-coefficient argument for centroid/ray membership and derivation of injectivity on affine span, the halfspace/minimum argument at :83, image transport at :96, and both insertion empty/nonempty cases. No missing mathematical endpoint found.",
+      "requested_change": "Replace only the inaccurate dependency anchor 49–76 with convexHull:48 and API:52–77. No status, file set or LOC change."
+    },
+    {
+      "concept": "cauchy-schwarz-inner-product",
+      "library": "mathlib",
+      "review_id": 7,
+      "decision": "accept",
+      "statement_check": "Defs:319–374 proves general complex/RCLike CS by nonnegative quadratic discriminant. Basic:280–282 exposes it. norm_inner_symm:226 identifies the product of two scalar norms with the modulus square. inner_self_nonneg:202 and inner_self_ofReal_re:207 show both diagonal inner products are nonnegative real scalars; under that conventional identification the catalogue inequality is exact. Inner-product conjugate-linearity convention does not change the modulus inequality. No finite-dimensionality or completeness assumption is needed.",
+      "ownership": "Proof and public/equality API are native Mathlib. Defs.lean is selected because it contains the actual proof, not merely prerequisite type definitions.",
+      "file_decision": "Retain Defs and Basic. Basic:454–479 gives norm/real/extended norm versions, and :722–845 gives conventional equality/proportionality and normalized cases with their explicit nonzero hypotheses. Retain exclusion of weighted Young, operator defects, energy forms and application-specific endpoints.",
+      "proof_check": "Read the completed discriminant proof, the public wrapper, norm bound derivation, equality TFAE proof and its nonzero/normalized specializations; no assumed target or placeholder found."
+    },
+    {
+      "concept": "cauchy-schwarz-inner-product",
+      "library": "tau-ceti",
+      "review_id": 8,
+      "decision": "accept",
+      "statement_check": "The exact manifest dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 contains Defs:355–374 actual CS proof, Basic:281–283 public theorem, :455 norm form, and :208–227 diagonal/complex-modulus conversion identities. This establishes complete dependency availability, not merely a name match.",
+      "ownership": "No native file is selected under the frozen core-API boundary; inherited status and zero native LOC are correct. Dependency source files must not be copied into Tau Ceti allocations.",
+      "file_decision": "Searched native theorem/declaration names and usages of Cauchy/Schwarz, cauchy_schwarz, inner_mul_inner_self_le, norm_inner_le_norm, norm_inner_eq_norm and equality variants; inspected Young, Contraction, OpNormDefect, QuadraticForm/TwoVector and Gram/Pair candidates. Young adds a separate weighted inequality; Contraction and OpNormDefect introduce operator endpoints; TwoVector packages a norm-bound application; Gram/Pair supplies determinant/calculus/change-of-pair formulas and no generic complex CS endpoint. Sphere/Cap and StarAlgebra/CauchySchwarz use imported CS for distinct spherical/positive-functional results. Retain the empty native file set.",
+      "proof_check": "Read dependency proof and checked native candidate theorem hypotheses/bodies. This is a scoped source review with explicit exclusions, not an exhaustive transitive axiom audit or claim that no related theorem exists anywhere."
+    }
+  ],
+  "replacement_proposals": [
+    {
+      "concept": "convex-hull",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Inspected Tau Ceti at 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The convexHull definition and minimum-property implementation are supplied by Mathlib (checked convexHull at Hull.lean:48 and its containment/minimum/closure API at :52–77 at that exact dependency commit). Tau Ceti owns generic associated API: Combination.lean:83/96 extends linear bounds and affine image transport to hulls, :161/219–273 develops centroid and injectivity API; Join.lean:35 proves insertion membership without a nonempty assumption. Count only these native files; do not charge the imported Mathlib implementation to Tau Ceti. Exclude distinct Caratheodory/compactness endpoints and particular geometric applications. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/Combination.lean",
+          "declarations": "IsLinearMap.le_of_mem_convexHull (L83); Set.EqOn.image_convexHull (L96); Finset.exists_lineMap_centroid_mem_convexHull (L161); AffineMap.eq_zero_of_injOn_convexHull (L219); AffineMap.injOn_affineSpan_iff_injOn_convexHull (L257); AffineIndependent.map_of_injOn_convexHull (L270)",
+          "note": "Native generic hull API: linear bounds, affine image interoperability, centroid/ray and affine injectivity properties. The underlying definition is imported from Mathlib; only this native extension file receives Tau Ceti LOC."
+        },
+        {
+          "path": "TauCeti/Analysis/Convex/Join.lean",
+          "declarations": "TauCeti.mem_convexHull_insert (L35)",
+          "note": "Native generic insertion-membership eliminator for convex hulls, including the empty-set case omitted by the imported nonempty formulation (L35–44)."
+        }
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Convex/Combination.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "sha256": "0f67ab269bc5cce01edcab6b096fed38dee5bbbf98566678b7a75596708044cf",
+      "loc": 641,
+      "matches_current_count_and_hash": true
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Convex/Hull.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "sha256": "a90d188e1d4d20d4d4191dfb7dac67d1c4a1a601f9da991f594c6b20e82e5759",
+      "loc": 224,
+      "matches_current_count_and_hash": true
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Convex/Join.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "sha256": "d198a82f3c58e6290d5f3a736dca73befa23a795b0d23f54a4f96d0c8cef14f8",
+      "loc": 197,
+      "matches_current_count_and_hash": true
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Convex/Combination.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "sha256": "ec6724734d0d790aa74291ac5f5e6ac1cc6e27cea669afacaf1d08b47c9fa5f3",
+      "loc": 378,
+      "matches_current_count_and_hash": true
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Convex/Join.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "sha256": "4bac6ed2f4a91500ba245bfaf5d09036b539675a63ba538ed68540dd97e6379b",
+      "loc": 62,
+      "matches_current_count_and_hash": true
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/InnerProductSpace/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "sha256": "e775fe26f95425ce3f8a995b2d935ec9e484cccfb76f796522f1d9d8e0e37884",
+      "loc": 1042,
+      "matches_current_count_and_hash": true
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/InnerProductSpace/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "sha256": "1cd82a3742b60afb50e16c42d6a9b14bb96a047e9c1f852e9509bce40236201d",
+      "loc": 620,
+      "matches_current_count_and_hash": true
+    }
+  ],
+  "status_changes": [],
+  "file_set_changes": [],
+  "expected_loc_changes": [],
+  "prompt_review": [
+    {
+      "severity": "resolved",
+      "location": "prompts/formalization.md final mandatory review bullet (cross-referenced by update-formalization-coverage.md)",
+      "finding": "Earlier cross-reference assigned mathematical declaration/hypothesis checks to a coordinating curator; coordinator has corrected this to independent mathematical subagents, with coordinator responsible for structural validation.",
+      "suggestion": "No further change required for this resolved issue."
+    },
+    {
+      "severity": "clarification",
+      "location": "update-formalization-coverage.md: no-change verification paragraph",
+      "finding": "Hash identity does not imply evidence anchors or prose are accurate. Here the implementation bytes are unchanged but the old Tau convex-hull evidence has an off-by-one defining anchor.",
+      "suggestion": "Allow evidence-only corrections after independent review without labelling the mathematical coverage/file selection as changed. Record coverage_changed=false, evidence_changed=true and LOC_changed=false."
+    },
+    {
+      "severity": "clarification",
+      "location": "update-formalization-coverage.md: scope freeze and publication checks",
+      "finding": "Current pair review can be valid at pinned snapshots while other agents ingest concepts concurrently; snapshot coverage and scoped verification need not match a later live catalogue count.",
+      "suggestion": "Keep the declared frozen roster and check saved scoped results against an internally consistent export/API snapshot; identify changes outside scope instead of treating later catalogue growth as an incomplete update."
+    },
+    {
+      "severity": "accepted",
+      "location": "update-formalization-coverage.md: statuses/native-API examples/API-boundary/measurement sections",
+      "finding": "The inherited distinction, existing native-API interpretation, independent reviewer requirement, exact dependency pins, and safeguard against global measurement of outside-scope mappings are adequate and correctly apply to these four reviews."
+    }
+  ],
+  "unresolved_frontier": []
+}

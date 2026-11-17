@@ -1,0 +1,623 @@
+{
+  "note": "Whole-catalogue formalization update batch-077: independent source review by algebra_formalization of analysis_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "split-simple",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Linear/Basic.lean",
+          "declarations": "CategoryTheory.End.linearEquiv:90; canonical Algebra R(End X) instance:95",
+          "note": "Actual canonical scalar map on endomorphisms used in the split-simple predicate."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a supplied simple X in a k-linear abelian category, exact predicate is Function.Bijective(algebraMap k (CategoryTheory.End X)). Actual canonical Algebra instance Linear/Basic95 is induced by the category scalar action; End.linearEquiv90 identifies wrapped endomorphisms with X→X. Hence this is isomorphism of the CANONICAL scalar map, not just existence of an unrelated ring isomorphism End(X)≅k. Bijective algebra map gives its inverse algebra isomorphism through AlgEquiv.ofBijective. No algebraic-closedness or finite-dimensional hypothesis is imposed by the definition.\nSearch and boundary notes: Read actual Linear90–96 and native59–72 completed proof. Split does not mean split monomorphism. A simple object over a non-algebraically-closed field need not be split; no Schur division ring silently identified with k. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "split-simple",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Preadditive/Schur.lean",
+          "declarations": "TauCeti.bijective_algebraMap_end_of_simple:59; endAlgEquivOfSimple:68",
+          "note": "Native exact canonical-scalar splitness criterion and inverse endomorphism algebra equivalence."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency canonical scalar-map supplier checked. For a supplied simple X in a k-linear abelian category, exact predicate is Function.Bijective(algebraMap k (CategoryTheory.End X)). Actual canonical Algebra instance Linear/Basic95 is induced by the category scalar action; End.linearEquiv90 identifies wrapped endomorphisms with X→X. Hence this is isomorphism of the CANONICAL scalar map, not just existence of an unrelated ring isomorphism End(X)≅k. Bijective algebra map gives its inverse algebra isomorphism through AlgEquiv.ofBijective. No algebraic-closedness or finite-dimensional hypothesis is imposed by the definition. Native TauCeti.bijective_algebraMap_end_of_simple59–63 and endAlgEquivOfSimple68–72 prove actual splitness and inverse CANONICAL algebra map for simple X with finite-dimensional End over algebraically closed k; full scalar-Schur proof inspected. These stronger hypotheses belong to that direct construction criterion, not to splitness itself. Exact dependency Linear/Basic canonical Algebra instance96/End.linearEquiv91 has header+1; Simple55 and finite-biproduct320 files are byte-identical.\nSearch and boundary notes: Read actual Linear90–96 and native59–72 completed proof. Split does not mean split monomorphism. A simple object over a non-algebraically-closed field need not be split; no Schur division ring silently identified with k. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "split-semisimple",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+          "declarations": "HasBiproduct:320; getBiproductData:329",
+          "note": "Actual finite direct-simple-sum constructor in the exact semisimple predicate."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Simple.lean",
+          "declarations": "CategoryTheory.Simple:55",
+          "note": "Actual simple-object predicate in every decomposition."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Linear/Basic.lean",
+          "declarations": "canonical Algebra R(End X) instance:95",
+          "note": "Actual canonical-scalar splitness condition for each simple object."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Use the existing catalogue semisimple convention: EVERY object is a FINITE direct sum of simple objects (explicit live semisimple-category REV2), without requiring finitely many simple isomorphism classes. The exact generic predicate is forall X, exists finite index i, simple family S_i and isomorphism X≅biproduct S_i; actual Simple55 and HasBiproduct320/getBiproductData329 construct these objects/finite sums. Add forall simple S, Bijective(canonical algebraMap k(End S)) using actual Linear95. This is precisely split semisimplicity under that linked finite-per-object convention, not semisimple algebra/module rank or finite global list of simples.\nSearch and boundary notes: Read actual68–103 class/transport proofs and generic coproduct versus finite biproduct semantics. Linked semisimple-category REV2 fixes the finite-per-object convention; isolated split-semisimple paragraph should be read consistently. No additional global finite iso-class restriction or split-mono-category conflation. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "split-semisimple",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Semisimple/Basic.lean",
+          "declarations": "IsFiniteSemisimpleCategory:68; IsFiniteSemisimpleCategory.of_equivalence:81; iff_of_equivalence:96",
+          "note": "Actual finite-per-object semisimple category definition and decomposition/equivalence API; split scalar condition supplied separately."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency finite-biproduct/simple/canonical scalar suppliers checked. Use the existing catalogue semisimple convention: EVERY object is a FINITE direct sum of simple objects (explicit live semisimple-category REV2), without requiring finitely many simple isomorphism classes. The exact generic predicate is forall X, exists finite index i, simple family S_i and isomorphism X≅biproduct S_i; actual Simple55 and HasBiproduct320/getBiproductData329 construct these objects/finite sums. Add forall simple S, Bijective(canonical algebraMap k(End S)) using actual Linear95. This is precisely split semisimplicity under that linked finite-per-object convention, not semisimple algebra/module rank or finite global list of simples. Native IsFiniteSemisimpleCategory68–71 is EXACT finite-per-object decomposition condition, and of_equivalence81–93/iff96–104 give ordinary finite semisimplicity transport. This native class does NOT mean finitely many simple classes; the split canonical-scalar clause is explicitly added. Exact dependency Linear/Basic canonical Algebra instance96/End.linearEquiv91 has header+1; Simple55 and finite-biproduct320 files are byte-identical.\nSearch and boundary notes: Read actual68–103 class/transport proofs and generic coproduct versus finite biproduct semantics. Linked semisimple-category REV2 fixes the finite-per-object convention; isolated split-semisimple paragraph should be read consistently. No additional global finite iso-class restriction or split-mono-category conflation. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "squared-norm",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact paired trace of an arbitrary isomorphism a:X→X** and choice independence on a simple object of an arbitrary fusion category were not certified in standalone source review. Generic rigid evaluation/coevaluation and scalar endomorphism maps are available inputs; a symmetric/braided categorical trace or a Hilbert norm squared is not automatically the nonpivotal fusion-category paired dimension. The pivotal dim(X)*dim(X*) component does not by itself prove all asserted choice invariance.\nSearch and boundary notes: Searched squared norm/paired dimension/arbitrary double-dual isomorphism and read native Trace88–108/210–216, Simple59–110 and GlobalDim87 aggregate proof. Frobenius–Perron squared dimensions and Hilbert squared norms are different concepts. Do not infer arbitrary-a construction from global pivotal-change theorem or assume all fusion categories supplied a pivotal structure. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "squared-norm",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Pivotal/Trace.lean",
+          "declarations": "TauCeti.leftTrace:88; leftDim:97; rightDim:101; leftDim_rightDual:210",
+          "note": "Actual pivotal trace/dimension and dual-dimension identity component of squared norm."
+        },
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Pivotal/Simple.lean",
+          "declarations": "TauCeti.leftTrace_inv_comp_rightTrace_hom:79; leftDim_comp_rightDim_eq:99",
+          "note": "Actual simple-object scalar cancellation and pointwise product independence under change of pivotal structure; general nonpivotal paired-trace frontier explicit."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native Trace.leftDim97/rightDim101 define actual pivotal categorical dimensions; leftDim_rightDual210–216 identifies dim(X*) with the opposite trace. Native Simple.leftTrace_inv_comp_rightTrace_hom79–87 proves actual scalar cancellation for an automorphism of a split simple object, and leftDim_comp_rightDim_eq99–110 proves pointwise product independence under TWO PIVOTAL structures (finite End over algebraically closed field). Read complete Schur scalar/cancellation proof. This certifies the pivotal product component and substantial direct choice-cancellation API. It does not certify existence/choice independence of the general paired trace for arbitrary a:X→X** in a fusion category without a chosen global pivotal structure; that material endpoint remains partial.\nSearch and boundary notes: Searched squared norm/paired dimension/arbitrary double-dual isomorphism and read native Trace88–108/210–216, Simple59–110 and GlobalDim87 aggregate proof. Frobenius–Perron squared dimensions and Hilbert squared norms are different concepts. Do not infer arbitrary-a construction from global pivotal-change theorem or assume all fusion categories supplied a pivotal structure. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "tensor-category",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/Monoidal/Linear.lean",
+          "declarations": "CategoryTheory.MonoidalLinear:33",
+          "note": "Actual k-bilinearity of the tensor product in the tensor-category conjunction."
+        },
+        {
+          "path": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+          "declarations": "CategoryTheory.RigidCategory:732",
+          "note": "Actual chosen left/right duality structure required by the tensor-category definition."
+        },
+        {
+          "path": "Mathlib/Order/RelSeries.lean",
+          "declarations": "RelSeries:37",
+          "note": "Actual finite composition-filtration constructor, applied to covers of Subobject X with explicit bottom/top endpoints."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/FiniteDimensional/Defs.lean",
+          "declarations": "FiniteDimensional:74",
+          "note": "Actual finite-dimensional hom-space predicate; no finite global simple-class restriction."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact literal conjunction: Category C with Linear k C, Abelian C, MonoidalCategory C and RigidCategory C; MonoidalLinear k C actual33 makes tensor k-bilinear; forall X,Y, FiniteDimensional k(X→Y), actual74 is Module.Finite; canonical scalar algebraMap k(End(unit)) bijective; and every X has a FINITE chain of subobjects from bottom0 to topX with consecutive covers. Actual RelSeries37 stores the finite chain and adjacent relation, so choose relation CovBy on Subobject X, require head=bottom and last=top. In an abelian category covers mean simple successive subquotients, precisely finite composition length. This direct finite-filtration predicate avoids assuming semisimplicity or finitely many simple iso-classes. The scalar-map condition means End(1)=k canonically.\nSearch and boundary notes: Read actual MonoidalLinear33–37/Rigid732, RelSeries37–43, finiteHom74 and native46–61 completed map-neg/sub proofs. Abelian110, Linear46/95, Subobject and composition-series semantics are checked generic input structures. The category need not be semisimple or have finitely many simple classes; no fusion-category substitution. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "tensor-category",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Preadditive.lean",
+          "declarations": "CategoryTheory.neg_whiskerRight:46; whiskerLeft_neg:51; sub_whiskerRight:56; whiskerLeft_sub:61",
+          "note": "Native actual additive tensor/whiskering identities applicable to the defining tensor-category operation; no semisimple assumption."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency tensor/rigid/finite-chain/finiteHom suppliers checked. Exact literal conjunction: Category C with Linear k C, Abelian C, MonoidalCategory C and RigidCategory C; MonoidalLinear k C actual33 makes tensor k-bilinear; forall X,Y, FiniteDimensional k(X→Y), actual74 is Module.Finite; canonical scalar algebraMap k(End(unit)) bijective; and every X has a FINITE chain of subobjects from bottom0 to topX with consecutive covers. Actual RelSeries37 stores the finite chain and adjacent relation, so choose relation CovBy on Subobject X, require head=bottom and last=top. In an abelian category covers mean simple successive subquotients, precisely finite composition length. This direct finite-filtration predicate avoids assuming semisimplicity or finitely many simple iso-classes. The scalar-map condition means End(1)=k canonically. Native Monoidal/Preadditive neg_whiskerRight46/whiskerLeft_neg51 and sub_whiskerRight56/whiskerLeft_sub61 are completed ordinary additive-tensor laws under weaker monoidal preadditive hypotheses; apply directly to tensor categories without imposing semisimplicity. These are direct core API of the defining tensor operation. Exact dependency MonoidalLinear33/FiniteDimensional74 files byte-identical; RigidCategory733 and RelSeries38 have header+1 with unchanged defining fields.\nSearch and boundary notes: Read actual MonoidalLinear33–37/Rigid732, RelSeries37–43, finiteHom74 and native46–61 completed map-neg/sub proofs. Abelian110, Linear46/95, Subobject and composition-series semantics are checked generic input structures. The category need not be semisimple or have finitely many simple classes; no fusion-category substitution. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "tensor-ideal",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Module/Submodule/Defs.lean",
+          "declarations": "Submodule:38",
+          "note": "Actual linear morphism-subspace constructor in the literal tensor ideal family."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact literal family I(X,Y):Submodule k(X→Y) with forall f in I, arbitrary g,h composable imply g≫f and f≫h in the appropriate I, and arbitrary tensor morphism a yields a⊗f and f⊗a in I. Actual Submodule38 provides zero/add/scalar closure; actual monoidal tensorHom and category composition are supplied operations. This is the specified family of linear morphism subspaces, with BOTH composition and tensor sides, not just an object ideal or a single ideal of an endomorphism ring.\nSearch and boundary notes: Read actual MonoidalIdeal74–108 and MorphismIdeal87–94/160–163. Quotient monoidal category is ordinary immediate construction in the same defining file; rigid/braided quotient and semisimplification/negligible-ideal endpoints add substantial structures and are excluded from extra files. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "tensor-ideal",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Envelope/Quotient/Basic.lean",
+          "declarations": "TauCeti.MonoidalIdeal:74; MonoidalIdeal.tensorHom_mem_left:98; tensorHom_mem_right:104",
+          "note": "Actual tensor-ideal definition and both arbitrary tensor-morphism closure laws."
+        },
+        {
+          "path": "TauCeti/CategoryTheory/Preadditive/MorphismIdeal/Basic.lean",
+          "declarations": "TauCeti.MorphismIdeal:87; MorphismIdeal.smul_mem:160",
+          "note": "Actual two-sided additive morphism ideal and scalar closure identifying it with a family of linear subspaces."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency linear-subspace constructors checked. Exact literal family I(X,Y):Submodule k(X→Y) with forall f in I, arbitrary g,h composable imply g≫f and f≫h in the appropriate I, and arbitrary tensor morphism a yields a⊗f and f⊗a in I. Actual Submodule38 provides zero/add/scalar closure; actual monoidal tensorHom and category composition are supplied operations. This is the specified family of linear morphism subspaces, with BOTH composition and tensor sides, not just an object ideal or a single ideal of an endomorphism ring. Native MonoidalIdeal74 extends actual MorphismIdeal87 (additive two-sided composition closure) by left/right OBJECT whiskering; tensorHom_mem_left98 and tensorHom_mem_right104 derive closure under arbitrary tensor MORPHISMS by tensorHom_def/composition. Native MorphismIdeal.smul_mem160–163 derives scalar closure from a*identity composition, so additive ideal indeed gives the exact k-linear subspaces. Read all these completed proofs; no missing linear closure. Exact selected generic dependency supplying files byte-identical.\nSearch and boundary notes: Read actual MonoidalIdeal74–108 and MorphismIdeal87–94/160–163. Quotient monoidal category is ordinary immediate construction in the same defining file; rigid/braided quotient and semisimplification/negligible-ideal endpoints add substantial structures and are excluded from extra files. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "twist",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/CategoryTheory/NatIso.lean",
+          "declarations": "CategoryTheory.NatIso.ofComponents:178",
+          "note": "Actual invertible natural transformation constructor in the exact twist predicate."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. On supplied braided monoidal C, choose theta: identityFunctor≅identityFunctor and require theta(unit)=identity and theta(X⊗Y)=(thetaX⊗thetaY) followed by braidingXY then braidingYX. Actual NatIso.ofComponents178 constructs natural isomorphism from invertible components/naturality, so this is a genuine natural AUTOMORPHISM, not a noninvertible transformation. Lean composition f≫g means g after f, hence this is exactly catalogue c_YX c_XY(thetaX⊗thetaY), with no reversed crossing convention.\nSearch and boundary notes: Read actual native53–81 unit derivation. Balanced here means ribbon-category twist compatibility, not categorical balanced mono+epi property; no dual ribbon axiom or pivotal existence is silently added. Braiding and naturality are supplied genuine input structures. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "twist",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/CategoryTheory/Monoidal/Braided/Balanced/Basic.lean",
+          "declarations": "TauCeti.BalancedCategory:53; BalancedCategory.twist_hom_app_unit:70; twist_inv_app_unit:79",
+          "note": "Native actual twist/balancing definition and completed unit/inverse ordinary API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency natural automorphism supplier checked. On supplied braided monoidal C, choose theta: identityFunctor≅identityFunctor and require theta(unit)=identity and theta(X⊗Y)=(thetaX⊗thetaY) followed by braidingXY then braidingYX. Actual NatIso.ofComponents178 constructs natural isomorphism from invertible components/naturality, so this is a genuine natural AUTOMORPHISM, not a noninvertible transformation. Lean composition f≫g means g after f, hence this is exactly catalogue c_YX c_XY(thetaX⊗thetaY), with no reversed crossing convention. Native BalancedCategory53–60 is EXACT twist automorphism and tensor compatibility; twist_hom_app_unit70–76 derives the unit identity using naturality/unitor and cancellable invertibility, rather than requiring an extra unrelated axiom. Inverse unit/tensor laws are ordinary associated API; no ribbon dual compatibility is built into twist. Exact selected generic dependency supplying files byte-identical.\nSearch and boundary notes: Read actual native53–81 unit derivation. Balanced here means ribbon-category twist compatibility, not categorical balanced mono+epi property; no dual ribbon axiom or pivotal existence is silently added. Braiding and naturality are supplied genuine input structures. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "planar-isotopy",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Homotopy/Basic.lean",
+          "declarations": "ContinuousMap.HomotopyWith:385",
+          "note": "Actual joint continuous embedding/marked-data-preserving deformation constructor via an explicit all-slice predicate."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a supplied FIXED diagram realization D with its incidences/boundary components/marked data, represent a continuous deformation by HomotopyWith f0 f1 whose every time-slice is a topological embedding and satisfies the explicit boundary/mark-preservation conditions. Actual HomotopyWith385 extends joint continuous Homotopy and stores forall time slice predicate. Fixed combinatorial source D retains all incidences; no arbitrary diagram may merge/cross edges because embeddings are required. Boundary components may be preserved setwise or marked points fixed as specified by the supplied diagram data; the chosen constraint must persist at EVERY time.\nSearch and boundary notes: Read actual HomotopyWith385–388, native embedding85–106 and restrict28–47 complete inverse/homeomorphism proof. No mere homotopy through nonembeddings, combinatorial planar matching isotopy or knot Reidemeister theorem is substituted. Marked-data preservation must be part of the explicit slice predicate. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "planar-isotopy",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Homotopy/Isotopy/Basic.lean",
+          "declarations": "TauCeti.Isotopy:85; Isotopy.isEmbedding_apply:93; AmbientIsotopy:160",
+          "note": "Native actual joint embedding isotopy and stronger ambient isotopy constructors/API."
+        },
+        {
+          "path": "TauCeti/Topology/Homotopy/Isotopy/Restrict.lean",
+          "declarations": "AmbientIsotopy.restrict:28; coe_restrict_apply:47",
+          "note": "Actual invariant-subspace restriction preserving boundary/marked subsets throughout the ambient deformation."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency joint HomotopyWith constructor checked. For a supplied FIXED diagram realization D with its incidences/boundary components/marked data, represent a continuous deformation by HomotopyWith f0 f1 whose every time-slice is a topological embedding and satisfies the explicit boundary/mark-preservation conditions. Actual HomotopyWith385 extends joint continuous Homotopy and stores forall time slice predicate. Fixed combinatorial source D retains all incidences; no arbitrary diagram may merge/cross edges because embeddings are required. Boundary components may be preserved setwise or marked points fixed as specified by the supplied diagram data; the chosen constraint must persist at EVERY time. Native Isotopy85 is precisely HomotopyWith embedding slices, with isEmbedding_apply93; AmbientIsotopy160 has a homeomorphic total map and gives embedding isotopies259. Native restrict28–43 restricts an ambient motion to any set preserved in BOTH directions at every time, proving actual inverse and continuity, so it supplies direct preservation of designated boundary/marked subspaces. Nonambient versus ambient distinction is explicit; concept asks deformation of embeddings, not an unproved knot-complement invariant. Exact selected generic dependency supplying files byte-identical.\nSearch and boundary notes: Read actual HomotopyWith385–388, native embedding85–106 and restrict28–47 complete inverse/homeomorphism proof. No mere homotopy through nonembeddings, combinatorial planar matching isotopy or knot Reidemeister theorem is substituted. Marked-data preservation must be part of the explicit slice predicate. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "barycentric-subdivision",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/AffineSpace/Centroid.lean",
+          "declarations": "Finset.centroid:78; centroid_def:82",
+          "note": "Actual equal-weight face barycenter constructor."
+        },
+        {
+          "path": "Mathlib/Analysis/Convex/Hull.lean",
+          "declarations": "convexHull:48",
+          "note": "Actual geometric simplex hull of chain barycenters in the defining subdivision family."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a supplied finite geometric simplicial complex K, define each new vertex b(F)=Finset.centroid R id on a NONEMPTY face F (actual centroid78 is equal-weight affine combination). The new geometric cells are convex hulls of {b(F):F in c} for NONEMPTY finite chains c of DISTINCT original faces under inclusion. Thus sorting c yields exactly strict F0⊊...⊊Fk. This literal defining family has the precise barycenters/chain incidence in the paragraph; no arbitrary subdivision or merely homeomorphic realization is substituted. Bare definition, not a separately asserted triangulability/existence theorem.\nSearch and boundary notes: Read actual centroid78–91, native chain69–96 and realization coordinate/linear108–130 proofs. Geometric Barycentric61 coning construction and full realization homeomorphism/smooth triangulation/subdivision shrink estimates are separate significant results; core chain/barycenter construction selected without allocating all such applications. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "barycentric-subdivision",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/AlgebraicTopology/SimplicialComplex/Subdivision/Basic.lean",
+          "declarations": "TauCeti.PreAbstractSimplicialComplex.barycentricSubdivision:69; mem_barycentricSubdivision_iff:84",
+          "note": "Actual defining nonempty-chain face incidence of barycentric subdivision."
+        },
+        {
+          "path": "TauCeti/AlgebraicTopology/SimplicialComplex/Realization/Basic.lean",
+          "declarations": "AbstractSimplicialComplex.faceBarycenter:80; faceBarycenter_apply:92",
+          "note": "Actual equal-weight coordinate barycenter of each nonempty face."
+        },
+        {
+          "path": "TauCeti/AlgebraicTopology/SimplicialComplex/Subdivision/Realization.lean",
+          "declarations": "AbstractSimplicialComplex.barycentricSubdivisionLinearMap:62; barycentricSubdivisionLinearMap_single:72; barycentricSubdivisionFaceMap:108",
+          "note": "Actual geometric face-barycenter realization and its linear chain-simplex maps."
+        },
+        {
+          "path": "TauCeti/Analysis/Convex/SimplicialComplex/Barycentric.lean",
+          "declarations": "Geometry.SimplicialComplex.exists_subdivision_centroid_mem:61",
+          "note": "Native completed direct geometric centroid-coning subdivision API: same support, finite triangulation of each source face and centroid/interior control; actual locally-finite hypothesis, no invented full-chain equality."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency centroid/hull suppliers checked. For a supplied finite geometric simplicial complex K, define each new vertex b(F)=Finset.centroid R id on a NONEMPTY face F (actual centroid78 is equal-weight affine combination). The new geometric cells are convex hulls of {b(F):F in c} for NONEMPTY finite chains c of DISTINCT original faces under inclusion. Thus sorting c yields exactly strict F0⊊...⊊Fk. This literal defining family has the precise barycenters/chain incidence in the paragraph; no arbitrary subdivision or merely homeomorphic realization is substituted. Bare definition, not a separately asserted triangulability/existence theorem. Native PreAbstractSimplicialComplex.barycentricSubdivision69/chain iff84–91 gives exact nonempty FACE-CHAIN complex. Native Realization.Basic.faceBarycenter80/92 is actual equal-coordinate barycenter (1/|F| on F,0 elsewhere); native Subdivision.Realization.barycentricSubdivisionLinearMap62/single72 and FaceMap108/apply123 extend these barycenters linearly on the exact chain simplices. Read actual finite-support/equal-coordinate proofs, so this is the geometric barycentric realization, not only abstract face names. Exact dependency centroid79/definition83 shifts+1; Hull48 file byte-identical. Independent native namespace enumeration additionally found Geometry.SimplicialComplex.exists_subdivision_centroid_mem:61–105 in Analysis/Convex/SimplicialComplex/Barycentric. Its ENTIRE completed proof was read: each actual face centroid lies in its intrinsic interior, then the checked coning/subdivision constructor returns a locally finite geometric complex L with EXACT same support, finite restriction triangulating every original simplex, and centroid/interior containment control. This is direct ordinary geometric centroid-subdivision API, applying in particular to finite complexes (or retaining its actual locally-finite hypothesis). Its statement is NOT claimed to assert the entire strict-face-chain equality; that exact defining incidence is separately supplied by the already selected chain and coordinate-realization files.\nSearch and boundary notes: Read actual centroid78–91, native chain69–96 and realization coordinate/linear108–130 proofs. Geometric Barycentric61 coning construction and full realization homeomorphism/smooth triangulation/subdivision shrink estimates are separate significant results; core chain/barycenter construction selected without allocating all such applications. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication. Independent geometric SimplicialComplex namespace review adds Barycentric61 as direct centroid-subdivision geometry. General Arrangement/CommonSubdivision and arbitrary coning machinery remain prerequisites/separate constructions; no source is added merely for importing barycenters.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "bolzano-weierstrass",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/MetricSpace/Sequences.lean",
+          "declarations": "tendsto_subseq_of_frequently_bounded:30; tendsto_subseq_of_bounded:39",
+          "note": "Actual bounded-sequence convergent subsequence theorem in proper metric spaces, specialized Euclidean."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual tendsto_subseq_of_bounded39–41 gives a strictly increasing subsequence and limit in closure S for EVERY bounded sequence in a proper metric space. Euclidean R^d is proper, so specialize exactly; source30–35 proves compact-closure sequential compactness, not only a cluster point without subsequence. Product/Euclidean convergence is equivalent to every coordinate convergence, and the limit belongs to the actual R^d. All d including0 allowed.\nSearch and boundary notes: Read actual complete proof30–41 and Euclidean proper-space instantiation. Bounded sequence range in proper space gives compact closure; strict subsequence index retained. Native Ascoli/larger function-space convergence and Gamma-convergence minimizer results are separate endpoints, not charged. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "bolzano-weierstrass",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency bounded-subsequence theorem39–41 and Euclidean properness suppliers checked. Same genuine R^d subsequence/coordinate conclusion, not a compactification limit or finite-dimensional weak subsequence only. Native topology Ascoli and blow-up subsequence sources give function-space/optimization endpoints and do not add direct ordinary bounded-Euclidean-sequence API selected here. Exact selected generic dependency supplying files byte-identical.\nSearch and boundary notes: Read actual complete proof30–41 and Euclidean proper-space instantiation. Bounded sequence range in proper space gives compact closure; strict subsequence index retained. Native Ascoli/larger function-space convergence and Gamma-convergence minimizer results are separate endpoints, not charged. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "brouwer-fixed-point",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Bounded search inspected M Contracting.exists_fixedPoint97 hypotheses: requires strict contraction, not arbitrary continuous self-map of simplex/closed ball. Compact simplex/ball and fixed-point predicate are available, but full no-retraction/topological fixed-point theorem was not certified standalone. Tau-owned genuine Brouwer source is not a Mathlib implementation. Unknown is a concrete proof-supplier frontier, not absence from missing alias.\nSearch and boundary notes: Searched actual fixed-point/Brouwer/no-retraction sources in both snapshots, read native91–142 completed proof. M contraction/Picard theorem is stronger-hypothesis different endpoint. Native Schauder infinite-dimensional extension and Bures/application fixed points are distinct substantial endpoints and excluded. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "brouwer-fixed-point",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/AlgebraicTopology/Singular/BrouwerFixedPoint.lean",
+          "declarations": "TauCeti.brouwerFixedPoint_topCatDisk:91; brouwerFixedPoint_compactConvex:125; brouwerFixedPoint_closedBall:139",
+          "note": "Actual full Brouwer disk proof and exact compact convex/simplex/closed-ball transports, including lower-dimensional sets."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual brouwerFixedPoint_topCatDisk91–115 proves genuine arbitrary continuous disk self-map fixed point by closedBallRayRetraction/noRetraction contradiction; complete proof read. CompactConvex125–135 transports via actual affine-span ball homeomorphism, allowing EMPTY INTERIOR, and closedBall139–142 handles nonnegative radii. Apply compactConvex to stdSimplex R(Fin(n+1)): actual stdSimplex39/convex48/compact217/nonempty single vertex, so exact Delta^n formulation follows, including n0. This is the same theorem in both paragraph formulations, no contraction assumption.\nSearch and boundary notes: Searched actual fixed-point/Brouwer/no-retraction sources in both snapshots, read native91–142 completed proof. M contraction/Picard theorem is stronger-hypothesis different endpoint. Native Schauder infinite-dimensional extension and Bures/application fixed points are distinct substantial endpoints and excluded. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "cake-division-theorem",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The actual Nonempty closed participant preferred-piece sets excluding empty pieces when a positive piece exists and resulting simultaneous BIJECTION assigning every participant a preferred alternative were not certified after targeted source review. Exact closed-preference/standard-simplex/bijection predicates are expressible, but no checked fair-division/KKM/marriage intersection theorem or boundary-label argument implements this endpoint. The separately inspected Tau-owned TauCeti/AlgebraicTopology/Singular/BrouwerFixedPoint.lean:125 (Tau commit3780371ca1bebf9f1c2bb3d753e4bb56c9526023) is a continuous SELF-MAP fixed point theorem; it does not by itself construct the necessary map or conclude a perfect participant matching. Cake, chore and rent boundary rules are different and are not interchanged.\nSearch and boundary notes: Searched cake/chore/rental harmony/envy-free/KKM/preference/boundary-label/participant matching. Read actual native Brouwer125 and compared with current multivalued closed preferences and participant-specific boundary constraints; existing finite matching is an ingredient, not the required existence intersection proof. Ordinary Sperner and dual Sperner endpoints remain separately unresolved, no new topological argument assembled or absence asserted. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "cake-division-theorem",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual Nonempty closed participant preferred-piece sets excluding empty pieces when a positive piece exists and resulting simultaneous BIJECTION assigning every participant a preferred alternative were not certified after targeted source review. Exact closed-preference/standard-simplex/bijection predicates are expressible, but no checked fair-division/KKM/marriage intersection theorem or boundary-label argument implements this endpoint. Actual Brouwer125 is a continuous SELF-MAP fixed point theorem; it does not by itself construct the necessary map or conclude a perfect participant matching. Cake, chore and rent boundary rules are different and are not interchanged.\nSearch and boundary notes: Searched cake/chore/rental harmony/envy-free/KKM/preference/boundary-label/participant matching. Read actual native Brouwer125 and compared with current multivalued closed preferences and participant-specific boundary constraints; existing finite matching is an ingredient, not the required existence intersection proof. Ordinary Sperner and dual Sperner endpoints remain separately unresolved, no new topological argument assembled or absence asserted. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "chore-division-theorem",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The actual Nonempty closed participant preferred-piece sets containing ONLY empty pieces when an empty piece is available and resulting simultaneous BIJECTION assigning every participant a preferred alternative were not certified after targeted source review. Exact closed-preference/standard-simplex/bijection predicates are expressible, but no checked fair-division/KKM/marriage intersection theorem or boundary-label argument implements this endpoint. The separately inspected Tau-owned TauCeti/AlgebraicTopology/Singular/BrouwerFixedPoint.lean:125 (Tau commit3780371ca1bebf9f1c2bb3d753e4bb56c9526023) is a continuous SELF-MAP fixed point theorem; it does not by itself construct the necessary map or conclude a perfect participant matching. Cake, chore and rent boundary rules are different and are not interchanged.\nSearch and boundary notes: Searched cake/chore/rental harmony/envy-free/KKM/preference/boundary-label/participant matching. Read actual native Brouwer125 and compared with current multivalued closed preferences and participant-specific boundary constraints; existing finite matching is an ingredient, not the required existence intersection proof. Ordinary Sperner and dual Sperner endpoints remain separately unresolved, no new topological argument assembled or absence asserted. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "chore-division-theorem",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual Nonempty closed participant preferred-piece sets containing ONLY empty pieces when an empty piece is available and resulting simultaneous BIJECTION assigning every participant a preferred alternative were not certified after targeted source review. Exact closed-preference/standard-simplex/bijection predicates are expressible, but no checked fair-division/KKM/marriage intersection theorem or boundary-label argument implements this endpoint. Actual Brouwer125 is a continuous SELF-MAP fixed point theorem; it does not by itself construct the necessary map or conclude a perfect participant matching. Cake, chore and rent boundary rules are different and are not interchanged.\nSearch and boundary notes: Searched cake/chore/rental harmony/envy-free/KKM/preference/boundary-label/participant matching. Read actual native Brouwer125 and compared with current multivalued closed preferences and participant-specific boundary constraints; existing finite matching is an ingredient, not the required existence intersection proof. Ordinary Sperner and dual Sperner endpoints remain separately unresolved, no new topological argument assembled or absence asserted. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "rental-harmony",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The actual Nonempty closed preferred-room sets containing ONLY free rooms when any room is free on nonnegative fixed-total prices and resulting simultaneous BIJECTION assigning every participant a preferred alternative were not certified after targeted source review. Exact closed-preference/standard-simplex/bijection predicates are expressible, but no checked fair-division/KKM/marriage intersection theorem or boundary-label argument implements this endpoint. The separately inspected Tau-owned TauCeti/AlgebraicTopology/Singular/BrouwerFixedPoint.lean:125 (Tau commit3780371ca1bebf9f1c2bb3d753e4bb56c9526023) is a continuous SELF-MAP fixed point theorem; it does not by itself construct the necessary map or conclude a perfect participant matching. Cake, chore and rent boundary rules are different and are not interchanged.\nSearch and boundary notes: Searched cake/chore/rental harmony/envy-free/KKM/preference/boundary-label/participant matching. Read actual native Brouwer125 and compared with current multivalued closed preferences and participant-specific boundary constraints; existing finite matching is an ingredient, not the required existence intersection proof. Ordinary Sperner and dual Sperner endpoints remain separately unresolved, no new topological argument assembled or absence asserted. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "rental-harmony",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual Nonempty closed preferred-room sets containing ONLY free rooms when any room is free on nonnegative fixed-total prices and resulting simultaneous BIJECTION assigning every participant a preferred alternative were not certified after targeted source review. Exact closed-preference/standard-simplex/bijection predicates are expressible, but no checked fair-division/KKM/marriage intersection theorem or boundary-label argument implements this endpoint. Actual Brouwer125 is a continuous SELF-MAP fixed point theorem; it does not by itself construct the necessary map or conclude a perfect participant matching. Cake, chore and rent boundary rules are different and are not interchanged.\nSearch and boundary notes: Searched cake/chore/rental harmony/envy-free/KKM/preference/boundary-label/participant matching. Read actual native Brouwer125 and compared with current multivalued closed preferences and participant-specific boundary constraints; existing finite matching is an ingredient, not the required existence intersection proof. Ordinary Sperner and dual Sperner endpoints remain separately unresolved, no new topological argument assembled or absence asserted. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "closed-preference-correspondence",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Defs/Basic.lean",
+          "declarations": "IsClosed:105",
+          "note": "Actual closedness predicate of each alternative-eligibility fiber in the exact multivalued preference definition."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For supplied metric X and finite alternative type A, use P:X→Set A, forall x,(P x).Nonempty, and forall a:A, IsClosed {x | a∈P x}. Actual IsClosed105 is open-complement closure in X. This is exactly the paragraph closed-fiber preference correspondence; ties/multiple members remain allowed. No single-valued selection, continuity of a chosen maximizer, compactness of X or utility representation is imposed.\nSearch and boundary notes: Searched native preference/correspondence/closed-fiber/selection candidates. Bare finite alternative closed-fiber predicate is a checked exact generic constructor; no dedicated preference alias necessary. Extra existence/upper-hemicontinuity/utility representation claims are not added. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "closed-preference-correspondence",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency IsClosed constructor checked. For supplied metric X and finite alternative type A, use P:X→Set A, forall x,(P x).Nonempty, and forall a:A, IsClosed {x | a∈P x}. Actual IsClosed105 is open-complement closure in X. This is exactly the paragraph closed-fiber preference correspondence; ties/multiple members remain allowed. No single-valued selection, continuity of a chosen maximizer, compactness of X or utility representation is imposed. Native measurable/continuous set-valued selection and maximum theorems impose extra selection/compactness hypotheses and are not direct defining closed-preference API selected here. Exact selected generic dependency supplying files byte-identical.\nSearch and boundary notes: Searched native preference/correspondence/closed-fiber/selection candidates. Bare finite alternative closed-fiber predicate is a checked exact generic constructor; no dedicated preference alias necessary. Extra existence/upper-hemicontinuity/utility representation claims are not added. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "dual-sperner-labeling",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Convex/StdSimplex.lean",
+          "declarations": "stdSimplex:39",
+          "note": "Actual coordinate simplex domain in the exact zero-coordinate boundary-label predicate; subdivision supplied as input."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For actual vertices x of the supplied m-fold barycentric subdivision of standard Delta^n (n>=1), take label lambda(x):Fin(n+1). Exact rule is forall x, (exists j,x_j=0) implies x_(lambda(x))=0; interior (all coordinates positive) places NO restriction. Standard simplex39 requires all coordinates nonnegative and sum1. Zero-coordinate face condition is the RELATIVE boundary in its affine sum=1 hyperplane; ambient frontier in R^(n+1) would contain the WHOLE simplex and is not substituted. This is a literal zero-coordinate eligibility predicate on supplied genuine subdivision vertices, not ordinary Sperner rule demanding labels in the support.\nSearch and boundary notes: Read actual stdSimplex39, native barycentric chain69/coordinate barycenter80/92. Ordinary Sperner boundary labels lie in a face support whereas this DUAL rule labels by a ZERO coordinate. No ambient-frontier or support-label reversal; native subdivision is supplied prerequisite not automatically charged to labels. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "dual-sperner-labeling",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency coordinate simplex constructor checked. For actual vertices x of the supplied m-fold barycentric subdivision of standard Delta^n (n>=1), take label lambda(x):Fin(n+1). Exact rule is forall x, (exists j,x_j=0) implies x_(lambda(x))=0; interior (all coordinates positive) places NO restriction. Standard simplex39 requires all coordinates nonnegative and sum1. Zero-coordinate face condition is the RELATIVE boundary in its affine sum=1 hyperplane; ambient frontier in R^(n+1) would contain the WHOLE simplex and is not substituted. This is a literal zero-coordinate eligibility predicate on supplied genuine subdivision vertices, not ordinary Sperner rule demanding labels in the support. Actual native barycentric chain/coordinate constructors provide the supplied subdivision, but do not by themselves add a new native zero-coordinate-label defining law. Generic native map/relabel requires injectivity or only renames vertices and is not allocated to this repeated-label predicate. Exact dependency stdSimplex40 shifts+1; selected coordinate predicate is otherwise byte-identical.\nSearch and boundary notes: Read actual stdSimplex39, native barycentric chain69/coordinate barycenter80/92. Ordinary Sperner boundary labels lie in a face support whereas this DUAL rule labels by a ZERO coordinate. No ambient-frontier or support-label reversal; native subdivision is supplied prerequisite not automatically charged to labels. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "dual-sperner-lemma",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact all-label elementary-simplex existence theorem for m>=1 repeated barycentric subdivisions under the DUAL zero-coordinate boundary rule was not certified. Generic subdivision and exact labeling predicate are available; neither is a proof of that combinatorial existence conclusion. Ordinary support-preserving Sperner is a different boundary rule and even that full theorem was not certified in reviewed078.\nSearch and boundary notes: Searched dual/reverse Sperner/zero-coordinate/fully-labeled chain/barycentric color and actual simplex/chain/boundary sources. Read native chain and coordinate constructors plus actual078 distinct antichain/all-face parity candidates. Material proof remains unverified rather than developing new combinatorial topology. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "dual-sperner-lemma",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual native barycentric69/realization62 and Brouwer125 are genuine ingredients, but no source-certified bridge from every dual zero-coordinate coloring of m-fold subdivision to a fully-labeled top cell was found in bounded review. No ordinary Sperner parity, collapse total-face parity or fixed-point theorem is substituted for the exact dual coloring statement.\nSearch and boundary notes: Searched dual/reverse Sperner/zero-coordinate/fully-labeled chain/barycentric color and actual simplex/chain/boundary sources. Read native chain and coordinate constructors plus actual078 distinct antichain/all-face parity candidates. Material proof remains unverified rather than developing new combinatorial topology. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "envy-free-allocation",
+      "library": "mathlib",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a supplied participant set I, allocation a with shares share(a,i), and supplied same-allocation weak preference relation pref(i,a,s,t) meaning s is weakly preferred to t, use forall i,j:I, pref(i,a,share(a,i),share(a,j)). It compares ALL other participants shares at the SAME a, permits ties, and imposes no theorem that such an allocation exists or utility/cardinality assumptions. Exact representation uses Lean kernel dependent function/forall/application constructors, with no Mathlib-native implementing file. Checked stock Lean4v4.36.0-rc2 commit b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; Init/Prelude.lean:2456 supplies Fin n when the participant set is finite. Supplied allocation/preferences are mathematical inputs, not falsely charged as defining native code.\nSearch and boundary notes: Searched envy-free/allocation/preferred share and finite preference/matching candidates. Exact bare universal relation is fully expressible through checked stock Lean constructors; no file imported/used solely for underlying arithmetic or participants is charged. Existence theorems cake/chore/rent remain separate unknowns; no specialized fairness method or optimization surrogate. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "envy-free-allocation",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The same stock Lean pin supplies the exact dependent-function/forall predicate in Tau actual toolchain. For a supplied participant set I, allocation a with shares share(a,i), and supplied same-allocation weak preference relation pref(i,a,s,t) meaning s is weakly preferred to t, use forall i,j:I, pref(i,a,share(a,i),share(a,j)). It compares ALL other participants shares at the SAME a, permits ties, and imposes no theorem that such an allocation exists or utility/cardinality assumptions. Exact representation uses Lean kernel dependent function/forall/application constructors, with no Mathlib-native implementing file. Checked stock Lean4v4.36.0-rc2 commit b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a; Init/Prelude.lean:2456 supplies Fin n when the participant set is finite. Supplied allocation/preferences are mathematical inputs, not falsely charged as defining native code.\nSearch and boundary notes: Searched envy-free/allocation/preferred share and finite preference/matching candidates. Exact bare universal relation is fully expressible through checked stock Lean constructors; no file imported/used solely for underlying arithmetic or participants is charged. Existence theorems cake/chore/rent remain separate unknowns; no specialized fairness method or optimization surrogate. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "simplex",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/AffineSpace/Simplex/Basic.lean",
+          "declarations": "Affine.Simplex:47; Simplex.face:97; face_points:102",
+          "note": "Actual independent vertices and face-index restriction defining the simplex and its faces."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/AffineSpace/Independent.lean",
+          "declarations": "affineIndependent_iff_linearIndependent_vsub:135",
+          "note": "Actual equivalence with the exact difference-vector linear-independence condition."
+        },
+        {
+          "path": "Mathlib/Analysis/Convex/Hull.lean",
+          "declarations": "convexHull:48",
+          "note": "Actual geometric carrier of the simplex and all vertex-subset faces."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual Affine.Simplex47 stores n+1 points and AffineIndependent. Actual affineIndependent_iff_linearIndependent_vsub135 identifies exactly independence of the n differences from v0 (reindex subtype j!=0 by j=1..n). The GEOMETRIC simplex is convexHull of its point range, actual Hull48; it is not just the tuple with no carrier. Actual Simplex.face97 restricts to nonempty vertex subsets with cardinal m+1 and preserves affine independence. Include the empty geometric face convention separately. This matches the full paragraph definition/face carriers, including n0.\nSearch and boundary notes: Read actual Simplex47/face97–108, independent135, convexHull48 and native Ray49–103 complete coordinate proof. Conormal forms, Euclidean angle/volume and global triangulability theorems introduce further structure/endpoints; selected ordinary face/ray API, not all simplex applications. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    },
+    {
+      "concept": "simplex",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/AffineSpace/Simplex/Ray.lean",
+          "declarations": "Affine.Simplex.exists_ray_exit:49",
+          "note": "Native actual simplex ray/boundary geometric API using exact affine barycentric coordinates; triangle edge variant in the same core file."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency independent-vertices/difference/hull/face suppliers checked. Actual Affine.Simplex47 stores n+1 points and AffineIndependent. Actual affineIndependent_iff_linearIndependent_vsub135 identifies exactly independence of the n differences from v0 (reindex subtype j!=0 by j=1..n). The GEOMETRIC simplex is convexHull of its point range, actual Hull48; it is not just the tuple with no carrier. Actual Simplex.face97 restricts to nonempty vertex subsets with cardinal m+1 and preserves affine independence. Include the empty geometric face convention separately. This matches the full paragraph definition/face carriers, including n0. Native Affine.Simplex.exists_ray_exit49–103 proves actual ordinary ray-to-boundary geometry: from interior p and distinct q in affine span, some T>0 characterizes exactly lineMap p q t inside closed simplex iff t<=T and open iff t<T. Complete barycentric-coordinate proof read, including zero-dimensional impossibility through hypotheses; no full-dimensional ambient assumption. Exact dependency Simplex48/face98/difference-equivalence136 shift+1 with identical selected bodies; later unrelated pair-independence/sign hypotheses differ and were not used. Hull48 byte-identical.\nSearch and boundary notes: Read actual Simplex47/face97–108, independent135, convexHull48 and native Ray49–103 complete coordinate proof. Conormal forms, Euclidean angle/volume and global triangulability theorems introduce further structure/endpoints; selected ordinary face/ray API, not all simplex applications. Actual relevant declarations/hypotheses and indicated completed source bodies inspected; bounded source review without developing new proofs or rebuilding Lean. Current18 paragraph/revision guards checked before publication.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-077.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Convex/StdSimplex.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 470,
+      "sha256": "d9dcf7861bd0d57d65da4673eb2b7cac3c43f1e014df2aa0f07daf29185b79e5",
+      "measured_at": "2026-11-13T06:41:19.593845+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/LinearAlgebra/AffineSpace/Centroid.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 254,
+      "sha256": "2788344b830767035d909ce4fe819094f0aebb37e25e45a9ba36848e56d47fad",
+      "measured_at": "2026-11-13T06:41:19.617528+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/LinearAlgebra/AffineSpace/Independent.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1156,
+      "sha256": "2a5d6178a19f503b26be79d64ea0dc9e5b64941e489f303147b596eafb27b96c",
+      "measured_at": "2026-11-13T06:41:19.620423+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/LinearAlgebra/AffineSpace/Simplex/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 727,
+      "sha256": "ac199a6ec30e30490623fdef763d7f100f7d6d6df78ff0ce03c6648b4a4ef391",
+      "measured_at": "2026-11-13T06:41:19.623372+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Order/RelSeries.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1081,
+      "sha256": "5b52445e591a4d2b66020e971a6245833200849499725f4bcbc5fdc135bf5122",
+      "measured_at": "2026-11-13T06:41:19.630057+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Homotopy/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 668,
+      "sha256": "884a91a7dd19ed0ab6557cd603595a8975c501fba5163ff9a864f405bf47e844",
+      "measured_at": "2026-11-13T06:41:19.635962+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/MetricSpace/Sequences.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 41,
+      "sha256": "d281d78b61a045ce21c7723be34240d39facf6f2aa3d61a94802c4cefa397974",
+      "measured_at": "2026-11-13T06:41:19.639582+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/AlgebraicTopology/SimplicialComplex/Realization/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 638,
+      "sha256": "51565b2fb56b7ca079a7f178144a6a9c469d3ad19d7ca1f337b71d80287a3c35",
+      "measured_at": "2026-11-13T06:41:19.644111+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/AlgebraicTopology/SimplicialComplex/Subdivision/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 223,
+      "sha256": "c315532ff44cf55b466b2b31ee940f1c37b43073336388590a04a4b988aa226a",
+      "measured_at": "2026-11-13T06:41:19.648853+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/AlgebraicTopology/SimplicialComplex/Subdivision/Realization.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 214,
+      "sha256": "38c9dd82b7b9a89c5f3c101dcef46a8b0486c61b1d036be6bea1861cc972625b",
+      "measured_at": "2026-11-13T06:41:19.653342+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/AlgebraicTopology/Singular/BrouwerFixedPoint.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 173,
+      "sha256": "56ad2a1d39b0a8c00db6389836b91ad523a162688afe080b016120e544a4ad09",
+      "measured_at": "2026-11-13T06:41:19.657826+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Convex/SimplicialComplex/Barycentric.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 104,
+      "sha256": "7052d744456479871d12e5d83bcc4bf3297e72057d855dcab578916efab6ce5f",
+      "measured_at": "2026-11-13T06:41:19.662333+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Monoidal/Braided/Balanced/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 102,
+      "sha256": "647be6821d917f04780f3d366d23be1e34f0b7810973418fa35fe9c9925cf639",
+      "measured_at": "2026-11-13T06:41:19.666931+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Monoidal/Envelope/Quotient/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 198,
+      "sha256": "45bf99a4a79f5f4454e07d0f5fa04f8dd1d155583262344e0fc7a4fc76d4e377",
+      "measured_at": "2026-11-13T06:41:19.671476+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Monoidal/Pivotal/Simple.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 149,
+      "sha256": "14adc7186f224740a44cc69894e2011b6818dce8ede447732d56ee92e18a991a",
+      "measured_at": "2026-11-13T06:41:19.676082+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Monoidal/Pivotal/Trace.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 399,
+      "sha256": "bf7ae3b79935d1a24a4517fe0510325a099b2ac8785f1b353367c616bb1891d4",
+      "measured_at": "2026-11-13T06:41:19.682034+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Monoidal/Preadditive.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 115,
+      "sha256": "0fe188d05665aee5bc0237ce2d391144a622ff94c8bd96b906d3a95efe92824f",
+      "measured_at": "2026-11-13T06:41:19.686694+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/CategoryTheory/Preadditive/Schur.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 131,
+      "sha256": "23fa465d22f8c70e828d10e588eb28374f070830a6284396dd700004e57eb9fc",
+      "measured_at": "2026-11-13T06:41:19.696988+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/LinearAlgebra/AffineSpace/Simplex/Ray.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 165,
+      "sha256": "758d082a49fd8228a9797e21db14074bdfd301dd19e7200d9ebd4c693f416bd8",
+      "measured_at": "2026-11-13T06:41:19.707182+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Homotopy/Isotopy/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 403,
+      "sha256": "86f670a936db4b244e8dd06acd3133c957f9cdfd1d3dc8db640e83cdac64f1da",
+      "measured_at": "2026-11-13T06:41:19.712751+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Homotopy/Isotopy/Restrict.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 52,
+      "sha256": "33d277f3652e0273c455a5964984ff4c22bc4776267d8abc498b4bc3f9ee4f3c",
+      "measured_at": "2026-11-13T06:41:19.717760+00:00"
+    }
+  ]
+}

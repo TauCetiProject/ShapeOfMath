@@ -1,0 +1,489 @@
+{
+  "batch_id": "batch-011",
+  "author": "category_galois_formalization",
+  "reviews": [
+    {
+      "concept": "distributional-laplacian",
+      "concept_id": "b2e6d488-faab-535e-a54e-a83121b584b3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Distribution/Distribution.lean implements general distributions on an open set \u03a9, not only tempered distributions on the whole space. lineDerivCLM_apply (:238) defines the derivative by negative transpose on test functions and lineDerivOp_apply_apply (:268) proves \u2202v T(\u03c6)=T(-\u2202v \u03c6). DerivNotation.laplacianCLM (:341) is the finite sum of the doubled directional derivative operators and :353 proves the sum over any orthonormal basis. Applying the checked transpose equation twice cancels both minus signs, and linearity moves the finite sum into T, yielding exactly (\u0394T)(\u03c6)=T(\u0394\u03c6). All open-set and finite-dimensional real inner-product hypotheses match the Euclidean paragraph. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Distribution/Distribution.lean",
+          "declarations": "Distribution.lineDerivCLM_apply (:238); Distribution.lineDerivOp_apply_apply (:268)",
+          "note": "Native general distributional differentiation as a continuous transpose, with the sign/evaluation identity needed for the Laplacian."
+        },
+        {
+          "path": "Mathlib/Analysis/Distribution/DerivNotation.lean",
+          "declarations": "LineDeriv.laplacianCLM (:341); LineDeriv.laplacianCLM_eq_sum (:353)",
+          "note": "Native basis-independent finite sum of second directional derivatives, instantiated at the general distribution type."
+        }
+      ],
+      "search_notes": "Read the actual derivative operator, evaluation proof and Laplacian sum construction/proof. The positive-sign second derivative follows by explicit cancellation, not a convention guess. Fourier-multiplier/resolvent and fundamental-solution results are separate endpoints and excluded."
+    },
+    {
+      "concept": "distributional-laplacian",
+      "concept_id": "b2e6d488-faab-535e-a54e-a83121b584b3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency Distribution and DerivNotation files differ only by whitespace and fully supply the checked general open-set distributional Laplacian. Native Distribution/LineDeriv.lean:32 proves arbitrary iterated derivatives transfer to the test function in reverse order with (-1)^n, by actual induction using the one-derivative transpose; :45 specializes to iteration in one fixed direction. With n=2 this gives the exact positive-sign evaluation needed by each Laplacian term, a direct ordinary second-derivative API contribution. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Distribution/LineDeriv.lean",
+          "declarations": "Distribution.iteratedLineDerivOp_apply_apply (:32); Distribution.iterate_lineDerivOp_apply_apply (:45)",
+          "note": "Native iterated-transpose/sign computation for distributions on arbitrary open sets; n=2 gives the Laplacian term evaluation."
+        }
+      ],
+      "search_notes": "Read the complete short induction and fixed-direction specialization. Native TemperedDistribution/Deriv gives a planar coordinate formula but is a restricted alternative; PDE/GreenFunction and LaplacianResolvent prove named further endpoints rather than the definition."
+    },
+    {
+      "concept": "divergence-theorem-euclidean",
+      "concept_id": "ebc7815b-1240-58cb-99e9-baf573c20cb5",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. MeasureTheory/Integral/DivergenceTheorem proves finite-box flux identities and, at integral_eq_of_hasDerivAt_off_countable_of_le (:374), the exact one-dimensional interval divergence formula \u222ba..b F\u2032=F(b)-F(a), whose outward normals are +1 at b and -1 at a. Read its complete reduction to the box theorem and endpoint integrals. The planar rectangle theorem (:483) is another verified flux case but rectangles have corners; it does not certify the catalogue theorem for every bounded C\u00b9 domain in arbitrary Euclidean dimension. A general smooth-boundary surface-measure/gluing result was not verified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/DivergenceTheorem.lean",
+          "declarations": "MeasureTheory.integral_eq_of_hasDerivAt_off_countable_of_le (:374); integral_divergence_prod_Icc_of_hasFDerivAt_of_le (:483)",
+          "note": "Native divergence/flux proofs for interval and finite-box domains; partial coverage of the general bounded C\u00b9-domain theorem."
+        }
+      ],
+      "search_notes": "Inspected actual interval proof and box/rectangle theorem endpoints; BoxIntegral/DivergenceTheorem is also box integration. Missing generality is arbitrary curved C\u00b9 boundaries with outer unit-normal surface integral; do not promote a title or rectangle formula to this full claim."
+    },
+    {
+      "concept": "divergence-theorem-euclidean",
+      "concept_id": "ebc7815b-1240-58cb-99e9-baf573c20cb5",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native InnerHalfSpace.setIntegral_setOf_inner_lt_trace_fderiv (:104) proves \u222b{inner(x,\u03bd)<c} tr(D\u03c6)=\u222b{inner(x,\u03bd)=c} inner(\u03c6,\u03bd) d\u03bcHE for unit \u03bd and compactly supported C\u00b9 \u03c6 in a finite-dimensional real inner-product space. Read the complete proof: expand trace in an orthonormal basis, apply directional half-space integration by parts, sum and recover the normal component. This is a genuine flat-boundary divergence theorem and a local model for the requested result, but it does not itself establish all bounded curved C\u00b9 domains. The actual dependency retains only the checked box/interval coverage. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Integral/DivergenceTheorem/InnerHalfSpace.lean",
+          "declarations": "TauCeti.setIntegral_setOf_inner_lt_fderiv_apply (:63); setIntegral_setOf_inner_lt_trace_fderiv (:104)",
+          "note": "Native half-space divergence theorem with Hausdorff boundary measure, explicit outward unit normal and compact-support hypotheses; partial general-domain implementation."
+        }
+      ],
+      "search_notes": "Native main DivergenceTheorem has C\u00b2 pullback one-form Green formulas on rectangles/annuli; Box has zero-divergence boundary sums. They are different restricted presentations/endpoints and not counted as a checked all-domain C\u00b9 proof. Missing chart flattening/partition gluing to arbitrary boundary remains explicit."
+    },
+    {
+      "concept": "dominated-convergence-theorem",
+      "concept_id": "cff954c4-40f1-52d9-808d-2b531bba6bd7",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. L1Space/HasFiniteIntegral.hasFiniteIntegral_of_dominated_convergence (:413) proves the limit has finite integral by domination inherited through pointwise norm convergence; measurability follows from aestronglyMeasurable_of_tendsto_ae. Its tendsto_lintegral_norm_of_dominated_convergence (:429) proves the L\u00b9 error tends to zero, using the actual 2g bound and dominated nonnegative integral proof; read that complete argument. Integral/DominatedConvergence (:57) proves convergence of Bochner integrals. For measurable real/complex functions these give the entire paragraph, not just convergence of possibly junk-valued integrals. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/L1Space/HasFiniteIntegral.lean",
+          "declarations": "MeasureTheory.hasFiniteIntegral_of_dominated_convergence (:413); tendsto_lintegral_norm_of_dominated_convergence (:429)",
+          "note": "Native integrability/finite-integral limit proof and full convergence of the integrated norm error."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Integral/DominatedConvergence.lean",
+          "declarations": "MeasureTheory.tendsto_integral_of_dominated_convergence (:57)",
+          "note": "Native Bochner integral convergence under the exact a.e. domination and convergence hypotheses."
+        }
+      ],
+      "search_notes": "Read actual 2g error domination and norm-limit calculation through nonnegative DCT. The \u211d\u22650\u221e error integral tends to zero; converting by ENNReal.toReal gives the finite real L\u00b9 integral in the paragraph. No finite total measure assumption is imposed; scalar measurability supplies strong measurability."
+    },
+    {
+      "concept": "dominated-convergence-theorem",
+      "concept_id": "cff954c4-40f1-52d9-808d-2b531bba6bd7",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency HasFiniteIntegral and Integral/DominatedConvergence files differ only by whitespace and supply the full checked integrability/L\u00b9/integral conclusions. Native Lebesgue/DominatedConvergence.tendsto_lintegral_filter_limsup_of_dominated_convergence (:153) proves the ordinary unnamed-limit variant for countably generated filters by identifying each a.e. limit with its limsup and applying the general dominated theorem. Full proof and eventual measurability/domination hypotheses inspected. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Integral/Lebesgue/DominatedConvergence.lean",
+          "declarations": "TauCeti.tendsto_lintegral_filter_limsup_of_dominated_convergence (:153)",
+          "note": "Native ordinary dominated-convergence limit-presentation API; actual full scalar/Bochner theorem remains dependency-owned."
+        }
+      ],
+      "search_notes": "Read native main DCT exceptional-null-point normalization and the selected generic limsup variant. Cutoff integrals, parameterized paths and Lp coefficient products are application or extra closure endpoints, not the reason for this core mapping."
+    },
+    {
+      "concept": "domination-basic-sequences",
+      "concept_id": "844495bd-3417-5ea9-bf7e-aa29ecb68f28",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked Analysis/Normed/Module/Bases.GeneralSchauderBasis (:104) actual basis/coordinate/biorthogonality/expansion fields and its finite projection API. Native c\u2080/Basis provides coordinate unconditional bases, and normed/Lp files estimate particular coordinate sums, but no checked predicate or equivalent finite-sum comparison for arbitrary two basic sequences was verified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched domination/dominates and equivalent basic/Schauder sequence candidates in normed/basis trees. The unresolved endpoint is one uniform C controlling every finitely supported coefficient family between the two sequences, not generic boundedness of one operator or an individual sum. Prerequisite basis and norm structures alone are not allocated."
+    },
+    {
+      "concept": "domination-basic-sequences",
+      "concept_id": "844495bd-3417-5ea9-bf7e-aa29ecb68f28",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked Analysis/Normed/Module/Bases.GeneralSchauderBasis (:104) actual basis/coordinate/biorthogonality/expansion fields and its finite projection API. Native c\u2080/Basis provides coordinate unconditional bases, and normed/Lp files estimate particular coordinate sums, but no checked predicate or equivalent finite-sum comparison for arbitrary two basic sequences was verified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched domination/dominates and equivalent basic/Schauder sequence candidates in normed/basis trees. The unresolved endpoint is one uniform C controlling every finitely supported coefficient family between the two sequences, not generic boundedness of one operator or an individual sum. Prerequisite basis and norm structures alone are not allocated."
+    },
+    {
+      "concept": "douglas-factorization-theorem",
+      "concept_id": "b43eb9b4-5099-58a0-a17e-7865b6b73a79",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked bounded operator/adjoint/positive operator candidate scopes, but no full equivalence of Ran A\u2286Ran B, AA*\u2264\u03bbBB* and bounded A=B C with the optimal norm constant was verified. Generic algebraic range-factorization does not prove the chosen factor is bounded; the Hilbert-space operator-order bridge is an essential part of this theorem. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched Douglas/factor-through/Gram and range inclusion in analysis operator/inner-product sources. Positive operator and adjoint constructors alone are prerequisites; no native file selected without the complete range/order/factorization and optimum claim. Unknown is not an absence assertion."
+    },
+    {
+      "concept": "douglas-factorization-theorem",
+      "concept_id": "b43eb9b4-5099-58a0-a17e-7865b6b73a79",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native Gram/Factor.factorThru (:110) constructs a bounded factor T through A from the common-source bound \u2016T x\u2016\u2264C\u2016A x\u2016 by extension to closure(range A), followed by orthogonal projection. factorThru_comp (:131) proves V A=T, and norm_factorThru_le (:155) proves \u2016V\u2016\u2264C; complete constructor and these proofs inspected. Applied to A=B* and T=A* then adjointed, this is the operator-inequality-to-factorization direction of Douglas. However the arbitrary range-inclusion implication and the full least-norm/least-\u03bb optimum were not verified in this file or neighboring source, so the entire three-way theorem is not certified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Gram/Factor.lean",
+          "declarations": "ContinuousLinearMap.factorThru (:110); factorThru_comp (:131); norm_factorThru_le (:155)",
+          "note": "Native bounded factor construction from pointwise norm domination, with explicit norm control; direct partial proof of Douglas factorization."
+        }
+      ],
+      "search_notes": "Read actual dense closure-range construction, orthogonal projection and extension norm estimate. Equal-Gram contraction/polar partial-isometry sections strengthen a special equality case but do not supply arbitrary Ran A\u2286Ran B or the optimal constant equivalence. Preserve that missing frontier, rather than labeling the full theorem formalized."
+    },
+    {
+      "concept": "drury-teardrop",
+      "concept_id": "d2846c58-d6f0-5765-989b-93efc8337ddb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Scoped searches for Drury/teardrop and numericalRange/numerical_range/numericalRadius/numerical_radius in operator and inner-product sources did not verify the two-disk convex-hull enclosure for f(T). Mathlib Complex/AbelLimit uses teardrop-shaped Stolz regions for scalar limits, a different meaning; functional calculus/norm bounds alone do not prove numerical range control. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Checked the Stolz-set declaration context to exclude the lexical false match. Missing is numerical-radius hypothesis w(T)\u22641, disk-algebra functional calculus with this precise enclosure, and 1+|f(0)|-|f(0)|\u00b2\u22645/4. No absence claim or automatic application-file mapping."
+    },
+    {
+      "concept": "drury-teardrop",
+      "concept_id": "d2846c58-d6f0-5765-989b-93efc8337ddb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Scoped searches for Drury/teardrop and numericalRange/numerical_range/numericalRadius/numerical_radius in operator and inner-product sources did not verify the two-disk convex-hull enclosure for f(T). Mathlib Complex/AbelLimit uses teardrop-shaped Stolz regions for scalar limits, a different meaning; functional calculus/norm bounds alone do not prove numerical range control. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Checked the Stolz-set declaration context to exclude the lexical false match. Missing is numerical-radius hypothesis w(T)\u22641, disk-algebra functional calculus with this precise enclosure, and 1+|f(0)|-|f(0)|\u00b2\u22645/4. No absence claim or automatic application-file mapping."
+    },
+    {
+      "concept": "dyadic-cube",
+      "concept_id": "9de704cd-503d-50a1-a309-1cdc33084505",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Searched dyadic cube and cube dyadic across actual Mathlib sources; the checked general box/half-open interval constructions permit writing the displayed set but no native dyadic-grid declaration or immediate grid API was verified. A new pointwise formula assembled from intervals alone is not charged as an existing dyadic implementation. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Compared with the actual native Tau floor-index cube definition and exact half-open box theorem. Mathlib BoxIntegral boxes and generic scaling are prerequisite machinery unless a specific dyadic construction/proof is inspected; unknown records that unverified endpoint rather than absence."
+    },
+    {
+      "concept": "dyadic-cube",
+      "concept_id": "9de704cd-503d-50a1-a309-1cdc33084505",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Lebesgue/DyadicCube.dyadicCube (:81) is the fiber of the coordinate floor index floor(x_i/2^k). dyadicCube_eq_pi (:100) proves it equals \u220fi [m_i 2^k,(m_i+1)2^k) by floor_eq_iff and positive zpow bounds. Choosing k=-j gives exactly 2^-j([0,1)^n+m). Read complete box equivalence and same-level disjointness/nesting proofs; arbitrary finite dimension Fin n specializes directly. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Measure/Lebesgue/DyadicCube.lean",
+          "declarations": "TauCeti.dyadicCube (:81); dyadicCube_eq_pi (:100); disjoint_dyadicCube (:150); dyadicCube_subset_or_disjoint (:157)",
+          "note": "Native exact floor-index half-open dyadic cube construction and ordinary membership, disjointness/nesting grid API."
+        }
+      ],
+      "search_notes": "Sign of the scale index is explicitly reversed to match catalogue notation. Dimension zero is handled by dyadicCube_eq_univ. Euclidean.lean supplies metric wrapper transport; maximal-cube selection and harmonic-analysis applications are further endpoints, not needed for the definition."
+    },
+    {
+      "concept": "ell1-block-average",
+      "concept_id": "978d5870-fca1-5ad1-b04b-63c3a5fb825d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The catalogue requires successive nonzero block vectors relative to a basis as well as a normalized average and lower norm bound. The actual general Schauder-basis and finite projection constructors inspected do not supply the ordered disjoint successive-support predicate, nor an \u2113\u2081\u207f average structure with this lower bound. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched block average/ell1/l1 average and ordered support/basis candidates, reusing the checked block-sequence frontier from batch-008. Native coordinate sum norm estimates concern particular lp vectors; they do not verify this general block-average definition. Unknown is a bounded unresolved implementation search, not absence."
+    },
+    {
+      "concept": "ell1-block-average",
+      "concept_id": "978d5870-fca1-5ad1-b04b-63c3a5fb825d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The catalogue requires successive nonzero block vectors relative to a basis as well as a normalized average and lower norm bound. The actual general Schauder-basis and finite projection constructors inspected do not supply the ordered disjoint successive-support predicate, nor an \u2113\u2081\u207f average structure with this lower bound. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched block average/ell1/l1 average and ordered support/basis candidates, reusing the checked block-sequence frontier from batch-008. Native coordinate sum norm estimates concern particular lp vectors; they do not verify this general block-average definition. Unknown is a bounded unresolved implementation search, not absence."
+    },
+    {
+      "concept": "elliptic-principal-eigenvalue",
+      "concept_id": "89a31c71-675a-57b1-a5c0-633b62a3afe0",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Inspected Tau DifferentialOperator/LaplaceType.IsLaplaceType (:90): it prescribes a negative scalar metric principal symbol and supplies perturbation/coordinate compatibility, not the general positive principal-part spectral assertion in the catalogue. Riemannian/Schrodinger and Sobolev/Schrodinger prove coercivity/weak inverse and a zero-solution uniqueness result for nonnegative potentials. No checked proof of a simple largest eigenvalue with positive eigenfunction for every stated self-adjoint elliptic operator was verified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped principal-eigenvalue, eigenfunction, elliptic spectrum and Riemannian/PDE searches; excluded finite-dimensional matrix eigenvalue theorems. Missing is existence plus simplicity/positivity and identification of every positive eigenfunction, including the catalogue sign convention. Generic coercivity/maximum estimates are prerequisites, not a direct partial implementation of this full theorem."
+    },
+    {
+      "concept": "elliptic-principal-eigenvalue",
+      "concept_id": "89a31c71-675a-57b1-a5c0-633b62a3afe0",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Inspected Tau DifferentialOperator/LaplaceType.IsLaplaceType (:90): it prescribes a negative scalar metric principal symbol and supplies perturbation/coordinate compatibility, not the general positive principal-part spectral assertion in the catalogue. Riemannian/Schrodinger and Sobolev/Schrodinger prove coercivity/weak inverse and a zero-solution uniqueness result for nonnegative potentials. No checked proof of a simple largest eigenvalue with positive eigenfunction for every stated self-adjoint elliptic operator was verified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Scoped principal-eigenvalue, eigenfunction, elliptic spectrum and Riemannian/PDE searches; excluded finite-dimensional matrix eigenvalue theorems. Missing is existence plus simplicity/positivity and identification of every positive eigenfunction, including the catalogue sign convention. Generic coercivity/maximum estimates are prerequisites, not a direct partial implementation of this full theorem."
+    },
+    {
+      "concept": "elliptic-selfadjoint-discrete-spectrum",
+      "concept_id": "eeaffc3f-d41a-5257-b161-3a7c3a67dd11",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked actual native IsLaplaceType symbol predicate and Sobolev Schr\u00f6dinger weak inverse endpoint. They do not establish a self-adjoint L\u00b2 realization of every symmetric second-order uniformly elliptic operator with domain H\u00b2, compact resolvent/discrete spectrum and a complete smooth eigenbasis. Generic compact self-adjoint spectral results require exactly that unverified elliptic realization/regularity bridge. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched manifold spectral/eigen/discrete-spectrum and elliptic/PDE operator candidates; inspected smooth symbol and weak H\u00b9-solution statements rather than inferring from filenames. Missing H\u00b2-domain equality, self-adjoint extension and all smooth eigenfunctions remain explicit; no specialized spectral subbundle or Morse spectral sequence is substituted."
+    },
+    {
+      "concept": "elliptic-selfadjoint-discrete-spectrum",
+      "concept_id": "eeaffc3f-d41a-5257-b161-3a7c3a67dd11",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked actual native IsLaplaceType symbol predicate and Sobolev Schr\u00f6dinger weak inverse endpoint. They do not establish a self-adjoint L\u00b2 realization of every symmetric second-order uniformly elliptic operator with domain H\u00b2, compact resolvent/discrete spectrum and a complete smooth eigenbasis. Generic compact self-adjoint spectral results require exactly that unverified elliptic realization/regularity bridge. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched manifold spectral/eigen/discrete-spectrum and elliptic/PDE operator candidates; inspected smooth symbol and weak H\u00b9-solution statements rather than inferring from filenames. Missing H\u00b2-domain equality, self-adjoint extension and all smooth eigenfunctions remain explicit; no specialized spectral subbundle or Morse spectral sequence is substituted."
+    },
+    {
+      "concept": "ellp-sequence-space",
+      "concept_id": "25711c85-43ad-5613-9565-a69937972094",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Normed/Lp/lpSpace.Mem\u2113p (:75) defines summability of \u2016f_i\u2016^p for 0<p<\u221e and bounded coordinate norms for p=\u221e; lp (:367) bundles these families. norm_eq_tsum_rpow (:454) and norm_eq_ciSup (:448) give exactly the standard p-norm and supremum norm. Set \u03b1=\u2115 and scalar fibers \u211d or \u2102. This is exactly counting-measure Lp since each singleton has mass one and a.e. equality is pointwise equality; the explicit scalar sequence presentation in the paragraph avoids needing a duplicate quotient carrier. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Lp/lpSpace.lean",
+          "declarations": "Mem\u2113p (:75); lp (:367); lp.norm_eq_ciSup (:448); lp.norm_eq_tsum_rpow (:454)",
+          "note": "Native scalar/dependent sequence lp spaces and exact finite/infinite exponent membership and norm formulas."
+        }
+      ],
+      "search_notes": "Read actual if-branches, membership equivalences and norm constructors/proofs. The p=0 finite-support branch is outside catalogue 1\u2264p\u2264\u221e; no quasi-norm below one is substituted. Natural-number indexing is a direct specialization of the general discrete index type."
+    },
+    {
+      "concept": "ellp-sequence-space",
+      "concept_id": "25711c85-43ad-5613-9565-a69937972094",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The supplying dependency lpSpace differs only by whitespace and gives the full checked scalar sequence lp construction/norm. Native Normed/Lp/Basic.evalCLM_apply (:54) computes coordinate evaluation and hasSum_norm_one (:57) proves the exact \u2113\u00b9 norm-as-sum identity; its exponent norm comparison (:62) preserves the same underlying coordinates. Read actual evaluation and \u2113\u00b9 normalization proof, ordinary sequence-space API without extra structures. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Lp/Basic.lean",
+          "declarations": "lp.evalCLM_apply (:54); lp.hasSum_norm_one (:57); lp.norm_le_norm_of_exponent_le (:62)",
+          "note": "Native coordinate evaluation and norm/summation API for lp spaces; the actual spaces remain dependency-defined."
+        }
+      ],
+      "search_notes": "Native bases, C0Ideal, Sobolev and tensor/weighted endpoint files are separate concepts and excluded. All claimed formulas specialize to \u2115 and scalar fibers, retaining 1\u2264p constraints where normed structure is used."
+    },
+    {
+      "concept": "embedded-smooth-surface-r3",
+      "concept_id": "43c85a23-15ac-5fab-8449-b2e7b2baf38d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Reused the checked smooth-embedding/graph comparison from batch-008: Mathlib IsSmoothEmbedding (:69) bundles a C^n immersion plus topological embedding, and native normal-graph rectifiability estimates assume a graph. A full equivalence with the catalogue subset-level local smooth graph after a rigid ambient coordinate change was not verified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected actual smooth embedding fields and Tau Rectifiable/Graph normal-graph tangent/cone theorem; searched local embedded-surface graph and immersion candidates. The missing check is both directions of the local orthogonal-coordinate graph characterization for arbitrary subsets of \u211d\u00b3. Smooth embeddings and given graphs alone are prerequisite/special presentations, so no false full match or absence claim."
+    },
+    {
+      "concept": "embedded-smooth-surface-r3",
+      "concept_id": "43c85a23-15ac-5fab-8449-b2e7b2baf38d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Reused the checked smooth-embedding/graph comparison from batch-008: Mathlib IsSmoothEmbedding (:69) bundles a C^n immersion plus topological embedding, and native normal-graph rectifiability estimates assume a graph. A full equivalence with the catalogue subset-level local smooth graph after a rigid ambient coordinate change was not verified. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected actual smooth embedding fields and Tau Rectifiable/Graph normal-graph tangent/cone theorem; searched local embedded-surface graph and immersion candidates. The missing check is both directions of the local orthogonal-coordinate graph characterization for arbitrary subsets of \u211d\u00b3. Smooth embeddings and given graphs alone are prerequisite/special presentations, so no false full match or absence claim."
+    },
+    {
+      "concept": "epsilon-net-metric-space",
+      "concept_id": "a926ffda-193e-53ea-9fa9-36dae53cd4fb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. MetricSpace/Cover.IsCover (:47) is the relation-cover predicate for edist(x,y)\u2264\u03b5; its documented \u03b5-net meaning and image_lipschitz (:66) proof explicitly unpack to \u2200x\u2208A, \u2203y\u2208N, distance(x,y)\u2264\u03b5. No N\u2286A requirement is present. For metric spaces edist\u2264\u03b5 is exactly the real distance condition at nonnegative radius \u03b5; the closed-ball interpretation of within distance \u03b5 is retained. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/MetricSpace/Cover.lean",
+          "declarations": "Metric.IsCover (:47); Metric.IsCover.mono_radius (:63); Metric.IsCover.image_lipschitz (:66)",
+          "note": "Native external \u03b5-net/cover predicate and ordinary monotonicity/Lipschitz image API, with no internal-center restriction."
+        }
+      ],
+      "search_notes": "Read actual predicate and full image proof. CoveringNumber is a cardinal minimization and internal coveringNumber adds N\u2286A, so neither is used as a substitute for the bare external-net definition. Strict-ball convention would require an explicit catalogue change; this review uses distance at most \u03b5."
+    },
+    {
+      "concept": "epsilon-net-metric-space",
+      "concept_id": "a926ffda-193e-53ea-9fa9-36dae53cd4fb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency MetricSpace/Cover is byte-identical and fully supplies the checked external \u03b5-net predicate and ordinary API. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read native CoveringNumbers.lean: finite packing-number bounds and disjoint small balls for separated sets are different cardinality/packing endpoints, not a reimplementation of generic \u03b5-net membership. No native Cover file or direct core net normalization selected."
+    },
+    {
+      "concept": "equivalence-class",
+      "concept_id": "8b55c346-48a9-5c49-bfed-33c2b8aac665",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Order/Setoid/Partition.classes (:61) is literally {s | \u2203y, s={x | r x y}}, the set of equivalence classes. rel_iff_exists_classes (:86) and classes_eqv_classes (:100) prove classes partition the type, by actual reflexivity/symmetry/transitivity arguments. Order/Setoid/Basic.ker_mk_eq (:84) identifies the equivalence relation as equality of Quotient representatives, giving the quotient-type presentation of exactly the same classes. Lean v4.36.0-rc2 b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a Init/Core:1930 supplies the primitive quotient wrapper, checked via git show. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Order/Setoid/Partition.lean",
+          "declarations": "Setoid.classes (:61); rel_iff_exists_classes (:86); classes_eqv_classes (:100)",
+          "note": "Native exact sets of equivalence classes, relation recovery and unique class membership proofs."
+        },
+        {
+          "path": "Mathlib/Order/Setoid/Basic.lean",
+          "declarations": "Setoid.ker_mk_eq (:84)",
+          "note": "Native equality-of-quotient-representatives characterization for the same equivalence relation; primitive Quotient is Lean-owned."
+        }
+      ],
+      "search_notes": "Read exact class set and complete partition proof, not an unrelated equivalence of types. No choice of a special canonical representative is required. Empty type/classes are handled by the existing definitions."
+    },
+    {
+      "concept": "equivalence-class",
+      "concept_id": "8b55c346-48a9-5c49-bfed-33c2b8aac665",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The dependency Partition file is identical and Basic only omits a later constant-kernel helper; the checked classes and quotient-kernel identities are unchanged. Native Setoid/Basic.ofPred_rel_eq_iff (:47) proves equality of the actual sets {z|r z x} iff r x y using reflexivity and transitivity; preimage_image_quotientMk_eq_relPreimage (:60) proves the quotient saturation formula. Read both complete short proofs. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Data/Setoid/Basic.lean",
+          "declarations": "Setoid.ofPred_rel_eq_iff (:47); Setoid.preimage_image_quotientMk_eq_relPreimage (:60)",
+          "note": "Native equality-of-classes and quotient saturation API for arbitrary equivalence relations; class/quotient definitions remain dependency-owned."
+        }
+      ],
+      "search_notes": "The quotient map\u2019s surjectivity and representative computations are adjacent ordinary API. Model-theory counting/isolation endpoints impose extra structures and are excluded."
+    },
+    {
+      "concept": "equivalence-relation",
+      "concept_id": "9bc9ef93-93f4-52cd-bc98-1921543de10f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual importing toolchains pin Lean v4.36.0-rc2 b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a. Init/Core:1322 defines Equivalence with exactly reflexivity, symmetry and transitivity, and :1566 Setoid bundles such a relation; both committed declarations were read via git show. Native Order/Setoid/Basic.eq_iff_rel_eq (:48), refl\u2032/symm\u2032/trans\u2032 and ker (:79) develop ordinary relation extensionality and the equality-kernel constructor. This is genuine native core API for the exact dependency-owned predicate. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Order/Setoid/Basic.lean",
+          "declarations": "Setoid.eq_iff_rel_eq (:48); refl'; symm'; trans'; Setoid.ker (:79)",
+          "note": "Native ordinary extensionality, axioms interface and kernel equivalence-relation constructor, extending Lean\u2019s exact Equivalence/Setoid definition."
+        }
+      ],
+      "search_notes": "No equivalence-of-types/bijection meaning is substituted. The carrier predicate has no finiteness, decidability or countability requirement; quotient order-lattice and classification results are extra endpoints outside the minimal native mapping."
+    },
+    {
+      "concept": "equivalence-relation",
+      "concept_id": "9bc9ef93-93f4-52cd-bc98-1921543de10f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Lean supplies the exact checked Equivalence/Setoid fields; dependency Order/Setoid/Basic has unchanged extensionality/axiom/kernel definitions despite an unrelated later helper omission. Native Setoid.ofPred_rel_eq_iff (:47) proves two elements are related exactly when their class predicates agree; its complete proof uses precisely the three equivalence axioms. This is an ordinary characterization of the same general relation, not a theorem about a stronger model-theoretic class. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Data/Setoid/Basic.lean",
+          "declarations": "Setoid.ofPred_rel_eq_iff (:47); Setoid.map_of_le_surjective (:54)",
+          "note": "Native class-equality characterization and ordinary quotient map API for arbitrary equivalence relations; exact relation axioms are dependency-owned."
+        }
+      ],
+      "search_notes": "Read actual class-equality proof and quotient representative maps. Native Logic/Relation treats generated reflexive/transitive or symmetric closures, whereas this file directly handles a supplied arbitrary equivalence relation; no inherited-only false negative."
+    },
+    {
+      "concept": "equivalent-basic-sequences",
+      "concept_id": "72accd0d-cc58-55f9-955e-c34f9853ddcb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The general Schauder-basis source supplies coordinates and convergent expansions, but the checked candidate search did not verify the two-sided finite-coefficient domination criterion or its equivalence with a bounded coordinate isomorphism of the closed spans. Particular c\u2080 coordinate bases do not establish arbitrary basic-sequence equivalence. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected actual GeneralSchauderBasis fields/finite-projection scope and native c\u2080 unconditionalBasis. Searched equivalent/basic-sequence/dominat terminology in analysis basis/operator candidates. Missing is the two-sided constants and extension/inverse-on-closed-span proof, rather than an alias for linear equivalence."
+    },
+    {
+      "concept": "equivalent-basic-sequences",
+      "concept_id": "72accd0d-cc58-55f9-955e-c34f9853ddcb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The general Schauder-basis source supplies coordinates and convergent expansions, but the checked candidate search did not verify the two-sided finite-coefficient domination criterion or its equivalence with a bounded coordinate isomorphism of the closed spans. Particular c\u2080 coordinate bases do not establish arbitrary basic-sequence equivalence. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected actual GeneralSchauderBasis fields/finite-projection scope and native c\u2080 unconditionalBasis. Searched equivalent/basic-sequence/dominat terminology in analysis basis/operator candidates. Missing is the two-sided constants and extension/inverse-on-closed-span proof, rather than an alias for linear equivalence."
+    },
+    {
+      "concept": "essential-supremum",
+      "concept_id": "a5b8d152-bb97-55b4-a4ba-c27610ee4426",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Function/EssSup.essSup (:46) is limsup along ae \u03bc; essSup_eq_sInf (:244) proves it equals sInf{a | \u03bc{x | a<f x}=0} by expanding limsup and ae_iff. Choose the complete extended-real codomain EReal for a real-valued f to preserve \u00b1\u221e, including no finite a.e. upper bound; conditionally complete real essSup alone would have a fallback and is not the intended unbounded case. The set condition is exactly f\u2264a a.e., so it is the paragraph\u2019s infimum of a.e. upper bounds. Read the complete sInf proof and a.e. upper-bound interface. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/EssSup.lean",
+          "declarations": "MeasureTheory.essSup (:46); essSup_eq_sInf (:244); ae_le_essSup (:266)",
+          "note": "Native essential supremum for general ordered codomains, exact infimum-of-a.e.-bounds theorem and ordinary a.e. order API; extended reals retain infinite values."
+        }
+      ],
+      "search_notes": "Explicitly use extended-real codomain instead of silently treating an unbounded function\u2019s real sInf as infinite. Upper bounds a=+\u221e are harmless; absence of all finite bounds gives +\u221e, and null-measure convention gives -\u221e. Essential norm of |f| is a related but different quantity."
+    },
+    {
+      "concept": "essential-supremum",
+      "concept_id": "a5b8d152-bb97-55b4-a4ba-c27610ee4426",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency Function/EssSup is identical and supplies the complete checked extended-real a.e.-bound infimum definition. Native EssSup.essSup_eq_iSup_support (:49) proves the ordinary support characterization for a lower semicontinuous complete-linear-order-valued function when support is conull; the complete proof uses generic a.e. upper bounds and closed superlevel sets. EReal satisfies the codomain requirements, with all topology/support assumptions explicit. It does not assert the identity for arbitrary measurable functions. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Function/EssSup.lean",
+          "declarations": "TauCeti.essSup_eq_iSup_support (:49); TauCeti.essSup_sub_essInf_le (:63)",
+          "note": "Native support/order characterization and elementary interval-bound API of essential suprema; definition and extended values supplied by Mathlib."
+        }
+      ],
+      "search_notes": "Read the complete support characterization and finite real interval oscillation proof. Extra support/topology assumptions affect these API results only, not full inherited availability for arbitrary functions. No finite total measure is assumed by the selected support theorem."
+    },
+    {
+      "concept": "fatou-lemma",
+      "concept_id": "344710cc-99f1-5841-b981-c6b7511b955e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Lebesgue/Add.lintegral_liminf_le (:237), specializing its countably generated filter to atTop on \u2115, is exactly \u222bliminf f_n\u2264liminf\u222bf_n for measurable \u211d\u22650\u221e-valued functions. Read private nat proof (:207): write liminf as increasing supremum of tail infima, exchange integral and increasing supremum by monotone convergence, and bound integral of each tail infimum. The public filter theorem (:220) reduces via a sequence tending to liminf. Infinite integrals are retained throughout. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Lebesgue/Add.lean",
+          "declarations": "MeasureTheory.lintegral_liminf_le' (:220); lintegral_liminf_le (:237)",
+          "note": "Native Fatou inequality proof for nonnegative extended integrals, with measurable/a.e.-measurable variants and arbitrary countably generated filters."
+        }
+      ],
+      "search_notes": "No integrable domination or finite measure is assumed. Nonnegative real functions embed in \u211d\u22650\u221e with the same integral; a finite-valued Bochner integral is not substituted when infinity is possible."
+    },
+    {
+      "concept": "fatou-lemma",
+      "concept_id": "344710cc-99f1-5841-b981-c6b7511b955e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Reviewed Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency Lebesgue/Add is byte-identical and fully supplies the checked nonnegative Fatou inequality, including infinite values. Source inspection only; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native Lebesgue/DominatedConvergence.limsup_setLIntegral_le is a reverse-Fatou set-integral estimate under finite domination, and its limsup DCT variant is dominated convergence. Both actual scopes/proofs were inspected; they are distinct endpoints and do not justify allocating native LOC to the unrestricted Fatou lemma."
+    }
+  ]
+}

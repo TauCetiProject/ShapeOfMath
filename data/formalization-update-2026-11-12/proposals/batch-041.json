@@ -1,0 +1,561 @@
+{
+  "batch_id": "batch-041",
+  "author": "category_galois_formalization",
+  "reviews": [
+    {
+      "concept": "convex-subgroup-ordered-group",
+      "concept_id": "275fa383-f684-5071-82b3-63771f811084",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact primary subgroup condition is (H : AddSubgroup G).carrier.OrdConnected: Defs:88 and OrdConnected.ordConnected_def:42 say every closed interval between members stays inside. Order/Quotient:33/42 defines the quotient preorder by transitive closure of order-or-equivalence, with monotone projection:65; :87/101 proves the induced LINEAR order when the ambient order is linear and fibers are order-connected. The catalogue does not state totality. For a genuinely partially ordered abelian G I have not checked an existing completed antisymmetry/order-compatibility theorem for the convex additive-subgroup quotient. Thus primary definition and a linear-order quotient variant are available, but that general explicit quotient endpoint remains open in this review. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Order/Interval/Set/Defs.lean",
+          "declarations": "Set.OrdConnected:88",
+          "note": "Actual interval-convex predicate used on the carrier of an additive subgroup, not vector-space convexity."
+        },
+        {
+          "path": "Mathlib/Order/Quotient.lean",
+          "declarations": "Quotient.instPreorder:42; Quotient.mk_le_mk:87; Quotient.instLinearOrder:101",
+          "note": "Induced quotient preorder and actual linear condensation; general partial-order antisymmetry for convex subgroup quotients remains unverified."
+        }
+      ],
+      "search_notes": "Searched ConvexSubgroup/order-convex subgroup formulations and actual GroupTheory/QuotientGroup/Defs and Order/Quotient. General quotient Preorder alone is not a PartialOrder proof. Do not silently add totality to the paragraph; abstract subgroup carrier file is prerequisite-only."
+    },
+    {
+      "concept": "convex-subgroup-ordered-group",
+      "concept_id": "275fa383-f684-5071-82b3-63771f811084",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native TauCeti.ConvexSubgroup:83 extends Subgroup under Group+PartialOrder with ordConnected field; convex:111 is exactly h1≤g≤h2 closure. Apply to Multiplicative G for the additive meaning. Native quotientLinearOrder:597 and quotientIsOrderedMonoid:619 have CommGroup+LinearOrder+IsOrderedMonoid (actual section hypotheses), with quotient_le_iff:604 and quotientMk_monotone:633; read complete fiber-convexity and quotient multiplication proofs:577-628. This gives the exact primary partial-order definition and the full totally ordered quotient variant. As the catalogue did not assume totality, general partially ordered quotient antisymmetry/compatibility remains unchecked, so partial rather than an unjustified stronger-scope claim. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Order/Group/ConvexSubgroup.lean",
+          "declarations": "TauCeti.ConvexSubgroup:83; .convex:111; .quotientLinearOrder:597; .quotient_le_iff:604; .quotientIsOrderedMonoid:619; .quotientMk_monotone:633",
+          "note": "Native definition, closure/comap core API and genuine ordered quotient construction under stated totality."
+        }
+      ],
+      "search_notes": "Enumerated native Algebra/Order/Group siblings (Bounds, Cofinal, Subgroup, MinMax, IntervalIsometry). Exclude Archimedean height-one application as a separate additional endpoint; do not infer a general partial-order quotient from the named linear-order instance."
+    },
+    {
+      "concept": "convex-subset-real-vector-space",
+      "concept_id": "3b97f07e-2e35-5056-97c3-18f456567fef",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Convex:53 plus convex_iff_add_mem:72 says a•x+b•y∈C for nonnegative a,b with a+b=1. Over ℝ take a=1−t,b=t; conversely every such pair has a=1−b. Exact arbitrary real module, no finite dimension or topology. Read interval equivalence and intersection/product closure bodies:61-110. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Convex/Basic.lean",
+          "declarations": "Convex:53; convex_iff_add_mem:72; Convex.inter:91",
+          "note": "Defines the convex subset predicate and ordinary closure/segment API."
+        }
+      ],
+      "search_notes": "Reviewed native Analysis/Convex directory and selected the topology-free module segment file; exclude Hahn–Banach separation, fixed points, convex functions and finite-dimensional bodies as separately significant endpoints."
+    },
+    {
+      "concept": "convex-subset-real-vector-space",
+      "concept_id": "3b97f07e-2e35-5056-97c3-18f456567fef",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact imported Mathlib Convex:53/convex_iff_add_mem:72 is byte-identical to standalone. Native Set.convexSegment:108 constructs ((1−t)x+ty) in the convex subtype for t∈[0,1], without topology or finite dimension; val_eqOn:120 and zero/one:128/135 prove the underlying formula/endpoints, all complete bodies read. This is direct convex-set core API, not a convex optimization application. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/Segment.lean",
+          "declarations": "Set.convexSegment:108; Set.convexSegment_val_eqOn:120; Set.convexSegment_zero:128; Set.convexSegment_one:135",
+          "note": "Native affine segment inside any convex module set, clamped outside [0,1], with genuine endpoint/evaluation API."
+        }
+      ],
+      "search_notes": "Reviewed native Analysis/Convex directory and selected the topology-free module segment file; exclude Hahn–Banach separation, fixed points, convex functions and finite-dimensional bodies as separately significant endpoints."
+    },
+    {
+      "concept": "coprime-integers",
+      "concept_id": "89340650-95de-5da1-9502-4154de86e930",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Int.isCoprime_iff_gcd_eq_one:36 is exactly IsCoprime a b ↔ Int.gcd a b=1. Read both Bézout/divisibility directions:37-43; gcd is nonnegative natural, so signed integers have the usual convention. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Coprime/Lemmas.lean",
+          "declarations": "Int.isCoprime_iff_gcd_eq_one:36",
+          "note": "Exact gcd-one characterization of integer coprimality and ordinary arithmetic API."
+        }
+      ],
+      "search_notes": "Native Data/Int/GCD and RingTheory/Coprime siblings inspected. Allocate the normalization file; do not add congruence-subgroup cusp counting or class-group representatives as separate arithmetic applications."
+    },
+    {
+      "concept": "coprime-integers",
+      "concept_id": "89340650-95de-5da1-9502-4154de86e930",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Int.isCoprime_iff_gcd_eq_one:37 is the exact same completed equivalence (header +1). Native TauCeti.Int.isCoprime_div_gcd_div_gcd:45 proves the ordinary normalized quotient pair is coprime for n≠0; body:47-48 rewrites gcd and applies its completed quotient law. This stronger first presentation (one argument natural) is genuine immediate integer-coprimality API, not merely a use in a cusp theorem. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Data/Int/GCD.lean",
+          "declarations": "TauCeti.Int.isCoprime_div_gcd_div_gcd:45",
+          "note": "Native normalization law: dividing integer c and nonzero natural n by their gcd leaves coprime integer quotients."
+        }
+      ],
+      "search_notes": "Native Data/Int/GCD and RingTheory/Coprime siblings inspected. Allocate the normalization file; do not add congruence-subgroup cusp counting or class-group representatives as separate arithmetic applications."
+    },
+    {
+      "concept": "cuspidal-automorphic-representation",
+      "concept_id": "57a3d011-370c-5132-81a6-4cffe63ca4a8",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Reviewed generic representation/unitarity and irreducibility candidates, classical modular cusp forms and the continuous representation constructor ContRepresentation:55. None checked here constructs the cuspidal adelic L² carrier with a chosen central/Harish–Chandra normalization and realizes an irreducible unitary representation as its closed summand, then identifies smooth K∞-finite vectors. The generic ingredients do not certify that realization; this is an unresolved construction/normalization bridge, not an absence claim. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched cuspidal/automorphic/adelic L2 and representation/period functional formulations. A classical holomorphic CuspForm or a generic irreducible continuous representation does not itself supply the specified adelic summand. Tau Harish–Chandra algebra and modular-symbol periods are native candidates, not standalone Mathlib ownership."
+    },
+    {
+      "concept": "cuspidal-automorphic-representation",
+      "concept_id": "57a3d011-370c-5132-81a6-4cffe63ca4a8",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Reviewed generic representation/unitarity and irreducibility candidates, classical modular cusp forms and the native HarishChandra/Basic and modular Petersson/period context. None checked here constructs the cuspidal adelic L² carrier with a chosen central/Harish–Chandra normalization and realizes an irreducible unitary representation as its closed summand, then identifies smooth K∞-finite vectors. The generic ingredients do not certify that realization; this is an unresolved construction/normalization bridge, not an absence claim. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched cuspidal/automorphic/adelic L2 and representation/period functional formulations. A classical holomorphic CuspForm or a generic irreducible continuous representation does not itself supply the specified adelic summand. Tau Harish–Chandra algebra and modular-symbol periods are native candidates, not standalone Mathlib ownership."
+    },
+    {
+      "concept": "dedekind-eta-function",
+      "concept_id": "dbf51ef9-bf14-564c-828b-81d0b3171111",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. ModularForm.eta:57 is qParam24 τ * ∏n≥0(1−qParam1 τ^(n+1)), with eta_q:41/47. qParam24 is exp(2πiτ/24), the intended q^{1/24} branch, not principal cpow of exp. Read multiplicability:63-66 and eta_tprod_ne_zero:108-115; upper-half-plane domain gives |q|<1. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/DedekindEta.lean",
+          "declarations": "ModularForm.eta_q:41; .eta:57; .multipliable_one_sub_pow:63; .eta_ne_zero:114",
+          "note": "Exact exponential-prefactor infinite product and local convergence/nonvanishing API."
+        }
+      ],
+      "search_notes": "Enumerated native DedekindEta directory (Basic, Transformation) and inspected SiegelFunction/Eta and JacobiTheta/QTheta candidates. Exclude Weber/Siegel-unit comparisons and theta identities as independently significant related concepts."
+    },
+    {
+      "concept": "dedekind-eta-function",
+      "concept_id": "dbf51ef9-bf14-564c-828b-81d0b3171111",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Imported eta definition and convergence suppliers are byte-identical. Native eta_eq_exp_mul_tprod:54 exposes the exact exp(2πiτ/24) product; doubling/halving identities:61/80/98 have completed product proofs. Native Transformation:65/87 proves generator laws and :148/153/159 constructs the full principal-square-root multiplier and proves it is a 24th root of unity; read quotient constancy proof:115-143 and the final law. Definition ownership remains Mathlib; only these native eta API files count. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/ModularForms/DedekindEta/Basic.lean",
+          "declarations": "TauCeti.ModularForm.eta_eq_exp_mul_tprod:54; .eta_two_mul:61; .eta_div_two:80; .eta_neg_one_div_sq:120",
+          "note": "Native exact product normalization and elementary doubling/halving/inversion identities."
+        },
+        {
+          "path": "TauCeti/NumberTheory/ModularForms/DedekindEta/Transformation.lean",
+          "declarations": "TauCeti.ModularForm.eta_add_intCast:65; .eta_neg_one_div:87; .etaMultiplier:148; .eta_smul:153",
+          "note": "Native translation/inversion and modular multiplier API with explicit square-root convention."
+        }
+      ],
+      "search_notes": "Enumerated native DedekindEta directory (Basic, Transformation) and inspected SiegelFunction/Eta and JacobiTheta/QTheta candidates. Exclude Weber/Siegel-unit comparisons and theta identities as independently significant related concepts."
+    },
+    {
+      "concept": "dense-subset-metric-space",
+      "concept_id": "d86d777e-fff9-5359-a4bf-ce6b87c1299a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Metric.dense_iff:1247 is precisely Dense A ↔ ∀x∀r>0,(ball x r∩A).Nonempty. Read completed proof reducing to mem_closure_iff; arbitrary pseudo-metric space specializes to metric space, including empty ambient cases. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/MetricSpace/Pseudo/Defs.lean",
+          "declarations": "Metric.dense_iff:1247; Metric.dense_iff_iUnion_ball:1251",
+          "note": "Exact ball characterization and immediate density API."
+        }
+      ],
+      "search_notes": "General topology/closure is supplier context, not an additional mapped prerequisite file."
+    },
+    {
+      "concept": "dense-subset-metric-space",
+      "concept_id": "d86d777e-fff9-5359-a4bf-ce6b87c1299a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency Metric.dense_iff:1247 and its complete ball/closure proof are byte-identical, so full definition is available. Enumerated native Topology root/MetricSpace/Pseudo and directly searched Dense declarations: native ContinuousOn/Dense:26 extends equal continuous germs across locally dense sets; Holder:105 extends Hölder maps, Baire/KuratowskiUlam:70 is a category theorem, and dyadic/projective-line density gives specific examples. These are separate map-extension/category/example endpoints, with no selected ordinary definition/ball-recognition API contribution. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inherited availability is from pinned Mathlib, empty native files/zero native LOC. Native closure/interior and annulus files checked; ball/sphere geometry alone is prerequisite machinery for density. No claim of absence from merely failing an exact-name search."
+    },
+    {
+      "concept": "digit-power-sum-map",
+      "concept_id": "03199a1c-3fbd-5c45-b070-3336a41b952d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact generic constructor S(b,e,x)=((Nat.digits b x).map (fun d ↦ d^e)).sum. Nat.digits:76 computes canonical base-b natural digits; b≥2 and e≥1 give the specified positive-integer domain by restriction. Checked actual recursion:48-52 and output branches:76-79. At both projects’ Lean v4.36.0-rc2 commit b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a, Init/Data/List/Basic.lean:2061 defines List.sum as foldr addition 0, exactly aggregation of all mapped digit powers. No dedicated alias or new dynamics theorem is claimed. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Digits/Defs.lean",
+          "declarations": "Nat.digitsAux:48; Nat.digits:76",
+          "note": "Canonical finite base-b digits supply the exact digit-power sum constructor under map/power/List.sum."
+        }
+      ],
+      "search_notes": "Not digit count, factorial-digit product, or the integer numeral printer Nat.toDigits. No claim that e=0 or b<2 belongs to the catalogue scope."
+    },
+    {
+      "concept": "digit-power-sum-map",
+      "concept_id": "03199a1c-3fbd-5c45-b070-3336a41b952d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency Nat.digits:76 and checked Lean List.sum:2061 give S(b,e,x)=sum(map (d↦d^e)(digits b x)). Native Nat.prod_map_digits_add_mul:111 has g0=1 in any Monoid and proves the mapped digit-product recursion; apply to Multiplicative ℕ with g(d)=ofAdd(d^e), e≥1, so g0=1 and product is exactly the additive digit-power sum. Its completed case split:114-124 gives S(j+b*y)=j^e+S(y) for j<b. This is direct ordinary digit-power-sum recursion, not factorial arithmetic or a later attraction theorem. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Data/Nat/Digits.lean",
+          "declarations": "Nat.prod_map_digits_add_mul:111; Nat.sum_digits_add_mul:95",
+          "note": "Native generic mapped-digit recursion specializes exactly to every positive power sum using the multiplicative tag of the additive naturals."
+        }
+      ],
+      "search_notes": "Enumerated native Data/Nat/Digits and Choose/Digits siblings; factorial/Stickelberger/cyclic-shift theorems are not selected as independent additional endpoint reasons. Exact digit supplier is byte-identical."
+    },
+    {
+      "concept": "digit-power-attraction-height",
+      "concept_id": "adc04704-d765-5378-85ae-7524a5f1ef97",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Set S(x)=((digits b x).map (d↦d^e)).sum, as checked above. For hreach:∃h,S^[h] x=u the existing Nat.find hreach is the EXACT least nonnegative hitting time. Nat.findX:46 constructs a witness with every earlier predicate false; find:67 and find_spec:70/find_min:75/find_min′:78 certify the least property. Nat.iterate:40 has zero=id and successor composition:61/64. Read full witness recursion:46-54. No assertion of reachability for arbitrary x or any chosen target is made. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Find.lean",
+          "declarations": "Nat.findX:46; Nat.find:67; Nat.find_spec:70; Nat.find_min:75",
+          "note": "Exact generic least hitting-time constructor specialized to iterates of the checked digit-power sum."
+        }
+      ],
+      "search_notes": "Digit extraction and generic iterate are checked suppliers, excluded from extra file allocation as prerequisite-only for this least-time refinement. Height is conditional on reaching u, not a fabricated totalized finite height for non-attracted x."
+    },
+    {
+      "concept": "digit-power-attraction-height",
+      "concept_id": "adc04704-d765-5378-85ae-7524a5f1ef97",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency Nat.findX:46/find:67/spec:70/min:75 is byte-identical and specializes to p(h):S^[h]x=u. Dependency Nat.iterate is identical except a +1 header offset (definition:41); no reachability assumption is omitted. Enumerated native Data/Nat and Logic/Function siblings: native Iterate:55 is generic second-iterate composition, :40 a simulation-existence theorem, and native Digits:111 a one-step digit-power sum recursion. They do not contribute to the LEAST hitting-time construction/API itself, so remain prerequisite/separate dynamics endpoints for this concept. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native Data/Nat/Find does not exist; broader find_min/Nat.find and attraction/height searches found no checked least-time-specific native API. Dependency availability checked, no native file allocated merely for using an iterate or the separately mapped digit-power map."
+    },
+    {
+      "concept": "dimension-group",
+      "concept_id": "7dea71fb-232a-572c-bfeb-9d6f57c92a7e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact bare-definition predicate on [AddCommGroup G] [PartialOrder G] [IsOrderedAddMonoid G]: Directed (·≤·) (id:G→G), AND ∀(n:ℕ),0<n→∀g,0≤n•g→0≤g, AND ∀a b c,0≤a→0≤b→0≤c→a≤b+c→∃b′ c′,0≤b′∧0≤c′∧b′≤b∧c′≤c∧a=b′+c′. These are precisely directedness, unperforation, and positive Riesz decomposition, with a genuinely partial order. Checked actual IsOrderedAddMonoid:26 explicitly provides translation-monotone addition (not an unrelated arbitrary order), and Directed:45 has the exact pairwise upper-bound quantifiers; the two remaining clauses are literal quantified predicates on the checked group operations, requiring no dedicated alias or classification theorem. In the Tau dependency the order class starts27 due only to a header blank, Directed45 is identical. Count the actual ordered-structure/directedness constructors used in this exact generic conjunctive representation; no claim of a named dimension-group class or new realization theorem. All cited committed constructors/bodies checked, no new proof development or fresh compilation.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Order/Monoid/Defs.lean",
+          "declarations": "IsOrderedAddMonoid:26",
+          "note": "Exact addition/order compatibility constructor used in the primary partially ordered group conjunction."
+        },
+        {
+          "path": "Mathlib/Order/Directed.lean",
+          "declarations": "Directed:45",
+          "note": "Exact directedness constructor, with the unperforation and Riesz clauses supplied as literal predicates on the checked group operations."
+        }
+      ],
+      "search_notes": "Whole native Algebra/Order/Group sibling enumeration and full-source Riesz/unperforation searches completed. The primary definition does not request an interpolation equivalence or ordered K0 realization theorem; no such proof is inferred. No totality, lattice structure, Archimedean axiom, simplicity or finite trace hypothesis is added."
+    },
+    {
+      "concept": "dimension-group-quotient-unperforation-criterion",
+      "concept_id": "45cc28e7-6f27-5d45-b12c-8296cd9fa599",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual convex-subgroup/quotient order candidates do not prove the stated Handelman–Roy equivalence. Searched finite pure traces, normalized traces annihilating H, smallest-face/zero-or-dense image formulations, unperforation and dimension-group quotients. No checked completed proof of G/H unperforated iff each f∈F has f(H)=0 or dense was identified. Generic quotient and convex geometry are prerequisites only; the simple/noncyclic/finitely-many-pure-traces and H=ker_G Z(H) hypotheses cannot be omitted. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native Tau ConvexSubgroup83 concerns order-convex subgroups, whereas this theorem has H∩G+=0 and a trace-kernel condition, not an automatic convexity identification. Do not infer the finite-trace theorem from its quotient-linear-order instance. No absence/proof claim."
+    },
+    {
+      "concept": "dimension-group",
+      "concept_id": "7dea71fb-232a-572c-bfeb-9d6f57c92a7e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact bare-definition predicate on [AddCommGroup G] [PartialOrder G] [IsOrderedAddMonoid G]: Directed (·≤·) (id:G→G), AND ∀(n:ℕ),0<n→∀g,0≤n•g→0≤g, AND ∀a b c,0≤a→0≤b→0≤c→a≤b+c→∃b′ c′,0≤b′∧0≤c′∧b′≤b∧c′≤c∧a=b′+c′. These are precisely directedness, unperforation, and positive Riesz decomposition, with a genuinely partial order. Checked actual IsOrderedAddMonoid:26 explicitly provides translation-monotone addition (not an unrelated arbitrary order), and Directed:45 has the exact pairwise upper-bound quantifiers; the two remaining clauses are literal quantified predicates on the checked group operations, requiring no dedicated alias or classification theorem. In the Tau dependency the order class starts27 due only to a header blank, Directed45 is identical. Native Bounds45/55 generated additive range_of_sub_le proves ordinary difference-bound arithmetic under Group+Preorder+two-sided monotonicity; read both completed witness proofs. These direct weaker-hypothesis laws specialize to every dimension group, just as generic group power laws specialize to abelian groups. All cited committed constructors/bodies checked, no new proof development or fresh compilation.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Order/Group/Bounds.lean",
+          "declarations": "BddBelow.range_of_div_le:45 (generated BddBelow.range_of_sub_le); BddAbove.range_of_div_le:55 (generated BddAbove.range_of_sub_le)",
+          "note": "Native ordinary ordered-group difference-bound arithmetic; all hypotheses hold in a partially ordered dimension group without totality."
+        }
+      ],
+      "search_notes": "Whole native Algebra/Order/Group sibling enumeration and full-source Riesz/unperforation searches completed. The primary definition does not request an interpolation equivalence or ordered K0 realization theorem; no such proof is inferred. No totality, lattice structure, Archimedean axiom, simplicity or finite trace hypothesis is added."
+    },
+    {
+      "concept": "dimension-group-quotient-unperforation-criterion",
+      "concept_id": "45cc28e7-6f27-5d45-b12c-8296cd9fa599",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual convex-subgroup/quotient order candidates do not prove the stated Handelman–Roy equivalence. Searched finite pure traces, normalized traces annihilating H, smallest-face/zero-or-dense image formulations, unperforation and dimension-group quotients. No checked completed proof of G/H unperforated iff each f∈F has f(H)=0 or dense was identified. Generic quotient and convex geometry are prerequisites only; the simple/noncyclic/finitely-many-pure-traces and H=ker_G Z(H) hypotheses cannot be omitted. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native Tau ConvexSubgroup83 concerns order-convex subgroups, whereas this theorem has H∩G+=0 and a trace-kernel condition, not an automatic convexity identification. Do not infer the finite-trace theorem from its quotient-linear-order instance. No absence/proof claim."
+    },
+    {
+      "concept": "diophantine-equation",
+      "concept_id": "0216dde9-057a-5ff8-9316-26ce55c0e67f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact generic representation: choose finite variable type σ and p:MvPolynomial σ ℤ, and require MvPolynomial.eval x p=0 for x:σ→ℤ; for rational solutions use eval₂ (Int.castRingHom ℚ) x p=0. eval₂:68/71 is precisely the finite coefficient/monomial sum and eval:255/258 is same-ring specialization. Read evaluation definitions and generator laws. This matches the broad definition, not a decision procedure or solvability theorem. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/MvPolynomial/Eval.lean",
+          "declarations": "MvPolynomial.eval₂:68; .eval₂_eq:71; .eval:255; .eval_eq:258",
+          "note": "Actual polynomial evaluation supplies the exact integer/rational zero-locus equation predicate."
+        }
+      ],
+      "search_notes": "Mathlib NumberTheory/Dioph IsPoly80/Poly93 uses NATURAL input tuples; that is not silently substituted for the integer/rational variable domain. Exclude Matiyasevic/Pell, Thue–Mahler and subspace-theorem applications as separately significant solving/classification endpoints."
+    },
+    {
+      "concept": "diophantine-equation",
+      "concept_id": "0216dde9-057a-5ff8-9316-26ce55c0e67f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency eval₂:69/eval:256 has only a +1 header offset. Native MvPolynomial.dvd_eval_sub_eval:58 proves by polynomial induction that d divides p(x)−p(t) whenever d divides each coordinate difference; instantiate R=ℤ. Read complete constant/add/mul_X proof:60-67. This is direct ordinary arithmetic equation-evaluation API, while the definition remains imported. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/MvPolynomial/Eval.lean",
+          "declarations": "MvPolynomial.dvd_eval_sub_eval:58",
+          "note": "Native ordinary congruence law for integer polynomial equation evaluations at congruent tuples."
+        }
+      ],
+      "search_notes": "Mathlib NumberTheory/Dioph IsPoly80/Poly93 uses NATURAL input tuples; that is not silently substituted for the integer/rational variable domain. Exclude Matiyasevic/Pell, Thue–Mahler and subspace-theorem applications as separately significant solving/classification endpoints."
+    },
+    {
+      "concept": "dirichlet-character",
+      "concept_id": "1ef8144d-64db-5630-a54e-8be94a35cb7b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. DirichletCharacter:39 is MulChar (ZMod q) ℂ. MulChar:73 is a monoid hom vanishing on nonunits, with unit-hom equivalence; integer coercion gives periodicity modulo q. apply_eq_zero_iff:56 gives exactly zero on noncoprime integers. changeLevel:65, FactorsThrough:114, conductor:245 (minimum factoring divisor), and IsPrimitive:291 implement induction/primitivity; read minimum witness:247-255 and factorization/injectivity bodies. Ordinary q>0 modulus intended. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
+          "declarations": "DirichletCharacter:39; DirichletCharacter.apply_eq_zero_iff:56; .changeLevel:65; .FactorsThrough:114; .conductor:245; .IsPrimitive:291",
+          "note": "Character definition, extension to integers, induction/conductor and primitive-character API."
+        }
+      ],
+      "search_notes": "Enumerated native DirichletCharacter Basic/Primitive/Conductor/LocalFactor and specialization siblings. Select core Basic; exclude quadratic classification, Gauss sums, generalized Bernoulli, prime-distribution and L-functions as separate concepts/endpoints."
+    },
+    {
+      "concept": "dirichlet-character",
+      "concept_id": "1ef8144d-64db-5630-a54e-8be94a35cb7b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The dependency DirichletCharacter/Basic is byte-identical and supplies the exact ZMod character/zero-extension/conductor definition. Native Basic:92 proves full-period cancellation, :108 factoring-character equality on congruent units, :119 the prime-power conductor criterion; read complete bodies:95-104/112-114/124-130. These are direct character/conductor API. No Gauss sum evaluation, L-value or class-field specialization is needed to define a Dirichlet character. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/DirichletCharacter/Basic.lean",
+          "declarations": "DirichletCharacter.sum_range_eq_zero_of_ne_one:92; .apply_eq_apply_of_factorsThrough:108; .conductor_eq_prime_pow_of_emod_eq_of_apply_ne_apply:119",
+          "note": "Native full-period cancellation, factorization-value and ordinary primitivity criteria."
+        }
+      ],
+      "search_notes": "Enumerated native DirichletCharacter Basic/Primitive/Conductor/LocalFactor and specialization siblings. Select core Basic; exclude quadratic classification, Gauss sums, generalized Bernoulli, prime-distribution and L-functions as separate concepts/endpoints."
+    },
+    {
+      "concept": "dirichlet-l-function",
+      "concept_id": "404adf8e-acfc-5d39-b0b4-08f725d73385",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. DirichletCharacter.LFunction:60 is the continued function, with equality to the Dirichlet series for Re(s)>1 at :74. ZMod.LFunction:85 is the actual finite combination of Hurwitz zeta functions; convergence:72 and sum identity:95-122 checked. DirichletContinuation:91/97 gives analytic nonprincipal functions, :181 principal residue, :345/349/355 removes the simple pole with an entire nonzero-at-1 numerator (complete proof:355-362). This certifies meromorphic continuation, not the junk-zero naive LSeries outside convergence. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/LSeries/DirichletContinuation.lean",
+          "declarations": "DirichletCharacter.LFunction:60; .LFunction_eq_LSeries:74; .differentiable_LFunction:97; .LFunctionTrivChar_residue_one:181; .differentiable_LFunctionTrivChar₁:355",
+          "note": "Exact Dirichlet L-function and continuation/pole/ordinary level API."
+        },
+        {
+          "path": "Mathlib/NumberTheory/LSeries/ZMod.lean",
+          "declarations": "ZMod.LFunction:85; .LFunction_eq_LSeries:95; .differentiableAt_LFunction:124",
+          "note": "Actual finite Hurwitz-zeta construction and completed convergence-range/analyticity proofs."
+        }
+      ],
+      "search_notes": "Native LFunction directory/siblings inspected; allocate ordinary Conjugate. Exclude zero-free region estimates, functional equation refinements, arithmetic special values and prime-distribution applications as separately significant endpoints."
+    },
+    {
+      "concept": "dirichlet-l-function",
+      "concept_id": "404adf8e-acfc-5d39-b0b4-08f725d73385",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency continued LFunction:60, agreement:74, analyticity/pole supplier bodies match; ZMod differs only a later cancellation-lemma rename, outside selected construction/proofs. Native LFunction_inv_conj:70 proves χ^-1.L(conj s)=conj(χ.L(s)), retaining s≠1 or χ nonprincipal; :83 gives zero correspondence. Read actual analytic-continuation proof:39-66 and principal-pole case separation:72-88. This is direct continued-L-function API, not merely an Euler-series identity on Re(s)>1. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/DirichletCharacter/LFunction/Conjugate.lean",
+          "declarations": "DirichletCharacter.LFunction_inv_conj:70; .LFunction_inv_conj_eq_zero_iff:83",
+          "note": "Native ordinary conjugate/inverse reflection and zero correspondence for the continued functions."
+        }
+      ],
+      "search_notes": "Native LFunction directory/siblings inspected; allocate ordinary Conjugate. Exclude zero-free region estimates, functional equation refinements, arithmetic special values and prime-distribution applications as separately significant endpoints."
+    },
+    {
+      "concept": "distinguished-automorphic-representation",
+      "concept_id": "79178106-eb12-5dcc-84b9-8933f61c4454",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For the PRIMARY definition as stated, fix the ambient representation ρ, subgroup H and specified one-dimensional character χ. The exact predicate is ∃ℓ:Module.Dual ℂ V, ℓ≠0 ∧ ∀h∈H∀v,ℓ(ρ(h)v)=χ(h)*ℓ(v). Dual/Defs:60 is precisely V→ₗ[ℂ]ℂ; Representation.IsIntertwiningMap:30 and IntertwiningMap:35/constructor:40 are exactly the same equivariance condition with the restriction to H and χ acting by scalar multiplication on ℂ. Source fields and completed constructor:40-42 checked. No additional realization of ρ as an adelic automorphic representation or explicit integral period formula is asserted by this generic definition match. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/RepresentationTheory/Intertwining.lean",
+          "declarations": "Representation.IsIntertwiningMap:30; .IntertwiningMap:35; LinearMap.intertwiningMap_of_isIntertwiningMap:40",
+          "note": "Actual equivariant-linear-map constructor supplies the exact period-functional condition after subgroup restriction and one-dimensional character specialization."
+        }
+      ],
+      "search_notes": "Subgroup and character are explicit parameters. Classical modular-symbol period integrals and Harish–Chandra modules are separate candidates, not definitions of every distinguished representation; the positive record is only the exact primary generic period-functional predicate. No topological continuity is silently added where the paragraph does not specify it."
+    },
+    {
+      "concept": "distinguished-automorphic-representation",
+      "concept_id": "79178106-eb12-5dcc-84b9-8933f61c4454",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency IntertwiningMap:36 and IsIntertwiningMap:31 have +1 header offset, Dual/Defs:61 similarly. For fixed ρ,H,χ the exact nonzero equivariant-linear-functional predicate matches the stated definition. Native IntertwiningMap.res:172 restricts along H′→*H while keeping the actual linear functional unchanged; coe_res:177/toLinearMap_res:181 and res_comp:190 are completed definitional API, and nonzero is preserved because the underlying map is identical. Count this ordinary functional restriction API; do not imply an adelic summand construction or prove existence of a nonzero period for a given ρ. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/RepresentationTheory/Intertwining.lean",
+          "declarations": "Representation.IntertwiningMap.res:172; .coe_res:177; .toLinearMap_res:181; .res_comp:190",
+          "note": "Native restriction/naturality API for equivariant maps, specializes to restriction of period functionals along subgroup homomorphisms."
+        }
+      ],
+      "search_notes": "Subgroup and character are explicit parameters. Classical modular-symbol period integrals and Harish–Chandra modules are separate candidates, not definitions of every distinguished representation; the positive record is only the exact primary generic period-functional predicate. No topological continuity is silently added where the paragraph does not specify it."
+    },
+    {
+      "concept": "elliott-halberstam-conjecture",
+      "concept_id": "86ae78be-dc90-56c6-a5e0-145722cfe19e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Searched Elliott/Halberstam, distribution-level and averaged arithmetic-progression error formulations, with large-sieve/Bombieri context. Mathlib LSeries/PrimesInAP proves the infinitude theorem for fixed coprime progression, and native Tau Chebotarev/PrimeCounting/ArithmeticProgression:63 onward identifies prime-power coefficients with Λ restricted to a progression; neither is the every-θ<1 averaged error assertion with arbitrary logarithmic saving. A checked formal statement of exactly this conjecture has not been located; no proof is claimed. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Reviewed actual PrimesInAP and native ArithmeticProgression file endpoints/docs. Uniform estimates averaged over growing moduli are the unresolved statement frontier. Native finite-family LFunction zero-free neighborhoods likewise do not supply Elliott–Halberstam; avoid confusing the open conjecture with Dirichlet’s theorem."
+    },
+    {
+      "concept": "elliott-halberstam-conjecture",
+      "concept_id": "86ae78be-dc90-56c6-a5e0-145722cfe19e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Searched Elliott/Halberstam, distribution-level and averaged arithmetic-progression error formulations, with large-sieve/Bombieri context. Mathlib LSeries/PrimesInAP proves the infinitude theorem for fixed coprime progression, and native Tau Chebotarev/PrimeCounting/ArithmeticProgression:63 onward identifies prime-power coefficients with Λ restricted to a progression; neither is the every-θ<1 averaged error assertion with arbitrary logarithmic saving. A checked formal statement of exactly this conjecture has not been located; no proof is claimed. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Reviewed actual PrimesInAP and native ArithmeticProgression file endpoints/docs. Uniform estimates averaged over growing moduli are the unresolved statement frontier. Native finite-family LFunction zero-free neighborhoods likewise do not supply Elliott–Halberstam; avoid confusing the open conjecture with Dirichlet’s theorem."
+    },
+    {
+      "concept": "elliptic-eisenstein-series",
+      "concept_id": "44f217b6-5387-5486-a75e-6c5b10c953a0",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. eisensteinSeries:203 sums (cτ+d)^(-k) over gammaSet with gcd=1; gammaSet_one_eq:58 gives exactly primitive pairs at level1. ModularForm.E:47 is one-half of that modular form for k≥3; choose even k≥4. QExpansion:298/323/347 proves the actual Fourier expansion and coefficient0=1 (completed coefficient-uniqueness proof:326-344). E2/Defs:60 normalizes the weight2 conditional series; Summable:101/106 gives exactly 1−24∑n≥1σ1(n)q^n, and Transform:223 gives its explicit D2 defect. Read complete cited proofs, retaining quasimodularity instead of falsely bundling E2 as a weight2 SL2Z ModularForm. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/EisensteinSeries/Defs.lean",
+          "declarations": "eisensteinSeries:203; EisensteinSeries.gammaSet_one_eq:58",
+          "note": "Exact coprime-pair lattice sum."
+        },
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/EisensteinSeries/Basic.lean",
+          "declarations": "ModularForm.eisensteinSeriesMF:35; .E:47",
+          "note": "Actual modular form and normalized half-sum."
+        },
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/EisensteinSeries/QExpansion.lean",
+          "declarations": "EisensteinSeries.q_expansion_bernoulli:298; .E_qExpansion_coeff:323; .E_qExpansion_coeff_zero:347",
+          "note": "Fourier expansion and exact constant-term-one normalization."
+        },
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Defs.lean",
+          "declarations": "EisensteinSeries.G2:56; .E2:60; .D2:63",
+          "note": "Normalized weight-two series and modularity-defect function."
+        },
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Summable.lean",
+          "declarations": "EisensteinSeries.E2_eq_tsum_cexp:101; .hasSum_qExpansion_E2:106",
+          "note": "Exact 1−24∑σ1(n)q^n expansion with completed convergence proof."
+        },
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Transform.lean",
+          "declarations": "EisensteinSeries.E2_slash_action:223",
+          "note": "Actual nonzero modularity-defect/quasimodular transformation law."
+        }
+      ],
+      "search_notes": "Native EisensteinSeries directory/character and integral siblings enumerated. Exclude twisted character series, Eisenstein-subspace dimension/cusp decomposition and Hecke trace formulas as independent additional concepts/endpoints. Intermediate analytic summability helper files are not additionally allocated."
+    },
+    {
+      "concept": "elliptic-eisenstein-series",
+      "concept_id": "44f217b6-5387-5486-a75e-6c5b10c953a0",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency supplies primitive-pair E47 and constant-coefficient-one normalization; QExpansion:299/324/348 and E2:61/Summable:102/107/Transform:224 have only +1 header offsets. Native E2/Bounds:41 proves the anomaly decays at infinity, :55 proves every integral slash of E2 tends to1, :72 proves boundedness at every modular cusp. Read completed inequality/squeeze proof:41-52 and transformation-limit argument:55-73. This is genuine ordinary boundary API of the stated quasimodular E2 component, with no false modularity claim. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/ModularForms/EisensteinSeries/E2/Bounds.lean",
+          "declarations": "TauCeti.EisensteinSeries.tendsto_D2_atImInfty:41; .tendsto_E2_slash_atImInfty:55; .isBoundedAt_E2:72",
+          "note": "Native direct E2 cusp/growth API compatible with the actual quasimodular defect."
+        }
+      ],
+      "search_notes": "Native EisensteinSeries directory/character and integral siblings enumerated. Exclude twisted character series, Eisenstein-subspace dimension/cusp decomposition and Hecke trace formulas as independent additional concepts/endpoints. Intermediate analytic summability helper files are not additionally allocated."
+    },
+    {
+      "concept": "elliptic-sturm-bound",
+      "concept_id": "1ef14a9a-14e9-50ab-848a-a295d223a7d8",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Mathlib LevelOne/DimensionFormula.sturm_bound_levelOne_nat:300 proves f=0 when the COMPLEX q-expansion order exceeds k/12; read full induction/discriminant proof:302-314. Native Tau ModularForms/SturmBound:58/66/75 extends that characteristic-zero equality theorem to finite-index subgroups. The catalogue instead assumes p-integral rational Fourier coefficients and vanishing MOD p. No checked reduction-mod-p/integral lattice saturation argument converting the finite coefficient congruences to all coefficients was located. Thus these named Sturm bounds do not certify the stated congruence theorem. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected native Integral Basic/Diamond/BoundedDenominators and SturmBound files: their truncation maps prove characteristic-zero injectivity/finiteness, not automatically injectivity after reduction modulo p. These are prerequisites or a different endpoint, so no partial file is allocated merely because the theorem has the same name. A formal statement/proof of the exact congruence remains unresolved."
+    },
+    {
+      "concept": "elliptic-sturm-bound",
+      "concept_id": "1ef14a9a-14e9-50ab-848a-a295d223a7d8",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Mathlib LevelOne/DimensionFormula.sturm_bound_levelOne_nat:300 proves f=0 when the COMPLEX q-expansion order exceeds k/12; read full induction/discriminant proof:302-314. Native Tau ModularForms/SturmBound:58/66/75 extends that characteristic-zero equality theorem to finite-index subgroups. The catalogue instead assumes p-integral rational Fourier coefficients and vanishing MOD p. No checked reduction-mod-p/integral lattice saturation argument converting the finite coefficient congruences to all coefficients was located. Thus these named Sturm bounds do not certify the stated congruence theorem. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Inspected native Integral Basic/Diamond/BoundedDenominators and SturmBound files: their truncation maps prove characteristic-zero injectivity/finiteness, not automatically injectivity after reduction modulo p. These are prerequisites or a different endpoint, so no partial file is allocated merely because the theorem has the same name. A formal statement/proof of the exact congruence remains unresolved."
+    },
+    {
+      "concept": "euler-brick",
+      "concept_id": "830449e1-77fc-5cbf-9315-42ba9f9bf3b3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact existing-constructor specialization: positive integers a,b,c together with ∃d e f:ℤ, PythagoreanTriple a b d ∧ PythagoreanTriple a c e ∧ PythagoreanTriple b c f. PythagoreanTriple:44 is literally x*x+y*y=z*z; its symmetry:49/65 and scaling:70 are completed elementary API. Since a,b,c>0 each squared diagonal is positive and its sign can be chosen positive without adding a space-diagonal condition. The predicate is exactly a rectangular box with the three integral face diagonals; no perfect-cuboid condition or existence/classification theorem is inferred. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/PythagoreanTriples.lean",
+          "declarations": "PythagoreanTriple:44; pythagoreanTriple_comm:49; PythagoreanTriple.mul:70",
+          "note": "Actual squared-diagonal constructor and ordinary symmetry/scaling API, instantiated for each pair of the three positive edges."
+        }
+      ],
+      "search_notes": "Pure bare definition via three checked Pythagorean predicates; no dedicated Euler-brick alias needed. Pythagorean parametrization/classification is separate and not a required endpoint."
+    },
+    {
+      "concept": "euler-brick",
+      "concept_id": "830449e1-77fc-5cbf-9315-42ba9f9bf3b3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency PythagoreanTriple:44 is literally the same squared-diagonal predicate; symmetry49/65 and scaling70 also agree. Conjoin the three pairwise predicates on positive integer edges and quantify their diagonal witnesses. Dependency differs only at a later rational-cancellation lemma in unrelated parametrization proof:413. Enumerated native NumberTheory root/Diophantine/Pythagorean candidates and searched Euler brick/PythagoreanTriple; no native diagonal-constructor or ordinary brick API contribution was checked. Generic polynomial arithmetic and solving specialized equations are prerequisite/separate applications. Relevant committed declarations, hypotheses and cited completed bodies inspected; no fresh compilation or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Availability from pinned Mathlib, empty native files and zero native LOC. No condition on the space diagonal; no fresh perfect-cuboid proof or automatic negative coverage claim."
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "batch_id": "batch-035",
+  "reviewer": "algebra_formalization",
+  "proposal_sha256": "1bad562146b768ba14f1bffebd19db5f88827784d63d938ef152e74c488e00f9",
+  "decisions": [
+    {
+      "concept": "module-homomorphism",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "LinearMap:84 actually extends additive and scalar-action homs; id-scalar notation:98 is precisely same-ring linearity. No topology/finiteness hypothesis inserted."
+    },
+    {
+      "concept": "module-homomorphism",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native toAddMonoidHom_comp:26 is rfl on the genuine semilinear composite, so identity-scalar specialization is direct composition/forgetful core API."
+    },
+    {
+      "concept": "monotone-real-sequence-convergence",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read ciSup:121 proof using directed range least upper bound and ciInf:155 duality. For ℕ→ℝ all required conditional-completeness/order-topology instances apply; increasing and decreasing cases are both present."
+    },
+    {
+      "concept": "monotone-real-sequence-convergence",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native tail variants:37/49 restrict to Ici a and transport the actual atTop limit; the degenerate-filter branch does not cause a missing ℕ case. This is the same bounded monotonicity theorem with a tail hypothesis."
+    },
+    {
+      "concept": "multiplicative-algebraic-group",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Laurent Hopf:65/77 and coproduct:87; for coefficient/exponent1 coproduct is T⊗T. Actual AddMonoidAlgebra.lift:593 has two inverse proofs; checked Units/Hom:192 and Int/Cast/Lemmas.zpowersHom:280 identify cyclic monoid maps with units. Arbitrary commutative value algebras suffice, without a target bialgebra hypothesis."
+    },
+    {
+      "concept": "multiplicative-algebraic-group",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read laurentEval:144 and equivalence:172 inverse proofs (T1*T(-1)=1), plus actual pointEquiv:123 and charOfPoint_convMul:141/pointsMulEquiv:162. The multiplication matches pointwise unit multiplication and Laurent/group-algebra comparison:210. Bounded file set supplies the coordinate functor and immediate group law."
+    },
+    {
+      "concept": "nilpotent-ideal",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "IsNilpotent:152 is a uniform vanishing ideal power, not separate nilpotence of every element. Exact positive-n refinement is expressible; n=0 only occurs for the trivial ideal semiring, where exponent1 also vanishes. Ideal.mul_le:283 and pow_eq_zero_of_mem:541 have actual ideal-power semantics."
+    },
+    {
+      "concept": "nilpotent-ideal",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native list_prod_mem_pow:118 inducts using reversed list concatenation and Submodule.pow_succ, certifying every length-n product lies in I^n. mul_pow_mem_pow:114 and mul_mem_pow_add:133 are direct ideal-power laws, not an unrelated nilpotence classification."
+    },
+    {
+      "concept": "nonabelian-continuous-one-cocycle",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Change: a bare predicate does not need a bundled nonabelian cocycle Setoid. ContinuousMap:32 and the genuine automorphism-action class MulDistribMulAction:626 allow exactly the stated noncommuting identity and explicit existential coboundary relation; none of their factor order needs commutativity.",
+      "replacement": {
+        "concept": "nonabelian-continuous-one-cocycle",
+        "concept_id": "981afb8d-3770-5aa0-a33e-035837892aee",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact generic bare definition: take c:C(Γ,H), where ContinuousMap:32 stores a function and Continuous proof, with groups Γ,H and a continuous automorphism action represented by MulDistribMulAction Γ H (Action.Defs:626) and ContinuousSMul Γ H. Restrict by ∀σ τ, c(σ*τ)=cσ*(σ•cτ). Define the stated relation literally by ∃h:H, ∀σ, c′σ=h⁻¹*cσ*(σ•h). These expressions retain their noncommuting order and impose no commutativity on H. The action class supplies multiplication-preserving actions and group action inverses, exactly the stipulated action. This primary definition/relation needs no named cocycle alias, bundled Setoid or new classification theorem. Actual defining source data inspected; no unproved twist or cocycle-classification result is asserted.",
+        "files": [
+          {
+            "path": "Mathlib/Topology/ContinuousMap/Defs.lean",
+            "declarations": "ContinuousMap:32; continuous_toFun:36",
+            "note": "Actual continuous-map constructor used in the exact cocycle subtype; the cocycle identity and coboundary relation are the explicit generic predicates in evidence."
+          }
+        ],
+        "search_notes": "Independent literal-predicate review resolves the prior interface uncertainty. Checked ContinuousMap:32 and MulDistribMulAction:626/ContinuousSMul supplier; the latter is input action machinery rather than extra allocated files. GroupCohomology.LowDegree.IsMulCocycle1:628 requires commutativity and is not used. Tau Nonabelian/Basic:75/139/157 independently implements the identical order but remains separate native ownership; no Tau file is attributed to standalone Mathlib."
+      }
+    },
+    {
+      "concept": "nonabelian-continuous-one-cocycle",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independently read native Cocycle:75, setoid:139 (including symmetric/transitive witnesses), twist:157 and relation equivalence:175. The order is exactly c(στ)=cσ*(σ•cτ) and c′σ=h⁻¹*cσ*(σ•h); no commutative target condition. Continuity of twist uses the explicitly stated continuous multiplication/action hypotheses."
+    },
+    {
+      "concept": "nonarchimedean-local-field",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read LocalField:44 and its actual value-group equivalence:115, discrete:132, finite residue:140 and complete:157 proofs. Valued.LocallyCompact:312/335 proves the complete DVR/finite residue equivalence under rank-one/nontrivial valuation; this supplies the full definition rather than just a topological analogy."
+    },
+    {
+      "concept": "nonarchimedean-local-field",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read NormedField:57 construction, two neighborhood-basis directions in topology equality:81, ultrametric:107 and completeness:117 by that topology equality. This is ordinary normalized topology/completeness API for every such local field, retaining characteristic-general hypotheses."
+    },
+    {
+      "concept": "nonnegatively-graded-commutative-ring",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read GradedRing:65 and decomposeRingEquiv:73/87; inspected actual DirectSum.Decomposition:55 two inverse laws and SetLike.GradedOne:484/GradedMul:502. With ℕ grading of additive subgroups of a commutative ring, this is unique finite-support additive decomposition and ordinary multiplication, without a Koszul sign rule."
+    },
+    {
+      "concept": "nonnegatively-graded-commutative-ring",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native mul_le_grade_add:50 proves literal component product inclusion. Degree-zero:63 double decomposition induction keeps its negative-degree vanishing hypothesis for the alternate ℤ grading; it does not replace arbitrary ℕ grading or assume finite overall grade support."
+    },
+    {
+      "concept": "normal-field-extension",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Normal:34 explicitly extends algebraicity and minpoly splitting; normal_iff:45 and tower proof:66 were read. Rooted irreducible polynomials identify with minpoly up to leading coefficient (checked supplier); no separability/finite-degree condition was silently introduced."
+    },
+    {
+      "concept": "normal-field-extension",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native liftNormal_equivFieldRange_apply:89 and isPretransitiveAlgHom:103 use actual field-range equivalence and normal lifting; no embedding existence is asserted. This is direct normal-extension embedding/conjugacy API even for infinite normal extensions."
+    },
+    {
+      "concept": "normal-subgroup",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Normal:601 and inverse-conjugation conj_mem′:629 proof. Inclusion in both conjugation directions yields actual subgroup equality for every g; no finiteness/abelian hypothesis."
+    },
+    {
+      "concept": "normal-subgroup",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read normal_of_commute_of_sup_eq_top:63 normalizer/sup proof and closure_normal_of_forall_conj_mem:73. Both literally establish normality by conjugation/normalizer, with their actual hypotheses, so qualify as direct recognition/construction API."
+    },
+    {
+      "concept": "normalized-place-norm-number-field",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Checked InfinitePlace.norm_embedding_eq:112 and mult:274/276/279; finite adicAbv:134 and norm_def:182 agree with the residue-cardinality rank-one normalization. In particular complex exponent2 is multiplicative and is not being bundled as an ordinary absolute value."
+    },
+    {
+      "concept": "normalized-place-norm-number-field",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked completionNormalizedAbsValue:66 actual norm^mult MonoidWithZeroHom and real/complex formulas:111/117, with continuity:124. These are the exact native normalization laws; all finite-place factors remain dependency-supplied."
+    },
+    {
+      "concept": "number-field-discriminant",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read NumberField.discr:36, rational comparison:38 and arbitrary integral-basis invariance:45 proof via reindexing/change-of-basis. Algebra.discr:68 is determinant of traceMatrix; Trace.Basic:338/343 is the actual Tr(b_i*b_j) matrix. Sign and integrality match the paragraph."
+    },
+    {
+      "concept": "number-field-discriminant",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read OfIntegralBasis:64 complete localization trace-discriminant proof and:75 construction of a genuine ℤ-basis using integral vectors and full span. No discriminant of a proper order is silently identified with d_F."
+    },
+    {
+      "concept": "number-field-product-formula",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independently read ProductFormula:46 finite-support prime-factor proof, fraction reduction:77 and all-place formula:98. Infinite multiplicity1/2 is explicit, and finite-support arguments:54–66/86 ensure finprod is the genuine finite product, not its unsupported fallback."
+    },
+    {
+      "concept": "number-field-product-formula",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read ideleNorm_unitEmbedding:363 coordinate rewrites, inverse absolute norm cancellation and principal kernel reformulation:385. This is a direct native principal-product formula with exact normalized factors, not a class field application."
+    },
+    {
+      "concept": "p-adic-valuation-rational",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read padicValRat:126 numerator-minus-denominator multiplicities and zero junk:144, then actual Rat.padicValuation:70 zero branch and multiplicativity/ultrametric proofs. Multiplicative zero corresponds to additive +∞ and exp(-r) to v_p=r; no false claim about integer padicValRat at zero."
+    },
+    {
+      "concept": "p-adic-valuation-rational",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native eq_zero_iff:33 using rational coprimality, and addition laws:45/57 with actual zero-case/nonzero arguments. Correct rational valuation supplied by dependency; the native integer-valued lemmas only claim their stated nonzero/positive/negative regimes."
+    },
+    {
+      "concept": "point-cone-strict-separation",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read ProperCone.hyperplane_separation′:96 actual Hahn–Banach/Riesz proof, giving ≥0 on cone and <0 at point. Euclidean finite-dimensional real space meets completeness, and real inner symmetry yields the exact dot orientation. No spurious finitely-generated hypothesis in full coverage."
+    },
+    {
+      "concept": "point-cone-strict-separation",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read FiniteDuality:39 complete coefficient alternative proof, including c_none=0 contradiction via cone membership and final f(x)<0. This is a direct restricted-hypothesis variant of the same strict separator, alongside full checked dependency coverage."
+    },
+    {
+      "concept": "polynomial-ring-commutative-ring",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read MvPolynomial:79 as finite-support additive monoid algebra on finitely supported exponent vectors, monomial:90 and multiplication formula:230. Fin n gives exactly finite-variable formal polynomials; no evaluation quotient or graded-sign change."
+    },
+    {
+      "concept": "polynomial-ring-commutative-ring",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Native Monomial:50/58 proofs identify variable products and powers with precise formal exponents, and Coeff:30 proves scalar cancellation from an explicit coefficient combination1. These are bounded direct monomial/coefficient API, with the unimodularity hypothesis retained."
+    },
+    {
+      "concept": "product-topology",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Pi.topologicalSpace:64 and full isOpen_pi_iff:1082 proof in both directions, especially finite Finset and univ outside it. This is arbitrary product topology, not the finer box topology."
+    },
+    {
+      "concept": "product-topology",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Pi:49 finite real-coordinate box openness and:60 finite injective tuple openness by coordinate inequality intersections. Finiteness/T2 are actual native lemma hypotheses, while generic arbitrary-product definition remains supplied by checked dependency."
+    },
+    {
+      "concept": "quotient-commutative-ring",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Ideal.Quotient.ringCon:57 actual multiplication compatibility, ring:65/commRing:73, mk:83 and exact coset equality criterion. Commutativity supplies two-sidedness, so displayed operations are well-defined for every ideal."
+    },
+    {
+      "concept": "quotient-commutative-ring",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read exists_ne_zero_mk_eq:33 proof: quotient surjectivity, nonzero ideal witness for zero class and original representative otherwise. The nonzero-ideal hypothesis is explicit and this is elementary representative API."
+    },
+    {
+      "concept": "quotient-group",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read QuotientGroup.con:61 actual conjugation-based multiplication compatibility and Quotient.group:72. Projection multiplication/inversion:163/167 are exact normal-coset formulas; no group structure is attributed to arbitrary subgroup cosets."
+    },
+    {
+      "concept": "quotient-group",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read out_mul_out_mul_inv_mem:247 using exact quotient equality criterion and mk_list_prod:254 induction. Normality is explicit; both are ordinary product/representative API. Further normal word/counting endpoints are rightly excluded."
+    }
+  ]
+}

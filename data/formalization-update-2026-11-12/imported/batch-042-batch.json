@@ -1,0 +1,609 @@
+{
+  "note": "Whole-catalogue formalization update batch-042: independent source review by analysis_formalization of algebra_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "euler-lagrange-equation",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "No complete existing proof certified for current revision2: arbitrary open Omega in R^n, C2 general L and u, all compactly supported smooth test variations of the support-localized DIFFERENCE integral imply the full divergence equation. The checked fundamental variational lemma does not by itself establish the first-variation formula. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Searched both entire libraries for Euler/Lagrange/variation and actual neighboring calculus/variational source. Mathlib fundamental variational lemma only turns zero test pairings into zero functions; it does not supply differentiation of the general L(x,u,gradient u) action and its integration-by-parts identity. Native Tau Hamiltonian/EulerLagrange and Noether assume equations; Wasserstein/JKO and Liouville/Yamabe have particular energies. LagrangianAction:408 and Vortex/Variational:389 are actual narrower implemented variational implications, not a proof of the catalogue general open-domain theorem.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "euler-lagrange-equation",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Symplectic/Hamiltonian/LagrangianAction.lean",
+          "declarations": "TauCeti.isActionStationary_iff_eulerLagrange:408",
+          "note": "Native complete curve/interval stationary-action theorem and first-variation API; retain its actual endpoint-fixed-variation hypotheses."
+        },
+        {
+          "path": "TauCeti/Analysis/PDE/Vortex/Variational.lean",
+          "declarations": "TauCeti.forall_hasDerivAt_taubesFunctional_add_smul_iff:389; hasDerivAt_taubesFunctional_add_smul:322",
+          "note": "Native genuine scalar-field variational theorem for a specific kinetic/exponential potential density; restricted implementation only."
+        }
+      ],
+      "evidence": "Native LagrangianAction.isActionStationary_iff_eulerLagrange:408 proves the full stationary-action/equation equivalence for curves on a compact interval, Cn endpoint-fixed variations (2<=n<=infinity), with C2 L along the curve; inspected first-variation use, smooth-test pairing, fundamental-lemma and continuity proof408–459. Native forall_hasDerivAt_taubesFunctional_add_smul_iff:389 proves a genuine multi-dimensional scalar-field Euler–Lagrange equivalence for the specific Taubes density, global C2 w, continuous coefficients and integrable density; its proof differentiates, integrates by parts and upgrades AE to pointwise. These implement restricted instances. Neither certifies arbitrary open-domain general L under exactly revision2 support-difference stationarity. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Searched both entire libraries for Euler/Lagrange/variation and actual neighboring calculus/variational source. Mathlib fundamental variational lemma only turns zero test pairings into zero functions; it does not supply differentiation of the general L(x,u,gradient u) action and its integration-by-parts identity. Native Tau Hamiltonian/EulerLagrange and Noether assume equations; Wasserstein/JKO and Liouville/Yamabe have particular energies. LagrangianAction:408 and Vortex/Variational:389 are actual narrower implemented variational implications, not a proof of the catalogue general open-domain theorem.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "euler-totient-function",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Totient.lean",
+          "declarations": "Nat.totient:38; totient_eq_card_coprime:50; filter_coprime_Ico_eq_totient:79; totient_mul:131",
+          "note": "Defining coprime count and ordinary value/interval/product API."
+        }
+      ],
+      "evidence": "Nat.totient:38 counts coprime residues in range n. filter_coprime_Ico_eq_totient:79 proves that ANY interval [k,k+n) gives that count, so k=1 is precisely the catalogue 1<=a<=n convention, including n=0 and n=1. Read actual periodic-count proof79–82 and basic zero/one/positivity and multiplicativity proofs. Definition identical in actual dependency. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Exclude Euler congruence theorem PowModTotient and cyclotomic applications as separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "euler-totient-function",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Nat/Totient.lean",
+          "declarations": "TauCeti.Nat.totient_prime_pow_eq_one_iff:31; totient_le_two_iff:39",
+          "note": "Native ordinary small-value API of the same arithmetic function; definition supplied by checked dependency."
+        }
+      ],
+      "evidence": "Nat.totient:38 counts coprime residues in range n. filter_coprime_Ico_eq_totient:79 proves that ANY interval [k,k+n) gives that count, so k=1 is precisely the catalogue 1<=a<=n convention, including n=0 and n=1. Read actual periodic-count proof79–82 and basic zero/one/positivity and multiplicativity proofs. Definition identical in actual dependency. Native TauCeti.Nat.totient_prime_pow_eq_one_iff:31 is a direct small-value classification of the totient; proof33–34 specializes exact dependency value theorem. totient_le_two_iff:39 includes zero and1,2,3,4,6; read complete divisor/prime-power reduction proof41–65. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Enumerated native Data/Nat/Totient and RingTheory totient siblings. Exclude ideal/Euler-phi for Dedekind quotients and roots-of-unity applications; they have different inputs.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "extreme-point-convex-set",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Convex/Extreme.lean",
+          "declarations": "Set.extremePoints:70; mem_extremePoints:135; extremePoints_singleton:163",
+          "note": "Exact definition and immediate endpoint/singleton API."
+        }
+      ],
+      "evidence": "Set.extremePoints:70 requires x in A and an open-segment endpoint equal to x; mem_extremePoints:135 proves BOTH endpoints equal to x, using openSegment symmetry. This is exactly x=(1-t)y+t z, 0<t<1, and y=z=x, over real modules. Its proof137–140 was checked; no exposed/supporting-hyperplane condition is substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Ambient convexity is given in catalogue; source definition valid for arbitrary sets. Exclude Krein–Milman and polyhedron classification.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "extreme-point-convex-set",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/Extreme.lean",
+          "declarations": "TauCeti.mem_extremePoints_iff_linearMap_mem_extremePoints:39",
+          "note": "Native natural-map characterization of the same extreme points, with precise face/range hypotheses."
+        }
+      ],
+      "evidence": "Set.extremePoints:70 requires x in A and an open-segment endpoint equal to x; mem_extremePoints:135 proves BOTH endpoints equal to x, using openSegment symmetry. This is exactly x=(1-t)y+t z, 0<t<1, and y=z=x, over real modules. Its proof137–140 was checked; no exposed/supporting-hyperplane condition is substituted. Actual dependency same definition and135; native TauCeti.mem_extremePoints_iff_linearMap_mem_extremePoints:39 is the ordinary injective-linear image/face identification. Read both inverse implications47–63; actual hypotheses include pullback membership, image in the face and face contained in the range. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Only defining/mapping API; exclude separate simplex facial classification and polyhedron vertex theorems as independent endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "face-convex-set",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Convex/Basic.lean",
+          "declarations": "Convex:53; convex_iff_segment_subset:61",
+          "note": "Direct constructor for the convex clause in the exact face predicate."
+        },
+        {
+          "path": "Mathlib/Analysis/Convex/Extreme.lean",
+          "declarations": "IsExtreme:63; IsExtreme.right_mem_of_mem_openSegment:82; IsExtreme.trans:87",
+          "note": "Direct endpoint/subset predicate and immediate transitivity API defining a face when conjoined with convexity."
+        }
+      ],
+      "evidence": "The exact literal predicate is Convex R F AND IsExtreme R K F, with K given convex. Convex:53 defines the first clause. IsExtreme:63 includes F subset K and the endpoint condition for an open segment; right_mem_of_mem_openSegment:82 proves the other endpoint belongs too. Thus it is a face, including empty/full faces, rather than merely an arbitrary extreme subset lacking convexity. Relevant source definitions and symmetry proof checked; dependency matches. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Do not infer convexity of arbitrary extreme subset. Exclude exposed-face restrictions and polyhedron-only face lattices.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "face-convex-set",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/Extreme.lean",
+          "declarations": "IsExtreme.mem_of_centerMass_mem:77; IsExtreme.convexHull_inter_subset:98",
+          "note": "Native ordinary face/convex-combination API; precise convex-hull inclusion assumptions retained."
+        }
+      ],
+      "evidence": "The exact literal predicate is Convex R F AND IsExtreme R K F, with K given convex. Convex:53 defines the first clause. IsExtreme:63 includes F subset K and the endpoint condition for an open segment; right_mem_of_mem_openSegment:82 proves the other endpoint belongs too. Thus it is a face, including empty/full faces, rather than merely an arbitrary extreme subset lacking convexity. Relevant source definitions and symmetry proof checked; dependency matches. Native IsExtreme.mem_of_centerMass_mem:77 proves every positive-weight constituent lies in the face when its convex hull is in K; read erase/singleton and positive-open-segment proof80–93. IsExtreme.convexHull_inter_subset:98 is the immediate convex-hull/face restriction identity with full proof101–112. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: No restriction to exposed or polytopal faces. Exclude simplex classification123 and polyhedron rational-face files as separately stronger settings/results.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "f-supercuspidal-test-function",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "No complete exact local F-supercuspidal predicate certified: compact support and local constancy are available, but the universal zero-integral conditions for EVERY left/right translate along the F_v-points of every proper F-defined parabolic radical have not been matched to one checked generic construction. Tau parabolic/radical constructors are Tau-owned candidates; they are not claimed as standalone Mathlib coverage. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Searched whole native/dependency trees for supercuspidal, unipotent radical, parabolic and local test functions. Actual Tau HopfIdeal.IsParabolic:248 is defined over F via base change, and Unipotent/Radical/Construction:69 gives the F-unipotent radical of a finite-type affine group; neither is an F_v-local constant-term/test-function predicate. LocallyConstant/Compact:26 is a uniform-neighborhood lemma, not the cancellation condition. Abstract finite-group HarishChandra functors do not replace Haar integrals on local unipotent points. A generic formula integral_N f(g*n)=0 and integral_N f(n*g)=0 for all g and all proper F-parabolics is apparent, but complete source-backed assembly of these F-defined subgroups, local-point embeddings/topologies and chosen Haar data was not certified. This is an explicit unresolved assembly frontier, not a claim of absence.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "f-supercuspidal-test-function",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "No complete exact local F-supercuspidal predicate certified: compact support and local constancy are available, but the universal zero-integral conditions for EVERY left/right translate along the F_v-points of every proper F-defined parabolic radical have not been matched to one checked generic construction. Tau parabolic/radical constructors are Tau-owned candidates; they are not claimed as standalone Mathlib coverage. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Searched whole native/dependency trees for supercuspidal, unipotent radical, parabolic and local test functions. Actual Tau HopfIdeal.IsParabolic:248 is defined over F via base change, and Unipotent/Radical/Construction:69 gives the F-unipotent radical of a finite-type affine group; neither is an F_v-local constant-term/test-function predicate. LocallyConstant/Compact:26 is a uniform-neighborhood lemma, not the cancellation condition. Abstract finite-group HarishChandra functors do not replace Haar integrals on local unipotent points. A generic formula integral_N f(g*n)=0 and integral_N f(n*g)=0 for all g and all proper F-parabolics is apparent, but complete source-backed assembly of these F-defined subgroups, local-point embeddings/topologies and chosen Haar data was not certified. This is an explicit unresolved assembly frontier, not a claim of absence.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "farkas-lemma",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Convex/Cone/Dual.lean",
+          "declarations": "ProperCone.hyperplane_separation:118; ProperCone.hyperplane_separation_point:132",
+          "note": "Native geometric Farkas separation theorem; explicit closed-cone hypotheses and unresolved affine matrix conversion."
+        }
+      ],
+      "evidence": "Read ProperCone.hyperplane_separation_point:132 and actual proof through compact-singleton separation:118–134. It produces a continuous dual functional nonnegative on a CLOSED convex cone and negative at an outside point, a genuine geometric Farkas implementation. A complete existing bridge to exactly the catalogue arbitrary row x, coordinate inequalities xA<=b, Ay=0,y>=0,b*y<0, including finite generated image-cone closedness and mutual exclusivity, was not certified in this pass. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Searched Farkas/farkas and matrix vecMul/mulVec inequalities and cone/duality directories. InnerDual has analogous geometric theorem; cone Basic TODO does not establish the matrix version. Do not infer a completed row-matrix alternative from a proof ingredient.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "farkas-lemma",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Convex/Cone/Alternative.lean",
+          "declarations": "TauCeti.exists_forall_dual_pos_iff:166; Submodule.exists_pos_dotProduct_eq_zero_iff:186",
+          "note": "Native proved finite-family homogeneous alternatives over ordered fields; catalogue affine-matrix endpoint remains unresolved."
+        }
+      ],
+      "evidence": "Read ProperCone.hyperplane_separation_point:132 and actual proof through compact-singleton separation:118–134. It produces a continuous dual functional nonnegative on a CLOSED convex cone and negative at an outside point, a genuine geometric Farkas implementation. A complete existing bridge to exactly the catalogue arbitrary row x, coordinate inequalities xA<=b, Ay=0,y>=0,b*y<0, including finite generated image-cone closedness and mutual exclusivity, was not certified in this pass. Dependency geometric theorem is byte-identical. Native TauCeti.exists_forall_dual_pos_iff:166 proves Gordan homogeneous alternative: a strictly positive dual functional on a finite vector family iff its only nonnegative zero relation is trivial; actual induction134–176 and nonzero/positivity argument checked. Submodule.exists_pos_dotProduct_eq_zero_iff:186 proves Stiemke via actual quotient-coordinate argument189–203. These are genuine restricted/homogeneous alternatives, not an unchecked assertion of the full b-affine matrix formulation. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Enumerated native cone Alternative/FiniteDuality and Analysis/Convex/Cone siblings; positive-dual point-separation is not an existing full row-matrix theorem. Stronger integer-lattice alternatives are excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "fermat-two-squares",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/SumTwoSquares.lean",
+          "declarations": "Nat.Prime.sq_add_sq:36; Nat.eq_sq_add_sq_iff:212",
+          "note": "Native Fermat sufficiency plus complete prime-factor iff providing the converse; integer/natural witness convention explicit."
+        }
+      ],
+      "evidence": "Nat.Prime.sq_add_sq:36 gives natural witnesses for primes not3 mod4, with completed Gaussian irreducibility proof38–39. Converse follows directly from EXISTING full Nat.eq_sq_add_sq_iff:212–230: for a prime its primeFactors is singleton (Prime.primeFactors:95), its own valuation is1 (Nat.multiplicity_self:189 and padicValNat_def), so3 mod4 is forbidden. Prime.mod_two_eq_one_iff_ne_two:120 gives the usual p=2 or odd convention, hence excluding3 leaves1 mod4. Integer witnesses are equivalent to natural witnesses by taking natAbs (squares unchanged); no positivity/nonzero requirement on a,b is added. Thus exact catalogue iff is covered, not just sufficiency. Actual dependency SumTwoSquares is byte-identical. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Checked primeFactors singleton and multiplicity1 actual supplier bodies, not counted as separate Fermat LOC. Exclude general Gaussian infrastructure prerequisites and rational-square classification as a separate extension.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "fermat-two-squares",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Nat.Prime.sq_add_sq:36 gives natural witnesses for primes not3 mod4, with completed Gaussian irreducibility proof38–39. Converse follows directly from EXISTING full Nat.eq_sq_add_sq_iff:212–230: for a prime its primeFactors is singleton (Prime.primeFactors:95), its own valuation is1 (Nat.multiplicity_self:189 and padicValNat_def), so3 mod4 is forbidden. Prime.mod_two_eq_one_iff_ne_two:120 gives the usual p=2 or odd convention, hence excluding3 leaves1 mod4. Integer witnesses are equivalent to natural witnesses by taking natAbs (squares unchanged); no positivity/nonzero requirement on a,b is added. Thus exact catalogue iff is covered, not just sufficiency. Actual dependency SumTwoSquares is byte-identical. Native NumberTheory/SumTwoSquares:28/73/106 classifies sums of TWO RATIONAL squares by all 3mod4 valuations and nonnegativity; read complete denominator-clearing and numerator/denominator sufficiency proof. That is a separately broader rational classification, not an added native prime/integer Fermat API certified here. Zero native attribution. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Enumerated native NumberTheory/SumTwoSquares and neighboring quadratic/PadicVal dirs. Rational classification uses the dependency integral classification; retain it as an excluded separate endpoint instead of treating imports or prerequisite application as native Fermat proof.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "field-norm-finite-extension",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Norm/Defs.lean",
+          "declarations": "Algebra.norm:60; norm_apply:63; norm_eq_matrix_det:81; Algebra.norm_algebraMap:99",
+          "note": "Exact determinant-of-multiplication definition and scalar/basis formulas."
+        },
+        {
+          "path": "Mathlib/RingTheory/Norm/Basic.lean",
+          "declarations": "Algebra.norm_zero:87; norm_eq_zero_iff:92",
+          "note": "Immediate nonzero/zero API, checked finite free domain hypotheses."
+        }
+      ],
+      "evidence": "Algebra.norm:60 is LinearMap.det composed with algebra left multiplication lmul; norm_apply:63 is literally det(lmul a), exactly the catalogue. norm_eq_matrix_det:81 proves the basis-matrix expression; norm_algebraMap:99 the scalar-degree formula. Norm/Basic.norm_zero:87 and norm_eq_zero_iff:92 prove ordinary zero/nonzero API for finite free domain algebras, in particular finite field extensions; read complete basis/kernel proof94–106. Dependency definitions/proofs differ only +1 doc line, so anchors61/64/82/100 and88/93 there. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Exclude tower transitivity, general characteristic polynomials, field norm groups and local/global norm theorems as separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "field-norm-finite-extension",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Norm/Units.lean",
+          "declarations": "TauCeti.Algebra.normUnits:52; Algebra.coe_normUnits:57; Algebra.normUnits_unitsMap_algebraMap:63",
+          "note": "Native norm-on-units constructor and value/scalar law; determinant norm itself supplied by actual dependency."
+        }
+      ],
+      "evidence": "Algebra.norm:60 is LinearMap.det composed with algebra left multiplication lmul; norm_apply:63 is literally det(lmul a), exactly the catalogue. norm_eq_matrix_det:81 proves the basis-matrix expression; norm_algebraMap:99 the scalar-degree formula. Norm/Basic.norm_zero:87 and norm_eq_zero_iff:92 prove ordinary zero/nonzero API for finite free domain algebras, in particular finite field extensions; read complete basis/kernel proof94–106. Dependency definitions/proofs differ only +1 doc line, so anchors61/64/82/100 and88/93 there. Native TauCeti.Algebra.normUnits:52 packages precisely this norm as S-units -> R-units, coe_normUnits:57 identifies its value, and normUnits_unitsMap_algebraMap:63 proves the scalar-degree formula; read actual Units.map and ext proofs52–65. These are ordinary norm natural-map API and apply to finite field extensions. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Enumerated all native Norm and NormTrace siblings. Exclude norm groups/image/cokernel arithmetic, transitivity/base-change comparison and quadratic explicit classification from this bounded mapping.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "finite-coefficient-integrality-siegel",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Neither higher-genus finite integral-coefficient implication nor its p-integrality version was certified. Concrete genus-one equality/bounded-denominator candidates have different domains and conclusions. Native Tau candidates are identified as Tau-owned; no standalone Mathlib implementation is inferred. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Full-tree Siegel/Jacobi/half-integral searches and direct modular-form directory enumeration checked. Mathlib ModularForms/LevelOne.sturm_bound concerns equality of genus-one complex forms. Native Tau SturmBound58/66/75 also proves complex coefficient equality, not reduction modulo p; Integral/BoundedDenominators:78 gives SOME common denominator from an integral spanning set on subgroups of SL2(Z), not that prescribed low coefficients integral force denominator1, and not genus>=2. Actual hypotheses/conclusion78–84 read. Tau SiegelFunction/Basic:95/102 is a one-variable q-Pochhammer modular unit, not a degree-g Siegel form. No complete proof of diagonal bound(4/3)^g*k/16 and its p-integrality variant certified; genuine unresolved theorem frontier, not absence.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "finite-coefficient-integrality-siegel",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Neither higher-genus finite integral-coefficient implication nor its p-integrality version was certified. Concrete genus-one equality/bounded-denominator candidates have different domains and conclusions. Native Tau candidates are identified as Tau-owned; no standalone Mathlib implementation is inferred. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Full-tree Siegel/Jacobi/half-integral searches and direct modular-form directory enumeration checked. Mathlib ModularForms/LevelOne.sturm_bound concerns equality of genus-one complex forms. Native Tau SturmBound58/66/75 also proves complex coefficient equality, not reduction modulo p; Integral/BoundedDenominators:78 gives SOME common denominator from an integral spanning set on subgroups of SL2(Z), not that prescribed low coefficients integral force denominator1, and not genus>=2. Actual hypotheses/conclusion78–84 read. Tau SiegelFunction/Basic:95/102 is a one-variable q-Pochhammer modular unit, not a degree-g Siegel form. No complete proof of diagonal bound(4/3)^g*k/16 and its p-integrality variant certified; genuine unresolved theorem frontier, not absence.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "finite-involution",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Logic/Function/Basic.lean",
+          "declarations": "Function.Involutive:1032; Function.Involutive.comp_self:1045; Function.Involutive.bijective:1060",
+          "note": "Exact involution predicate and immediate self-inverse/bijection API; finite X is a parameter restriction."
+        }
+      ],
+      "evidence": "Function.Involutive:1032 is literally forall x,f(f x)=x; apply to any finite type X. Its comp_self:1045 and injective/surjective/bijective:1056/1058/1060 are completed direct inverse-law proofs, with no fixed-point-free assumption and no finiteness required; exact dependency identical. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Exclude special matrix/graph actions, orbit-transversal counting and concrete involutions; no imposed lack of fixed points.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "finite-involution",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Set/Function.lean",
+          "declarations": "Set.MapsTo.image_eq_of_involutive:34",
+          "note": "Native exact invariant-image consequence of self-inverse law, valid without adding fixed-point-freeness."
+        }
+      ],
+      "evidence": "Function.Involutive:1032 is literally forall x,f(f x)=x; apply to any finite type X. Its comp_self:1045 and injective/surjective/bijective:1056/1058/1060 are completed direct inverse-law proofs, with no fixed-point-free assumption and no finiteness required; exact dependency identical. Native Set.MapsTo.image_eq_of_involutive:34 proves that an invariant set is mapped onto itself by an involution, with explicit inverse witness f x; completed proof36–37 checked. Applies in particular to finite X/finite invariant subsets, and is ordinary involution image API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Enumerated native Logic/Function, Data/Set, Data/Finset and involution neighbors. Exclude Enumerative/InvolutionTransversal counting and matchings as separate fixed-point-free structures; orbit-deletion lemma there is unnecessary to bounded map.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "finite-sums-set",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean",
+          "declarations": "Finset.sum (generated additive definition of protected prod):66",
+          "note": "Direct finite-index sum constructor defining the literal FS-set for finite and infinite index types."
+        },
+        {
+          "path": "Mathlib/Combinatorics/Hindman.lean",
+          "declarations": "Hindman.FS:89; Hindman.FS.singleton (generated):221; Hindman.FS.finsetSum (generated):239",
+          "note": "Native infinite sequence nonempty-tail sum predicate and immediate finite-index membership API; no repeated index."
+        }
+      ],
+      "evidence": "The exact generic set for x:I->positive naturals is {n | exists s:Finset I, s.Nonempty AND sum i in s, x i = n}; I=Fin k or Nat gives finite/infinite sequences and Finset indices enforce DISTINCTNESS. Finset.sum is actually generated by protected prod:66 in BigOperators/Group/Finset/Defs, using the nodup Finset underlying multiset; inspect actual definition66–67. Native Mathlib Hindman.FS:89 gives the infinite-stream nonempty-subsequence presentation, with constructors taking head once and recursing only on tail. Generated FS.singleton:221 and FS.finsetSum:239 give ordinary membership API; actual erase/min proof239–254 checked. No infinite sum/convergence claim. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Hindman partition theorem/ultrafilter construction is a separate theorem, excluded as API endpoint though whole shared file LOC applies. Generic finite-index predicate covers finite sequences without padding zeros into a positive stream.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "finite-sums-set",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "The exact generic set for x:I->positive naturals is {n | exists s:Finset I, s.Nonempty AND sum i in s, x i = n}; I=Fin k or Nat gives finite/infinite sequences and Finset indices enforce DISTINCTNESS. Finset.sum is actually generated by protected prod:66 in BigOperators/Group/Finset/Defs, using the nodup Finset underlying multiset; inspect actual definition66–67. Native Mathlib Hindman.FS:89 gives the infinite-stream nonempty-subsequence presentation, with constructors taking head once and recursing only on tail. Generated FS.singleton:221 and FS.finsetSum:239 give ordinary membership API; actual erase/min proof239–254 checked. No infinite sum/convergence claim. Actual dependency defining Finset.sum/Hindman source differs only a +1 header blank, so anchors67 and90/222/240. No qualifying native FS-set API certified after checking direct combinatorics and finite-set siblings; zero native files. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Enumerated native Combinatorics and searched Hindman/FS/IPSet/finite sums across Combinatorics,Dynamics,NumberTheory. Data/Finset/Sum is disjoint SUM TYPE (left/right tagged projections), not arithmetic sums; complete source read and excluded. Generic finite sum reindexing and applications are prerequisites/uses, not FS-set API.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "first-nonabelian-galois-cohomology",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/ContinuousMap/Defs.lean",
+          "declarations": "ContinuousMap:32",
+          "note": "Direct constructor for the continuous-cocycle subtype in the exact bare pointed quotient."
+        }
+      ],
+      "evidence": "Use Fsep=SeparableClosure F (FieldTheory/IsSepClosed.lean:347;348 in dependency), Gamma=Gal(Fsep/F) with actual Krull topology:134. The coefficient group A is H(Fsep), with DISCRETE topology, not the field topology. Checked group-valued points supplier: CommAlgCat.grpObjOpOf:173 and Cartesian/Grp.yonedaGrpObj:75 give A for arbitrary commutative value algebra; its morphisms are postcomposition by sigma, hence precisely the natural Galois action. Let C be continuous maps Gamma->A satisfying c(st)=c(s)*(s acting on c(t)); the EXACT gauge relation on C is exists h:A, forall s, c2(s)=h^-1*c1(s)*(s acting on h). This is the quotient of C by the relation, with distinguished class of constant1. Actual stock Lean b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a Init/Prelude:437–447 supplies primitive Quot r and Quot.mk for ANY relation; docs453–470 specify the generated-equivalence meaning, so a new named Setoid alias is not required for this bare quotient definition. Gauge multiplication order matches genuine orbits, as independently verified in actual Tau setoid139–146 (a*b composition, inverse a^-1); that proof is Tau-owned evidence of convention, NOT attributed as a Mathlib theorem. No H1 vanishing/descent classification asserted. ContinuousMap:32 is the checked continuous-map subtype supplying the actual cocycle constructor. MulDistribMulAction:626 describes the supplied coefficient-action INPUT, so its file is not charged again as H1-specific implementation. The quotient is taken on ALREADY continuous cocycles, so no assertion that every arbitrary map twist is continuous is smuggled into the construction. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Reuses checked035 cocycle/gauge predicate with an actual primitive quotient+basepoint. No dedicated Mathlib H1 name is claimed. SeparableClosure/Krull/Hopf point group are checked INPUT suppliers, excluded from this quotient-specific LOC; stock Lean Quot has zero project-owned LOC. General commutative IsMulCocycle is not substituted for noncommutative H. File-boundary refinement: the coefficient action, like the separable closure/Krull/point-group inputs, is supplied data. Its generic action-interface file is excluded consistently with the independently reviewed035 cocycle boundary.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "first-nonabelian-galois-cohomology",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RepresentationTheory/Homological/ContCohomology/Nonabelian/Basic.lean",
+          "declarations": "TauCeti.NonabelianH1.Cocycle:75; NonabelianH1.Cocycle.setoid:139; NonabelianH1:190; NonabelianH1.mk_eq_mk_iff:210; One instance:215",
+          "note": "Native exact continuous nonabelian cocycle quotient, noncommutative gauge equivalence proof and distinguished trivial class."
+        }
+      ],
+      "evidence": "Use Fsep=SeparableClosure F (FieldTheory/IsSepClosed.lean:347;348 in dependency), Gamma=Gal(Fsep/F) with actual Krull topology:134. The coefficient group A is H(Fsep), with DISCRETE topology, not the field topology. Checked group-valued points supplier: CommAlgCat.grpObjOpOf:173 and Cartesian/Grp.yonedaGrpObj:75 give A for arbitrary commutative value algebra; its morphisms are postcomposition by sigma, hence precisely the natural Galois action. Let C be continuous maps Gamma->A satisfying c(st)=c(s)*(s acting on c(t)); the EXACT gauge relation on C is exists h:A, forall s, c2(s)=h^-1*c1(s)*(s acting on h). This is the quotient of C by the relation, with distinguished class of constant1. Actual stock Lean b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a Init/Prelude:437–447 supplies primitive Quot r and Quot.mk for ANY relation; docs453–470 specify the generated-equivalence meaning, so a new named Setoid alias is not required for this bare quotient definition. Gauge multiplication order matches genuine orbits, as independently verified in actual Tau setoid139–146 (a*b composition, inverse a^-1); that proof is Tau-owned evidence of convention, NOT attributed as a Mathlib theorem. No H1 vanishing/descent classification asserted. Native TauCeti.NonabelianH1.Cocycle:75 gives the exact continuous maps, setoid:139 proves the precise relation is reflexive/symmetric/transitive, NonabelianH1:190 is the actual quotient, mk_eq_mk_iff:210 gives exact class equality and One:215 is the trivial class. Read completed proof137–146 and230–238; base quotient needs only Group/TopologicalSpace/MulDistribMulAction, not a nonexistent continuous field topology on A. Twist:157 additionally requires ContinuousMul/ContinuousSMul, explicitly only for that optional API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Checked native pointsFunctor56/135/152 gives group-valued points and postcomposition, with identity/composition proofs; input supplier excluded from H1-specific LOC. Krull source is exact actual dependency. Exclude inflation-restriction, group-extension classification and H1-vanishing theorems.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "fixed-point",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Logic/Function/Defs.lean",
+          "declarations": "Function.IsFixedPt:217; Function.IsFixedPt.eq:220",
+          "note": "Defining fixed-point equation."
+        },
+        {
+          "path": "Mathlib/Dynamics/FixedPoints/Defs.lean",
+          "declarations": "Function.fixedPoints:31; mem_fixedPoints_iff:42; inter_subset_fixedPoints_comp:50",
+          "note": "Exact fixed-point set and immediate composition/set API."
+        }
+      ],
+      "evidence": "Function.IsFixedPt:217 is f x=x. Dynamics/FixedPoints/Defs.fixedPoints:31 is {x | IsFixedPt f x}; mem_fixedPoints_iff:42 is exactly f x=x, and fixedPoints_id:46/inter_subset_fixedPoints_comp:50 give ordinary set API; complete proof50–53 checked. Exact dependency files identical. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: No existence/uniqueness theorem is required by the bare definition. Exclude order/lattice fixed-point theorems and topological or dynamical applications.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "fixed-point",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Function.IsFixedPt:217 is f x=x. Dynamics/FixedPoints/Defs.fixedPoints:31 is {x | IsFixedPt f x}; mem_fixedPoints_iff:42 is exactly f x=x, and fixedPoints_id:46/inter_subset_fixedPoints_comp:50 give ordinary set API; complete proof50–53 checked. Exact dependency files identical. No qualifying native generic fixed-point/set API certified; zero native LOC. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Enumerated native Logic/Function and direct Dynamics/Flow/Periodic and Data/Finset/Iterate siblings; Periodic/Basic:66/90 identifies periodic ODE solutions with return-map fixed points, a separately significant dynamics result, and Finset/Iterate:47 proves termination under extensivity, a separate existence theorem. Data/Set/Function.mapsTo_of_eq_self is an invariant-set result for injective maps fixing a complement, not defining Fix(f). Exclude these applications.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "formal-power-series",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/MvPowerSeries/Basic.lean",
+          "declarations": "MvPowerSeries:85; MvPowerSeries.coeff:136; Mul instance:214; MvPowerSeries.coeff_mul:218; X:373",
+          "note": "Exact multivariate coefficient array, coefficientwise additive ring and finite Cauchy product with ordinary monomial/variable API."
+        }
+      ],
+      "evidence": "MvPowerSeries:85 is literally (sigma->finitely-supported Nat)->R, use sigma=Fin n; coeff:136 evaluates this array. Addition instances100–110 are pointwise. Mul instance214 and coeff_mul:218 define coefficients by FINITE antidiagonal Cauchy sums; completed coefficient proof220–221 checked. No analytic convergence or restricted/Tate condition. Actual dependency differs only +1 header line, anchors86/137/215/219. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: No univariate-only substitution. Exclude analytic convergence, Tate algebras, Weierstrass division and formal differential equations as separate structures/endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "formal-power-series",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/MvPowerSeries/Basic.lean",
+          "declarations": "MvPowerSeries.X_ne_zero:48; MvPowerSeries.coeff_X_add_X_pow:56; MvPolynomial.coe_finsuppProd_pow:34",
+          "note": "Native ordinary variable/coefficient/polynomial-inclusion API for the same multivariate formal series."
+        }
+      ],
+      "evidence": "MvPowerSeries:85 is literally (sigma->finitely-supported Nat)->R, use sigma=Fin n; coeff:136 evaluates this array. Addition instances100–110 are pointwise. Mul instance214 and coeff_mul:218 define coefficients by FINITE antidiagonal Cauchy sums; completed coefficient proof220–221 checked. No analytic convergence or restricted/Tate condition. Actual dependency differs only +1 header line, anchors86/137/215/219. Native MvPowerSeries.X_ne_zero:48 proves nonzero coordinate monomials by extracting coefficient1; coeff_X_add_X_pow:56 proves the ordinary binomial coefficient formula for two variables, mapping the Nat identity into any semiring. Read full coefficient/cast proof48–64; no characteristic-zero restriction on R. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Enumerated all native MvPowerSeries direct siblings; map/rename/inverse derivatives can be separate additional API, not needed for bounded defining ring/coefficient mapping. Exclude Tate algebra/analytic consequences.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "fourier-expansion-siegel",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Matrix/Symmetric.lean",
+          "declarations": "Matrix.IsSymm:33",
+          "note": "Direct symmetric matrix predicate for the index/domain of the literal expansion."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/Matrix/PosDef.lean",
+          "declarations": "Matrix.PosSemidef:62; Matrix.PosDef:176",
+          "note": "Direct positive-semidefinite index and positive-imaginary-part domain constructors."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/Matrix/Trace.lean",
+          "declarations": "Matrix.trace:42",
+          "note": "Direct trace in the Fourier exponential formula."
+        },
+        {
+          "path": "Mathlib/Topology/Algebra/InfiniteSum/Defs.lean",
+          "declarations": "HasSum (generated additive definition of HasProd):106",
+          "note": "Direct convergent expansion relation, so equality is not inferred from a default value for a divergent series."
+        }
+      ],
+      "evidence": "This is a bare expansion DEFINITION, not a theorem asserting every Siegel form has such coefficients. A checked exact generic representation is: H_g={Z:Matrix(Fin g)(Fin g)C | Z.IsSymm AND (entrywise Im Z).PosDef}; index T is a symmetric RATIONAL matrix with integral diagonal, integral twice every off-diagonal entry, and real-cast T.PosSemidef. For given F on H_g and c on this index, require FOR EVERY Z, HasSum (fun T => c(T)*Complex.exp(2*pi*I*Matrix.trace((complex-cast T)*Z))) (F Z). Thus half-integral means diagonal integral and off-diagonal half-integral, not every entry integral or arbitrary half diagonals. Matrix.IsSymm:33 is transpose equality; PosSemidef:62/PosDef:176 are actual Hermitian quadratic-form predicates (over real matrices star is identity); Trace:42 is the actual diagonal sum. Generated HasSum from HasProd:106 is the finite-subset-sum limit, not a junk totalized tsum. Actual defining bodies and standard complex exponential constructor checked. This certifies the literal expansion relation only; no Siegel modularity/Koecher/convergence-existence theorem is asserted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Actual whole-tree modular/Siegel search gave no named genus-g class; generic bare expansion definition does not require such an alias when its F is given. Integral/half-integral matrix predicate is spelled out, not guessed from a filename. Do not claim the theorem that an arbitrary invariant holomorphic function has this PSD-supported convergent expansion.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "fourier-expansion-siegel",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "This is a bare expansion DEFINITION, not a theorem asserting every Siegel form has such coefficients. A checked exact generic representation is: H_g={Z:Matrix(Fin g)(Fin g)C | Z.IsSymm AND (entrywise Im Z).PosDef}; index T is a symmetric RATIONAL matrix with integral diagonal, integral twice every off-diagonal entry, and real-cast T.PosSemidef. For given F on H_g and c on this index, require FOR EVERY Z, HasSum (fun T => c(T)*Complex.exp(2*pi*I*Matrix.trace((complex-cast T)*Z))) (F Z). Thus half-integral means diagonal integral and off-diagonal half-integral, not every entry integral or arbitrary half diagonals. Matrix.IsSymm:33 is transpose equality; PosSemidef:62/PosDef:176 are actual Hermitian quadratic-form predicates (over real matrices star is identity); Trace:42 is the actual diagonal sum. Generated HasSum from HasProd:106 is the finite-subset-sum limit, not a junk totalized tsum. Actual defining bodies and standard complex exponential constructor checked. This certifies the literal expansion relation only; no Siegel modularity/Koecher/convergence-existence theorem is asserted. Actual dependency same defining bodies: IsSymm33, PosSemidef62/PosDef176; trace43 and HasSum107 after +1 header lines. Later PosDef changes concern infinite-index submatrix API after325, irrelevant for Fin g and defining predicates. No own Siegel Fourier-expansion API certified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Enumerated native ModularForms/JacobiTheta/SiegelFunction and Matrix/Trace,PosDef,Symmetric plus InfiniteSum directories before inherited classification. Their generic trace/positivity/sum identities are prerequisite mathematics, not native API for this trace-exponential expansion; genus-one q-expansion and one-variable Siegel modular units are different. Zero native files/LOC.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "fourier-jacobi-expansion",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "No complete exact Fourier–Jacobi expansion record certified: the last-variable exponential series is representable, but the coefficient-domain requirement that every phi_m is a genuine degree-g Jacobi form has not been matched to checked existing constructors. Native Tau theta/Siegel-unit candidates are explicitly Tau-owned and narrower. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Searched FourierJacobi/Fourier–Jacobi/JacobiForm/Siegel and direct all native modular/theta directories. Actual JacobiTheta/OneVariable and Mathlib twoVariableTheta implement named theta functions, not the degree-g Jacobi transformation/holomorphic/strip-growth class. Tau SiegelFunction Basic95/102 is a one-variable product. Generic matrix block/HasSum constructors can express a last-variable power series, but coefficient functions being genuine degree-g Jacobi FORMS and the full ambient degree-(g+1) setting were not certified. Do not count a series formula alone as this enriched expansion definition; an unresolved interface frontier, not absence.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "fourier-jacobi-expansion",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "No complete exact Fourier–Jacobi expansion record certified: the last-variable exponential series is representable, but the coefficient-domain requirement that every phi_m is a genuine degree-g Jacobi form has not been matched to checked existing constructors. Native Tau theta/Siegel-unit candidates are explicitly Tau-owned and narrower. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Searched FourierJacobi/Fourier–Jacobi/JacobiForm/Siegel and direct all native modular/theta directories. Actual JacobiTheta/OneVariable and Mathlib twoVariableTheta implement named theta functions, not the degree-g Jacobi transformation/holomorphic/strip-growth class. Tau SiegelFunction Basic95/102 is a one-variable product. Generic matrix block/HasSum constructors can express a last-variable power series, but coefficient functions being genuine degree-g Jacobi FORMS and the full ambient degree-(g+1) setting were not certified. Do not count a series formula alone as this enriched expansion definition; an unresolved interface frontier, not absence.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "fundamental-theorem-arithmetic",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Factors.lean",
+          "declarations": "Nat.primeFactorsList:38; prime_of_mem_primeFactorsList:55; prod_primeFactorsList:70; primeFactorsList_unique:168",
+          "note": "Native existence/product/primality and full permutation uniqueness theorem for prime factorization."
+        }
+      ],
+      "evidence": "Nat.primeFactorsList:38 recursively divides by minFac and terminates by factors_lemma; prime_of_mem_primeFactorsList:55 proves every factor prime, prod_primeFactorsList:70 proves product n for n!=0, and primeFactorsList_unique:168 proves ANY prime list with product n is a permutation of this list. Read actual recursive proofs55–81 and uniqueness170–179 (including exclusion of a zero prime-product). This covers every n>=2 and uniqueness up to ordering. Dependency adds1 header line:39/56/71/169. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: No assertion about factoring negative integers into only positive primes; catalogue n>=2 is the standard natural/positive-integer statement. Exclude algorithm performance and global UFD theory as prerequisites.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "fundamental-theorem-arithmetic",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Data/Nat/Factorization/Basic.lean",
+          "declarations": "Nat.minFac_mem_primeFactors:28; Nat.ordCompl_minFac_lt:37; Nat.primeFactors_ordCompl:44; TauCeti.finsuppProd_prime_pow_injective:67",
+          "note": "Native ordinary prime-factorization peeling and unique prime-exponent representation API."
+        }
+      ],
+      "evidence": "Nat.primeFactorsList:38 recursively divides by minFac and terminates by factors_lemma; prime_of_mem_primeFactorsList:55 proves every factor prime, prod_primeFactorsList:70 proves product n for n!=0, and primeFactorsList_unique:168 proves ANY prime list with product n is a permutation of this list. Read actual recursive proofs55–81 and uniqueness170–179 (including exclusion of a zero prime-product). This covers every n>=2 and uniqueness up to ordering. Dependency adds1 header line:39/56/71/169. Native Nat.minFac_mem_primeFactors:28, ordCompl_minFac_lt:37 and primeFactors_ordCompl:44 give direct prime-block peeling identities; actual strict-decrease and erasure proof checked. TauCeti.finsuppProd_prime_pow_injective:67 proves exact uniqueness of monomial prime-power presentations using actual dependency factorization_prod_pow_eq_self and mapDomain injectivity; read full proof70–78. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Enumerated native Nat Factorization siblings. Exclude arithmetic distribution of primes, cyclotomic uses and general UFD applications; ordinary prime-block/exponent normal forms are direct core API.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "gamma-one-congruence-subgroup",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean",
+          "declarations": "CongruenceSubgroup.Gamma1':105; Gamma1:131; Gamma1_mem:135",
+          "note": "Defining Gamma1 kernel/subgroup and exact entry congruences, with determinant proof of equivalence."
+        }
+      ],
+      "evidence": "CongruenceSubgroup.Gamma1:131 is subgroup of SL(2,Z), defined through kernel in Gamma0. Gamma1_mem:135 proves EXACTLY a=d=1,c=0 in ZMod N, all levels including N=0. Gamma1_to_Gamma0_mem:112 uses actual determinant1 identity to recover a from d=1,c=0; complete proof116–127 and subgroup membership135–150 checked. Actual dependency +1 header lines,132/136/113. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Do not substitute Gamma(N) or Gamma0(N), nor principal level1 Gamma. Exclude cusp counts, modular curve genus and Hecke theory.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    },
+    {
+      "concept": "gamma-one-congruence-subgroup",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/ModularForms/CongruenceSubgroups/Basic.lean",
+          "declarations": "CongruenceSubgroup.Gamma1_le_Gamma1_of_dvd:167; Gamma_le_Gamma1:195; mem_Gamma1_iff:241; mem_Gamma1_iff_dvd_lowerRow:251",
+          "note": "Native ordinary level-inclusion and exact entry/divisibility membership API of Gamma1."
+        }
+      ],
+      "evidence": "CongruenceSubgroup.Gamma1:131 is subgroup of SL(2,Z), defined through kernel in Gamma0. Gamma1_mem:135 proves EXACTLY a=d=1,c=0 in ZMod N, all levels including N=0. Gamma1_to_Gamma0_mem:112 uses actual determinant1 identity to recover a from d=1,c=0; complete proof116–127 and subgroup membership135–150 checked. Actual dependency +1 header lines,132/136/113. Native Gamma1_le_Gamma1_of_dvd:167 proves level antitonicity by actual castHom reduction; Gamma_le_Gamma1:195 is immediate inclusion; mem_Gamma1_iff:241 and mem_Gamma1_iff_dvd_lowerRow:251 give the exact lower-row/fiber/divisibility normal form. Read full 167–172,195–196 and241–254 proofs, valid without excluding zero level. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant definitions, hypotheses and completed source bodies inspected; bounded existing-source review, no new Lean proof development.\nSearch and boundary notes: Native congruence directory and direct Gamma1 siblings checked. Exclude prime-power indices, strong approximation, gcd/lcm decomposition, cusp enumeration, Hecke cosets/operators and modular-form applications as separately significant endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-042.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Convex/Cone/Dual.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 148,
+      "sha256": "61e9937ab3584591c277d892cf1e651c420246e0915f795a1ed85678956ad585",
+      "measured_at": "2026-11-13T02:47:09.057598+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Convex/Extreme.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 326,
+      "sha256": "6ac135a3603d0ea59014b21379e3161a3093e182f295d02a0118cdec3f78c97a",
+      "measured_at": "2026-11-13T02:47:09.062177+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Nat/Factors.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 321,
+      "sha256": "93d8b080cd0c104110012edbbdb57e88b37560170a275ece4f6d6264f309d0e6",
+      "measured_at": "2026-11-13T02:47:09.072530+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Dynamics/FixedPoints/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 57,
+      "sha256": "d199f6054dbc14d623a92dade0f817cb42ef8dfd7e77a432d3b64046381d8a11",
+      "measured_at": "2026-11-13T02:47:09.081108+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/LinearAlgebra/Matrix/Symmetric.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 187,
+      "sha256": "a45ef9eb6af910bd929f77968934ed32776cd496f0879ef8caf2f77e8f727e03",
+      "measured_at": "2026-11-13T02:47:09.090223+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 345,
+      "sha256": "264ee4b395f4bb8e0bd312e68b153f908f7a46ea6e9ae3a5b2cbb3f571549ecc",
+      "measured_at": "2026-11-13T02:47:09.108024+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/NumberTheory/SumTwoSquares.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 235,
+      "sha256": "398af89a91679e3646645928430678c3226a929b699a43aef4565c9207d74882",
+      "measured_at": "2026-11-13T02:47:09.111117+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/MvPowerSeries/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1016,
+      "sha256": "6bebc3ad93f3e4d25760c8979f4ca0773aa9cd2a904d5bfc64265e58f464df29",
+      "measured_at": "2026-11-13T02:47:09.115007+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/Norm/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 247,
+      "sha256": "34af201890b9aeada5ad930c316b554961d65fec2ed6e56a6f0a306ca720c0de",
+      "measured_at": "2026-11-13T02:47:09.118270+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/Norm/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 106,
+      "sha256": "e51a03eb9c8e8e7fec102edd8ea62a47eed74620f69a7b2a87a9ab80378ceecf",
+      "measured_at": "2026-11-13T02:47:09.121448+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Convex/Extreme.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 165,
+      "sha256": "68ac6faf94d0aa6610c9c07840f1ad0c36211bb5fbbbbc06f4705de4a6d7d9e5",
+      "measured_at": "2026-11-13T02:47:09.135823+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/PDE/Vortex/Variational.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 566,
+      "sha256": "661dff39baf087c197cf5e5b8742f9c37c269b2700cdd0db178b5d77e4664eec",
+      "measured_at": "2026-11-13T02:47:09.142236+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Data/Nat/Factorization/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 100,
+      "sha256": "5c6e69837b33575aa7c4a27eadff8188227b0af51a3e68237e9515b5240588b5",
+      "measured_at": "2026-11-13T02:47:09.149661+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Data/Nat/Totient.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 67,
+      "sha256": "708dc905dc2e7800333d7d23527b2311409c2363fe00592e3e8a4dd375b2ad23",
+      "measured_at": "2026-11-13T02:47:09.155132+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Data/Set/Function.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 50,
+      "sha256": "57936c30e4b712b4c2b9ac2de996d6f4cf51a43d3acdddef0ced1811a2c2f3fe",
+      "measured_at": "2026-11-13T02:47:09.161265+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Geometry/Convex/Cone/Alternative.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 281,
+      "sha256": "aef0505d7fc9b83b2e9a4a4c6992b0800e922b58ecee50090077a68461378617",
+      "measured_at": "2026-11-13T02:47:09.169020+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Geometry/Symplectic/Hamiltonian/LagrangianAction.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 461,
+      "sha256": "2003550d641d014c9e5e52337f2c139b81d6d5a5660837ba09d9460cecee5ea7",
+      "measured_at": "2026-11-13T02:47:09.176825+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/NumberTheory/ModularForms/CongruenceSubgroups/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 1115,
+      "sha256": "8d6d3253ec4ab85cca1bb1adfb1f3b136931b2671e6705a623750b3684501e49",
+      "measured_at": "2026-11-13T02:47:09.181836+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RingTheory/MvPowerSeries/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 66,
+      "sha256": "190f39cf6da4bbcc6a149a82bc17fe07f0e2f1b19d71221533458db7023054d4",
+      "measured_at": "2026-11-13T02:47:09.195082+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RingTheory/Norm/Units.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 153,
+      "sha256": "c8dc6dcadb14698fa42cf15333cdb53981b59642d9075cba185d9ab7c8bf4b29",
+      "measured_at": "2026-11-13T02:47:09.201685+00:00"
+    }
+  ]
+}

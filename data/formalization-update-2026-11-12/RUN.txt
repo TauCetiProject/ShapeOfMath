@@ -1,0 +1,37 @@
+Whole-catalogue formalization coverage update
+
+The user explicitly selected expansion across the whole catalogue. baseline.json
+freezes the 1,413 active concept identities and paragraphs captured at the start;
+plan.json assigns 2,826 Mathlib/Tau Ceti pairs. Concepts added concurrently are
+outside this pass. Twelve existing pairs were independently cross-reviewed first:
+ten retained, two evidence-only corrections, no changed status/file set/LOC.
+
+prompts/update-formalization-coverage.md is the public workflow.
+WORKER_PROTOCOL.txt coordinates the three author/reviewer agents for this run.
+Each job's author and independent reviewer differ. Source reasoning stays in
+subagents; the coordinator performs structural validation and mechanical imports.
+
+jobs/ contains the immutable per-batch rosters.
+proposals/ contains source-based author proposals.
+reviews/ contains digest-bound independent mathematical decisions/replacements.
+imported/ contains validated import receipts and executable audited data batches.
+existing-reviews/ contains the refresh decisions for the original six concepts.
+file-checks.json records exact original stored-file counts/hashes and dependency pin.
+progress.json records current completed counts; import-errors.json lists any rejected
+or conflicting imports requiring attention. Unknown judgments retain explicit
+source/search limits and are not assertions of absence or complete resolution.
+
+import_reviewed.py performs one structural-validation/import pass over ready jobs.
+Run only one importer at a time. It checks independent identities, exact proposal
+digests, assigned-pair coverage, concept revisions, file paths, regular committed
+Git objects, exact physical LOC/hash and core invariants. It applies accepted
+records through mathdb.ingest and checks unrelated mathematical tables are unchanged.
+Rejected or digest-mismatched proposals are never imported. It does not decide the
+mathematics. Run with the repository Python from the project root.
+
+Source snapshots are pinned in plan.json; local worktree edits are ignored. Counts
+and allocations are global per library, not limited to each batch. Import receipts
+preserve the reviewed batch and audit version. Original pilot manifests stay intact.
+
+A new record appears on the live site after import. Readable global exports are
+regenerated during/finally after the pass from a consistent database snapshot.

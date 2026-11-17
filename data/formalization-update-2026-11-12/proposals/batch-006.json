@@ -1,0 +1,566 @@
+{
+  "batch_id": "batch-006",
+  "author": "algebra_formalization",
+  "reviews": [
+    {
+      "concept": "fundamental-calculus",
+      "concept_id": "2f427db9-294a-5877-b33f-d0b208e3599d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. integral_hasDerivAt_right:725 gives derivative of the indefinite integral at a continuity point, with interval integrability and local strong measurability. For an interior point these follow from continuity on [a,b]. integral_eq_sub_of_hasDerivAt_of_le:1140 requires continuous antiderivative on [a,b], derivative on (a,b) and interval-integrable f; continuous f supplies the latter. This covers both clauses of the catalogue. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean",
+          "declarations": "intervalIntegral.integral_hasDerivAt_right (:725); integral_eq_sub_of_hasDerivAt_of_le (:1140)",
+          "note": "Actual first and second FTC statements/proofs and one-sided/interior ordinary variants."
+        }
+      ],
+      "search_notes": "Read actual two FTC statements, continuity-to-integrability use at :931–934 and proof of FTC-2 via the right-derivative version. Catalogue antiderivative is understood continuous at endpoints (as usual on [a,b]); an antiderivative only on the open interval with arbitrarily reassigned endpoint values would make the informal statement false. Exclude ODE periodic-solution and specialized chain-rule applications."
+    },
+    {
+      "concept": "fundamental-calculus",
+      "concept_id": "2f427db9-294a-5877-b33f-d0b208e3599d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned FTC file is byte-identical to checked standalone and supplies both full continuous-integrand clauses. Native TauCeti.intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le_of_nonneg:46–51 proves the ordinary FTC-2 variant where nonnegative derivative implies integrability rather than requiring it. This is direct theorem-hypothesis API for FTC. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean",
+          "declarations": "TauCeti.intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le_of_nonneg (:46)",
+          "note": "Native direct FTC-2 variant deriving integrability of a nonnegative derivative; full general FTC remains dependency-owned."
+        }
+      ],
+      "search_notes": "Read native proof deriving IntegrableOn from integrableOn_deriv_of_nonneg before applying FTC. Periodic integral-equation and loop bilinear-integral lemmas later in the same mixed file are additional applications; no other application files selected. Same conventional endpoint-continuity interpretation as Mathlib."
+    },
+    {
+      "concept": "integer",
+      "concept_id": "05bf698c-848c-537a-8c9c-413cef9bb82e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Mathlib uses Lean’s integer carrier and operations, and Int.instCommRing:28 explicitly supplies ring fields with natCast/intCast_ofNat/intCast_negSucc. Order/Ring/Int:42 proves the strict ordered-ring structure from integer multiplication positivity. These implement ℤ with the stated ordered-ring and additive-inverse structure; elementary induction/cast laws are native API. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Ring/Int/Defs.lean",
+          "declarations": "Int.instCommRing (:28); instIsDomain (:51); Int.cast_mul (:58)",
+          "note": "Registers the actual Lean integer operations as a commutative ring and proves ordinary natural/integer cast compatibility."
+        },
+        {
+          "path": "Mathlib/Algebra/Order/Ring/Int.lean",
+          "declarations": "Int.instIsStrictOrderedRing (:42); Nat.cast_natAbs (:50)",
+          "note": "Registers compatibility of the actual integer order with multiplication and proves ordinary absolute-value/cast API."
+        },
+        {
+          "path": "Mathlib/Data/Int/Basic.lean",
+          "declarations": "Int.strongRec_of_ge (:40); natAbs_surjective (:57); natCast_dvd (:72)",
+          "note": "Elementary integer induction, absolute value and divisibility API beyond Lean-supplied constructors."
+        }
+      ],
+      "search_notes": "Read actual ring fields and cast_mul proof splitting every integer into a natural or negative natural. Core = ordered ring instances plus elementary signs/casts/induction/divisibility; exclude GCD/Chinese remainder/square representation and separately significant number-theory endpoints. Lean constructors are supplier-owned, not native Mathlib definition LOC."
+    },
+    {
+      "concept": "integer",
+      "concept_id": "05bf698c-848c-537a-8c9c-413cef9bb82e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned integer ring/order files are byte-identical to checked standalone structures, including Int.instCommRing:28 and ordered-ring instance:42. Native Int.ite_lt_zero_eq_sign:33 proves the ordinary sign normal form, and MulPred:48 proves nonnegativity of a consecutive integer product by the discrete order; :65 proves its elementary parity identity. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Data/Int/Sign.lean",
+          "declarations": "Int.ite_lt_zero_eq_sign (:33); ite_and_mul_lt_zero (:40)",
+          "note": "Native elementary sign normalization and multiplication API for integers."
+        },
+        {
+          "path": "TauCeti/Data/Int/MulPred.lean",
+          "declarations": "Int.zero_le_mul_sub_one (:48); two_dvd_sq_sub_self (:65); two_mul_mul_sub_one_ediv_two (:70)",
+          "note": "Native immediate discrete-order/parity and exact half-product identities on ℤ."
+        }
+      ],
+      "search_notes": "Read sign trichotomy and consecutive-product proofs. Exclude CRT/GCD and Diophantine fixed-value/sum-of-squares endpoints. Only native API files counted; integer carrier and complete ring structure are attributed to checked suppliers."
+    },
+    {
+      "concept": "integer-polynomial",
+      "concept_id": "d58d33f3-8f94-5193-96ab-11b1de1fec4a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For f=Int.castRingHom ℝ, Polynomial.lifts f:60 is exactly the image of ℤ[X] in ℝ[X]. lifts_iff_coeff_lifts:72 proves membership iff ∀n,p.coeff n∈range f. This is the actual equivalent coefficient-integrality definition requested, with finite support inherited from polynomials. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Polynomial/Lifts.lean",
+          "declarations": "Polynomial.lifts (:60); mem_lifts (:63); lifts_iff_coeff_lifts (:72)",
+          "note": "Defines the coefficient-subring image construction and proves exact equivalence to each coefficient lying in its image."
+        }
+      ],
+      "search_notes": "Read image subsemiring constructor and coefficient-range equivalence, not the unrelated notion of an element integral over a ring. Core includes lifting/coefficient and degree/monic presentation laws in this file. Exclude general polynomial API as prerequisite-only for this coefficient refinement, and Galois descent/denominator clearing/irreducibility applications."
+    },
+    {
+      "concept": "integer-polynomial",
+      "concept_id": "d58d33f3-8f94-5193-96ab-11b1de1fec4a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Read exact dependency Lifts:61–75, whose constructor and coefficient-range equivalence give the same integer-coefficient real polynomial predicate via Int.castRingHom ℝ. No selected native coefficient-integrality core file is required. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native Algebra/Polynomial/Lifts:33 proves descent from invariance under ring automorphisms, with extra Galois-style data; MapZMod proves reduction/congruence/divisibility endpoints. Generic polynomial coefficient/list files do not contribute to the integer-coefficient refinement itself. Those candidates are excluded rather than charging prerequisite API."
+    },
+    {
+      "concept": "integration-by-parts",
+      "concept_id": "58687f52-61e4-53db-ac6e-9a0c1e3f6c32",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. At :110–117 the theorem states exactly ∫u v′=u(b)v(b)−u(a)v(a)−∫u′v, assuming endpoint continuity, derivatives on the interior and interval-integrable derivatives. C¹ functions on the compact interval satisfy these hypotheses. Proof at :97–106 applies the FTC to the product derivative and subtracts the other integral. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/IntervalIntegral/IntegrationByParts.lean",
+          "declarations": "intervalIntegral.integral_mul_deriv_eq_deriv_mul_of_hasDerivAt (:110); integral_mul_deriv_eq_deriv_mul (:141)",
+          "note": "Actual integration-by-parts proof and ordinary two-sided/one-sided/within-derivative and scalar variants."
+        }
+      ],
+      "search_notes": "Read actual product-rule/FTC proof and integrability obligations. The same file includes change of variables but only integration-by-parts contribution anchors are claimed. Exclude improper integral/endless-domain and Sobolev distributional enhancements."
+    },
+    {
+      "concept": "integration-by-parts",
+      "concept_id": "58687f52-61e4-53db-ac6e-9a0c1e3f6c32",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned Mathlib IntegrationByParts file is byte-identical to the inspected :97–117 and proves the complete C¹ real formula. No native integration-by-parts core theorem was selected. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native file with the same IntegrationByParts basename proves only integral_comp_sq_mul:34, the substitution u=x². Inspected its statement/proof; it is a different calculus endpoint, so filename similarity earns no native LOC."
+    },
+    {
+      "concept": "nonnegative-series",
+      "concept_id": "df6a5de7-20aa-52da-8fdd-296b99241fbc",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. ENNReal.tsum_eq_iSup_nat:150 states ∑′i,f i=⨆n,∑i∈range n,f i for f:ℕ→ℝ≥0∞, with no finiteness restriction, so +∞ is preserved. Embed a_n≥0 using ENNReal.ofReal and reindex n↦n+1 to represent the catalogue n≥1 convention. The theorem is proved by cofinality of finite initial segments. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/InfiniteSum/ENNReal.lean",
+          "declarations": "ENNReal.tsum_eq_iSup_nat (:150); tsum_eq_iSup_nat′ (:143)",
+          "note": "Direct extended-nonnegative sum equals supremum of finite partial sums, with ordinary finite/coercion/reindexing API."
+        }
+      ],
+      "search_notes": "Read :143–152 cofinal partial-sum proof, not real tsum with its nonsummable default zero. Core = extended nonnegative supremum and ordinary finite/coercion API. Exclude convergence-rate, probability-distribution and comparison-test applications."
+    },
+    {
+      "concept": "nonnegative-series",
+      "concept_id": "df6a5de7-20aa-52da-8fdd-296b99241fbc",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned ENNReal summation file is byte-identical to checked supremum theorem :150, allowing infinite value. Native HasSum.toReal:36–40 proves the ordinary finite-value conversion to termwise real sums and explicitly requires s≠∞. Complete extended-sum availability comes from the dependency; finite conversion is genuine native API. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Algebra/InfiniteSum/ENNReal.lean",
+          "declarations": "HasSum.toReal (:36); ENNReal.tsum_indicator_one (:43)",
+          "note": "Native ordinary finite-value real conversion and basic indicator/cardinality evaluation for extended nonnegative sums."
+        }
+      ],
+      "search_notes": "Read native finite-sum hypothesis and tsum_toReal proof. Do not replace the infinite extended sum by real tsum or ignore the s≠∞ condition. Weighted probability and convergence-rate applications are excluded."
+    },
+    {
+      "concept": "pi",
+      "concept_id": "4d56af47-0856-543f-bb06-c5b1c35da7ad",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Real.pi:128 is twice a chosen cosine zero; pi_pos:158, sin_pi:217 and sin_pos_of_pos_of_lt_pi:411 prove it is exactly the least positive sine zero, so this is the catalogue π despite a different construction. The Euclidean circumference phrase identifies the same constant; this review certifies the explicit least-positive-zero definition, not an additional arc-length formalization. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Trigonometric/Basic.lean",
+          "declarations": "Real.pi (:128); pi_pos (:158); sin_pi (:217); sin_pos_of_pos_of_lt_pi (:411)",
+          "note": "Defines π and proves its least positive sine-zero characterization and ordinary period/special-angle consequences in the same file."
+        }
+      ],
+      "search_notes": "Read chosen-zero construction and sine positivity proof, rather than assuming π definition from notation. Core = constant definition, zero/period/special-angle API; exclude irrationality, transcendence, advanced numerical bounds and circle-measure/arc-length theorem files as separate endpoints. The descriptive circumference characterization is not used as an extra LOC mapping."
+    },
+    {
+      "concept": "pi",
+      "concept_id": "4d56af47-0856-543f-bb06-c5b1c35da7ad",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned Trigonometric/Basic is byte-identical to checked Real.pi:128, positivity:158, sine zero:217 and strict positivity before π:411, fully identifying the least positive sine-zero constant. No native ordinary API of π itself was selected. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched native Pi files and π uses: native trigonometric Bounds gives sign/size bounds of sin and cos on π-indexed intervals, which contributes to those functions rather than a new constant definition. Circle/conformal length estimates are separate endpoints. Same explicit least-zero definition boundary as Mathlib."
+    },
+    {
+      "concept": "pi-irrational",
+      "concept_id": "c16c28fb-e020-5867-9c56-0253ed3725ff",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. irrational_pi:281–309 concludes Irrational π. It represents a hypothetical rational π/2 by integers, bounds the auxiliary integral times a factorial expression strictly between 0 and1, proves it is an integer using sinPoly evaluation, and closes by integer arithmetic. Irrational.irrational_iff_ne_rational:37 identifies this with the catalogue no-integer-quotient statement. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Real/Pi/Irrational.lean",
+          "declarations": "irrational_pi (:281)",
+          "note": "Actual full irrationality proof with integral-polynomial construction and contradiction to an integer strictly between zero and one."
+        }
+      ],
+      "search_notes": "Read theorem and final integer contradiction, plus exact Irrational equivalence. All auxiliary integral/polynomial arguments are local to selected proof file. Generic trigonometric/integration infrastructure is prerequisite, not separately charged to this theorem."
+    },
+    {
+      "concept": "pi-irrational",
+      "concept_id": "c16c28fb-e020-5867-9c56-0253ed3725ff",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Read pinned dependency irrational_pi:282–310: same complete auxiliary-integral/integer-polynomial contradiction with final 0<z<1. Checked shared NumberTheory/Real/Irrational:37 quotient characterization. No native proof/API of π irrationality was found or selected. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native irrational fourth-root and integer-linear-independence results concern arbitrary irrational reals, not π irrationality. Search for irrational_pi hits the supplier; those distinct native endpoints do not count as a proof of this fixed constant theorem."
+    },
+    {
+      "concept": "rational-number",
+      "concept_id": "b9346493-37e3-557c-b624-36039d5506c8",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Irrational x:34 means x is outside the range of ℚ→ℝ. irrational_iff_ne_rational:37 proves this is exactly ∀a b:ℤ,b≠0→x≠a/b. Negating it gives the catalogue rational predicate; exists_rat_of_not_irrational:43 supplies its rational-cast witness. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/Real/Irrational.lean",
+          "declarations": "Irrational (:34); irrational_iff_ne_rational (:37); exists_rat_of_not_irrational (:43)",
+          "note": "Defines the real rational/irrational dichotomy by rational-cast image and proves exact integer-quotient equivalent presentation with ordinary arithmetic API."
+        }
+      ],
+      "search_notes": "Read exact definition/equivalence, distinguishing a real rational predicate from abstract quotient construction. Core = rational-image/integer-quotient presentations and ordinary arithmetic dichotomy API. Exclude root irrationality/transcendence results in other files and number-theoretic approximations."
+    },
+    {
+      "concept": "rational-number",
+      "concept_id": "b9346493-37e3-557c-b624-36039d5506c8",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned real Irrational file is byte-identical to checked rational-image/integer-quotient equivalence. Native Irrational.intCast_add_mul_eq_zero_iff:101–114 proves the ordinary integer-linear relation characterization of an irrational real by ruling out a nonzero rational denominator, directly tied to the same rational/irrational dichotomy. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/Real/Irrational.lean",
+          "declarations": "Irrational.intCast_add_mul_eq_zero_iff (:101)",
+          "note": "Native elementary zero integer-linear-relation criterion for an irrational real; full rational predicate is dependency-owned."
+        }
+      ],
+      "search_notes": "Read both directions and nonzero-b contradiction via Irrational.intCast_mul.ne_int. Fourth-root irrationality in the same mixed file is a stronger separate endpoint, not the reason this file is selected. Exclude bounded denominator/ABC/squarefree and Diophantine applications."
+    },
+    {
+      "concept": "real-number",
+      "concept_id": "a5e4fdfb-d3dd-59c2-9a77-6b6f41799865",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Real:36 wraps the rational Cauchy completion; instField:456 proves multiplicative inverse cancellation. Real.exists_isLUB:54 proves every nonempty bounded-above real set has a LUB by rational approximants; isLUB_sSup:122 and the :135 instance package precisely the catalogue order completeness. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Basic/Real/Basic.lean",
+          "declarations": "Real (:36); Real.instField (:456)",
+          "note": "Constructs reals as rational Cauchy completion and registers actual field operations with inverse cancellation."
+        },
+        {
+          "path": "Mathlib/Algebra/Order/Archimedean/Real/Basic.lean",
+          "declarations": "Real.exists_isLUB (:54); Real.isLUB_sSup (:122); ConditionallyCompleteLinearOrder instance (:135)",
+          "note": "Proves least-upper-bound completeness and its exact nonempty/bounded conditions, with ordinary supremum/infimum API."
+        }
+      ],
+      "search_notes": "Read actual completion carrier, field instance, LUB approximation proof and conditional completeness fields. Avoid deprecated Data/Real/Basic import-only wrapper. Core = actual complete ordered field and elementary supremum/field API; exclude real closedness, topology/metric completion applications and specialized exponent functions."
+    },
+    {
+      "concept": "real-number",
+      "concept_id": "a5e4fdfb-d3dd-59c2-9a77-6b6f41799865",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned Basic/Real/Basic bytes equal the checked real carrier/field construction; read pinned Archimedean/Real/Basic:55 and :123/:136 completeness fields. Native Real.sign_sub_sub_sign_sub_div_two:26–37 proves an elementary ordered-real sign/interval indicator identity by trichotomy, ordinary arithmetic/order recognition API for ℝ. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Basic/Real/Sign.lean",
+          "declarations": "Real.sign_sub_sub_sign_sub_div_two (:26)",
+          "note": "Native elementary real sign/interval identity, with real complete ordered field definition correctly attributed to dependency."
+        }
+      ],
+      "search_notes": "Read actual real trichotomy proof and supplier completeness; do not count Data/Real/Truncation approximation or conjugate-exponent specialization, topology and analytic applications. Whole native sign file counted; supplier field/completeness LOC excluded."
+    },
+    {
+      "concept": "real-polynomial",
+      "concept_id": "9a1f2234-22b1-5665-b9c7-cc78e138cbd0",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Polynomial ℝ:69 is the finite-support additive monoid algebra on ℕ; support:274 is finite, sum_C_mul_X_pow_eq:819 reconstructs every polynomial as its finite coefficient-power sum. eval₂:55/:58 evaluates exactly that sum, so specializing to ℝ realizes the stated real polynomial functions. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Polynomial/Basic.lean",
+          "declarations": "Polynomial (:69); Polynomial.support (:274); monomial (:299); sum_C_mul_X_pow_eq (:819)",
+          "note": "Actual finite-support polynomial carrier and finite monomial presentation, with basic coefficient/ring identities."
+        },
+        {
+          "path": "Mathlib/Algebra/Polynomial/Eval/Defs.lean",
+          "declarations": "Polynomial.eval₂ (:55); eval₂_eq_sum (:58); eval₂_monomial (:76)",
+          "note": "Actual evaluation finite sum, composition and coefficient-map API."
+        }
+      ],
+      "search_notes": "Read the actual finite-support carrier, monomial constructor and finite-sum evaluation. Core = finite coefficient/monomial representation and ring/evaluation/composition maps. Exclude derivatives/integrals, roots/irreducibility, special polynomial families and numerical root algorithms."
+    },
+    {
+      "concept": "real-polynomial",
+      "concept_id": "9a1f2234-22b1-5665-b9c7-cc78e138cbd0",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Read exact dependency Polynomial:69 and eval₂:56–59 finite coefficient-power sum; complete real-polynomial availability follows by R=ℝ. Native Polynomial.coeff_X_pow_mul_of_natDegree_le:24–27 proves coefficient-shift window formula. TauCeti.Polynomial.ofCoeffList_append:64–69 and reverse_concat:73–76 prove ordinary list/Horner presentation identities over any semiring, including ℝ. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Polynomial/Coeff/Basic.lean",
+          "declarations": "Polynomial.coeff_X_pow_mul_of_natDegree_le (:24)",
+          "note": "Native ordinary monomial shift/coefficient formula for finite polynomials."
+        },
+        {
+          "path": "TauCeti/Algebra/Polynomial/Coeff/List.lean",
+          "declarations": "TauCeti.Polynomial.ofCoeffList_append (:64); ofCoeffList_reverse_concat (:73); eval₂_ofCoeffList_reverse (:79)",
+          "note": "Native finite coefficient-list/Horner equivalent presentation, evaluation and ordinary degree/leading coefficient API."
+        }
+      ],
+      "search_notes": "Read generic semiring hypotheses, actual recurrence proofs and coefficient formula; they directly specialize to real coefficients. Exclude calculus/integration, resultants, irreducibility, cyclotomic and number-theory applications. These generic files are not automatically charged to integer-coefficient refinement."
+    },
+    {
+      "concept": "real-sequence",
+      "concept_id": "3d4fa65c-3ec5-53c5-98bf-03985837a3d2",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The catalogue type is directly representable as the Lean function type ℕ+→ℝ, with Nat.succPNat/natPred furnishing the ℕ↔ℕ+ shift. Source searches verify the ingredients and reject special sequence subtypes, but this proposal has not yet established a directly attributable generic function/sequence supplier review and exact supplier revision for a zero-native-file availability judgment. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read PNat/Defs:45–74 inverse successor/predecessor reindexing and checked ℝ definition. Searched RealSeq/RealSequence/Sequence ℝ: Cantor sequences and EndSequence realAtTop impose extra properties. No absence claim: mathematical availability is straightforward; direct file/supplier attribution is awaiting independent consistency review with the separate generic sequence entry."
+    },
+    {
+      "concept": "real-sequence",
+      "concept_id": "3d4fa65c-3ec5-53c5-98bf-03985837a3d2",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The catalogue type is directly representable as the Lean function type ℕ+→ℝ, with Nat.succPNat/natPred furnishing the ℕ↔ℕ+ shift. Source searches verify the ingredients and reject special sequence subtypes, but this proposal has not yet established a directly attributable generic function/sequence supplier review and exact supplier revision for a zero-native-file availability judgment. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Read PNat/Defs:45–74 inverse successor/predecessor reindexing and checked ℝ definition. Searched RealSeq/RealSequence/Sequence ℝ: Cantor sequences and EndSequence realAtTop impose extra properties. No absence claim: mathematical availability is straightforward; direct file/supplier attribution is awaiting independent consistency review with the separate generic sequence entry."
+    },
+    {
+      "concept": "real-series",
+      "concept_id": "eccdc751-32f5-508b-a70c-924ae7dd0b80",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Use HasSum (fun n:ℕ→a_(n+1)) S (SummationFilter.conditional ℕ), not default HasSum. HasSum is generated from HasProd:107 as Tendsto of finite sums. conditional_filter_eq_map_range:247 proves that its filter is atTop.map Finset.range, so this definition reduces exactly to convergence of the ordinary partial-sum sequence, allowing conditional convergence. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/InfiniteSum/Defs.lean",
+          "declarations": "HasSum (generated by to_additive at HasProd :107)",
+          "note": "Actual limit-of-finite-sums definition parameterized by a summation filter; default unconditional is explicitly not used for this concept."
+        },
+        {
+          "path": "Mathlib/Topology/Algebra/InfiniteSum/SummationFilter.lean",
+          "declarations": "SummationFilter.conditional (:217); conditional_filter_eq_map_Iic (:234); conditional_filter_eq_map_range (:247)",
+          "note": "Actual ordered initial-segment summation filter and proof that on ℕ it is exactly partial sums over range n."
+        }
+      ],
+      "search_notes": "Read conditional filter :217 and both initial-interval/range proofs :234–250, plus Defs explicit warning that alternating harmonic series is not covered by default unconditional HasSum. Core = ordered partial-sum convergence definition and generic summation/filter presentation; do not silently strengthen to absolute convergence. Exclude unconditional regrouping/Tonelli and summability test files."
+    },
+    {
+      "concept": "real-series",
+      "concept_id": "eccdc751-32f5-508b-a70c-924ae7dd0b80",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Read pinned HasSum generator Defs:107–108; pinned SummationFilter file is byte-identical to the checked conditional ℕ filter and partial-range proof :247. This gives the full conditionally convergent real-series predicate by reindexing positive indices. No native ordinary conditional-series file is selected. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native InfiniteSum/NatInt:44/:92 and Constructions:32 operate on default unconditional HasSum/HasProd and use unordered fiber groupings. Those are stronger series-specific assumptions, and do not provide core API for all convergent real series. Native Real.lean summable weights are also unconditional/extra hypotheses; excluded."
+    },
+    {
+      "concept": "riemann-integral",
+      "concept_id": "33eb13bd-8bc5-5c9d-81ce-0f1cda5a7c71",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Take one-dimensional boxes and IntegrationParams.Riemann:236. It requires tags in the corresponding closed intervals and a spatially constant gauge (RCond:291); the mesh tends uniformly to zero. integralSum:79 is Σ length(J) f(tag J) using volume; HasIntegral:162 and epsilon-delta theorem:195 are exactly the tagged-sum limit. In dimension one box diameter equals interval length, giving the stated Riemann definition. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/BoxIntegral/Partition/Filter.lean",
+          "declarations": "BoxIntegral.IntegrationParams.Riemann (:236); RCond (:291); toFilter (:304)",
+          "note": "Defines the genuine constant-mesh Riemann tagged-partition filter, distinct from variable gauges of Henstock integration."
+        },
+        {
+          "path": "Mathlib/Analysis/BoxIntegral/Basic.lean",
+          "declarations": "BoxIntegral.integralSum (:79); HasIntegral (:162); hasIntegral_iff (:195)",
+          "note": "Defines weighted tagged partition sums and their limit, proves epsilon-delta presentation, uniqueness and ordinary integral algebra API."
+        }
+      ],
+      "search_notes": "Read Riemann parameter booleans, constant-gauge/filter construction and HasIntegral epsilon-delta formula with actual partition requirement. Use Riemann, not the Bochner intervalIntegral alone or nonconstant Henstock gauge. Core = tagged mesh/filter definition plus ordinary uniqueness/linearity; exclude equivalence proofs for other integral notions and substitution/endless-domain applications."
+    },
+    {
+      "concept": "riemann-integral",
+      "concept_id": "33eb13bd-8bc5-5c9d-81ce-0f1cda5a7c71",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Read pinned BoxIntegral/Basic:162–169 tagged-sum limit and integral existence; pinned Partition/Filter is byte-identical to checked Riemann:236 constant-gauge constructor. These supply the complete one-dimensional tagged-mesh notion. No selected native Riemann-only API file was found. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native BoxIntegral/IntervalIntegral:115 explicitly requires l.bRiemann=false; Oriented/Basic defines HasHenstockIntervalIntegral and HenstockPartition:130 also assumes bRiemann=false. Read these hypotheses and exclude them: they do not formalize new Riemann-mesh API despite sharing box-integral machinery."
+    },
+    {
+      "concept": "sequence-limit",
+      "concept_id": "58eed2c9-2fcc-5d77-a7ec-3abacacee36b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Metric.tendsto_atTop:911–914 equates Tendsto u atTop (𝓝 L) with ∀ε>0,∃N,∀n≥N,dist(u n,L)<ε. Over ℝ, Real.dist_eq is |u n−L|, exactly the catalogue criterion; β=ℕ or positive naturals are both allowed semilattice index types. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/MetricSpace/Pseudo/Defs.lean",
+          "declarations": "Metric.tendsto_atTop (:911); Metric.tendsto_atTop′ (:919)",
+          "note": "Proves exact epsilon-N limit criterion for a sequence in a metric space, specializing to real absolute differences."
+        }
+      ],
+      "search_notes": "Read proof through atTop and neighborhood ball bases. Core = exact metric epsilon-N equivalent presentation, not every convergent sequence theorem. Exclude compactness subsequence selection, proper-space/asymptotic and PDE radius applications."
+    },
+    {
+      "concept": "sequence-limit",
+      "concept_id": "58eed2c9-2fcc-5d77-a7ec-3abacacee36b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned MetricSpace/Pseudo/Defs is byte-identical to checked Metric.tendsto_atTop:911–914 and gives the full real epsilon-N criterion. No selected native generic sequence-limit definition/equivalent-presentation file is required. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Native Pseudo/Defs:61 proves an eventual bound along product filter l×𝓝x for rho+dist given a vanishing radius; read its exact product-filter hypotheses and excluded it as specialized estimate. Sequences.lean gives uniform compact subsequence selection and Sequences/Small set-theoretic closure cardinality, distinct named endpoints."
+    },
+    {
+      "concept": "sine",
+      "concept_id": "7b00e2eb-6e35-57df-940e-ebcc510e0778",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Real.sin:73 is the real part of the exponential-defined complex sine; Real.hasSum_sin:105 proves convergence at EVERY real r of Σ(-1)^n r^(2n+1)/(2n+1)! to sin r. Real.sin_eq_tsum:112 gives exact equality with the catalogue power-series presentation, so construction differences are immaterial. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Complex/Trigonometric.lean",
+          "declarations": "Real.sin (:73); Complex.sin (:28)",
+          "note": "Actual sine function definition through complex exponential, with ordinary addition/parity/special-value algebra."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Trigonometric/Series.lean",
+          "declarations": "Real.hasSum_sin (:105); Real.sin_eq_tsum (:112)",
+          "note": "Proves the catalogue everywhere convergent factorial power series and equality with the actual function."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Trigonometric/Basic.lean",
+          "declarations": "Real.continuous_sin (:91); sin_pos_of_pos_of_lt_pi (:411); sin_eq_zero_iff (:526)",
+          "note": "Ordinary real continuity, sign, zero and period API for the same sine function."
+        }
+      ],
+      "search_notes": "Read actual function and real HasSum obtained from the checked complex sine series. Core = definition, power-series equivalent presentation and ordinary addition/parity/zeros/period/sign/continuity; exclude inverse trigonometric functions, special integrals, product expansions, transcendence and geometry applications."
+    },
+    {
+      "concept": "sine",
+      "concept_id": "7b00e2eb-6e35-57df-940e-ebcc510e0778",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Read pinned Real.sin:74 definition, and byte-identical Trigonometric/Series Real.hasSum_sin:105 certifying the exact factorial series for all real inputs. Native Bounds:47 proves sine nonpositive on [π,2π], :112 strict sine-square bound on |x|<π/2 and :128 positivity of sin(π/x) for x>1. These are ordinary sine sign/range API, with complete function supplied by dependency. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Trigonometric/Bounds.lean",
+          "declarations": "TauCeti.sin_nonpos_of_pi_le_of_le_two_pi (:47); sin_sq_lt_one_of_abs_lt (:112); sin_pi_div_pos (:128)",
+          "note": "Native ordinary sine sign/range/zero recognition on standard intervals; function/series definition remains dependency-owned."
+        }
+      ],
+      "search_notes": "Read explicit sign/period and cosine-square proofs with exact interval hypotheses. Exclude elliptic-integral combinations, turning-chain geometry, nonnegative linear combination parameterizations and special periodic bumps as separately significant applications. Other consequences share this selected mixed bounds file under whole-file counting."
+    },
+    {
+      "concept": "absolute-continuity-measures",
+      "concept_id": "1b185d57-2026-5dbc-b633-6e860c3fb60d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. AbsolutelyContinuous ν μ:49 is literally ∀A, μ A=0→ν A=0, with the declared shared measurable space. It is expressed for all sets using the measure’s outer-measure extension, so in particular agrees with the sigma-algebra null-set definition. The same file proves ordinary transitivity/scaling/ae-null equivalences. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/AbsolutelyContinuous.lean",
+          "declarations": "MeasureTheory.Measure.AbsolutelyContinuous (:49); absolutelyContinuous_of_le (:55); ae_le_iff_absolutelyContinuous (:174)",
+          "note": "Actual null-set implication definition and ordinary composition/order/ae-filter/scaling/transport API."
+        }
+      ],
+      "search_notes": "Read null-set fields with orientation ν≪μ, not absolute continuity of functions. Core = null domination and ordinary equivalent criteria/order/scaling/transport API. Exclude Radon–Nikodym, Lebesgue decomposition, differentiability and optimal-transport curves as separate endpoints."
+    },
+    {
+      "concept": "absolute-continuity-measures",
+      "concept_id": "1b185d57-2026-5dbc-b633-6e860c3fb60d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Read pinned AbsolutelyContinuous:50 exact ν≪μ null-set implication. Native exists_pos_measure_lt_of_measure_lt:82–101 proves the standard finite-ν epsilon-delta criterion, with no finiteness/sigma-finiteness on μ, by small-measure tails and continuity from above. This is ordinary equivalent recognition API under the stated finite-measure hypothesis. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Measure/AbsolutelyContinuous.lean",
+          "declarations": "MeasureTheory.Measure.AbsolutelyContinuous.exists_pos_measure_lt_of_measure_lt (:82); ae_comp_of_map_absolutelyContinuous (:68)",
+          "note": "Native finite-measure epsilon-delta recognition and ordinary map/null-set API; base definition supplied by Mathlib."
+        }
+      ],
+      "search_notes": "Read actual finite-measure assumption, small-set construction and Borel–Cantelli/continuity-from-above proof. Do not claim epsilon-delta equivalence for arbitrary infinite ν. Exclude absolutely continuous functions/paths, optimal transport and RN density applications."
+    },
+    {
+      "concept": "addition-theorem-spherical-harmonics",
+      "concept_id": "c3501bca-afd3-50b6-8f87-e466fb7df8c3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The checked candidates do not establish the probability-normalized spherical-harmonic reproducing-kernel addition formula with the stated Gegenbauer normalization or the n=2 Chebyshev clause. Tau implements spherical restrictions and orthogonal-group action on harmonic polynomials, but these are prerequisites, not a verified addition-theorem proof. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched spherical harmonic/addition theorem/Gegenbauer/zonal across both analysis and algebra trees. Inspected Tau Analysis/MvPolynomial/Sphere:115–149 restriction/injectivity/dimension and RingTheory/MvPolynomial/Harmonic/Orthogonal:70/:104/:120 Laplacian equivariance/representation. No checked orthonormal probability-area kernel sum=normalized Gegenbauer or diagonal=N endpoint. JacobiElliptic/Elliptic AdditionTheorem files concern unrelated functions; unknown is not absence."
+    },
+    {
+      "concept": "addition-theorem-spherical-harmonics",
+      "concept_id": "c3501bca-afd3-50b6-8f87-e466fb7df8c3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The checked candidates do not establish the probability-normalized spherical-harmonic reproducing-kernel addition formula with the stated Gegenbauer normalization or the n=2 Chebyshev clause. Tau implements spherical restrictions and orthogonal-group action on harmonic polynomials, but these are prerequisites, not a verified addition-theorem proof. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [],
+      "search_notes": "Searched spherical harmonic/addition theorem/Gegenbauer/zonal across both analysis and algebra trees. Inspected Tau Analysis/MvPolynomial/Sphere:115–149 restriction/injectivity/dimension and RingTheory/MvPolynomial/Harmonic/Orthogonal:70/:104/:120 Laplacian equivariance/representation. No checked orthonormal probability-area kernel sum=normalized Gegenbauer or diagonal=N endpoint. JacobiElliptic/Elliptic AdditionTheorem files concern unrelated functions; unknown is not absence."
+    },
+    {
+      "concept": "adjoint-operator",
+      "concept_id": "20eb1012-ea14-5f56-b032-48b8b8aea91d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. ContinuousLinearMap.adjointAux:72 constructs a bounded map using inverse Riesz toDual; adjoint:111 is a conjugate-linear isometric equivalence on bounded operators. adjoint_inner_right:124 says ⟪x,A†y⟫=⟪Ax,y⟫, exactly the catalogue identity (reversed equality), and eq_adjoint_iff:160 proves uniqueness by inner-product extensionality. Taking E=F complex complete realizes bounded Hilbert endomorphisms. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Adjoint.lean",
+          "declarations": "ContinuousLinearMap.adjoint (:111); adjoint_inner_right (:124); eq_adjoint_iff (:160)",
+          "note": "Constructs actual bounded Hilbert adjoint through Riesz representation, proves characterization/uniqueness, isometry, involution and ordinary composition/kernel-range API."
+        }
+      ],
+      "search_notes": "Read actual Riesz construction, defining equations, complete-space hypotheses and uniqueness proof. Mathlib inner product is conjugate-linear in first argument; the displayed identity matches without convention error. Core = adjoint definition/equality, norm/involution/composition/inverse and kernel-range laws; exclude spectral perturbation, polar decomposition, tensor and Fredholm applications."
+    },
+    {
+      "concept": "adjoint-operator",
+      "concept_id": "20eb1012-ea14-5f56-b032-48b8b8aea91d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Read pinned adjoint:112 and adjoint_inner_right:125, supplying full bounded Hilbert adjoint with exact identity and uniqueness. Native adjoint_apply_mem_orthogonal_ker:105 proves ordinary range/kernel relation; isUnit_adjoint_iff:148 and ringInverse_adjoint:152 prove inversion compatibility using the star identification. These are core operator-adjoint API, not import-only availability. Source/proof inspection; no fresh Lean build or transitive axiom audit.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Adjoint.lean",
+          "declarations": "ContinuousLinearMap.adjoint_apply_mem_orthogonal_ker (:105); isUnit_adjoint_iff (:148); ringInverse_adjoint (:152)",
+          "note": "Native ordinary orthogonal-kernel/range, inverse, map/composition and adjoint-equivalence API over the dependency-defined bounded adjoint."
+        }
+      ],
+      "search_notes": "Read native hypotheses and proofs, including complete Hilbert spaces and star-adjoint identification. Later spectral-gap/compression and finite-dimensional determinant applications share the mixed file but are not the core reasons for inclusion. Exclude other spectral/tensor/Fredholm application files."
+    }
+  ]
+}

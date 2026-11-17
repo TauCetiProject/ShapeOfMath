@@ -1,0 +1,683 @@
+{
+  "batch_id": "batch-064",
+  "author": "analysis_formalization",
+  "reviews": [
+    {
+      "concept": "moment-determinate-distribution",
+      "concept_id": "0aa3e583-0c08-519b-a4a3-5b7fa8ee89da",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "For a supplied probability measure mu on Real the exact bare predicate is (forall n:Nat, Integrable(fun x=>x^n)mu) AND forall nu:ProbabilityMeasure Real, (forall n,Integrable(fun x=>x^n)nu) -> (forall n,moment id n mu=moment id n nu) -> nu=mu. moment56 is literally the pow integral. All-competitor and all-order integrability are explicit, so Bochner undefined=0 never fakes equal moments. This defines determinacy, without asserting every law is determinate. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Moments/Basic.lean",
+          "declarations": "ProbabilityTheory.moment:56; mgf:122; mgf_undef:175",
+          "note": "Native exact real moment/expectation constructors and explicit divergent-integral fallback, avoided by stated integrability domain."
+        }
+      ],
+      "search_notes": "No named determinate alias needed for the literal predicate. Native CompactDeterminacy112-127 explicitly states that replacing competitor support by mere moment integrability is not formalized there. Do not infer one-law exponential/compact determinacy from these two-law theorems. Carleman, moment-problem existence, polynomial density and lognormal indeterminacy are separate endpoints."
+    },
+    {
+      "concept": "moment-determinate-distribution",
+      "concept_id": "0aa3e583-0c08-519b-a4a3-5b7fa8ee89da",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency supplies the same complete all-competitor finite-moment predicate. Native Determinacy213-219 proves equality of laws from matching moments when BOTH laws have exponential moments near0; CompactDeterminacy128/161 proves equality when BOTH laws are carried by a common compact set. These are direct restricted uniqueness/recognition API, with actual proofs and hypothesis distinction checked. Neither is claimed to establish the one-law criterion against arbitrary finite-moment competitors; the full bare definition is independently available. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency moment56 and the same bare integral constructor are byte-identical.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Moments/Determinacy.lean",
+          "declarations": "TauCeti.Measure.ext_of_forall_integral_pow_eq:213",
+          "note": "Native direct moment-uniqueness API under explicit two-law exponential-integrability hypotheses."
+        },
+        {
+          "path": "TauCeti/Probability/Moments/CompactDeterminacy.lean",
+          "declarations": "TauCeti.Measure.ext_of_forall_integral_monomial_eq_of_support:128; Measure.ext_of_forall_integral_pow_eq_of_support:161",
+          "note": "Native actual common-compact-support moment uniqueness; both support assumptions retained."
+        }
+      ],
+      "search_notes": "No named determinate alias needed for the literal predicate. Native CompactDeterminacy112-127 explicitly states that replacing competitor support by mere moment integrability is not formalized there. Do not infer one-law exponential/compact determinacy from these two-law theorems. Carleman, moment-problem existence, polynomial density and lognormal indeterminacy are separate endpoints."
+    },
+    {
+      "concept": "moment-generating-function",
+      "concept_id": "4121bf55-b4a0-5782-8ddd-ce0ab4b2bb16",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "mgf122 is exactly E exp(tX). Restrict to integrableExpSet111={t|Integrable(exp(t*X))}; mgf_undef175 explicitly totalizes divergent expectations to0 and is not the mathematical MGF outside this domain. MGFAnalytic61/83/92 proves derivatives equal exponentially weighted moments and at0 ordinary moments under 0 in the domain interior; full actual induction42-102 inspected. No analytic claim at a finite-domain endpoint is imposed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Moments/Basic.lean",
+          "declarations": "ProbabilityTheory.moment:56; mgf:122; mgf_undef:175",
+          "note": "Native exact real moment/expectation constructors and explicit divergent-integral fallback, avoided by stated integrability domain."
+        },
+        {
+          "path": "Mathlib/Probability/Moments/IntegrableExpMul.lean",
+          "declarations": "ProbabilityTheory.integrableExpSet:111; convex_integrableExpSet:118",
+          "note": "Native actual finite-exponential-expectation domain and its interval structure."
+        },
+        {
+          "path": "Mathlib/Probability/Moments/MGFAnalytic.lean",
+          "declarations": "ProbabilityTheory.hasDerivAt_mgf:61; iteratedDeriv_mgf:83; iteratedDeriv_mgf_zero:92; analyticAt_mgf:110",
+          "note": "Native ordinary real MGF differentiability/analyticity and moment derivatives on the INTERIOR of its actual finite domain."
+        }
+      ],
+      "search_notes": "Checked real-domain definition and fallback policy. Standalone M real analytic derivative file is selected; complex MGF extension is a checked proof supplier, not a transitive import-tree allocation. Native ComplexMGF analytic-continuation uniqueness and concentration/tilting measure constructions are additional endpoints and excluded."
+    },
+    {
+      "concept": "moment-generating-function",
+      "concept_id": "4121bf55-b4a0-5782-8ddd-ce0ab4b2bb16",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency supplies exact MGF and finite domain. Native Moments.Basic95 proves convolution/product normal form,230-243 gives finite independent-sum factorization under only selected AE measurable variables, and245 supplies actual exponential integrability when component exponentials are integrable. IntegrableExpMul52-67 adds exact lower-bounded/nonpositive-rate domain and finiteness API. Relevant completed proofs inspected. These directly extend the MGF itself, not a named-distribution application. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency Basic.mgf122 is unchanged; integrableExpSet112 and MGFAnalytic62/84/93 have the same bodies after one earlier documentation blank.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Moments/Basic.lean",
+          "declarations": "TauCeti.mgf_id_conv:95; iIndepFun.mgf_sum_of_aemeasurable:230; iIndepFun.integrable_exp_mul_sum_of_aemeasurable:245",
+          "note": "Native ordinary MGF convolution/sum law and genuine integrability closure."
+        },
+        {
+          "path": "TauCeti/Probability/Moments/IntegrableExpMul.lean",
+          "declarations": "TauCeti.integrable_exp_mul_of_ge:52; isFiniteMeasure_of_integrable_exp_mul:61",
+          "note": "Native direct domain/finiteness API for exponential expectations."
+        }
+      ],
+      "search_notes": "Checked real-domain definition and fallback policy. Standalone M real analytic derivative file is selected; complex MGF extension is a checked proof supplier, not a transitive import-tree allocation. Native ComplexMGF analytic-continuation uniqueness and concentration/tilting measure constructions are additional endpoints and excluded."
+    },
+    {
+      "concept": "monomer-dimer-model-finite",
+      "concept_id": "6bc6c116-c32e-533c-a4b7-e698300bccd8",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "For finite G, configurations are subgraphs M with IsMatching67 (each matched vertex has a unique partner); theorem218 identifies matched vertices with edge endpoints and225 rules out extra unmatched vertices in the matching encoding. Weight w(M)=product_{v outside M.verts} a(v) * product_{e in M.edgeSet} b(e), for specified finite nonnegative activities, counts each UNORDERED edge once. PMF.normalize246/253 gives exactly w/Z on the finite configuration type WHEN Z>0. This is the bare probability-model definition on its necessary nonzero-partition domain, not an existence assertion for every nonnegative activity vector. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [
+        {
+          "path": "Mathlib/Combinatorics/SimpleGraph/Matching.lean",
+          "declarations": "SimpleGraph.Subgraph.IsMatching:67; IsMatching.verts_eq_biUnion_edgeSet:218; IsMatching.injOn_edgeSet:225",
+          "note": "Native actual hard-core matching constraint and matched-vertex/edge-set dictionary."
+        },
+        {
+          "path": "Mathlib/Probability/ProbabilityMassFunction/Constructions.lean",
+          "declarations": "PMF.normalize:246; normalize_apply:253",
+          "note": "Native exact normalized finite product-weight probability law with a nonzero finite partition sum."
+        }
+      ],
+      "search_notes": "Specification caveat preserved: nonnegative activities alone can give Z=0, e.g. a one-vertex edgeless graph with monomer activity0. The paragraph should state positive partition sum (or sufficient positivity assumptions), not pretend normalization exists for that input. No line-graph/uniform-activity equivalence, heat-bath convergence or infinite-volume Gibbs theorem claimed."
+    },
+    {
+      "concept": "monomer-dimer-model-finite",
+      "concept_id": "6bc6c116-c32e-533c-a4b7-e698300bccd8",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Exact dependency Matching67/218/225 and normalize constructors supply the complete matching/product-activity probability definition with explicit Z>0. Native HardCore is an independent-set model with a SINGLE activity and empty-set weight1; it neither implements arbitrary monomer/edge activities nor resolves zero partition functions, so no native compound model file is charged. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency Matching is byte-identical; PMF.normalize247/normalize_apply254 has the same constructor/proof after one documentation blank.",
+      "files": [],
+      "search_notes": "Specification caveat preserved: nonnegative activities alone can give Z=0, e.g. a one-vertex edgeless graph with monomer activity0. The paragraph should state positive partition sum (or sufficient positivity assumptions), not pretend normalization exists for that input. No line-graph/uniform-activity equivalence, heat-bath convergence or infinite-volume Gibbs theorem claimed."
+    },
+    {
+      "concept": "monte-carlo-expectation-estimator",
+      "concept_id": "dc1877b6-28fe-5e51-93e5-7f8c4e6fc30a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "For L>0 and samples indexed by Fin L, estimator omega maps to (L:Real)^(-1)*sum i,F(X_i omega). The IID hypothesis is exact iIndepFun135 plus IdentDistrib68 of each sample with its supplied target law. Integrable F identifies EF as the target; the bare estimator makes no unconditional convergence/error claim. A dependent variant must carry its separately justified joint sampling law rather than silently reuse independence. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean",
+          "declarations": "Finset.prod:66 (generated Finset.sum)",
+          "note": "Native finite empirical/quadrature sum constructor, directly forming the average."
+        },
+        {
+          "path": "Mathlib/Probability/Independence/Basic.lean",
+          "declarations": "ProbabilityTheory.iIndepFun:135",
+          "note": "Native actual joint sample independence condition."
+        },
+        {
+          "path": "Mathlib/Probability/IdentDistrib.lean",
+          "declarations": "ProbabilityTheory.IdentDistrib:68",
+          "note": "Native genuine measurable equality of sample laws, rather than equality only of moments."
+        }
+      ],
+      "search_notes": "Explicit L>0; no empty empirical mean substitute. Exclude concentration/CLT/ergodic-MCMC and stochastic-mesh applications as separate endpoints; finiteMean and direct variance are the bounded associated API."
+    },
+    {
+      "concept": "monte-carlo-expectation-estimator",
+      "concept_id": "dc1877b6-28fe-5e51-93e5-7f8c4e6fc30a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The exact dependency supplies the complete finite estimator/IID predicates. Native finiteMean50/56 is exactly the estimator; SampleMean86-108 proves its genuine mean-square-error identity for pairwise independent square-integrable samples with common mean, and113-121 gives gamma/L for equal per-sample error. Completed cross-term factorization63-79 and centering86-97 proofs read. This is ordinary estimator API under explicit stronger finite-variance hypotheses, not an asserted general LLN. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency Finset generated sum67 differs by one earlier blank; iIndepFun135 and IdentDistrib68 are unchanged.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/FiniteMean.lean",
+          "declarations": "TauCeti.finiteMean:50; finiteMean_eq_inv_smul_sum:56; finiteMean_sub_const:77",
+          "note": "Native actual finite sample average and ordinary centering/normal-form API."
+        },
+        {
+          "path": "TauCeti/Probability/Moments/SampleMean.lean",
+          "declarations": "TauCeti.integral_norm_finiteMean_sub_sq:86; integral_finiteMean_sub_sq:103; integral_norm_finiteMean_sub_sq_of_forall_eq:113",
+          "note": "Native direct sample-average mean-square error and inverse-sample-size normal form."
+        }
+      ],
+      "search_notes": "Explicit L>0; no empty empirical mean substitute. Exclude concentration/CLT/ergodic-MCMC and stochastic-mesh applications as separate endpoints; finiteMean and direct variance are the bounded associated API."
+    },
+    {
+      "concept": "montel-theorem-holomorphic",
+      "concept_id": "8a2cae20-fa06-50ce-8585-22915c3468d7",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Standalone complex Cauchy-integral/local-uniform holomorphy and generic Ascoli ingredients were inspected, but no complete existing analytic normal-family selection interface was certified. Analysis/LocallyConvex/Montel defines MontelSpace (bounded closed sets compact in a topological vector space), not this holomorphic-family theorem. Native Tau Montel is not attributed to standalone Mathlib. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [],
+      "search_notes": "Bounded searches Montel/normal family/locally bounded/compact-open subsequence and actual analytic/generic Ascoli candidates. Generic Ascoli infrastructure is a prerequisite rather than an extra allocated tree. Exclude Riemann mapping/conformal classification applications and unrelated MontelSpace functional analysis."
+    },
+    {
+      "concept": "montel-theorem-holomorphic",
+      "concept_id": "8a2cae20-fa06-50ce-8585-22915c3468d7",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "TauCeti.montel58-78 takes an open complex set, every F_n holomorphic there, and a family bound on each compact subset, and returns a STRICTLY increasing subsequence plus holomorphic locally-uniform limit. For scalar target Complex the required ProperSpace holds; connectedness is not needed, so domain hypotheses are at least as general. Precompact67-79 proves relative compactness by actual Ascoli/equicontinuity and compact pointwise balls; NormalFamilies154-166 obtains equicontinuity from uniform local Cauchy bounds. Complete relevant source proofs inspected, including compact-open to locally-uniform conversion76-78. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Complex/Conformal/Montel/Basic.lean",
+          "declarations": "TauCeti.montel:58",
+          "note": "Native exact subsequence-selection theorem with holomorphic compact-uniform limit."
+        },
+        {
+          "path": "TauCeti/Analysis/Complex/Conformal/Montel/Precompact.lean",
+          "declarations": "TauCeti.isCompact_closure_range_of_isLocallyBoundedOn:67; isCompact_closure_range_iff_isLocallyBoundedOn:84",
+          "note": "Native direct relative-compactness formulation implementing the selection proof."
+        },
+        {
+          "path": "TauCeti/Analysis/Complex/Conformal/NormalFamilies.lean",
+          "declarations": "TauCeti.IsLocallyBoundedOn.equicontinuousOn:154; IsLocallyBoundedOn.deriv:173",
+          "note": "Native same-family equicontinuity and immediate derivative-bound API used by analytic Montel."
+        }
+      ],
+      "search_notes": "Bounded searches Montel/normal family/locally bounded/compact-open subsequence and actual analytic/generic Ascoli candidates. Generic Ascoli infrastructure is a prerequisite rather than an extra allocated tree. Exclude Riemann mapping/conformal classification applications and unrelated MontelSpace functional analysis."
+    },
+    {
+      "concept": "morimoto-stochastic-mesh-cva-estimators",
+      "concept_id": "9756191d-582b-50af-9605-639c642fd5b2",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "No complete existing shared-macro/one-local-factor low-dimensional mesh CVA construction with BOTH plug-in exposure and independent-path sign-classification payoff estimator was certified. Conditional expectation/finite means are available, but do not supply the exact time-discretized aggregate-positive-exposure and independent realized-payoff construction. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [],
+      "search_notes": "Searched Morimoto/stochastic mesh/CVA/exposure/positive portfolio/independent sign classification plus native finance/conditional expectation candidates. Generic mesh estimator definition separately reviewed in069 is not automatically the shared-factor CVA construction. No new conditional-mesh/payoff proof or algorithm assembled."
+    },
+    {
+      "concept": "morimoto-stochastic-mesh-cva-estimators",
+      "concept_id": "9756191d-582b-50af-9605-639c642fd5b2",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Native stochastic/finance and finiteMean/conditional-distribution candidates supply generic expectation/simulation pieces, not the two Morimoto estimators with shared-factor structure and independent path sign-classification law. No existing exact complete interface identified after bounded source search. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.",
+      "files": [],
+      "search_notes": "Searched Morimoto/stochastic mesh/CVA/exposure/positive portfolio/independent sign classification plus native finance/conditional expectation candidates. Generic mesh estimator definition separately reviewed in069 is not automatically the shared-factor CVA construction. No new conditional-mesh/payoff proof or algorithm assembled."
+    },
+    {
+      "concept": "multi-index",
+      "concept_id": "8a40f461-c21a-5b79-95c5-baf613ea3609",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Exact representation alpha:Fin n->Nat, length=sum i,alpha i, equivalently the checked finite-index Finsupp.equivFunOnFinite205. For sufficiently smooth f on Euclidean space, define the actual coordinate derivative operator d_i(f)(x)=fderiv Real f x(e_i), then D^alpha by applying d_i alpha(i) times in fixed increasing coordinate order. Function iteration is supplied stock Lean; fderiv161 is the actual derivative, not a symbolic label. On the stated smooth domain no undefined-derivative fallback0 is used. No unverified equality of alternate derivative orders is asserted for arbitrary nonsmooth f. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Finsupp/Defs.lean",
+          "declarations": "Finsupp.equivFunOnFinite:205",
+          "note": "Native exact equivalence of finite coordinate tuples with finitely supported multi-indices."
+        },
+        {
+          "path": "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean",
+          "declarations": "Finset.prod:66 (generated Finset.sum)",
+          "note": "Native finite empirical/quadrature sum constructor, directly forming the average."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/FDeriv/Defs.lean",
+          "declarations": "fderiv:161; HasFDerivAt:122",
+          "note": "Native actual Frechet derivative operation; coordinate directional derivatives use its evaluation at a standard coordinate vector."
+        }
+      ],
+      "search_notes": "Preserve nonnegative-integer n-tuple, total order sum and actual derivatives. Native algebraic multiIndexDeriv and divided Hasse operators are not silently substituted for Euclidean partial derivatives; their smooth-function derivation bridge was not certified and is unnecessary for the direct fderiv iteration representation. Hermite/product basis applications excluded."
+    },
+    {
+      "concept": "multi-index",
+      "concept_id": "8a40f461-c21a-5b79-95c5-baf613ea3609",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency supplies the complete tuple/order/coordinate-derivative representation. Native Finsupp.prod_choose_add_single42-72 proves ordinary coordinate Pascal arithmetic of multi-index coefficients, and prod_choose_eq_zero35-39 the componentwise-order vanishing case. With finite-index equivalence205 these are direct ordinary multi-index API, independent of any polynomial Hasse/Frechet alias claim. Relevant actual proof bodies inspected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency finite-tuple equivalence206, fderiv162 and generated sum67 differ only by earlier documentation blanks.",
+      "files": [
+        {
+          "path": "TauCeti/Data/Finsupp/Choose.lean",
+          "declarations": "Finsupp.prod_choose_eq_zero:35; prod_choose_add_single:42",
+          "note": "Native actual multi-index coordinate increment/order/binomial-coefficient API."
+        }
+      ],
+      "search_notes": "Preserve nonnegative-integer n-tuple, total order sum and actual derivatives. Native algebraic multiIndexDeriv and divided Hasse operators are not silently substituted for Euclidean partial derivatives; their smooth-function derivation bridge was not certified and is unnecessary for the direct fderiv iteration representation. Hermite/product basis applications excluded."
+    },
+    {
+      "concept": "multiple-spine-branching-change-of-measure",
+      "concept_id": "ee7f73a2-7d51-557e-a7b8-7a159823e909",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "No complete marked genealogical branching-process supplier with mark-count-dependent beta*m_j clocks, j-size-biased offspring and independent uniform mark-to-child choices was certified. Scalar PMF normalization and moments are genuine pieces but do not construct the joint multiple-spine path/genealogy law or skeleton. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [],
+      "search_notes": "Searched multiple spine/many-to-few/marked branching/size-biased offspring/skeleton and native Brownian/branching candidates. Specification caveat: m_j=0 can occur for offspring identically0; then beta*m_j=0 but a^j P(A=a)/m_j is undefined. State positivity or a zero-rate/no-branching convention; do not silently divide by0. No new genealogy or change-of-measure proof developed."
+    },
+    {
+      "concept": "multiple-spine-branching-change-of-measure",
+      "concept_id": "ee7f73a2-7d51-557e-a7b8-7a159823e909",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Native moment/PMF/Poisson-clock/Markov-motion primitives and branching/counting candidates do not implement the complete marked genealogical rate-and-offspring change of measure. General Brownian constant-drift Girsanov is a different path tilt. No checked exact endpoint identified in the bounded actual-source search. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.",
+      "files": [],
+      "search_notes": "Searched multiple spine/many-to-few/marked branching/size-biased offspring/skeleton and native Brownian/branching candidates. Specification caveat: m_j=0 can occur for offspring identically0; then beta*m_j=0 but a^j P(A=a)/m_j is undefined. State positivity or a zero-rate/no-branching convention; do not silently divide by0. No new genealogy or change-of-measure proof developed."
+    },
+    {
+      "concept": "multivariate-normal-distribution",
+      "concept_id": "783f649b-b845-50d0-8c83-6227ad9b44cb",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "IsGaussian44 literally requires every real continuous linear form to have the scalar Gaussian law; all linear forms are continuous in finite-dimensional Euclidean space, matching every real coordinate combination. multivariateGaussian165 realizes any mean m and PSD matrix S via m+sqrt(S)Z, with actual Gaussian proof180-185, mean188, covariance196-218 and characteristic function232. CharFun.ext186-191 proves equality from equal mean and covariance. Singular PSD and zero-dimensional/zero-covariance cases are retained; no positive-definiteness restriction. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Distributions/Gaussian/Basic.lean",
+          "declarations": "ProbabilityTheory.IsGaussian:44; isGaussian_gaussianReal:59; isGaussian_map:137",
+          "note": "Native exact every-real-continuous-linear-form Gaussian characterization and ordinary linear-image closure."
+        },
+        {
+          "path": "Mathlib/Probability/Distributions/Gaussian/Multivariate.lean",
+          "declarations": "ProbabilityTheory.multivariateGaussian:165; integral_id_multivariateGaussian:188; covarianceBilin_multivariateGaussian:196; charFun_multivariateGaussian:232",
+          "note": "Native finite-dimensional PSD covariance square-root realization, exact mean/covariance and characteristic function, including singular covariance."
+        },
+        {
+          "path": "Mathlib/Probability/Distributions/Gaussian/CharFun.lean",
+          "declarations": "ProbabilityTheory.IsGaussian.charFun_eq':137; IsGaussian.ext:186; IsGaussian.ext_iff:194",
+          "note": "Native actual Gaussian mean/covariance uniqueness and characteristic-function characterization."
+        }
+      ],
+      "search_notes": "Core boundary: defining Gaussian condition, mean/covariance and degeneracy, characteristic/MGF linear transforms, affine/convolution, density/support, parameter continuity and coordinate independence. Exclude conditional/regression kernels, rank/coupling defects, quadratic-form/chi-square/Wishart laws, Wick/Hermite/completeness, concentration/Poincare and infinite-dimensional Fernique endpoints; no broad import allocation."
+    },
+    {
+      "concept": "multivariate-normal-distribution",
+      "concept_id": "783f649b-b845-50d0-8c83-6227ad9b44cb",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The actual dependency gives complete Gaussian predicate/PSD realization/mean-covariance uniqueness. Native Multivariate72/106/112 records exact covariance and zero/Dirac degeneracy; Affine109-144 transports arbitrary rectangular linear maps; Sum33-43 adds means/covariances by convolution; Transforms223-251 gives every linear projection law/MGF; Density229-252 gives affine covariance-range support and265-300 proves the NONDEGENERATE density (positive definite only). Continuity51-79 covers every PSD boundary. Symmetry37 and Independence47-86 are ordinary centered-negation and vanishing-cross-covariance independence API. Actual relevant completed bodies read. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency Gaussian.Basic45 and Multivariate166/189/197/233 have a preceding documentation blank. CharFun137/186/194 selected bodies match with no line shift; a separate earlier helper has only a div-cancellation lemma-name refactor.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Multivariate.lean",
+          "declarations": "TauCeti.Probability.covMatrix_multivariateGaussian:72; multivariateGaussian_zero_right:106; multivariateGaussian_eq_dirac_iff:112",
+          "note": "Native exact parameter/covariance/degeneracy core API."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Affine.lean",
+          "declarations": "TauCeti.Probability.map_affine_multivariateGaussian:109; gaussianReal_map_const_add_const_mul:75",
+          "note": "Native direct affine Gaussian pushforwards with exact transformed means/covariances, rectangular/rank-deficient maps allowed."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Sum.lean",
+          "declarations": "TauCeti.Probability.multivariateGaussian_conv_multivariateGaussian:33",
+          "note": "Native same-family convolution normal form."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Transforms.lean",
+          "declarations": "TauCeti.Probability.gaussian_exp_integral:110; map_inner_multivariateGaussian:223; mgf_inner_multivariateGaussian:243",
+          "note": "Native direct Gaussian exponential/linear-functional transform normal forms with genuine finite exponential domain."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Density.lean",
+          "declarations": "TauCeti.Probability.support_multivariateGaussian:229; multivariateGaussian_eq_withDensity:265",
+          "note": "Native support for all PSD matrices and exact Lebesgue density when positive definite; no density claimed for singular laws."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Continuity.lean",
+          "declarations": "TauCeti.Probability.continuous_gaussianReal:37; continuous_multivariateGaussian:51",
+          "note": "Native actual weak parameter continuity including zero/singular covariance boundaries."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Symmetry.lean",
+          "declarations": "ProbabilityTheory.IsGaussian.map_neg_eq_self:37; TauCeti.Probability.measurePreserving_reflection_gaussianReal:76",
+          "note": "Native direct centered Gaussian negation and scalar reflection invariance; ordinary same-law API."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Independence.lean",
+          "declarations": "TauCeti.Probability.indepFun_matrix_multivariateGaussian_iff:47",
+          "note": "Native exact covariance-zero/independence characterization for joint Gaussian linear images."
+        }
+      ],
+      "search_notes": "Core boundary: defining Gaussian condition, mean/covariance and degeneracy, characteristic/MGF linear transforms, affine/convolution, density/support, parameter continuity and coordinate independence. Exclude conditional/regression kernels, rank/coupling defects, quadratic-form/chi-square/Wishart laws, Wick/Hermite/completeness, concentration/Poincare and infinite-dimensional Fernique endpoints; no broad import allocation."
+    },
+    {
+      "concept": "non-reconstruction-gibbs",
+      "concept_id": "f1f0c926-aea8-5367-97e7-0924df99af54",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "The conditional discrepancy component is exactly representable for supplied Gibbs configuration law nu, root R, root spin Y and radius-r boundary tuple B_r: E_nu[(tvDist(condDistrib Y B_r nu (B_r sigma), nu.map Y))/2], averaged also over the supplied typical-root law. condDistrib63/74 is an actual measurable probability kernel; TVDefs52/61 is full L1 so the usual probability-TV factor1/2 is explicit. The large-sparse-graph asymptotic quantifier order is not fixed by the paragraph and has not been certified; merely radius->infinity on a fixed finite graph is vacuous once the boundary empties. Thus only the genuine conditional-discrepancy relation is claimed, not full non-reconstruction coverage. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Kernel/CondDistrib.lean",
+          "declarations": "ProbabilityTheory.condDistrib:63; condDistrib_apply_of_ne_zero:74",
+          "note": "Native actual regular conditional root-spin distribution given the boundary variable, with a Markov probability kernel."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/TotalVariation/Defs.lean",
+          "declarations": "MeasureTheory.Measure.etvDist:52; tvDist:61",
+          "note": "Native total-variation discrepancy; probability convention here is tvDist/2, not the full-L1 library normalization."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+          "declarations": "MeasureTheory.integral:157",
+          "note": "Native actual expected conditional-TV discrepancy integral; supplied probability kernels make the integrand bounded, with genuine measurability/integrability required."
+        }
+      ],
+      "search_notes": "Specification issue preserved: give the graph family/random-root law and the order of graph-size and boundary-radius limits (often radius limit after a graph-size limsup), or specify an infinite rooted Gibbs measure. Generic conditional kernels alone cannot choose those quantifiers. Native finite Ising/hard-core laws and reconstruction of occurrence times are not this concept."
+    },
+    {
+      "concept": "non-reconstruction-gibbs",
+      "concept_id": "f1f0c926-aea8-5367-97e7-0924df99af54",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "The actual dependency supplies the conditional marginal/half-TV discrepancy component. Native Countable TV normal form and Gibbs/HardCore sampling are input refinements, not a complete non-reconstruction asymptotic definition for the intended sparse-graph family. No qualifying own file resolves the graph-size/root/boundary limit-order frontier. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency condDistrib64 and tvDist62 have identical bodies after an earlier documentation blank; finite-discrepancy source ownership remains separate from the unresolved sparse-graph limit.",
+      "files": [],
+      "search_notes": "Specification issue preserved: give the graph family/random-root law and the order of graph-size and boundary-radius limits (often radius limit after a graph-size limsup), or specify an infinite rooted Gibbs measure. Generic conditional kernels alone cannot choose those quantifiers. Native finite Ising/hard-core laws and reconstruction of occurrence times are not this concept."
+    },
+    {
+      "concept": "normal-distribution",
+      "concept_id": "4f0b8b29-e6f6-5ebb-9da0-407f35d35305",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "gaussianPDFReal46 is exactly (sqrt(2*pi*v))^-1 exp(-(x-m)^2/(2*v)); gaussianReal219 chooses Dirac m at v=0 and volume.withDensity otherwise, with actual probability proof228-230 and density normalization110-131 inspected. v:NNReal is VARIANCE, hence the paragraph sigma>0 corresponds to v=sigma^2. Mean534 and variance544/569, affine/scaling/convolution and MGF/characteristic functions in the same Real file are ordinary core. The zero-variance law is not described by a Lebesgue probability density. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Distributions/Gaussian/Real.lean",
+          "declarations": "ProbabilityTheory.gaussianPDFReal:46; gaussianReal:219; gaussianReal_zero_var:226; instIsProbabilityMeasureGaussianReal:228; integral_id_gaussianReal:534; variance_id_gaussianReal:569",
+          "note": "Native exact scalar Gaussian density/probability/Dirac boundary, mean/variance and ordinary affine/transform API."
+        }
+      ],
+      "search_notes": "Core boundary is density/law/mean-variance, affine/convolution and elementary transforms, CDF/quantile/support and parameter continuity. Higher all-even Gaussian moments are separately catalogued058; Wick/Hermite, concentration, Poincare, conditional distributions and derived chi-square/Cauchy/Owen laws are excluded as further endpoints. Same-file mixed content is charged once; no entire Gaussian directory/import tree selected."
+    },
+    {
+      "concept": "normal-distribution",
+      "concept_id": "4f0b8b29-e6f6-5ebb-9da0-407f35d35305",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency supplies the full scalar law/Dirac boundary and ordinary mean/variance/transforms. Native Basic73 standardizes density and112-138 proves density derivative/integrability dictionary; PDF26/31 has genuine density only v!=0 and RN-derivative convention otherwise. Cdf124-158 proves the actual erf/CDF and standardization, Quantile57-81 inverse-erf formula INCLUDING Dirac case. Affine75-82, Support31-37, Continuity37-47, Transforms110/116 and Symmetry37/76 give direct affine/support/weak-parameter/exponential/reflection API. Relevant completed proofs checked; variance zero remains explicit. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency Real density47, gaussianReal220, zero-variance227, probability229, mean535 and variance570 have the same bodies after one earlier documentation blank.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Basic.lean",
+          "declarations": "TauCeti.Probability.gaussianPDFReal_eq_gaussianPDFReal_zero_one:73; hasDerivAt_gaussianPDFReal:112; integrable_gaussianReal_iff_integrable_gaussianPDFReal_smul:132",
+          "note": "Native density standardization, derivative and integral dictionary."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/PDF.lean",
+          "declarations": "TauCeti.Probability.hasPDF_of_hasLaw_gaussianReal:26; pdf_eq_gaussianPDF_of_hasLaw_gaussianReal:31",
+          "note": "Native probability-density/RN derivative presentation with nonzero variance condition preserved."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Cdf.lean",
+          "declarations": "TauCeti.Probability.cdf_gaussianReal_eq:143; cdf_gaussianReal_eq_cdf_zero_one:156; strictMono_cdf_gaussianReal:221",
+          "note": "Native direct cumulative law and standard normal form."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Quantile.lean",
+          "declarations": "TauCeti.Probability.quantile_gaussianReal:57; quantile_gaussianReal_eq_add_mul:78",
+          "note": "Native direct inverse-cumulative law including zero-variance boundary."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Affine.lean",
+          "declarations": "TauCeti.Probability.map_affine_multivariateGaussian:109; gaussianReal_map_const_add_const_mul:75",
+          "note": "Native direct affine Gaussian pushforwards with exact transformed means/covariances, rectangular/rank-deficient maps allowed."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Support.lean",
+          "declarations": "TauCeti.Probability.support_gaussianReal:31",
+          "note": "Native full-real versus Dirac support characterization."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Continuity.lean",
+          "declarations": "TauCeti.Probability.continuous_gaussianReal:37; continuous_multivariateGaussian:51",
+          "note": "Native actual weak parameter continuity including zero/singular covariance boundaries."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Transforms.lean",
+          "declarations": "TauCeti.Probability.gaussian_exp_integral:110; map_inner_multivariateGaussian:223; mgf_inner_multivariateGaussian:243",
+          "note": "Native direct Gaussian exponential/linear-functional transform normal forms with genuine finite exponential domain."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Gaussian/Symmetry.lean",
+          "declarations": "ProbabilityTheory.IsGaussian.map_neg_eq_self:37; TauCeti.Probability.measurePreserving_reflection_gaussianReal:76",
+          "note": "Native direct centered Gaussian negation and scalar reflection invariance; ordinary same-law API."
+        }
+      ],
+      "search_notes": "Core boundary is density/law/mean-variance, affine/convolution and elementary transforms, CDF/quantile/support and parameter continuity. Higher all-even Gaussian moments are separately catalogued058; Wick/Hermite, concentration, Poincare, conditional distributions and derived chi-square/Cauchy/Owen laws are excluded as further endpoints. Same-file mixed content is charged once; no entire Gaussian directory/import tree selected."
+    },
+    {
+      "concept": "normal-reflected-diffusion",
+      "concept_id": "6d50c18f-5f7d-5c7d-90c7-1e883b078466",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "A complete Brownian stochastic integral/SDE supplier was not certified in061; adding an abstract finite-variation correction cannot supply an actual reflected diffusion equation. Convex normal cones and deterministic BV paths exist, but the inward-normal Stieltjes boundary-support correction/SDE law remains unassembled. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [],
+      "search_notes": "Searched normally reflected diffusion/reflected SDE/Skorokhod/inward normal/local time/regulator and actual Brownian/finance/convex/BV candidates. Do not substitute X_(t min tau), deterministic metric projection or Sobolev extension for reflection with a boundary-supported normal finite-variation measure."
+    },
+    {
+      "concept": "normal-reflected-diffusion",
+      "concept_id": "6d50c18f-5f7d-5c7d-90c7-1e883b078466",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Native Sobolev normalReflection files reflect FUNCTIONS across hyperplanes; they do not implement a convex-domain Skorokhod regulator or the continuous stochastic reflected SDE. Elementary Brownian integrals/localizing sequences likewise do not construct the general Ito operator. No exact reflected-diffusion supplier certified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.",
+      "files": [],
+      "search_notes": "Searched normally reflected diffusion/reflected SDE/Skorokhod/inward normal/local time/regulator and actual Brownian/finance/convex/BV candidates. Do not substitute X_(t min tau), deterministic metric projection or Sobolev extension for reflection with a boundary-supported normal finite-variation measure."
+    },
+    {
+      "concept": "optimal-strong-stationary-time-theorem",
+      "concept_id": "8f47155a-78bd-5456-b169-897cff42d680",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "No checked existence of a randomized strong stationary time saturating separation at ALL n, or the universal tail lower-bound theorem, was certified. Generic finite-chain ergodicity/mixing, stopping times and coupling definitions are inputs rather than the Aldous-Diaconis construction. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [],
+      "search_notes": "Searched Aldous/Diaconis/strong stationary time/optimal stationary/separation/tail coupling in both snapshots. Preserve irreducible, aperiodic finite chain with positive stationary law and the same time for every n. Ordinary stopping enlargement for the bare SST definition (069) does not supply this theorem."
+    },
+    {
+      "concept": "optimal-strong-stationary-time-theorem",
+      "concept_id": "8f47155a-78bd-5456-b169-897cff42d680",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Native Markov-chain/strong-Markov/kernel/coupling candidates and filtration-enlargement stopping API do not prove the required optimal strong stationary time with exact separation tail. No exact complete endpoint found in bounded search; no proof inferred from a maximal-coupling or total-variation bound. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.",
+      "files": [],
+      "search_notes": "Searched Aldous/Diaconis/strong stationary time/optimal stationary/separation/tail coupling in both snapshots. Preserve irreducible, aperiodic finite chain with positive stationary law and the same time for every n. Ordinary stopping enlargement for the bare SST definition (069) does not supply this theorem."
+    },
+    {
+      "concept": "order-coupling-coalescence-limit",
+      "concept_id": "f3733e28-409f-5d72-8d69-4f5de3605e14",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "General weak convergence/tightness and closed-order definitions are present, but no complete existing theorem that ordered couplings with a common limiting law concentrate on the diagonal in an arbitrary Polish CLOSED PARTIAL order was certified. A real-valued cdf argument or pathwise monotonicity theorem is not that conclusion. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [],
+      "search_notes": "Bounded searches ordered coupling/coalescence/same marginal weak limit/closed partial order and actual quantile, finite ordered-coupling and Prokhorov candidates. No total-order, finite-support or stochastic-monotone-flow strengthening is silently substituted. No new compactness/subsequence/diagonal proof developed."
+    },
+    {
+      "concept": "order-coupling-coalescence-limit",
+      "concept_id": "f3733e28-409f-5d72-8d69-4f5de3605e14",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Native StochasticOrder88 proves real cdf order iff existence of an ordered quantile coupling, a static real theorem. Finsupp.OrderedCoupling.Uniqueness instead assumes CHAIN SUPPORT in the PRODUCT partial order and fixes marginals; this is not mere support on comparable pairs and does not prove general Polish asymptotic coalescence. Actual candidate statements inspected; the joint weak-limit/diagonal uniqueness/in-probability conclusion remains unverified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.",
+      "files": [],
+      "search_notes": "Bounded searches ordered coupling/coalescence/same marginal weak limit/closed partial order and actual quantile, finite ordered-coupling and Prokhorov candidates. No total-order, finite-support or stochastic-monotone-flow strengthening is silently substituted. No new compactness/subsequence/diagonal proof developed."
+    },
+    {
+      "concept": "order-interval-poset",
+      "concept_id": "a697975f-3868-5757-85e3-5ce89d8aefb5",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Set.Icc77 literally is {x|f<=x and x<=g} for a Preorder, hence exact for a supplied partially ordered state space and f<=g. mem_Icc81 is definitional; ordinary interval duality in Basic99/119 preserves endpoints. No linear-order/density/metric assumption is needed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [
+        {
+          "path": "Mathlib/Order/Interval/Set/Defs.lean",
+          "declarations": "Set.Icc:77; mem_Icc:81",
+          "note": "Native exact two-sided partial-order interval and membership predicate."
+        },
+        {
+          "path": "Mathlib/Order/Interval/Set/Basic.lean",
+          "declarations": "Set.Icc_toDual:99; Icc_ofDual:119",
+          "note": "Native ordinary interval endpoint/order-duality API."
+        }
+      ],
+      "search_notes": "Count definition/membership/elementary interval API, not special chains/catenary dimension, numerical subdivision, projections/clipping or unrelated real interval integration. Preserve arbitrary partial order, not only total order."
+    },
+    {
+      "concept": "order-interval-poset",
+      "concept_id": "a697975f-3868-5757-85e3-5ce89d8aefb5",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency gives Icc and its partial-order membership. Native Set.mem_Icc_update_right31 and update_left36 prove actual coordinate-endpoint update rules for product preorders; complete one-line proofs31-37 inspected. These are direct ordinary interval membership API under weaker-than-partial-order hypotheses. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.",
+      "files": [
+        {
+          "path": "TauCeti/Order/Interval/Set/Pi.lean",
+          "declarations": "Set.mem_Icc_update_right:31; mem_Icc_update_left:36",
+          "note": "Native ordinary product-order interval endpoint-update API."
+        }
+      ],
+      "search_notes": "Count definition/membership/elementary interval API, not special chains/catenary dimension, numerical subdivision, projections/clipping or unrelated real interval integration. Preserve arbitrary partial order, not only total order."
+    },
+    {
+      "concept": "order-preserving-rds",
+      "concept_id": "032e82ef-5893-5f27-9252-4e3e839a22ca",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "On the supplied random dynamical system with partially ordered state space, the exact additional predicate is forall t>=0, forall omega, Monotone(phi t omega). Monotone62-63 literally means forall x<=y,phi(t,omega,x)<=phi(t,omega,y). This is a checked direct predicate constructor, with EVERY noise realization as stated, not an AE replacement. The base flow/cocycle is supplied and not re-proved. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [
+        {
+          "path": "Mathlib/Order/Monotone/Defs.lean",
+          "declarations": "Monotone:62",
+          "note": "Native exact order-preservation predicate applied pointwise to the cocycle."
+        }
+      ],
+      "search_notes": "Searched monotone/order-preserving cocycles and native Order/Monotone/Hom/flow siblings. Do not confuse stochastic ordering of laws or a.s. order with pathwise preservation for every noise. Attractor/coalescence/comparison/existence results are separate endpoints."
+    },
+    {
+      "concept": "order-preserving-rds",
+      "concept_id": "032e82ef-5893-5f27-9252-4e3e839a22ca",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Exact dependency Monotone62 is the identical complete defining predicate for each supplied cocycle map, universally in time/noise. Native StrictMono update/order-embedding APIs impose a stronger distinct notion or alter input maps, and no directly applicable native order-preserving RDS API was selected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.",
+      "files": [],
+      "search_notes": "Searched monotone/order-preserving cocycles and native Order/Monotone/Hom/flow siblings. Do not confuse stochastic ordering of laws or a.s. order with pathwise preservation for every noise. Attractor/coalescence/comparison/existence results are separate endpoints."
+    },
+    {
+      "concept": "orthogonal-matrix",
+      "concept_id": "d4263ce1-6c99-54a7-8aee-1c551e695ac0",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Matrix.mem_orthogonalGroup_iff'323 is exactly transpose(U)*U=I over Real (trivial star). Existing EQUIVALENCES Matrix.toEuclideanCLM100 -> Unitary.mapEquiv383 -> Unitary.linearIsometryEquiv969 identify this predicate with a Euclidean linear isometry, with actual action125/129. Conversely an inner-preserving linear map is bundled by LinearMap.isometryOfInner125 and upgraded by LinearIsometry.toLinearIsometryEquiv68 on equal finite dimensions, so the same existing inverse equivalences recover its orthogonal matrix. These source constructors/inverses were actually inspected in018 and the additional inner/finite-dimensional constructors checked here; no new proof or alias demanded. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/UnitaryGroup.lean",
+          "declarations": "Matrix.orthogonalGroup:317; mem_orthogonalGroup_iff':323",
+          "note": "Native exact U-transpose*U=I predicate and ordinary inverse/product API."
+        },
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/Matrix.lean",
+          "declarations": "Matrix.toEuclideanCLM:100; toEuclideanCLM_toLp:125; ofLp_toEuclideanCLM:129",
+          "note": "Native actual matrix/Euclidean-operator star equivalence with matrix-vector action."
+        },
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Adjoint.lean",
+          "declarations": "Unitary.linearIsometryEquiv:969; coe_linearIsometryEquiv_apply:989",
+          "note": "Native complete unitary-operator/isometry equivalence, giving Euclidean inner-product preservation."
+        }
+      ],
+      "search_notes": "Reuse checked018 equivalences for this identical matrix predicate; matrix HasOrthogonalRows/Cols alone omits unit norms and is not substituted. Generic Unitary.mapEquiv383/inner125/finiteDim68 are checked suppliers, not an added transitive tree. Orthogonal-group component/path/determinant classification endpoints excluded."
+    },
+    {
+      "concept": "orthogonal-matrix",
+      "concept_id": "d4263ce1-6c99-54a7-8aee-1c551e695ac0",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency supplies transpose-inverse orthogonality. Native OrthogonalGroup.Basic111 gives the EXACT iff forall x y,dot(Ux)(Uy)=dot(x)(y), with124 orthonormal columns. Native EuclideanLin232/240 and269/280 bundles the action as a linear-isometry equivalence and proves the full inverse standard-basis dictionary. Thus the stated inner-product equivalence, including n=0, is checked rather than inferred from merely pairwise orthogonal columns. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency orthogonalGroup318/membership324 differs only by one earlier documentation blank; native action files implement the selected same property.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Matrix/OrthogonalGroup/Basic.lean",
+          "declarations": "Matrix.mem_orthogonalGroup_iff_dotProduct_mulVec:111; col_dotProduct_col_of_mem_orthogonalGroup:124",
+          "note": "Native exact defining inner-product equivalence and ordinary column API."
+        },
+        {
+          "path": "TauCeti/Analysis/Matrix/EuclideanLin.lean",
+          "declarations": "Matrix.UnitaryGroup.toLinearIsometryEquiv:232; toLinearIsometryEquiv_apply:240; toLinearIsometryEquiv_injective:269; toLinearIsometryEquiv_surjective:280",
+          "note": "Native complete matrix/Euclidean-isometry action dictionary."
+        }
+      ],
+      "search_notes": "Reuse checked018 equivalences for this identical matrix predicate; matrix HasOrthogonalRows/Cols alone omits unit norms and is not substituted. Generic Unitary.mapEquiv383/inner125/finiteDim68 are checked suppliers, not an added transitive tree. Orthogonal-group component/path/determinant classification endpoints excluded."
+    },
+    {
+      "concept": "orthogonal-polynomial-sequence",
+      "concept_id": "9df17eef-9ff0-5174-8ed9-49fa81712071",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Exact predicate on p:Nat->Real[X]: forall n,degree(p n)=(n:WithBot Nat), and for m!=n, integral (fun x=>(p m).eval x*(p n).eval x)mu=0, with all necessary genuine moments/product integrability explicitly supplied. degree47 avoids natDegree(0)=0 accidentally allowing a zero initial polynomial; eval249 is actual polynomial evaluation. No positive-norm normalization or completeness is asserted from orthogonality alone; a finite-support positive measure may make the pairing degenerate. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Polynomial/Degree/Defs.lean",
+          "declarations": "Polynomial.degree:47; natDegree:51",
+          "note": "Native exact successive-degree condition; use degree(p_n)=n, preventing zero constant at n=0."
+        },
+        {
+          "path": "Mathlib/Algebra/Polynomial/Eval/Defs.lean",
+          "declarations": "Polynomial.eval:249; eval_eq_sum:255",
+          "note": "Native actual polynomial evaluation in the orthogonality integral."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+          "declarations": "MeasureTheory.integral:157",
+          "note": "Native actual polynomial-product orthogonality integral, with genuine finite moments/product integrability imposed."
+        }
+      ],
+      "search_notes": "Select generic same-system normalization as associated API. Hermite/Chebyshev particular-family orthogonality and polynomial density/completeness/Hilbert-basis endpoints are distinct theorem concepts/applications, excluded. No claim every finite-moment measure admits an infinite nondegenerate system, three-term recurrence, or unique monic normalization."
+    },
+    {
+      "concept": "orthogonal-polynomial-sequence",
+      "concept_id": "9df17eef-9ff0-5174-8ed9-49fa81712071",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Actual dependency supplies the complete successive-degree/integral-orthogonality predicate. Native WeightedOrthogonalBasis128-163 proves ordinary normalization: instantiate f_n=(p_n).eval and weight1; if norms c_n>0 and actual normalized L2 membership hold, p_n/sqrt(c_n) are orthonormal in L2. The actual integral/AE-representative proof128-152 and normalization156-163 were read. Stronger nondegeneracy hypotheses are explicit, not inferred for every positive measure. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency degree47 is unchanged; eval250 and integral158 have the same bodies after one earlier documentation blank.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/WeightedOrthogonalBasis.lean",
+          "declarations": "TauCeti.inner_bareNormalizedLp:128; orthonormal_bareNormalizedLp:156",
+          "note": "Native generic direct orthogonal-system normalization/inner-product API, exactly applicable to polynomial evaluations with positive squared norms."
+        }
+      ],
+      "search_notes": "Select generic same-system normalization as associated API. Hermite/Chebyshev particular-family orthogonality and polynomial density/completeness/Hilbert-basis endpoints are distinct theorem concepts/applications, excluded. No claim every finite-moment measure admits an infinite nondegenerate system, three-term recurrence, or unique monic normalization."
+    }
+  ]
+}

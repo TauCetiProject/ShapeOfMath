@@ -1,0 +1,580 @@
+Infinite particle systems of long range jumps with long range interactions
+
+Coverage: Entire pinned arXiv:1508.06796v1, 22 PDF pages, §§1–5, all finite-volume truncation and cutoff estimates, and 18 references. PDF display date October24,2018 differs from its arXiv v1 stamp August27,2015; exact artifact hash/version is retained.
+Required concepts complete: True
+Introduced concepts complete: True
+All citations captured: True
+Completion refers to immediate concepts only; false means not certified.
+
+REQUIRED CONCEPT FRONTIER (18)
+
+- Canonical Gibbs specification for a continuum point process: A point process satisfies the canonical Gibbs specification for self-potentialΦ and pair potentialΨ if, conditional on the outside configurationη and exactly n particles in a bounded regionΛ, its inside positions have a Lebesgue Gibbs density proportional to exp(−∑_iΦ(x_i)−∑_{i<j}Ψ(x_i,x_j)−∑_i∑_{y∈η}Ψ(x_i,y)). The cross sums and positive finite normalizer must exist for almost every conditioning configuration; particle labels are quotiented out.
+- Chebyshev's inequality: If EX²<∞ and t>0, then P(abs(X−EX)≥t)≤Var(X)/t².
+- Closable nonnegative symmetric form: A densely defined nonnegative symmetric form E is closable if u_n→0 in H and E(u_n−u_m,u_n−u_m)→0 imply E(u_n,u_n)→0. Equivalently it has a closed extension obtained by completing its graph norm.
+- Closed symmetric form–semigroup correspondence: Densely defined closed nonnegative symmetric forms on a Hilbert space correspond to nonnegative self-adjoint operators and strongly continuous self-adjoint contraction semigroups T_t=exp(−tA), with E(u,v)=⟨A¹ᐟ²u,A¹ᐟ²v⟩ on D(A¹ᐟ²).
+- Compact-inner-regular Radon measure on a Hausdorff space: A Borel measure on a Hausdorff topological space that is finite on compact sets and inner regular: the measure of every Borel set is the supremum of the measures of its compact subsets.
+- First Borel–Cantelli lemma: If ∑ₙP(Aₙ)<∞, then P(⋂ₘ⋃ₙ≥ₘAₙ)=0: almost surely only finitely many Aₙ occur.
+- Infinite Ginibre point process: The determinantal point process on ℂ with respect to planar Lebesgue measure and kernel K(z,w)=π⁻¹exp(z w̄−(|z|²+|w|²)/2). Its intensity is1/π; this fixes the spatial normalization.
+- Isotropic symmetric α-stable Lévy process: For 0<α≤2, the Euclidean Lévy process whose characteristic function is Eexp(iξ·X_t)=exp(−t|ξ|ᵅ), up to a specified positive time-scaling constant.
+- Lennard–Jones6–12 pair potential: The radial pair potential Ψ(x,y)=A|x−y|⁻¹²−B|x−y|⁻⁶ for A,B>0 and x≠y, with Ψ(x,x)=+∞. The inverse-twelfth-power term is repulsive and the inverse-sixth-power term attractive.
+- Mean value theorem for real functions: If f is continuous on [a,b] and differentiable on (a,b), there exists c∈(a,b) such that f(b)−f(a)=f′(c)(b−a).
+- Mollifier on Euclidean space: A nonnegative smooth compactly supported function j on ℝᵈ with integral one. Its scaled kernels j_ε(x)=ε⁻ᵈj(x/ε) produce smooth approximations by convolution.
+- Monotone convergence theorem for Lebesgue integrals: If 0≤fₙ≤fₙ₊₁ and fₙ→f pointwise, then ∫fₙdμ increases to ∫f dμ, allowing infinity.
+- Process existence for quasi-regular symmetric Dirichlet forms: A quasi-regular symmetric Dirichlet form on a Lusin measurable state space is associated with an m-tight special standard process, unique up to the usual exceptional-set equivalence, whose L² semigroup is the semigroup of the form. The resulting process is m-symmetric; conservativeness requires an additional condition.
+- Quasi-Gibbs measure for a point process: For specified one-body and pair potentials Φ,Ψ, a point-process law is quasi-Gibbs if its restriction to configurations with m particles in each bounded region can be approximated increasingly by submeasures whose conditional inside laws, given the outside configuration, are bounded above and below by positive multiples of exp(−H_inside) times Poisson reference measure restricted to m particles. Constants may depend on the region, particle number, approximation level and outside configuration.
+- Reduced Palm distribution of a point process: The disintegration μ_x of the reduced Campbell measure: E∑_{x∈ξ}F(x,ξ−δ_x)=∫E_{μ_x}F(x,η)ρ⁽¹⁾(x)dx. It describes the remaining configuration viewed conditional on a point at x, without conditioning on a usually null event.
+- Regular symmetric stable-like form with measurable variable order: Let α:ℝᵈ→(0,2) be measurable, with α⁻¹,(2−α)⁻¹ locally integrable and∫_{|x|>R}|x|^{−d−α(x)}dx<∞ for some R>1. Set J(x,y)=(|x−y|^{−d−α(x)}+|x−y|^{−d−α(y)})/2. The form E(u,v)=½∬(u(x)−u(y))(v(x)−v(y))J(x,y)dxdy on compactly supported Lipschitz functions is closable inL²; its closure is a regular symmetric Dirichlet form.
+- Repulsive Riesz pair potential: For s>0, the Euclidean pair potential Ψ(x,y)=|x−y|^{−s}, with value+∞ on the diagonal. The particle example in Esaki assumes s>d, which controls its long-distance tail.
+- Upper semicontinuous function: An extended-real-valued function f on a topological space is upper semicontinuous if {x:f(x)<a} is open for every real a.
+
+INHERITED PREREQUISITES (142)
+
+- Abelian group — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Absolute continuity of measures — via ginibre-infinite-point-process, reduced-palm-distribution
+- Almost-everywhere property on a measure space — via canonical-gibbs-point-process, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, quasi-gibbs-point-process, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Banach space — via closed-form-semigroup-correspondence
+- Bijection between sets — via canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Bilinear map — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Binary operation on a set — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Binary relation on a set — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Borel σ-algebra of a topological space — via canonical-gibbs-point-process, ginibre-infinite-point-process, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Borel σ-algebra on the real line — via canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mollifier, monotone-convergence, quasi-gibbs-point-process, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Bounded linear functional — via closed-form-semigroup-correspondence
+- Bounded linear operator — via closed-form-semigroup-correspondence
+- Cartesian product of sets — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Cauchy sequence in a metric space — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Characteristic function of a real probability distribution — via isotropic-alpha-stable-process
+- Closed nonnegative symmetric form on a Hilbert space — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Closure of a subset of a topological space — via canonical-gibbs-point-process, ginibre-infinite-point-process, mollifier, quasi-gibbs-point-process, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Commutative ring with identity — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Compact topological space — via canonical-gibbs-point-process, dirichlet-form-process-existence, ginibre-infinite-point-process, mollifier, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Compactly supported smooth test function on an open Euclidean set — via mollifier
+- Complement of a subset — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form
+- Complete measure — via canonical-gibbs-point-process, ginibre-infinite-point-process, reduced-palm-distribution
+- Complete metric space — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Complex exponential function — via ginibre-infinite-point-process
+- Complex number — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, stable-like-variable-order-regular-form
+- Complex power series — via ginibre-infinite-point-process
+- Composition of functions — via ginibre-infinite-point-process
+- Conditional expectation given a σ-algebra — via canonical-gibbs-point-process, dirichlet-form-process-existence, quasi-gibbs-point-process, reduced-palm-distribution
+- Continuous map between topological spaces — via canonical-gibbs-point-process, dirichlet-form-process-existence, ginibre-infinite-point-process, mean-value-theorem, mollifier, quasi-gibbs-point-process, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Convergence in probability — via isotropic-alpha-stable-process
+- Convergence of a sequence in a metric space — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, stable-like-variable-order-regular-form
+- Convergent real series — via borel-cantelli-first, canonical-gibbs-point-process, closed-form-semigroup-correspondence, dirichlet-form-process-existence, isotropic-alpha-stable-process, quasi-gibbs-point-process, stable-like-variable-order-regular-form
+- Correlation functions of a point process — via ginibre-infinite-point-process, reduced-palm-distribution
+- Càdlàg path — via dirichlet-form-process-existence, isotropic-alpha-stable-process
+- Dense subset of a metric space — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Densely defined self-adjoint operator on a Hilbert space — via closed-form-semigroup-correspondence
+- Derivative of a real function — via mean-value-theorem, mollifier
+- Determinant of a square matrix — via ginibre-infinite-point-process
+- Determinantal point process — via ginibre-infinite-point-process
+- Disjoint sets — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Equivalence class — via closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Equivalence relation — via closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Essential supremum of a measurable real function — via closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Euclidean space ℝᵈ — via canonical-gibbs-point-process, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mollifier, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form
+- Expectation of an integrable real random variable — via canonical-gibbs-point-process, chebyshev-inequality, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, quasi-gibbs-point-process, reduced-palm-distribution
+- Extended nonnegative real numbers — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Extended real line — via canonical-gibbs-point-process, lennard-jones-6-12-pair-potential, riesz-repulsive-pair-potential
+- Factorial — via canonical-gibbs-point-process, closed-form-semigroup-correspondence, dirichlet-form-process-existence, isotropic-alpha-stable-process, quasi-gibbs-point-process, stable-like-variable-order-regular-form
+- Field — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Filtration of σ-algebras — via dirichlet-form-process-existence
+- Finite set — via canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Finite-volume Gibbs probability density — via canonical-gibbs-point-process
+- Function between sets — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Group — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Hausdorff topological space — via canonical-gibbs-point-process, dirichlet-form-process-existence, ginibre-infinite-point-process, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Independent family of random variables — via isotropic-alpha-stable-process, quasi-gibbs-point-process
+- Independent σ-algebras — via isotropic-alpha-stable-process
+- Indicator function of a subset — via canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mollifier, monotone-convergence, quasi-gibbs-point-process, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Integer — via ginibre-infinite-point-process
+- Intersection of a family of sets — via canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Least upper bound in a partially ordered set — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Lebesgue Lᵖ space — via closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Lebesgue integral — via canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mollifier, monotone-convergence, quasi-gibbs-point-process, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Lebesgue measure on Euclidean space — via canonical-gibbs-point-process, ginibre-infinite-point-process
+- Limit of a function between metric spaces — via mean-value-theorem, mollifier
+- Limit of a real function at a point — via dirichlet-form-process-existence, isotropic-alpha-stable-process, mean-value-theorem, mollifier
+- Limit of a real sequence — via borel-cantelli-first, canonical-gibbs-point-process, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, monotone-convergence, quasi-gibbs-point-process, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Linear map between vector spaces — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Linearity of the Lebesgue integral — via chebyshev-inequality
+- Lipschitz map between metric spaces — via stable-like-variable-order-regular-form
+- Locally compact Hausdorff space — via canonical-gibbs-point-process, ginibre-infinite-point-process, quasi-gibbs-point-process, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Locally finite point configuration — via canonical-gibbs-point-process, ginibre-infinite-point-process, quasi-gibbs-point-process, reduced-palm-distribution
+- Lusin topological space — via dirichlet-form-process-existence
+- Lévy process — via isotropic-alpha-stable-process
+- Markov transition semigroup — via closed-form-semigroup-correspondence, dirichlet-form-process-existence
+- Matrix over a ring — via ginibre-infinite-point-process
+- Measurable map between measurable spaces — via canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mollifier, monotone-convergence, quasi-gibbs-point-process, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form
+- Measurable simple real function — via canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mollifier, monotone-convergence, quasi-gibbs-point-process, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Measurable space — via canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mollifier, monotone-convergence, quasi-gibbs-point-process, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form
+- Measure — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Metric induced by a norm — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Metric space — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mean-value-theorem, mollifier, quasi-gibbs-point-process, stable-like-variable-order-regular-form
+- Modulus of a complex number — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Natural logarithm — via closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Natural number — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Nest for a Dirichlet form — via dirichlet-form-process-existence
+- Nonnegative real square root — via canonical-gibbs-point-process, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mollifier, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form
+- Normed vector space — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Open interval in the real line — via canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mollifier, monotone-convergence, quasi-gibbs-point-process, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Operator norm of a bounded linear operator — via closed-form-semigroup-correspondence
+- Ordered field — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Ordered pair — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Pair potential for a continuum particle system — via canonical-gibbs-point-process, lennard-jones-6-12-pair-potential, riesz-repulsive-pair-potential
+- Partial derivative in Euclidean coordinates — via mollifier
+- Partial order — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Point process — via ginibre-infinite-point-process, quasi-gibbs-point-process, reduced-palm-distribution
+- Poisson distribution — via quasi-gibbs-point-process
+- Poisson point process — via quasi-gibbs-point-process
+- Polish space — via dirichlet-form-process-existence
+- Preimage of a subset under a function — via canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form
+- Probability density relative to a measure — via canonical-gibbs-point-process
+- Probability space — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, quasi-gibbs-point-process, reduced-palm-distribution
+- Product measure — via ginibre-infinite-point-process, reduced-palm-distribution
+- Quasi-continuity relative to a Dirichlet form — via dirichlet-form-process-existence
+- Quasi-regular symmetric Dirichlet form — via dirichlet-form-process-existence
+- Radon measure on a locally compact Hausdorff space — via canonical-gibbs-point-process, ginibre-infinite-point-process, quasi-gibbs-point-process, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Radon–Nikodym derivative of a measure — via ginibre-infinite-point-process, reduced-palm-distribution
+- Real Hilbert space — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Real exponential function — via canonical-gibbs-point-process, closed-form-semigroup-correspondence, dirichlet-form-process-existence, isotropic-alpha-stable-process, quasi-gibbs-point-process, stable-like-variable-order-regular-form
+- Real inner-product space — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Real number — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Real power of a positive real number — via closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Real sequence — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Real-valued random variable — via canonical-gibbs-point-process, chebyshev-inequality, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, quasi-gibbs-point-process, reduced-palm-distribution
+- Regular symmetric Dirichlet form — via stable-like-variable-order-regular-form
+- Separable metric space — via dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Sequence in a set — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form
+- Set — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Sign of a permutation — via ginibre-infinite-point-process
+- Smooth map between open Euclidean sets — via mollifier
+- Special standard Markov process — via dirichlet-form-process-existence
+- Stochastic process — via dirichlet-form-process-existence, isotropic-alpha-stable-process
+- Stopping time for a filtration — via dirichlet-form-process-existence
+- Strong Markov process — via dirichlet-form-process-existence
+- Strongly continuous contraction semigroup — via closed-form-semigroup-correspondence
+- Subset — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Sum of a nonnegative series — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, stable-like-variable-order-regular-form
+- Support of a function — via mollifier
+- Symmetric Dirichlet form — via dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Symmetric Markov semigroup — via closed-form-semigroup-correspondence, dirichlet-form-process-existence
+- Symmetric group of a finite set — via ginibre-infinite-point-process
+- Topological space — via canonical-gibbs-point-process, dirichlet-form-process-existence, ginibre-infinite-point-process, mean-value-theorem, mollifier, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Total order — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Union of a family of sets — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mean-value-theorem, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form, upper-semicontinuous-function
+- Vague convergence of Radon measures — via canonical-gibbs-point-process, ginibre-infinite-point-process, quasi-gibbs-point-process, reduced-palm-distribution
+- Variance of a real random variable — via chebyshev-inequality
+- Vector space — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Vector subspace — via closable-symmetric-form, closed-form-semigroup-correspondence, dirichlet-form-process-existence, stable-like-variable-order-regular-form
+- Weak convergence of probability measures on a metric space — via quasi-gibbs-point-process
+- σ-algebra — via borel-cantelli-first, canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, lennard-jones-6-12-pair-potential, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, riesz-repulsive-pair-potential, stable-like-variable-order-regular-form
+- σ-algebra generated by a family of subsets — via canonical-gibbs-point-process, chebyshev-inequality, closed-form-semigroup-correspondence, dirichlet-form-process-existence, ginibre-infinite-point-process, isotropic-alpha-stable-process, mollifier, monotone-convergence, quasi-gibbs-point-process, radon-measure-hausdorff-compact-inner-regular, reduced-palm-distribution, stable-like-variable-order-regular-form
+- σ-finite measure — via ginibre-infinite-point-process, reduced-palm-distribution
+
+INTRODUCED CONCEPTS (2)
+
+- Esaki’s quasi-Gibbs jump-form closability theorem
+- Esaki’s quasi-regularity theorem for infinite-particle jump forms
+
+LOCATED CONCEPTS (36)
+
+1. Polish space
+   A topological space admitting a complete separable metric that induces its topology.
+   Source: relies_on, §§1–2, notation and rates (1.1)–(1.3)
+   Note: Palm laws are disintegrations, not literal conditioning on the null event “a point at x”.
+
+2. Vague convergence of Radon measures
+   On a locally compact Hausdorff space, μ_n converge vaguely to μ if ∫f dμ_n→∫f dμ for every continuous compactly supported real function f.
+   Source: relies_on, §§1–2, notation and rates (1.1)–(1.3)
+   Note: Palm laws are disintegrations, not literal conditioning on the null event “a point at x”.
+
+3. Locally finite point configuration
+   An integer-valued Radon measure ξ=∑_iδ_{x_i} assigning finite mass to every compact set; repeated points may have multiplicity. Configuration space carries the vague topology.
+   Source: relies_on, §§1–2, notation and rates (1.1)–(1.3)
+   Note: Palm laws are disintegrations, not literal conditioning on the null event “a point at x”.
+
+4. Correlation functions of a point process
+   Relative to a reference measure dx, the k-point correlation function ρ⁽ᵏ⁾ is the density satisfying E∑_{x₁,…,xₖ distinct in ξ}f(x₁,…,xₖ)=∫fρ⁽ᵏ⁾dx₁⋯dxₖ for nonnegative measurable f, when this density exists. The sum counts distinct particle labels.
+   Source: relies_on, §§1–2, notation and rates (1.1)–(1.3)
+   Note: Palm laws are disintegrations, not literal conditioning on the null event “a point at x”.
+
+5. Reduced Palm distribution of a point process
+   The disintegration μ_x of the reduced Campbell measure: E∑_{x∈ξ}F(x,ξ−δ_x)=∫E_{μ_x}F(x,η)ρ⁽¹⁾(x)dx. It describes the remaining configuration viewed conditional on a point at x, without conditioning on a usually null event.
+   Source: relies_on, §§1–2, notation and rates (1.1)–(1.3)
+   Note: Palm laws are disintegrations, not literal conditioning on the null event “a point at x”.
+
+6. Radon–Nikodym derivative of a measure
+   A nonnegative measurable function f representing ν relative to μ by ν(A)=∫_A f dμ for every measurable A; it is defined up to μ-almost-everywhere equality when such a density exists.
+   Source: relies_on, §§1–2, notation and rates (1.1)–(1.3)
+   Note: Palm laws are disintegrations, not literal conditioning on the null event “a point at x”.
+
+7. Closed nonnegative symmetric form on a Hilbert space
+   A nonnegative symmetric bilinear form E on a dense vector subspace D of a real Hilbert space H is closed if D is complete for the norm ‖u‖_{E,1}=(‖u‖_H²+E(u,u))¹ᐟ².
+   Source: relies_on, §§1–2 and §5 Definition5.9; Ma–Röckner[7,IV.3.5,IV.5.1]
+   Note: The standard process correspondence is imported, not proved or introduced by this paper; no claim of infinite lifetime from existence alone.
+
+8. Closable nonnegative symmetric form
+   A densely defined nonnegative symmetric form E is closable if u_n→0 in H and E(u_n−u_m,u_n−u_m)→0 imply E(u_n,u_n)→0. Equivalently it has a closed extension obtained by completing its graph norm.
+   Source: relies_on, §§1–2 and §5 Definition5.9; Ma–Röckner[7,IV.3.5,IV.5.1]
+   Note: The standard process correspondence is imported, not proved or introduced by this paper; no claim of infinite lifetime from existence alone.
+
+9. Symmetric Dirichlet form
+   A closed densely defined nonnegative symmetric form E on real L²(X,m) satisfying the Markov contraction property: for u∈D(E), v=(0∨u)∧1 belongs to D(E) and E(v,v)≤E(u,u).
+   Source: relies_on, §§1–2 and §5 Definition5.9; Ma–Röckner[7,IV.3.5,IV.5.1]
+   Note: The standard process correspondence is imported, not proved or introduced by this paper; no claim of infinite lifetime from existence alone.
+
+10. Nest for a Dirichlet form
+   An increasing sequence of closed sets F_n such that the union of {u∈D(E):u=0 m-a.e. outside F_n} is dense in D(E) for the E₁ norm. A set is E-exceptional if it is contained in the complement of the union of some nest.
+   Source: relies_on, §§1–2 and §5 Definition5.9; Ma–Röckner[7,IV.3.5,IV.5.1]
+   Note: The standard process correspondence is imported, not proved or introduced by this paper; no claim of infinite lifetime from existence alone.
+
+11. Quasi-continuity relative to a Dirichlet form
+   A real function has an E-quasi-continuous version if it agrees m-a.e. with a function whose restriction to every member of some E-nest is continuous.
+   Source: relies_on, §§1–2 and §5 Definition5.9; Ma–Röckner[7,IV.3.5,IV.5.1]
+   Note: The standard process correspondence is imported, not proved or introduced by this paper; no claim of infinite lifetime from existence alone.
+
+12. Quasi-regular symmetric Dirichlet form
+   A symmetric Dirichlet form on L²(X,m) is quasi-regular if it has a nest of compact sets, an E₁-dense subset of its domain with quasi-continuous versions, and countably many domain elements with quasi-continuous versions separating all points outside an exceptional set.
+   Source: relies_on, §§1–2 and §5 Definition5.9; Ma–Röckner[7,IV.3.5,IV.5.1]
+   Note: The standard process correspondence is imported, not proved or introduced by this paper; no claim of infinite lifetime from existence alone.
+
+13. Process existence for quasi-regular symmetric Dirichlet forms
+   A quasi-regular symmetric Dirichlet form on a Lusin measurable state space is associated with an m-tight special standard process, unique up to the usual exceptional-set equivalence, whose L² semigroup is the semigroup of the form. The resulting process is m-symmetric; conservativeness requires an additional condition.
+   Source: relies_on, §§1–2 and §5 Definition5.9; Ma–Röckner[7,IV.3.5,IV.5.1]
+   Note: The standard process correspondence is imported, not proved or introduced by this paper; no claim of infinite lifetime from existence alone.
+
+14. Closed symmetric form–semigroup correspondence
+   Densely defined closed nonnegative symmetric forms on a Hilbert space correspond to nonnegative self-adjoint operators and strongly continuous self-adjoint contraction semigroups T_t=exp(−tA), with E(u,v)=⟨A¹ᐟ²u,A¹ᐟ²v⟩ on D(A¹ᐟ²).
+   Source: relies_on, §§1–2 and §5 Definition5.9; Ma–Röckner[7,IV.3.5,IV.5.1]
+   Note: The standard process correspondence is imported, not proved or introduced by this paper; no claim of infinite lifetime from existence alone.
+
+15. Quasi-Gibbs measure for a point process
+   For specified one-body and pair potentials Φ,Ψ, a point-process law is quasi-Gibbs if its restriction to configurations with m particles in each bounded region can be approximated increasingly by submeasures whose conditional inside laws, given the outside configuration, are bounded above and below by positive multiples of exp(−H_inside) times Poisson reference measure restricted to m particles. Constants may depend on the region, particle number, approximation level and outside configuration.
+   Source: relies_on, Definition2.3 and applications§3
+   Note: Quasi-Gibbs measures explicitly credited to Osada[11,12]; Ginibre Palm ratios credited to Osada–Shirai[13].
+
+16. Poisson point process
+   A point process with intensity measure λ for which counts in disjoint measurable sets are independent and ξ(A) has Poisson law of mean λ(A) whenever λ(A)<∞.
+   Source: relies_on, Definition2.3 and applications§3
+   Note: Quasi-Gibbs measures explicitly credited to Osada[11,12]; Ginibre Palm ratios credited to Osada–Shirai[13].
+
+17. Determinantal point process
+   A point process whose k-point correlation functions satisfy ρ⁽ᵏ⁾(x₁,…,xₖ)=det(K(x_i,x_j))_{i,j=1}ᵏ for a specified kernel K and reference measure.
+   Source: relies_on, Definition2.3 and applications§3
+   Note: Quasi-Gibbs measures explicitly credited to Osada[11,12]; Ginibre Palm ratios credited to Osada–Shirai[13].
+
+18. Weak convergence of probability measures on a metric space
+   Measures μ_n converge weakly to μ if ∫f dμ_n→∫f dμ for every bounded continuous real function f on the space.
+   Source: relies_on, Definition2.3 and applications§3
+   Note: Quasi-Gibbs measures explicitly credited to Osada[11,12]; Ginibre Palm ratios credited to Osada–Shirai[13].
+
+19. Chebyshev's inequality
+   If EX²<∞ and t>0, then P(abs(X−EX)≥t)≤Var(X)/t².
+   Source: relies_on, §§4–5, especially Lemmas4.4–4.6,5.1–5.8
+   Note: Cutoff functions and dyadic geometric sums are proof devices, not paper-local concept records.
+
+20. First Borel–Cantelli lemma
+   If ∑ₙP(Aₙ)<∞, then P(⋂ₘ⋃ₙ≥ₘAₙ)=0: almost surely only finitely many Aₙ occur.
+   Source: relies_on, §§4–5, especially Lemmas4.4–4.6,5.1–5.8
+   Note: Cutoff functions and dyadic geometric sums are proof devices, not paper-local concept records.
+
+21. Monotone convergence theorem for Lebesgue integrals
+   If 0≤fₙ≤fₙ₊₁ and fₙ→f pointwise, then ∫fₙdμ increases to ∫f dμ, allowing infinity.
+   Source: relies_on, §§4–5, especially Lemmas4.4–4.6,5.1–5.8
+   Note: Cutoff functions and dyadic geometric sums are proof devices, not paper-local concept records.
+
+22. Mean value theorem for real functions
+   If f is continuous on [a,b] and differentiable on (a,b), there exists c∈(a,b) such that f(b)−f(a)=f′(c)(b−a).
+   Source: relies_on, §§4–5, especially Lemmas4.4–4.6,5.1–5.8
+   Note: Cutoff functions and dyadic geometric sums are proof devices, not paper-local concept records.
+
+23. Mollifier on Euclidean space
+   A nonnegative smooth compactly supported function j on ℝᵈ with integral one. Its scaled kernels j_ε(x)=ε⁻ᵈj(x/ε) produce smooth approximations by convolution.
+   Source: relies_on, §§4–5, especially Lemmas4.4–4.6,5.1–5.8
+   Note: Cutoff functions and dyadic geometric sums are proof devices, not paper-local concept records.
+
+24. Upper semicontinuous function
+   An extended-real-valued function f on a topological space is upper semicontinuous if {x:f(x)<a} is open for every real a.
+   Source: relies_on, §§4–5, especially Lemmas4.4–4.6,5.1–5.8
+   Note: Cutoff functions and dyadic geometric sums are proof devices, not paper-local concept records.
+
+25. Lévy process
+   A càdlàg stochastic process starting at zero with stationary independent increments and continuity in probability, taking values in Euclidean space.
+   Source: explains, §§1,3.1–3.3
+   Note: Existing Lévy processes and equilibrium jump dynamics; variable-order stable-like kernels and Sine/Airy/Bessel/Ginibre ensembles appear as examples requiring further specialized review, not new concepts claimed by this paper.
+
+26. Isotropic symmetric α-stable Lévy process
+   For 0<α≤2, the Euclidean Lévy process whose characteristic function is Eexp(iξ·X_t)=exp(−t|ξ|ᵅ), up to a specified positive time-scaling constant.
+   Source: explains, §§1,3.1–3.3
+   Note: Existing Lévy processes and equilibrium jump dynamics; variable-order stable-like kernels and Sine/Airy/Bessel/Ginibre ensembles appear as examples requiring further specialized review, not new concepts claimed by this paper.
+
+27. Symmetric Markov semigroup
+   A Markov transition semigroup is symmetric with respect to m if ∫fP_tg dm=∫gP_tf dm for suitable f,g. Its stationary process has time-reversal invariant finite-dimensional distributions when initialized from a probability measure m.
+   Source: explains, §§1,3.1–3.3
+   Note: Existing Lévy processes and equilibrium jump dynamics; variable-order stable-like kernels and Sine/Airy/Bessel/Ginibre ensembles appear as examples requiring further specialized review, not new concepts claimed by this paper.
+
+28. Esaki’s quasi-regularity theorem for infinite-particle jump forms
+   For a configuration law μ with locally Lᵖ finite-region particle densities (p>1), consider the closable jump form E(f,g)=½∫μ(dξ)∫ξ(dx)∫dy ν(ξ,x;y)[f(ξ−δ_x+δ_y)−f(ξ)][g(ξ−δ_x+δ_y)−g(ξ)] on local smooth functions. If ν≤Cp(|x−y|), ρ⁽¹⁾(x)=O(|x|ᵏ), p(r)=O(r⁻ᵈ⁻ᵅ) at infinity with α>κ, p(r)=O(r⁻ᵈ⁻ᵝ) near zero with 0<β<2, and Var ξ(B_r)/(Eξ(B_r))²=O(r⁻ᵟ) for some δ>0, its closure is a quasi-regular Dirichlet form.
+   Source: introduces, Theorem2.1, proof§5; Corollary2.2
+   Note: Process existence is a standard consequence through [7]. The theorem is a construction result, not a claim that every formal rate is defined pointwise or that every associated process is conservative.
+   Origin evidence: Abstract and Introduction explicitly distinguish the long-range jump construction from earlier Kawasaki constructions[2,6] and diffusive results[8,11,12]; §§2,5 state/prove the new growth and kernel-tail criterion.
+
+29. Esaki’s quasi-Gibbs jump-form closability theorem
+   For the infinite-particle jump form on local smooth functions, suppose μ is (Φ,Ψ)-quasi-Gibbs and Φ,Ψ are bounded above and below by positive constant multiples of upper semicontinuous comparison potentials Φ₀,Ψ₀, locally bounded below, with Ψ₀ even and its infinite-value set compact. Under the standing symmetric jump-kernel integrability assumptions ∫(1∧|x−y|²)ν(ξ,x;y)dy<∞, the form is closable on L²(μ).
+   Source: introduces, Theorem2.4, proof§4
+   Note: Osada’s finite-volume closability/disintegration lemmas are adapted from [8,11]; these lemmas are not falsely originated here.
+   Origin evidence: Introduction and §2 present the jump-form extension of Osada’s quasi-Gibbs closability approach; §4 gives finite-region truncation estimates before invoking inherited assembly lemmas.
+
+30. Lévy process
+   A càdlàg stochastic process starting at zero with stationary independent increments and continuity in probability, taking values in Euclidean space.
+   Source: relies_on, §§3.1–3.2 application hypotheses
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+31. Isotropic symmetric α-stable Lévy process
+   For 0<α≤2, the Euclidean Lévy process whose characteristic function is Eexp(iξ·X_t)=exp(−t|ξ|ᵅ), up to a specified positive time-scaling constant.
+   Source: relies_on, §§3.1–3.2 application hypotheses
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+32. Symmetric Markov semigroup
+   A Markov transition semigroup is symmetric with respect to m if ∫fP_tg dm=∫gP_tf dm for suitable f,g. Its stationary process has time-reversal invariant finite-dimensional distributions when initialized from a probability measure m.
+   Source: relies_on, §§3.1–3.2 application hypotheses
+   Note: Explicitly used reading input, also explained in this source; not an automatic prerequisite of every shared theorem occurrence.
+
+33. Lusin topological space
+   A Hausdorff topological space that is a continuous bijective image of a Polish space. Its Borel measurable space is consequently standard Borel; the topology need not itself be Polish.
+   Source: relies_on, §2 Corollary2.2 special-standard-process existence
+   Note: Required source-specific input identified during union review, including uncited background.
+
+34. Canonical Gibbs specification for a continuum point process
+   A point process satisfies the canonical Gibbs specification for self-potentialΦ and pair potentialΨ if, conditional on the outside configurationη and exactly n particles in a bounded regionΛ, its inside positions have a Lebesgue Gibbs density proportional to exp(−∑_iΦ(x_i)−∑_{i<j}Ψ(x_i,x_j)−∑_i∑_{y∈η}Ψ(x_i,y)). The cross sums and positive finite normalizer must exist for almost every conditioning configuration; particle labels are quotiented out.
+   Source: relies_on, §§3.1–3.2 actual stable-like/continuum Gibbs and Ginibre application inputs; exact normalization and variable-order hypotheses checked
+   Note: Actual source-specific input recorded during full statement-union review.
+
+35. Lennard–Jones6–12 pair potential
+   The radial pair potential Ψ(x,y)=A|x−y|⁻¹²−B|x−y|⁻⁶ for A,B>0 and x≠y, with Ψ(x,x)=+∞. The inverse-twelfth-power term is repulsive and the inverse-sixth-power term attractive.
+   Source: relies_on, §§3.1–3.2 actual stable-like/continuum Gibbs and Ginibre application inputs; exact normalization and variable-order hypotheses checked
+   Note: Actual source-specific input recorded during full statement-union review.
+
+36. Repulsive Riesz pair potential
+   For s>0, the Euclidean pair potential Ψ(x,y)=|x−y|^{−s}, with value+∞ on the diagonal. The particle example in Esaki assumes s>d, which controls its long-distance tail.
+   Source: relies_on, §§3.1–3.2 actual stable-like/continuum Gibbs and Ginibre application inputs; exact normalization and variable-order hypotheses checked
+   Note: Actual source-specific input recorded during full statement-union review.
+
+37. Infinite Ginibre point process
+   The determinantal point process on ℂ with respect to planar Lebesgue measure and kernel K(z,w)=π⁻¹exp(z w̄−(|z|²+|w|²)/2). Its intensity is1/π; this fixes the spatial normalization.
+   Source: relies_on, §§3.1–3.2 actual stable-like/continuum Gibbs and Ginibre application inputs; exact normalization and variable-order hypotheses checked
+   Note: Actual source-specific input recorded during full statement-union review.
+
+38. Regular symmetric stable-like form with measurable variable order
+   Let α:ℝᵈ→(0,2) be measurable, with α⁻¹,(2−α)⁻¹ locally integrable and∫_{|x|>R}|x|^{−d−α(x)}dx<∞ for some R>1. Set J(x,y)=(|x−y|^{−d−α(x)}+|x−y|^{−d−α(y)})/2. The form E(u,v)=½∬(u(x)−u(y))(v(x)−v(y))J(x,y)dxdy on compactly supported Lipschitz functions is closable inL²; its closure is a regular symmetric Dirichlet form.
+   Source: relies_on, §§3.1–3.2 actual stable-like/continuum Gibbs and Ginibre application inputs; exact normalization and variable-order hypotheses checked
+   Note: Actual source-specific input recorded during full statement-union review.
+
+39. Compact-inner-regular Radon measure on a Hausdorff space
+   A Borel measure on a Hausdorff topological space that is finite on compact sets and inner regular: the measure of every Borel set is the supremum of the measures of its compact subsets.
+   Source: relies_on, §§1–2, notation and rates (1.1)–(1.3); §2 p. 5 before Definition 2.3 (finite Radon measures on a Polish space)
+   Note: Palm laws are disintegrations, not literal conditioning on the null event “a point at x”. Esaki’s finite Radon measures live on the Polish configuration space, which is not locally compact (p. 2), so the compact-inner-regular Hausdorff-space notion is the one relied on.
+
+ADDITIONAL PREREQUISITES (126)
+
+- Abelian group [definition]: A group whose operation is commutative.
+- Absolute continuity of measures [definition]: A measure ν is absolutely continuous with respect to μ on the same σ-algebra if μ(A)=0 implies ν(A)=0.
+- Almost-everywhere property on a measure space [definition]: A property holds almost everywhere if the set where it fails is contained in a measurable set of measure zero.
+- Banach space [definition]: A real or complex normed vector space complete for the metric induced by its norm.
+- Bijection between sets [definition]: A function for which each element of the codomain is the image of exactly one element of the domain.
+- Bilinear map [definition]: A map of two vector-space variables that is linear in each variable separately.
+- Binary operation on a set [definition]: A function S×S→S.
+- Binary relation on a set [definition]: A subset R⊆S×S; writing xRy means (x,y)∈R.
+- Borel σ-algebra of a topological space [definition]: The σ-algebra generated by the open subsets of the space.
+- Borel σ-algebra on the real line [definition]: The σ-algebra on ℝ generated by the open intervals.
+- Bounded linear functional [definition]: A linear map from a real or complex normed vector space to its scalar field satisfying |ℓ(x)|≤C∥x∥ for one finite C and every x.
+- Bounded linear operator [definition]: A linear map T:X→Y between normed vector spaces is bounded if ∥Tx∥≤C∥x∥ for one finite constant C and every x∈X.
+- Cartesian product of sets [definition]: A×B is the set of ordered pairs (a,b) with a∈A and b∈B.
+- Cauchy sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) is Cauchy if for every ε>0 there is N such that d(xₙ,xₘ)<ε whenever n,m≥N.
+- Characteristic function of a real probability distribution [definition]: For a real random variable X, φ_X(t)=Eexp(itX), t∈ℝ. It is always defined and determines the law of X.
+- Closure of a subset of a topological space [definition]: The closure of A is the intersection of all closed subsets containing A; a set is closed when its complement is open.
+- Commutative ring with identity [definition]: An abelian group under addition, together with an associative commutative multiplication with identity, distributing over addition. The zero ring is allowed.
+- Compact topological space [definition]: A topological space in which every open cover has a finite subcover.
+- Compactly supported smooth test function on an open Euclidean set [definition]: A smooth function on an open Ω⊂ℝⁿ whose support is a compact subset of Ω; these form C_c^∞(Ω).
+- Complement of a subset [definition]: For A⊆Ω, its complement Ω∖A consists of the elements of Ω that do not belong to A.
+- Complete measure [definition]: A measure is complete if every subset of a measurable null set is measurable and has measure zero.
+- Complete metric space [definition]: A metric space is complete if every Cauchy sequence in it converges to a point of that same space.
+- Complex exponential function [definition]: The entire function exp(z)=∑ₙ₌₀∞zⁿ/n!; on imaginary arguments exp(it)=cos(t)+i sin(t).
+- Complex number [definition]: A complex number is a pair of real numbers, written a+bi. Addition is componentwise and multiplication is (a+bi)(c+di)=(ac−bd)+(ad+bc)i, so i²=−1.
+- Complex power series [definition]: A series ∑ₙ₌₀∞aₙ(z−z₀)ⁿ with complex coefficients, considered at points where its partial sums converge.
+- Composition of functions [definition]: For f:A→B and g:B→C, the composite g∘f:A→C sends x to g(f(x)).
+- Conditional expectation given a σ-algebra [definition]: For integrable X and a sub-σ-algebra G, E[X|G] is a G-measurable integrable random variable satisfying ∫_AE[X|G]dP=∫_AXdP for every A∈G, defined up to almost-sure equality.
+- Continuous map between topological spaces [definition]: A map is continuous if the preimage of every open subset of its target is open in its domain.
+- Convergence in probability [definition]: Random variables X_n converge in probability to X if P(|X_n−X|>ε)→0 for every ε>0; metric-valued variables use their metric in place of absolute difference.
+- Convergence of a sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) converges to x∈X if for every ε>0 there is N such that d(xₙ,x)<ε whenever n≥N.
+- Convergent real series [definition]: The series ∑ₙ≥1aₙ converges to S if its sequence of partial sums converges to S.
+- Càdlàg path [definition]: A path from a real time interval into a metric space that is right-continuous and has a left limit at every positive time.
+- Dense subset of a metric space [definition]: A subset A of a metric space X is dense if every open ball centered in X with positive radius meets A.
+- Densely defined self-adjoint operator on a Hilbert space [definition]: A linear operator A with dense domain D(A) in a Hilbert space such that its Hilbert-space adjoint A* has the same domain and agrees with A. The adjoint domain consists of y for which x↦⟨Ax,y⟩ is bounded on D(A) in the ambient Hilbert norm.
+- Derivative of a real function [definition]: The derivative f′(x) is the finite limit of (f(x+h)−f(x))/h as h→0, when it exists. Higher derivatives are defined by iteration.
+- Determinant of a square matrix [definition]: For an n×n matrix A over a commutative ring, det A=∑_{σ∈Sₙ}sgn(σ)∏_{i=1}ⁿA_{i,σ(i)}, with the 0×0 determinant equal to one.
+- Disjoint sets [definition]: Two sets are disjoint when they have no common element; a family is pairwise disjoint when every two distinct members are disjoint.
+- Equivalence class [definition]: For an equivalence relation ~ on X, [x]={y∈X:y~x}; the quotient set X/~ consists of these classes.
+- Equivalence relation [definition]: A reflexive, symmetric and transitive binary relation.
+- Essential supremum of a measurable real function [definition]: The infimum of real a for which f≤a almost everywhere, allowing infinite values when no finite bound exists.
+- Euclidean space ℝᵈ [definition]: For d≥1, ℝᵈ consists of d-tuples of real numbers with distance dist(x,y)=(∑ᵢ(xᵢ−yᵢ)²)¹ᐟ².
+- Expectation of an integrable real random variable [definition]: If E abs(X)=∫abs(X)dP<∞, the expectation of X is EX=∫X dP.
+- Extended nonnegative real numbers [definition]: The nonnegative real numbers together with a greatest element ∞. Sums involving ∞ equal ∞, and 0·∞ is taken to be 0 when integrating simple functions.
+- Extended real line [definition]: The ordered set ℝ∪{−∞,+∞}, with−∞<r<+∞ for every real r.
+- Factorial [definition]: For n≥1, n!=1·2···n, and 0!=1.
+- Field [definition]: A commutative ring in which 1≠0 and every nonzero element is invertible.
+- Filtration of σ-algebras [definition]: An increasing family (F_t) of sub-σ-algebras on a fixed probability space, indexed by ordered time: F_s⊆F_t for s≤t.
+- Finite set [definition]: A set X is finite if it is bijective with {1,…,n} for some natural number n≥0; its cardinality is n.
+- Finite-volume Gibbs probability density [construction]: For a reference measure m and measurable energy H with0<Z=∫exp(−H)dm<∞, the Gibbs probability measure has density Z⁻¹exp(−H) relative to m. Finite-volume particle configurations commonly use Lebesgue measure or a finite-volume Poisson law as reference.
+- Function between sets [definition]: An assignment taking each element of a specified domain set to exactly one element of a specified codomain set.
+- Group [definition]: A set with an associative binary operation, an identity element, and a two-sided inverse for each element.
+- Hausdorff topological space [definition]: A topological space in which any two distinct points have disjoint open neighbourhoods.
+- Independent family of random variables [definition]: For distinct i₁,…,iₖ and Borel A₁,…,Aₖ, independence requires P(⋂ⱼ{Xᵢⱼ∈Aⱼ})=∏ⱼP(Xᵢⱼ∈Aⱼ).
+- Independent σ-algebras [definition]: A family of sub-σ-algebras is independent if the probability of the intersection of events from any finite subfamily equals the product of their probabilities.
+- Indicator function of a subset [definition]: For A⊆Ω, the real function 1_A is 1 on A and 0 on its complement.
+- Integer [definition]: An integer is an element of the ordered ring ℤ, obtained by adjoining additive inverses to the natural numbers.
+- Intersection of a family of sets [definition]: Inside a specified ambient set, the elements belonging to every member of the family.
+- Least upper bound in a partially ordered set [definition]: For A⊆P, its least upper bound is an upper bound s satisfying s≤b for every upper bound b of A, when such an s exists.
+- Lebesgue Lᵖ space [definition]: For a measure space and 1≤p<∞, Lᵖ consists of measurable scalar functions modulo equality almost everywhere with ∫|f|ᵖ<∞, normed by (∫|f|ᵖ)¹ᐟᵖ. For p=∞ use the essential-supremum norm.
+- Lebesgue integral [definition]: For measurable f≥0, ∫f dμ is the supremum of integrals of nonnegative simple functions below f. For signed f with ∫abs(f)dμ<∞, define ∫f=∫f⁺−∫f⁻.
+- Lebesgue measure on Euclidean space [definition]: The completion of the Borel measure on ℝⁿ assigning each rectangular box the product of its side lengths.
+- Limit of a function between metric spaces [definition]: For f defined near an accumulation point a of a metric space, lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<d(x,a)<δ implies d(f(x),L)<ε.
+- Limit of a real function at a point [definition]: The relation lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<|x−a|<δ in the domain implies |f(x)−L|<ε.
+- Limit of a real sequence [definition]: A sequence (aₙ) converges to L∈ℝ if for every ε>0 there is N such that n≥N implies abs(aₙ−L)<ε.
+- Linear map between vector spaces [definition]: A map between vector spaces over the same field preserving addition and scalar multiplication.
+- Linearity of the Lebesgue integral [theorem]: If f and g are integrable real functions and a,b are real scalars, then af+bg is integrable and ∫(af+bg)dμ=a∫f dμ+b∫g dμ.
+- Lipschitz map between metric spaces [definition]: A map f:(X,d)→(Y,e) is Lipschitz if e(f(x),f(y))≤L d(x,y) for one finite constant L and all x,y∈X.
+- Locally compact Hausdorff space [definition]: A Hausdorff topological space in which every point has a neighbourhood with compact closure.
+- Markov transition semigroup [definition]: A family of transition kernels P_t(x,A), t≥0, with P₀(x,·)=δ_x and P_{s+t}(x,A)=∫P_t(y,A)P_s(x,dy). Sub-Markov semigroups may lose mass at a cemetery state.
+- Matrix over a ring [definition]: A rectangular array of elements of a ring; addition is entrywise and matrix multiplication uses row-by-column sums.
+- Measurable map between measurable spaces [definition]: A function for which the preimage of each measurable subset of the codomain is measurable in the domain.
+- Measurable simple real function [definition]: A measurable real function with finite range. It can be written as a finite sum ∑ a_i 1_{A_i} with measurable level sets A_i.
+- Measurable space [definition]: A set equipped with a specified σ-algebra of subsets.
+- Measure [definition]: A measure μ maps a σ-algebra to [0,∞], sends ∅ to 0, and satisfies μ(⋃ₙAₙ)=∑ₙμ(Aₙ) for every pairwise disjoint sequence of measurable sets.
+- Metric induced by a norm [construction]: The metric induced by a norm on a real or complex vector space is d(x,y)=‖x−y‖.
+- Metric space [definition]: A set X with a function d:X×X→[0,∞) such that d(x,y)=0 exactly when x=y, d(x,y)=d(y,x), and d(x,z)≤d(x,y)+d(y,z).
+- Modulus of a complex number [definition]: For z=a+bi, its modulus is the nonnegative real number |z|=√(a²+b²).
+- Natural logarithm [definition]: The inverse ln:(0,∞)→ℝ of the real exponential function.
+- Natural number [definition]: One of 0, 1, 2, …; natural numbers count finite collections.
+- Nonnegative real square root [definition]: For t≥0, √t is the unique real number y≥0 satisfying y²=t.
+- Normed vector space [definition]: A real or complex vector space X with a function ∥·∥:X→[0,∞) that is positive except at zero, absolutely homogeneous, and subadditive.
+- Open interval in the real line [definition]: For real a<b, the set (a,b)={x∈ℝ:a<x<b}.
+- Operator norm of a bounded linear operator [definition]: For a bounded linear map T:X→Y between normed spaces, ∥T∥=sup{∥Tx∥:∥x∥≤1}.
+- Ordered field [definition]: A field with a total order preserved by addition, in which the product of two positive elements is positive.
+- Ordered pair [definition]: A pair (x,y) with distinguished first and second entries; (x,y)=(x′,y′) exactly when x=x′ and y=y′.
+- Pair potential for a continuum particle system [definition]: A symmetric measurable function Ψ(x,y) with values in ℝ∪{+∞}, assigning interaction energy to a pair of particle positions. The energy of a finite configuration sums Ψ over its unordered distinct-particle pairs.
+- Partial derivative in Euclidean coordinates [definition]: The ith partial derivative of f at x is the derivative at zero of t↦f(x+t e_i), with all other coordinates fixed; vector-valued maps are differentiated componentwise.
+- Partial order [definition]: A reflexive, antisymmetric and transitive binary relation, usually written ≤.
+- Point process [definition]: A random locally finite point configuration, or equivalently a probability measure on configuration space with its measurable structure generated by counting points in bounded Borel sets.
+- Poisson distribution [definition]: The distribution on nonnegative integers with masses P(N=k)=e⁻ˡλᵏ/k! for λ≥0.
+- Preimage of a subset under a function [definition]: For f:A→B and E⊆B, f⁻¹(E)={x∈A:f(x)∈E}.
+- Probability density relative to a measure [definition]: A nonnegative measurable function P with ∫P dμ=1; the measure P dμ is the corresponding probability measure.
+- Probability space [definition]: A probability space is (Ω,𝔽,P), where 𝔽 is a σ-algebra on Ω and P is a measure on 𝔽 with P(Ω)=1.
+- Product measure [construction]: For σ-finite measure spaces, the product measure on the product σ-algebra assigns a measurable rectangle A×B the value μ(A)ν(B); its completion also includes subsets of product-null sets.
+- Radon measure on a locally compact Hausdorff space [definition]: A Borel measure on a locally compact Hausdorff space that is finite on compact sets, outer regular on Borel sets (each has measure equal to the infimum over open supersets) and inner regular on open sets (each has measure equal to the supremum over compact subsets). This is the Folland–Cohn convention; on σ-compact spaces it coincides with compact inner regularity on all Borel sets.
+- Real Hilbert space [definition]: A real inner-product space complete for its induced norm metric.
+- Real exponential function [definition]: The real function exp(x)=∑_{n≥0}xⁿ/n!, whose series converges for every real x.
+- Real inner-product space [definition]: A real vector space with a symmetric bilinear form ⟨x,y⟩ that is positive on ⟨x,x⟩ for x≠0; its induced norm is √⟨x,x⟩.
+- Real number [definition]: A real number is an element of a complete ordered field ℝ; completeness means every nonempty subset bounded above has a least upper bound.
+- Real power of a positive real number [definition]: For x>0 and p∈ℝ, define xᵖ=exp(p log x). For p>0 extend by 0ᵖ=0.
+- Real sequence [definition]: A real sequence is a function a:ℕ₊→ℝ, written (aₙ)ₙ≥1.
+- Real-valued random variable [definition]: A real-valued random variable is a measurable map from a probability space to ℝ with its Borel σ-algebra.
+- Regular symmetric Dirichlet form [definition]: A symmetric Dirichlet form on L²(E,m), where E is locally compact separable metric and m is a full-support Radon measure, is regular if its domain intersected with compactly supported continuous functions is dense both in the domain’s E₁ norm and in C_c(E) for the uniform norm.
+- Separable metric space [definition]: A metric space having a countable dense subset.
+- Sequence in a set [definition]: A function from the natural numbers, or the positive natural numbers, to that set.
+- Set [definition]: A collection of distinct elements, regarded as one object.
+- Sign of a permutation [definition]: The sign of a permutation of {1,…,n} is (−1) to the number of inversions, where an inversion is a pair i<j with σ(i)>σ(j).
+- Smooth map between open Euclidean sets [definition]: A map on an open subset of ℝⁿ is smooth if all of its component partial derivatives of every order exist and are continuous.
+- Special standard Markov process [definition]: A right-continuous strong Markov process on a Lusin state space, with cemetery state, that is quasi-left-continuous: along stopping times T_n↑T, X_{T_n}→X_T on the event T is before the lifetime.
+- Stochastic process [definition]: A family (X_t) indexed by a specified time set, with each X_t a measurable map from a probability space into a specified measurable state space. Adaptation, joint measurability and path regularity are additional conditions when required.
+- Stopping time for a filtration [definition]: A random time T taking values in the time index together with infinity, such that {T≤t}∈F_t for every t; by time t one can determine whether T has occurred.
+- Strong Markov process [definition]: A Markov process whose conditional future after any finite stopping time, given the past through that time, has the transition law started from its state at that stopping time.
+- Strongly continuous contraction semigroup [definition]: Bounded operators T_t on a Banach space satisfy T₀=I,T_{s+t}=T_sT_t,‖T_t‖≤1 and T_tx→x in norm as t↓0 for every x.
+- Subset [definition]: A⊆B means every element of A is an element of B.
+- Sum of a nonnegative series [definition]: For aₙ≥0, define ∑ₙ≥1aₙ as the supremum of its finite partial sums; the value may be infinite.
+- Support of a function [definition]: The closure in its domain of the set on which a function is nonzero.
+- Symmetric group of a finite set [definition]: The group of all bijections of a finite set to itself under composition.
+- Topological space [definition]: A set X with a family τ of subsets, called open sets, containing ∅ and X and closed under arbitrary unions and finite intersections.
+- Total order [definition]: A partial order in which any two elements are comparable.
+- Union of a family of sets [definition]: The set of elements belonging to at least one member of the family.
+- Variance of a real random variable [definition]: If EX²<∞, then Var(X)=E[(X−EX)²].
+- Vector space [definition]: An abelian group with scalar multiplication by a field satisfying a(v+w)=av+aw, (a+b)v=av+bv, (ab)v=a(bv), and 1v=v.
+- Vector subspace [definition]: A subset of a vector space containing zero and closed under addition and scalar multiplication.
+- σ-algebra [definition]: A σ-algebra on Ω contains Ω and is closed under complements in Ω and countable unions.
+- σ-algebra generated by a family of subsets [definition]: The smallest σ-algebra containing that family, equivalently the intersection of all σ-algebras on the ambient set that contain it.
+- σ-finite measure [definition]: A measure whose whole underlying space is a countable union of measurable sets of finite measure.
+
+CITATIONS
+
+  [1] Esaki, S.: Infinite stochastic differential equation of interacting particle systems of long range
+     jumps with long range interactions. in preparation.
+    Pedagogically necessary: unknown
+
+  [2] Kondratiev, Y., Lytvynov, E., Röckner, M.: Equilibrium Kawasaki dynamics of continuous par-
+     ticle systems. Infin. Dimen. Anal. Quant. Prob. Rel. Top., 10 02, 185-209.
+    Pedagogically necessary: unknown
+
+  [3] Kusuoka, S.: Dirichlet forms and diffusion processes on Banach spaces. J. Fac. Sci. Univ. Tokyo.,
+     Sec IA 29 (1982) 382-400.
+    Pedagogically necessary: unknown
+
+  [4] Liggett, T.M.: The Stochastic Evolution of Infinite Systems of Interacting Particles. Springer
+     Lecture Notes in Mathematics, Vol. 598, 188-248.
+    Pedagogically necessary: unknown
+
+  [5] Liggett, T.M.: Interacting Particle Systems. Springer, New York, 1985.
+    Pedagogically necessary: unknown
+
+  [6] Lytvynov, E., Ohlerich, N.: A note on equilibrium Glauber and Kawasaki dynamics for fermion
+     point processes. Methods Funct. Anal. Topol., 14(1), 67-80, 2008.
+    Pedagogically necessary: unknown
+
+  [7] Ma, Z.-M., Röckner, M.: Introduction to the theory of (non-symmetric) Dirichlet forms. Springer-
+     Verlag, Berlin, 1992.
+    Pedagogically necessary: unknown
+
+  [8] Osada, H.: Dirichlet form approach to infinitely dimensional Wiener processes with singular
+     interactions. Comm. Math. Phys., 176 (1996), 117-131.
+    Pedagogically necessary: unknown
+
+  [9] Osada, H.: Tagged particle processes and their non-explosion criteria. J. Math. Soc. Japan, 62,
+     No. 3, 867-894 (2010).
+    Pedagogically necessary: unknown
+
+  [10] Osada, H.: Infinite-dimensional stochastic differential equations related to random matrices.
+     Probab. Theory Related Fields 153, 471-509 (2012)
+    Pedagogically necessary: unknown
+
+  [11] Osada, H.: Interacting Brownian motions in infinite dimensions with logarithmic interaction
+     potentials. Ann. Probab. 41, 1-49 (2013)
+    Pedagogically necessary: unknown
+
+  [12] Osada, H.: Interacting Brownian motions in infinite dimensions with logarithmic interaction
+     potentials II: Airy random point field. Stochastic Process. Appl. 123, 813-838 (2013)
+    Pedagogically necessary: unknown
+
+  [13] Osada, H., Shirai, T.: Absolute continuity and singularity of Palm measures of the Ginibre point
+     process. arXiv:math.PR/1406.3913.
+    Pedagogically necessary: unknown
+
+  [14] Osada, H., Tanemura, H.: Cores of Dirichlet forms related to Random Matrix Theory. Proc.
+     Japan Acad. 90, Ser. A (2014)
+    Pedagogically necessary: unknown
+
+  [15] Ruelle, D.: Superstable interactions in classical statistical mechanics. Commun. Math. Phys., 18
+     (1970), 127-159.
+    Pedagogically necessary: unknown
+
+  [16] Simon, B.: A canonical decomposition for quadratic forms with applications to monotone con-
+     vergence theorems. J. Funct. Anal. 28 (1978), 377-385.
+    Pedagogically necessary: unknown
+
+  [17] Spitzer, F.: Random Processes Defined Through the Interaction of an Infinite Particle System.
+     Springer Lecture Note in Mathematics, Vol. 89, 201-223.
+    Pedagogically necessary: unknown
+
+  [18] Uemura, T.: On some path properties of symmetric stable-like processes for one dimension,
+     Potential Anal. 16 (2002), 79-91.
+    Pedagogically necessary: unknown
+

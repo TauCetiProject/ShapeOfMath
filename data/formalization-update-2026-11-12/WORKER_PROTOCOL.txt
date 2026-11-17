@@ -1,0 +1,105 @@
+FULL-CATALOGUE COVERAGE UPDATE — WORKER/REVIEWER PROTOCOL
+
+The user explicitly requested expansion across the whole catalogue. Frozen baseline:
+1,413 concepts, 2,826 Mathlib/Tau Ceti pairs. The original six concepts are already
+being independently cross-reviewed; 1,407 additional concepts are split into 79
+jobs of at most 18 concepts each. Continue through the assigned queue; do not stop
+at a sample or merely produce a plan. Save each completed batch immediately.
+
+Read current AGENTS.md and prompts/update-formalization-coverage.md, with its linked
+policies. All mathematical processing, source reading and mathematical review
+happen in workers/reviewers. Root performs structural checks and mechanical import.
+Do not mutate live database, concept identities, source data, code or other docs.
+
+Run directory: /home/kim/TheShapeOfMath/data/formalization-update-2026-11-12
+Use absolute paths / explicit workdir for shell tools.
+Worker identities are algebra_formalization, analysis_formalization,
+category_galois_formalization. jobs/batch-NNN.json names its author and a DIFFERENT
+reviewer. Each worker both authors its assigned jobs and reviews ready jobs assigned
+to it. Prefer ready independent reviews, then the next unproduced author job. Do
+not idle waiting for review when other author jobs are available. At queue exhaustion,
+notify root; continue pending reviews or follow-up requests. Write only your own
+proposal/review outputs. Send root brief progress after each finished batch.
+
+Immutable source roots:
+Mathlib /tmp/nix-shell.RiFG0P/shape-formalization-pilot-p55a5fb9/mathlib
+  26573066084e6e2aa8526ea358bc43b66d96f970 (upstream master)
+Tau Ceti /tmp/nix-shell.RiFG0P/shape-formalization-pilot-p55a5fb9/tau-ceti
+  3780371ca1bebf9f1c2bb3d753e4bb56c9526023 (upstream main)
+Tau's ACTUAL Mathlib dependency snapshot:
+  /tmp/nix-shell.RiFG0P/shape-formalization-pilot-p55a5fb9/mathlib-tau-dependency
+  2ddf59c8f14245864e6c0ed227a2dab76b9efea2
+Do not substitute the independently reviewed Mathlib snapshot for Tau's dependency.
+
+AUTHORING
+Read the job's actual concept paragraphs/kinds/revisions, then search actual source.
+For every assigned concept produce BOTH library judgments. Look up candidates by
+names/aliases and mathematics, inspect actual declarations, hypotheses and relevant
+proof bodies before a positive/partial claim. Search Tau's native source for genuine
+core API even when Mathlib implements the definition. A native power law and generic
+half-braiding identities qualify under the user-approved core API policy. An import,
+proof application, independently significant new theorem or unrelated specialization
+does not. Review natural adjacent API; preserve consequential exclusions.
+
+Do real bounded searches for hard concepts. If uncertainty remains after source
+inspection, record unknown with specific searched candidates and the unresolved
+hypothesis/endpoint issue; do not fabricate a formalization or infer absence from
+no exact name hit. An unresolved frontier is permitted and must be explicit. Do not
+bulk mark concepts formalized, inherited or absent from keyword/filename matches
+alone. No placeholder generic evidence or boilerplate claiming code was checked
+without actual inspection. Negative judgments require a defensible scoped search,
+including dependencies. Inherited requires actual checked complete dependency
+availability, empty native files, and zero native LOC. Partial explains what is
+present and missing and has genuine native implementing files.
+
+Save proposals/batch-NNN.json atomically (temporary file then rename), with:
+{
+  "batch_id":"batch-NNN", "author":"YOUR_WORKER_NAME",
+  "reviews":[
+    {"concept":"slug", "concept_id":"uuid", "concept_revision":N,
+     "library":"mathlib|tau-ceti", "status":"formalized|partial|inherited|not_formalized|unknown",
+     "evidence":"Specific checked declaration/hypothesis/proof evidence and full upstream/dependency commits; actual verification limits.",
+     "files":[{"path":"Native/Repo/Relative.lean",
+               "declarations":"Representative qualified names and line anchors",
+               "note":"What this file actually defines/proves/contributes; ownership."}],
+     "search_notes":"Candidate terms/files inspected, meaning comparison, missing work or reasons for material exclusions."}
+  ]
+}
+There must be exactly 2 * concept_count distinct reviews matching the job. All
+native files need contribution notes/declaration anchors. Unknown/negative/inherited
+have empty file lists; partial/formalized have nonempty native files. Root computes
+whole-file LOC/hash from the exact commits; do not spend time inventing or hand-
+estimating counts. Do not change a published proposal while a review is underway.
+If rejected, coordinate a corrected proposal version and a fresh independent review.
+
+INDEPENDENT REVIEW
+Read the entire job/proposal and independently verify the mathematical decisions
+against the actual source snapshots, including exact dependency for inherited
+claims. Check hypothesis equivalence, proof/definition ownership, API boundaries,
+representative anchors and substantive search uncertainty. Unknown can be accepted
+when its evidence accurately identifies a real unresolved question; it is not an
+assertion of absence or complete mathematical coverage. Do not mechanically approve
+because a name/path exists. Save reviews/batch-NNN.json atomically with:
+{
+ "batch_id":"batch-NNN", "reviewer":"YOUR_WORKER_NAME",
+ "proposal_sha256":"SHA256 OF THE EXACT PROPOSAL FILE BYTES",
+ "decisions":[
+   {"concept":"slug","library":"mathlib|tau-ceti","decision":"accept|change|reject",
+    "reason":"Concrete mathematical review reasoning and checked source anchors",
+    "replacement": FULL AUTHOR-STYLE REVIEW OBJECT FOR change ONLY}
+ ]
+}
+Exactly one decision for every proposal pair. A change supplies the full corrected
+review and evidence; a reject requires a concrete missing check and author follow-up
+before import. Root will never import rejected or mismatched-digest proposals.
+Ensure review reason gives actual checks, not just 'looks good'.
+
+EFFICIENCY AND PERSISTENCE
+Reuse checked common source sections and dependency byte comparisons across genuinely
+shared concepts, but justify each actual mathematical identity. Group shared files
+without conflating subclass vocabulary or applications. Read source context relevant
+to statements/proofs; a fresh Lean build or transitive axiom audit is not required.
+Use rg first. Prefer small outputs; avoid dumping entire libraries or the full 1,413
+paragraph roster at once. Save partial completed JOBS regularly, retain a resumable
+progress note if needed, and keep processing the queue across context compactions.
+Report actual positive/partial/inherited/unknown counts and unresolved questions.

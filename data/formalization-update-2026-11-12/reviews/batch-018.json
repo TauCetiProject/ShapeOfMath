@@ -1,0 +1,300 @@
+{
+  "batch_id": "batch-018",
+  "reviewer": "analysis_formalization",
+  "proposal_sha256": "4d6a5f4f27790455f03d3e8e155ea056f56685bc1c1d2d6fb0598a5037b00d7a",
+  "decisions": [
+    {
+      "concept": "numerical-radius-power-inequality",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read actual Rayleigh quotient norm theorem120 requiring symmetry and real-part quotient. Independent numericalRadius/Berger/power searches did not identify the general complex numerical-radius power theorem; neither spectral radius nor selfadjoint Rayleigh supremum is an adequate substitute. Unknown is the exact unresolved endpoint."
+    },
+    {
+      "concept": "numerical-radius-power-inequality",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read actual Rayleigh quotient norm theorem120 requiring symmetry and real-part quotient. Independent numericalRadius/Berger/power searches did not identify the general complex numerical-radius power theorem; neither spectral radius nor selfadjoint Rayleigh supremum is an adequate substitute. Unknown is the exact unresolved endpoint."
+    },
+    {
+      "concept": "numerical-range",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Set.image261, sphere431 and checked conjugate-first inner convention. The image of x↦inner x(Tx) on the unit sphere is exactly the catalogue linear-first numerical range, including full imaginary parts. Nonzero complete complex H is explicit; no numerical-range convexity theorem inferred. Actual dependency image offset only is checked."
+    },
+    {
+      "concept": "numerical-range",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Set.image261, sphere431 and checked conjugate-first inner convention. The image of x↦inner x(Tx) on the unit sphere is exactly the catalogue linear-first numerical range, including full imaginary parts. Nonzero complete complex H is explicit; no numerical-range convexity theorem inferred. Actual dependency image offset only is checked."
+    },
+    {
+      "concept": "operator-norm",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read infimum constructor169/isLeast188 and actual unit-closed-ball supremum proof208/221. Over the usual real/complex normed spaces the DenselyNormed scalar hypothesis is satisfied; the zero domain is explicitly included by a nonempty closed unit ball. Native restriction34/40 proofs are direct norm monotonicity and closure invariance; correct ordinary API boundary."
+    },
+    {
+      "concept": "operator-norm",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read infimum constructor169/isLeast188 and actual unit-closed-ball supremum proof208/221. Over the usual real/complex normed spaces the DenselyNormed scalar hypothesis is satisfied; the zero domain is explicitly included by a nonempty closed unit ball. Native restriction34/40 proofs are direct norm monotonicity and closure invariance; correct ordinary API boundary."
+    },
+    {
+      "concept": "operator-spectrum",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read spectrum/resolvent64/72/103 as nonunits of lambda*1-T, with multiplication composition and bounded inverses in the continuous-linear-map algebra. Tau402/417 supplies both inverse/unit directions and436/446 exact full-domain spectrum comparison. This is actual bounded-operator API, not a merely analogous unbounded spectrum."
+    },
+    {
+      "concept": "operator-spectrum",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read spectrum/resolvent64/72/103 as nonunits of lambda*1-T, with multiplication composition and bounded inverses in the continuous-linear-map algebra. Tau402/417 supplies both inverse/unit directions and436/446 exact full-domain spectrum comparison. This is actual bounded-operator API, not a merely analogous unbounded spectrum."
+    },
+    {
+      "concept": "orthogonal-group-real",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Changed partial to formalized: independent source search found the actual complete equivalence composition Matrix.toEuclideanCLM100 -> Unitary.mapEquiv383 -> Unitary.linearIsometryEquiv969. All are equivalences with inverse proofs already present; Real trivial star gives O(n). This resolves the claimed frontier without developing a proof.",
+      "replacement": {
+        "concept": "orthogonal-group-real",
+        "concept_id": "a8a1f386-2701-52d0-ad82-f66ffe8585bd",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Matrix.orthogonalGroup:317 with mem_orthogonalGroup_iff':323 is exactly U-transpose*U=I, carrying its subtype group structure. The complete Euclidean-isometry identification ALREADY EXISTS as a composition of checked generic EQUIVALENCES: Analysis/CStarAlgebra/Matrix.toEuclideanCLM:100 is a star-algebra equivalence from square matrices to bounded Euclidean operators, with actual matrix-vector action toEuclideanCLM_toLp:125 and ofLp_toEuclideanCLM:129; Algebra/Star/Unitary.mapEquiv:383 transports unitary subgroups along a star-monoid equivalence, its inverse using the inverse ambient equivalence and complete left/right inverse proofs; Analysis/InnerProductSpace/Adjoint.Unitary.linearIsometryEquiv:969 is a group equivalence from unitary bounded operators to all linear isometric equivalences, whose inverse bundles the given isometry and its inverse and verifies the star-unitary equation from norm preservation. Specialize scalar Real and index Fin n: scalar star is identity, so Matrix.unitaryGroup is exactly the orthogonalGroup. Composition of these existing equivalences gives both directions and surjectivity with no additional theorem proof or separately named alias. PiL2.toMatrix_mem_unitaryGroup:960 independently confirms the usual standard-basis converse. Actual source definitions, hypotheses and complete relevant constructor/inverse bodies inspected; no fresh build or transitive proof audit.",
+        "files": [
+          {
+            "path": "Mathlib/LinearAlgebra/UnitaryGroup.lean",
+            "declarations": "Matrix.orthogonalGroup (:317); mem_orthogonalGroup_iff' (:323)",
+            "note": "Native exact transpose-inverse matrix group and defining multiplication/inverse API."
+          },
+          {
+            "path": "Mathlib/Analysis/CStarAlgebra/Matrix.lean",
+            "declarations": "Matrix.toEuclideanCLM (:100); toEuclideanCLM_toLp (:125); ofLp_toEuclideanCLM (:129)",
+            "note": "Native actual star-algebra EQUIVALENCE from square matrices to Euclidean operators and literal matrix-vector action."
+          },
+          {
+            "path": "Mathlib/Analysis/InnerProductSpace/Adjoint.lean",
+            "declarations": "Unitary.linearIsometryEquiv (:969); coe_linearIsometryEquiv_apply (:989); coe_symm_linearIsometryEquiv_apply (:994)",
+            "note": "Native complete group equivalence between unitary bounded operators and linear isometry equivalences, completing exact O(n) interpretation."
+          }
+        ],
+        "search_notes": "Do not require a separately named orthogonalGroup-to-isometry alias: checked generic equivalence composition is full availability under policy. Unitary.mapEquiv:383 is a checked structural supplier, not an added transitive allocation. Remove the prior unverified-surjectivity claim; native Tau EuclideanLin additionally packages this route but does not own the underlying Mathlib equivalences. Exclude topology/determinant-component classifications."
+      }
+    },
+    {
+      "concept": "orthogonal-group-real",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read exact transpose-inverse group317/323 and native dot-product iff111 plus action232/240, injectivity269 and surjectivity280 proofs. Real star is trivial. Native file boundary gives direct defining/isometry API; separate determinant-component classification is correctly excluded."
+    },
+    {
+      "concept": "orthogonal-projection-hilbert",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read complete-subspace orthogonal decomposition53, bounded projection120/131, difference orthogonal173, uniqueness192, idempotence304 and adjoint star-projection506. Closed subspace completeness supplies input. Native norm equality242/248 uses actual fixed-point/contraction equivalence and Pythagoras; full representation and ordinary equality-case API are sound."
+    },
+    {
+      "concept": "orthogonal-projection-hilbert",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read complete-subspace orthogonal decomposition53, bounded projection120/131, difference orthogonal173, uniqueness192, idempotence304 and adjoint star-projection506. Closed subspace completeness supplies input. Native norm equality242/248 uses actual fixed-point/contraction equivalence and Pythagoras; full representation and ordinary equality-case API are sound."
+    },
+    {
+      "concept": "outer-function-h2",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read H2 boundary realization and actual disk holomorphic/L2 radial identification; cyclic closed-span predicate is expressible but exponential Poisson characterization is not verified. Standalone Mathlib H2 disk/boundary realization is unresolved as already recorded, so its unknown remains defensible rather than substituting formal coefficient sequences."
+    },
+    {
+      "concept": "outer-function-h2",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Unknown to partial: actual Toeplitz multiplication/shift-power202/210/233 plus native H2 carrier43 gives the precise generic cyclic predicate and its disk realization; it is genuine implemented definition content. The exponential Poisson-integral equivalence is a separate unverified clause, so no full coverage or outer theorem asserted.",
+      "replacement": {
+        "concept": "outer-function-h2",
+        "concept_id": "31ca6ca8-8723-52e4-8602-bd8bb25a8b33",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "partial",
+        "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The CYCLIC DEFINITION is supplied exactly by the generic predicate (Submodule.span Complex (Set.range (fun n:Nat => (S^n) a))).topologicalClosure=top on native HardySpace, where S=toeplitz(fourierLp1). Hardy/Basic.hardySubmodule:43/HardySpace:47 is the actual nonnegative-frequency closed Hilbert subspace. Native Toeplitz.coe_toeplitz_fourierLp_natCast_apply:202, coe_toeplitz_fourierLp_one_apply:210 and toeplitz_fourierLp_natCast:233 prove that S and its powers are multiplication by z and z^n in this boundary H2 realization; actual proofs remove the projection using membership in Hardy space. Dependency Submodule.dense_iff_topologicalClosure_eq_top:206 identifies the displayed closed-span predicate with density. The previously checked native DiskFunction.diskFunction:57/differentiableOn_diskFunction:151/tendsto_eLpNorm_diskFunction_sub:302 gives the actual analytic disk and L2 boundary realization, so this is the stated H2 cyclic definition, not merely a formal sequence placeholder. However the catalogue ALSO asserts equivalence with the exponential Poisson-integral definition; that substantial equivalence remains unverified, so status is partial. No exponential representation, boundary log integrability or prescribed-modulus existence/uniqueness is inferred. Actual relevant definitions/proofs inspected; no fresh build or transitive proof audit.",
+        "files": [
+          {
+            "path": "TauCeti/Analysis/Fourier/Hardy/Basic.lean",
+            "declarations": "TauCeti.hardySubmodule (:43); HardySpace (:47)",
+            "note": "Native exact H2 carrier used by the cyclic defining predicate; its topology is actual circle L2 topology."
+          },
+          {
+            "path": "TauCeti/Analysis/Fourier/Hardy/Toeplitz.lean",
+            "declarations": "TauCeti.coe_toeplitz_fourierLp_natCast_apply (:202); coe_toeplitz_fourierLp_one_apply (:210); toeplitz_fourierLp_natCast (:233)",
+            "note": "Native actual multiplication-by-z and z^n shift-power API supplying the cyclic orbit in the definition; exponential characterization unresolved."
+          }
+        ],
+        "search_notes": "Generic closed-span restriction defines the exact cyclic object without an outer alias or a theorem classifying it. Native shift-power implementation is direct object structure, beyond merely a prerequisite Hardy ambient. DiskFunction and generic closed-span topology checked as suppliers, not a transitive file tree. Searched outer/cyclic/log/Poisson characterization; retain the exponential equivalence and both outer-function theorem concepts as explicit unresolved frontiers."
+      }
+    },
+    {
+      "concept": "outer-function-poisson-log-modulus",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read actual Tau Hardy disk/radial L2 source and checked Poisson reproducing theorem hypotheses (closed-disk harmonic data). Neither proves the nonzero outer logarithmic identity with L1 boundary log or the origin exponential formula; actual source scope does not establish this endpoint. Unknown retained."
+    },
+    {
+      "concept": "outer-function-poisson-log-modulus",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read actual Tau Hardy disk/radial L2 source and checked Poisson reproducing theorem hypotheses (closed-disk harmonic data). Neither proves the nonzero outer logarithmic identity with L1 boundary log or the origin exponential formula; actual source scope does not establish this endpoint. Unknown retained."
+    },
+    {
+      "concept": "outer-function-prescribed-modulus",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Checked H2 realization and actual positive-harmonic/Poisson/Herglotz candidates; no verified normalized outer construction or uniqueness for arbitrary L2 w with integrable log, nor the bounded-modulus H-infinity consequence. This is a concrete unresolved theorem, not a bare predicate alias issue.",
+      "replacement": {
+        "concept": "outer-function-prescribed-modulus",
+        "concept_id": "06cff3db-58c2-52ca-8cf7-5ebccb1185f5",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "unknown",
+        "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No checked construction and uniqueness theorem of an outer H² function with prescribed L² modulus and integrable logarithm, normalized by a(0)>0, was found among the actual Hardy/radial-boundary candidates. The inspected Tau-owned Hardy holomorphic disk realization alone supplies neither prescribed modulus nor the H∞ consequence. Actual committed definitions, hypotheses and representative completed proof bodies inspected; no fresh build or transitive proof audit. Those native Hardy proofs are Tau ownership, not standalone Mathlib.",
+        "files": [],
+        "search_notes": "Searched outer/Outer/cyclic, prescribed modulus, Poisson and boundary logarithm in both trees; inspected Tau Hardy.Basic:41, DiskFunction:56 and boundary/radial candidates. Missing exact outer-function construction and uniqueness bridge retained unknown, not a negative inventory."
+      }
+    },
+    {
+      "concept": "outer-function-prescribed-modulus",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked H2 realization and actual positive-harmonic/Poisson/Herglotz candidates; no verified normalized outer construction or uniqueness for arbitrary L2 w with integrable log, nor the bounded-modulus H-infinity consequence. This is a concrete unresolved theorem, not a bare predicate alias issue."
+    },
+    {
+      "concept": "outer-normal-convex-body",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read IsMaxOn116/isMaxOn_iff132 as all y∈K inequalities; inner subtraction gives exactly inner(y-x,u)<=0 with unit and boundary conditions explicit. Unique-witness restriction defines the Gauss map without asserting uniqueness everywhere. Native exposed-face theorem is a different endpoint, so inherited native-zero decision is justified."
+    },
+    {
+      "concept": "outer-normal-convex-body",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read IsMaxOn116/isMaxOn_iff132 as all y∈K inequalities; inner subtraction gives exactly inner(y-x,u)<=0 with unit and boundary conditions explicit. Unique-witness restriction defines the Gauss map without asserting uniqueness everywhere. Native exposed-face theorem is a different endpoint, so inherited native-zero decision is justified."
+    },
+    {
+      "concept": "partial-derivative-euclidean",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read HasLineDerivAt81 and lineDeriv109 as derivative at zero on x+t*v; standard coordinate vector fixes all other coordinates. Actual pi derivative equivalence79/96 gives componentwise derivative under exact hypotheses. Tau lineDeriv_one42/support locality48 are direct coordinate-line API; no weak derivative substitution."
+    },
+    {
+      "concept": "partial-derivative-euclidean",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read HasLineDerivAt81 and lineDeriv109 as derivative at zero on x+t*v; standard coordinate vector fixes all other coordinates. Actual pi derivative equivalence79/96 gives componentwise derivative under exact hypotheses. Tau lineDeriv_one42/support locality48 are direct coordinate-line API; no weak derivative substitution."
+    },
+    {
+      "concept": "partial-fractions",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read full finite-power decomposition339 with degree-bounded numerators and inverse denominators, splitting299 and nonzero RatFunc denominator939/representation964. For Complex linear factors, distinct-pole coprimality and degree<1 yield constants; multiplicities bound powers and constant denominators give polynomial-only case. Native finite simple-pole decay/uniqueness68/77/145 is ordinary normal-form API; no infinite expansion substitute."
+    },
+    {
+      "concept": "partial-fractions",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read full finite-power decomposition339 with degree-bounded numerators and inverse denominators, splitting299 and nonzero RatFunc denominator939/representation964. For Complex linear factors, distinct-pole coprimality and degree<1 yield constants; multiplicities bound powers and constant denominators give polynomial-only case. Native finite simple-pole decay/uniqueness68/77/145 is ordinary normal-form API; no infinite expansion substitute."
+    },
+    {
+      "concept": "partial-isometry-hilbert",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read generic LinearIsometry46 with norm_map field on the actual ker-orthogonal restriction. Native definition86 and iff193 prove precisely this norm predicate through polarization and ker-perp intersection;210/216 initial/final projection API is direct. No global isometry/surjectivity requirement is imposed."
+    },
+    {
+      "concept": "partial-isometry-hilbert",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read generic LinearIsometry46 with norm_map field on the actual ker-orthogonal restriction. Native definition86 and iff193 prove precisely this norm predicate through polarization and ker-perp intersection;210/216 initial/final projection API is direct. No global isometry/surjectivity requirement is imposed."
+    },
+    {
+      "concept": "pasting-lemma-closed-cover",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read actual liftCover154 compatible-family construction and restriction160/163, LocallyFinite.continuous112 and finite-family34. Together they give exactly finite closed-cover pasting without target Hausdorffness. Native binary closed-embedding glue92 proves continuity by closed-range union and both restriction laws; valid direct special-case API."
+    },
+    {
+      "concept": "pasting-lemma-closed-cover",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read actual liftCover154 compatible-family construction and restriction160/163, LocallyFinite.continuous112 and finite-family34. Together they give exactly finite closed-cover pasting without target Hausdorffness. Native binary closed-embedding glue92 proves continuity by closed-range union and both restriction laws; valid direct special-case API."
+    },
+    {
+      "concept": "path-connected-space",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Joined62 as Nonempty(Path x y) and Path60 endpoint-bearing continuous unit-interval map. Catalogue forall-pairs permits empty, unlike bundled class577. Native partialSups60 has actual overlap hypotheses, and representative88 uses path-setoid quotient; these ordinary path-component/union laws do not impose nonemptiness on the base predicate."
+    },
+    {
+      "concept": "path-connected-space",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Joined62 as Nonempty(Path x y) and Path60 endpoint-bearing continuous unit-interval map. Catalogue forall-pairs permits empty, unlike bundled class577. Native partialSups60 has actual overlap hypotheses, and representative88 uses path-setoid quotient; these ordinary path-component/union laws do not impose nonemptiness on the base predicate."
+    },
+    {
+      "concept": "peetre-maximal-function",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read iSup42=sSup(range), positive-base Real.rpow34/50 and extended nonnegative supremum carrier. The formula uses literal 1+2^j*norm(x-y), permits integer j and unbounded result, and asserts no extra frequency-band estimate. Native Japanese-bracket93 is a distinct comparable-weight inequality, not this exact maximal-function constructor; inherited zero is correct."
+    },
+    {
+      "concept": "peetre-maximal-function",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read iSup42=sSup(range), positive-base Real.rpow34/50 and extended nonnegative supremum carrier. The formula uses literal 1+2^j*norm(x-y), permits integer j and unbounded result, and asserts no extra frequency-band estimate. Native Japanese-bracket93 is a distinct comparable-weight inequality, not this exact maximal-function constructor; inherited zero is correct."
+    },
+    {
+      "concept": "petty-projection-local-minimum",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Read native affine normalization228: only an affine-equivalence sandwich between two dimension-dependent balls. It neither constructs the surface-area projection body nor proves the strict Petty local minimum under density/GL/nonellipsoid hypotheses. Scoped unknown has a genuine endpoint gap.",
+      "replacement": {
+        "concept": "petty-projection-local-minimum",
+        "concept_id": "bf95a92b-e403-5666-9f3d-5a2594238ad5",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "unknown",
+        "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The checked convex-body normalization and Minkowski/Steiner material does not establish the specialized Petty projection-volume strict local minimum with surface-area density near one modulo GL, dimension≥3 and the nonellipsoid strictness. Neither a completed full theorem nor a qualifying partial proof of this exact endpoint was verified. Actual committed definitions, hypotheses and representative completed proof bodies inspected; no fresh build or transitive proof audit.",
+        "files": [],
+        "search_notes": "Searched Petty/projectionBody/surfaceAreaMeasure/ellipsoid/density in convex/geometric trees. Tau-owned native AffineNormalization:228 bounds a normalized convex body between balls; it supplies neither the projection-body surface-area integral nor the strict local stability inequality. Earlier mixed-volume/projection-body unresolved bridges retained; no false absence claim."
+      }
+    },
+    {
+      "concept": "petty-projection-local-minimum",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native affine normalization228: only an affine-equivalence sandwich between two dimension-dependent balls. It neither constructs the surface-area projection body nor proves the strict Petty local minimum under density/GL/nonellipsoid hypotheses. Scoped unknown has a genuine endpoint gap."
+    },
+    {
+      "concept": "phi-transform-variable-triebel-type",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Read native tempered Littlewood-Paley reconstruction158: fixed-bump Fourier blocks converge in S-prime by Schwartz cutoff convergence. It does not give sampled Frazier-Jawerth analysis/synthesis estimates with variable exponents and phi coefficient quasi-norm, nor pair-independence. Explicit unknown frontier is sound.",
+      "replacement": {
+        "concept": "phi-transform-variable-triebel-type",
+        "concept_id": "9273e253-9de3-5ce6-baf9-8ff47b885486",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "unknown",
+        "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Tau-owned native TemperedDistribution/LittlewoodPaley tempered-distribution reconstruction:158 proves convergence of ordinary chosen-bump blocks in S′, but does not prove bounded discrete Frazier–Jawerth analysis/synthesis on variable-exponent Triebel–Lizorkin-type spaces, the matching sequence quasi-norms or admissible-pair independence. No proof at the full variable p,q,s,φ scope was verified. Actual committed definitions, hypotheses and representative completed proof bodies inspected; no fresh build or transitive proof audit. These Tau reconstruction proofs are not standalone Mathlib implementations.",
+        "files": [],
+        "search_notes": "Searched Frazier/Jawerth/Triebel/phiTransform/variable-exponent and inspected Tau-owned native TemperedDistribution/LittlewoodPaley:135/148/158 and fixed-exponent Sobolev/BesselPotential Besov candidates. A continuous dyadic block decomposition is not the sampled discrete φ-transform; this exact representation/estimate frontier remains unknown in both libraries."
+      }
+    },
+    {
+      "concept": "phi-transform-variable-triebel-type",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native tempered Littlewood-Paley reconstruction158: fixed-bump Fourier blocks converge in S-prime by Schwartz cutoff convergence. It does not give sampled Frazier-Jawerth analysis/synthesis estimates with variable exponents and phi coefficient quasi-norm, nor pair-independence. Explicit unknown frontier is sound."
+    }
+  ]
+}

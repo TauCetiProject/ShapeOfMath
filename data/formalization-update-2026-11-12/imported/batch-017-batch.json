@@ -1,0 +1,443 @@
+{
+  "note": "Whole-catalogue formalization update batch-017: independent source review by algebra_formalization of category_galois_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "minkowski-first-inequality",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The actual Tau BrunnMinkowski/Basic:211/224/243 and Homothety:223 prove the volume-root superadditivity inequality and its homothetic equality case for convex bodies. They do not identify the first mixed-volume coefficient or prove the derivative-to-mixed-volume bridge. The requested mixed-volume inequality with its exact equality case remains unverified. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Scoped mixedVolume/mixed_volume/Minkowski-first/coefficient searches across both source trees; inspected Mathlib ConvexBody/Minkowski operations and Tau weighted Brunn–Minkowski/equality statements and volume/homothety proof context. A derivation through a not-yet-checked volume polynomial is new mathematics for this review, so not asserted. Matrix determinant inequalities are a different endpoint.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "minkowski-first-inequality",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual Tau BrunnMinkowski/Basic:211/224/243 and Homothety:223 prove the volume-root superadditivity inequality and its homothetic equality case for convex bodies. They do not identify the first mixed-volume coefficient or prove the derivative-to-mixed-volume bridge. The requested mixed-volume inequality with its exact equality case remains unverified. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Scoped mixedVolume/mixed_volume/Minkowski-first/coefficient searches across both source trees; inspected Mathlib ConvexBody/Minkowski operations and Tau weighted Brunn–Minkowski/equality statements and volume/homothety proof context. A derivation through a not-yet-checked volume polynomial is new mathematics for this review, so not asserted. Matrix determinant inequalities are a different endpoint.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "minkowski-inequality-lp",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/LpSpace/Basic.lean",
+          "declarations": "MeasureTheory.Lp.instNormedAddCommGroup:433 (add_le proof)",
+          "note": "Native proof of the Lp triangle inequality and genuine norm instance."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Lp.instNormedAddCommGroup:433 proves the norm triangle inequality with Fact(1<=p), including p=infinity. Its actual add_le proof converts to ENNReal eLpNorm, uses the AE representative sum and eLpNorm_add_le. Thus for all f,g in Lp the standard norm_add_le is exactly the requested theorem. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: No finiteness or sigma-finiteness assumption on the measure is added; p<1 is excluded by Fact(1<=p).\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "minkowski-inequality-lp",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Function/Lp/Norm.lean",
+          "declarations": "TauCeti.Lp.norm_le_add_of_ae_norm_le:87",
+          "note": "Native ordinary two-term Lp norm inequality extending and directly recovering Minkowski."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency LpSpace/Basic is byte-identical, including the norm triangle proof. Native TauCeti.Lp.norm_le_add_of_ae_norm_le:87 proves ||f||<=a||g||+b||h|| from the AE pointwise two-term domination, using real Lp norm representatives, monotonicity and the triangle law. Taking f=g+h and a=b=1 gives precisely Minkowski, and the native theorem is its ordinary two-term domination API. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: All exponents 1<=q including infinity are allowed. Integral Minkowski, vector-valued Schur bounds and other independently significant integral estimates are not charged.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "minkowski-sum",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Pointwise/Set/Basic.lean",
+          "declarations": "Set.add (generated from Set.mul:304); Set.mem_add",
+          "note": "Native pointwise set addition and ordinary Minkowski algebra."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Set.add is the additive declaration generated from protected Set.mul:304, whose body is image2 of the binary operation. Thus membership is exactly existence of a in A and b in B with x=a+b, with no convexity or topology requirement. Actual constructor and generated membership/group identities checked. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: This is pointwise addition, not union or set-theoretic difference. The operation applies to arbitrary subsets of a vector space; ConvexBody is not needed for the bare definition.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "minkowski-sum",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Algebra/Group/Pointwise.lean",
+          "declarations": "IsClosed.image_add_of_snd_subset (to_additive from image_mul_of_snd_subset:63); IsCompact.exists_isOpen_superset_add_subset (from mul:83)",
+          "note": "Native ordinary closure/compact-factor neighborhood API for Minkowski addition; definition imported."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Set.add has the same image2-addition definition (only separate inversion-instance scoping differs). Native IsClosed.image_add_of_snd_subset is generated at Pointwise:63 from the multiplicative statement: sums of a closed relation form a closed set when second coordinates lie in a compact set. IsCompact.exists_isOpen_superset_add_subset generated at:83 proves ordinary compact-factor thickening of A+K within an open set; its proof uses complement and pointwise sum witnesses. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Additional topology hypotheses belong to these ordinary topological operation lemmas, not to the underlying definition. Brunn–Minkowski volume inequalities are separate endpoints and excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "minkowski-symmetrization",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Pointwise/Set/Basic.lean",
+          "declarations": "Set.add (generated from Set.mul:304)",
+          "note": "Exact Minkowski-sum component of the set constructor."
+        },
+        {
+          "path": "Mathlib/Algebra/Group/Pointwise/Set/Scalar.lean",
+          "declarations": "Set.smulSet:72",
+          "note": "Exact half-dilation component of the set constructor."
+        },
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Projection/Reflection.lean",
+          "declarations": "Submodule.reflection:52; reflection_orthogonal_apply:101; reflection_singleton_apply:109",
+          "note": "Actual hyperplane-reflection map in the image component."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The checked exact generic constructor is (1/2:real) smul (K + (R_u image K)), with R_u=Submodule.reflection(real-span(u) orthogonal). Set.add is image2 addition and Set.smulSet:72 in Pointwise/Set/Scalar.lean is image of scalar multiplication. Reflection:52/101/109 computes R_u x=x-2 inner(x,u)smul u for unit u. This is exactly the catalogue set operation, with all factors and the hyperplane (not line) reflection fixed; no separate named symmetrization alias is required. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Generic constructor specialization, analogous to difference-body K+(-K); no convergence of iterated symmetrizations, monotonicity, volume claim or convex-body regularity is inferred.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "minkowski-symmetrization",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Reflection.lean",
+          "declarations": "TauCeti.reflection_orthogonal_singleton_apply:167; reflection_orthogonal_singleton_apply_div_norm_sq:176",
+          "note": "Native exact computational reflector component in the checked generic symmetrization constructor; sums/dilation supplied by dependency."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The checked exact generic constructor is (1/2:real) smul (K + (R_u image K)), with R_u=Submodule.reflection(real-span(u) orthogonal). Set.add is image2 addition and Set.smulSet:72 in Pointwise/Set/Scalar.lean is image of scalar multiplication. Reflection:52/101/109 computes R_u x=x-2 inner(x,u)smul u for unit u. This is exactly the catalogue set operation, with all factors and the hyperplane (not line) reflection fixed; no separate named symmetrization alias is required. The same dependency set/reflector definitions are checked (reflection byte-identical). Native TauCeti.reflection_orthogonal_singleton_apply:167 proves the exact unit-normal formula for this image component, and its division-by-norm-square variant:176 provides the ordinary computational form. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: The full set operation is the explicit composition of existing constructors; not claiming a separately declared Tau symmetrization alias or any iterative symmetrization theorem. General set-addition topology lemmas are not additionally counted merely as prerequisite operation API.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "mixed-discriminant",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Inspected Matrix.detRowAlternating:52 and det:62/65: the multilinear variables there are matrix rows, not the n matrix arguments in the mixed discriminant. Tau Matrix/MinkowskiDeterminant:83 proves determinant-root superadditivity for positive semidefinite matrices, not a normalized symmetric multilinear matrix polarization. The coefficient extraction and D(A,...,A)=det A normalization bridge remain unchecked. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Searched mixedDiscriminant/mixed_discriminant/polarization in matrix/determinant sources and actual determinant expansion/homogeneity. A generic MvPolynomial coefficient could express a candidate, but no checked n!-normalization and symmetric multilinearity identification was found in this bounded review. Do not turn the determinant inequality into an implementation of the mixed coefficient.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "mixed-discriminant",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Inspected Matrix.detRowAlternating:52 and det:62/65: the multilinear variables there are matrix rows, not the n matrix arguments in the mixed discriminant. Tau Matrix/MinkowskiDeterminant:83 proves determinant-root superadditivity for positive semidefinite matrices, not a normalized symmetric multilinear matrix polarization. The coefficient extraction and D(A,...,A)=det A normalization bridge remain unchecked. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Searched mixedDiscriminant/mixed_discriminant/polarization in matrix/determinant sources and actual determinant expansion/homogeneity. A generic MvPolynomial coefficient could express a candidate, but no checked n!-normalization and symmetric multilinearity identification was found in this bounded review. Do not turn the determinant inequality into an implementation of the mixed coefficient.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "mixed-projection-body-quermass",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Convex bodies, linear projections and volumes are present, but the quermassintegral W_i in each orthogonal hyperplane and the convex body whose support function equals that quantity have not been verified. Merely projecting K or measuring it does not establish the required mixed-quermass projection body. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Scoped quermass/projectionBody/mixed-volume/support-function searches in Convex, Euclidean and measure sources. Inspected actual ConvexBody carrier/map and orthogonal projection APIs; the dimension-(d-1) quermass normalization and supplying support function/body existence are concrete unresolved ingredients. No absence claim.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "mixed-projection-body-quermass",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Convex bodies, linear projections and volumes are present, but the quermassintegral W_i in each orthogonal hyperplane and the convex body whose support function equals that quantity have not been verified. Merely projecting K or measuring it does not establish the required mixed-quermass projection body. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Scoped quermass/projectionBody/mixed-volume/support-function searches in Convex, Euclidean and measure sources. Inspected actual ConvexBody carrier/map and orthogonal projection APIs; the dimension-(d-1) quermass normalization and supplying support function/body existence are concrete unresolved ingredients. No absence claim.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "mixed-variable-lebesgue-sequence",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The inspected iterated-Lp construction uses a single constant p:ENNReal and product measures. It does not supply a measurable variable q(x) sequence power, the variable-exponent p(x) Luxemburg quasi-norm or the corresponding AE quotient. Tau EnergyForm/VariableLp concerns fixed L2 jets with variable coefficients, which is mathematically different. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Searched variable-exponent/Luxemburg/modular in Analysis/MeasureTheory; inspected Tau Lp/Iterated.lean section-norm measurability/equality and its constant exponent hypotheses, plus VariableLp candidate definition. Ordinary Lp of an lp-valued function is only a fixed-exponent special case, not a checked variable-exponent constructor.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "mixed-variable-lebesgue-sequence",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The inspected iterated-Lp construction uses a single constant p:ENNReal and product measures. It does not supply a measurable variable q(x) sequence power, the variable-exponent p(x) Luxemburg quasi-norm or the corresponding AE quotient. Tau EnergyForm/VariableLp concerns fixed L2 jets with variable coefficients, which is mathematically different. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Searched variable-exponent/Luxemburg/modular in Analysis/MeasureTheory; inspected Tau Lp/Iterated.lean section-norm measurability/equality and its constant exponent hypotheses, plus VariableLp candidate definition. Ordinary Lp of an lp-valued function is only a fixed-exponent special case, not a checked variable-exponent constructor.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "mixed-volume",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The checked ConvexBody and pointwise set operations form nonnegative Minkowski combinations, and Lebesgue volume measures them. A homogeneous degree-d volume polynomial on such combinations, its symmetric coefficient map and diagonal normalization were not verified. The generic polynomial coefficient constructor alone does not prove that the measured function is this polynomial. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Searched mixedVolume/mixed_volume/volume polynomial in both entire source trees; inspected actual ConvexBody/Minkowski definitions and Tau Brunn–Minkowski statements. The polynomiality/normalized coefficient identification remains the specific missing bridge, rather than lack of a familiar declaration name.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "mixed-volume",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The checked ConvexBody and pointwise set operations form nonnegative Minkowski combinations, and Lebesgue volume measures them. A homogeneous degree-d volume polynomial on such combinations, its symmetric coefficient map and diagonal normalization were not verified. The generic polynomial coefficient constructor alone does not prove that the measured function is this polynomial. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Searched mixedVolume/mixed_volume/volume polynomial in both entire source trees; inspected actual ConvexBody/Minkowski definitions and Tau Brunn–Minkowski statements. The polynomiality/normalized coefficient identification remains the specific missing bridge, rather than lack of a familiar declaration name.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "mixed-volume-integral-curvature-matrices",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Neither the normalized mixed volume/discriminant nor the homogeneous-support-function curvature-matrix construction has been verified here, and the required sphere integral identity is not supplied by ordinary Gauss/immersion formulas. Its C2 strictly positive curvature hypotheses do not turn generic Riemannian area/integration code into this convex-geometric identity. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Scoped mixed coefficient/curvature matrix/support Hessian searches; inspected Matrix determinant expansion, convex-body/volume candidates, and Tau induced-metric/Levi-Civita immersion formulas (actual source ownership Tau). Missing full normalized sphere representation is explicit; no proof development or unbounded derivation attempted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "mixed-volume-integral-curvature-matrices",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Neither the normalized mixed volume/discriminant nor the homogeneous-support-function curvature-matrix construction has been verified here, and the required sphere integral identity is not supplied by ordinary Gauss/immersion formulas. Its C2 strictly positive curvature hypotheses do not turn generic Riemannian area/integration code into this convex-geometric identity. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Scoped mixed coefficient/curvature matrix/support Hessian searches; inspected Matrix determinant expansion, convex-body/volume candidates, and Tau induced-metric/Levi-Civita immersion formulas (actual source ownership Tau). Missing full normalized sphere representation is explicit; no proof development or unbounded derivation attempted.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "moore-penrose-inverse-matrix",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Matrix/NonsingularInverse explicitly limits its inverse construction to nonsingular square matrices and warns that pseudoinverses are not covered. Orthogonal projections and first-isomorphism constructors do not by themselves establish a chosen inverse satisfying all four Penrose equations for arbitrary rectangular real matrices. No such complete construction/characterization was verified in this Mathlib snapshot. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Searched Moore/Penrose/pseudoinverse in Matrix/InnerProductSpace and inspected nonsingular inverse scope. Native Tau MoorePenrose is outside standalone Mathlib. An arbitrary algebraic pseudo-inverse with ABA=A is weaker than the two symmetric Penrose products.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "moore-penrose-inverse-matrix",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/MoorePenrose.lean",
+          "declarations": "LinearMap.IsMoorePenroseInverse:86; IsMoorePenroseInverse.unique:162; moorePenroseInverse:211; isMoorePenroseInverse_moorePenroseInverse:231; Matrix.isMoorePenroseInverse_toEuclideanLin_of_penrose:316",
+          "note": "Native general singular-system inverse, four Penrose equations, uniqueness and matrix comparison; explicit full-column formula remains unchecked."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. LinearMap.IsMoorePenroseInverse:86 records all four equations, with symmetric compositions. moorePenroseInverse:211 constructs the finite-dimensional singular-system inverse; theorem:231 proves all four conditions, and uniqueness:162/characterization:268 are actual completed proofs. Matrix.isMoorePenroseInverse_toEuclideanLin_of_penrose:316 checks the matrix/linear-map correspondence. This supplies the full intrinsic inverse, but the paragraph also states the explicit full-column-rank normal form (A-transpose*A)^(-1)*A-transpose; that identity was not verified, so it is a stated remaining API frontier rather than silently claimed. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Read construction, all four correctness proofs and uniqueness in full. CovariancePseudoInverse only specializes to square positive-semidefinite matrices; LinearMap/PseudoInverse supplies merely ABA=A. Neither is substituted for the general Moore–Penrose inverse. Full-column formula search in these candidates unresolved.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "non-extreme-hinfinity-criterion",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The requested equivalence between real convex non-extremality and integrability of log(1-|b-star|^2) was not verified. Tau provides a genuine supnorm H-infinity subspace and boundary multiplier algebra, but those constructions do not establish boundary limits/log integrability or this extreme-point criterion. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Searched non-extreme/extreme/Schur/log-defect in complex and Hardy sources, inspected native boundedHolomorphicFunctions and Hardy/Multiplier. The ordinary Hardy H2 disk-function bound ||x||/sqrt(1-|z|^2) is not an H-infinity unit-ball criterion. Generic extremePoints and integrability alone do not prove the analytic equivalence.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "non-extreme-hinfinity-criterion",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The requested equivalence between real convex non-extremality and integrability of log(1-|b-star|^2) was not verified. Tau provides a genuine supnorm H-infinity subspace and boundary multiplier algebra, but those constructions do not establish boundary limits/log integrability or this extreme-point criterion. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Searched non-extreme/extreme/Schur/log-defect in complex and Hardy sources, inspected native boundedHolomorphicFunctions and Hardy/Multiplier. The ordinary Hardy H2 disk-function bound ||x||/sqrt(1-|z|^2) is not an H-infinity unit-ball criterion. Generic extremePoints and integrability alone do not prove the analytic equivalence.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "non-extreme-schur-function",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The complex holomorphy predicate and bounded continuous functions on the open disk are available. The exact generic data subtype of bounded continuous functions whose ambient zero-extension is DifferentiableOn complex gives individual H-infinity functions, but this pass has not certified the corresponding real vector-space/submodule assembly with the supnorm needed to take extreme points of its closed unit ball. Thus full non-extreme Schur coverage remains unresolved here. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Checked Tau native boundedHolomorphicFunctions as a supplier candidate, but it is outside standalone Mathlib. Mathlib Set.extremePoints:70 is the exact real convex endpoint predicate; the missing bridge is the actual normed H-infinity real-linear ambient space, not boundary continuity and not a required named Schur alias.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "non-extreme-schur-function",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Complex/HolomorphicFunctions/Bounded.lean",
+          "declarations": "TauCeti.boundedHolomorphicFunctions:71; mem_boundedHolomorphicFunctions_iff_of_eqOn:87; BoundedHolomorphicFunctions.of:130",
+          "note": "Native exact supnorm H-infinity space supplying the real closed-unit-ball/extreme-point specialization."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native boundedHolomorphicFunctions:71 is the complex submodule of bounded continuous functions on open U with a holomorphic representative, inheriting the exact supremum norm; of:130 constructs any such function and representative iff:87 checks its meaning. Set U=open unit disk and H=this complex normed space, restrict scalars to real using the existing NormedSpace.restrictScalars constructor. Then Metric.closedBall (0:H) 1 minus Set.extremePoints real of that ball is exactly non-extreme scalar Schur functions. The dependency extremePoints definition uses real open segments, and membership in the ball is exactly ||b||infinity<=1. These are checked existing constructor specializations, not a claimed log-integrability theorem. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Checked dependency Convex/Extreme Set.extremePoints:70 and normed scalar restriction:495; real convexity is essential, not complex convex segments. Boundary Hardy multipliers and boundary-value identifications are unnecessary for this definition and excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "norm-monotonicity-positive-cstar",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Order.lean",
+          "declarations": "CStarAlgebra.norm_le_norm_of_le_of_nonneg:468",
+          "note": "Actual positive CStar norm-monotonicity proof and adjacent order/norm API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. CStarAlgebra.norm_le_norm_of_le_of_nonneg:468 has a<=b and 0<=a, for a possibly nonunital CStar algebra with the canonical star order. Its proof embeds in the unitization, uses the positive norm/order characterization and b<=||b||*1, then preserves norms under the embedding. This exactly proves the requested monotonicity, without an unital restriction. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: The PartialOrder/StarOrderedRing assumptions are the actual positive CStar order interface, not a comparison in an arbitrary unrelated order.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "norm-monotonicity-positive-cstar",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency ContinuousFunctionalCalculus/Order.lean is byte-identical, including norm_le_norm_of_le_of_nonneg:468 and its unitization proof for nonunital algebras. Native ConditionalExpectation/Basic uses this theorem for expectation estimates; Kaplansky/ZeroTemperature files give additional functional-calculus endpoints rather than ordinary native monotonicity API, so no native implementing file selected. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Scoped norm-order monotonicity search across Tau CStarAlgebra; inspected the actual supplier and use contexts. A proof application is not charged as implementation; no further scalar/CStar algebra added to output scope.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "normed-vector-space",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Group/Defs.lean",
+          "declarations": "NormedAddCommGroup:282",
+          "note": "Actual positive definite norm/metric group structure."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Module/Basic.lean",
+          "declarations": "NormedSpace:37; NormedSpace.toNormSMulClass:47",
+          "note": "Actual scalar-module norm compatibility and absolute homogeneity API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. NormedAddCommGroup:282 supplies a norm whose induced distance is a genuine metric, hence positivity/separation and triangle inequality. NormedSpace:37 extends the scalar module with norm_smul_le; its NormSMulClass derivation gives exact absolute homogeneity over a normed field using inverse scalars. Specialize field to real or complex for precisely the catalogue normed vector space, with no completeness assumption. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Use NormedAddCommGroup, not merely the possibly degenerate SeminormedAddCommGroup. CompleteSpace is not imposed; Banach is a separate concept.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "normed-vector-space",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Module/Basic.lean",
+          "declarations": "TauCeti.norm_sum_smul_le_sum_div_mul:44; norm_smul_sq_div_add_norm_smul_sq:64",
+          "note": "Native ordinary finite-linear-combination and norm-homogeneity API; basic structure imported."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency normed-group and module definitions are byte-identical. Native norm_sum_smul_le_sum_div_mul:44 proves a finite scalar-combination norm bound directly from triangle inequality and norm-scalar compatibility, and norm_smul_sq_div_add_norm_smul_sq:64 proves simultaneous-scaling invariance by norm_smul and cancellation. These are ordinary normed-vector core identities under weaker hypotheses; each applies to real/complex genuine normed spaces. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: The user-approved native-API interpretation does not require completeness or all norm axioms to be used in each lemma. Integer-ring cast isometry in the same file is not the reason for assigning it here.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "norming-set-banach-space",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The general catalogue predicate requires exact norm recovery for an arbitrary family of linear functionals on X. Tau Operator/Norming:49 constructs finite predual TEST VECTORS with loss A>1, and :102 constructs countable domain test vectors recovering norms on a separable set of operators. Those are checked norming constructions in the evaluation/predual direction; a full general arbitrary-functional-family predicate/equivalent isometric evaluation construction was not verified. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Read the countable norming theorem/proof:102–154 (dense operator sequence, near-norming vectors, then continuity); inspected Hahn–Banach norming-functional and double-dual candidates. A single norming functional depending on x, or approximate finite domain tests, is not automatically the exact supremum for the specified family F on X. Unknown is this representation frontier, not an absence claim.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "norming-set-banach-space",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The general catalogue predicate requires exact norm recovery for an arbitrary family of linear functionals on X. Tau Operator/Norming:49 constructs finite predual TEST VECTORS with loss A>1, and :102 constructs countable domain test vectors recovering norms on a separable set of operators. Those are checked norming constructions in the evaluation/predual direction; a full general arbitrary-functional-family predicate/equivalent isometric evaluation construction was not verified. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Read the countable norming theorem/proof:102–154 (dense operator sequence, near-norming vectors, then continuity); inspected Hahn–Banach norming-functional and double-dual candidates. A single norming functional depending on x, or approximate finite domain tests, is not automatically the exact supremum for the specified family F on X. Unknown is this representation frontier, not an absence claim.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "nowhere-dense-subset",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/GDelta/Basic.lean",
+          "declarations": "IsNowhereDense:204; IsNowhereDense.mono:213; IsNowhereDense.union:217",
+          "note": "Exact nowhere-dense predicate and elementary set operations."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Topology/GDelta/Basic.lean:204 defines IsNowhereDense s as interior(closure s)=empty, exactly the catalogue. The checked mono:213 and union:217 proofs give ordinary subset and finite-union core API without separation or countability assumptions. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Do not confuse empty interior of s itself with empty interior of closure s.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "nowhere-dense-subset",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Baire/Perfect.lean",
+          "declarations": "TauCeti.isNowhereDense_singleton:46",
+          "note": "Native basic nowhere-dense singleton API with explicit non-isolation/T1 assumptions."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency GDelta/Basic is byte-identical. Native TauCeti.isNowhereDense_singleton:46 proves the ordinary basic example: in T1, a nonisolated singleton is closed and has empty interior, so its closure has empty interior. The proof directly uses the imported defining criterion. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: The same file derives countable meagreness and uncountability consequences; these added endpoints are not the reason for selection. Kuratowski–Ulam section theorems are independently significant and excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "numerical-radius",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual RayleighQuotient is re(inner(Tx,x))/||x||^2, and its supremum-of-absolute-values norm formula requires T.IsSymmetric. That is not the general complex absolute quadratic-value supremum. A complete generic unit-sphere quadratic-image/supremum representation matching W(T), including its convention in the zero space, was not certified in this pass. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Searched numericalRange/numerical_radius/numerical radius throughout both trees, inspected Mathlib Rayleigh and LinearMap complex polarization, and Tau QuadraticForm/Bounds. Tau UpperFormBoundOn only controls Re(inner), not abs(inner) for arbitrary complex operators. A bare sSup expression is a candidate, but its exact numerical-range construction/ordinary API remains an explicit unchecked definition-level bridge.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "numerical-radius",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual RayleighQuotient is re(inner(Tx,x))/||x||^2, and its supremum-of-absolute-values norm formula requires T.IsSymmetric. That is not the general complex absolute quadratic-value supremum. A complete generic unit-sphere quadratic-image/supremum representation matching W(T), including its convention in the zero space, was not certified in this pass. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Searched numericalRange/numerical_radius/numerical radius throughout both trees, inspected Mathlib Rayleigh and LinearMap complex polarization, and Tau QuadraticForm/Bounds. Tau UpperFormBoundOn only controls Re(inner), not abs(inner) for arbitrary complex operators. A bare sSup expression is a candidate, but its exact numerical-range construction/ordinary API remains an explicit unchecked definition-level bridge.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "numerical-radius-norm-comparison",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Rayleigh.lean",
+          "declarations": "ContinuousLinearMap.rayleighQuotient:56; image_rayleigh_eq_image_rayleigh_sphere:84; norm_eq_iSup_rayleighQuotient:120",
+          "note": "Actual self-adjoint/symmetric numerical-radius equality via normalized quadratic supremum."
+        },
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Symmetric.lean",
+          "declarations": "LinearMap.IsSymmetric.coe_re_inner_apply_self:156",
+          "note": "Identifies real-part Rayleigh value with the full complex quadratic value for the checked self-adjoint subcase."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. ContinuousLinearMap.norm_eq_iSup_rayleighQuotient:120 proves ||T||=sup_x |Re(inner(Tx,x))/||x||^2| for symmetric T, by polarization/parallelogram and operator norm bounds. Symmetric.coe_re_inner_apply_self:156 proves the quadratic values are real; the sphere-normalization identity:84/98 identifies nonzero Rayleigh values with unit-sphere values. Thus the self-adjoint equality subcase w(T)=||T|| is checked. The general arbitrary-complex-operator factor-2 comparison remains unverified. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Complex polarization identities in InnerProductSpace/LinearMap.lean are ingredients, not a claimed completed factor-2 norm estimate. Generic self-adjoint operator equality qualifies as direct partial target; finite-dimensional Ritz/variational eigenvalue theorems are separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    },
+    {
+      "concept": "numerical-radius-norm-comparison",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual dependency Rayleigh file differs only by a comment blank line and supplies the checked self-adjoint normalized-quadratic norm formula. Full arbitrary-complex w(T)<=||T||<=2w(T), and a qualifying native implementation of that comparison, were not verified. Native QuadraticForm/Bounds uses real-part lower/upper bounds; RayleighRitz/Variational/Rayleigh concern residual minimization or coercive variational eigenvalues, not the general numerical-radius comparison. Actual source statements, definitions and relevant completed proof bodies inspected; no fresh build or transitive proof/axiom audit.\nSearch and boundary notes: Inspected the dependency self-adjoint equality and native candidate statements/scopes; no complete inherited status is claimed for a theorem with an unverified general factor-2 endpoint. No native file is invented merely to attach a partial dependency result.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-017.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Group/Pointwise/Set/Scalar.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 336,
+      "sha256": "386637467e8e5b8864965d3e74b93731f99599e22344123f62750fb48a0072ea",
+      "measured_at": "2026-11-13T00:14:39.882830+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Order.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 707,
+      "sha256": "c56faa7e11d51e162bc84e375fd368473a76a12abfb4e45627a35dece66c45f3",
+      "measured_at": "2026-11-13T00:14:39.886757+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/InnerProductSpace/Rayleigh.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 371,
+      "sha256": "8e35f3072ae2549f7df0baba0c66d05f94f834a0377bc6b85983199b7e96effd",
+      "measured_at": "2026-11-13T00:14:39.893081+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/InnerProductSpace/Symmetric.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 376,
+      "sha256": "2cf92ced957539728df1d0d6042c6821ee87f3d72796c392519511420bf7e515",
+      "measured_at": "2026-11-13T00:14:39.896373+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Function/LpSpace/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1112,
+      "sha256": "fa893bbca0d4862acb4ca5ab4cdc20a5cf5cc601b2921c1563aa4c806dd894bf",
+      "measured_at": "2026-11-13T00:14:39.905541+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/GDelta/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 384,
+      "sha256": "007b4d7ba03421c146bdb4504c1fedddda8d97f5315aa2098f3c209d9bfa6c39",
+      "measured_at": "2026-11-13T00:14:39.909114+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/MoorePenrose.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 333,
+      "sha256": "b271e5b434e4ee40d85c7984b7f88085bee4d0261adf6a1159a72755905e12db",
+      "measured_at": "2026-11-13T00:14:39.918422+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Function/Lp/Norm.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 426,
+      "sha256": "b4bd43e96147e815869c7bf23d1308fb5c769876f917b03295eb04aa2085819f",
+      "measured_at": "2026-11-13T00:14:39.933823+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Algebra/Group/Pointwise.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 103,
+      "sha256": "9e78fffb60b5804b6bd5b7d6245df7727175aa4847376538b4cf21fd1e6f704a",
+      "measured_at": "2026-11-13T00:14:39.939062+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Baire/Perfect.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 62,
+      "sha256": "dfefe35388e163814ff41987ce58d3312c832c015784fac0b784cc41f561e0d3",
+      "measured_at": "2026-11-13T00:14:39.944996+00:00"
+    }
+  ]
+}

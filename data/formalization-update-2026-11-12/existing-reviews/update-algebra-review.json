@@ -1,0 +1,246 @@
+{
+  "method": "Independent source review of another agent's four existing saved judgments. Read exact current concept paragraphs and selected committed files; checked representative proof bodies, complementary inverse laws, source-generated additive declarations, ordinary Group/CommGroup power API, and nearby excluded superclass/transport/construction files. No fresh Lean rebuild or transitive axiom audit. No database/library/document edits.",
+  "baseline": [
+    {
+      "id": "22a3e19c-ec66-56dc-a7b0-d98b04741451",
+      "slug": "group",
+      "title": "Group",
+      "kind": "definition",
+      "description": "A set with an associative binary operation, an identity element, and a two-sided inverse for each element.",
+      "status": "active",
+      "revision": 1
+    },
+    {
+      "id": "5cf2c775-91ee-58d0-b4d9-054f8b51e1a3",
+      "slug": "abelian-group",
+      "title": "Abelian group",
+      "kind": "definition",
+      "description": "A group whose operation is commutative.",
+      "status": "active",
+      "revision": 1
+    }
+  ],
+  "upstream_revisions": {
+    "mathlib": "26573066084e6e2aa8526ea358bc43b66d96f970",
+    "tau-ceti": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023"
+  },
+  "tau_mathlib_dependency": "2ddf59c8f14245864e6c0ed227a2dab76b9efea2",
+  "dependency_check": "Direct git-show inspection of Group/Defs.lean at Tau Ceti dependency commit 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; byte-identical to standalone reviewed Defs. Confirmed Group/AddGroup, CommGroup/AddCommGroup, and both inverse laws, rather than assuming a newer dependency.",
+  "decisions": [
+    {
+      "concept": "group",
+      "concept_id": "22a3e19c-ec66-56dc-a7b0-d98b04741451",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "review_id": 1,
+      "decision": "accept",
+      "replacement": null,
+      "retain_status": "formalized",
+      "retain_files": [
+        {
+          "path": "Mathlib/Algebra/Group/Basic.lean",
+          "declarations": "mul_inv_eq_one (:689), div_mul_div_cancel (:739), zpow_induction_left (:882), zpow_induction_right (:899)",
+          "note": "Develops immediate group arithmetic, equation rearrangement, cancellation and integer-power induction (Group section 607–909). The file also contains monoid and commutative-group material; this rough mapping counts the whole file and shares it with abelian-group."
+        },
+        {
+          "path": "Mathlib/Algebra/Group/Defs.lean",
+          "declarations": "Group (:33), AddGroup (:44), mul_inv_cancel (:62), Group.toDivisionMonoid (:93), Group.toCancelMonoid (:102)",
+          "note": "Defines multiplicative/additive groups and derives right inverses and cancellation from the class axioms (lines 25–106). This same file also defines commutative groups, so it is shared with abelian-group; the entire mixed file is counted as requested."
+        },
+        {
+          "path": "Mathlib/Algebra/Group/MinimalAxioms.lean",
+          "declarations": "Group.ofLeftAxioms (:39), Group.ofRightAxioms (:66); generated AddGroup.ofLeftAxioms/AddGroup.ofRightAxioms",
+          "note": "Constructs a Group from associativity plus one-sided identity and inverse laws, proving the missing side, with additive counterparts. This is an alternate presentation of the same group concept rather than a product, opposite or downstream theory."
+        }
+      ],
+      "reason": "Group extends the associative two-sided-unit monoid hierarchy and imposes a left inverse law; Defs.lean:62 proves the complementary right inverse law, so no two-sided-inverse clause is missing. Defs:93–106 derives involution and cancellation. MinimalAxioms:39–81 proves the missing unit/inverse side for equivalent constructors rather than assuming the endpoint. Basic:607–909 supplies direct generic group identities and integer-power induction. These files match the declared defining/ordinary-law/alternate-axiom boundary.",
+      "source_revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "dependency_revision": null
+    },
+    {
+      "concept": "group",
+      "concept_id": "22a3e19c-ec66-56dc-a7b0-d98b04741451",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "review_id": 3,
+      "decision": "accept",
+      "replacement": null,
+      "retain_status": "formalized",
+      "retain_files": [
+        {
+          "path": "TauCeti/Algebra/Group/Pow.lean",
+          "declarations": "TauCeti.eq_mul_zpow_sub_iff_mul_zpow_eq (:58–60)",
+          "note": "Adds the generic Group identity a = b * h^(n-m) iff a*h^m = b*h^n. The underlying Group definition is supplied by the pinned Mathlib dependency, not this file. Count only this native direct-API extension; share the mixed file with abelian-group for its distinct commutative-group law at lines 50–54."
+        }
+      ],
+      "reason": "Under the expressly accepted native-API policy, retain formalized. Pow.lean:58–60 proves a = b*h^(n-m) iff a*h^m = b*h^n for arbitrary Group G, by zpow_sub, associativity and inverse equation rearrangement. No commutativity, finiteness, arithmetic specialization or assumed target is hidden. The Group definition belongs to the exact Mathlib dependency; only the native Pow file is counted. The unrelated Monoid M variables earlier in the file do not occur in this theorem signature.",
+      "source_revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "dependency_revision": "2ddf59c8f14245864e6c0ed227a2dab76b9efea2"
+    },
+    {
+      "concept": "abelian-group",
+      "concept_id": "5cf2c775-91ee-58d0-b4d9-054f8b51e1a3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "review_id": 2,
+      "decision": "accept",
+      "replacement": null,
+      "retain_status": "formalized",
+      "retain_files": [
+        {
+          "path": "Mathlib/Algebra/Group/Basic.lean",
+          "declarations": "mul_inv (:523), mul_zpow (:593), div_div_cancel (:943), div_eq_div_iff_mul_eq_mul (:996)",
+          "note": "Proves immediate commutative inverse, product-power and division laws (DivisionCommMonoid section 516–605; CommGroup section 912–1016). Shared with group because the file contains direct API for both concepts; the whole mixed file is counted."
+        },
+        {
+          "path": "Mathlib/Algebra/Group/Defs.lean",
+          "declarations": "AddCommGroup (:111), CommGroup (:116), CommGroup.toCancelCommMonoid (:124), CommGroup.toDivisionCommMonoid (:129)",
+          "note": "Defines commutative groups in both additive and multiplicative notation and supplies the immediate cancellation/division hierarchy (lines 110–145). Shared with group because this same file independently defines both concepts."
+        }
+      ],
+      "reason": "CommGroup at Defs:116 extends Group and CommMonoid; the latter contributes exactly commutativity of the same operation. AddCommGroup at Defs:111 is the additive presentation of the same mathematical structure. Basic has genuinely commutative DivisionCommMonoid and CommGroup sections at 516–605 and 912–1016, so its shared mapping is justified directly, not merely by superclass inheritance. MinimalAxioms has no direct commutative-group constructor and is correctly excluded from this bounded selection.",
+      "source_revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "dependency_revision": null
+    },
+    {
+      "concept": "abelian-group",
+      "concept_id": "5cf2c775-91ee-58d0-b4d9-054f8b51e1a3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "review_id": 4,
+      "decision": "accept",
+      "replacement": null,
+      "retain_status": "formalized",
+      "retain_files": [
+        {
+          "path": "TauCeti/Algebra/Group/Pow.lean",
+          "declarations": "TauCeti.mul_zpow_mul_mul_zpow (:50–54)",
+          "note": "Adds generic commutative-group monomial arithmetic by adding integer exponent vectors. CommGroup/AddCommGroup definitions are inherited from pinned Mathlib. Count this native immediate API extension and share the whole mixed file with group for its separate arbitrary-Group rearrangement law at lines 58–60."
+        }
+      ],
+      "reason": "Under the expressly accepted native-API policy, retain formalized. Pow.lean:50–54 proves ordinary integer-exponent-vector arithmetic for arbitrary CommGroup G; it expands product powers using mul_zpow/zpow_mul/zpow_add and associativity/commutativity. This is direct commutative-group API, not Group inheritance or a special-group application. The underlying CommGroup/AddCommGroup definitions are checked in the exact dependency. Tau does not generate a separate additive version of this theorem, but the catalogue concept is an abstract commutative group independent of operation notation; the multiplicative formulation matches it.",
+      "source_revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "dependency_revision": "2ddf59c8f14245864e6c0ed227a2dab76b9efea2"
+    }
+  ],
+  "file_measurement_checks": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Group/Basic.lean",
+      "snapshot_revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1099,
+      "sha256": "48a12b3df43fb8b5ea5b75677ae93a5f16f9ad9c74dba0befc2ef45b85b1eabe",
+      "stored_loc_matches": true,
+      "stored_sha256_matches": true
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Group/Defs.lean",
+      "snapshot_revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 155,
+      "sha256": "2862e96c66aea952864a5016bb106ca4cf043000a8915d89e24623132e12fb6c",
+      "stored_loc_matches": true,
+      "stored_sha256_matches": true
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Group/MinimalAxioms.lean",
+      "snapshot_revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 82,
+      "sha256": "f1879a7e70c25a97aa33d22ec026c96d94c7be8c92197d0a1adb9f06cd8e9611",
+      "stored_loc_matches": true,
+      "stored_sha256_matches": true
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/Group/Pow.lean",
+      "snapshot_revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 71,
+      "sha256": "ed2d39088183a4cdafea8094190ba2209128e05d4d556f7ef23042733de9e250",
+      "stored_loc_matches": true,
+      "stored_sha256_matches": true
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Group/Basic.lean",
+      "snapshot_revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1099,
+      "sha256": "48a12b3df43fb8b5ea5b75677ae93a5f16f9ad9c74dba0befc2ef45b85b1eabe",
+      "stored_loc_matches": true,
+      "stored_sha256_matches": true
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Group/Defs.lean",
+      "snapshot_revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 155,
+      "sha256": "2862e96c66aea952864a5016bb106ca4cf043000a8915d89e24623132e12fb6c",
+      "stored_loc_matches": true,
+      "stored_sha256_matches": true
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/Group/Pow.lean",
+      "snapshot_revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 71,
+      "sha256": "ed2d39088183a4cdafea8094190ba2209128e05d4d556f7ef23042733de9e250",
+      "stored_loc_matches": true,
+      "stored_sha256_matches": true
+    }
+  ],
+  "shared_file_review": "Basic/Defs independently contribute to both Group and Abelian group. Tau Pow independently contributes an arbitrary-Group rearrangement and a CommGroup monomial law. All shared mappings therefore have direct anchors. MinimalAxioms remains Group-only. With only these current mappings, Mathlib allocations are Group709 and Abelian627, and Tau35.5 each; coordinator must still recompute denominators globally.",
+  "excluded_candidates": [
+    {
+      "paths": [
+        "Mathlib/Algebra/Group/Semigroup.lean",
+        "Mathlib/Algebra/Group/Monoid.lean",
+        "Mathlib/Algebra/Group/DivInvMonoid.lean"
+      ],
+      "decision": "retain exclusion",
+      "reason": "Prerequisite/helper hierarchy for weaker structures; these fields explain Group but do not introduce the Group/CommGroup layer selected here. Do not recursively charge all imports."
+    },
+    {
+      "paths": [
+        "Mathlib/Algebra/Group/InjSurj.lean",
+        "Mathlib/Algebra/Group/Opposite.lean",
+        "Mathlib/Algebra/Group/Prod.lean",
+        "Mathlib/Algebra/Group/Hom/Defs.lean"
+      ],
+      "decision": "retain exclusion",
+      "reason": "Carrier transfer, opposite/product constructions, or separately bundled homomorphisms fall outside the accepted defining and ordinary-law boundary; validity of those developments is not disputed."
+    },
+    {
+      "paths": [
+        "TauCeti/Algebra/Group/Primary/Decomposition.lean",
+        "TauCeti/Algebra/Group/ForwardDiff.lean",
+        "TauCeti/Algebra/Group/Subgroup/ZPowers.lean"
+      ],
+      "decision": "retain exclusion in principle",
+      "reason": "Finite primary decomposition, finite-difference constructions and power subgroups are separately recognizable topics rather than the selected generic group definition/API. No claim of an exhaustive search of all Tau group API is made."
+    }
+  ],
+  "prompt_ambiguities": [
+    {
+      "severity": "minor",
+      "finding": "Core-API examples allow natural maps/equivalent presentations, while this accepted Group boundary excludes structure transfer and bundled-homomorphism files. The saved declared boundary makes this consistent, but workers could broaden it silently.",
+      "suggestion": "Preserve the per-concept boundary on refresh. Explicitly distinguish equivalent axiom constructors (MinimalAxioms, retained) from transfer of structures to another carrier (InjSurj, excluded here); require an evidence-backed boundary-change decision if broadening."
+    },
+    {
+      "severity": "minor",
+      "finding": "Mathematical additive/multiplicative equivalence can be misread as requiring a separately generated additive declaration for each native theorem. Tau Pow has no to_additive attribute on its two reviewed laws.",
+      "suggestion": "Distinguish mathematical equivalence of notation from existence of a separate Lean additive API. Count a matching generic formulation while recording which representation is implemented; do not claim generated declarations absent an appropriate source attribute."
+    },
+    {
+      "severity": "minor",
+      "finding": "A superclass relationship might tempt mapping every Group-only constructor file to Abelian group.",
+      "suggestion": "Retain the direct-anchor rule: Basic and Defs contain independent commutative anchors; MinimalAxioms does not. No saved mapping needs to change."
+    },
+    {
+      "severity": "none",
+      "finding": "The prompt explicitly accepts native Tau Group/Abelian-group elementary power laws over checked inherited definitions.",
+      "suggestion": "Retain this agreed interpretation; this independent review found no mathematical flaw requiring demotion or file changes."
+    }
+  ],
+  "unresolved_mathematical_frontier": [],
+  "overall_decision": "accept all four unchanged"
+}

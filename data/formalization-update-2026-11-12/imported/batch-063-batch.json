@@ -1,0 +1,753 @@
+{
+  "note": "Whole-catalogue formalization update batch-063: independent source review by analysis_formalization of algebra_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "markov-chain-finite",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Kernel/Defs.lean",
+          "declarations": "ProbabilityTheory.Kernel:54; IsMarkovKernel:137",
+          "note": "Native measurable transition-measure constructor and probability-row predicate."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean",
+          "declarations": "MeasureTheory.condExp:100; condExp_of_sigmaFinite:132",
+          "note": "Native actual conditional expectation used in the defining past-conditioned transition equality; finite probability avoids its exceptional junk branches."
+        },
+        {
+          "path": "Mathlib/Probability/Process/Filtration.lean",
+          "declarations": "MeasureTheory.Filtration.natural:434; natural_eq_comap:442",
+          "note": "Native whole-past filtration, as the join of coordinate pullbacks through the current date."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a finite discrete state set V and probability P, take measurable X:ℕ→Ω→V and κ:Kernel V V with IsMarkovKernel. Its transition matrix is κ(x){y}; probability rows are built into the checked kernel class. The exact literal predicate is ∀n,A, P[1_A∘X(n+1)|Filtration.natural X n] =ᵐ[P] (ω↦(κ(X n ω)).real A). This uses the WHOLE past and a single κ; it requires no dedicated alias or a path-law existence theorem. Kernel:54/IsMarkovKernel:137, conditional expectation:100–108 and natural:434–440/442–445 were read, including their actual definitions. Finite-discrete measurability and real indicator testing make this exactly the catalogue definition.\nSearch and boundary notes: Bare definition via checked generic constructors. Matrix positivity and row sums are expressed by κ probability rows; native Tau matrix/filtered/path-law results are not attributed to standalone Mathlib. Exclude Ionescu–Tulcea existence and recurrence as separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "markov-chain-finite",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/MarkovChain/Filtered/Basic.lean",
+          "declarations": "TauCeti.Probability.IsMarkovChain:47; IsMarkovChain.condExp_add:61; isMarkovChain_markovChainLaw:126",
+          "note": "Native actual homogeneous Markov predicate and history-law interface, including multistep conditional laws."
+        },
+        {
+          "path": "TauCeti/Probability/Kernel/Matrix/Basic.lean",
+          "declarations": "Matrix.rowStochastic.toKernel:132; ProbabilityTheory.Kernel.rowStochasticEquiv:191",
+          "note": "Native equivalent finite matrix/kernel representation, with genuine inverse proofs."
+        },
+        {
+          "path": "TauCeti/Probability/Process/MarkovChain.lean",
+          "declarations": "TauCeti.Probability.markovChainLaw:164; markovChainLaw_map_prefix_succ_eq_compProd:253",
+          "note": "Native path-law constructor and immediate defining finite-prefix/marginal API."
+        },
+        {
+          "path": "TauCeti/Probability/MarkovChain/MarkovProperty.lean",
+          "declarations": "MeasureTheory.Measure.condExp_shift_iterate_markovChainLaw:181; condExp_indicator_shift_iterate_markovChainLaw:232",
+          "note": "Native proof that the constructed path law has exactly the past-conditioned Markov property."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency supplies the generic history/conditional-expectation predicate above (Defs/CE/Filtration supplier bodies unchanged, D anchors +1). Native TauCeti.Probability.IsMarkovChain:47–51 explicitly packages adaptedness and the whole-past bounded-test conditional law. condExp_add:61–91 proves the multistep law by tower induction; isMarkovChain_markovChainLaw:126–146 proves the history coordinate realization. Kernel.Matrix.Basic toKernel:132–143 and rowStochasticEquiv:191–201 prove the exact finite stochastic-matrix/kernel equivalence. Process.MarkovChain law:164/253–287 constructs and proves prefix laws; MarkovProperty condExp_shift_iterate:181–227 proves the conditional law. Proof bodies were read; no independent sampling assumption replaces Markov dependence.\nSearch and boundary notes: Bounded API: defining process, finite-matrix dictionary, path-law/conditional-law equivalent presentations. Exclude Simulation, stationary/strong Markov, return-time/recurrence, convergence and coupling endpoints from this generic concept.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "markov-chain-monte-carlo",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Kernel/Invariance.lean",
+          "declarations": "ProbabilityTheory.Kernel.Invariant:38; Invariant.comp:49",
+          "note": "Native prescribed stationary-target predicate and ordinary composition law."
+        },
+        {
+          "path": "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean",
+          "declarations": "Finset.prod:66 and generated Finset.sum",
+          "note": "Native finite-sum constructor supplies the empirical estimator N⁻¹∑_{n<N}f(X_n), N>0, with explicit sample indices."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a GENERAL measurable state space S and supplied homogeneous process X, use the exact bounded-measurable-test conditional expectation predicate: for every bounded measurable real f, E[f(X(n+1))|whole past_n] equals the integral of f against κ(Xn). The checked condExp:100 and Kernel:54/137 constructors above supply this formula without a finite-state restriction. For this DEFINITION, a prescribed probability π satisfying Kernel.Invariant κ π:38 and an observable f add exactly the target and estimator N⁻¹∑n<N f(X_n); actual Invariant:38–53 and generated Finset.sum from prod:66 were read. This records the sampling method with supplied chain/target and finite empirical averages; it asserts no unspecified ergodic convergence or error bound.\nSearch and boundary notes: The catalogue gives a method definition, not a convergence theorem under unlisted assumptions. Underlying Markov/history constructors checked separately in this job and excluded here as prerequisites. No Metropolis/Hastings acceptance rule or independent-sample claim is substituted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "markov-chain-monte-carlo",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/MarkovChain/Simulation.lean",
+          "declarations": "TauCeti.Probability.randomizedChain:54; hasLaw_randomizedChain:117; exists_uniform_randomizedChain:157",
+          "note": "Native actual dependent-chain simulation and completed path-law proof."
+        },
+        {
+          "path": "TauCeti/Probability/Kernel/Invariance.lean",
+          "declarations": "ProbabilityTheory.Kernel.invariant_iff_singleton:56; invariant_ofPMF_toMeasure_iff:88",
+          "note": "Native direct prescribed-target stationarity equations for transition weights."
+        },
+        {
+          "path": "TauCeti/Probability/MarkovChain/Stationary.lean",
+          "declarations": "ProbabilityTheory.Kernel.Invariant.measurePreserving_shift_markovChainLaw:41; MeasureTheory.Measure.measurePreserving_shift_markovChainLaw_iff:55",
+          "note": "Native ordinary equivalent presentation of the prescribed stationary target."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The dependency supplies the same literal prescribed-invariant-target and finite-estimator construction on general measurable state spaces (Invariance D39, sum D67). Native Simulation randomizedChain:54/60/65 and hasLaw_randomizedChain:117–150 implement dependent recursive sampling from independent innovations and prove its complete path law. exists_uniform_randomizedChain:157–171 supplies samplers on nonempty standard Borel spaces, hence finite ones. Native Invariance:56/88 proves the exact target-weight equations; Stationary:41–62 proves invariant-target ⇔ stationary path law. This is the bare MCMC method with an estimator, not a general ergodic-estimator convergence theorem.\nSearch and boundary notes: Read simulation recursion and complete inductive law proof, target singleton computation and shift-marginal converse. Exclude SampleMean IID variance/concentration, chain recurrence/mixing convergence, and separate estimator consistency theorems; no such theorem is claimed by this method definition.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "markov-inequality",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+          "declarations": "MeasureTheory.mul_meas_ge_le_integral_of_nonneg:1180",
+          "note": "Native completed real-integral Markov inequality."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Lebesgue/Markov.lean",
+          "declarations": "MeasureTheory.mul_meas_ge_le_lintegral₀:52; meas_ge_le_lintegral_div:106",
+          "note": "Native nonnegative extended-integral defining inequality and threshold-division API."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Bochner.Basic.mul_meas_ge_le_integral_of_nonneg:1180–1193 proves t*P.real{t≤Y}≤∫Y for AE nonnegative integrable real Y. The actual proof restricts the integral to the threshold event and uses integral monotonicity; for probability P and t>0 division gives the exact catalogue bound. Lebesgue.Markov meas_ge_le_lintegral_div:106 supplies the nonnegative extended-integral form, not an unproved theorem statement.\nSearch and boundary notes: Preserve t>0 and integrability; AE nonnegativity is sufficient. Exclude separately named second-moment Chebyshev, centered variance, concentration and squared truncation inequalities.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "markov-inequality",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency supplies the complete real theorem at Bochner.Basic:1181–1194 (one header blank), and unchanged Lebesgue.Markov:106. The actual proof/statement were compared at the dependency pin. Bochner.Basic.mul_meas_ge_le_integral_of_nonneg:1180–1193 proves t*P.real{t≤Y}≤∫Y for AE nonnegative integrable real Y. The actual proof restricts the integral to the threshold event and uses integral monotonicity; for probability P and t>0 division gives the exact catalogue bound. Lebesgue.Markov meas_ge_le_lintegral_div:106 supplies the nonnegative extended-integral form, not an unproved theorem statement. Native probability Moments/Chebyshev:43 and Bochner.Basic:745 are squared second-moment/truncation endpoints, not selected generic first-moment core API.\nSearch and boundary notes: Enumerated native Probability/Moments and Integral/{Bochner,Lebesgue} siblings and threshold/Markov declarations. Chebyshev43 was read: it applies imported Markov to norm² and proves another named endpoint; DominatedConvergence/Subsequence merely import Markov. No qualifying native selected; inherited zero LOC.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "markov-transition-semigroup",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Kernel/Defs.lean",
+          "declarations": "ProbabilityTheory.Kernel:54; IsMarkovKernel:137",
+          "note": "Native measurable transition-measure constructor and probability-row predicate."
+        },
+        {
+          "path": "Mathlib/Probability/Kernel/Basic.lean",
+          "declarations": "ProbabilityTheory.Kernel.id:110; id_apply:114",
+          "note": "Native zero-time Dirac transition."
+        },
+        {
+          "path": "Mathlib/Probability/Kernel/Composition/Comp.lean",
+          "declarations": "ProbabilityTheory.Kernel.comp:49; comp_apply':59; comp_assoc:143",
+          "note": "Native Chapman–Kolmogorov integral-composition constructor and ordinary semigroup identities."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact generic definition: P:ℝ≥0→Kernel S S, ∀t IsMarkovKernel(Pt), P0=Kernel.id, and ∀s,t P(s+t)=Pt∘ₖPs. Kernel.comp:49–61 is genuinely measure bind, with comp_apply' proving ∫⁻y Pt(y,A)dPs(x); Basic.id:110–115 is δ_x, and Defs IsMarkovKernel:137 is unit total mass. Those definitions/proofs give the exact Chapman–Kolmogorov orientation; addition commutes but composition notation is explicitly reversed. Sub-Markov is the same predicate with row mass ≤1, not probability rows, and a cemetery extension can retain mass.\nSearch and boundary notes: Bare family predicate; no existence/Feller/generator/path process theorem asserted. The optional sub-Markov variant has explicit mass≤1; no false claim that a probability kernel itself loses mass.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "markov-transition-semigroup",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Kernel/Composition/Power.lean",
+          "declarations": "ProbabilityTheory.IsMarkovKernel.pow:49; Kernel.one_def:64; Kernel.Invariant.pow_comp:68; Kernel.comp_pow_eq_pow_comp_of_comp_eq:77",
+          "note": "Native probability preservation and ordinary power/invariant/intertwining laws for transition kernels, giving integer iterates of any semigroup member."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency supplies the exact generic real-nonnegative-time kernel family and Chapman–Kolmogorov predicate (Defs/Basic/Comp D+1, unchanged bodies). Native Composition.Power proves ordinary iterate API: Markov powers:45–53, one_def:64, Invariant.pow_comp:68–74 and intertwining comp_pow_eq_pow_comp_of_comp_eq:77–85 by induction. Applied to any Pt, these are its integer-time restrictions and invariant/intertwining identities, a genuine core API contribution alongside the inherited arbitrary-time defining predicate.\nSearch and boundary notes: Enumerated native Kernel/Composition and Process and searched semigroup variants. Exclude generators, strong continuity/Feller enhancements, heat-specific constructions and semigroup existence. This is ordinary power-law API, under the approved Group powers-style boundary, not an unsupported claim that a natural-time construction creates all real-time semigroups.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "martingale-continuous-time",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Martingale/Basic.lean",
+          "declarations": "MeasureTheory.Martingale:52; Martingale.integrable:96; martingale_nat:478",
+          "note": "Native all-dates martingale definition, derived integrability, closure laws and completed induction equating discrete one-step and all-dates conditions."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. MeasureTheory.Martingale:52 is StronglyAdapted ℱ M ∧ ∀s≤t E[M_t|ℱ_s]=ᵐM_s. Integrability is genuinely proved at :96 using the self-date conditional expectation, not an omitted axiom. For real values strong measurability equals measurability. Set ι=ℝ≥0; no path continuity or right-continuous filtration is imposed, matching the paragraph.\nSearch and boundary notes: Bounded core: definition, derived integrability, real-linear closure, AE congruence and discrete one-step equivalence. Optional stopping/localization, convergence and path regularity are separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "martingale-continuous-time",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Martingale/Basic.lean",
+          "declarations": "MeasureTheory.StronglyAdapted.martingale_iff_setIntegral_eq:60; Martingale.indicator:110; Martingale.norm:125; Martingale.const_min:166",
+          "note": "Native ordinary equivalent set-integral presentation, indicator/norm closure and deterministic freezing API, valid for arbitrary time preorders."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact definition/integrability/one-step bridge is inherited from checked Basic at D53/97/479 (only header blank). MeasureTheory.Martingale:52 is StronglyAdapted ℱ M ∧ ∀s≤t E[M_t|ℱ_s]=ᵐM_s. Integrability is genuinely proved at :96 using the self-date conditional expectation, not an omitted axiom. For real values strong measurability equals measurability. Set ι=ℝ≥0; no path continuity or right-continuous filtration is imposed, matching the paragraph. Native Basic:60–74 proves the set-integral equivalence from adapted integrable processes by actual conditional-expectation uniqueness; indicator:110, norm:125 and const_min:166 prove ordinary transformations, valid at the indicated time type.\nSearch and boundary notes: Read actual set-integral uniqueness, indicator, norm Jensen and frozen-time case proof. Enumerated native Martingale siblings; exclude Completion/RightContinuousFiltration extra regularity, local martingales, Lp/continuous-limit existence, optional stopping and convergence from the generic definition.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "martingale-discrete-time",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Martingale/Basic.lean",
+          "declarations": "MeasureTheory.Martingale:52; Martingale.integrable:96; martingale_nat:478",
+          "note": "Native all-dates martingale definition, derived integrability, closure laws and completed induction equating discrete one-step and all-dates conditions."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. MeasureTheory.Martingale:52 is StronglyAdapted ℱ M ∧ ∀s≤t E[M_t|ℱ_s]=ᵐM_s. Integrability is genuinely proved at :96 using the self-date conditional expectation, not an omitted axiom. For real values strong measurability equals measurability. Set ι=ℕ. martingale_nat:478–490 proves the one-step formulation implies all-dates by actual induction/tower, while all-dates directly gives the successor formula. Probability finite measure supplies the stated bridge hypotheses.\nSearch and boundary notes: Bounded core: definition, derived integrability, real-linear closure, AE congruence and discrete one-step equivalence. Optional stopping/localization, convergence and path regularity are separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "martingale-discrete-time",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Martingale/Basic.lean",
+          "declarations": "MeasureTheory.StronglyAdapted.martingale_iff_setIntegral_eq:60; Martingale.indicator:110; Martingale.norm:125; Martingale.const_min:166",
+          "note": "Native ordinary equivalent set-integral presentation, indicator/norm closure and deterministic freezing API, valid for arbitrary time preorders."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact definition/integrability/one-step bridge is inherited from checked Basic at D53/97/479 (only header blank). MeasureTheory.Martingale:52 is StronglyAdapted ℱ M ∧ ∀s≤t E[M_t|ℱ_s]=ᵐM_s. Integrability is genuinely proved at :96 using the self-date conditional expectation, not an omitted axiom. For real values strong measurability equals measurability. Set ι=ℕ. martingale_nat:478–490 proves the one-step formulation implies all-dates by actual induction/tower, while all-dates directly gives the successor formula. Probability finite measure supplies the stated bridge hypotheses. Native Basic:60–74 proves the set-integral equivalence from adapted integrable processes by actual conditional-expectation uniqueness; indicator:110, norm:125 and const_min:166 prove ordinary transformations, valid at the indicated time type.\nSearch and boundary notes: Read actual set-integral uniqueness, indicator, norm Jensen and frozen-time case proof. Enumerated native Martingale siblings; exclude Completion/RightContinuousFiltration extra regularity, local martingales, Lp/continuous-limit existence, optional stopping and convergence from the generic definition.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "martingale-convergence-bounded",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Martingale/Convergence.lean",
+          "declarations": "MeasureTheory.Submartingale.ae_tendsto_limitProcess:207; Submartingale.memLp_limitProcess:229; Submartingale.tendsto_eLpNorm_one_limitProcess:305; tendsto_ae_condExp:415; tendsto_eLpNorm_condExp:428",
+          "note": "Native completed almost-sure/L1 convergence and upward conditional-expectation identification for discrete time."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Read Convergence:189–237/305–341/349–435 complete proofs. On the DISCRETE sequence reading specified by the paragraph’s n-indexed conditional-expectation clause, deterministic |M_n|≤C makes UniformIntegrable M 1 by the actual tail criterion UniformIntegrable.uniformIntegrable_of:724 (threshold C+1 makes every tail zero). Submartingale.ae_tendsto_limitProcess:207 and tendsto_eLpNorm_one_limitProcess:305 prove AE and L1 convergence with integrable limit:229. The explicit particular clause is precisely tendsto_ae_condExp:415 and tendsto_eLpNorm_condExp:428, limit conditioned on ⨆nℱn. These genuinely prove both modes and the identification.\nSearch and boundary notes: Interpreted as the usual discrete bounded martingale convergence theorem; paragraph n-indexed application supports that choice. Arbitrary-time right-continuous convergence is not silently inferred. UI tail criterion and completeness are prerequisites, excluded from the mapped theorem file set; reverse martingale/downward theorem is separate.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "martingale-convergence-bounded",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Martingale/Convergence.lean",
+          "declarations": "MeasureTheory.tendsto_eLpNorm_condExp_of_ae_bdd:202; MemLp.tendsto_eLpNorm_condExp:333",
+          "note": "Native bounded conditional-expectation convergence upgrade and upward Lp form; direct core API for the paragraph’s explicit conditional-expectation clause."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Convergence actual statements/proofs match after +2 blanks for AE207→209/+3 for L1 and upward415→418/428→431. It supplies the complete discrete bounded theorem and upward CE identification. Native Convergence:202–234 directly proves bounded CE L1→Lp convergence by inherited CE essential bounds/Vitali with threshold R+1, and MemLp.tendsto_eLpNorm_condExp:333–339 proves the paragraph’s explicit upward conclusion for every finite p, in particular1. Definition/proof ownership is explicit.\nSearch and boundary notes: Read actual native bounded-tail-zero proof and upward wrapper to the general simple-function reduction. Bounded theorem read as discrete as above; no arbitrary continuous-time convergence inferred. Downward/tail factorization results in same file are not extra mappings; native ContinuousLimit is a different fixed-date process-family limit endpoint.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "martingale-convergence-nonnegative",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Martingale/Convergence.lean",
+          "declarations": "MeasureTheory.Submartingale.ae_tendsto_limitProcess:207; Submartingale.memLp_limitProcess:229; Submartingale.tendsto_eLpNorm_one_limitProcess:305; tendsto_ae_condExp:415; tendsto_eLpNorm_condExp:428",
+          "note": "Native completed almost-sure/L1 convergence and upward conditional-expectation identification for discrete time."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Convergence.Submartingale.exists_ae_tendsto_of_bdd:189 and ae_tendsto_limitProcess:207/ memLp_limitProcess:229 are completed DISCRETE ℕ convergence and integrability proofs. Nonnegative martingales have constant mean and thus bounded L1 norms (Basic.setIntegral_eq:99 on univ), so these supply the discrete nonnegative case. The paragraph expressly requires ALL real nonnegative times and right-continuous paths; an existing countable-skeleton/upcrossing bridge giving an AE full-time limit, not only integer-time convergence, remains uncertified after search. Discrete convergence does not prove that scope.\nSearch and boundary notes: Read full discrete upcrossing/limit construction. Searched convergence, right continuity, nonnegative martingale and arbitrary-index variants. No new dense-time path proof developed; finite integrable limiting variable in continuous time is the unresolved endpoint.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "martingale-convergence-nonnegative",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency supplies only the checked discrete nonnegative convergence component (Convergence D191/209/231). Native Martingale/Convergence is upward/downward CONDITIONAL-EXPECTATION convergence on ℕ; ContinuousLimit:54 concerns a sequence of continuous martingales Cauchy at each fixed date, not t→∞. Local/Nonnegative:85 proves a nonnegative local martingale is a supermartingale, a separate localization result, not continuous-time convergence. The right-continuous all-real-time AE finite/integrable endpoint remains unverified, so inherited complete availability cannot be claimed.\nSearch and boundary notes: Enumerated native Martingale siblings ContinuousLimit, Continuity, Crossings/Bounds, RightContinuousFiltration, Local/Nonnegative and Convergence; inspected relevant statements/proofs. Countable/dyadic stopping approximations and arbitrary-index crossing counters alone are not the missing full-time limit theorem; no native selected partial convergence proof certified.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "matching-graph",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Combinatorics/SimpleGraph/Matching.lean",
+          "declarations": "SimpleGraph.Subgraph.IsMatching:67; IsMatching.toEdge:70; IsMatching.verts_eq_biUnion_edgeSet:218; IsMatching.injOn_edgeSet:225",
+          "note": "Native actual matching and its equivalent edge-set/support presentation."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. SimpleGraph.Subgraph.IsMatching:67 requires each selected vertex exactly one incident edge. IsMatching.verts_eq_biUnion_edgeSet:218–224 and injOn_edgeSet:225–228 were read: support is exactly the union of selected edges and edge set uniquely identifies the matching subgraph. Thus it is the precise simple-graph edge-set matching, with unmatched vertices outside that support (monomers); isolated vertices are not duplicated in the matching object. toEdge:70 and its adjacency/surjectivity API prove the ordinary selected-edge presentation.\nSearch and boundary notes: Checked exact support, not a spanning degree≤1 subgraph with extraneous isolated vertices. Perfect matchings, Hall and counting are separate endpoints; no monomer–dimer Gibbs law inferred.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "matching-graph",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Combinatorics/Graph/Matching/Basic.lean",
+          "declarations": "Graph.IsMatching:59; Graph.IsMatching.mono:83; Graph.matchingSupport:117",
+          "note": "Native direct edge-set matching definition and ordinary support/subset/unique-incidence API."
+        },
+        {
+          "path": "TauCeti/Combinatorics/Graph/Matching/OfSimpleGraph.lean",
+          "declarations": "SimpleGraph.matchingSubgraph_isMatching_iff:118; SimpleGraph.matchingEquiv:165",
+          "note": "Native completed equivalence to the dependency’s simple matching presentation."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency matching definition/proofs above are byte-identical. Native Graph.IsMatching:59 explicitly says no loops and no two distinct selected edges share an incident vertex; Basic:79–102 proves empty/subset/uniqueness API, matchingSupport:117 is the saturated vertices. OfSimpleGraph.matchingSubgraph_isMatching_iff:118–145 and matchingEquiv:165–179 prove the exact edge-set ↔ Mathlib matching-subgraph dictionary, with genuine inverse/support proofs. Loop exclusion is stated for the multigraph extension; the catalogue ordinary graph convention is loopless.\nSearch and boundary notes: Enumerated entire native Graph/Matching directory. Hall/network/regular/bipartite-coloring/vertex-cover constructions prove separate stronger endpoints; exclude them. Planar/TL matchings and Finite-type matching samplers are extra structures.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "matrix-exponential",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Algebra/Exponential.lean",
+          "declarations": "NormedSpace.exp:128; exp_eq_tsum:164; expSeries_radius_eq_top:451; exp_series_hasSum_exp':489",
+          "note": "Native defining factorial series, completed convergence and ordinary algebra exponential API instantiated to finite matrices."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Algebra/MatrixExponential.lean",
+          "declarations": "Matrix.exp_diagonal:82; exp_conjTranspose:93; exp_add_of_commute:128",
+          "note": "Native matrix-specific normal forms and norm-independent wrappers."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. NormedSpace.exp:128/exp_eq_tsum:164 is the factorial power series. Exponential.expSeries_radius_eq_top:451–460, norm_expSeries_summable':471 and exp_series_hasSum_exp':489–490 are actual complete convergence proofs for Banach algebras over ℝ/ℂ. Finite matrices use an operator norm as MatrixExponential explicitly explains and does in its wrappers; all finite-dimensional real/complex norms induce the same topology, so the same HasSum holds in any matrix norm (checked Topology/Algebra/Module/FiniteDimension.LinearMap.continuous_of_finiteDimensional:287–289 applied to the identity in both directions). MatrixExponential:82–104 proves diagonal/block/conjugate-transpose identities by power-series transport and :128 supplies commuting-addition law.\nSearch and boundary notes: Bounded core includes power-series convergence and ordinary algebraic/entry/block normal forms. Matrix norm choice is explicit; exclude Lie exponential local inverses, logarithm/branch/surjectivity, Hermitian optimization and operator inequalities. No numerical algorithm complexity claimed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "matrix-exponential",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Algebra/MatrixExponential.lean",
+          "declarations": "Matrix.exp_series_hasSum_exp_apply:96; IsUpperTriangular.exp_apply_diag:116; Matrix.exp_eq_mul_exp_half:223; Matrix.exp_mul_exp_neg:235",
+          "note": "Native entrywise convergence, triangular normal forms and ordinary multiplication/cancellation identities."
+        },
+        {
+          "path": "TauCeti/Analysis/Matrix/Exponential/Block.lean",
+          "declarations": "Matrix.exp_fromBlocks_zero₂₁_eq_fromBlocks:101; exp_fromBlocks_diagonal:111; exp_fromBlocks_zero₂₁:128",
+          "note": "Native equivalent two-block normal forms with completed integral proof."
+        },
+        {
+          "path": "TauCeti/Analysis/Matrix/Exponential/Diagonal.lean",
+          "declarations": "Matrix.diag_pos_of_exp_eq_diagonal:37",
+          "note": "Native ordinary diagonal positivity normal-form consequence, with actual distinct-entry assumption."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency supplies actual defining series/convergence (Exponential declaration bodies identical; one unrelated proof tactic changes at M347 and adds1 later; MatrixExponential byte-identical). Native MatrixExponential entrywise HasSum:96–103, power-entry transport:106, triangular diagonal/submatrix:116/126 and cancellation:223–274 are direct completed core identities. Native Block:101–162 proves triangular two-block exponential and exact off-diagonal integral, including zero-block normal form. Diagonal:37–54 proves positive diagonal entries of a real exponential with distinct diagonal entries by actual commutation/diagonal normal form. All inspected are native contributions to the same matrix exponential.\nSearch and boundary notes: Enumerated Analysis/Matrix/Exponential and Normed/Algebra siblings. Keep bounded algebraic/entry/block normal forms; exclude Log/triangular logarithms, specialized ZeroTemperature asymptotics, positive-semidefinite inequalities and derivative-isomorphism/Lie enhancements as separately structured endpoints. Distinct-entry positivity is not claimed without its hypothesis.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "maximal-coupling-finite",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Prod.lean",
+          "declarations": "MeasureTheory.Measure.fst:1150; fst_apply:1153; Measure.snd:1208; snd_apply:1211",
+          "note": "Native exact two marginal constructors for the defining coupling predicate."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/TotalVariation/Defs.lean",
+          "declarations": "MeasureTheory.etvDist:52; tvDist:61",
+          "note": "Native signed-measure norm underlying the exact normalized disagreement predicate d_TV=tvDist/2."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. This is a DEFINITION of a coupling satisfying maximality, not a theorem asserting its existence for every p,q. On finite discrete V, a plan ρ:Measure(V×V) has marginal conditions ρ.fst=p and ρ.snd=q (Prod.fst:1150/snd:1208). Impose ρ.real{z|z.1≠z.2}=tvDist p q/2, and explicitly the minimum predicate ∀σ, σ.fst=p→σ.snd=q→ρ.real{z|z.1≠z.2}≤σ.real{z|z.1≠z.2}. This exact literal generic predicate includes every catalogue clause; no alias/existence or omitted lower-bound theorem is claimed. The half factor is essential: Mathlib tvDist:61 is the FULL signed-measure variation norm, not probability d_TV. The actual fst/snd pushforwards and variation definition were inspected. Finite probability laws avoid all nonfinite junk cases.\nSearch and boundary notes: Bare literal maximizing/minimizing predicate with supplied plan. No general maximal coupling construction or existence proof is inferred from writing this definition; Griffeath simultaneous process maximality is a separate theorem. Current Mathlib lacks the native Tau IsCoupling alias; marginal equations themselves are exact checked generic constructors.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "maximal-coupling-finite",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/OptimalTransport/Coupling.lean",
+          "declarations": "TauCeti.IsCoupling:125; IsCoupling.fst_eq:127; IsCoupling.snd_eq:129",
+          "note": "Native defining marginal predicate for the exact maximal-coupling subtype."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency supplies exact marginal/variation constructors (Prod selected bodies unchanged despite unrelated finite-product proof edit; TVDefs+1 header). This is a DEFINITION of a coupling satisfying maximality, not a theorem asserting its existence for every p,q. On finite discrete V, a plan ρ:Measure(V×V) has marginal conditions ρ.fst=p and ρ.snd=q (Prod.fst:1150/snd:1208). Impose ρ.real{z|z.1≠z.2}=tvDist p q/2, and explicitly the minimum predicate ∀σ, σ.fst=p→σ.snd=q→ρ.real{z|z.1≠z.2}≤σ.real{z|z.1≠z.2}. This exact literal generic predicate includes every catalogue clause; no alias/existence or omitted lower-bound theorem is claimed. The half factor is essential: Mathlib tvDist:61 is the FULL signed-measure variation norm, not probability d_TV. Native TauCeti.IsCoupling:125–130 packages those actual marginal equalities, and TotalVariation.Countable.tvDist_eq_tsum_abs_singleton:56–60 genuinely proves tvDist=Σ|p(x)−q(x)|, hence the defining RHS is half that sum. Read its variation-singleton and summability proof :39–60. This native equivalent presentation is direct definition/core API, not a fabricated existence theorem. Independent file-boundary review: Countable.tvDist_eq_tsum_abs_singleton56 is checked normalization of the discrepancy input, not a native joint-plan disagreement/minimality theorem, so that prerequisite file is excluded from allocation. IsCoupling125 remains the direct native defining joint-plan constructor with ordinary coupling core API applying to this supplied maximal-coupling subtype. No status/existence claim changes.\nSearch and boundary notes: Enumerated OptimalTransport coupling, TotalVariation Basic/Countable, Measure/Coupling/Shift and MarkovChain/Coupling. Shift gives only a designated-atom dominance construction and an upper bound; do not claim general maximal-coupling existence. Generic native coupling API applies to the maximizing subclass, while nonselected Wasserstein transport endpoints add different objectives. Independent boundary correction excludes Countable TV as input-only; retains actual native marginal/coupling constructor under approved ordinary subclass API policy.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "maximal-coupling-markov-chain-theorem",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Standalone Mathlib checked Kernel composition, total variation and probability product/path constructors do not certify an existing Griffeath simultaneous maximal process coupling. The catalogue requires ONE coupling of complete chains attaining equality at EVERY n and allowing non-coadapted construction. No such completed endpoint was certified by searches for maximal coupling/Griffeath and path-tail equality. A one-time maximal predicate or product-chain meeting bound is insufficient.\nSearch and boundary notes: Searched maximal/Griffeath/coalescence and actual native coupling Basic/Convergence, shift transport and dependency total variation/path suppliers. Separate library ownership: Tau splice/meeting results are Tau-only, not Mathlib implementations. No negative absence assertion and no new coupling proof developed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "maximal-coupling-markov-chain-theorem",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native MarkovChain/Coupling.Basic:257–305 proves only etvDist(law_n,law'_n)≤2·P(no meeting by n), via spliceAtMeeting and a coupling inequality; Convergence:43 proves convergence when eventual meeting is ASSUMED. Actual proof bodies were inspected. The catalogue requires ONE coupling of complete chains attaining equality at EVERY n and allowing non-coadapted construction. No such completed endpoint was certified by searches for maximal coupling/Griffeath and path-tail equality. A one-time maximal predicate or product-chain meeting bound is insufficient.\nSearch and boundary notes: Searched maximal/Griffeath/coalescence and actual native coupling Basic/Convergence, shift transport and dependency total variation/path suppliers. Separate library ownership: Tau splice/meeting results are Tau-only, not Mathlib implementations. No negative absence assertion and no new coupling proof developed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "mean-value-theorem",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/Deriv/MeanValue.lean",
+          "declarations": "exists_hasDerivAt_eq_slope:124; exists_deriv_eq_slope:154; exists_deriv_eq_slope':160",
+          "note": "Native actual real MVT and derivative/slope equivalent forms."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Deriv.MeanValue.exists_hasDerivAt_eq_slope:124–130 and exists_deriv_eq_slope:154–156 are genuine completed Lagrange MVT proofs. The former applies Cauchy MVT to g=id then cancels b−a; the latter turns interior DifferentiableOn into HasDerivAt. They give c∈Ioo a b and f'c=(fb−fa)/(b−a), equivalently fb−fa=f'c·(b−a). Preserve the standard a<b hypothesis (the paragraph leaves this implicit); for a=b the asserted c∈(a,b) is false.\nSearch and boundary notes: Compared actual continuity closed interval/differentiability open interval and strict endpoint order. Banach mean-value inequalities and complex harmonic averaging are distinct. Implicit a<b scope caveat recorded, without changing the concept.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "mean-value-theorem",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Calculus/MeanValue.lean",
+          "declarations": "ContinuousOn.exists_deriv_comp_mul_sub_eq:120",
+          "note": "Native completed exact mean-value increment along a continuous path, direct ordinary tagged-increment API."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency supplies actual Lagrange MVT at Deriv.MeanValue D125/155 (header+1), same continuity/interior differentiability and a<b. Native ContinuousOn.exists_deriv_comp_mul_sub_eq:120–151 in Calculus.MeanValue proves an exact increment realization along ANY continuous real path: its actual proof handles reversed/equal endpoints, applies inherited MVT to the interval image, and uses the intermediate value theorem to realize the tag on the path. This is an ordinary exact-increment equivalent presentation, not a norm-only mean value inequality. It does not relax a<b for the paragraph’s strict interior witness.\nSearch and boundary notes: Enumerated native calculus MeanValue and Holder/MeanValue siblings. Select the exact scalar increment theorem; exclude localized level-band escape estimates, Holder upgrades and symplectic/harmonic mean-value endpoints. Retain explicit standard a<b caveat.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "measure-preserving-flow",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Group/Defs.lean",
+          "declarations": "MeasureTheory.VAddInvariantMeasure:51",
+          "note": "Native measure invariance under the additive real action."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Group/Arithmetic.lean",
+          "declarations": "MeasurableVAdd₂:456; measurable_vadd",
+          "note": "Native JOINT product measurable action constructor."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Group/Action.lean",
+          "declarations": "MeasureTheory.measurePreserving_smul:178, generated measurePreserving_vadd",
+          "note": "Native completed slice-preserving-map and invariant-action equivalence API."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact representation: AddAction ℝ Ω with θtω=t+ᵥω, MeasurableVAdd₂ ℝ Ω (Arithmetic:456 joint measurability, NOT merely separately measurable MeasurableVAdd:443), and VAddInvariantMeasure ℝ Ω μ (Group.Defs:51), with IsProbabilityMeasure μ. AddAction zero/add axioms give θ0=id and θ(s+t)=θs∘θt. Group.Action generated measurePreserving_vadd from the actual :178–184 proof identifies each slice as a probability-preserving map. This is a measurable group flow, without forcing topological continuity of θ or of Ω.\nSearch and boundary notes: Read additive generated declarations and proof, supplied AddAction axioms :117. Dynamics.Flow:96 requires a JOINTLY CONTINUOUS action and cannot replace the requested merely measurable flow; exclude that stronger topology and ergodicity/recurrence theorems.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "measure-preserving-flow",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Group/Action.lean",
+          "declarations": "MeasureTheory.SMulInvariantMeasure.restrict:37",
+          "note": "Native ordinary restriction of the invariant measure to an invariant measurable subset; real additive flows are obtained through Multiplicative ℝ."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Group Defs/Arithmetic/Action files are byte-identical and supply the exact JOINTLY measurable real action above. Exact representation: AddAction ℝ Ω with θtω=t+ᵥω, MeasurableVAdd₂ ℝ Ω (Arithmetic:456 joint measurability, NOT merely separately measurable MeasurableVAdd:443), and VAddInvariantMeasure ℝ Ω μ (Group.Defs:51), with IsProbabilityMeasure μ. AddAction zero/add axioms give θ0=id and θ(s+t)=θs∘θt. Group.Action generated measurePreserving_vadd from the actual :178–184 proof identifies each slice as a probability-preserving map. This is a measurable group flow, without forcing topological continuity of θ or of Ω. Native SMulInvariantMeasure.restrict:37–43 proves the natural restriction of an invariant measure to an exactly invariant measurable subset; instantiate G=Multiplicative ℝ to express this additive real flow. Renormalizing a nonzero finite restricted probability is inherited scalar-invariance API. This direct restriction law contributes ordinary measure-preserving-action core API without assuming isometry or continuity.\nSearch and boundary notes: Enumerated Group/Action, CountableAction, native Dynamics/Flow and ergodic siblings. Native Flow Basic concerns continuous dynamical structure, not the generic merely measurable definition; isometric transitive ball laws and recurrence/ergodicity are excluded. No separate-slice/joint equivalence invented.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "method-of-moments-distribution",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Standalone Mathlib moments Basic/MGFAnalytic and compact polynomial density/weak probability topology were searched. No completed moment-convergence→weak theorem for an arbitrary moment-DETERMINATE limit was certified; Tau native WeakConvergence is a separate project-owned theorem, not a Mathlib proof. The paragraph allows any moment-determinate limiting law, including noncompact ones. That broader determinacy/tight-subsequence argument is an explicitly unverified frontier; mere Bochner integrals without integrability are not treated as moments.\nSearch and boundary notes: Searched moments, weak convergence, determinacy/compact determinacy, polynomial integrability, probability topology and tightness. Native CompactDeterminacy and Determinacy are equality results, not the missing general convergence endpoint; no new Prokhorov/determinacy proof reconstructed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "method-of-moments-distribution",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Moments/WeakConvergence.lean",
+          "declarations": "TauCeti.tendsto_integral_eval_of_tendsto_integral_pow:65; MeasureTheory.ProbabilityMeasure.tendsto_of_tendsto_integral_pow:174",
+          "note": "Native actual moments→weak convergence theorem for a compactly supported LIMIT law, with unrestricted approximating supports."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native Moments/WeakConvergence.tendsto_of_tendsto_integral_pow:174–230 proves the method when the LIMIT law is COMPACTLY SUPPORTED; approximating laws need not be compactly supported. Its completed proof :76–167 builds a global polynomial dominator and :183–230 uses all genuine integrable moment limits and Weierstrass to test bounded continuous functions. The paragraph allows any moment-determinate limiting law, including noncompact ones. That broader determinacy/tight-subsequence argument is an explicitly unverified frontier; mere Bochner integrals without integrability are not treated as moments.\nSearch and boundary notes: Searched moments, weak convergence, determinacy/compact determinacy, polynomial integrability, probability topology and tightness. Native CompactDeterminacy and Determinacy are equality results, not the missing general convergence endpoint; no new Prokhorov/determinacy proof reconstructed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "mgf-convergence-theorem",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Mathlib Moments/MGFAnalytic/ComplexMGF and Levy weak-characteristic-function interfaces were inspected/searched. The catalogue is the general MGF/Curtiss convergence theorem from pointwise convergence on a COMMON real neighborhood of zero. The existing analytic-equality statements or characteristic-function convergence cannot be substituted without a checked normal-family/tightness bridge. No completed general bridge was certified after bounded source search.\nSearch and boundary notes: Searched mgf/tendsto/Curtiss/moment-generating convergence in both Probability/Moments and MeasureTheory measure-convergence suppliers, including native Stable/Laplace specialized limit application. Native weak convergence from compact-limit moments has different hypotheses; no claim of mathematical absence or new analytic convergence proof.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "mgf-convergence-theorem",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native Moments/ComplexMGF.eqOn_complexMGF_of_eqOn_mgf:90–106 is equality/analytic continuation on a fixed integrability strip, not convergence of a sequence; LevyConvergence is a characteristic-function convergence theorem. The catalogue is the general MGF/Curtiss convergence theorem from pointwise convergence on a COMMON real neighborhood of zero. The existing analytic-equality statements or characteristic-function convergence cannot be substituted without a checked normal-family/tightness bridge. No completed general bridge was certified after bounded source search.\nSearch and boundary notes: Searched mgf/tendsto/Curtiss/moment-generating convergence in both Probability/Moments and MeasureTheory measure-convergence suppliers, including native Stable/Laplace specialized limit application. Native weak convergence from compact-limit moments has different hypotheses; no claim of mathematical absence or new analytic convergence proof.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "mixing-time-total-variation",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/TotalVariation/Defs.lean",
+          "declarations": "MeasureTheory.tvDist:61; etvDist:52",
+          "note": "Native exact discrepancy constructor, divided by two for probability mixing time."
+        },
+        {
+          "path": "Mathlib/Data/ENat/Lattice.lean",
+          "declarations": "CompleteLinearOrder ENat instance:29; ENat.iInf_natCast_eq_top:41; iInf_eq_natCast_iff:74",
+          "note": "Native extended infimum/finite-supremum constructors preserving infinite mixing time and attained finite times."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For supplied finite chain coordinate laws μ_n and stationary target π, set d(n)=tvDist μ_n π/2. Define t_mix(ε):ℕ∞=⨅ (n:ℕ) (_:d(n)≤ε), (n:ℕ∞). ENat.Lattice CompleteLinearOrder:29, iInf_natCast_eq_top:41 and iInf_eq_natCast_iff:74 give the actual extended infimum (∞ if the set is empty), not Nat.sInf’s misleading empty-set 0. Worst case is the finite supremum over starting states of that same value; ε is supplied. No convergence/monotonicity/irreducibility is needed to DEFINE it. Time is discrete as in finite chains here; μ_n may be expressed by kernel powers or any realization. Actual signed variation tvDist:61 was read, so the probability normalization is explicit.\nSearch and boundary notes: No standalone named mixing-time alias required under generic-constructor policy. Exclude Markov convergence, coupling estimates and worst-case contraction theorems, which are separately significant endpoints. In particular the definition does not imply a finite mixing time.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "mixing-time-total-variation",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency supplies that exact extended-infimum definition (ENat declaration bodies unchanged, D+1 header; unrelated natCast_sInf adds an explicit lower bound). For supplied finite chain coordinate laws μ_n and stationary target π, set d(n)=tvDist μ_n π/2. Define t_mix(ε):ℕ∞=⨅ (n:ℕ) (_:d(n)≤ε), (n:ℕ∞). ENat.Lattice CompleteLinearOrder:29, iInf_natCast_eq_top:41 and iInf_eq_natCast_iff:74 give the actual extended infimum (∞ if the set is empty), not Nat.sInf’s misleading empty-set 0. Worst case is the finite supremum over starting states of that same value; ε is supplied. No convergence/monotonicity/irreducibility is needed to DEFINE it. Time is discrete as in finite chains here; μ_n may be expressed by kernel powers or any realization. Native Countable.tvDist_eq_tsum_abs_singleton:56–60 proves d(n)=(1/2)Σx|μ_n{x}−π{x}|, the exact finite-state normal form used to compute the discrepancy in this definition. Read actual total-variation singleton/summability proof. The native Equilibrium.tendsto_tvDist_pow_comp is a separate theorem with irreducibility/aperiodicity and supplied invariant π, excluded here. Independent review corrects native attribution: the Countable TV singleton formula is solely the discrepancy input to the extended threshold-time infimum. No native threshold-time/infimum/worst-case mixing API was certified, so full availability is inherited from the actual checked dependency, with zero native files/LOC.\nSearch and boundary notes: Enumerated native MarkovChain/Equilibrium/Coupling and TotalVariation Basic/Countable; no accidental truncated-search inherited conclusion. Count direct finite-state discrepancy normal form, not merely a use of total variation. Convergence/meeting/period bounds remain separate endpoints. Do not map the finite TV input normal form to this compound threshold-time definition. Complete defining ENat/variation supplier remains checked; native convergence/meeting results remain separately significant endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "mollifier",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Calculus/BumpFunction/Normed.lean",
+          "declarations": "ContDiffBump.normed:35; contDiff_normed:43; integral_normed:71; hasCompactSupport_normed:82",
+          "note": "Native actual normalized nonnegative smooth compact kernels and their support API."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/BumpFunction/FiniteDimension.lean",
+          "declarations": "ExistsContDiffBumpBase.w:287; w_integral:308; w_support:313",
+          "note": "Native explicit scaled ε^{-d} normalized compact-kernel construction and checked Jacobian normalization."
+        },
+        {
+          "path": "Mathlib/Analysis/Convolution.lean",
+          "declarations": "convolution_tendsto_right:836",
+          "note": "Native genuine approximation theorem for arbitrary normalized nonnegative shrinking-support kernels."
+        },
+        {
+          "path": "Mathlib/Analysis/Calculus/ContDiff/Convolution.lean",
+          "declarations": "HasCompactSupport.contDiff_convolution_right:420; HasCompactSupport.contDiff_convolution_left:427",
+          "note": "Native completed smooth convolution proof for arbitrary compact smooth kernels."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The generic mollifier is the exact predicate j≥0, ContDiff ℝ ∞ j, HasCompactSupport j and ∫j=1 on finite-dimensional Euclidean space. Normed bump constructor normed:35–43/71–88 supplies actual nonnegative smooth compact-support normalized witnesses. FiniteDimension (namespace ExistsContDiffBumpBase) w:287 and w_integral:308–324 explicitly give D^{-d}j(D^{-1}x), D>0, using the Haar change-of-variable proof (for Lebesgue Haar normalization the constant is exactly ε^{-d}). Convolution:836–870 proves approximation for ANY nonnegative normalized shrinking-support kernels, with explicit continuity/local integrability conditions; ContDiff.Convolution HasCompactSupport.contDiff_convolution_left:427–431 proves smoothness for ANY smooth compactly supported kernel and locally integrable data. Thus the general defining family and smoothing/approximation clauses are supported; radial witnesses are not substituted as the whole definition.\nSearch and boundary notes: Positive scale ε>0 and finite-dimensional Lebesgue/Haar normalization explicit. Smooth approximation is for locally integrable data and convergence at continuity points (or stronger appropriate norms under additional hypotheses), not arbitrary nonmeasurable data. Exclude Sobolev-specific weak derivative estimates, shifted boundary mollification and distribution regularization endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    },
+    {
+      "concept": "mollifier",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Calculus/BumpFunction/Convolution.lean",
+          "declarations": "ContDiffBump.shrinking:52; shrinking_apply_eq:102; integral_shrinking_normed_mul:139; tendstoUniformlyOn_normed_convolution:167",
+          "note": "Native explicit rescaled normalized mollifier family, exact scaling integral and ordinary support/uniform approximation API."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency supplies the generic mollifier predicate, normalized witnesses/scaled kernels and arbitrary-kernel smooth approximation proofs above; Normed/FiniteDimension/Convolution bodies byte-identical, ContDiff.Convolution D+1 header. Native BumpFunction/Convolution.shrinking:52–80 constructs radii tending to zero; shrinking_apply_eq:102–118 proves rescaling by n+1 and integral_shrinking_normed_mul:139–160 proves its exact dimension-Jacobian normalization. tendstoUniformlyOn_normed_convolution:167–180 and global:184–189 prove ordinary uniform-on-sets/whole-space approximation when the data are uniformly continuous in the specified neighborhood. Actual proof bodies read, not inferred from the filename.\nSearch and boundary notes: Enumerated native BumpFunction Convolution/DerivativeApproximation/HolderApproximation/SmoothApprox and Sobolev/Mollification siblings. Count generic mollifier family/scaling/support/convolution API only; exclude weak/Sobolev derivative bounds, boundary extension, prescribed Lipschitz cutoffs and specialized uniform derivative approximation endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-063.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Calculus/BumpFunction/Normed.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 155,
+      "sha256": "7e83e202a58990360dcf41525cd96b5f795e878c9627036e4b334ca6e561435d",
+      "measured_at": "2026-11-13T04:52:01.362057+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Calculus/ContDiff/Convolution.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 435,
+      "sha256": "f1b4a98fe1a7db31a9f345778f19d4244552b86f59567fb38794664a5e744068",
+      "measured_at": "2026-11-13T04:52:01.387403+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Calculus/Deriv/MeanValue.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 536,
+      "sha256": "2c155ab195073e9e5319883c9be46d99939592f4d151aa9875a9fea5066876c1",
+      "measured_at": "2026-11-13T04:52:01.399689+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Normed/Algebra/Exponential.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 695,
+      "sha256": "d102eee4a109a2265ef046fc9704014ba6dfe83dc5fc02a10cd8cf2b4289e6d2",
+      "measured_at": "2026-11-13T04:52:01.457088+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Normed/Algebra/MatrixExponential.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 197,
+      "sha256": "cd2fa04067c23d37171c3f60dc346b8bbd6df68cfc779a22d096108cd272f9dc",
+      "measured_at": "2026-11-13T04:52:01.491056+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Group/Action.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 363,
+      "sha256": "3ef4f777a7d0699d1527699867d971b2e32665f3ceab88a675d35c96cb7b2e45",
+      "measured_at": "2026-11-13T04:52:01.602558+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Group/Arithmetic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 878,
+      "sha256": "309b5900817f3b806f9c799ae8dffe360a9af1d7b79200d0451c1a7ec9a53ac1",
+      "measured_at": "2026-11-13T04:52:01.629436+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Integral/Lebesgue/Markov.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 163,
+      "sha256": "41d852f6c850f8b2a6e726065a970d5aa840dbd4db0ec8b8a5a42faf460edfa7",
+      "measured_at": "2026-11-13T04:52:01.700453+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/Kernel/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 464,
+      "sha256": "7b35e0aebe3961c6478bc5352d27320207c7d3831f1594bd758adc999d7708e4",
+      "measured_at": "2026-11-13T04:52:01.774084+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/Kernel/Invariance.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 73,
+      "sha256": "ff3db51e046abfb6acec25fa085736723661d1f58b2b0c02eae6f817dc9cda10",
+      "measured_at": "2026-11-13T04:52:01.834349+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/Martingale/Convergence.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 441,
+      "sha256": "898bcdae34f5fa0bbcdf9c4feb4e2f91f8ec0f5c78c98150c6b2a54a299b7d5b",
+      "measured_at": "2026-11-13T04:52:01.845225+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Calculus/BumpFunction/Convolution.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 321,
+      "sha256": "8c6177e0a1dadacb12cf91c19016b150aae934a5c207cb32a066bfa2bbd8c96f",
+      "measured_at": "2026-11-13T04:52:01.935748+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Calculus/MeanValue.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 516,
+      "sha256": "7d09bcc718950974dfa962371195d4c9908d9b5d5b0e1d2a0d361e9387ecbf18",
+      "measured_at": "2026-11-13T04:52:01.971028+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Matrix/Exponential/Block.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 171,
+      "sha256": "1fde9acc553363b91594d39dbef28787ab5b175e35ec549c5a75c88e3477fe3b",
+      "measured_at": "2026-11-13T04:52:01.987810+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Matrix/Exponential/Diagonal.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 51,
+      "sha256": "0e77e670a0df04ab80c5c82c75f05cb16a6250fda1983b0b87e5e232d8c86258",
+      "measured_at": "2026-11-13T04:52:02.034330+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Normed/Algebra/MatrixExponential.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 317,
+      "sha256": "22e1fcb42cda181f1a1004aa3de929a8791af8cb135fc0af2fb66df79085ed14",
+      "measured_at": "2026-11-13T04:52:02.061572+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Combinatorics/Graph/Matching/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 372,
+      "sha256": "c69fd63373e087e9ebf027267ce812620a9258f1bc544d035362d29e1b4954b7",
+      "measured_at": "2026-11-13T04:52:02.092199+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Combinatorics/Graph/Matching/OfSimpleGraph.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 222,
+      "sha256": "f34669ba055d03727359b36562302a45fde8d28a4f92838e91a6cbfe3b0b5a3f",
+      "measured_at": "2026-11-13T04:52:02.109042+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Group/Action.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 74,
+      "sha256": "9de54c04498af2048714542e6211b192ea4daf516e6c17ff4b1e5952d2566be7",
+      "measured_at": "2026-11-13T04:52:02.120210+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Kernel/Composition/Power.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 135,
+      "sha256": "469c700d6a857350d24f1d52e725fa163dcfbbc29ae55f39ac4d634a90ad37b4",
+      "measured_at": "2026-11-13T04:52:02.224789+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/MarkovChain/Filtered/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 247,
+      "sha256": "e5107d667af933618e9597c67db7800d78eb5fe0f1d69df64327b73157e86b4f",
+      "measured_at": "2026-11-13T04:52:02.346589+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/MarkovChain/MarkovProperty.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 327,
+      "sha256": "85b1ff3b3e8623b7fca131eaf8e35e9199fb952b6a507c909fed47158054201f",
+      "measured_at": "2026-11-13T04:52:02.378204+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/MarkovChain/Simulation.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 190,
+      "sha256": "be1923ebdc6ef171db44fda4caeeab5c2f30748d9ff9502cdeaf608c4a849a60",
+      "measured_at": "2026-11-13T04:52:02.427920+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/MarkovChain/Stationary.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 82,
+      "sha256": "dda8e4969a2febbe3f61ed9bca1db164482b9c848dc0c6ce4c4764b3f6386a4d",
+      "measured_at": "2026-11-13T04:52:02.466247+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Martingale/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 211,
+      "sha256": "f9c4f7ec5a8bce72ca8c12577d71dd576d6f48e7c25d6b0960a6374da1d8ea55",
+      "measured_at": "2026-11-13T04:52:02.506318+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Martingale/Convergence.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 464,
+      "sha256": "8b6fce2900115659e998be7a69b1b974eb2d266e603d3d31d0020295457f745c",
+      "measured_at": "2026-11-13T04:52:02.542505+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Moments/WeakConvergence.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 219,
+      "sha256": "7f79161cdc7e1058138a611592e2fa9a09ba413937ea22570281a38d158e375a",
+      "measured_at": "2026-11-13T04:52:02.568179+00:00"
+    }
+  ]
+}

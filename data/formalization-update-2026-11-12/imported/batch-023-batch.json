@@ -1,0 +1,567 @@
+{
+  "note": "Whole-catalogue formalization update batch-023: independent source review by algebra_formalization of category_galois_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "spectrum-banach-algebra-element",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Algebra/Spectrum/Basic.lean",
+          "declarations": "resolventSet:64; spectrum:72; spectrum.mem_iff:103",
+          "note": "Exact unital scalar spectrum and ordinary algebraic inverse/resolvent/natural-map API."
+        },
+        {
+          "path": "Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean",
+          "declarations": "quasispectrum:255; Unitization.quasispectrum_eq_spectrum_inr:424",
+          "note": "Actual nonunital definition and checked equivalence to the unitization spectrum."
+        }
+      ],
+      "evidence": "resolventSet:64 and spectrum:72 define exactly failure of IsUnit(λ1−a); mem_iff:103 unfolds that predicate. IsUnit is a two-sided unit, not one-sided invertibility. For a nonunital algebra quasispectrum:255 is identified by the complete Unitization.quasispectrum_eq_spectrum_inr:424 proof with spectrum of the canonical image in Unitization ℂ A. This covers the paragraph convention; for already unital A use spectrum itself, since quasispectrum would adjoin0 unnecessarily. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Bounded core: defining set, inverse criterion, scalar/algebra-map laws and nonunital equivalent presentation. Completeness is unnecessary for the definition. Exclude spectral theorem, functional calculus, spectral-radius formula and CStar order enhancements; no dependency unitization implementation file is charged merely as a prerequisite.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "spectrum-banach-algebra-element",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Algebra/Spectrum.lean",
+          "declarations": "AlgHom.spectrum_apply_eq:38; spectrum_apply_subset_of_ker_le:46",
+          "note": "Native ordinary exact spectrum transport under unit reflection and kernel-compatible maps."
+        },
+        {
+          "path": "TauCeti/Analysis/Normed/Algebra/Spectrum.lean",
+          "declarations": "TauCeti.spectralRadius_eq_zero_iff:34; spectralRadius_eq_zero_iff_spectrum_subset_singleton_zero:40; spectrum.eventually_disjoint_of_isClosed:59",
+          "note": "Native elementary spectrum/quasispectrum recognition and local closed-set avoidance API."
+        }
+      ],
+      "evidence": "The exact dependency supplies the same unital and nonunital unitization meanings. Native AlgHom.spectrum_apply_eq:38 proves equality under a unit-reflecting algebra map by the exact inverse criterion; native spectrum.eventually_disjoint_of_isClosed:59 proves ordinary local avoidance of closed scalar sets via upper hemicontinuity. The native zero-radius equivalence:34/40 retains the distinction between spectrum and quasispectrum. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Defining sets remain Mathlib-owned; selected native algebra/topological identities are actual proved API. Exclude matrix/point-spectrum/real-selfadjoint interval and CStar functional-calculus endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "spherical-area-measure",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/Geometry/Euclidean/Volume/Measure.lean",
+          "declarations": "MeasureTheory.Measure.euclideanHausdorffMeasure:68; euclideanHausdorffMeasure_def:74",
+          "note": "Actual Euclidean-normalized dimensional Hausdorff area constructor, specialized to the sphere."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean",
+          "declarations": "MeasureTheory.FiniteMeasure.normalize:469; toMeasure_normalize_eq_of_ne_zero:510",
+          "note": "Actual mass-division probability constructor; finite positive sphere-area bridge remains unverified in standalone Mathlib."
+        }
+      ],
+      "evidence": "Euclidean.Volume.Measure:68 defines μHE[k] as Hausdorff measure scaled to equal Lebesgue measure in Euclidean dimension k, the appropriate area convention (raw μH uses diameter-power normalization). Its restriction/comap to sphere0 1 is exactly the requested area measure. FiniteMeasure.normalize:469 divides by total mass and proves probability under the supplied nonzero finite-measure condition. This pass did not check a standalone Mathlib proof that codimension-one sphere Hausdorff area has finite positive mass in every positive dimension; therefore do not certify the entire probability-normalization clause as unconditional. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Restriction/comap is a generic measure constructor (Restrict:50) and not a fictitious sphere alias. d=0 gives empty sphere and no probability normalization. Searched Hausdorff/sphere volume comparison; Tau proves the missing comparison separately. Do not identify unnormalized HaarToSphere with Hausdorff area without checked supplier evidence.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "spherical-area-measure",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Euclidean/Volume/Sphere.lean",
+          "declarations": "TauCeti.euclideanHausdorffMeasure_restrict_sphere_eq_smul_map:101; toSphere_volume_eq_comap_euclideanHausdorffMeasure:322; euclideanHausdorffMeasure_restrict_sphere:353; euclideanHausdorffMeasure_sphere_zero_one:361",
+          "note": "Native exact Hausdorff/sphere-area identification, ordinary radius-change API and total mass needed for probability normalization."
+        }
+      ],
+      "evidence": "The dependency μHE[k] constructor gives normalized Euclidean k-dimensional Hausdorff measure. Native toSphere_volume_eq_comap_euclideanHausdorffMeasure:322 proves exactly that its comap to the unit sphere equals volume.toSphere; :353 gives ambient restricted measure equality. The checked complete comparison proof splits measurable sphere sets to avoid antipodal chart poles. Combined with the actual dependency HaarToSphere finite-measure:107/nonzero:104 facts and mass-division normalize:469, this supplies area and probability normalization for d≥1. Native :101 proves ordinary scaling/translation of sphere area; :361 computes its total mass. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: No claim of a probability measure on the empty d=0 sphere. The displayed normalized Hausdorff terminology means Euclidean volume normalization, not total-mass1; probability is an additional division. Circle area/variation is a separate specialization; raw Hausdorff zero-counting/fiber coarea files are not charged by superclass inclusion.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "spherical-harmonic",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked MvPolynomial.IsHomogeneous:46, pderiv:60 with monomial derivative law, and eval:255 as candidate polynomial constructors. Their finite second-partial sum is the expected polynomial Laplacian, but this pass did not certify the exact restricted homogeneous harmonic polynomial representation against the analytic Euclidean Laplacian interface. A dedicated alias is unnecessary in principle; the unverified evaluation/restriction comparison is recorded instead of claiming absence. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Searched sphericalHarmonic/harmonic polynomial/Laplacian eval and actual pderiv/analytic harmonic files. Generic harmonic functions alone do not identify a polynomial degree. No assertion about sphere eigenfunctions or orthogonality follows from the checked ingredients.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "spherical-harmonic",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/MvPolynomial/Harmonic.lean",
+          "declarations": "MvPolynomial.laplacian:85; laplacian_apply:88; harmonicSubmodule:210; mem_harmonicSubmodule_iff:216",
+          "note": "Native harmonic homogeneous polynomial constructor and elementary second-derivative/product/degree API; sphere-function representation frontier explicit."
+        }
+      ],
+      "evidence": "Native MvPolynomial.laplacian:85 is explicitly the finite sum of second formal partial derivatives, with completed product-rule proof, and harmonicSubmodule:210 is homogeneousSubmodule d intersect its kernel; membership:216 is exactly homogeneity plus zero polynomial Laplacian. This is substantial native polynomial-side implementation. Its source explicitly leaves sphere restriction/eigenfunction treatment outside the file; the evaluated analytic Laplacian/restriction bridge has not been independently certified here, so coverage remains partial. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Read the polynomial definitions and product/low-degree proofs. Orthogonal.lean acts on polynomial harmonic spaces, but without checking the requested sphere restriction it is not used to silently claim complete spherical function coverage. Exclude Fischer decomposition from this bounded bare-definition selection as a separately catalogued endpoint.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "spherical-harmonic-decomposition-l2",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked the generic Hilbert orthogonal-sum machinery and homogeneous polynomial/partial derivative candidates. No completed standalone theorem identifying all sphere L2 functions as the orthogonal sum of polynomial harmonic restrictions was certified. In particular abstract Hilbert decomposition does not by itself prove harmonic-degree orthogonality, finite dimensions or density of polynomial restrictions. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped spherical harmonic/Fischer/sphere polynomial/L2 searches. The exact sphere subspaces, analytic restriction bridge and density/orthogonality endpoint remain unverified; no absence assertion.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "spherical-harmonic-decomposition-l2",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/MvPolynomial/Harmonic.lean",
+          "declarations": "MvPolynomial.disjoint_ker_laplacian_map_mulLeft_normSq:300; harmonicSubmodule_sup_map_mulLeft_normSq:310; homogeneousSubmodule_eq_iSup_map_mulLeft_normSq_pow:327; finrank_harmonicSubmodule_add_finrank:343",
+          "note": "Native completed polynomial harmonic decomposition and finite-dimensional algebraic dimension API, an identified partial component of the catalogue decomposition."
+        }
+      ],
+      "evidence": "Native harmonicSubmodule_sup_map_mulLeft_normSq:310 proves the actual Fischer direct-sum spanning relation, with disjointness:300; homogeneousSubmodule_eq_iSup_map_mulLeft_normSq_pow:327 iterates it. Read the full finite-dimensional surjectivity and induction proofs. This implements the algebraic polynomial-decomposition part underlying the final clause. It does not prove sphere L2 orthogonality/completeness or the evaluated restriction comparison, so the full Hilbert-space theorem is unverified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: The positive-characteristic/general-ring statements are not substituted for the real characteristic-zero case: Fischer section uses a characteristic-zero field and nonempty variable type. Algebraic finite sum is not the asserted orthogonal L2 sum. Do not charge generic HilbertBasis source merely as a prerequisite.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "spherical-radon-transform",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "The checked sphere-area/average constructors are candidates for equatorial integration, but no exact source-backed constructor specializing the normalized measure on u-orthogonal unit vectors with the required R1=1 convention has been certified. Convex.Radon is the finite affine-dependence theorem and is not this transform. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Searched sphericalRadon/Funk/Radon transform and actual equatorial/subspace/sphere measure contexts. Missing checked equator-as-unit-sphere comparison and finite nonzero normalization; low dimensions require a convention for empty equators. No transform inferred from the word Radon.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "spherical-radon-transform",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "The checked sphere-area/average constructors are candidates for equatorial integration, but no exact source-backed constructor specializing the normalized measure on u-orthogonal unit vectors with the required R1=1 convention has been certified. Convex.Radon is the finite affine-dependence theorem and is not this transform. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Searched sphericalRadon/Funk/Radon transform and actual equatorial/subspace/sphere measure contexts. Missing checked equator-as-unit-sphere comparison and finite nonzero normalization; low dimensions require a convention for empty equators. No transform inferred from the word Radon.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "spreading-model-basic-sequence",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "The actual Mathlib SchauderBasis and separately Tau-owned subsequence constructors represent basis expansions/subsequences, but do not assert the ordered-index asymptotic norm limits defining a generated spreading model. No exact generic multi-index limit/filter representation and finite-coefficient identification was verified after the scoped sequence/basis search. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Inspected Bases:104/120 and native Tau Bases/Subsequence:55 expansion proof, distinguishing a subsequence basis from asymptotic spreading limits. Tau’s native generating-family norm-equivalence Span:152 controls two-sided bounds rather than the required limiting equality. The construction frontier is explicit, not an absence claim.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "spreading-model-basic-sequence",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "The actual SchauderBasis and subsequence constructors represent basis expansions/subsequences, but do not assert the ordered-index asymptotic norm limits defining a generated spreading model. No exact generic multi-index limit/filter representation and finite-coefficient identification was verified after the scoped sequence/basis search. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Inspected Bases:104/120 and native Bases/Subsequence:55 expansion proof, distinguishing a subsequence basis from asymptotic spreading limits. Native generating-family norm-equivalence Span:152 controls two-sided bounds rather than the required limiting equality. The construction frontier is explicit, not an absence claim.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "star-body-origin",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked StarConvex and gauge/radial-equivalence candidates. A general nonconvex star body needs the last nonnegative ray parameter to be positive, attained and continuous over all ambient unit directions. Gauge API for convex neighborhoods does not certify the full nonconvex compact star-body representation in this pass. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped star body/radial function/ray/gauge searches. Compact-star-convex alone does not guarantee radial continuity or positivity; those extra conditions must be checked rather than inferred from a set-class name.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "star-body-origin",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/RadialReach.lean",
+          "declarations": "TauCeti.compactConvexRadialReach:48; compactConvexRadialReach_eq_inv_gauge:86; compactConvexRadialReach_pos:94; setOf_ray_mem_eq_Icc_compactConvexRadialReach:102; continuous_compactConvexRadialReach:125",
+          "note": "Native actual radial-function implementation with attainment/positive continuous API for the convex subclass; nonconvex star-body scope missing."
+        }
+      ],
+      "evidence": "compactConvexRadialReach:48 defines the actual supremum of nonnegative ray parameters from an intrinsic interior center. Under convex/closed/bounded hypotheses, :86 identifies it with inverse gauge, :94 proves positivity, :102 identifies the entire ray segment, :117 proves attainment and :125 proves continuity. Read these complete proofs. With c=0 and full affine span this is the requested radial data for convex bodies about0. General compact nonconvex star bodies are not covered, so retain partial. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: The intrinsic-direction formulation does not imply all ambient directions unless full affine span is supplied. Convex radial gauge is a genuine restricted implementation, not all star bodies. Native Star.smul_mono is merely a general star-convex set law and does not repair radial continuity.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "strictly-singular-operator",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked bounded linear operator, compact-operator and closed-span norm-equivalence contexts. No exact implementation was certified of the universal condition over every infinite-dimensional closed subspace, nor the equivalence between absence of bounded-below restrictions and absence of a closed-image isomorphism. A compact operator or an operator with nontrivial kernel is not itself that definition. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped strictlySingular/strictly singular/bounded below/restriction searches in operator/module source. Generic Antilipschitz restrictions and continuous linear equivalence constructors are candidates, but their quantified all-subspace meaning and closed-image equivalence remain unresolved. No absence claim.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "strictly-singular-operator",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked bounded linear operator, compact-operator and closed-span norm-equivalence contexts. No exact implementation was certified of the universal condition over every infinite-dimensional closed subspace, nor the equivalence between absence of bounded-below restrictions and absence of a closed-image isomorphism. A compact operator or an operator with nontrivial kernel is not itself that definition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped strictlySingular/strictly singular/bounded below/restriction searches in operator/module source. Generic Antilipschitz restrictions and continuous linear equivalence constructors are candidates, but their quantified all-subspace meaning and closed-image equivalence remain unresolved. No absence claim.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "subsymmetric-schauder-basis",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Module/Bases.lean",
+          "declarations": "GeneralSchauderBasis:104; SchauderBasis:120; UnconditionalSchauderBasis:136",
+          "note": "Existing exact basis/unconditional-coordinate-expansion constructors used in the explicit universal subsequence predicate."
+        },
+        {
+          "path": "Mathlib/Topology/Algebra/Module/Equiv/Basic.lean",
+          "declarations": "ContinuousLinearEquiv:47; ContinuousLinearEquiv.continuous_toFun:51; continuous_invFun:52",
+          "note": "Existing exact bounded-linear equivalence structure required for equivalence with every subsequence closed span."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact checked generic representation: take b:SchauderBasis 𝕜 X (Bases:120), require that its SAME coordinate expansions satisfy ∀x,HasSum (fun n=>b.coord n x • b n) x (SummationFilter.unconditional ℕ), and require for EVERY u:ℕ→ℕ with StrictMono u a ContinuousLinearEquiv between the closed linear spans of b and b∘u sending the embedded b n to b(u n). GeneralSchauderBasis:104 stores basis, coordinate functionals, biorthogonality and expansion; UnconditionalSchauderBasis:136 uses precisely the finite-subset-atTop summation filter (SummationFilter.unconditional:169). ContinuousLinearEquiv:47 is a linear equivalence with continuous forward/inverse maps, exactly the Banach-space basis-equivalence meaning. Thus this is the full defining predicate on the original vectors and coordinates; no dedicated alias and no proof that arbitrary bases are subsymmetric is required. The actual norm-bounded span-equivalence criterion in Tau Span:152 is Tau ownership, not standalone Mathlib proof. Actual constructor fields and relevant completed proofs inspected; no fresh build/new proof development.\nSearch and boundary notes: Earlier assembly uncertainty resolved by checking the actual unconditional summation filter, same coordinate expansion and exact ContinuousLinearEquiv object with basis-vector identification for each StrictMono subsequence. A single subsequence theorem alone would be insufficient; the universal condition is explicitly retained. No spreading/asymptotic model, permutation invariance or existence theorem is claimed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "subsymmetric-schauder-basis",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Module/Bases/Subsequence.lean",
+          "declarations": "SchauderBasis.subsequence:55; coe_subsequence_apply:71; subsequence_coord_apply:75",
+          "note": "Native actual subsequence basis and same-vector/coordinate identification, ordinary API of the defining every-subsequence property."
+        },
+        {
+          "path": "TauCeti/Analysis/Normed/Operator/Span.lean",
+          "declarations": "exists_continuousLinearEquiv_topologicalClosure_span_of_bounds:117; exists_continuousLinearEquiv_topologicalClosure_span_iff:152",
+          "note": "Native exact closed-span equivalence and finite-combination criterion used for the ordinary meaning of subsequence equivalence, with complete-span hypotheses explicit."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact checked generic representation: take b:SchauderBasis 𝕜 X (Bases:120), require that its SAME coordinate expansions satisfy ∀x,HasSum (fun n=>b.coord n x • b n) x (SummationFilter.unconditional ℕ), and require for EVERY u:ℕ→ℕ with StrictMono u a ContinuousLinearEquiv between the closed linear spans of b and b∘u sending the embedded b n to b(u n). GeneralSchauderBasis:104 stores basis, coordinate functionals, biorthogonality and expansion; UnconditionalSchauderBasis:136 uses precisely the finite-subset-atTop summation filter (SummationFilter.unconditional:169). ContinuousLinearEquiv:47 is a linear equivalence with continuous forward/inverse maps, exactly the Banach-space basis-equivalence meaning. Thus this is the full defining predicate on the original vectors and coordinates; no dedicated alias and no proof that arbitrary bases are subsymmetric is required. Dependency Bases differs only a comment line (+1) and ContinuousLinearEquiv source is byte-identical. Native SchauderBasis.subsequence:55 constructs the actual closed-span subsequence basis with the original restricted coordinate functionals and completed convergence proof. Native Span:117/152 proves equivalence with two-sided finite-combination bounds when both closed spans are complete, as in the Banach context; this API does not silently add completeness to the defining predicate. Actual constructor fields and relevant completed proofs inspected; no fresh build/new proof development.\nSearch and boundary notes: Earlier assembly uncertainty resolved by checking the actual unconditional summation filter, same coordinate expansion and exact ContinuousLinearEquiv object with basis-vector identification for each StrictMono subsequence. A single subsequence theorem alone would be insufficient; the universal condition is explicitly retained. No spreading/asymptotic model, permutation invariance or existence theorem is claimed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "superharmonic-dirichlet-dbr-classification",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked actual Hardy/reproducing-kernel and planar harmonic/PDE candidates. They do not certify the exact superharmonic weighted Dirichlet space Dμ, de Branges–Rovnyak space H(b), equality of their norms and the iff classification by an atomic closed-disk measure together with b/a=αz/(1−conj(ζ)z). Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped Rovnyak/de Branges/superharmonic Dirichlet/weighted Dirichlet searches in both analysis trees, comparing Hardy disk kernels and PDE Dirichlet boundary problems. Neither generic RKHS data nor a Dirichlet boundary-value theorem gives this normed-space classification; exact weighted-space and two-way classification frontier remains unknown.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "superharmonic-dirichlet-dbr-classification",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked actual Hardy/reproducing-kernel and planar harmonic/PDE candidates. They do not certify the exact superharmonic weighted Dirichlet space Dμ, de Branges–Rovnyak space H(b), equality of their norms and the iff classification by an atomic closed-disk measure together with b/a=αz/(1−conj(ζ)z). Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped Rovnyak/de Branges/superharmonic Dirichlet/weighted Dirichlet searches in both analysis trees, comparing Hardy disk kernels and PDE Dirichlet boundary problems. Neither generic RKHS data nor a Dirichlet boundary-value theorem gives this normed-space classification; exact weighted-space and two-way classification frontier remains unknown.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "superharmonic-dirichlet-dilation",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Actual holomorphic dilation/Hardy and harmonic Dirichlet boundary APIs do not prove the requested weighted Dirichlet integral inequality with sharp displayed factor 2r/(1+r), for every finite positive closed-disk representing measure. That exact weighted integral model and completed estimate were not certified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped superharmonic/Dirichlet weight/dilation candidates and inspected native harmonic/subharmonic/disk-function contexts. Generic radial contraction or continuity of f(rz) does not imply this quantitative norm bound. Keep 0≤r<1 and positive measure convention explicit; unknown is not a negative coverage assertion.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "superharmonic-dirichlet-dilation",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Actual holomorphic dilation/Hardy and harmonic Dirichlet boundary APIs do not prove the requested weighted Dirichlet integral inequality with sharp displayed factor 2r/(1+r), for every finite positive closed-disk representing measure. That exact weighted integral model and completed estimate were not certified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped superharmonic/Dirichlet weight/dilation candidates and inspected native harmonic/subharmonic/disk-function contexts. Generic radial contraction or continuity of f(rz) does not imply this quantitative norm bound. Keep 0≤r<1 and positive measure convention explicit; unknown is not a negative coverage assertion.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "superharmonic-function",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Read the actual analytic harmonic/Laplacian candidates and semicontinuity representation. They do not certify the full extended-real superharmonic class with circle averages on every contained closed disk, the non-identically-infinity component condition and lower semicontinuity. Harmonic C² functions are a special case. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped superharmonic/subharmonic/circle average/Laplacian candidates. WithTop ℝ and generic integrals alone are not claimed as a checked exact definition assembly; circle versus volume mean and extended-value integration remain explicit frontiers.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "superharmonic-function",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Harmonic/Subharmonic.lean",
+          "declarations": "TauCeti.SubharmonicOn:83; InnerProductSpace.HarmonicOnNhd.subharmonicOn:94; SubharmonicOn.le_of_le_sphere:265",
+          "note": "Native continuous-real local mean-value predicate and comparison API, used with a negative function for the restricted superharmonic case."
+        }
+      ],
+      "evidence": "Native SubharmonicOn:83 stores continuity of a REAL-valued function and the local ball sub-mean inequality for arbitrarily small radii. Applied to −u it implements a restricted continuous-real superharmonic class; :94 proves harmonic functions belong to it, and :265 supplies comparison on balls. These actual fields/proofs were checked. The catalogue LSC possibly-infinite circle-mean class, every contained disk, and component non-infinite condition have not been matched, so retain partial. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Continuous/local-volume-mean formulation is not silently identified with general LSC circle-mean formulation. No extended-value nonsmooth promotion or unproved equivalence. Exclude Perron solution/maximum endpoints as distinct theorem entries.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "support-distribution",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Distribution/Support.lean",
+          "declarations": "Distribution.IsVanishingOn:58; dsupport:93; dsupport_compl_eq:100; mem_dsupport_iff_forall_exists_ne:112",
+          "note": "Actual support and local test-vanishing definition, exact complement-of-vanishing-opens representation and ordinary derivative/delta support API."
+        }
+      ],
+      "evidence": "IsVanishingOn:58 says every test supported in the set has zero value; dsupport:93 is the intersection of closed complements of vanishing opens. dsupport_compl_eq:100 is the exact complement of the union of all such opens, matching the set construction in the paragraph. Read its proof and neighborhood test-function characterization. For classical distributions choose the actual smooth compactly supported test type; this is a definition review, not a new theorem that an arbitrary nonadditive map vanishes on that entire union. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Definition is generic enough for classical/tempered distributions. Native Tau proves union localization/maximal vanishing for additive test maps; do not misattribute that additional proof to standalone Mathlib. Core is defining support and local vanishing/equality/derivative behavior, not singular support or wavefront theory.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "support-distribution",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Distribution/Support.lean",
+          "declarations": "Distribution.isVanishingOn_iUnion:85; isVanishingOn_compl_dsupport:100; isVanishingOn_iff_disjoint_dsupport:106; dsupport_eq_empty_iff:118; map_eq_map_of_eventuallyEq:148",
+          "note": "Native completed support localization/maximal open vanishing and ordinary zero/germ/smooth-multiple support API; underlying definition inherited."
+        }
+      ],
+      "evidence": "Exact dependency supplies IsVanishingOn/dsupport and complement union. Native isVanishingOn_iUnion:85 proves localization using a finite partition-of-unity decomposition of a compactly supported test. Consequently isVanishingOn_compl_dsupport:100 proves that the union really is a vanishing open set for additive maps, and :106 is exact open-set disjoint-support equivalence. Native empty-support/zero and germ-equality proofs:118/148 are ordinary associated API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Read all localization, additive-support, germ and smooth-multiple proof bodies. Partition-of-unity helper is a proof ingredient, not automatically counted. Augmentation/current-boundary operations later in this mixed file are additional structures, not the reason for mapping its whole-file LOC.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "support-function-compact-set",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Order/Compact.lean",
+          "declarations": "IsCompact.isGreatest_sSup:428; IsCompact.exists_sSup_image_eq_and_ge:439",
+          "note": "Actual generic attained-supremum constructor specialized to the support value; convex-hull invariance remains unverified."
+        }
+      ],
+      "evidence": "For fixed u, the explicit existing representation is sSup ((fun x↦inner ℝ x u)  K). IsCompact.exists_sSup_image_eq_and_ge:439 proves it is attained and is exactly the maximum under nonempty compact K and continuity of inner product. This checks the defining support value. The additional equality with the support function of convexHull ℝ K was not located as a completed matching theorem after bounded hull/upper-bound searches, so retain partial for that stated clause. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Read complete compact supremum-attainment proof via dual minimum. Hull:68 proves upper-bound halfspace preservation and is a candidate for deriving invariance, but no new proof is developed here. Do not confuse supporting height-sequence slopes or topological function support with compact-set support function.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "support-function-compact-set",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "The exact dependency has the checked attained-supremum representation of h_K, but the catalogue convex-hull invariance clause remains unverified and no native qualifying support-function implementation was selected. Therefore full inherited coverage is not certified. Native ConvexBody.map:51 concerns underlying bodies, and SupportingContact:42 concerns supporting tangent contact for differentiable functions, not this missing h_K identity. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Bounded supportFunction/support function/sSup convexHull/IsMaxOn hull searches checked actual generic attainment and hull halfspace candidate. Partial dependency availability is recorded in evidence; status model requires native files for partial and full dependency availability for inherited. No false complete inherited or native LOC claim.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "support-function-convex-body",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Order/Compact.lean",
+          "declarations": "IsCompact.isGreatest_sSup:428; IsCompact.exists_sSup_image_eq_and_ge:439",
+          "note": "Native generic maximum-value constructor/attainment used in the explicit compact-body support function representation."
+        }
+      ],
+      "evidence": "For nonempty compact convex K use h_K(u)=sSup ((fun x↦inner ℝ x u)  K). The actual IsCompact.exists_sSup_image_eq_and_ge:439 proves this is the attained maximum, with exactly the continuous real inner-product evaluation and no interior or symmetry hypothesis. This is the exact bare support-function definition using a checked generic supremum constructor; restriction to unit directions is ordinary domain restriction. No dedicated supportFunction alias is required. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Core bounded to actual max representation and attainment, with ordinary generic scalar evaluation. Positive homogeneous extension is the conventional equivalent presentation of this same max; no separate Minkowski/dual-body/mean-width theorem is claimed. ConvexBody carrier source is an input structure, not another support-function implementing file.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "support-function-convex-body",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Actual dependency Compact:439 is byte-identical and supplies the checked generic attained maximum defining h_K. There is no selected native support-function definition or ordinary h_K identity: native ConvexBody.map constructs the image body but does not state support-function transport, and SupportingContact concerns a different function/contact construction. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Count zero native LOC. Bare constructor specialization is retained independently of the unresolved convex-hull-invariance theorem in support-function-compact-set. Exclude body superclass/image files, support of a function, supporting sequence slopes and unrelated convex contact endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "support-function-topological",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/Support.lean",
+          "declarations": "tsupport (generated additive of mulTSupport):49; isClosed_tsupport (generated):56; tsupport_eq_empty_iff (generated):60",
+          "note": "Native exact closure-of-nonzero-locus definition and ordinary zero/closedness/operation/composition support API."
+        }
+      ],
+      "evidence": "Topology.Algebra.Support:49 defines mulTSupport as closure of multiplicative support with a to_additive declaration generating tsupport. The additive doc and generated theorem family give exactly closure of the nonzero locus, with no continuity assumption on f. Read closure, empty-support and natural operation proofs. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: The term support alone in Function.support means nonzero locus without closure, and is explicitly not substituted. HasCompactSupport is a separate refinement. Exclude distribution support, measure support and sheaf-supported cohomology endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "support-function-topological",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Algebra/Support.lean",
+          "declarations": "TauCeti.tsupport_comp_sub_right (generated from mulTSupport_comp_div_right):46; tsupport_snd_smul_fst_subset:63; Homeomorph.tsupport_comp_symm (generated):101",
+          "note": "Native ordinary translation, product and homeomorphism support transport; definition inherited."
+        }
+      ],
+      "evidence": "Exact dependency supplies the same generated tsupport definition. Native mulTSupport_comp_div_right:46 generates tsupport_comp_sub_right, proving actual translation of support. Native tsupport_snd_smul_fst_subset:63 proves product separation, and Homeomorph.mulTSupport_comp_symm:101 generates exact support transport under a homeomorphism. Read these complete short closure/preimage/image proofs. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Natural-map/core-operation selection, not every compact-support use. Exclude distribution localization and cutoff/partitions-of-unity application files; generated additive source anchors point to their genuine multiplicative implementation.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "surface-area-measure-convex-body",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked dimensional Hausdorff area, convex body and supporting-contact candidates, but did not certify the outer-normal direction map on the nonsmooth boundary of an arbitrary convex body, its boundary-area almost-everywhere uniqueness or the resulting exact pushed-forward sphere measure. A smooth sphere area measure does not supply this general Gauss-image construction. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Scoped surfaceAreaMeasure/surface area measure/Gauss map/outer normal/normal unique searches in convex and Euclidean geometry. Native SupportingContact concerns differentiable scalar tangent contact, and ConvexBody.map is a linear image of the body, neither the requested nonsmooth normal pushforward. Unknown, not an absence claim.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "surface-area-measure-convex-body",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked dimensional Hausdorff area, convex body and supporting-contact candidates, but did not certify the outer-normal direction map on the nonsmooth boundary of an arbitrary convex body, its boundary-area almost-everywhere uniqueness or the resulting exact pushed-forward sphere measure. A smooth sphere area measure does not supply this general Gauss-image construction. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit. Independently checked native Tau Analysis/BoundedVariation/ReducedBoundary.outerNormal:107 and norm_outerNormal:140: this is a polar-variation-density normal on the reduced boundary. The bridge to the convex supporting-normal definition, boundary Hausdorff area and AE uniqueness for arbitrary convex bodies remains unverified; this is not asserted to be absent.\nSearch and boundary notes: Scoped surfaceAreaMeasure/surface area measure/Gauss map/outer normal/normal unique searches in convex and Euclidean geometry. Native SupportingContact concerns differentiable scalar tangent contact, and ConvexBody.map is a linear image of the body, neither the requested nonsmooth normal pushforward. Unknown, not an absence claim. Also inspected BV ReducedBoundary:95/107/140 and frontier inclusion:221; no identified convex-boundary area/Gauss-normal comparison proof was certified.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "surface-gradient",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Dual.lean",
+          "declarations": "InnerProductSpace.toDual:136; toDual_symm_apply:178",
+          "note": "Existing representing-vector constructor and exact inner-product characterization, instantiated at the surface tangent differential."
+        },
+        {
+          "path": "Mathlib/Geometry/Manifold/MFDeriv/NormedSpace.lean",
+          "declarations": "mvfderiv:592; mvfderiv_comp:813; mvfderiv_comp_apply:821",
+          "note": "Actual scalar manifold differential and chain rule used in the intrinsic surface-gradient representation."
+        }
+      ],
+      "evidence": "The checked exact generic constructor is (InnerProductSpace.toDual ℝ (TangentSpace I x)).symm (mvfderiv I f x), using the surface-induced Riemannian metric. Dual:136 supplies the actual onto Riesz equivalence, and toDual_symm_apply:178 proves its inner product against v is precisely the scalar manifold derivative applied to v. MFDeriv.NormedSpace:592 is the actual vector-space-valued derivative; the tangent fibre is complete by VectorBundle.Riemannian:280 for the finite-dimensional model. Thus this already gives the exact primary characterization of the catalogue surface gradient, without requiring a new alias. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: The installed metric must be the Euclidean induced metric of the embedded surface, not an arbitrary unrelated metric. This is a source-backed generic constructor specialization, not only an expressible proposition; the Riesz proof and actual tangent derivative were inspected. No assertion about a separate committed ambient-projection formula is needed for the defining characterization; exclude curvature/flows and sphere-specific height calculations.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    },
+    {
+      "concept": "surface-gradient",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Manifold/Riemannian/Gradient/Basic.lean",
+          "declarations": "TauCeti.Manifold.mgradient:78; inner_mgradient:90; eq_mgradient_iff:102",
+          "note": "Native actual manifold/surface gradient and defining uniqueness/ordinary linearity/zero laws."
+        },
+        {
+          "path": "TauCeti/Geometry/Manifold/Riemannian/Gradient/ChainRule.lean",
+          "declarations": "TauCeti.Manifold.inner_mgradientWithin_comp:61; mgradientWithin_comp:71; inner_mgradient_comp:83; mgradient_comp:92",
+          "note": "Native ordinary gradient pullback/metric-adjoint chain rule under smooth maps, including surface inclusion."
+        },
+        {
+          "path": "TauCeti/Geometry/Manifold/Riemannian/Gradient/NormedSpace.lean",
+          "declarations": "TauCeti.Manifold.mgradient_eq_gradient:55; mgradient_eq_gradient_of_eq:77",
+          "note": "Native exact flat Euclidean comparison, identifying the surface construction with conventional gradient notation."
+        }
+      ],
+      "evidence": "Native mgradient:78 explicitly packages exactly the tangent Riesz dual of mvfderiv, and inner_mgradient:90 plus eq_mgradient_iff:102 prove the defining/unique inner-product characterization for every tangent vector. ChainRule:61/71/83/92 proves the metric-adjoint derivative pullback law, the intrinsic form of tangential projection for an isometric surface inclusion. NormedSpace.mgradient_eq_gradient:55 proves agreement with the ordinary Euclidean gradient in the flat model by testing inner products. This covers smooth embedded surfaces with the induced metric, not just the sphere. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual committed statements, hypotheses and relevant completed source bodies inspected; no new proofs, fresh build or transitive axiom audit.\nSearch and boundary notes: Read defining Riesz body/characterization and complete chain/flat-comparison proofs. Count no helper Riesz file merely as a prerequisite. Core bounded to intrinsic definition, ordinary calculus and flat comparison; sphere-height examples, unit-gradient normalization, flows, curvature and Morse endpoints are excluded as selected extra geometry/structures, not a claimed exhaustive inventory.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-023.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 704,
+      "sha256": "e0a06c2958c3416d2a4f8ba70c97f01e163c7bb3c5d3be5281a551e403d06864",
+      "measured_at": "2026-11-13T00:44:03.734521+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Distribution/Support.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 333,
+      "sha256": "19d2a91937537e85d431fced7daa18418180864f9572cb98f7a23240021ac40c",
+      "measured_at": "2026-11-13T00:44:03.737194+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/InnerProductSpace/Dual.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 241,
+      "sha256": "268dc583a3c7969ab27a9a4ec3c4d0784b21bc0cfb1b54b03418371a4a46514e",
+      "measured_at": "2026-11-13T00:44:03.739710+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Geometry/Euclidean/Volume/Measure.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 388,
+      "sha256": "70b4229bc3b8f990883c5ab38d13fd39e3b0a791a9405197fc0b152ec03a62f2",
+      "measured_at": "2026-11-13T00:44:03.746236+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Geometry/Manifold/MFDeriv/NormedSpace.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 831,
+      "sha256": "afa9d6224445cf26158778377f21af1553a18ced1e4aee6e160748cb8f4c3cba",
+      "measured_at": "2026-11-13T00:44:03.749081+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 707,
+      "sha256": "3229b162f551c6c03cefddb0308a106a85d547195b8d0a7e3d2e82ff31c4f0f9",
+      "measured_at": "2026-11-13T00:44:03.752064+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Algebra/Support.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 566,
+      "sha256": "8a361db0b94df4ae135f1708c1869dd0dae74b9ff010151f1b4b2d632b2a792e",
+      "measured_at": "2026-11-13T00:44:03.759600+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Order/Compact.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 573,
+      "sha256": "66365051fad5ce736456b386ce4f491083294ea1dcc7cef7b7942ab0c548f9f8",
+      "measured_at": "2026-11-13T00:44:03.762686+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/Algebra/Spectrum.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 69,
+      "sha256": "f433e843958ea53dfd6042244cb8361391de53a720a8d0f91564944753fb39b7",
+      "measured_at": "2026-11-13T00:44:03.767866+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Convex/RadialReach.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 164,
+      "sha256": "fb6dfc4d3ccf706f61bc94fb129142ad8dfa4352a9b59329a68273ba0765a4b9",
+      "measured_at": "2026-11-13T00:44:03.772728+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Distribution/Support.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 408,
+      "sha256": "974df5fdf71bda999433a4681f1f39603312961815aa0b0aafc587746e12f6db",
+      "measured_at": "2026-11-13T00:44:03.777282+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Normed/Algebra/Spectrum.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 64,
+      "sha256": "609ebb0a26256dde0fbb3b06fa13249ae0192c0fab3495dd8d9c993dbf7326c3",
+      "measured_at": "2026-11-13T00:44:03.786724+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Normed/Module/Bases/Subsequence.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 104,
+      "sha256": "aea609fb2d425fc671ac653633bf19fae36ba1bc1014ba4c416d9beed2405b83",
+      "measured_at": "2026-11-13T00:44:03.791126+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Normed/Operator/Span.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 198,
+      "sha256": "957df9fdf2426064b0abf7bce0823617685378eca508e236eb99a6d6bd01138e",
+      "measured_at": "2026-11-13T00:44:03.796041+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Geometry/Euclidean/Volume/Sphere.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 447,
+      "sha256": "e35ba184c0e64e10320115c94fdf9e9f2ccdabfd26a99f04a71b5d57b29187f6",
+      "measured_at": "2026-11-13T00:44:03.801851+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Geometry/Manifold/Riemannian/Gradient/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 435,
+      "sha256": "c15afe9fab0a26aeb447179074a71bcdb23de4c3cb5193f6ea9554da981132ef",
+      "measured_at": "2026-11-13T00:44:03.806318+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Geometry/Manifold/Riemannian/Gradient/ChainRule.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 172,
+      "sha256": "7e5b7c6b394eea58a4e47711b85c5902819c4e664217c80847907a33666abf60",
+      "measured_at": "2026-11-13T00:44:03.811435+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Geometry/Manifold/Riemannian/Gradient/NormedSpace.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 170,
+      "sha256": "2f2640d5562a08aef7a9961b946e747d556657d7e6b07ac503bab56ba722b8da",
+      "measured_at": "2026-11-13T00:44:03.816694+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RingTheory/MvPolynomial/Harmonic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 369,
+      "sha256": "e939e9344ca8ba022c13d6599dd28480080184e8e60698b79aa3309d5d226d4a",
+      "measured_at": "2026-11-13T00:44:03.821690+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Algebra/Support.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 122,
+      "sha256": "117e58d43950b210ede0dd1708802949f43a0de24686ea242e76ed9fda9a798c",
+      "measured_at": "2026-11-13T00:44:03.826005+00:00"
+    }
+  ]
+}

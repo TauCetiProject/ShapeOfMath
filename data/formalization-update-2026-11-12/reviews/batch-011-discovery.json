@@ -1,0 +1,45 @@
+{
+  "batch_id": "batch-011-discovery",
+  "reviewer": "algebra_formalization",
+  "proposal_sha256": "199ecf56c7a2fdcd2d6537d8ede46ba8b016849bc28181c896ca07e9340e2a9f",
+  "decisions": [
+    {
+      "concept": "equivalent-basic-sequences",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Independent source recheck confirms the earlier extension frontier is resolved. Read full Mathlib LinearEquiv.extend237 dense-induction inverse proofs, extend_eq269 and norm bounds280/285; existing constructor accepts coefficient families without requiring them to have a norm. Read Finsupp.range_linearCombination123, denseRange_inclusion_iff502 and actual closed-span completeness instance. Native Tau Span56 applies exactly that generic constructor to the identity coefficient equivalence;117 maps closed-span family vectors and152 proves both directions of the finite-combination criterion using operator norms/apply_linearCombination, no unconditionality assumption. Dependency Extend and Finsupp bytes identical; Asymptotics differs only comment offset(+1). Actual two-sided bounds at Filter.top are exactly mutual domination. Complete spans/Banach convention explicit. Source inspection, no new proofs or build. Evidence-only correction: completeness instance declaration starts211, not212.",
+      "replacement": {
+        "concept": "equivalent-basic-sequences",
+        "concept_id": "72accd0d-cc58-55f9-955e-c34f9853ddcb",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Mutual domination is exactly the two reversed Asymptotics.IsBigO comparisons at the top filter on \u2115\u2192\u2080\ud835\udd5c, with linearCombination:54/apply:59 and isBigO_iff:99. Newly checked LinearEquiv.extend:237 is an actual completed continuous-linear-equivalence constructor from two dense linear maps and the corresponding two finite-coefficient bounds; its body constructs both bounded extensions and proves inverse laws by dense induction. Instantiate f as the identity equivalence on \u2115\u2192\u2080\ud835\udd5c and e1/e2 as the two combination maps into their closed spans. range_linearCombination:123 identifies their ranges with spans, and denseRange_inclusion_iff:502 makes inclusion of each span into its closure dense. Closed spans in the Banach ambient setting are complete by Submodule.topologicalClosure.completeSpace:211 (Topology/Algebra/Module/Basic.lean). extend_eq:269 sends each finite combination, hence each basis vector, to its counterpart; norm_extend_le:280 and inverse:285 give both uniform bounds. Conversely ContinuousLinearMap.bound:130 applied to the isomorphism and its inverse gives precisely the reversed finite-sum bounds. These existing generic constructors resolve the previously unverified extension/inverse endpoint without requiring a named basic-sequence alias. Relevant actual source bodies and hypotheses inspected; no new Lean proof, fresh build or transitive axiom audit.",
+        "files": [
+          {
+            "path": "Mathlib/Analysis/Asymptotics/Defs.lean",
+            "declarations": "Asymptotics.IsBigOWith:72; IsBigO:86; isBigO_iff:99",
+            "note": "Actual uniform comparison predicate, applied in both directions to finite coefficient combinations."
+          },
+          {
+            "path": "Mathlib/LinearAlgebra/Finsupp/LinearCombination.lean",
+            "declarations": "Finsupp.linearCombination:54; linearCombination_apply:59; range_linearCombination:123",
+            "note": "Exact finite-coefficient sum constructor and span-range presentation used by the coordinate correspondence."
+          },
+          {
+            "path": "Mathlib/Analysis/Normed/Operator/Extend.lean",
+            "declarations": "LinearEquiv.extend:237; extend_eq:269; extend_symm_eq:275; norm_extend_le:280; norm_extend_symm_le:285",
+            "note": "Existing completed two-sided bounded extension with inverse/equality/norm API, specialized to closed-span coordinate isomorphism."
+          }
+        ],
+        "search_notes": "This is a targeted discovery/recheck superseding only the earlier equivalent-basic-sequences unknown pair, not a rewrite of imported batch011. Actual complete closed spans are required: catalogue Schauder bases are explicitly bases of Banach spaces; no extension claim is made for arbitrary incomplete normed ambient spaces. The two-sided bound may use nonnegative constants (enlarge any real witness to max(C,0)); the isomorphism direction supplies positive norm bounds directly. Native topological dense-span and Finsupp coercion helper files are prerequisites and excluded from native file shares. Parent should obtain fresh independent review by original reviewer algebra_formalization before any audited live update."
+      }
+    },
+    {
+      "concept": "equivalent-basic-sequences",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independent source recheck confirms the earlier extension frontier is resolved. Read full Mathlib LinearEquiv.extend237 dense-induction inverse proofs, extend_eq269 and norm bounds280/285; existing constructor accepts coefficient families without requiring them to have a norm. Read Finsupp.range_linearCombination123, denseRange_inclusion_iff502 and actual closed-span completeness instance. Native Tau Span56 applies exactly that generic constructor to the identity coefficient equivalence;117 maps closed-span family vectors and152 proves both directions of the finite-combination criterion using operator norms/apply_linearCombination, no unconditionality assumption. Dependency Extend and Finsupp bytes identical; Asymptotics differs only comment offset(+1). Actual two-sided bounds at Filter.top are exactly mutual domination. Complete spans/Banach convention explicit. Source inspection, no new proofs or build."
+    }
+  ]
+}

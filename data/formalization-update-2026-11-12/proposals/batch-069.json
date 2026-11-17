@@ -1,0 +1,618 @@
+{
+  "batch_id": "batch-069",
+  "author": "algebra_formalization",
+  "reviews": [
+    {
+      "concept": "spectral-gap-finite-markov-chain",
+      "concept_id": "f3db511e-6210-52a6-8570-1503eeaf529c",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Take the paragraph's supplied irreducible REVERSIBLE transition matrix with its real nontrivial spectrum, and at least two states (so lambda1 is defined). Matrix.charpoly140, mem_spectrum_iff_isRoot_charpoly83 and Polynomial.roots55/mem_roots107 give the finite real spectral-root carrier. Filter out1; given the listed eigenvalue hypotheses its remaining root set S is nonempty. Define ordinary gap=1-S.sup'(nonempty)id using Finset.sup':529/least-upper-bound565. It is essential to use a real maximum WITHOUT adjoining0: lambda1 can be negative and ordinary gap can exceed1. Absolute gap instead uses Finset.sup43 of nnNorm eigenvalues, with bottom0. Multiplicity is irrelevant to these maxima, and the strict lambda0>lambda1 assumption permits filtering the value1. This is the exact bare spectral-value definition, not a positivity/mixing theorem or a new proof of reversible spectral reality. A one-state chain has no lambda1 in the paragraph; ordinary gap is left outside this domain rather than silently assigned the absolute-gap empty-spectrum convention. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean",
+          "declarations": "Matrix.charpoly:140",
+          "note": "Actual finite characteristic polynomial carrier of the supplied transition spectrum."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean",
+          "declarations": "Matrix.mem_spectrum_iff_isRoot_charpoly:83",
+          "note": "Actual characteristic-root/eigenvalue dictionary over the real field."
+        },
+        {
+          "path": "Mathlib/Algebra/Polynomial/Roots.lean",
+          "declarations": "Polynomial.roots:55; mem_roots:107",
+          "note": "Actual finite root multiset, using nonzero monic characteristic polynomial."
+        },
+        {
+          "path": "Mathlib/Data/Finset/Lattice/Fold.lean",
+          "declarations": "Finset.sup:43; sup':529; sup'_le_iff:555; isLUB_sup':565",
+          "note": "Actual nonempty REAL finite maximum, and separate nonnegative-modulus maximum for absolute gap."
+        }
+      ],
+      "search_notes": "Compared earlier050 absolute-gap definition: its bottom0 maximum is deliberately not copied to ordinary gap. Enumerated native MarkovChain/Kernel/Matrix and spectral/gap terms; native matrix/Perron eigenvalue results construct the supplied spectral input, not this spectral-gap maximum. No native Markov gap/threshold API selected; separate mixing, Cheeger and eigenvalue-existence theorems excluded."
+    },
+    {
+      "concept": "spectral-gap-finite-markov-chain",
+      "concept_id": "f3db511e-6210-52a6-8570-1503eeaf529c",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The supplying Charpoly Basic/Eigs and Finset Fold files are byte-identical in the pinned dependency; Roots56/108 has only a preceding header blank. Take the paragraph's supplied irreducible REVERSIBLE transition matrix with its real nontrivial spectrum, and at least two states (so lambda1 is defined). Matrix.charpoly140, mem_spectrum_iff_isRoot_charpoly83 and Polynomial.roots55/mem_roots107 give the finite real spectral-root carrier. Filter out1; given the listed eigenvalue hypotheses its remaining root set S is nonempty. Define ordinary gap=1-S.sup'(nonempty)id using Finset.sup':529/least-upper-bound565. It is essential to use a real maximum WITHOUT adjoining0: lambda1 can be negative and ordinary gap can exceed1. Absolute gap instead uses Finset.sup43 of nnNorm eigenvalues, with bottom0. Multiplicity is irrelevant to these maxima, and the strict lambda0>lambda1 assumption permits filtering the value1. This is the exact bare spectral-value definition, not a positivity/mixing theorem or a new proof of reversible spectral reality. A one-state chain has no lambda1 in the paragraph; ordinary gap is left outside this domain rather than silently assigned the absolute-gap empty-spectrum convention. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [],
+      "search_notes": "Compared earlier050 absolute-gap definition: its bottom0 maximum is deliberately not copied to ordinary gap. Enumerated native MarkovChain/Kernel/Matrix and spectral/gap terms; native matrix/Perron eigenvalue results construct the supplied spectral input, not this spectral-gap maximum. No native Markov gap/threshold API selected; separate mixing, Cheeger and eigenvalue-existence theorems excluded."
+    },
+    {
+      "concept": "star-discrepancy",
+      "concept_id": "71a6dd32-3a9f-598f-9910-97efb4225a3c",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For N>0, x:Fin N→(Fin s→R) with all coordinates in[0,1], and a in the same cube, use Finset.univ.filter(fun i=>forall j,x i j<a j).card/N as the empirical anchored HALF-OPEN box mass; indexing the points retains repeated observations. Subtract Finset.prod a, take absolute value, and use real sSup of the resulting set as a ranges over the cube. Actual Finset finite sum/product definitions66 and cardinal bound card_le_card66 provide the finite count; csSup least-upper-bound API101/105 is the actual real supremum, with nonempty range (a=0) and bounded values[0,1]. This is exactly the displayed bare discrepancy formula, not a discrepancy bound or a low-discrepancy construction. N=0 is excluded so the reciprocal is genuine, not division-by-zero totalization. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Finset/Card.lean",
+          "declarations": "Finset.card_le_card:66",
+          "note": "Actual finite empirical index-count/cardinality bound; duplicates retained by counting indices."
+        },
+        {
+          "path": "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean",
+          "declarations": "Finset.sum/prod:66",
+          "note": "Actual finite sum/product operations for empirical box counts and box volume."
+        },
+        {
+          "path": "Mathlib/Order/ConditionallyCompleteLattice/Basic.lean",
+          "declarations": "le_csSup:101; csSup_le:105",
+          "note": "Actual bounded real supremum of anchored half-open box discrepancy values."
+        }
+      ],
+      "search_notes": "Searched star/anchored-box discrepancy and quasi-Monte-Carlo namespaces. Native graph cut discrepancy is a different domain/test family; native FiniteMean would supply only the empirical-average INPUT, with no anchored-box/supremum API, so is not allocated to this compound discrepancy. No Koksma-Hlawka or discrepancy-rate claim."
+    },
+    {
+      "concept": "star-discrepancy",
+      "concept_id": "71a6dd32-3a9f-598f-9910-97efb4225a3c",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Card and conditionally-complete supremum suppliers are identical; finite big-operator definitions have only +1 header offset in the dependency. For N>0, x:Fin N→(Fin s→R) with all coordinates in[0,1], and a in the same cube, use Finset.univ.filter(fun i=>forall j,x i j<a j).card/N as the empirical anchored HALF-OPEN box mass; indexing the points retains repeated observations. Subtract Finset.prod a, take absolute value, and use real sSup of the resulting set as a ranges over the cube. Actual Finset finite sum/product definitions66 and cardinal bound card_le_card66 provide the finite count; csSup least-upper-bound API101/105 is the actual real supremum, with nonempty range (a=0) and bounded values[0,1]. This is exactly the displayed bare discrepancy formula, not a discrepancy bound or a low-discrepancy construction. N=0 is excluded so the reciprocal is genuine, not division-by-zero totalization. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [],
+      "search_notes": "Searched star/anchored-box discrepancy and quasi-Monte-Carlo namespaces. Native graph cut discrepancy is a different domain/test family; native FiniteMean would supply only the empirical-average INPUT, with no anchored-box/supremum API, so is not allocated to this compound discrepancy. No Koksma-Hlawka or discrepancy-rate claim."
+    },
+    {
+      "concept": "stationary-distribution-finite",
+      "concept_id": "7bb2739b-1822-587e-9529-6248b22d50f1",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a supplied finite real row-stochastic P, the exact predicate is pi_i>=0, sum_i pi_i=1 and Matrix.vecMul pi P=pi. Actual vecMul742/apply_eq_sum751 gives (pi P)_j=sum_i pi_i P_ij, with the correct ROW orientation. This is the bare probability fixed-row definition, not existence/uniqueness or convergence to stationarity. No reversibility or irreducibility is imposed. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Matrix/Mul.lean",
+          "declarations": "Matrix.vecMul:742; vecMul_apply_eq_sum:751",
+          "note": "Actual probability-row stationarity equation, with exact finite component formula."
+        }
+      ],
+      "search_notes": "Compared matrix and Kernel.Invariant38 definitions. Finite nonnegative normalization is explicit. Generic invariant-measure existence and chain long-time convergence are separate endpoints."
+    },
+    {
+      "concept": "stationary-distribution-finite",
+      "concept_id": "7bb2739b-1822-587e-9529-6248b22d50f1",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Data/Matrix/Mul is byte-identical. For a supplied finite real row-stochastic P, the exact predicate is pi_i>=0, sum_i pi_i=1 and Matrix.vecMul pi P=pi. Actual vecMul742/apply_eq_sum751 gives (pi P)_j=sum_i pi_i P_ij, with the correct ROW orientation. This is the bare probability fixed-row definition, not existence/uniqueness or convergence to stationarity. No reversibility or irreducibility is imposed. Native Kernel.invariant_iff_vecMul41–48 and Matrix.rowStochastic.invariant_toKernel_toMeasure_iff_vecMul106–110 prove the exact kernel/PMF stationary-row dictionary, with complete singleton-mass proof. Native Matrix.Basic.toKernel132–148 constructs every row-stochastic NNReal matrix as an actual Markov kernel with the prescribed point masses. Real nonnegative rows are the same data via their nonnegative subtype; no arbitrary real matrix is asserted stochastic. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Kernel/Matrix/Basic.lean",
+          "declarations": "Matrix.rowStochastic.toKernel:132; toKernel_apply_singleton:142; toMatrix_toKernel:148",
+          "note": "Native actual finite stochastic matrix/kernel constructor used by the exact stationary-row dictionary."
+        },
+        {
+          "path": "TauCeti/Probability/Kernel/Matrix/Invariance.lean",
+          "declarations": "ProbabilityTheory.Kernel.invariant_iff_vecMul:41; Matrix.rowStochastic.invariant_toKernel_toMeasure_iff_vecMul:106",
+          "note": "Native completed direct finite stationary-row/invariant-PMF equivalence and ordinary balance API."
+        }
+      ],
+      "search_notes": "Enumerated native Kernel/Matrix/Basic/Invariance and Kernel/Stationary/Invariance. Count the direct stationary-row dictionary; path shift-invariance, recurrent-state classification and stationary-law existence are extra endpoints."
+    },
+    {
+      "concept": "stirling-formula",
+      "concept_id": "ed887412-6808-5817-94ee-019856688f5b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Stirling.factorial_isEquivalent_stirling216–223 proves exactly n! ~ sqrt(2*n*pi)*(n/exp1)^n. Full source proof reduces to tendsto_stirlingSeq_sqrt_pi209–213 and the ratio-to-one equivalence; positivity of the limit and Wallis limit identify sqrt(pi). Multiplication order matches sqrt(2*pi*n). The limit is n→infinity, so n=0 conventions do not alter it. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Stirling.lean",
+          "declarations": "Stirling.tendsto_stirlingSeq_sqrt_pi:209; factorial_isEquivalent_stirling:216",
+          "note": "Actual completed factorial Stirling asymptotic and direct effective-sequence API."
+        }
+      ],
+      "search_notes": "Read actual factorial ratio theorem/proof; Gamma complex-sector asymptotics are not required for this real factorial theorem."
+    },
+    {
+      "concept": "stirling-formula",
+      "concept_id": "ed887412-6808-5817-94ee-019856688f5b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency Stirling final theorems are211/218: earlier conv syntax and a div-cancellation alias differ, but completed Wallis/ratio proof and statement are the same. Stirling.factorial_isEquivalent_stirling216–223 proves exactly n! ~ sqrt(2*n*pi)*(n/exp1)^n. Full source proof reduces to tendsto_stirlingSeq_sqrt_pi209–213 and the ratio-to-one equivalence; positivity of the limit and Wallis limit identify sqrt(pi). Multiplication order matches sqrt(2*pi*n). The limit is n→infinity, so n=0 conventions do not alter it. Native Stirling.tendsto_log_factorial_sub_stirling54–76 supplies ordinary logarithmic factorial Stirling asymptotics with n+1 in the smooth main term. Its proof explicitly corrects n log(1+1/n)→1 and log(1+1/n)→0; the shifted convention is not silently substituted for the factorial ratio theorem, which remains dependency-owned. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Gamma/Stirling.lean",
+          "declarations": "Stirling.tendsto_log_factorial_sub_stirling:54",
+          "note": "Native actual logarithmic factorial Stirling normal form/direct asymptotic API; complete shifted-main-term correction proof."
+        }
+      ],
+      "search_notes": "Native Gamma Stirling contains further complex log-Gamma remainder/sector expansions; their whole-file LOC is counted because the direct factorial result is here, without mapping unrelated importers/applications."
+    },
+    {
+      "concept": "stochastic-mesh-method",
+      "concept_id": "38f8bac4-2246-54f7-bf96-e4a1fd8c7a3c",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For supplied transition density p and L>0 simulated paths, let q(y)=finite average_l p(s,X_l(s);t,y). The final estimator at x is finite average_j [(p(s,x;t,Y_j)/q(Y_j))*f(Y_j)], Y_j=X_j(t). Finset.sum:66 gives exactly sum_j p/(L*q)*f; native finiteMean equality56 gives the same normalized sum. The SAME q and simulated Y_j family is reused for every queried x, exactly the random-mesh rule. Restrict the displayed quotient to q(Y_j)>0; on a zero-denominator event an explicit weight0 convention may be chosen, but no unverified theorem about its nullity is asserted. No construction of p or of the simulated Markov law, unbiasedness, convergence or error rate is claimed: this entry defines the supplied-input approximation. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean",
+          "declarations": "Finset.sum:66",
+          "note": "Actual finite weighted estimator and common empirical-density mixture formula."
+        }
+      ],
+      "search_notes": "Searched stochastic mesh/mesh expectation/transition density. Finite positive L and nonzero displayed-denominator domain are explicit. Simulating paths/constructing the transition density are supplied inputs, not unlocated theorem claims."
+    },
+    {
+      "concept": "stochastic-mesh-method",
+      "concept_id": "38f8bac4-2246-54f7-bf96-e4a1fd8c7a3c",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned finite-sum definition has only +1 header line. For supplied transition density p and L>0 simulated paths, let q(y)=finite average_l p(s,X_l(s);t,y). The final estimator at x is finite average_j [(p(s,x;t,Y_j)/q(Y_j))*f(Y_j)], Y_j=X_j(t). Finset.sum:66 gives exactly sum_j p/(L*q)*f; native finiteMean equality56 gives the same normalized sum. The SAME q and simulated Y_j family is reused for every queried x, exactly the random-mesh rule. Restrict the displayed quotient to q(Y_j)>0; on a zero-denominator event an explicit weight0 convention may be chosen, but no unverified theorem about its nullity is asserted. No construction of p or of the simulated Markov law, unbiasedness, convergence or error rate is claimed: this entry defines the supplied-input approximation. Native finiteMean50/finiteMean_eq_inv_smul_sum56 constructs the FINAL normalized weighted estimator itself, not merely its density input q. Read exact definition and completed normalization proof; it applies to the vector family z_j=(p/q)*f(Y_j), over real scalars. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/FiniteMean.lean",
+          "declarations": "TauCeti.finiteMean:50; finiteMean_eq_inv_smul_sum:56",
+          "note": "Native actual final finite-mean estimator constructor and completed inverse-cardinality sum formula, instantiated at mesh-weighted values."
+        }
+      ],
+      "search_notes": "Enumerated native finite-averaging/importance-sampling/Markov mesh candidates. Count the constructor of the final mean formula; no named mesh alias is required. Exclude concentration/error results and density/simulation implementation prerequisites."
+    },
+    {
+      "concept": "stochastic-monotonicity-markov-kernel",
+      "concept_id": "4f3e2248-3c32-52a4-9ab9-2d598513159e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. On a supplied finite partially ordered state type S and transition matrix P, define forall f:S→R, Monotone f→Monotone(P.mulVec f). Matrix.mulVec719/apply_eq_sum728 gives precisely Pf(x)=sum_y Pxy*f(y), and Monotone62 is forall x<=y, value(x)<=value(y). Define row stochastic domination by testing every increasing real f; the paragraph's equivalent row-law condition is literally the same forall f,x,y quantifiers reordered. On finite S every real f is bounded; no total order, CDF test or coupling existence is substituted. This exact bare monotone-kernel predicate needs no theorem that arbitrary P preserves monotonicity. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/Data/Matrix/Mul.lean",
+          "declarations": "Matrix.mulVec:719; mulVec_apply_eq_sum:728",
+          "note": "Actual finite transition expectation operator in the defining monotonicity predicate."
+        },
+        {
+          "path": "Mathlib/Order/Monotone/Defs.lean",
+          "declarations": "Monotone:62",
+          "note": "Actual arbitrary-partial-order monotonicity constructor and exact increasing-test row-domination representation."
+        }
+      ],
+      "search_notes": "Searched monotone/stochastically ordered kernels and enumerated native StochasticOrder/Kernel/Matrix. Native Probability/StochasticOrder is real-line CDF/quantile coupling, not an arbitrary finite-partial-order kernel-preservation API. Generic matrix conversion provides only the input P, not its monotonicity predicate, so excluded here. No new Strassen/coupling proof claimed."
+    },
+    {
+      "concept": "stochastic-monotonicity-markov-kernel",
+      "concept_id": "4f3e2248-3c32-52a4-9ab9-2d598513159e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact Matrix/Mul and Monotone/Defs dependency files byte-identical. On a supplied finite partially ordered state type S and transition matrix P, define forall f:S→R, Monotone f→Monotone(P.mulVec f). Matrix.mulVec719/apply_eq_sum728 gives precisely Pf(x)=sum_y Pxy*f(y), and Monotone62 is forall x<=y, value(x)<=value(y). Define row stochastic domination by testing every increasing real f; the paragraph's equivalent row-law condition is literally the same forall f,x,y quantifiers reordered. On finite S every real f is bounded; no total order, CDF test or coupling existence is substituted. This exact bare monotone-kernel predicate needs no theorem that arbitrary P preserves monotonicity. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [],
+      "search_notes": "Searched monotone/stochastically ordered kernels and enumerated native StochasticOrder/Kernel/Matrix. Native Probability/StochasticOrder is real-line CDF/quantile coupling, not an arbitrary finite-partial-order kernel-preservation API. Generic matrix conversion provides only the input P, not its monotonicity predicate, so excluded here. No new Strassen/coupling proof claimed."
+    },
+    {
+      "concept": "stochastic-porous-medium-equation-additive",
+      "concept_id": "43e1cb7e-ecb2-5ab2-a946-18ba9b2bed49",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The variational stochastic evolution in a negative Sobolev state space, with nonlinear |X|^(m-1)X, specified domain/boundary and Hilbert-valued additive Wiener noise, was not certified by the checked existing sources. Brownian evaluation classes and deterministic elliptic/Sobolev energy constructions are not an implementation of this variational SPDE or its stochastic integral. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [],
+      "search_notes": "Searched porous medium, negative Sobolev, variational SPDE, Wiener stochastic evolution and stochastic-integral candidates across both Analysis/Probability namespaces; enumerated native Brownian/Process and PDE/Sobolev sources. Tau-owned geometric Brownian Basic explicitly leaves even its SDE identification unproved; deterministic weak PDEs do not settle this genuinely different equation. Unknown is a bounded unresolved formalization frontier, not a nonexistence claim."
+    },
+    {
+      "concept": "stochastic-porous-medium-equation-additive",
+      "concept_id": "43e1cb7e-ecb2-5ab2-a946-18ba9b2bed49",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The variational stochastic evolution in a negative Sobolev state space, with nonlinear |X|^(m-1)X, specified domain/boundary and Hilbert-valued additive Wiener noise, was not certified by the checked existing sources. Brownian evaluation classes and deterministic elliptic/Sobolev energy constructions are not an implementation of this variational SPDE or its stochastic integral. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [],
+      "search_notes": "Searched porous medium, negative Sobolev, variational SPDE, Wiener stochastic evolution and stochastic-integral candidates across both Analysis/Probability namespaces; enumerated native Brownian/Process and PDE/Sobolev sources. Tau-owned geometric Brownian Basic explicitly leaves even its SDE identification unproved; deterministic weak PDEs do not settle this genuinely different equation. Unknown is a bounded unresolved formalization frontier, not a nonexistence claim."
+    },
+    {
+      "concept": "stochastic-process",
+      "concept_id": "a63581bb-5018-55a7-b947-a8ce20a3d39a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact literal carrier is a family X:T→Omega→S on a supplied probability space with forall t, Measurable(X t). Actual Measurable492 is preimage measurability for all state-measurable sets; the ordinary dependent function carrier supplies arbitrary specified time set T. No filtration, joint time/sample measurability, separability, continuity or cadlag condition is silently added. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/MeasurableSpace/Defs.lean",
+          "declarations": "Measurable:492",
+          "note": "Actual slice-measurability predicate defining a general stochastic-process family."
+        }
+      ],
+      "search_notes": "Compared corrected catalogue paragraph to actual generic measurable-family constructor. Adapted/Progressive/StronglyMeasurable processes are stronger structures, excluded from the bare definition."
+    },
+    {
+      "concept": "stochastic-process",
+      "concept_id": "a63581bb-5018-55a7-b947-a8ce20a3d39a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency MeasurableSpace.Defs is byte-identical. Exact literal carrier is a family X:T→Omega→S on a supplied probability space with forall t, Measurable(X t). Actual Measurable492 is preimage measurability for all state-measurable sets; the ordinary dependent function carrier supplies arbitrary specified time set T. No filtration, joint time/sample measurability, separability, continuity or cadlag condition is silently added. Native process cylinder54 and measurableSet_blockCylinder85–89 give direct ordinary finite-coordinate event API for the Nat-indexed specialization, using only measurability of selected slices. Complete preimage/intersection and measurability proofs68–89 read. This is ordinary process API, not a Markov/exchangeability model or joint-measurability assertion. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Process/Cylinder.lean",
+          "declarations": "TauCeti.Probability.blockCylinder:54; blockCylinder_eq_preimage_univ_pi:68; measurableSet_blockCylinder:85",
+          "note": "Native actual selected-coordinate process events and their measurability, a direct ordinary Nat-time specialization of the general family."
+        }
+      ],
+      "search_notes": "Enumerated ALL native root Process siblings before classification. Cylinder is direct generic finite-coordinate event API. Array/reindexing/exchangeability limit theorems, natural-history Markov constructions and progressive/path-regularity additions are separately significant and not allocated merely for using processes."
+    },
+    {
+      "concept": "stopping-time",
+      "concept_id": "89cb22f5-3296-5386-a319-906739b2c7d6",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. MeasureTheory.IsStoppingTime74 is exactly forall t, MeasurableSet[F_t]{omega|tau omega<=t}, with tau:Omega→WithTop(time). It includes infinity as the extra top time. Read actual constructor and stopping-past sigma-algebra/measurability API; no predictable-time or strict-sublevel definition is substituted. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Process/Stopping.lean",
+          "declarations": "MeasureTheory.IsStoppingTime:74; IsStoppingTime.measurableSpace:446; stoppedValue:803",
+          "note": "Actual extended-time stopping predicate, stopped-past sigma algebra and immediate stopped-value/process API."
+        }
+      ],
+      "search_notes": "Native stopping/root/StoppedValue/StoppingApproximation siblings enumerated. Count defining/ordinary stopping API; optional-sampling, optimal stopping and recurrence endpoints excluded."
+    },
+    {
+      "concept": "stopping-time",
+      "concept_id": "89cb22f5-3296-5386-a319-906739b2c7d6",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Stopping has +1 header offset (definition75). MeasureTheory.IsStoppingTime74 is exactly forall t, MeasurableSet[F_t]{omega|tau omega<=t}, with tau:Omega→WithTop(time). It includes infinity as the extra top time. Read actual constructor and stopping-past sigma-algebra/measurability API; no predictable-time or strict-sublevel definition is substituted. Native mono_filtration32–35 transports exactly each stopping sublevel event under enlargement; finite-sup41–50 proves closure under a finite maximum by stopping-time max induction. Both completed proofs read. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Process/Stopping.lean",
+          "declarations": "MeasureTheory.IsStoppingTime.mono_filtration:32; Finset.isStoppingTime_sup:41",
+          "note": "Native direct stopping-event natural-map and finite-maximum API, with exact completed proofs."
+        }
+      ],
+      "search_notes": "Enumerated native Stopping, StoppedValue, StoppingApproximation, HittingTime, localizers and filtered stopping. Generic time approximation/continuity/optional-sampling endpoints are not added merely as importers."
+    },
+    {
+      "concept": "stratonovich-integral",
+      "concept_id": "de78717c-8a45-5e82-a3e8-e0207e539cbd",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The complete continuous-semimartingale Stratonovich integral and asserted equivalence between Ito-plus-half-bracket and symmetric stochastic Riemann sums were not certified. Existing convergence-in-measure predicates and native finite-variation quadratic-sum vanishing results do not construct the general Ito integral/cross-bracket, or prove symmetric-sum convergence for arbitrary continuous semimartingales. Merely adding one-half of a supplied bracket would not verify the explicit equivalence clause. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [],
+      "search_notes": "Searched Stratonovich, stochastic/Ito integral, semimartingale and symmetric stochastic sums; inspected native Process/QuadraticVariation and BV mixed-quadratic-sum candidates previously066 with completed stronger BV proof106. Tau-owned geometric Brownian docs explicitly say Ito calculus/SDE identification is not proved there. No prerequisite formula is counted as a partial proof of the missing stochastic-sum endpoint."
+    },
+    {
+      "concept": "stratonovich-integral",
+      "concept_id": "de78717c-8a45-5e82-a3e8-e0207e539cbd",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The complete continuous-semimartingale Stratonovich integral and asserted equivalence between Ito-plus-half-bracket and symmetric stochastic Riemann sums were not certified. Existing convergence-in-measure predicates and native finite-variation quadratic-sum vanishing results do not construct the general Ito integral/cross-bracket, or prove symmetric-sum convergence for arbitrary continuous semimartingales. Merely adding one-half of a supplied bracket would not verify the explicit equivalence clause. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [],
+      "search_notes": "Searched Stratonovich, stochastic/Ito integral, semimartingale and symmetric stochastic sums; inspected native Process/QuadraticVariation and BV mixed-quadratic-sum candidates previously066 with completed stronger BV proof106. Tau-owned geometric Brownian docs explicitly say Ito calculus/SDE identification is not proved there. No prerequisite formula is counted as a partial proof of the missing stochastic-sum endpoint."
+    },
+    {
+      "concept": "strong-markov-process",
+      "concept_id": "7b346533-5b08-5a16-9203-c7a93330978f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The bare general property can be represented literally using ALL almost-surely finite F-stopping times tau, their actual stopped-past sigma-algebra IsStoppingTime.measurableSpace446, and stoppedValue803. For a supplied Markov process and its supplied transition kernel/future law from (tau,X_tau), require conditional expectations of EVERY bounded measurable real future test to equal its integral against that transition/future law. MeasureTheory.condExp100 is the actual conditional expectation constructor; bounded tests on probability spaces ensure integrability, and the stopped sigma algebra is a subsigma algebra, avoiding its zero fallback. The property uses the full supplied future path test family (or its specified transition-law presentation), not just a correlation/mean or deterministic-time Markov property. This is a literal universal PROPERTY definition; it does not assert every arbitrary-time Markov process satisfies it. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Process/Stopping.lean",
+          "declarations": "MeasureTheory.IsStoppingTime:74; IsStoppingTime.measurableSpace:446; stoppedValue:803",
+          "note": "Actual all-finite-stopping quantifier, stopped-past sigma algebra and stopped-state/future construction in the definition."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean",
+          "declarations": "MeasureTheory.condExp:100",
+          "note": "Actual bounded-test conditional-law predicate at the stopped-past sigma algebra."
+        }
+      ],
+      "search_notes": "Searched strong Markov and compared actual stopped sigma algebra/future conditional-law suppliers. Full future law is supplied as input; no universal strong-Markov theorem or continuous-time regularity implication is fabricated."
+    },
+    {
+      "concept": "strong-markov-process",
+      "concept_id": "7b346533-5b08-5a16-9203-c7a93330978f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Stopping/ConditionalExpectation definitions have only +1 header offsets. The bare general property can be represented literally using ALL almost-surely finite F-stopping times tau, their actual stopped-past sigma-algebra IsStoppingTime.measurableSpace446, and stoppedValue803. For a supplied Markov process and its supplied transition kernel/future law from (tau,X_tau), require conditional expectations of EVERY bounded measurable real future test to equal its integral against that transition/future law. MeasureTheory.condExp100 is the actual conditional expectation constructor; bounded tests on probability spaces ensure integrability, and the stopped sigma algebra is a subsigma algebra, avoiding its zero fallback. The property uses the full supplied future path test family (or its specified transition-law presentation), not just a correlation/mean or deterministic-time Markov property. This is a literal universal PROPERTY definition; it does not assert every arbitrary-time Markov process satisfies it. Native StrongMarkov.Basic277–292 proves exact whole-future conditional expectation for canonical homogeneous Nat-time chains at AE-finite stopping times. Process51–90 transfers full stopped-future laws to arbitrary sample spaces with filtration contained in coordinate history; the time-slice decomposition proof was read. Filtered/StrongMarkov106–165 and211–236 prove the full relative-filtration bounded/integrable future conditional-law assertion for actual IsMarkovChain F, not an arbitrary enlargement guessed to preserve Markovness. Future coordinate0 is X_tau. These are direct core strong-Markov property API on an explicit discrete-time subcase; general definition remains the literal dependency property. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/MarkovChain/StrongMarkov/Basic.lean",
+          "declarations": "MeasureTheory.Measure.condExp_stoppedValue_shift_iterate_markovChainLaw_of_ae_ne_top:277",
+          "note": "Native completed canonical whole-future strong Markov conditional law at AE-finite stopping times."
+        },
+        {
+          "path": "TauCeti/Probability/MarkovChain/StrongMarkov/Process.lean",
+          "declarations": "ProbabilityTheory.HasLaw.markovChainLaw_restrict_map_stoppedValue_processShift:51",
+          "note": "Native genuine arbitrary-sample-space stopped-future law transfer, with exact filtration-history hypothesis."
+        },
+        {
+          "path": "TauCeti/Probability/MarkovChain/Filtered/StrongMarkov.lean",
+          "declarations": "TauCeti.Probability.IsMarkovChain.condExp_stoppedValue_processShift:106; condExp_stoppedValue_processShift_of_ae_ne_top_of_bounded:226",
+          "note": "Native actual supplied-filtration strong-Markov future-law API; full conditional-expectation proof and bounded-test specialization."
+        }
+      ],
+      "search_notes": "Enumerated StrongMarkov Basic/Process, Filtered StrongMarkov/Stopping and MarkovChain root. Count direct stopped-future law/conditional-law core. Visits/return renewal/hitting-time model applications excluded. Discrete-time theorem does not certify universal continuous-time strong Markovness."
+    },
+    {
+      "concept": "strong-sde-wellposedness-lipschitz",
+      "concept_id": "dbd7966d-ab28-55d1-905b-f7985022ef8f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The actual general globally Lipschitz Euclidean Ito SDE existence, adapted continuous strong solution, pathwise uniqueness and bounded-horizon supremum second-moment estimate were not certified. Brownian laws, deterministic Picard ODE existence and the explicit geometric Brownian formula are insufficient for these completed theorem endpoints. In particular native geometric Brownian source explicitly says its SDE interpretation needs Ito calculus and is not proved. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [],
+      "search_notes": "Searched strong solution/pathwise uniqueness/Lipschitz diffusion/stochastic differential equation/Ito integral in both probability/analysis trees. Enumerated native Brownian, Process and stochastic-evolution/PDE candidates. Tau-owned Geometric/Basic17–24 is a concrete formula/law comparison candidate only, not a standalone Mathlib source or a proof of the general SDE theorem. No new SDE proof or transitive construction attempted."
+    },
+    {
+      "concept": "strong-sde-wellposedness-lipschitz",
+      "concept_id": "dbd7966d-ab28-55d1-905b-f7985022ef8f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual general globally Lipschitz Euclidean Ito SDE existence, adapted continuous strong solution, pathwise uniqueness and bounded-horizon supremum second-moment estimate were not certified. Brownian laws, deterministic Picard ODE existence and the explicit geometric Brownian formula are insufficient for these completed theorem endpoints. In particular native geometric Brownian source explicitly says its SDE interpretation needs Ito calculus and is not proved. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [],
+      "search_notes": "Searched strong solution/pathwise uniqueness/Lipschitz diffusion/stochastic differential equation/Ito integral in both probability/analysis trees. Enumerated native Brownian, Process and stochastic-evolution/PDE candidates. Tau-owned Geometric/Basic17–24 is a concrete formula/law comparison candidate only, not a standalone Mathlib source or a proof of the general SDE theorem. No new SDE proof or transitive construction attempted."
+    },
+    {
+      "concept": "strong-stationary-time",
+      "concept_id": "bd9bdbdb-3e52-51b9-a141-ac1900d66076",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. On the probability space enlarged by independent auxiliary randomization (product probability and filtration as in the checked randomized-stopping-time definition), take tau:Omega→WithTop(Nat) satisfying IsStoppingTime74 and tau<infinity AE. Let Y=stoppedValue X tau (803). The exact additional predicate is HasLaw Y pi P (actual HasLaw39 records AE measurability and pushforward law) AND IndepFun Y tau P (actual IndepFun143). pi is a supplied stationary law of the chain. These are precisely stationarity of X_tau and independence from tau, not independence of tau from the entire process. AE finiteness is explicit so the arbitrary value at infinity does not affect Y; no existence of such a time, optimality or tail=separation theorem is claimed. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Process/Stopping.lean",
+          "declarations": "MeasureTheory.IsStoppingTime:74; stoppedValue:803",
+          "note": "Actual randomized stopping predicate and stopped-state variable in the exact strong-stationary-time definition."
+        },
+        {
+          "path": "Mathlib/Probability/HasLaw.lean",
+          "declarations": "ProbabilityTheory.HasLaw:39",
+          "note": "Actual exact stationary stopped-state pushforward-law predicate."
+        },
+        {
+          "path": "Mathlib/Probability/Independence/Basic.lean",
+          "declarations": "ProbabilityTheory.IndepFun:143; indepFun_prod:725",
+          "note": "Actual stopped-state/time independence and independent auxiliary product coordinates."
+        }
+      ],
+      "search_notes": "Searched strong-stationary/halting/optimal times and enumerated native Process/Stopping/Stationary/MarkovChain law siblings. Definition is a subclass of randomized stopping times; do not conflate path shift stationarity with independence of X_tau and tau. Separately catalogued optimal-tail/existence result remains a distinct theorem frontier."
+    },
+    {
+      "concept": "strong-stationary-time",
+      "concept_id": "bd9bdbdb-3e52-51b9-a141-ac1900d66076",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency HasLaw bytes identical; stopping has +1 header offset, IndepFun143 unchanged (product proof726 after one intervening doc blank). On the probability space enlarged by independent auxiliary randomization (product probability and filtration as in the checked randomized-stopping-time definition), take tau:Omega→WithTop(Nat) satisfying IsStoppingTime74 and tau<infinity AE. Let Y=stoppedValue X tau (803). The exact additional predicate is HasLaw Y pi P (actual HasLaw39 records AE measurability and pushforward law) AND IndepFun Y tau P (actual IndepFun143). pi is a supplied stationary law of the chain. These are precisely stationarity of X_tau and independence from tau, not independence of tau from the entire process. AE finiteness is explicit so the arbitrary value at infinity does not affect Y; no existence of such a time, optimality or tail=separation theorem is claimed. Native IsStoppingTime.mono_filtration32–35 is ordinary subclass-preserving API here: keep the SAME tau, probability, X and supplied stationary pi and enlarge the filtration. Its actual stopping events remain measurable; the stopped-state law and IndepFun predicates are unchanged because they do not mention the filtration. Thus it directly transports this stronger stopping-time predicate, without a native claim of constructing an optimal strong stationary time. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Process/Stopping.lean",
+          "declarations": "MeasureTheory.IsStoppingTime.mono_filtration:32",
+          "note": "Native direct filtration-enlargement API for the same strong stationary time: stopping property transported, law and independence unchanged."
+        }
+      ],
+      "search_notes": "Searched strong-stationary/halting/optimal times and enumerated native Process/Stopping/Stationary/MarkovChain law siblings. Definition is a subclass of randomized stopping times; do not conflate path shift stationarity with independence of X_tau and tau. Separately catalogued optimal-tail/existence result remains a distinct theorem frontier. Counts ordinary parent stopping-time API under the approved weaker-parent subclass rule, consistently with randomized stopping066; no generic TV or stationary-distribution input-only file is allocated."
+    },
+    {
+      "concept": "strongly-continuous-contraction-semigroup",
+      "concept_id": "c8f49d52-696d-5107-8574-4b5533446c77",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a supplied real or complex Banach space X, use T:NNReal→(X→L[k]X), T0=id, forall s,t,T(s+t)=Ts.comp(Tt), forall t,norm(Tt)<=1 and forall x,ContinuousAt(fun t=>Tt x)0. ContinuousAt182 on NNReal is exactly the right-sided norm limit t↓0. ContinuousLinearMap61 is the actual linear/continuous constructor; Operator.Basic.opNorm169/norm_def175 and completed isLeast_opNorm/inequality233 give the genuine bounded-operator norm (not pointwise vector norm). This literal conjunction is the full bare C0 contraction-semigroup definition, without a generator/Hille–Yosida theorem. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean",
+          "declarations": "ContinuousLinearMap:61",
+          "note": "Actual bounded linear time-operator carrier on normed spaces."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/Basic.lean",
+          "declarations": "ContinuousLinearMap.opNorm:169; norm_def:175; le_opNorm:233",
+          "note": "Actual operator-norm constructor and completed least-bound API used in the contraction clause."
+        },
+        {
+          "path": "Mathlib/Topology/Defs/Filter.lean",
+          "declarations": "ContinuousAt:182",
+          "note": "Actual right-sided strong-continuity predicate at0 on the nonnegative-time subtype."
+        }
+      ],
+      "search_notes": "Searched C0/contraction semigroup. No named alias is required for this exact literal family conjunction. Norm continuity of T itself is a stronger uniform-continuity condition and is not substituted for pointwise strong continuity."
+    },
+    {
+      "concept": "strongly-continuous-contraction-semigroup",
+      "concept_id": "c8f49d52-696d-5107-8574-4b5533446c77",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned CLM constructor has +1 header; continuous-at definition identical and operator norm dictionary checked at its actual pin. For a supplied real or complex Banach space X, use T:NNReal→(X→L[k]X), T0=id, forall s,t,T(s+t)=Ts.comp(Tt), forall t,norm(Tt)<=1 and forall x,ContinuousAt(fun t=>Tt x)0. ContinuousAt182 on NNReal is exactly the right-sided norm limit t↓0. ContinuousLinearMap61 is the actual linear/continuous constructor; Operator.Basic.opNorm169/norm_def175 and completed isLeast_opNorm/inequality233 give the genuine bounded-operator norm (not pointwise vector norm). This literal conjunction is the full bare C0 contraction-semigroup definition, without a generator/Hille–Yosida theorem. Native StronglyContinuousSemigroup43 and ContractionSemigroup219 implement exactly the real case. Read map_zero69/map_add81 and map_nsmul89 completed law proof. On a complex space the underlying real semigroup plus IsComplexLinear77 is the exact complex-linear subclass; complexLinearOperator96–102 bundles actual complex maps and zero119/add127 preserve the semigroup law with unchanged pointwise action106. Norm_restrictScalars448 in the pinned Operator.Basic identifies the same operator norm, so contraction is unchanged, not an unverified scalar-norm switch. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Semigroups/Basic.lean",
+          "declarations": "TauCeti.Semigroups.StronglyContinuousSemigroup:43; StronglyContinuousSemigroup.map_nsmul:89; ContractionSemigroup:219",
+          "note": "Native actual real C0/contraction-semigroup definition and ordinary time/zero/composition/power API."
+        },
+        {
+          "path": "TauCeti/Analysis/Semigroups/Generator/ComplexLinear.lean",
+          "declarations": "TauCeti.Semigroups.StronglyContinuousSemigroup.IsComplexLinear:77; complexLinearOperator:96; complexLinearOperator_zero:119; complexLinearOperator_add:127",
+          "note": "Native exact complex-scalar semigroup carrier/natural-map API; underlying action and contraction norm preserved."
+        }
+      ],
+      "search_notes": "Enumerated native Semigroups root/Orbit/Generator/Resolvent/Generation. Select defining Basic plus actual complex carrier file; Defs is only an import aggregator. Exclude Hille–Yosida/generator existence, resolvents, PDE semigroup examples and exponential-shift structures as extra endpoints."
+    },
+    {
+      "concept": "strongly-measurable-banach-function",
+      "concept_id": "c525d2b3-d513-5da3-9f17-fedc1fa72e98",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The paragraph says ALMOST-EVERYWHERE pointwise norm limit, so its exact Mathlib predicate is AEStronglyMeasurable66, not the stricter pointwise-everywhere StronglyMeasurable64. StronglyMeasurable64 explicitly supplies a sequence of measurable simple functions converging at EVERY point to a chosen representative g; AEStronglyMeasurable66 means f=g AE. Conversely the actual completed aestronglyMeasurable_of_tendsto_ae699–713 proves the AE sequential simple-function limit is AEStronglyMeasurable on a metric Banach target. Read the separable-range closure/countable-union proof, not just the name. Thus these actual constructors/limit theorem give the exact catalogue AE convention without assuming the original function is everywhere Borel measurable or the Banach space globally separable. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.lean",
+          "declarations": "MeasureTheory.StronglyMeasurable:64",
+          "note": "Actual measurable-simple-function sequence/pointwise limit constructor on a representative."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean",
+          "declarations": "MeasureTheory.AEStronglyMeasurable:66; aestronglyMeasurable_of_tendsto_ae:699",
+          "note": "Actual AE-representative predicate and completed AE-limit equivalence supplier for the precise catalogue convention."
+        }
+      ],
+      "search_notes": "Explicitly compared AE versus everywhere strong measurability. Banach norm topology matches the source metric convergence. No Pettis theorem/exotic separability hypothesis is silently used to identify ordinary measurability with strong measurability."
+    },
+    {
+      "concept": "strongly-measurable-banach-function",
+      "concept_id": "c525d2b3-d513-5da3-9f17-fedc1fa72e98",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency StronglyMeasurable/AEStronglyMeasurable definitions/limit theorem have only +1 header offset (65/67/700). The paragraph says ALMOST-EVERYWHERE pointwise norm limit, so its exact Mathlib predicate is AEStronglyMeasurable66, not the stricter pointwise-everywhere StronglyMeasurable64. StronglyMeasurable64 explicitly supplies a sequence of measurable simple functions converging at EVERY point to a chosen representative g; AEStronglyMeasurable66 means f=g AE. Conversely the actual completed aestronglyMeasurable_of_tendsto_ae699–713 proves the AE sequential simple-function limit is AEStronglyMeasurable on a metric Banach target. Read the separable-range closure/countable-union proof, not just the name. Thus these actual constructors/limit theorem give the exact catalogue AE convention without assuming the original function is everywhere Borel measurable or the Banach space globally separable. Native AEStronglyMeasurable.comp_aemeasurable_of_map_absolutelyContinuous192–195 is direct ordinary composition/AE-class API; comp_prod_sub199–216 and finite-piecewise sum221–233 completed proofs were also read. These require actual pushforward absolute continuity/right invariance as stated, not arbitrary composition preserving null sets. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Function/AEStronglyMeasurable.lean",
+          "declarations": "MeasureTheory.AEStronglyMeasurable.comp_aemeasurable_of_map_absolutelyContinuous:192; comp_prod_sub:199; aestronglyMeasurable_uncurry_sum_indicator:221",
+          "note": "Native actual AE-strong composition/null-set transport and piecewise measurable-family API matching the catalogue convention."
+        }
+      ],
+      "search_notes": "Enumerated native AEStronglyMeasurable and StronglyMeasurable siblings. Count actual AE-class API; compact-range continuous pointwise representatives and application-specific integrability are extra or stronger supplier structures, not necessary defining files."
+    },
+    {
+      "concept": "submartingale-discrete-time",
+      "concept_id": "d6298e99-3737-5db7-8179-19a75153db9d",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. MeasureTheory.Submartingale64 is strongly adapted, all-dates AE conditional-expectation inequality and integrability at every time. For REAL X and Nat time, adapted measurable slices are strongly measurable (R is second countable), and the completed submartingale_nat411–423 uses exactly the paragraph's one-step inequality plus integrability to prove the all-dates version by induction, CE monotonicity and the tower property. The reverse specialization is immediate j=n+1. Probability is finite, meeting the actual theorem hypothesis. No missing integrability or reverse inequality is accepted. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Martingale/Basic.lean",
+          "declarations": "MeasureTheory.Submartingale:64; submartingale_nat:411",
+          "note": "Actual integrable submartingale predicate and completed one-step/all-dates equivalence direction for discrete time."
+        }
+      ],
+      "search_notes": "Read exact filtration/real integrability and CE tower induction. Separate Doob convergence/upcrossing/optional stopping results are not allocated to the definition."
+    },
+    {
+      "concept": "submartingale-discrete-time",
+      "concept_id": "d6298e99-3737-5db7-8179-19a75153db9d",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Martingale.Basic has only +1 header line (65/412). MeasureTheory.Submartingale64 is strongly adapted, all-dates AE conditional-expectation inequality and integrability at every time. For REAL X and Nat time, adapted measurable slices are strongly measurable (R is second countable), and the completed submartingale_nat411–423 uses exactly the paragraph's one-step inequality plus integrability to prove the all-dates version by induction, CE monotonicity and the tower property. The reverse specialization is immediate j=n+1. Probability is finite, meeting the actual theorem hypothesis. No missing integrability or reverse inequality is accepted. Native Submartingale.integral_mul_le134–146 proves the ordinary nonnegative predictable-position expectation inequality using conditional-expectation pullout and tower, with SigmaFiniteFiltration and both products integrable explicitly. The actual proof was read in full; real Nat-time probability is within its hypotheses. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Martingale/Basic.lean",
+          "declarations": "MeasureTheory.Submartingale.integral_mul_le:134; Martingale.norm:125",
+          "note": "Native ordinary integrable submartingale/test-position API and norm-of-martingale construction; no convergence endpoint counted."
+        }
+      ],
+      "search_notes": "Enumerated native Martingale/Basic/local/upcrossing/Doob siblings. Count direct Basic conditional-expectation/position API, exclude inequalities/convergence with separate conceptual endpoints."
+    },
+    {
+      "concept": "symmetric-dirichlet-form",
+      "concept_id": "5df014c6-0d14-565d-aac5-be0f61dbdbf1",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact literal predicate on a supplied real L2 space: D is a linear subspace dense in the AMBIENT L2 norm, E:D→linear(D→linear R) is symmetric/nonnegative, and D is complete for the NEW E1 norm sqrt(norm_L2(u)^2+E(u,u)). Actual InnerProductSpace.Core155 and toNormedAddCommGroup473 construct that norm from inner_new(u,v)=inner_L2(u,v)+E(u,v); CompleteSpace369 must use this selected NEW uniformity, not inherited ambient/subspace L2 completeness. Dense149 supplies the separate domain-density clause. The Markov clause is forall u:D, exists v:D, v=AE(fun x=>min(max(u(x),0),1)) AND E(v,v)<=E(u,u). This AE representative clause avoids forming constant1 as an L2 element when the base measure is infinite. It is exactly domain membership and energy contraction of the normal unit truncation, not an assumed bounded-domain substitute. Bare definition only: no form/semigroup/Hunt-process representation theorem is asserted. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Defs.lean",
+          "declarations": "InnerProductSpace.Core:155; InnerProductSpace.Core.toNormedAddCommGroup:473",
+          "note": "Actual new E1 inner/norm construction in the closed nonnegative symmetric-form definition, distinct from ambient L2 norm."
+        },
+        {
+          "path": "Mathlib/Topology/UniformSpace/Cauchy.lean",
+          "declarations": "CompleteSpace:369; CauchySeq:185",
+          "note": "Actual completeness predicate on the explicitly selected form-norm uniformity."
+        },
+        {
+          "path": "Mathlib/Topology/Defs/Basic.lean",
+          "declarations": "Dense:149",
+          "note": "Actual domain density in the original ambient L2 topology; not confused with form-norm completeness."
+        }
+      ],
+      "search_notes": "Searched symmetric Dirichlet/Markov-contraction forms and enumerated native PDE/Energy/Sobolev form candidates. Exact literal definition is supplied by checked generic constructors. E and L2 are supplied input structures; no Markov contraction theorem for a particular PDE energy is guessed."
+    },
+    {
+      "concept": "symmetric-dirichlet-form",
+      "concept_id": "5df014c6-0d14-565d-aac5-be0f61dbdbf1",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Core, Cauchy and Dense supplying files are byte-identical at the dependency pin. Exact literal predicate on a supplied real L2 space: D is a linear subspace dense in the AMBIENT L2 norm, E:D→linear(D→linear R) is symmetric/nonnegative, and D is complete for the NEW E1 norm sqrt(norm_L2(u)^2+E(u,u)). Actual InnerProductSpace.Core155 and toNormedAddCommGroup473 construct that norm from inner_new(u,v)=inner_L2(u,v)+E(u,v); CompleteSpace369 must use this selected NEW uniformity, not inherited ambient/subspace L2 completeness. Dense149 supplies the separate domain-density clause. The Markov clause is forall u:D, exists v:D, v=AE(fun x=>min(max(u(x),0),1)) AND E(v,v)<=E(u,u). This AE representative clause avoids forming constant1 as an L2 element when the base measure is infinite. It is exactly domain membership and energy contraction of the normal unit truncation, not an assumed bounded-domain substitute. Bare definition only: no form/semigroup/Hunt-process representation theorem is asserted. Native BilinForm.IsSymm.apply_add_self179–183 proves ordinary real quadratic polarization E(u+v,u+v)=Euu+Evv+2Euv, with actual symmetry and bilinearity only; pullback-symmetry166–170 is also direct core form API. This applies to the exact defining E of the Dirichlet subclass without an extra continuity/finite-dimension assumption. Count consistently with independently reviewed053 closed-symmetric-form under the approved weaker-parent ordinary-core policy. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/BilinearForm/Basic.lean",
+          "declarations": "LinearMap.BilinForm.IsSymm.compl₁₂:166; apply_add_self:179",
+          "note": "Native direct symmetric-form pullback and quadratic polarization API on the defining Dirichlet energy; no Markov/PDE representation theorem claimed."
+        }
+      ],
+      "search_notes": "Enumerated native PDE/Spectrum/Energy and Sobolev truncation/chain-rule candidates. Those construct special energies or substantive PDE endpoints, not a checked general Dirichlet-form correspondence. Selected ordinary actual symmetric-form law remains valid for the Markov subclass; no automatic input-only PDE allocation."
+    },
+    {
+      "concept": "symmetric-group",
+      "concept_id": "14a87593-cdee-565c-9659-d8e5d88b0fd9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a supplied FINITE set type alpha, Equiv.Perm alpha is exactly all self-bijections. Algebra/Group/End instOne66, instMul67 (Equiv.trans g f), instInv68 and permGroup72–81 give composition (f*g)(x)=f(g(x)), identity and inverse, with actual group-law proofs. The same construction works for arbitrary alpha, whose finite specialization is precisely the symmetric group; no finitary-support subgroup is substituted on an infinite carrier. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/End.lean",
+          "declarations": "Equiv.Perm.instOne:66; instMul:67; instInv:68; permGroup:72",
+          "note": "Actual all-bijections group constructor with composition/inverse and completed group laws, specialized to finite carrier."
+        }
+      ],
+      "search_notes": "Enumerated Mathlib Perm/Finite/Cycle/Support and native Perm siblings. Finite support/cardinality, alternating/sign/representation/wreath structures are not additional defining requirements of the bare group. Avoid conflating the finitely supported infinite permutation group with all permutations of a finite set."
+    },
+    {
+      "concept": "symmetric-group",
+      "concept_id": "14a87593-cdee-565c-9659-d8e5d88b0fd9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Algebra.Group.End is byte-identical. For a supplied FINITE set type alpha, Equiv.Perm alpha is exactly all self-bijections. Algebra/Group/End instOne66, instMul67 (Equiv.trans g f), instInv68 and permGroup72–81 give composition (f*g)(x)=f(g(x)), identity and inverse, with actual group-law proofs. The same construction works for arbitrary alpha, whose finite specialization is precisely the symmetric group; no finitary-support subgroup is substituted on an infinite carrier. Native TauCeti.swap_braid556–567 and three-point product evaluations574/581/588 are direct ordinary transposition/composition API. exists_perm_apply_eq596–598 extends a supplied permutation along an injection using the actual viaEmbedding construction, with its evaluation proof. These apply in particular on finite carriers; complete displayed proofs read. Actual indicated declarations/hypotheses and relevant completed source bodies inspected; bounded source review, without new proof development or rebuild.",
+      "files": [
+        {
+          "path": "TauCeti/GroupTheory/Perm/Basic.lean",
+          "declarations": "TauCeti.swap_braid:556; swap_mul_swap_apply_left:574; swap_mul_swap_apply_middle:581; swap_mul_swap_apply_right:588; exists_perm_apply_eq:596",
+          "note": "Native direct transposition/composition and inclusion-extension API for actual permutation groups."
+        }
+      ],
+      "search_notes": "Enumerated native Perm Basic/Fin/Finite/Cycle and specialized algebraic permutation siblings. Count bounded generic Basic composition/transposition API; explicit Fin rotations, infinite dynamics, alternating signs and representation constructions are additional presentations/endpoints, not mere importer allocations."
+    }
+  ]
+}

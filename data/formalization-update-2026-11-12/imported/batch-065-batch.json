@@ -1,0 +1,674 @@
+{
+  "note": "Whole-catalogue formalization update batch-065: independent source review by algebra_formalization of category_galois_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "orthonormal-basis-hilbert",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/l2Space.lean",
+          "declarations": "HilbertBasis:376; orthonormal:420; dense_span:449",
+          "note": "Actual general Hilbert-basis constructor, exact orthonormal/dense-span dictionary and expansion API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. HilbertBasis:376 carries an actual linear isometric equivalence H≃l2(I,K). Its orthonormal:420 and dense_span:449 prove that the resulting family is unit/orthogonal and has dense LINEAR span. Conversely HilbertBasis.mk (538, actual constructor body inspected) makes exactly this equivalence from an orthonormal family with dense span in a complete Hilbert space, and coe_mk returns that same family. Thus the l2 representation is checked equivalent to the paragraph, not a finite algebraic-basis substitution. Arbitrary index types and real/complex Hilbert spaces are covered.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Enumerated native HilbertBasis Basic/Map/Small/FiniteSection and Orthonormal siblings. Selected general basis orthogonality/operator expansion core; exclude spectral eigenbasis constructions, special Hermite/Chebyshev bases and finite-section convergence/compactness theorems as separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "orthonormal-basis-hilbert",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/HilbertBasis/Basic.lean",
+          "declarations": "inner_eq_zero_of_forall_inner_eq_zero:35; hasSum_inner_smul_apply:56",
+          "note": "Native direct orthogonality/dense-span and continuous-image expansion API for general Hilbert bases."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. HilbertBasis:376 carries an actual linear isometric equivalence H≃l2(I,K). Its orthonormal:420 and dense_span:449 prove that the resulting family is unit/orthogonal and has dense LINEAR span. Conversely HilbertBasis.mk (538, actual constructor body inspected) makes exactly this equivalence from an orthonormal family with dense span in a complete Hilbert space, and coe_mk returns that same family. Thus the l2 representation is checked equivalent to the paragraph, not a finite algebraic-basis substitution. Arbitrary index types and real/complex Hilbert spaces are covered. Native HilbertBasis.inner_eq_zero_of_forall_inner_eq_zero:35 proves orthogonality to the basis implies orthogonality to its entire represented subspace, and hasSum_inner_smul_apply:56 gives the ordinary continuous-map basis expansion; complete proofs35–42/56–60 read.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Enumerated native HilbertBasis Basic/Map/Small/FiniteSection and Orthonormal siblings. Selected general basis orthogonality/operator expansion core; exclude spectral eigenbasis constructions, special Hermite/Chebyshev bases and finite-section convergence/compactness theorems as separate endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "orthonormal-family-hilbert",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Orthonormal.lean",
+          "declarations": "Orthonormal:51; orthonormal_iff_ite:86; Orthonormal.inner_right_finsupp:118",
+          "note": "Actual unit/orthogonal-family definition and direct delta/coefficient API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Orthonormal:51 is LITERALLY (forall i,norm(v i)=1) AND Pairwise(fun i j=>inner(v i)(v j)=0). The delta-inner equivalence and coefficient-selection proofs were read. It requires no finite-dimensionality or completeness, hence applies to any supplied Hilbert space and arbitrary family.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Native Orthonormal Family/Sum/SpanProjection/Coordinates/ChangeOfBasis and product siblings enumerated. Selected actual finite synthesis/isometry/coefficient/projection API under an explicit finite-index stronger subcase; exclude independently significant Procrustes optimization and special-function orthogonal families.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "orthonormal-family-hilbert",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/Orthonormal/Family.lean",
+          "declarations": "synthesisMapIsometry:40; synthesisMapIsometry_apply:59; starProjection_apply_eq_sum:102; norm_starProjection_sq_eq_sum:122",
+          "note": "Native actual finite-family synthesis isometry, coefficient and projection identities, direct ordinary orthonormal-family API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Orthonormal:51 is LITERALLY (forall i,norm(v i)=1) AND Pairwise(fun i j=>inner(v i)(v j)=0). The delta-inner equivalence and coefficient-selection proofs were read. It requires no finite-dimensionality or completeness, hence applies to any supplied Hilbert space and arbitrary family. Native Orthonormal.synthesisMapIsometry:40 and its coordinate/range/adjoint identities construct the isometric finite coefficient map; starProjection_apply_eq_sum and norm_starProjection_sq_eq_sum prove ordinary projection/Parseval API for the supplied finite family. Full relevant proofs in Family read, with finite-index scope explicit rather than silently imposed on the full definition.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Native Orthonormal Family/Sum/SpanProjection/Coordinates/ChangeOfBasis and product siblings enumerated. Selected actual finite synthesis/isometry/coefficient/projection API under an explicit finite-index stronger subcase; exclude independently significant Procrustes optimization and special-function orthogonal families.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "paley-zygmund",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact strict-superlevel lower bound with (1-theta)^2*(EX)^2/EX2 was not certified. Actual Bochner.Basic.mul_meas_ge_le_integral_of_nonneg:1180 is an UPPER Markov bound; integral_mul_le_Lp_mul_Lq_of_nonneg:1243 is generic Holder, and native Tau Moments/Variance.integral_le_sqrt_integral_sq:121 proves only EX≤sqrt(EX2). Their actual hypotheses/bodies were inspected; none by itself supplies the threshold split and restricted-event lower bound with the stated strict event. No new second-moment-method proof is developed here.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched Paley/Zygmund/second-moment method and threshold/event-measure versus moment inequalities in both actual libraries; inspected Markov1180–1191, nonnegative Holder1243–1261 and Tau Variance121–128. Nonnegative X, finite positive second moment and strict X>theta EX must be retained; unknown is an unresolved existing-supplier frontier, not an absence claim.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "paley-zygmund",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact strict-superlevel lower bound with (1-theta)^2*(EX)^2/EX2 was not certified. Actual Bochner.Basic.mul_meas_ge_le_integral_of_nonneg:1180 is an UPPER Markov bound; integral_mul_le_Lp_mul_Lq_of_nonneg:1243 is generic Holder, and native Tau Moments/Variance.integral_le_sqrt_integral_sq:121 proves only EX≤sqrt(EX2). Their actual hypotheses/bodies were inspected; none by itself supplies the threshold split and restricted-event lower bound with the stated strict event. No new second-moment-method proof is developed here.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched Paley/Zygmund/second-moment method and threshold/event-measure versus moment inequalities in both actual libraries; inspected Markov1180–1191, nonnegative Holder1243–1261 and Tau Variance121–128. Nonnegative X, finite positive second moment and strict X>theta EX must be retained; unknown is an unresolved existing-supplier frontier, not an absence claim.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "parabolic-hormander-bracket-condition",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Geometry/Manifold/VectorField/LieBracket.lean",
+          "declarations": "mlieBracket:69",
+          "note": "Actual smooth vector-field bracket constructor iterated in the exact noise-seeded condition."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/Span/Defs.lean",
+          "declarations": "span:45",
+          "note": "Actual pointwise tangent linear-span constructor in the generation criterion."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. On supplied smooth Stratonovich vector fields V indexed Fin(d+1), define the family of bracket words by choosing an initial i with 1≤i≤d, and a finite word w:List(Fin(d+1)); evaluate w.foldr(fun j W=>VectorField.mlieBracket I (V j) W)(V i). At every spatial point x require Submodule.span R(range of these evaluated vectors)=top in TangentSpace I x. Empty word includes each noise field, while V0 ALONE is never seeded; brackets with V0 are allowed at every later step. This precisely represents the stated parabolic bracket-generation condition, without replacing it by the elliptic condition that seeds drift too. Actual smooth bracket constructor/sign/Jacobi were checked in062. Stock List.foldr is independently checked at Lean4 v4.36.0-rc2 commit b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a, src/Init/Data/List/Basic.lean:535–542, actual empty/cons recursion; both projects pin this toolchain. Actual Submodule.span:45 is the smallest containing submodule. No hypoellipticity or diffusion-existence theorem is inferred.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched parabolic Hormander/bracket generating/noise Lie ideal in manifold/probability namespaces. Generic algebraic LieSpan requires a Lie-module interface not silently asserted for unbundled smooth fields; the exact checked finite-word bracket construction avoids that unchecked packaging. Native Fourier Mihlin–Hormander multiplier is a different concept and excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "parabolic-hormander-bracket-condition",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Geometry/Manifold/VectorField/LieBracket.lean",
+          "declarations": "mlieBracket_eq_lieBracket:73; mvfderiv_mlieBracket:175",
+          "note": "Native direct smooth bracket coordinate/commutator API used by the bracket-generating condition, not a claim of Hormander hypoellipticity."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. On supplied smooth Stratonovich vector fields V indexed Fin(d+1), define the family of bracket words by choosing an initial i with 1≤i≤d, and a finite word w:List(Fin(d+1)); evaluate w.foldr(fun j W=>VectorField.mlieBracket I (V j) W)(V i). At every spatial point x require Submodule.span R(range of these evaluated vectors)=top in TangentSpace I x. Empty word includes each noise field, while V0 ALONE is never seeded; brackets with V0 are allowed at every later step. This precisely represents the stated parabolic bracket-generation condition, without replacing it by the elliptic condition that seeds drift too. Actual smooth bracket constructor/sign/Jacobi were checked in062. Stock List.foldr is independently checked at Lean4 v4.36.0-rc2 commit b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a, src/Init/Data/List/Basic.lean:535–542, actual empty/cons recursion; both projects pin this toolchain. Actual Submodule.span:45 is the smallest containing submodule. No hypoellipticity or diffusion-existence theorem is inferred. Native VectorField.mlieBracket_eq_lieBracket:73 and mvfderiv_mlieBracket:175 give ordinary coordinate/scalar action API of exactly those iterated vector-field brackets, with smoothness/Jacobi proof bodies checked; no stronger hypoelliptic theorem is charged.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched parabolic Hormander/bracket generating/noise Lie ideal in manifold/probability namespaces. Generic algebraic LieSpan requires a Lie-module interface not silently asserted for unbundled smooth fields; the exact checked finite-word bracket construction avoids that unchecked packaging. Native Fourier Mihlin–Hormander multiplier is a different concept and excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "parseval-hilbert-basis",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/l2Space.lean",
+          "declarations": "repr_apply_apply:413; hasSum_repr:445; hasSum_inner_mul_inner:461; tsum_inner_mul_inner:471; toSchauderBasis:508",
+          "note": "Actual complete Hilbert-basis norm expansion and inner-product Parseval identity, including sequential specialization."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. HilbertBasis.repr_apply_apply:413 and hasSum_repr:445 give norm-topology unconditional sum x=sum_i innerLean(e_i,x)*e_i. hasSum_inner_mul_inner:461 and tsum_inner_mul_inner:471, at y=x, give norm(x)^2=sum_i abs(innerLean(e_i,x))^2 via conjugate symmetry/inner_self_eq_norm_sq. Complete expansion proof428–446 and scalar inner-product passage461–473 read. This is stronger than merely coordinatewise convergence. For separable spaces use the supplied countable basis (or Nat indexing with the actual toSchauderBasis sequential expansion); finite-dimensional spaces retain a finite index type. COMPLEX CONVENTION: Lean inner is linear in the SECOND slot, so the catalogue coefficient inner_cat(x,e_i), under its usual first-linear convention, is innerLean(e_i,x); the identity is not written with the wrong conjugate. Real coefficients coincide directly.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Read actual arbitrary-index basis expansion and scalar Parseval proof, with countable/Nat sequential specialization. Native operator-image expansion is direct ordinary expansion API; special Fourier/Hermite Parseval and compact-operator spectral diagonalization are independently significant endpoints and excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "parseval-hilbert-basis",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/HilbertBasis/Basic.lean",
+          "declarations": "hasSum_inner_smul_apply:56",
+          "note": "Native actual continuous-map Hilbert expansion, direct ordinary Parseval/basis expansion API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. HilbertBasis.repr_apply_apply:413 and hasSum_repr:445 give norm-topology unconditional sum x=sum_i innerLean(e_i,x)*e_i. hasSum_inner_mul_inner:461 and tsum_inner_mul_inner:471, at y=x, give norm(x)^2=sum_i abs(innerLean(e_i,x))^2 via conjugate symmetry/inner_self_eq_norm_sq. Complete expansion proof428–446 and scalar inner-product passage461–473 read. This is stronger than merely coordinatewise convergence. For separable spaces use the supplied countable basis (or Nat indexing with the actual toSchauderBasis sequential expansion); finite-dimensional spaces retain a finite index type. COMPLEX CONVENTION: Lean inner is linear in the SECOND slot, so the catalogue coefficient inner_cat(x,e_i), under its usual first-linear convention, is innerLean(e_i,x); the identity is not written with the wrong conjugate. Real coefficients coincide directly. Native HilbertBasis.hasSum_inner_smul_apply:56 proves T x=sum inner(e_i,x)*T(e_i) for any continuous linear map by actual HasSum transport, directly extending this basis-expansion API without assuming finite dimension.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Read actual arbitrary-index basis expansion and scalar Parseval proof, with countable/Nat sequential specialization. Native operator-image expansion is direct ordinary expansion API; special Fourier/Hermite Parseval and compact-operator spectral diagonalization are independently significant endpoints and excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "partition-function-finite",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/ProbabilityMassFunction/Constructions.lean",
+          "declarations": "normalize:246; normalize_apply:253",
+          "note": "Actual finite positive-weight partition normalization."
+        },
+        {
+          "path": "Mathlib/Analysis/Complex/Exponential.lean",
+          "declarations": "Real.exp_sum:222",
+          "note": "Actual exponential-of-energy-sum equals product-weight identity."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Log/Basic.lean",
+          "declarations": "exp_log:59; log_exp:75",
+          "note": "Actual positive-weight logarithm/exponential dictionary and real log-partition value."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a nonempty finite configuration type Sigma and real H,beta, Z=SUM_sigma Real.exp(-beta*H sigma), which is positive and finite. PMF.normalize:246/normalize_apply:253 is the actual probability normalizer w/Z for ENNReal.ofReal(exp(-beta H)); its probability-sum proof was read. Real.exp_sum:222 and exp_log:59 give the equivalent positive factor-weight formula when the effective energy is the sum of negative logarithms, or factors are exp(-beta H_a). No claim that arbitrary factor weights at a FIXED beta=0 encode arbitrary prescribed H is made. log Z is the checked real logarithm on positive Z; any temperature/volume free-energy factor is separately supplied, as the paragraph says up to normalization.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched Gibbs/partitionFunction/freeEnergy in both trees. Generic Gibbs/KL inequalities and matrix entropic optimal transport are different endpoints. Native Log/SumExp is exactly ordinary log-partition evaluation API; no floating-point accuracy or thermodynamic-limit claim is included. The nonempty hypothesis excludes meaningless log0 normalization.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "partition-function-finite",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/Log/SumExp.lean",
+          "declarations": "log_sum_exp_eq_add_log_sum_exp_sub:32; sum_exp_sub_sup'_le_card:45; one_le_sum_exp_sub_sup':51",
+          "note": "Native direct log-partition shift invariance and max-shift normalization bounds for finite positive Gibbs sums."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For a nonempty finite configuration type Sigma and real H,beta, Z=SUM_sigma Real.exp(-beta*H sigma), which is positive and finite. PMF.normalize:246/normalize_apply:253 is the actual probability normalizer w/Z for ENNReal.ofReal(exp(-beta H)); its probability-sum proof was read. Real.exp_sum:222 and exp_log:59 give the equivalent positive factor-weight formula when the effective energy is the sum of negative logarithms, or factors are exp(-beta H_a). No claim that arbitrary factor weights at a FIXED beta=0 encode arbitrary prescribed H is made. log Z is the checked real logarithm on positive Z; any temperature/volume free-energy factor is separately supplied, as the paragraph says up to normalization. Native Finset.log_sum_exp_eq_add_log_sum_exp_sub:32 proves exact common-energy-shift identity, and max-shift bounds put the shifted exponential sum between1 and number of configurations. Entire proof32–57 read; at f=-beta H this is the exact log Z API.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched Gibbs/partitionFunction/freeEnergy in both trees. Generic Gibbs/KL inequalities and matrix entropic optimal transport are different endpoints. Native Log/SumExp is exactly ordinary log-partition evaluation API; no floating-point accuracy or thermodynamic-limit claim is included. The nonempty hypothesis excludes meaningless log0 normalization.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "partition-of-set",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Order/Partition/Basic.lean",
+          "declarations": "Partition:68; disjoint:102; pairwiseDisjoint:105",
+          "note": "Actual set-partition carrier and exact nonempty/disjoint/union semantics through the Set lattice."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Instantiate the actual Partition:68 constructor at the complete Boolean algebra Set X and support S. parts are subsets, bot_notMem excludes EMPTY cells, sSup_eq is union=S, and sSupIndep is pairwise disjointness for the Set frame; actual disjoint:102/pairwiseDisjoint:105 and frame meet proof using sSupIndep_iff_pairwiseDisjoint were read. This allows an arbitrary family of parts, not only a finite partition; the empty set has the empty family.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Native Order/Partition Restriction, Finpartition, Equiv/Pi/Pairing siblings enumerated. Selected actual finite-subcase restriction/part matching as ordinary partition API; equipartition/regularity padding and enumerative integer partitions are separate concepts. Do not substitute a cover allowing empty cells or overlapping cells.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "partition-of-set",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Order/Partition/Restriction.lean",
+          "declarations": "exists_partsEquiv_restrict:41",
+          "note": "Native direct finite partition restriction/cell-matching API under explicit surviving-cell hypotheses."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Instantiate the actual Partition:68 constructor at the complete Boolean algebra Set X and support S. parts are subsets, bot_notMem excludes EMPTY cells, sSup_eq is union=S, and sSupIndep is pairwise disjointness for the Set frame; actual disjoint:102/pairwiseDisjoint:105 and frame meet proof using sSupIndep_iff_pairwiseDisjoint were read. This allows an arbitrary family of parts, not only a finite partition; the empty set has the empty family. Native Finpartition.exists_partsEquiv_restrict:41 proves that intersecting with a retained subset gives an exact bijection of cells when every cell survives; full injectivity/surjectivity proof41–66 read. This is direct ordinary restriction API on the explicit finite-partition stronger subcase, not an equitability theorem asserted for all partitions.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Native Order/Partition Restriction, Finpartition, Equiv/Pi/Pairing siblings enumerated. Selected actual finite-subcase restriction/part matching as ordinary partition API; equipartition/regularity padding and enumerative integer partitions are separate concepts. Do not substitute a cover allowing empty cells or overlapping cells.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "pelekis-ramon-wang-bennett-bound",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact dependency-graph Bennett exponent S*((1+t/S)log(1+t/S)-t/S)/chi_f(G) was not certified. The checked TAU-OWNED candidate TauCeti/Probability/Moments/Bernstein.lean ProbabilityTheory.iIndepFun.mgf_sum_le_exp_of_ae_le:93 assumes full independent-family iIndepFun and proves a quadratic-over-(1-tb/3) bound; its actual proof93–105 was read. It is neither the exact Bennett exponent nor the fractional-color-cover inequality for graph-dependent variables. Generic block independence and fractional-chromatic definitions do not supply that missing theorem.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched Pelekis/Ramon/Wang, Bennett, fractional chromatic dependent concentration and graph-color Holder in both probability trees. Read native Bernstein93/108 hypotheses and actual independent-MGF product proof; prior DisjointBlocks59/69/115 and fractional-color construction were independently checked. No new MGF/color-cover optimization proof is developed, and no theorem-level absence is asserted. Ownership clarification: this Bernstein candidate is Tau-native, not a standalone Mathlib proof.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "pelekis-ramon-wang-bennett-bound",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact dependency-graph Bennett exponent S*((1+t/S)log(1+t/S)-t/S)/chi_f(G) was not certified. Native Bernstein.mgf_sum_le_exp_of_ae_le:93 assumes full independent-family iIndepFun and proves a quadratic-over-(1-tb/3) bound; its actual proof93–105 was read. It is neither the exact Bennett exponent nor the fractional-color-cover inequality for graph-dependent variables. Generic block independence and fractional-chromatic definitions do not supply that missing theorem.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched Pelekis/Ramon/Wang, Bennett, fractional chromatic dependent concentration and graph-color Holder in both probability trees. Read native Bernstein93/108 hypotheses and actual independent-MGF product proof; prior DisjointBlocks59/69/115 and fractional-color construction were independently checked. No new MGF/color-cover optimization proof is developed, and no theorem-level absence is asserted.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "poincare-inequality-h10",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. No checked standalone supplier of the complete zero-boundary H01 inequality was certified. Generic Holder/Fundamental-Theorem-of-Calculus and finite-dimensional test-function primitives are prerequisites, not an existing proof on the closure of smooth compact-supported weak-Sobolev functions for arbitrary bounded domains. Native Tau Poincare/W1p0 is not standalone Mathlib.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched H01/Poincare/Sobolev zero boundary and derivative-supported-slab estimates. Native W1p/Zero167 is actual closure of smooth compact-supported jets, not merely functions vanishing pointwise at an irregular boundary. Native Poincare/W1p0 full proof extends a closed norm inequality from test jets; no trace theorem or boundary regularity is imposed. Positive Euclidean dimension is explicit; dimension0 is not silently asserted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "poincare-inequality-h10",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Sobolev/Poincare/W1p0.lean",
+          "declarations": "W1p.norm_value_le_mul_norm_gradient_of_subset_slab:102; W1p.norm_value_le_mul_norm_gradient_of_subset_ball:122",
+          "note": "Native actual completed zero-boundary Sobolev Poincare inequality and bounded-domain p=2 corollary. "
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native W1p.norm_value_le_mul_norm_gradient_of_subset_ball proves norm_Lp(u)≤2R*norm_Lp(gradient u) for every u in w1p0Submodule, p≥1 including p=2. Full actual proof of the slab closure inequality and ball corollary read: the norm-inequality set is closed, contains every smooth compact-supported jet, and Zero167/184 closure minimality transfers the estimate. A bounded domain is contained in some ball, hence C_D=2R is finite; no Lipschitz boundary or smooth u restriction is added. Source works on R^(n+1), the conventional positive-dimensional Euclidean domain scope (d≥1); a zero-dimensional domain would make the unrestricted paragraph false and is not claimed.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched H01/Poincare/Sobolev zero boundary and derivative-supported-slab estimates. Native W1p/Zero167 is actual closure of smooth compact-supported jets, not merely functions vanishing pointwise at an irregular boundary. Native Poincare/W1p0 full proof extends a closed norm inequality from test jets; no trace theorem or boundary regularity is imposed. Positive Euclidean dimension is explicit; dimension0 is not silently asserted.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "point-process",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/MeasurableSpace/Defs.lean",
+          "declarations": "generateFrom:329",
+          "note": "Actual exact bounded-count-generated configuration measurable-space constructor."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Map.lean",
+          "declarations": "map:95",
+          "note": "Actual probability law of a measurable random configuration and identity-law realization."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Use the exact supplied configuration carrier from checked generic constructors: Borel Radon measures expressible as indexed sums of unit Diracs with repeated occurrences retained, InnerRegular and finite on every compact. On a metric location space equip this subtype with the sigma algebra generated by all evaluation maps xi↦xi(A) for BOUNDED Borel A: explicitly MeasurableSpace.generateFrom:329 of preimages of Borel ENNReal sets under those evaluations. This avoids silently identifying bounded-count generation with all-set evaluation or vague-Borel structure on arbitrary spaces. A point process is a measurable map into this carrier on a probability space; its law is the actual Measure.map:95 pushforward, and conversely any probability law is realized by identity on that same space. No nonatomic/simplicity condition is imposed.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Read GiryMonad evaluation-generated measurable space49–59 and actual generateFrom329 constructor. The default Measure measurable space uses ALL measurable evaluations; use the explicitly bounded generating family here, rather than claim equality for every metric space. Native RandomMeasure/Law is selected only as ordinary law/evaluation API on the explicitly stronger all-evaluation-measurable subcase; configuration existence and measurable enumeration are not invented.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "point-process",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/RandomMeasure/Law.lean",
+          "declarations": "ext_of_forall_finset_map_eval_eq:47; map_eq_iff_forall_finset_map_eval_eq:112",
+          "note": "Native direct random-measure law/evaluation dictionary applicable to point configurations; stronger measurability subcase explicit."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Use the exact supplied configuration carrier from checked generic constructors: Borel Radon measures expressible as indexed sums of unit Diracs with repeated occurrences retained, InnerRegular and finite on every compact. On a metric location space equip this subtype with the sigma algebra generated by all evaluation maps xi↦xi(A) for BOUNDED Borel A: explicitly MeasurableSpace.generateFrom:329 of preimages of Borel ENNReal sets under those evaluations. This avoids silently identifying bounded-count generation with all-set evaluation or vague-Borel structure on arbitrary spaces. A point process is a measurable map into this carrier on a probability space; its law is the actual Measure.map:95 pushforward, and conversely any probability law is realized by identity on that same space. No nonatomic/simplicity condition is imposed. Native RandomMeasure/Law.ext_of_forall_finset_map_eval_eq and map_eq_iff_forall_finset_map_eval_eq prove exact law determination by joint evaluations; full projective-limit/comap proof read. This is ordinary random configuration law API on the explicit stronger all-evaluation-measurable realization subcase. It does not prove bounded-count/all-count sigma equality in arbitrary spaces.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Read GiryMonad evaluation-generated measurable space49–59 and actual generateFrom329 constructor. The default Measure measurable space uses ALL measurable evaluations; use the explicitly bounded generating family here, rather than claim equality for every metric space. Native RandomMeasure/Law is selected only as ordinary law/evaluation API on the explicitly stronger all-evaluation-measurable subcase; configuration existence and measurable enumeration are not invented.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "point-process-correlation-functions",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact general k-particle-label factorial moment measure and its reference-product-density representation were not certified. The checked TAU-OWNED comparison candidate TauCeti/Probability/PointProcess/Poisson/Sampling/Mecke.lean lintegral_finsetSum_dirac_pi_succ:50 actually distinguishes ONE occurrence in a finite iid sample and explicitly counts coincident locations separately; full proof50–83 read. This is useful scope evidence but does not establish the general k-point correlation construction for an arbitrary point process. A setwise off-diagonal product measure would wrongly remove different labels sharing a location, so it is not used as a substitute.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched factorial moment measure, correlation function, distinct occurrences/labels and density in PointProcess/RandomMeasure namespaces; enumerated integer-valued Atomic/Enumeration/Marking tuple candidates. Native tupleMarking attaches independent marks and is a separate operation; it is not an existing general factorial-moment density interface. Generic Radon–Nikodym alone does not certify the missing labeled tuple measure/measurability. Bounded unknown, not absence. The Mecke comparison source is Tau-owned, not a standalone Mathlib supplier.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "point-process-correlation-functions",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact general k-particle-label factorial moment measure and its reference-product-density representation were not certified. Native Poisson/Sampling/Mecke.lintegral_finsetSum_dirac_pi_succ:50 actually distinguishes ONE occurrence in a finite iid sample and explicitly counts coincident locations separately; full proof50–83 read. This is useful scope evidence but does not establish the general k-point correlation construction for an arbitrary point process. A setwise off-diagonal product measure would wrongly remove different labels sharing a location, so it is not used as a substitute.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched factorial moment measure, correlation function, distinct occurrences/labels and density in PointProcess/RandomMeasure namespaces; enumerated integer-valued Atomic/Enumeration/Marking tuple candidates. Native tupleMarking attaches independent marks and is a separate operation; it is not an existing general factorial-moment density interface. Generic Radon–Nikodym alone does not certify the missing labeled tuple measure/measurability. Bounded unknown, not absence.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "poisson-compensation-formula",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The full nonnegative predictable random-measure compensation identity in a filtration with independent future increments was not certified. The checked TAU-OWNED comparison source TauCeti/Probability/Process/Poisson/Filtered.lean indepFun_sub_sub:141 and hasIndepIncrements:149 prove the temporal independence dictionary, and the TAU-OWNED static PointProcess/Poisson/Sampling/Mecke:50/89 proves insertion/Campbell identities for iid Poisson samples. Neither inspected supplier identifies the general predictable integrand integral with its product-intensity expectation or supplies its monotone predictable extension. Do not silently replace random predictable H by deterministic tests or by a static insertion identity.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched compensation/Campbell/predictable Poisson/random-measure integration; read actual Filtered141–159 and Mecke50–130 complete relevant proofs. Brownian predictable-energy integration and stable-law compensation concern different integrators. Retain nonnegative extended-valued H and future-increment independence; no arbitrary-filtration theorem is claimed. Both filtered-Poisson and Mecke comparison candidates are Tau-owned; no standalone Mathlib supplying proof is claimed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "poisson-compensation-formula",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The full nonnegative predictable random-measure compensation identity in a filtration with independent future increments was not certified. Actual native Poisson/Filtered.indepFun_sub_sub:141 and hasIndepIncrements:149 prove the temporal independence dictionary, and static Poisson/Sampling/Mecke:50/89 proves insertion/Campbell identities for iid Poisson samples. Neither inspected supplier identifies the general predictable integrand integral with its product-intensity expectation or supplies its monotone predictable extension. Do not silently replace random predictable H by deterministic tests or by a static insertion identity.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched compensation/Campbell/predictable Poisson/random-measure integration; read actual Filtered141–159 and Mecke50–130 complete relevant proofs. Brownian predictable-energy integration and stable-law compensation concern different integrators. Retain nonnegative extended-valued H and future-increment independence; no arbitrary-filtration theorem is claimed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "poisson-distribution",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Distributions/Poisson/Basic.lean",
+          "declarations": "poissonMeasure:40; poissonMeasure_singleton:49; hasSum_one_poissonMeasure:62",
+          "note": "Actual normalized Poisson law, exact masses and complete exponential-series normalization."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. ProbabilityTheory.poissonMeasure:40 is the actual measure sum of Dirac masses ENNReal.ofReal(exp(-r)*r^k/k!), r:NNReal (equivalently real lambda≥0). singleton:49 and real_singleton:53 give exactly the catalogue mass, and hasSum_one_poissonMeasure:62 plus the probability instance prove normalization using the exponential series, including r=0. There is no shift to positive trial counts or accidental exclusion of rate0.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Enumerated native Poisson Basic/Support/Measurability/Cdf-related Quantile/Transforms/FactorialMoments/Sum/SizeBias/Laplace/CharFun siblings. Selected actual zero/PGF/factorial core and support API read; zero-inflated/truncated/hurdle/mixed distributions, compound-Poisson limits and sampling algorithms are separate concepts/endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "poisson-distribution",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Distributions/Poisson/Basic.lean",
+          "declarations": "poissonMeasure_zero:40; hasSum_pow_poissonMeasure:68; hasSum_descFactorial_poissonMeasure:80",
+          "note": "Native actual rate-zero law and ordinary PGF/factorial moment series API."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Poisson/Support.lean",
+          "declarations": "support_poissonMeasure:32; support_map_cast_poissonMeasure:49",
+          "note": "Native exact ordinary support API including the degenerate zero-rate case."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Poisson/Measurability.lean",
+          "declarations": "TauCeti.Probability.measurable_poissonMeasure:27; measurable_pi_poissonMeasure:33",
+          "note": "Native actual parameter-measurable Poisson law and finite parameter-vector extension, with completed weighted-Dirac proof."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Poisson/Tail.lean",
+          "declarations": "TauCeti.Probability.poissonMeasure_tail_eq_regularizedGamma:100; poissonMeasure_real_Iic:120; cdf_map_cast_poissonMeasure:155; cdf_map_cast_poissonMeasure_of_neg:161",
+          "note": "Native exact cumulative/tail finite-mass normal forms and real-cast CDF, with actual incomplete-Gamma identity proof."
+        },
+        {
+          "path": "TauCeti/Probability/Distributions/Poisson/Quantile.lean",
+          "declarations": "TauCeti.Probability.quantile_map_cast_poissonMeasure_eq_iff:47; quantile_map_cast_poissonMeasure_eq_iff_regularizedGamma:57; quantile_map_cast_poissonMeasure_zero:71; tendsto_quantile_map_cast_poissonMeasure_nhdsLT_one:92",
+          "note": "Native exact lower-quantile normal form and rate-zero/support-endpoint API; interior-level hypotheses explicit."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. ProbabilityTheory.poissonMeasure:40 is the actual measure sum of Dirac masses ENNReal.ofReal(exp(-r)*r^k/k!), r:NNReal (equivalently real lambda≥0). singleton:49 and real_singleton:53 give exactly the catalogue mass, and hasSum_one_poissonMeasure:62 plus the probability instance prove normalization using the exponential series, including r=0. There is no shift to positive trial counts or accidental exclusion of rate0. Native Poisson/Basic.poissonMeasure_zero proves the rate0 Dirac law; actual PGF/factorial-series proofs use the same masses. Support.support_poissonMeasure and support_map_cast_poissonMeasure identify precisely all naturals at positive rate and singleton0 at rate0, with complete proofs read.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit. Independent review additionally enumerated the complete native Poisson namespace and read Measurability.measurable_poissonMeasure:27–29 actual countable-weighted-Dirac proof, Tail.poissonMeasure_tail_eq_regularizedGamma:100–115/real_Iic120–125/cdf155–163 actual finite-mass/complement formulas, and Quantile.quantile_map_cast_poissonMeasure_eq_iff:47–53/eq_iff_regularizedGamma57–62/zero71–77 and endpoint81–109 completed lower-quantile proofs. These are direct ordinary parameter, cumulative and inverse-CDF normal forms of the same law, not a separate sampling algorithm. Interior quantile statements require u in(0,1); rate0 is explicitly handled, and positive-rate upper quantiles tend to infinity. Selected Tail supplies the actual incomplete-Gamma/cumulative equality used by Quantile; the general incomplete-Gamma prerequisite is not allocated here.\nSearch and boundary notes: Enumerated native Poisson Basic/Support/Measurability/Cdf-related Quantile/Transforms/FactorialMoments/Sum/SizeBias/Laplace/CharFun siblings. Selected actual zero/PGF/factorial core and support API read; zero-inflated/truncated/hurdle/mixed distributions, compound-Poisson limits and sampling algorithms are separate concepts/endpoints. Independent native namespace enumeration adds Measurability/Tail/Quantile as direct parameter/cumulative/inverse-CDF API, consistently with051 binomial and059 geometric. Exclude StochasticOrder comparison/coupling, CountableSum closure, SmallRate asymptotic bounds, sampling Characterization and multivariate transform constructions as separate endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "poisson-point-process",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/MeasurableSpace/Defs.lean",
+          "declarations": "generateFrom:329",
+          "note": "Actual exact bounded-count-generated configuration measurable space; stronger all-evaluation source is not silently substituted."
+        },
+        {
+          "path": "Mathlib/Probability/Distributions/Poisson/Basic.lean",
+          "declarations": "poissonMeasure:40; poissonMeasure_singleton:49",
+          "note": "Actual finite-intensity marginal count law, including zero intensity."
+        },
+        {
+          "path": "Mathlib/Probability/Independence/Basic.lean",
+          "declarations": "iIndepFun:135",
+          "note": "Actual joint finite disjoint-count independence constructor, not a pairwise approximation."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact generic supplied-random-measure predicate: configuration-valued N measurable for the BOUNDED-count-generated sigma algebra on a probability space, a common-AE integer-valued-realization condition (every finite measurable-set mass is a Nat cast, infinity allowed), Poisson count law of mean nu(A) for every measurable A with nu(A)<infinity, and joint independence for every finite family of disjoint measurable sets. Use actual generateFrom329 bounded-count measurability, Poisson law40 and iIndepFun135, not pairwise independence. Infinite-intensity means are not fed to ENNReal.toNNReal as a false finite Poisson parameter. Use the exact supplied configuration carrier from checked generic constructors: Borel Radon measures expressible as indexed sums of unit Diracs with repeated occurrences retained, InnerRegular and finite on every compact. On a metric location space equip this subtype with the sigma algebra generated by all evaluation maps xi↦xi(A) for BOUNDED Borel A: explicitly MeasurableSpace.generateFrom:329 of preimages of Borel ENNReal sets under those evaluations. This avoids silently identifying bounded-count generation with all-set evaluation or vague-Borel structure on arbitrary spaces. A point process is a measurable map into this carrier on a probability space; its law is the actual Measure.map:95 pushforward, and conversely any probability law is realized by identity on that same space. No nonatomic/simplicity condition is imposed. No equality of bounded-count and all-evaluation sigma algebras is silently asserted; the supplied count laws include the measurability needed on the sets they test. In this point-process case require the common-AE locally finite Radon configuration condition explicitly, in addition to the count criterion; no general PRM is asserted locally finite without appropriate intensity hypotheses.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Native Poisson Basic/IntegerValued/Laplace/Law/Construction and Superposition siblings enumerated. The native IsPoissonRandomMeasure47 alias ADDS infinite-intensity counts=infinity AE; that stronger convention is not silently imposed on the general paragraph. Ordinary native count API is selected on this explicit stronger subcase; sigma-finite intensity and countably generated/LCH sigma-compact location assumptions are stated for simultaneous integrality/local-finiteness consequences. Simplicity requires further atomlessness and is excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "poisson-point-process",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/PointProcess/Poisson/Basic.lean",
+          "declarations": "IsPoissonRandomMeasure:47; IsPoissonRandomMeasure.hasLaw:81; IsPoissonRandomMeasure.iIndepFun_eval:139",
+          "note": "Native actual Poisson random-measure count constructor and ordinary independent-count API; stronger infinite-intensity convention explicit."
+        },
+        {
+          "path": "TauCeti/Probability/PointProcess/Poisson/IntegerValued.lean",
+          "declarations": "IsPoissonRandomMeasure.ae_isIntegerValued:55; IsPoissonRandomMeasure.ae_isLocallyFiniteMeasure:81",
+          "note": "Native completed simultaneous integer-valued realization and conditional local-finiteness API; multiplicities retained."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact generic supplied-random-measure predicate: configuration-valued N measurable for the BOUNDED-count-generated sigma algebra on a probability space, a common-AE integer-valued-realization condition (every finite measurable-set mass is a Nat cast, infinity allowed), Poisson count law of mean nu(A) for every measurable A with nu(A)<infinity, and joint independence for every finite family of disjoint measurable sets. Use actual generateFrom329 bounded-count measurability, Poisson law40 and iIndepFun135, not pairwise independence. Infinite-intensity means are not fed to ENNReal.toNNReal as a false finite Poisson parameter. Use the exact supplied configuration carrier from checked generic constructors: Borel Radon measures expressible as indexed sums of unit Diracs with repeated occurrences retained, InnerRegular and finite on every compact. On a metric location space equip this subtype with the sigma algebra generated by all evaluation maps xi↦xi(A) for BOUNDED Borel A: explicitly MeasurableSpace.generateFrom:329 of preimages of Borel ENNReal sets under those evaluations. This avoids silently identifying bounded-count generation with all-set evaluation or vague-Borel structure on arbitrary spaces. A point process is a measurable map into this carrier on a probability space; its law is the actual Measure.map:95 pushforward, and conversely any probability law is realized by identity on that same space. No nonatomic/simplicity condition is imposed. No equality of bounded-count and all-evaluation sigma algebras is silently asserted; the supplied count laws include the measurability needed on the sets they test. In this point-process case require the common-AE locally finite Radon configuration condition explicitly, in addition to the count criterion; no general PRM is asserted locally finite without appropriate intensity hypotheses. Native IsPoissonRandomMeasure47, hasLaw81 and iIndepFun_eval139–163 provide genuine ordinary count/mapping API with its stronger infinite-intensity convention explicit. IntegerValued.ae_isIntegerValued:55 proves simultaneous sample integrality under countably generated space+sigma-finite intensity; ae_isLocallyFiniteMeasure:81 uses compact exhaustion under LCH sigma-compact topology and compact-finite intensity. Complete finite-piece/pi-system and exhaustion proofs read; no Radon regularity theorem is inferred merely from local finiteness. The full bare paragraph remains the explicit generic conjunction above.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Native Poisson Basic/IntegerValued/Laplace/Law/Construction and Superposition siblings enumerated. The native IsPoissonRandomMeasure47 alias ADDS infinite-intensity counts=infinity AE; that stronger convention is not silently imposed on the general paragraph. Ordinary native count API is selected on this explicit stronger subcase; sigma-finite intensity and countably generated/LCH sigma-compact location assumptions are stated for simultaneous integrality/local-finiteness consequences. Simplicity requires further atomlessness and is excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "poisson-random-measure",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/GiryMonad.lean",
+          "declarations": "instMeasurableSpace:49; measurable_of_measurable_coe:55",
+          "note": "Actual measurable random-measure/evaluation interface in the independent-Poisson-count predicate."
+        },
+        {
+          "path": "Mathlib/Probability/Distributions/Poisson/Basic.lean",
+          "declarations": "poissonMeasure:40; poissonMeasure_singleton:49",
+          "note": "Actual finite-intensity marginal count law, including zero intensity."
+        },
+        {
+          "path": "Mathlib/Probability/Independence/Basic.lean",
+          "declarations": "iIndepFun:135",
+          "note": "Actual joint finite disjoint-count independence constructor, not a pairwise approximation."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact generic supplied-random-measure predicate: measurable N:Omega→Measure X on a probability space, a common-AE integer-valued-realization condition (every finite measurable-set mass is a Nat cast, infinity allowed), Poisson count law of mean nu(A) for every measurable A with nu(A)<infinity, and joint independence for every finite family of disjoint measurable sets. Use actual GiryMonad49/55 measurable measure-valued map, Poisson law40 and iIndepFun135, not pairwise independence. Infinite-intensity means are not fed to ENNReal.toNNReal as a false finite Poisson parameter.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Native Poisson Basic/IntegerValued/Laplace/Law/Construction and Superposition siblings enumerated. The native IsPoissonRandomMeasure47 alias ADDS infinite-intensity counts=infinity AE; that stronger convention is not silently imposed on the general paragraph. Ordinary native count API is selected on this explicit stronger subcase; sigma-finite intensity and countably generated/LCH sigma-compact location assumptions are stated for simultaneous integrality/local-finiteness consequences. Simplicity requires further atomlessness and is excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "poisson-random-measure",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/PointProcess/Poisson/Basic.lean",
+          "declarations": "IsPoissonRandomMeasure:47; IsPoissonRandomMeasure.hasLaw:81; IsPoissonRandomMeasure.iIndepFun_eval:139",
+          "note": "Native actual Poisson random-measure count constructor and ordinary independent-count API; stronger infinite-intensity convention explicit."
+        },
+        {
+          "path": "TauCeti/Probability/PointProcess/Poisson/IntegerValued.lean",
+          "declarations": "IsPoissonRandomMeasure.ae_isIntegerValued:55; IsPoissonRandomMeasure.ae_isLocallyFiniteMeasure:81",
+          "note": "Native completed simultaneous integer-valued realization and conditional local-finiteness API; multiplicities retained."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact generic supplied-random-measure predicate: measurable N:Omega→Measure X on a probability space, a common-AE integer-valued-realization condition (every finite measurable-set mass is a Nat cast, infinity allowed), Poisson count law of mean nu(A) for every measurable A with nu(A)<infinity, and joint independence for every finite family of disjoint measurable sets. Use actual GiryMonad49/55 measurable measure-valued map, Poisson law40 and iIndepFun135, not pairwise independence. Infinite-intensity means are not fed to ENNReal.toNNReal as a false finite Poisson parameter. Native IsPoissonRandomMeasure47, hasLaw81 and iIndepFun_eval139–163 provide genuine ordinary count/mapping API with its stronger infinite-intensity convention explicit. IntegerValued.ae_isIntegerValued:55 proves simultaneous sample integrality under countably generated space+sigma-finite intensity; ae_isLocallyFiniteMeasure:81 uses compact exhaustion under LCH sigma-compact topology and compact-finite intensity. Complete finite-piece/pi-system and exhaustion proofs read; no Radon regularity theorem is inferred merely from local finiteness. The full bare paragraph remains the explicit generic conjunction above.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Native Poisson Basic/IntegerValued/Laplace/Law/Construction and Superposition siblings enumerated. The native IsPoissonRandomMeasure47 alias ADDS infinite-intensity counts=infinity AE; that stronger convention is not silently imposed on the general paragraph. Ordinary native count API is selected on this explicit stronger subcase; sigma-finite intensity and countably generated/LCH sigma-compact location assumptions are stated for simultaneous integrality/local-finiteness consequences. Simplicity requires further atomlessness and is excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "polish-space",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/MetricSpace/Polish.lean",
+          "declarations": "PolishSpace:64",
+          "note": "Actual exact Polish topology class and compatible-metric/separability dictionary."
+        },
+        {
+          "path": "Mathlib/Topology/Metrizable/CompletelyMetrizable.lean",
+          "declarations": "IsCompletelyMetrizableSpace:159",
+          "note": "Actual complete compatible metric existence field in the definition."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. PolishSpace:64 extends SecondCountableTopology and IsCompletelyMetrizableSpace. Actual CompletelyMetrizable:159 field is existence of a metric with EXACT original topology and CompleteSpace for that metric. The converse instance in Polish:67–72 upgrades to a compatible complete metric and uses separability to get second countability; in a metric topology second countability implies separability. Thus this is precisely admitting a complete separable compatible metric, not completeness of an arbitrary originally chosen metric.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Enumerated native Polish/Pi/GDelta and measurable descriptive-set siblings. Pi file is primarily an instance-search repair and is not selected alone as native implementation. GDelta supplies actual completed Cauchy-filter topology argument and the ordinary Polish-subspace criterion; analytic-set capacitability and probability disintegration are separate results.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "polish-space",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/MetricSpace/Polish/GDelta.lean",
+          "declarations": "isGδ_of_isCompletelyMetrizableSpace:58; isGδ_iff_polishSpace:101",
+          "note": "Native completed ordinary complete/Polish subspace criterion via actual Cauchy-filter argument."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. PolishSpace:64 extends SecondCountableTopology and IsCompletelyMetrizableSpace. Actual CompletelyMetrizable:159 field is existence of a metric with EXACT original topology and CompleteSpace for that metric. The converse instance in Polish:67–72 upgrades to a compatible complete metric and uses separability to get second countability; in a metric topology second countability implies separability. Thus this is precisely admitting a complete separable compatible metric, not completeness of an arbitrary originally chosen metric. Native isGdelta_iff_polishSpace proves a subset of a Polish space is Polish iff Gdelta; full Cauchy-trace/completeness/unique-Hausdorff-limit proof read. This is ordinary subspace API of the very same Polish topology notion.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Enumerated native Polish/Pi/GDelta and measurable descriptive-set siblings. Pi file is primarily an instance-search repair and is not selected alone as native implementation. GDelta supplies actual completed Cauchy-filter topology argument and the ordinary Polish-subspace criterion; analytic-set capacitability and probability disintegration are separate results.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "portmanteau-theorem",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Portmanteau.lean",
+          "declarations": "ProbabilityMeasure.limsup_measure_closed_le_of_tendsto:311; ProbabilityMeasure.le_liminf_measure_open_of_tendsto:323; tendsto_of_forall_isClosed_limsup_le_nat:618; tendsto_of_forall_isOpen_le_liminf_nat:554",
+          "note": "Actual full closed/open portmanteau equivalences, with exact probability-measure hypotheses."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual ProbabilityMeasure.limsup_measure_closed_le_of_tendsto:311 and le_liminf_measure_open_of_tendsto:323 prove both closed/open forward bounds; converse tendsto_of_forall_isClosed_limsup_le_nat:618 and tendsto_of_forall_isOpen_le_liminf_nat:554 prove weak convergence on the stated metric probability spaces. Read actual complement duality and converse source bodies612–640 plus forward311–335. Metric spaces supply HasOuterApproxClosed; no unsupported separability/Polish assumption is substituted for the paragraph. Probability bounds ensure limsup/liminf exist with the stated ENNReal/NNReal translations.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Native Portmanteau continuity-set/finite-measure and tightness API inspected. Select actual general null-frontier convergence extension, exclude finite small-diameter partition construction/tightness as separately significant consequences rather than charge every imported weak-convergence tool. The genuine finite-measure zero-limit branch is explicitly checked.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "portmanteau-theorem",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Measure/Portmanteau.lean",
+          "declarations": "tendsto_measure_of_null_frontier_of_tendsto:152",
+          "note": "Native actual ordinary continuity-set convergence API for finite/probability measures, including the zero-measure extension."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual ProbabilityMeasure.limsup_measure_closed_le_of_tendsto:311 and le_liminf_measure_open_of_tendsto:323 prove both closed/open forward bounds; converse tendsto_of_forall_isClosed_limsup_le_nat:618 and tendsto_of_forall_isOpen_le_liminf_nat:554 prove weak convergence on the stated metric probability spaces. Read actual complement duality and converse source bodies612–640 plus forward311–335. Metric spaces supply HasOuterApproxClosed; no unsupported separability/Polish assumption is substituted for the paragraph. Probability bounds ensure limsup/liminf exist with the stated ENNReal/NNReal translations. Native FiniteMeasure.tendsto_measure_of_null_frontier_of_tendsto extends the same ordinary continuity-set convergence to finite measures, including ZERO limiting measure: full proof normalization for nonzero limit and direct mass squeeze for zero limit read. It specializes directly to probability measures.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Native Portmanteau continuity-set/finite-measure and tightness API inspected. Select actual general null-frontier convergence extension, exclude finite small-diameter partition construction/tightness as separately significant consequences rather than charge every imported weak-convergence tool. The genuine finite-measure zero-limit branch is explicitly checked.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "potts-model-finite-graph",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/ProbabilityMassFunction/Constructions.lean",
+          "declarations": "normalize:246; normalize_apply:253",
+          "note": "Actual normalized finite positive spin-agreement Gibbs weights; antiferromagnetic energy sign explicit."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a finite graph with UNORDERED edge set E and q>=1 states Fin q, configurations sigma:V→Fin q receive positive weights exp(-beta*sum_{e={u,v}}J(e)*1_{sigma(u)=sigma(v)}), optionally with specified single-site fields. Take beta>=0,J(e)>=0 for the antiferromagnetic convention, so agreement increases the energy and decreases the weight. PMF.normalize246/253 exactly divides these finite positive weights by their finite nonzero partition sum and proves probability normalization. This is a literal checked finite-state constructor, not an infinite-volume or phase-transition theorem. q=0 with nonempty V is excluded because there is no spin configuration to normalize.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched Potts/Gibbs/spin-agreement in both actual trees and graph/kernel examples. No agreement-specific native constructor/API was identified. Native Log/SumExp32 directly belongs to separately catalogued partition-function-finite; it reexpresses a supplied normalizer but contributes no selected spin-interaction/Gibbs-model API. Matrix EntropicTransport Gibbs kernels and quantum KMS states are different objects.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    },
+    {
+      "concept": "potts-model-finite-graph",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. For a finite graph with UNORDERED edge set E and q>=1 states Fin q, configurations sigma:V→Fin q receive positive weights exp(-beta*sum_{e={u,v}}J(e)*1_{sigma(u)=sigma(v)}), optionally with specified single-site fields. Take beta>=0,J(e)>=0 for the antiferromagnetic convention, so agreement increases the energy and decreases the weight. PMF.normalize246/253 exactly divides these finite positive weights by their finite nonzero partition sum and proves probability normalization. This is a literal checked finite-state constructor, not an infinite-volume or phase-transition theorem. q=0 with nonempty V is excluded because there is no spin configuration to normalize. Complete actual supplier is pinned Mathlib PMF/Constructions247/254, same constructor/proof bytes; no qualifying native spin-agreement API selected.  Exact pinned dependency comparison: Orthonormal, Log/Basic, MeasurableSpace/Defs, GiryMonad, Poisson/Basic, MetricSpace/Polish, CompletelyMetrizable, Regular, Typeclasses/Finite, Sum and Dirac/Def are byte-identical. HilbertBasis structure376/repr413/expansion445/density449 and inner Parseval461/471 are unchanged; D finite toOrthonormalBasis has an older equivalent orthonormal+dense constructor and later anchors differ by1 after its replacement, not a change of the general basis definition. Manifold LieBracket, Span/Defs, Complex/Exponential, PMF/Constructions and Order/Partition/Basic have one preceding header line (mlieBracket70, span46, Real.exp83/exp_sum223, normalize247/254, Partition69). Independence.Basic iIndepFun135 is unchanged, later finset restriction shifts+1. Portmanteau has preceding documentation blanks: closed/open forward312/324, closed converse615/621/638; actual statements/proofs unchanged.  Relevant actual declarations/hypotheses/completed source bodies inspected; bounded source review without new proof development or transitive axiom audit.\nSearch and boundary notes: Searched Potts/Gibbs/spin-agreement in both actual trees and graph/kernel examples. No agreement-specific native constructor/API was identified. Native Log/SumExp32 directly belongs to separately catalogued partition-function-finite; it reexpresses a supplied normalizer but contributes no selected spin-interaction/Gibbs-model API. Matrix EntropicTransport Gibbs kernels and quantum KMS states are different objects.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-065.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/InnerProductSpace/Orthonormal.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 477,
+      "sha256": "af47bded00a46986f0493ec80bdad31b3ffc6b728338e9bfcae8aa1f4f6b3e9f",
+      "measured_at": "2026-11-13T05:27:05.659778+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/InnerProductSpace/l2Space.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 596,
+      "sha256": "4d568df0a238bcc28cad4158627f9b18ff1ac4fd9c46da30148fe751742d73ed",
+      "measured_at": "2026-11-13T05:27:05.664993+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/SpecialFunctions/Log/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 718,
+      "sha256": "0c2f73c5a7d1a27efc9e44d02ead60112bfe10e3cfbba2407ad3dbcd1c363a97",
+      "measured_at": "2026-11-13T05:27:05.668564+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Measure/GiryMonad.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 377,
+      "sha256": "5e91a85375c59ccd8729b765c86465b4d787f613092e0c2a6974bf1e60a396bc",
+      "measured_at": "2026-11-13T05:27:05.682326+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Measure/Portmanteau.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 861,
+      "sha256": "319c30973c44a925d9aefaa893b2de78e398d4216333592a9af463d9df887e7a",
+      "measured_at": "2026-11-13T05:27:05.688930+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Order/Partition/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 555,
+      "sha256": "0536331d1ab89908047f4364c93b37f3f7c191b26ba6660db0ee5b80eac6baf4",
+      "measured_at": "2026-11-13T05:27:05.692319+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/Distributions/Poisson/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 204,
+      "sha256": "eecbb6ede40cf92e32cc64ab101dba91a1f1fa9979c62814f499d3618d39e43b",
+      "measured_at": "2026-11-13T05:27:05.697084+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Metrizable/CompletelyMetrizable.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 310,
+      "sha256": "a10e8782d72b19544359573cd1e61ecc9d0c2653b1451cb66891a2d0d4a87764",
+      "measured_at": "2026-11-13T05:27:05.711102+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/HilbertBasis/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 83,
+      "sha256": "d9ff2136b3a5160c50977ef9440fac39c0703bc377c248d1887cfb6ab5f021a3",
+      "measured_at": "2026-11-13T05:27:05.717785+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/Orthonormal/Family.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 151,
+      "sha256": "bce4c2c8508bb6f11eb72e03c8fa7e03ffd1ef9702126acd1d023c608c7f4090",
+      "measured_at": "2026-11-13T05:27:05.723172+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Sobolev/Poincare/W1p0.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 136,
+      "sha256": "3bd29ac1e19f49c621ec7c972086d9aa29e8e1553141e8c474db003455a58798",
+      "measured_at": "2026-11-13T05:27:05.728942+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/Log/SumExp.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 56,
+      "sha256": "a0a329ff0746e85cf8e2f08cc40000b04e616f199c5c5b6130515189418fbab5",
+      "measured_at": "2026-11-13T05:27:05.735398+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Measure/Portmanteau.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 218,
+      "sha256": "c19eba70d331738b268946f698843fdebb00dc2f1067df2382a427818ca7424a",
+      "measured_at": "2026-11-13T05:27:05.746812+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Order/Partition/Restriction.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 123,
+      "sha256": "45ef21f56afa481ba6727f1c4c2306b63a427f5ff7fbf28d31e450f5ade2376f",
+      "measured_at": "2026-11-13T05:27:05.753391+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Distributions/Poisson/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 244,
+      "sha256": "64fa75943574ed29e788e62a1049f949f1791fd10375cc4b1cc2fd19ee0464af",
+      "measured_at": "2026-11-13T05:27:05.758835+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Distributions/Poisson/Measurability.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 47,
+      "sha256": "05e7b0576896a7e540dda951da317c74ac66380345d3faf8f5a10d94ffede4a1",
+      "measured_at": "2026-11-13T05:27:05.764049+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Distributions/Poisson/Quantile.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 111,
+      "sha256": "0d083442852060ed586f01c7d805925850bc3fe105ae79b2adb58e3868fce2f3",
+      "measured_at": "2026-11-13T05:27:05.769195+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Distributions/Poisson/Support.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 60,
+      "sha256": "e688e40d97d10a44cd1b783dbd6939a8ddd7c010dd9dad59762b113cb1f03fea",
+      "measured_at": "2026-11-13T05:27:05.774565+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Distributions/Poisson/Tail.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 182,
+      "sha256": "3c5468ac190dea6ff3f7b1507414ec2d7fd02e895399caa4902ce6b83585674d",
+      "measured_at": "2026-11-13T05:27:05.779321+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/PointProcess/Poisson/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 268,
+      "sha256": "d689ad7eb3e4db88ac464ecee28d47295f894d445d83d301b657e4a22652ff17",
+      "measured_at": "2026-11-13T05:27:05.785161+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/PointProcess/Poisson/IntegerValued.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 92,
+      "sha256": "402dee4d963c57cb225f42f4df6a5b3eafdf6e77f1da04a052234d7db5169474",
+      "measured_at": "2026-11-13T05:27:05.789735+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/RandomMeasure/Law.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 155,
+      "sha256": "71893b73f25062ca9c88eace16cf7c0096a7571b17550ab8681bdb9814f031f8",
+      "measured_at": "2026-11-13T05:27:05.794552+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/MetricSpace/Polish/GDelta.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 104,
+      "sha256": "1a618034a6728b8b8a2f2709d4131794ac6dea026c4d8a62184fc1bd9cd251d1",
+      "measured_at": "2026-11-13T05:27:05.800100+00:00"
+    }
+  ]
+}

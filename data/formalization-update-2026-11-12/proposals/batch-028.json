@@ -1,0 +1,601 @@
+{
+  "batch_id": "batch-028",
+  "author": "analysis_formalization",
+  "reviews": [
+    {
+      "concept": "nondegenerate-bilinear-form",
+      "concept_id": "b283f0fc-8905-5a39-8fd6-ece5d9557e30",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "BilinForm.Nondegenerate:291 is LinearMap.Nondegenerate, whose actual definition in SesquilinearForm/Basic:546 is SeparatingLeft∧SeparatingRight. Left527 is ∀v,(∀w,b(v,w)=0)→v=0 and Right542 is the same implication in the other slot, exactly BOTH clauses of the catalogue. Neither symmetry nor finite dimension is assumed. Properties.nondegenerate_congr_iff:316 proves invariance under vector-space equivalence with its actual two-sided proof. The implementation changed from one-sided in January2026; the checked current two-sided definition is the one recorded. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/BilinearForm/Properties.lean",
+          "declarations": "LinearMap.BilinForm.Nondegenerate L291; Nondegenerate.congr L311; nondegenerate_congr_iff L316",
+          "note": "Native exact two-sided nondegenerate bilinear predicate and ordinary equivalence/zero-form API."
+        }
+      ],
+      "search_notes": "The zero vector space is allowed. Do not infer one-sided ⇒ two-sided without the finite-dimensional/reflexivity hypotheses of separate equivalences. Perfect pairing/dual isomorphism requires further finite-dimensional hypotheses and is not the bare definition."
+    },
+    {
+      "concept": "nondegenerate-bilinear-form",
+      "concept_id": "b283f0fc-8905-5a39-8fd6-ece5d9557e30",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "BilinForm.Nondegenerate:291 is LinearMap.Nondegenerate, whose actual definition in SesquilinearForm/Basic:546 is SeparatingLeft∧SeparatingRight. Left527 is ∀v,(∀w,b(v,w)=0)→v=0 and Right542 is the same implication in the other slot, exactly BOTH clauses of the catalogue. Neither symmetry nor finite dimension is assumed. Properties.nondegenerate_congr_iff:316 proves invariance under vector-space equivalence with its actual two-sided proof. The implementation changed from one-sided in January2026; the checked current two-sided definition is the one recorded. Actual dependency two-sided predicate checked. Native disjoint_orthogonal_of_restrict_nondegenerate:112 directly uses the RIGHT-separating clause to prove a nondegenerate restriction meets its right orthogonal complement in0. restrict_nondegenerate_iff_disjoint_orthogonal:356 proves the converse under IsRefl; no finite-dimensional assumption. This is direct restriction/recognition API, not just a named nondegenerate instance. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/BilinearForm/Orthogonal.lean",
+          "declarations": "LinearMap.BilinForm.disjoint_orthogonal_of_restrict_nondegenerate L112; restrict_nondegenerate_iff_disjoint_orthogonal L356; IsRefl.nondegenerate_restrict_of_isCompl_ker L365",
+          "note": "Native ordinary restriction/nondegeneracy recognition and complementary-kernel API, with two-sided/chirality hypotheses explicit."
+        }
+      ],
+      "search_notes": "Actual h.2 proof and reflexive converse read. Orthogonal basis extension, Lagrangian classification, discriminants and Witt theory farther in the same file are not further selection reasons."
+    },
+    {
+      "concept": "orthogonal-complement-bilinear-form",
+      "concept_id": "068b85e2-b59b-5102-a29b-6cb377603776",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "LinearMap.BilinForm.orthogonal:102 is N.orthogonalBilin B, and mem_orthogonal_iff:108 literally states v∈Uorth iff ∀u∈U,B u v=0. It is the RIGHT orthogonal complement, already a submodule/subspace. There is no positive inner-product, symmetry, reflexivity or finite-dimensional hypothesis in this constructor. Order reversal orthogonal_le:114 is proved directly; double-orthogonal inclusion116 explicitly needs IsRefl and is not assumed in the definition. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/BilinearForm/Orthogonal.lean",
+          "declarations": "LinearMap.BilinForm.orthogonal L102; mem_orthogonal_iff L108; orthogonal_le L114",
+          "note": "Native exact right-orthogonal subspace and ordinary inclusion/zero/top/restriction API."
+        }
+      ],
+      "search_notes": "Do not swap B u v to B v u without a reflexivity hypothesis. InnerProductSpace orthogonal and positive projection theorem are not substituted for an arbitrary bilinear form."
+    },
+    {
+      "concept": "orthogonal-complement-bilinear-form",
+      "concept_id": "068b85e2-b59b-5102-a29b-6cb377603776",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "LinearMap.BilinForm.orthogonal:102 is N.orthogonalBilin B, and mem_orthogonal_iff:108 literally states v∈Uorth iff ∀u∈U,B u v=0. It is the RIGHT orthogonal complement, already a submodule/subspace. There is no positive inner-product, symmetry, reflexivity or finite-dimensional hypothesis in this constructor. Order reversal orthogonal_le:114 is proved directly; double-orthogonal inclusion116 explicitly needs IsRefl and is not assumed in the definition. Actual dependency right-slot definition checked. Native apply_eq_zero_of_mem_span:144 proves orthogonality passes to both spans by the actual orthogonalBilin span criterion; restriction/disjoint recognition112/356 and complement-of-kernel365 are direct same-concept API. Their IsRefl/nondegeneracy hypotheses remain explicit. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/BilinearForm/Orthogonal.lean",
+          "declarations": "LinearMap.BilinForm.apply_eq_zero_of_mem_span L144; disjoint_orthogonal_of_restrict_nondegenerate L112; restrict_nondegenerate_iff_disjoint_orthogonal L356",
+          "note": "Native direct span-orthogonality and restricted-complement recognition API for the same right orthogonal construction."
+        }
+      ],
+      "search_notes": "No claim arbitrary bilinear forms have inner-product orthogonal decomposition. Hyperbolic-pair/anisotropic basis extension and dimension bounds are separately significant endpoints, not additional mappings."
+    },
+    {
+      "concept": "product-vector-subspaces-field",
+      "concept_id": "3c3a93ff-ceec-5edb-8fd7-213e34675b6a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Submodule.mul_def:446 identifies S*T with span F ((S:Set L)*(T:Set L)); pointwise set multiplication is exactly all s*t. span_mul_span:443 proves span(A)*span(B)=span(A*B) via the actual bilinear map₂ constructor. For bases b,c of S,T, their coerced families span S,T; specialize this completed span identity to get span{b_i*c_j}=S*T. Thus both the primary product definition and the basis-product generating presentation are covered; no algebraicity/separability hypothesis on L/F is required. Finite-dimensionality of S,T makes the chosen basis index types finite, as stated. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Algebra/Operations.lean",
+          "declarations": "Submodule.mul_eq_map₂ L437; span_mul_span L443; mul_def L446; mul_eq_span_mul_set L560",
+          "note": "Native span-of-pointwise-products multiplication, exact bilinear image and basis-generator span identity."
+        }
+      ],
+      "search_notes": "Product denotes linear span of products, not merely the pointwise set. Generic Basis.span_eq and finiteBasisIndex checked027 are suppliers. No Kneser dimension inequality or stabilizer field theorem is inferred."
+    },
+    {
+      "concept": "product-vector-subspaces-field",
+      "concept_id": "3c3a93ff-ceec-5edb-8fd7-213e34675b6a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Submodule.mul_def:446 identifies S*T with span F ((S:Set L)*(T:Set L)); pointwise set multiplication is exactly all s*t. span_mul_span:443 proves span(A)*span(B)=span(A*B) via the actual bilinear map₂ constructor. For bases b,c of S,T, their coerced families span S,T; specialize this completed span identity to get span{b_i*c_j}=S*T. Thus both the primary product definition and the basis-product generating presentation are covered; no algebraicity/separability hypothesis on L/F is required. Finite-dimensionality of S,T makes the chosen basis index types finite, as stated. Actual dependency product-span constructor/identity checked. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Native TensorProduct/Submodule.map₂_tmul_mul_le concerns multiplication inside a tensor algebra, and Span/PowMulPow72 a special shear of monomial generators; these are distinct added structures/endpoints. MultiplierRing lattice-ideal comparisons USE products rather than define general ST; no native plain product-span API certified."
+    },
+    {
+      "concept": "quotient-vector-space",
+      "concept_id": "e3221d48-0b8a-5ad6-81a2-8144110fd0a5",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Submodule.quotientRel:43 and hasQuotient:54 construct V/U as equivalence classes modulo x-y∈U; Quotient.mk:60 is the actual coset map. The module instance descends vector operations; mkQ and liftQ:115/120 give the linear projection/universal map with evaluation, and ker_mkQ:149 states the actual denominator U is its kernel. These are algebraic cosets, without closing U or imposing a topology. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Quotient/Defs.lean",
+          "declarations": "Submodule.quotientRel L43; hasQuotient L54; Submodule.Quotient.mk L60",
+          "note": "Native actual algebraic coset carrier and inherited vector-space operations."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/Quotient/Basic.lean",
+          "declarations": "Submodule.liftQ L115; liftQ_apply L120; ker_mkQ L149",
+          "note": "Native quotient linear operations/projection/universal map and exact denominator recognition."
+        }
+      ],
+      "search_notes": "Checked actual quotient/lift structure bodies in027. No norm/Hausdorff quotient or cokernel image is forced into an arbitrary denominator U."
+    },
+    {
+      "concept": "quotient-vector-space",
+      "concept_id": "e3221d48-0b8a-5ad6-81a2-8144110fd0a5",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Submodule.quotientRel:44 and hasQuotient:55 construct V/U as equivalence classes modulo x-y∈U; Quotient.mk:61 is the actual coset map. The module instance descends vector operations; mkQ and liftQ:116/121 give the linear projection/universal map with evaluation, and ker_mkQ:150 states the actual denominator U is its kernel. These are algebraic cosets, without closing U or imposing a topology. Actual dependency quotient definitions/proofs checked. Native Submodule.quotientEquivOfEqSup:48 identifies a direct-sum quotient with the surviving summand, and representative57/68/75 formulas show the actual quotient classes. Native LinearMap.cokerCongrOfComp:110 in RestrictScalars is genuine ordinary quotient transport for isomorphic arrows (take auxiliary ring=ground field), with forward/inverse representative formulas116/121. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Submodule/Quotient.lean",
+          "declarations": "Submodule.quotientEquivOfEqSup L48; quotientEquivOfEqSup_symm_apply L57; quotientEquivOfEqSup_apply_mk L68",
+          "note": "Native direct ordinary complementary-sum quotient normal form and coset representative API."
+        },
+        {
+          "path": "TauCeti/LinearAlgebra/LinearMap/RestrictScalars.lean",
+          "declarations": "LinearMap.cokerCongrOfComp L110; cokerCongrOfComp_mk L116; cokerCongrOfComp_symm_mk L121",
+          "note": "Native substantive quotient transport under equivalent denominator/image diagrams; not merely a scalar-class installer."
+        }
+      ],
+      "search_notes": "Actual inverse/universal-map proofs read; conditions Disjoint p pprime and F=p sup pprime are explicit for that normal form. Torsion quotient diagonalization and topological quotient endpoints excluded."
+    },
+    {
+      "concept": "separable-field-extension",
+      "concept_id": "f2eb3926-a58b-5a12-a426-a56f3576bb16",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "IsSeparable:536 means minpoly F x is Polynomial.Separable; Algebra.IsSeparable:546 requires this for EVERY x:L. Polynomial.Separable:41 is coprimality with the derivative, and nodup_aroots_iff_of_splits:460 proves it is equivalent to no repeated roots in any splitting algebra for a nonzero polynomial. Instantiate the algebraic closure, where minpoly splits. IsSeparable.isIntegral:557 and the algebraic extension instance567 are actual proofs: nonintegral minpoly is0, which is not separable. Thus the catalogue algebraicity condition is preserved, not vacuously lost. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/FieldTheory/Separable.lean",
+          "declarations": "Polynomial.Separable L41; nodup_aroots_iff_of_splits L460; IsSeparable L536; Algebra.IsSeparable L546; IsSeparable.isIntegral L557",
+          "note": "Native all-elements separable extension definition and exact distinct-roots/minimal-polynomial/algebraicity characterization."
+        }
+      ],
+      "search_notes": "Algebraic closure splitting and minpoly nonzero for algebraic x are checked standard suppliers. No finiteness or characteristic0/perfectness assumption is imposed. Normal/Galois closure and primitive-element theorem are different endpoints."
+    },
+    {
+      "concept": "separable-field-extension",
+      "concept_id": "f2eb3926-a58b-5a12-a426-a56f3576bb16",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "IsSeparable:537 means minpoly F x is Polynomial.Separable; Algebra.IsSeparable:547 requires this for EVERY x:L. Polynomial.Separable:42 is coprimality with the derivative, and nodup_aroots_iff_of_splits:461 proves it is equivalent to no repeated roots in any splitting algebra for a nonzero polynomial. Instantiate the algebraic closure, where minpoly splits. IsSeparable.isIntegral:558 and the algebraic extension instance568 are actual proofs: nonintegral minpoly is0, which is not separable. Thus the catalogue algebraicity condition is preserved, not vacuously lost. Actual dependency polynomial/minpoly characterization checked. Native Set.Pairwise.isSeparable_adjoin_iff:31 proves a commuting generator set generates a separable subalgebra iff every generator is separable, specializing to field extensions. Native IsSeparable.restrictScalars:40 descends an element through a separable field tower, with actual finite simple-adjoin/integrality proof. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/FieldTheory/Separable/Adjoin.lean",
+          "declarations": "Set.Pairwise.isSeparable_adjoin_iff L31",
+          "note": "Native ordinary separability detection on generating sets, in particular commutative field generators."
+        },
+        {
+          "path": "TauCeti/FieldTheory/Separable/Tower.lean",
+          "declarations": "IsSeparable.restrictScalars L40",
+          "note": "Native direct tower/base-field transport API with separability of the intermediate extension explicit."
+        }
+      ],
+      "search_notes": "Both completed generator and tower proofs inspected. Higher transcendence-degree regularity, geometrically reduced tensor criteria and prime-degree specializations are distinct endpoints, not extra mapped files."
+    },
+    {
+      "concept": "snake-lemma",
+      "concept_id": "4515fd87-3ccf-5df4-9ff8-aba760f890ef",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "CategoryTheory.ShortComplex.SnakeInput encodes the commuting exact-row diagram with objectwise kernel/cokernel rows, top-row epi and bottom-row mono. SnakeInput.composableArrows:377 is exactly the six kernel/cokernel objects with the connecting arrow; snake_lemma:384 proves all four interior exactness conditions by actual successive short-complex exactness proofs. With both original rows short exact, their endpoint mono/epi yield the initial0/final0 exactness as well. naturality_δ:530 proves connecting-map naturality for morphisms of diagrams. Instantiate the existing abelian category ModuleCat F to obtain exactly vector spaces/linear maps, not a claim only for finite dimension. The explicit module SnakeLemma.δ:109 and exact_δprime_right:256/exact_δprime_left:283 implement the same connecting homomorphism by lifts, with section/retraction dependence removed in δprime. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean",
+          "declarations": "CategoryTheory.ShortComplex.SnakeInput; SnakeInput.composableArrows L377; SnakeInput.snake_lemma L384; SnakeInput.naturality_δ L530",
+          "note": "Native full six-term exact snake sequence and naturality in an arbitrary abelian category, specialized to ModuleCat F."
+        },
+        {
+          "path": "Mathlib/Algebra/Module/SnakeLemma.lean",
+          "declarations": "SnakeLemma.δ L109; δ_eq L122; exact_δ'_right L256; exact_δ'_left L283",
+          "note": "Native explicit linear connecting map with its representative independence and exactness on both sides."
+        }
+      ],
+      "search_notes": "Read actual δ construction, six-term exactness composition and naturality proof bodies. ModuleCat abelian/kernel/cokernel instances are generic checked suppliers, not an import tree. Long exact cohomology and arithmetic torsion applications are separate endpoints."
+    },
+    {
+      "concept": "snake-lemma",
+      "concept_id": "4515fd87-3ccf-5df4-9ff8-aba760f890ef",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "CategoryTheory.ShortComplex.SnakeInput encodes the commuting exact-row diagram with objectwise kernel/cokernel rows, top-row epi and bottom-row mono. SnakeInput.composableArrows:378 is exactly the six kernel/cokernel objects with the connecting arrow; snake_lemma:385 proves all four interior exactness conditions by actual successive short-complex exactness proofs. With both original rows short exact, their endpoint mono/epi yield the initial0/final0 exactness as well. naturality_δ:531 proves connecting-map naturality for morphisms of diagrams. Instantiate the existing abelian category ModuleCat F to obtain exactly vector spaces/linear maps, not a claim only for finite dimension. The explicit module SnakeLemma.δ:110 and exact_δprime_right:257/exact_δprime_left:284 implement the same connecting homomorphism by lifts, with section/retraction dependence removed in δprime. Actual dependency general/category and explicit-module snake interfaces checked. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Native Algebra/Module/Torsion/Snake builds the special scalar-multiplication connecting sequence and torus/lattice torsion maps, using the general snake lemma. These are independently scoped applications with extra data, not a new arbitrary commuting-diagram snake implementation. No native general API selected."
+    },
+    {
+      "concept": "stabilizer-field-vector-subspace",
+      "concept_id": "94ee6340-16b6-5892-80a0-14fd1ffccc59",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "An exact generic instantiation is H as the Subalgebra F L whose carrier is {x | ∀v∈V,x*v∈V}; Subalgebra:29 gives precisely the scalar-image/zero/add/mul closure constructor. Choose a nonzero v0∈V. Evaluation x↦x*v0 is an injective F-linear map H→V (field cancellation), and actual FiniteDimensional.of_injective:84 supplies finite dimension of H. H inherits a commutative domain from L; IsField.of_isDomain_of_finite:339 is the completed generic theorem making exactly this finite algebraic subring a FIELD. Thus H is the stated subfield, not merely a multiplier ring. For nonzero x∈H the actual endomorphism V→V, v↦x*v is injective; LinearMap.surjective_of_injective:292 gives xV=V. These checked generic constructors/theorems apply with precisely the catalogue parameters; no separate named H alias or separability/1∈V assumption is required. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Algebra/Subalgebra/Basic.lean",
+          "declarations": "Subalgebra:29",
+          "note": "Native exact generic subalgebra carrier/closure constructor instantiated to the multiplier stabilizer."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/FiniteDimensional/Basic.lean",
+          "declarations": "LinearMap.surjective_of_injective:292; IsField.of_isDomain_of_finite:339",
+          "note": "Native completed finite algebraic-domain field constructor and injective multiplication surjectivity, instantiated to H and V."
+        }
+      ],
+      "search_notes": "Nonzero V is necessary for evaluation injectivity. FiniteDimensional.of_injective84 is a checked supplier. The paragraph does not require V contain1. No assertion of a uniform K depending only on another subspace S is inferred."
+    },
+    {
+      "concept": "stabilizer-field-vector-subspace",
+      "concept_id": "94ee6340-16b6-5892-80a0-14fd1ffccc59",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "An exact generic instantiation is H as the Subalgebra F L whose carrier is {x | ∀v∈V,x*v∈V}; Subalgebra:29 gives precisely the scalar-image/zero/add/mul closure constructor. Choose a nonzero v0∈V. Evaluation x↦x*v0 is an injective F-linear map H→V (field cancellation), and actual FiniteDimensional.of_injective:84 supplies finite dimension of H. H inherits a commutative domain from L; IsField.of_isDomain_of_finite:339 is the completed generic theorem making exactly this finite algebraic subring a FIELD. Thus H is the stated subfield, not merely a multiplier ring. For nonzero x∈H the actual endomorphism V→V, v↦x*v is injective; LinearMap.surjective_of_injective:292 gives xV=V. These checked generic constructors/theorems apply with precisely the catalogue parameters; no separate named H alias or separability/1∈V assumption is required. Exact dependency defining and field/surjectivity suppliers are checked. Native AddSubgroup.multiplierRing:118 explicitly defines this carrier as a SUBRING and proves every closure axiom; mem_multiplierRing:135 is the exact predicate. Native Submodule.algebraMap_mem_multiplierRing:46 proves scalar F inclusion. Together with the same checked finite-domain field constructor this supplies the whole field account. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Ring/Subgroup.lean",
+          "declarations": "AddSubgroup.multiplierRing:118; AddSubgroup.mem_multiplierRing:135",
+          "note": "Native explicit multiplier stabilizer ring and its exact elementwise closure proofs."
+        },
+        {
+          "path": "TauCeti/Algebra/Module/Submodule/MultiplierRing.lean",
+          "declarations": "Submodule.algebraMap_mem_multiplierRing:46",
+          "note": "Native actual scalar-image inclusion for the same vector-subspace multiplier ring."
+        }
+      ],
+      "search_notes": "Native integral_of_mem_multiplierRing has an EXTRA 1∈V assumption and is not used here. The checked finite-domain constructor covers arbitrary nonzero finite-dimensional V. Lattice arithmetic and ideal invertibility endpoints excluded."
+    },
+    {
+      "concept": "stabilizer-subgroup-sumset",
+      "concept_id": "75d782bb-2324-50ab-8e2a-3819038cac4a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "AddAction.stabilizer is generated at the source MulAction.stabilizer:514; its carrier is exactly g+ᵥA=A under the regular translation action on Set G. On an additive abelian group this is g+A=A. The actual inverse-closure proof:516 uses inverse action cancellation, so it is a genuine subgroup, not only a submonoid. mem_stabilizer_iff:523 gives exact fixed-set membership. Empty A has full stabilizer, correctly included. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/GroupTheory/GroupAction/Defs.lean",
+          "declarations": "MulAction.stabilizer:514 / generated AddAction.stabilizer; mem_stabilizer_iff:523",
+          "note": "Native stabilizer subgroup constructor and exact fixed-set criterion, instantiated to regular additive translation."
+        }
+      ],
+      "search_notes": "No finiteness or nonempty assumption is imposed. A one-way inclusion g+A⊆A is not generally enough. Separate no-doubling/Kneser classification endpoints are excluded."
+    },
+    {
+      "concept": "stabilizer-subgroup-sumset",
+      "concept_id": "75d782bb-2324-50ab-8e2a-3819038cac4a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "AddAction.stabilizer is generated at the source MulAction.stabilizer:515; its carrier is exactly g+ᵥA=A under the regular translation action on Set G. On an additive abelian group this is g+A=A. The actual inverse-closure proof:517 uses inverse action cancellation, so it is a genuine subgroup, not only a submonoid. mem_stabilizer_iff:524 gives exact fixed-set membership. Empty A has full stabilizer, correctly included. Exact dependency headers checked. Native TauCeti.mem_stabilizer_set_iff_mapsTo:219 proves equality of sets iff BOTH an element and its inverse map the set into itself. Instantiate its Group parameter with Multiplicative G and its action with regular additive translation; it therefore directly gives the two-inclusion criterion for this H(A), without claiming the native theorem has a generated additive alias. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/GroupTheory/GroupAction/Stabilizer/Basic.lean",
+          "declarations": "TauCeti.mem_stabilizer_set_iff_mapsTo:219",
+          "note": "Native ordinary fixed-set stabilizer recognition by forward AND inverse inclusion, valid for the additive translation action through Multiplicative G."
+        }
+      ],
+      "search_notes": "Actual completed two-direction proof read. Do not replace equality by just MapsTo. Sift/chain algorithms and geometric generic-stabilizer classifications are not mapped."
+    },
+    {
+      "concept": "subgroup",
+      "concept_id": "dfa774bd-0f37-5e5d-8cc7-407e5e60be6e",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Subgroup:296 literally extends Submonoid G (identity and multiplication closure) by inverse closure inv_mem:298. AddSubgroup:302 is the additive counterpart. No normality, topology, finiteness or commutativity is imposed. The inherited subtype group operations are the actual ambient operations. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Subgroup/Defs.lean",
+          "declarations": "Subgroup:296; AddSubgroup:302",
+          "note": "Native exact subgroup/additive-subgroup bundled closure definitions and ordinary subtype group API."
+        }
+      ],
+      "search_notes": "General arbitrary subgroups, not just normal subgroups or subgroup closures of finite generators. Quotient-group representability and Sylow/classification endpoints excluded."
+    },
+    {
+      "concept": "subgroup",
+      "concept_id": "dfa774bd-0f37-5e5d-8cc7-407e5e60be6e",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Subgroup:296 literally extends Submonoid G (identity and multiplication closure) by inverse closure inv_mem:298. AddSubgroup:302 is the additive counterpart. No normality, topology, finiteness or commutativity is imposed. The inherited subtype group operations are the actual ambient operations. Exact dependency is byte-identical. Native TauCeti.Subgroup.congrOfMapEq:127 restricts a group equivalence onto a subgroup mapped onto B;132/138 prove actual forward/inverse inclusion formulas. Native conjugation membership:53, map_conj:60 and cardinality:66 are ordinary subgroup image/conjugation API with complete short proofs. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Group/Subgroup/Map.lean",
+          "declarations": "TauCeti.Subgroup.congrOfMapEq:127; coe_congrOfMapEq_apply:132; coe_congrOfMapEq_symm_apply:138",
+          "note": "Native ordinary restricted group-equivalence and subgroup map/transport API."
+        },
+        {
+          "path": "TauCeti/Algebra/Group/Subgroup/Pointwise.lean",
+          "declarations": "TauCeti.mem_conj_smul:53; map_conj_eq_conj_smul:60; card_conj_smul_eq:66",
+          "note": "Native ordinary conjugated-subgroup membership, map description and size invariance."
+        }
+      ],
+      "search_notes": "Only genuine subgroup natural-map/conjugation results justify files. Specialized commutator, normal-core/quotient and coset geometry endpoints are not separate selection reasons."
+    },
+    {
+      "concept": "sum-vector-subspaces",
+      "concept_id": "5df2258f-002d-5048-b07d-593ffec4b3fc",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Submodule.completeLattice:194 defines U⊔W as the intersection of all submodules containing both, with actual least-upper-bound proofs:196-198. Submodule.mem_sup:380 proves in BOTH directions, by span induction, that membership is exactly ∃u∈U,∃w∈W,u+w=x. coe_sup:406 identifies this with the pointwise sum of the carrier sets. This gives both clauses: actual sum elements and the smallest containing subspace. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Module/Submodule/Lattice.lean",
+          "declarations": "Submodule.completeLattice:194; sup least-upper-bound laws:196-198",
+          "note": "Native exact smallest-subspace-containing-both construction."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/Span/Defs.lean",
+          "declarations": "Submodule.mem_sup:380; mem_sup':396; coe_sup:406",
+          "note": "Native completed elementwise two-summand characterization of the join."
+        }
+      ],
+      "search_notes": "No topological closure, independence or finite-dimensional assumption. The dimension formula is a separate theorem. Count elementary join/membership API, not a transitive lattice import tree."
+    },
+    {
+      "concept": "sum-vector-subspaces",
+      "concept_id": "5df2258f-002d-5048-b07d-593ffec4b3fc",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Submodule.completeLattice:195 defines U⊔W as the intersection of all submodules containing both, with actual least-upper-bound proofs:197-199. Submodule.mem_sup:381 proves in BOTH directions, by span induction, that membership is exactly ∃u∈U,∃w∈W,u+w=x. coe_sup:407 identifies this with the pointwise sum of the carrier sets. This gives both clauses: actual sum elements and the smallest containing subspace. Exact dependency body-identical with header offsets. Native Submodule.quotientEquivOfEqSup:48 proves the ordinary complementary-sum normal form (U+W)/W≃U when U∩W=0;57/68 prove actual inclusion and representative formulas. This is direct natural-map API for decomposing that sum, with disjointness explicit. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Submodule/Quotient.lean",
+          "declarations": "Submodule.quotientEquivOfEqSup:48; quotientEquivOfEqSup_symm_apply:57; quotientEquivOfEqSup_apply_mk:68",
+          "note": "Native ordinary complementary-sum quotient normal form and its constituent inclusion/projection representatives."
+        }
+      ],
+      "search_notes": "The direct-sum quotient normal form is associated natural-map API; arbitrary sums are still available without disjointness from dependency. Separate dimension/supermodular inequalities are not mapped just because they use a sum."
+    },
+    {
+      "concept": "sumset",
+      "concept_id": "b2acc963-7391-5948-a2d3-b495720d9641",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Set.add is the generated additive version of protected Set.mul:304, literally image2 (+) A B. Set.mem_add generated from mem_mul:314 is exactly x∈A+B iff ∃a∈A,∃b∈B,a+b=x. No finiteness or nonemptiness assumption, so empty sets are handled by the image2 constructor. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Pointwise/Set/Basic.lean",
+          "declarations": "Set.add (generated at Set.mul:304); Set.mem_add (generated at mem_mul:314)",
+          "note": "Native exact pointwise set sum and its existential membership constructor/API."
+        }
+      ],
+      "search_notes": "Sumset is a set of sums, not the generated additive subgroup or linear span. Plunnecke/Ruzsa/Kneser and cardinal growth endpoints are excluded."
+    },
+    {
+      "concept": "sumset",
+      "concept_id": "b2acc963-7391-5948-a2d3-b495720d9641",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Set.add is the generated additive version of protected Set.mul:298, literally image2 (+) A B. Set.mem_add generated from mem_mul:308 is exactly x∈A+B iff ∃a∈A,∃b∈B,a+b=x. No finiteness or nonemptiness assumption, so empty sets are handled by the image2 constructor. Actual dependency set operations are mathematically identical, with an earlier inverse-instance refactor shifting these anchors. Native Subgroup.mem_smul_set_iff_exists_smul_mem:89 has generated additive AddSubgroup.mem_vadd_set_iff_exists_vadd_mem:89. On the regular action and with first factor an additive subgroup A it proves x∈A+B iff ∃a∈A,a+x∈B, by explicit inverse translation. This is ordinary sumset membership API with the stronger first-factor subgroup hypothesis, not an independent growth theorem. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Group/Subgroup/Pointwise.lean",
+          "declarations": "Subgroup.mem_smul_set_iff_exists_smul_mem:89; generated AddSubgroup.mem_vadd_set_iff_exists_vadd_mem:89",
+          "note": "Native direct translated-set membership recognition, specialized to the ordinary subgroup-plus-set sumset case."
+        }
+      ],
+      "search_notes": "Native proof91-96 actually uses inverse translation in both directions; no claim all arbitrary A are subgroups. The full arbitrary sumset constructor is dependency supplied. Exclude normalizer join classification and cardinality-growth applications as further mapping reasons."
+    },
+    {
+      "concept": "uniform-subfield-stabilizer-theorem",
+      "concept_id": "c64f3078-ede7-5bb7-8149-d085a598b9c1",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Concrete searches for uniform subfield/Kneser/product-span stabilizer and inspected actual multiplierRing118/scalar inclusion46, finite-domain-field339 and product-span446 constructors. These cover H(V) for a FIXED V, not existence of one proper intermediate field K depending ONLY on S and simultaneously stabilizing every exceptional ST. Actual Mathlib VerySmallDoubling.smul_stabilizer_of_no_doubling:76 concerns set doubling in a group, not arbitrary field-extension subspaces. Native Tau span_add_smul_pow_mul_pow:72 proves a monomial shear identity, not this uniform dimension dichotomy. The all-T uniformity, properness and absence of separability assumptions remain unverified; no exact theorem is certified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Bounded source review kept fixed-product stabilizer field separate from a SINGLE S-dependent stabilizing field for every exceptional T. No theorem follows just from writing the dimension predicate or defining H(ST). Tau candidates have separate ownership and do not prove standalone Mathlib coverage. Unknown, not absence."
+    },
+    {
+      "concept": "uniform-subfield-stabilizer-theorem",
+      "concept_id": "c64f3078-ede7-5bb7-8149-d085a598b9c1",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Concrete searches for uniform subfield/Kneser/product-span stabilizer and inspected actual multiplierRing118/scalar inclusion46, finite-domain-field339 and product-span446 constructors. These cover H(V) for a FIXED V, not existence of one proper intermediate field K depending ONLY on S and simultaneously stabilizing every exceptional ST. Actual Mathlib VerySmallDoubling.smul_stabilizer_of_no_doubling:76 concerns set doubling in a group, not arbitrary field-extension subspaces. Native Tau span_add_smul_pow_mul_pow:72 proves a monomial shear identity, not this uniform dimension dichotomy. The all-T uniformity, properness and absence of separability assumptions remain unverified; no exact theorem is certified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "Bounded source review kept fixed-product stabilizer field separate from a SINGLE S-dependent stabilizing field for every exceptional T. No theorem follows just from writing the dimension predicate or defining H(ST). Tau candidates have separate ownership and do not prove standalone Mathlib coverage. Unknown, not absence."
+    },
+    {
+      "concept": "vector-space-basis",
+      "concept_id": "7fec872a-6a2f-57f6-b184-3f6632f68dcf",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Module.Basis:88 is the linear equivalence V≃ₗ[F](ι→₀F), so coefficients are finite and unique even for infinite bases. Basis.mk:111 explicitly constructs that equivalence from LinearIndependent F b and span F(range b)=top, with the inverse finite-combination proofs inspected. Conversely its linearIndependent/span_eq fields give exactly the paragraph. Thus both the coordinate and independent-spanning presentations agree, without assuming finite dimension. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Basis/Defs.lean",
+          "declarations": "Module.Basis:88; Module.Basis.sum_repr:258",
+          "note": "Native exact finite-coordinate basis structure and reconstruction API."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/Basis/Basic.lean",
+          "declarations": "Module.Basis.mk:111",
+          "note": "Native checked independent-spanning constructor and ordinary basis equivalence/coordinate API."
+        }
+      ],
+      "search_notes": "General bases, not only ordered finite bases. Choice/existence is a checked underlying supplier, not a request to count all choice/linear-independence prerequisites. Orthonormal basis and spectral applications excluded."
+    },
+    {
+      "concept": "vector-space-basis",
+      "concept_id": "7fec872a-6a2f-57f6-b184-3f6632f68dcf",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Module.Basis:89 is the linear equivalence V≃ₗ[F](ι→₀F), so coefficients are finite and unique even for infinite bases. Basis.mk:111 explicitly constructs that equivalence from LinearIndependent F b and span F(range b)=top, with the inverse finite-combination proofs inspected. Conversely its linearIndependent/span_eq fields give exactly the paragraph. Thus both the coordinate and independent-spanning presentations agree, without assuming finite dimension. Exact dependency checked. Native coefficient-singleton61 and coordinate transport69/83/104 have completed representation proofs; linearIndependent_coe_basis132 and eq_sum_repr_smul_of_mem137 handle bases of an actual subspace and reconstruct its elements. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Basis/Basic.lean",
+          "declarations": "Module.Basis.eq_smul_of_repr_support_subset_singleton:61; repr_map_eq_of_map_basis:69; repr_comp_apply_apply:83; coord_map_apply:104; linearIndependent_coe_basis:132; eq_sum_repr_smul_of_mem:137",
+          "note": "Native ordinary finite-coordinate recognition, linear-map coefficient transport and subspace-basis reconstruction API."
+        }
+      ],
+      "search_notes": "No special eigenbasis, determinant or lattice application justifies this mapping. Actual namespace nesting of subspace linearIndependent_coe_basis is checked in source."
+    },
+    {
+      "concept": "vector-space-dimension",
+      "concept_id": "29e9069c-454a-55f3-964f-46d7a9c86d48",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Module.rank:68 is the Cardinal supremum of sizes of independent subsets. Actual Module.Basis.mk_eq_rank'':313 proves equality with the cardinality of ANY basis by both cardinal inequalities; rank_eq_card_basis:334 gives exactly n for a finite n-element basis. The cardinal-valued rank, rather than totalized finrank:61 (infinite→0), is used for general dimension. Arbitrary finite and infinite vector spaces are included. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Dimension/Basic.lean",
+          "declarations": "Module.rank:68",
+          "note": "Native actual cardinal-valued dimension constructor, retaining infinite cardinal sizes."
+        },
+        {
+          "path": "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+          "declarations": "Module.Basis.mk_eq_rank'':313; rank_eq_card_basis:334",
+          "note": "Native basis-cardinality invariance and exact finite basis-size theorem."
+        }
+      ],
+      "search_notes": "StrongRankCondition hypotheses hold over fields. Finrank is only used for finite dimensions. CH, cardinal classification and dimension inequalities are separate endpoints."
+    },
+    {
+      "concept": "vector-space-dimension",
+      "concept_id": "29e9069c-454a-55f3-964f-46d7a9c86d48",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Module.rank:68 is the Cardinal supremum of sizes of independent subsets. Actual Module.Basis.mk_eq_rank'':314 proves equality with the cardinality of ANY basis by both cardinal inequalities; rank_eq_card_basis:335 gives exactly n for a finite n-element basis. The cardinal-valued rank, rather than totalized finrank:61 (infinite→0), is used for general dimension. Arbitrary finite and infinite vector spaces are included. Exact dependency rank/basis theorem checked. Native Module.finrank_prod_self:27 proves dim(V×V)=2dim(V) for finite V and explicitly handles the totalized infinite case by Module.Finite.of_surjective; this is ordinary finite-dimension arithmetic API and is not used as an infinite-cardinal claim. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Dimension/Prod.lean",
+          "declarations": "Module.finrank_prod_self:27",
+          "note": "Native direct ordinary dimension-of-product identity, with actual finite/infinite convention branches."
+        }
+      ],
+      "search_notes": "Infinite general dimension remains the dependency cardinal Module.rank, never finrank0. Native CardEqFinrank results about alternate conventions are excluded from the definition mapping."
+    },
+    {
+      "concept": "vector-space-dimension-formula",
+      "concept_id": "6ba22c04-4f87-5243-8eb0-73e6de44a60b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Submodule.finrank_sup_add_finrank_inf_eq:53 is EXACTLY dim(U+W)+dim(U∩W)=dim U+dim W, with finite dimension required only for U and W. Its completed proof converts the full cardinal rank identity to naturals using those finite instances. Submodule.mem_sup:380 and lattice inf=intersection identify the paragraph operations, so no independence or finite ambient space assumption is added. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean",
+          "declarations": "Submodule.finrank_sup_add_finrank_inf_eq:53",
+          "note": "Native exact finite-dimensional sum/intersection dimension identity."
+        }
+      ],
+      "search_notes": "Only U,W need be finite-dimensional. This is not cardinal cancellation for arbitrary infinite spaces, nor an orthogonal direct-sum formula."
+    },
+    {
+      "concept": "vector-space-dimension-formula",
+      "concept_id": "6ba22c04-4f87-5243-8eb0-73e6de44a60b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Submodule.finrank_sup_add_finrank_inf_eq:53 is EXACTLY dim(U+W)+dim(U∩W)=dim U+dim W, with finite dimension required only for U and W. Its completed proof converts the full cardinal rank identity to naturals using those finite instances. Submodule.mem_sup:381 and lattice inf=intersection identify the paragraph operations, so no independence or finite ambient space assumption is added. Byte-identical dependency identity checked. Native finrank_inf_add_finrank_inf_le:56 proves the immediate supermodularity consequence by that exact sum formula and inclusion monotonicity; inf_ne_bot_of_finrank_lt:70 is the usual dimension-counting nontrivial intersection corollary. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Dimension/Submodule.lean",
+          "declarations": "Submodule.finrank_inf_add_finrank_inf_le:56; inf_ne_bot_of_finrank_lt:70",
+          "note": "Native direct dimension-formula consequences for intersections, with complete short dimension/inclusion proofs."
+        }
+      ],
+      "search_notes": "The added finite-dimensional H/ambient hypotheses belong to these ordinary corollaries, not the dependency general identity. More specialized geometric intersection and Grassmannian endpoints excluded."
+    },
+    {
+      "concept": "vector-subspace",
+      "concept_id": "2a3e1ec4-4a2e-5d4a-8ee6-384090ef7893",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Submodule:38 literally extends AddSubmonoid (zero/add closure) and SubMulAction (scalar closure) with the same carrier. Specializing R to F and M to a vector space gives exactly the catalogue subset; SubmoduleClass.module:381 supplies its inherited vector operations. No topology, closedness, dimension or extra generating data is part of this definition. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Module/Submodule/Defs.lean",
+          "declarations": "Submodule:38; SubmoduleClass.module:381",
+          "note": "Native exact zero/add/scalar-closed subset constructor and inherited vector-space operations."
+        }
+      ],
+      "search_notes": "Do not substitute arbitrary additive subgroup for scalar closure. Quotient/topological closure, invariant/eigenspaces and subspace classification are distinct endpoints."
+    },
+    {
+      "concept": "vector-subspace",
+      "concept_id": "2a3e1ec4-4a2e-5d4a-8ee6-384090ef7893",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Submodule:38 literally extends AddSubmonoid (zero/add closure) and SubMulAction (scalar closure) with the same carrier. Specializing R to F and M to a vector space gives exactly the catalogue subset; SubmoduleClass.module:381 supplies its inherited vector operations. No topology, closedness, dimension or extra generating data is part of this definition. Exact dependency is byte-identical. Native mem_pointwise_smul_iff_inv_smul_mem:60 directly recognizes elements of an invertibly transformed subspace; neg_smul_eq_smul:128 proves negating a scalar does not change the subspace image. Over a field both are ordinary scalar-image API, with actual short coercion and inverse-action proofs inspected. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Module/Submodule/Pointwise.lean",
+          "declarations": "Submodule.mem_pointwise_smul_iff_inv_smul_mem:60; neg_smul_eq_smul:128",
+          "note": "Native ordinary scalar-image membership and sign-invariance laws for the same subspace constructor."
+        }
+      ],
+      "search_notes": "General scalar-image identities count as core API. Ring-localization powers/ideals and specialized lattice arithmetic later in the file are not extra mapping reasons."
+    },
+    {
+      "concept": "absolute-value-field",
+      "concept_id": "7b9c719e-4621-55eb-a623-07247157c776",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "AbsoluteValue:36 extends a multiplicative map by nonnegativity, zero iff x=0 and the exact triangle inequality. Take domain Field K and codomain ℝ≥0, or equivalent nonnegative-valued ℝ presentation; no archimedean assumption or normalization is imposed. IsNonarchimedean:108 in Algebra/Order/Ring/Basic is the literal stronger max/sup inequality. The actual fields of both constructors were inspected, so the optional ultrametric property is represented exactly. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Order/AbsoluteValue/Basic.lean",
+          "declarations": "AbsoluteValue:36; eq_zero':41; add_le':43",
+          "note": "Native exact multiplicative positive-definite absolute-value constructor and ordinary triangle API."
+        }
+      ],
+      "search_notes": "An absolute value is not an additive valuation with infinity. Extra NumberField normalization/classification and Ostrowski endpoints excluded; generic max predicate is a supplier, not an unbounded ordered-ring file inventory."
+    },
+    {
+      "concept": "absolute-value-field",
+      "concept_id": "7b9c719e-4621-55eb-a623-07247157c776",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "AbsoluteValue:36 extends a multiplicative map by nonnegativity, zero iff x=0 and the exact triangle inequality. Take domain Field K and codomain ℝ≥0, or equivalent nonnegative-valued ℝ presentation; no archimedean assumption or normalization is imposed. IsNonarchimedean:108 in Algebra/Order/Ring/Basic is the literal stronger max/sup inequality. The actual fields of both constructors were inspected, so the optional ultrametric property is represented exactly. Exact dependency is byte-identical. Native apply_natCast_mul_le:40 proves the repeated-addition triangle bound and apply_sum_le_pow_mul:52 the finite-sum bound from the stated strengthened max hypothesis. Native AbsoluteValue.nonarchRpow:158 actually constructs every positive real power of a nonarchimedean absolute value, checks all fields using strong triangle inequality,175 preserves nonarchimedeanity and180 proves equivalence. This is direct ordinary absolute-value rescaling API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Order/AbsoluteValue/Basic.lean",
+          "declarations": "AbsoluteValue.apply_natCast_mul_le:40; apply_sum_le_pow_mul:52",
+          "note": "Native actual ordinary finite/repeated triangle-inequality bounds."
+        },
+        {
+          "path": "TauCeti/Analysis/AbsoluteValue/Nonarchimedean.lean",
+          "declarations": "AbsoluteValue.nonarchRpow:158; isNonarchimedean_nonarchRpow:175; isEquiv_nonarchRpow:180",
+          "note": "Native positive-power constructor, exact strong-triangle proof and ordinary equivalence API for nonarchimedean absolute values."
+        }
+      ],
+      "search_notes": "Positive-power statement requires nonarchimedeanity; for archimedean values powers>1 may fail triangle inequality. Integral rings/number-theoretic classification and normalized global heights excluded."
+    },
+    {
+      "concept": "adelic-matrix-height",
+      "concept_id": "40d07117-2050-511a-83a4-c0800f784c11",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Scoped searches of adelic/matrix/representation heights and inspected actual number-field height candidates. Native Tau NumberTheory/Height/Twisted/Basic.twistedLocalHeight:101 is max_i |L_vi(x)|_v Q^(-c_vi), and twistedHeight:179 is the finprod of these factors for one GLOBAL rational vector x; it is not the specified max of entries of adelic ρ(g_v) AND ρ(g_v^-1). The actual totalized finprod returns1 when support is infinite; its mere existence does not prove the required almost-all-factors1 clause. Weight/Global handles global sums of subspace weights, not comparison of faithful representation matrix heights. No complete generic adelic restricted-product constructor plus the faithful-choice polynomial-comparability endpoint was certified in the checked standalone/dependency/native candidates. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "The displayed finite-product expression alone would not certify almost-all1 or the equivalent faithful-representation growth comparison. Tau specialized point-height constructors retain separate ownership and do not establish standalone Mathlib coverage. Unknown with these concrete unverified endpoints, not an absence claim."
+    },
+    {
+      "concept": "adelic-matrix-height",
+      "concept_id": "40d07117-2050-511a-83a4-c0800f784c11",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Scoped searches of adelic/matrix/representation heights and inspected actual number-field height candidates. Native Tau NumberTheory/Height/Twisted/Basic.twistedLocalHeight:101 is max_i |L_vi(x)|_v Q^(-c_vi), and twistedHeight:179 is the finprod of these factors for one GLOBAL rational vector x; it is not the specified max of entries of adelic ρ(g_v) AND ρ(g_v^-1). The actual totalized finprod returns1 when support is infinite; its mere existence does not prove the required almost-all-factors1 clause. Weight/Global handles global sums of subspace weights, not comparison of faithful representation matrix heights. No complete generic adelic restricted-product constructor plus the faithful-choice polynomial-comparability endpoint was certified in the checked standalone/dependency/native candidates. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual definitions, hypotheses and relevant completed proof bodies inspected; source review only, no fresh build or new proof development.",
+      "files": [],
+      "search_notes": "The displayed finite-product expression alone would not certify almost-all1 or the equivalent faithful-representation growth comparison. Tau specialized point-height constructors retain separate ownership and do not establish standalone Mathlib coverage. Unknown with these concrete unverified endpoints, not an absence claim."
+    }
+  ]
+}

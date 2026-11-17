@@ -1,0 +1,599 @@
+Iterations of the projection body operator and a remark on Petty's conjectured projection inequality
+
+Coverage: All statements, spherical-harmonic contraction and regularization argument, mixed-volume perturbation proof, equality discussion and bibliography inspected.
+Required concepts complete: True
+Introduced concepts complete: True
+All citations captured: True
+Completion refers to immediate concepts only; false means not certified.
+
+REQUIRED CONCEPT FRONTIER (15)
+
+- Aleksandrov–Fenchel inequality for mixed volumes: For convex bodies K₁,…,K_d⊂ℝᵈ, V(K₁,K₂,K₃,…,K_d)²≥V(K₁,K₁,K₃,…,K_d)V(K₂,K₂,K₃,…,K_d).
+- Banach–Mazur distance between origin-symmetric convex bodies: For origin-symmetric convex bodies K,L⊂ℝᵈ, d_BM(K,L)=inf{t≥1:L⊆TK⊆tL for an invertible linear map T}.
+- Best L² approximation by spherical polynomials: Forf∈L²(S^{d−1}),E_N(f) is the infimum of∥f−P∥₂ over spherical polynomialsP of degree at mostN. Rates of decay ofE_N quantify polynomial approximation.
+- Cauchy’s projection formula for convex bodies: For a convex body K and unit u, the volume of K projected onto u⊥ equals ½∫|u·v| dS_K(v).
+- Curvature density under an invertible linear map: ForA∈GL(d) and a convex bodyK with surface-area densityf_K, f_AK(v)=|detA|²|Aᵀv|^(−d−1) f_K(Aᵀv/|Aᵀv|) almost everywhere onS^{d−1}.
+- Determinant-integral formula for zonoid volume: For a full-dimensional symmetric zonoidZ with generating measureµ defined byh_Z(u)=∫|u·v|dµ(v), |Z|=(2ᵈ/d!)∫⋯∫|det(v₁,…,v_d)|dµ(v₁)⋯dµ(v_d).
+- Difference body of a convex body: The origin-symmetric body K−K=K+(−K), where−K={−x:x∈K}. Some sources use the normalized difference body½(K−K).
+- Generating-measure representation theorem for symmetric zonoids: An origin-symmetric convex body is a zonoid exactly when it has a finite even positive generating measure on the unit sphere. That generating measure is unique.
+- Invertibility of the cosine transform on smooth even functions: For d≥3, the spherical cosine transform is a bijection ofC∞ even functions onS^{d−1} onto itself, where even meansf(−u)=f(u).
+- Nikolskii inequality for spherical polynomials: For a spherical polynomialP of degree at mostN≥1 onS^{d−1}, ∥P∥∞≤C_dN^{(d−1)/2}∥P∥₂, with spherical area normalized to probability.
+- Projection body associated with a quermassintegral: For 0≤i≤d−2, Π_iK is the convex body with support function h_{Π_iK}(u)=W_i(K|u⊥), where the quermassintegral is taken in the (d−1)-dimensional space u⊥.
+- Schneider’s projection-functional monotonicity theorem: For a full-dimensional convex body K⊂ℝᵈ, set P(K)=|ΠK|/|K|^{d−1}. Then P(K)≥P(ΠK), with equality exactly when K is homothetic to Π²K.
+- Smooth symmetric support functions are generalized zonoids: An origin-symmetric convex body withC∞ support function is a generalized zonoid: h_K=Cν for a finite even signed measureν, equivalentlyK+M=L for symmetric zonoidsL,M.
+- Spherical Radon transform on spherical harmonics: For d≥3, the normalized spherical Radon transform acts on degree-k harmonics by zero for oddk and by(−1)^{k/2}[1·3⋯(k−1)]/[(d−1)(d+1)⋯(d+k−3)] for evenk; the degree-zero multiplier is1.
+- Weil’s formula for bounded curvature densities of projection bodies: For d≥3 and a convex bodyK with bounded surface-area densityf_K relative to unnormalized spherical area, ΠK has density f_ΠK(u)=(1/(d−1)!)∫_{(S^{d−1}∩u⊥)^{d−1}}det_{u⊥}(v₁,…,v_{d−1})²∏_jf_K(v_j)dℋ^{d−2}(v_j), for almost everyu.
+
+INHERITED PREREQUISITES (123)
+
+- Abelian group — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Absolute continuity of measures — via curvature-density-linear-transform, weil-projection-curvature-formula
+- Almost-everywhere property on a measure space — via curvature-density-linear-transform, nikolskii-spherical-polynomials, spherical-polynomial-l2-approximation, weil-projection-curvature-formula
+- Area measure on the Euclidean unit sphere — via cosine-transform-smooth-even-inverse, curvature-density-linear-transform, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula
+- Bijection between sets — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Bilinear map — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Binary operation on a set — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Binary relation on a set — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Borel σ-algebra of a topological space — via aleksandrov-fenchel-mixed-volume, cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-volume-integral
+- Borel σ-algebra on the real line — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Boundary of a subset of a topological space — via cauchy-projection-formula, curvature-density-linear-transform, weil-projection-curvature-formula
+- Cartesian product of sets — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Cauchy sequence in a metric space — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, weil-projection-curvature-formula
+- Cauchy–Schwarz inequality for complex inner-product spaces — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, weil-projection-curvature-formula
+- Closure of a subset of a topological space — via cauchy-projection-formula, curvature-density-linear-transform, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula
+- Commutative ring with identity — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Compact topological space — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Compactly supported smooth test function on an open Euclidean set — via spherical-radon-harmonic-multipliers
+- Complement of a subset — via aleksandrov-fenchel-mixed-volume, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Complete measure — via aleksandrov-fenchel-mixed-volume, cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-volume-integral
+- Complete metric space — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, weil-projection-curvature-formula
+- Complex Hilbert space — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, weil-projection-curvature-formula
+- Complex conjugation — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, weil-projection-curvature-formula
+- Complex inner-product space — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, weil-projection-curvature-formula
+- Complex number — via cauchy-projection-formula, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, spherical-polynomial-l2-approximation, weil-projection-curvature-formula
+- Composition of functions — via curvature-density-linear-transform, weil-projection-curvature-formula, zonoid-volume-integral
+- Continuous map between topological spaces — via cosine-transform-smooth-even-inverse, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers
+- Convergence of a sequence in a metric space — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, weil-projection-curvature-formula
+- Convergent real series — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula
+- Convex body in Euclidean space — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Convex subset of ℝᵈ — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Curvature function of a convex body — via curvature-density-linear-transform, weil-projection-curvature-formula
+- Derivative of a real function — via cosine-transform-smooth-even-inverse, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers
+- Determinant of a square matrix — via curvature-density-linear-transform, weil-projection-curvature-formula, zonoid-volume-integral
+- Disjoint sets — via aleksandrov-fenchel-mixed-volume, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Equivalence class — via nikolskii-spherical-polynomials, spherical-polynomial-l2-approximation
+- Equivalence relation — via nikolskii-spherical-polynomials, spherical-polynomial-l2-approximation
+- Essential supremum of a measurable real function — via nikolskii-spherical-polynomials, spherical-polynomial-l2-approximation
+- Euclidean space ℝᵈ — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Extended nonnegative real numbers — via aleksandrov-fenchel-mixed-volume, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Factorial — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula
+- Field — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Finite set — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Finite signed measure — via cosine-transform-smooth-even-inverse, smooth-body-generalized-zonoid
+- Function between sets — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Generating measure of an origin-symmetric zonoid — via zonoid-measure-representation, zonoid-volume-integral
+- Greatest lower bound — via spherical-polynomial-l2-approximation
+- Group — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Hausdorff distance between compact sets — via smooth-body-generalized-zonoid, zonoid-measure-representation, zonoid-volume-integral
+- Hausdorff measure of a metric space — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula
+- Homogeneous real polynomial — via spherical-radon-harmonic-multipliers
+- Indicator function of a subset — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Integer — via curvature-density-linear-transform, weil-projection-curvature-formula, zonoid-volume-integral
+- Interior of a subset of a topological space — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Intersection of a family of sets — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Least upper bound in a partially ordered set — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Lebesgue Lᵖ space — via nikolskii-spherical-polynomials, spherical-polynomial-l2-approximation
+- Lebesgue integral — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Lebesgue measure on Euclidean space — via aleksandrov-fenchel-mixed-volume, cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-volume-integral
+- Limit of a function between metric spaces — via cosine-transform-smooth-even-inverse, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers
+- Limit of a real function at a point — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula
+- Limit of a real sequence — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula
+- Linear map between vector spaces — via banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Matrix over a ring — via curvature-density-linear-transform, weil-projection-curvature-formula, zonoid-volume-integral
+- Measurable map between measurable spaces — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Measurable simple real function — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Measurable space — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Measure — via aleksandrov-fenchel-mixed-volume, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Metric induced by a norm — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, weil-projection-curvature-formula
+- Metric space — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Minkowski sum of subsets of a vector space — via aleksandrov-fenchel-mixed-volume, difference-body, mixed-projection-body-quermass, smooth-body-generalized-zonoid, zonoid-measure-representation, zonoid-volume-integral
+- Mixed volume of convex bodies — via aleksandrov-fenchel-mixed-volume, mixed-projection-body-quermass
+- Modulus of a complex number — via cauchy-projection-formula, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, spherical-polynomial-l2-approximation, weil-projection-curvature-formula
+- Natural logarithm — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula
+- Natural number — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Nonnegative real square root — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Normalized spherical Radon transform — via spherical-radon-harmonic-multipliers
+- Normed vector space — via cauchy-projection-formula, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, spherical-polynomial-l2-approximation, weil-projection-curvature-formula
+- Open interval in the real line — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Ordered field — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Ordered pair — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Origin-symmetric generalized zonoid — via smooth-body-generalized-zonoid
+- Orthogonal projection onto a closed Hilbert subspace — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, weil-projection-curvature-formula
+- Outer unit normal of a convex body — via cauchy-projection-formula, curvature-density-linear-transform, weil-projection-curvature-formula
+- Partial derivative in Euclidean coordinates — via cosine-transform-smooth-even-inverse, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers
+- Partial order — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Preimage of a subset under a function — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Product measure — via weil-projection-curvature-formula, zonoid-volume-integral
+- Projection body of a convex body — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, weil-projection-curvature-formula
+- Pushforward measure — via cauchy-projection-formula, curvature-density-linear-transform, weil-projection-curvature-formula
+- Quermassintegral of a convex body — via mixed-projection-body-quermass
+- Radon–Nikodym derivative of a measure — via curvature-density-linear-transform, weil-projection-curvature-formula
+- Real Hilbert space — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, weil-projection-curvature-formula
+- Real exponential function — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula
+- Real inner-product space — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Real number — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Real polynomial in finitely many variables — via aleksandrov-fenchel-mixed-volume, mixed-projection-body-quermass, nikolskii-spherical-polynomials, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers
+- Real power of a positive real number — via cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, nikolskii-spherical-polynomials, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula
+- Real sequence — via aleksandrov-fenchel-mixed-volume, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Sequence in a set — via aleksandrov-fenchel-mixed-volume, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Set — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Sign of a permutation — via curvature-density-linear-transform, weil-projection-curvature-formula, zonoid-volume-integral
+- Smooth function on a Euclidean sphere — via cosine-transform-smooth-even-inverse, smooth-body-generalized-zonoid
+- Smooth map between open Euclidean sets — via cosine-transform-smooth-even-inverse, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers
+- Spherical cosine transform — via cosine-transform-smooth-even-inverse, smooth-body-generalized-zonoid
+- Spherical harmonic — via spherical-radon-harmonic-multipliers
+- Spherical polynomial — via nikolskii-spherical-polynomials, spherical-polynomial-l2-approximation
+- Subset — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Sum of a nonnegative series — via aleksandrov-fenchel-mixed-volume, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Support function of a convex body — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Support of a function — via spherical-radon-harmonic-multipliers
+- Surface area measure of a convex body — via cauchy-projection-formula, curvature-density-linear-transform, weil-projection-curvature-formula
+- Symmetric group of a finite set — via curvature-density-linear-transform, weil-projection-curvature-formula, zonoid-volume-integral
+- Topological space — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Total order — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Union of a family of sets — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Vector space — via aleksandrov-fenchel-mixed-volume, banach-mazur-distance-symmetric-bodies, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, difference-body, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- Vector subspace — via cauchy-projection-formula, mixed-projection-body-quermass, schneider-projection-functional-monotonicity, weil-projection-curvature-formula
+- Weak partial derivative of a locally integrable function — via spherical-radon-harmonic-multipliers
+- Zonoid — via smooth-body-generalized-zonoid, zonoid-measure-representation, zonoid-volume-integral
+- σ-algebra — via aleksandrov-fenchel-mixed-volume, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- σ-algebra generated by a family of subsets — via aleksandrov-fenchel-mixed-volume, cauchy-projection-formula, cosine-transform-smooth-even-inverse, curvature-density-linear-transform, mixed-projection-body-quermass, nikolskii-spherical-polynomials, schneider-projection-functional-monotonicity, smooth-body-generalized-zonoid, spherical-polynomial-l2-approximation, spherical-radon-harmonic-multipliers, weil-projection-curvature-formula, zonoid-measure-representation, zonoid-volume-integral
+- σ-finite measure — via weil-projection-curvature-formula, zonoid-volume-integral
+
+INTRODUCED CONCEPTS (3)
+
+- Local attraction of the ball under projection-body iteration
+- Local strict minimum in Petty’s conjectured projection inequality
+- Saroglou–Zvavitch refinement of Lutwak’s quermassintegral inequality
+
+LOCATED CONCEPTS (35)
+
+1. Convex body in Euclidean space
+   A compact convex subset of ℝᵈ with nonempty interior.
+   Source: relies_on, §1
+   Note: Used in the source-specific selected proof or background definitions.
+
+2. Support function of a convex body
+   For a convex body K⊂ℝᵈ, h_K(u)=max{x·u:x∈K}; it may be restricted to the unit sphere or extended positively homogeneously to ℝᵈ.
+   Source: relies_on, §1
+   Note: Used in the source-specific selected proof or background definitions.
+
+3. Banach–Mazur distance between origin-symmetric convex bodies
+   For origin-symmetric convex bodies K,L⊂ℝᵈ, d_BM(K,L)=inf{t≥1:L⊆TK⊆tL for an invertible linear map T}.
+   Source: relies_on, §1
+   Note: Used in the source-specific selected proof or background definitions.
+
+4. Surface area measure of a convex body
+   The measure S_K on the unit sphere assigning a Borel set of directions the boundary area of points of K whose outer unit normal lies in that set; points with nonunique normals form a boundary-area null set.
+   Source: relies_on, §1
+   Note: Used in the source-specific selected proof or background definitions.
+
+5. Curvature function of a convex body
+   When the surface area measure S_K is absolutely continuous with respect to spherical area measure, its Radon–Nikodym density f_K is called the curvature function.
+   Source: relies_on, §1
+   Note: Used in the source-specific selected proof or background definitions.
+
+6. Projection body of a convex body
+   The origin-symmetric convex body ΠK whose support function at a unit vector u is the (d−1)-dimensional volume of the orthogonal projection of K onto u⊥.
+   Source: relies_on, §1 throughout
+   Note: Used in the source-specific selected proof or background definitions.
+
+7. Cauchy’s projection formula for convex bodies
+   For a convex body K and unit u, the volume of K projected onto u⊥ equals ½∫|u·v| dS_K(v).
+   Source: relies_on, §1 p.2
+   Note: Used in the source-specific selected proof or background definitions.
+
+8. Spherical harmonic
+   The restriction to the unit sphere in ℝᵈ of a homogeneous polynomial annihilated by the Euclidean Laplacian. Its degree is the degree of that polynomial.
+   Source: relies_on, §2
+   Note: Used in the source-specific selected proof or background definitions.
+
+9. Normalized spherical Radon transform
+   For a function f on S^{d−1}, Rf(u) is its average over the equatorial sphere S^{d−1}∩u⊥; the normalization gives R1=1.
+   Source: relies_on, §2
+   Note: Used in the source-specific selected proof or background definitions.
+
+10. Lebesgue Lᵖ space
+   For a measure space and 1≤p<∞, Lᵖ consists of measurable scalar functions modulo equality almost everywhere with ∫|f|ᵖ<∞, normed by (∫|f|ᵖ)¹ᐟᵖ. For p=∞ use the essential-supremum norm.
+   Source: relies_on, §2 L²/L∞ estimates
+   Note: Used in the source-specific selected proof or background definitions.
+
+11. Linear map between vector spaces
+   A map between vector spaces over the same field preserving addition and scalar multiplication.
+   Source: relies_on, §2 GL(d) normalizations
+   Note: Used in the source-specific selected proof or background definitions.
+
+12. Mixed volume of convex bodies
+   The symmetric coefficient V(K₁,…,K_d) in the homogeneous degree-d volume polynomial |∑tᵢKᵢ| for nonnegative scalars tᵢ, normalized by V(K,…,K)=|K|.
+   Source: relies_on, §3
+   Note: Used in the source-specific selected proof or background definitions.
+
+13. Quermassintegral of a convex body
+   For a convex body K⊂ℝᵈ, W_i(K)=V(K[d−i],B₂ᵈ[i]), where brackets denote repeated arguments and B₂ᵈ is the unit Euclidean ball.
+   Source: relies_on, §1 pp.3–4;§3
+   Note: Used in the source-specific selected proof or background definitions.
+
+14. Projection body associated with a quermassintegral
+   For 0≤i≤d−2, Π_iK is the convex body with support function h_{Π_iK}(u)=W_i(K|u⊥), where the quermassintegral is taken in the (d−1)-dimensional space u⊥.
+   Source: relies_on, §1 p.4;§3
+   Note: Used in the source-specific selected proof or background definitions.
+
+15. Aleksandrov–Fenchel inequality for mixed volumes
+   For convex bodies K₁,…,K_d⊂ℝᵈ, V(K₁,K₂,K₃,…,K_d)²≥V(K₁,K₁,K₃,…,K_d)V(K₂,K₂,K₃,…,K_d).
+   Source: relies_on, §3 pp.11–12
+   Note: Used in the source-specific selected proof or background definitions.
+
+16. Zonoid
+   A compact convex set that is a Hausdorff limit of finite Minkowski sums of line segments.
+   Source: relies_on, §3 p.10
+   Note: Used in the source-specific selected proof or background definitions.
+
+17. Hausdorff distance between compact sets
+   For nonempty compact sets A,B in a metric space, d_H(A,B) is the maximum of sup_{a∈A}inf_{b∈B}d(a,b) and sup_{b∈B}inf_{a∈A}d(a,b).
+   Source: relies_on, §3 approximation
+   Note: Used in the source-specific selected proof or background definitions.
+
+18. Minkowski sum of subsets of a vector space
+   For subsets A,B of a vector space, A+B={a+b:a∈A,b∈B}.
+   Source: relies_on, §3
+   Note: Used in the source-specific selected proof or background definitions.
+
+19. Schneider’s projection-functional monotonicity theorem
+   For a full-dimensional convex body K⊂ℝᵈ, set P(K)=|ΠK|/|K|^{d−1}. Then P(K)≥P(ΠK), with equality exactly when K is homothetic to Π²K.
+   Source: relies_on, §1 (1);proofTheorem1.3
+   Note: Used in the source-specific selected proof or background definitions.
+
+20. Convex body in Euclidean space
+   A compact convex subset of ℝᵈ with nonempty interior.
+   Source: explains, §§1–3
+   Note: Recalls earlier convex-geometric vocabulary, with standard references; no origin claim.
+
+21. Star body about the origin
+   A compact set star shaped about 0 whose radial function ρ(u)=max{t≥0:tu∈K} on the unit sphere is positive and continuous.
+   Source: explains, §§1–3
+   Note: Recalls earlier convex-geometric vocabulary, with standard references; no origin claim.
+
+22. Projection body of a convex body
+   The origin-symmetric convex body ΠK whose support function at a unit vector u is the (d−1)-dimensional volume of the orthogonal projection of K onto u⊥.
+   Source: explains, §§1–3
+   Note: Recalls earlier convex-geometric vocabulary, with standard references; no origin claim.
+
+23. Intersection body of a star body
+   The star body IK with radial function ρ_IK(u) equal to the (d−1)-dimensional volume of K∩u⊥.
+   Source: explains, §§1–3
+   Note: Recalls earlier convex-geometric vocabulary, with standard references; no origin claim.
+
+24. Zonoid
+   A compact convex set that is a Hausdorff limit of finite Minkowski sums of line segments.
+   Source: explains, §§1–3
+   Note: Recalls earlier convex-geometric vocabulary, with standard references; no origin claim.
+
+25. Mixed volume of convex bodies
+   The symmetric coefficient V(K₁,…,K_d) in the homogeneous degree-d volume polynomial |∑tᵢKᵢ| for nonnegative scalars tᵢ, normalized by V(K,…,K)=|K|.
+   Source: explains, §§1–3
+   Note: Recalls earlier convex-geometric vocabulary, with standard references; no origin claim.
+
+26. Quermassintegral of a convex body
+   For a convex body K⊂ℝᵈ, W_i(K)=V(K[d−i],B₂ᵈ[i]), where brackets denote repeated arguments and B₂ᵈ is the unit Euclidean ball.
+   Source: explains, §§1–3
+   Note: Recalls earlier convex-geometric vocabulary, with standard references; no origin claim.
+
+27. Normalized spherical Radon transform
+   For a function f on S^{d−1}, Rf(u) is its average over the equatorial sphere S^{d−1}∩u⊥; the normalization gives R1=1.
+   Source: explains, §§1–3
+   Note: Recalls earlier convex-geometric vocabulary, with standard references; no origin claim.
+
+28. Local attraction of the ball under projection-body iteration
+   For each d≥3 there is ε_d>0 such that if a convex body K has absolutely continuous surface area measure and ∥f_{TK}−1∥∞<ε_d for some invertible linear T, then ΠᵐK converges to the Euclidean ball up to linear equivalence, in Banach–Mazur distance.
+   Source: introduces, Theorem1.1
+   Note: Original theorem distinguished from the specific predecessor result.
+   Origin evidence: The introduction states that no general convergence description is known, distinguishesWeil’s polytope fixed-point results[W1], and adapts the earlier intersection-body local-attraction result[FNRZ] to the different projection-body operator; §2 proves this adaptation.
+
+29. Local strict minimum in Petty’s conjectured projection inequality
+   For each d≥3 there is ε_d>0 such that a nonellipsoidal convex body K with absolutely continuous surface area measure and ∥f_{TK}−1∥∞<ε_d for some invertible linear T satisfies |ΠK|/|K|^{d−1}>|ΠB₂ᵈ|/|B₂ᵈ|^{d−1}.
+   Source: introduces, Theorem1.3
+   Note: Original theorem distinguished from the specific predecessor result.
+   Origin evidence: The introduction describes the missing natural local class for Petty’s conjecture and derives the new curvature-neighborhood result fromTheorem1.1 andSchneider’s earlier monotonicity[Sch1].
+
+30. Saroglou–Zvavitch refinement of Lutwak’s quermassintegral inequality
+   For every convex body K⊂ℝᵈ, d≥3, W_{d−2}(Π_{d−2}K)≥[d(d−2)ω_{d−1}²/((d−1)²ω_d)]W_{d−1}(K)²+[ω_{d−1}²/(d−1)²]W_{d−2}(K), where ω_j is the j-dimensional unit ball volume. Equality holds for balls; the inequality is strict for bodies that are not centrally symmetric.
+   Source: introduces, Theorem1.5
+   Note: Original theorem distinguished from the specific predecessor result.
+   Origin evidence: The introduction reproducesLutwak[Lu3] inequality(3), explicitly states the stronger weighted refinement, and proves it in§3 using the new local Petty minimum.
+
+31. Origin-symmetric generalized zonoid
+   An origin-symmetric convex body K that is a Minkowski difference of origin-symmetric zonoids: there are such zonoids L,M with K+M=L, equivalently h_K=h_L−h_M.
+   Source: relies_on, §3,p.10
+   Note: The signed cosine-transform representation is for generalized zonoids, rather than only positive-measure zonoids.
+
+32. Difference body of a convex body
+   The origin-symmetric body K−K=K+(−K), where−K={−x:x∈K}. Some sources use the normalized difference body½(K−K).
+   Source: relies_on, §3,p.12
+   Note: The nonsymmetric case uses D K=½(K−K); our unnormalized definition is explicitly converted by this factor.
+
+33. Spherical Radon transform on spherical harmonics
+   For d≥3, the normalized spherical Radon transform acts on degree-k harmonics by zero for oddk and by(−1)^{k/2}[1·3⋯(k−1)]/[(d−1)(d+1)⋯(d+k−3)] for evenk; the degree-zero multiplier is1.
+   Source: explains, §2,p.5,formula preceding the transformation actions; source citesGroemerLemma3.4.7. Complete proof supplied here.
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+34. Nikolskii inequality for spherical polynomials
+   For a spherical polynomialP of degree at mostN≥1 onS^{d−1}, ∥P∥∞≤C_dN^{(d−1)/2}∥P∥₂, with spherical area normalized to probability.
+   Source: explains, §2,polynomial approximation classes andL²/sup interpolation; complete standard harmonic-kernel proof supplied here
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+35. Invertibility of the cosine transform on smooth even functions
+   For d≥3, the spherical cosine transform is a bijection ofC∞ even functions onS^{d−1} onto itself, where even meansf(−u)=f(u).
+   Source: explains, §3,smooth generalized-zonoid representation; complete harmonic-inversion argument supplied here
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+36. Generating-measure representation theorem for symmetric zonoids
+   An origin-symmetric convex body is a zonoid exactly when it has a finite even positive generating measure on the unit sphere. That generating measure is unique.
+   Source: explains, §§1,3,zonoid representation used to constructMt; complete segment/measure argument supplied here
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+37. Smooth symmetric support functions are generalized zonoids
+   An origin-symmetric convex body withC∞ support function is a generalized zonoid: h_K=Cν for a finite even signed measureν, equivalentlyK+M=L for symmetric zonoidsL,M.
+   Source: explains, §3,paragraph preceding(10); source citesWeil/Schneider; complete smooth-inversion proof supplied here
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+38. Determinant-integral formula for zonoid volume
+   For a full-dimensional symmetric zonoidZ with generating measureµ defined byh_Z(u)=∫|u·v|dµ(v), |Z|=(2ᵈ/d!)∫⋯∫|det(v₁,…,v_d)|dµ(v₁)⋯dµ(v_d).
+   Source: explains, §3,volume polynomial ofMt following(10); complete finite-zonotope limiting argument supplied here
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+39. Weil’s formula for bounded curvature densities of projection bodies
+   For d≥3 and a convex bodyK with bounded surface-area densityf_K relative to unnormalized spherical area, ΠK has density f_ΠK(u)=(1/(d−1)!)∫_{(S^{d−1}∩u⊥)^{d−1}}det_{u⊥}(v₁,…,v_{d−1})²∏_jf_K(v_j)dℋ^{d−2}(v_j), for almost everyu.
+   Source: explains, §2,Weil formula following the linear actions; source[W2]; complete support-Hessian approximation argument supplied here
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+40. Curvature density under an invertible linear map
+   ForA∈GL(d) and a convex bodyK with surface-area densityf_K, f_AK(v)=|detA|²|Aᵀv|^(−d−1) f_K(Aᵀv/|Aᵀv|) almost everywhere onS^{d−1}.
+   Source: explains, §2,p.5,linear-action identities citingLutwak[Lu2]; complete normal-map computation supplied here
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+41. Best L² approximation by spherical polynomials
+   Forf∈L²(S^{d−1}),E_N(f) is the infimum of∥f−P∥₂ over spherical polynomialsP of degree at mostN. Rates of decay ofE_N quantify polynomial approximation.
+   Source: relies_on, §2,definition and uses ofU_a
+   Note: The auxiliary proof norms are built from these standard finite-degree approximation errors.
+
+42. Nikolskii inequality for spherical polynomials
+   For a spherical polynomialP of degree at mostN≥1 onS^{d−1}, ∥P∥∞≤C_dN^{(d−1)/2}∥P∥₂, with spherical area normalized to probability.
+   Source: relies_on, §2,L²/sup interpolation for approximation classes
+   Note: A finite-degreeL²-to-sup estimate is the background behind the approximation/interpolation tools.
+
+43. Spherical Radon transform on spherical harmonics
+   For d≥3, the normalized spherical Radon transform acts on degree-k harmonics by zero for oddk and by(−1)^{k/2}[1·3⋯(k−1)]/[(d−1)(d+1)⋯(d+k−3)] for evenk; the degree-zero multiplier is1.
+   Source: relies_on, §2,p.5
+   Note: The harmonic contraction uses the exact classical eigenvalues.
+
+44. Invertibility of the cosine transform on smooth even functions
+   For d≥3, the spherical cosine transform is a bijection ofC∞ even functions onS^{d−1} onto itself, where even meansf(−u)=f(u).
+   Source: relies_on, §3,signed cosine representation
+   Note: Smooth support functions are inverted through the even cosine transform.
+
+45. Smooth symmetric support functions are generalized zonoids
+   An origin-symmetric convex body withC∞ support function is a generalized zonoid: h_K=Cν for a finite even signed measureν, equivalentlyK+M=L for symmetric zonoidsL,M.
+   Source: relies_on, §3,paragraph before(10)
+   Note: The signed generating representation is invoked for the smooth-body approximation argument.
+
+46. Generating-measure representation theorem for symmetric zonoids
+   An origin-symmetric convex body is a zonoid exactly when it has a finite even positive generating measure on the unit sphere. That generating measure is unique.
+   Source: relies_on, §3,construction(10)
+   Note: A positive generating density defines an actual zonoid.
+
+47. Determinant-integral formula for zonoid volume
+   For a full-dimensional symmetric zonoidZ with generating measureµ defined byh_Z(u)=∫|u·v|dµ(v), |Z|=(2ᵈ/d!)∫⋯∫|det(v₁,…,v_d)|dµ(v₁)⋯dµ(v_d).
+   Source: relies_on, §3,polynomial-volume claim after(10)
+   Note: The determinant integral makes volume polynomial in the generating density parameter.
+
+48. Weil’s formula for bounded curvature densities of projection bodies
+   For d≥3 and a convex bodyK with bounded surface-area densityf_K relative to unnormalized spherical area, ΠK has density f_ΠK(u)=(1/(d−1)!)∫_{(S^{d−1}∩u⊥)^{d−1}}det_{u⊥}(v₁,…,v_{d−1})²∏_jf_K(v_j)dℋ^{d−2}(v_j), for almost everyu.
+   Source: relies_on, §2 and§3
+   Note: The multilinear determinant operator is the existing named curvature formula, not a new concept for the local symbolQ.
+
+49. Curvature density under an invertible linear map
+   ForA∈GL(d) and a convex bodyK with surface-area densityf_K, f_AK(v)=|detA|²|Aᵀv|^(−d−1) f_K(Aᵀv/|Aᵀv|) almost everywhere onS^{d−1}.
+   Source: relies_on, §2,p.5
+   Note: The change of coordinates for the curvature density is an explicitly imported theorem.
+
+ADDITIONAL PREREQUISITES (108)
+
+- Abelian group [definition]: A group whose operation is commutative.
+- Absolute continuity of measures [definition]: A measure ν is absolutely continuous with respect to μ on the same σ-algebra if μ(A)=0 implies ν(A)=0.
+- Almost-everywhere property on a measure space [definition]: A property holds almost everywhere if the set where it fails is contained in a measurable set of measure zero.
+- Area measure on the Euclidean unit sphere [definition]: On S^{d−1}⊂ℝᵈ, spherical area is the restriction of (d−1)-dimensional Hausdorff measure. Its probability normalization divides by its total mass.
+- Bijection between sets [definition]: A function for which each element of the codomain is the image of exactly one element of the domain.
+- Bilinear map [definition]: A map of two vector-space variables that is linear in each variable separately.
+- Binary operation on a set [definition]: A function S×S→S.
+- Binary relation on a set [definition]: A subset R⊆S×S; writing xRy means (x,y)∈R.
+- Borel σ-algebra of a topological space [definition]: The σ-algebra generated by the open subsets of the space.
+- Borel σ-algebra on the real line [definition]: The σ-algebra on ℝ generated by the open intervals.
+- Boundary of a subset of a topological space [definition]: The boundary of A is its closure with its interior removed.
+- Cartesian product of sets [definition]: A×B is the set of ordered pairs (a,b) with a∈A and b∈B.
+- Cauchy sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) is Cauchy if for every ε>0 there is N such that d(xₙ,xₘ)<ε whenever n,m≥N.
+- Cauchy–Schwarz inequality for complex inner-product spaces [theorem]: In a complex inner-product space, |⟨u,v⟩|²≤⟨u,u⟩⟨v,v⟩ for all u,v.
+- Closure of a subset of a topological space [definition]: The closure of A is the intersection of all closed subsets containing A; a set is closed when its complement is open.
+- Commutative ring with identity [definition]: An abelian group under addition, together with an associative commutative multiplication with identity, distributing over addition. The zero ring is allowed.
+- Compact topological space [definition]: A topological space in which every open cover has a finite subcover.
+- Compactly supported smooth test function on an open Euclidean set [definition]: A smooth function on an open Ω⊂ℝⁿ whose support is a compact subset of Ω; these form C_c^∞(Ω).
+- Complement of a subset [definition]: For A⊆Ω, its complement Ω∖A consists of the elements of Ω that do not belong to A.
+- Complete measure [definition]: A measure is complete if every subset of a measurable null set is measurable and has measure zero.
+- Complete metric space [definition]: A metric space is complete if every Cauchy sequence in it converges to a point of that same space.
+- Complex Hilbert space [definition]: A complex inner-product space complete in the metric d(x,y)=∥x−y∥ induced by its inner product.
+- Complex conjugation [definition]: The complex conjugate of z=a+bi is z̄=a−bi.
+- Complex inner-product space [definition]: A complex vector space with a positive definite Hermitian form ⟨x,y⟩, linear in x and conjugate-linear in y. Its induced norm is ∥x∥=√⟨x,x⟩.
+- Complex number [definition]: A complex number is a pair of real numbers, written a+bi. Addition is componentwise and multiplication is (a+bi)(c+di)=(ac−bd)+(ad+bc)i, so i²=−1.
+- Composition of functions [definition]: For f:A→B and g:B→C, the composite g∘f:A→C sends x to g(f(x)).
+- Continuous map between topological spaces [definition]: A map is continuous if the preimage of every open subset of its target is open in its domain.
+- Convergence of a sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) converges to x∈X if for every ε>0 there is N such that d(xₙ,x)<ε whenever n≥N.
+- Convergent real series [definition]: The series ∑ₙ≥1aₙ converges to S if its sequence of partial sums converges to S.
+- Convex subset of ℝᵈ [definition]: C⊆ℝᵈ is convex if (1−t)x+ty∈C whenever x,y∈C and 0≤t≤1.
+- Derivative of a real function [definition]: The derivative f′(x) is the finite limit of (f(x+h)−f(x))/h as h→0, when it exists. Higher derivatives are defined by iteration.
+- Determinant of a square matrix [definition]: For an n×n matrix A over a commutative ring, det A=∑_{σ∈Sₙ}sgn(σ)∏_{i=1}ⁿA_{i,σ(i)}, with the 0×0 determinant equal to one.
+- Disjoint sets [definition]: Two sets are disjoint when they have no common element; a family is pairwise disjoint when every two distinct members are disjoint.
+- Equivalence class [definition]: For an equivalence relation ~ on X, [x]={y∈X:y~x}; the quotient set X/~ consists of these classes.
+- Equivalence relation [definition]: A reflexive, symmetric and transitive binary relation.
+- Essential supremum of a measurable real function [definition]: The infimum of real a for which f≤a almost everywhere, allowing infinite values when no finite bound exists.
+- Euclidean space ℝᵈ [definition]: For d≥1, ℝᵈ consists of d-tuples of real numbers with distance dist(x,y)=(∑ᵢ(xᵢ−yᵢ)²)¹ᐟ².
+- Extended nonnegative real numbers [definition]: The nonnegative real numbers together with a greatest element ∞. Sums involving ∞ equal ∞, and 0·∞ is taken to be 0 when integrating simple functions.
+- Factorial [definition]: For n≥1, n!=1·2···n, and 0!=1.
+- Field [definition]: A commutative ring in which 1≠0 and every nonzero element is invertible.
+- Finite set [definition]: A set X is finite if it is bijective with {1,…,n} for some natural number n≥0; its cardinality is n.
+- Finite signed measure [definition]: A differenceµ=µ₁−µ₂ of two finite positive measures on the sameσ-algebra. It is real-valued and countably additive.
+- Function between sets [definition]: An assignment taking each element of a specified domain set to exactly one element of a specified codomain set.
+- Generating measure of an origin-symmetric zonoid [definition]: A finite even positive measureµ onS^{d−1} generating an origin-symmetric zonoidZ satisfiesh_Z(u)=∫|⟨u,v⟩|dµ(v). Even means invariance underv↦−v.
+- Greatest lower bound [definition]: For a subset A of a partially ordered set, its greatest lower bound is a lower bound of A lying above every lower bound of A, when one exists.
+- Group [definition]: A set with an associative binary operation, an identity element, and a two-sided inverse for each element.
+- Hausdorff measure of a metric space [definition]: For s≥0, the s-dimensional Hausdorff measure is the limit as δ↓0 of the infimum of normalized sums of diameters^s over countable covers by sets of diameter at most δ.
+- Homogeneous real polynomial [definition]: A real polynomial in finitely many variables whose nonzero monomials all have the same total degree.
+- Indicator function of a subset [definition]: For A⊆Ω, the real function 1_A is 1 on A and 0 on its complement.
+- Integer [definition]: An integer is an element of the ordered ring ℤ, obtained by adjoining additive inverses to the natural numbers.
+- Interior of a subset of a topological space [definition]: The interior of A is the union of all open subsets contained in A.
+- Intersection of a family of sets [definition]: Inside a specified ambient set, the elements belonging to every member of the family.
+- Least upper bound in a partially ordered set [definition]: For A⊆P, its least upper bound is an upper bound s satisfying s≤b for every upper bound b of A, when such an s exists.
+- Lebesgue integral [definition]: For measurable f≥0, ∫f dμ is the supremum of integrals of nonnegative simple functions below f. For signed f with ∫abs(f)dμ<∞, define ∫f=∫f⁺−∫f⁻.
+- Lebesgue measure on Euclidean space [definition]: The completion of the Borel measure on ℝⁿ assigning each rectangular box the product of its side lengths.
+- Limit of a function between metric spaces [definition]: For f defined near an accumulation point a of a metric space, lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<d(x,a)<δ implies d(f(x),L)<ε.
+- Limit of a real function at a point [definition]: The relation lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<|x−a|<δ in the domain implies |f(x)−L|<ε.
+- Limit of a real sequence [definition]: A sequence (aₙ) converges to L∈ℝ if for every ε>0 there is N such that n≥N implies abs(aₙ−L)<ε.
+- Matrix over a ring [definition]: A rectangular array of elements of a ring; addition is entrywise and matrix multiplication uses row-by-column sums.
+- Measurable map between measurable spaces [definition]: A function for which the preimage of each measurable subset of the codomain is measurable in the domain.
+- Measurable simple real function [definition]: A measurable real function with finite range. It can be written as a finite sum ∑ a_i 1_{A_i} with measurable level sets A_i.
+- Measurable space [definition]: A set equipped with a specified σ-algebra of subsets.
+- Measure [definition]: A measure μ maps a σ-algebra to [0,∞], sends ∅ to 0, and satisfies μ(⋃ₙAₙ)=∑ₙμ(Aₙ) for every pairwise disjoint sequence of measurable sets.
+- Metric induced by a norm [construction]: The metric induced by a norm on a real or complex vector space is d(x,y)=‖x−y‖.
+- Metric space [definition]: A set X with a function d:X×X→[0,∞) such that d(x,y)=0 exactly when x=y, d(x,y)=d(y,x), and d(x,z)≤d(x,y)+d(y,z).
+- Modulus of a complex number [definition]: For z=a+bi, its modulus is the nonnegative real number |z|=√(a²+b²).
+- Natural logarithm [definition]: The inverse ln:(0,∞)→ℝ of the real exponential function.
+- Natural number [definition]: One of 0, 1, 2, …; natural numbers count finite collections.
+- Nonnegative real square root [definition]: For t≥0, √t is the unique real number y≥0 satisfying y²=t.
+- Normed vector space [definition]: A real or complex vector space X with a function ∥·∥:X→[0,∞) that is positive except at zero, absolutely homogeneous, and subadditive.
+- Open interval in the real line [definition]: For real a<b, the set (a,b)={x∈ℝ:a<x<b}.
+- Ordered field [definition]: A field with a total order preserved by addition, in which the product of two positive elements is positive.
+- Ordered pair [definition]: A pair (x,y) with distinguished first and second entries; (x,y)=(x′,y′) exactly when x=x′ and y=y′.
+- Orthogonal projection onto a closed Hilbert subspace [definition]: For a closed subspace V of a Hilbert space H, Pᵥx is the unique v∈V for which x−v is orthogonal to V; Pᵥ is a bounded self-adjoint idempotent operator.
+- Outer unit normal of a convex body [definition]: A unit vector u is an outer normal at x∈∂K if (y−x)·u≤0 for every y∈K; at boundary points with a unique such u, this gives the Gauss map.
+- Partial derivative in Euclidean coordinates [definition]: The ith partial derivative of f at x is the derivative at zero of t↦f(x+t e_i), with all other coordinates fixed; vector-valued maps are differentiated componentwise.
+- Partial order [definition]: A reflexive, antisymmetric and transitive binary relation, usually written ≤.
+- Preimage of a subset under a function [definition]: For f:A→B and E⊆B, f⁻¹(E)={x∈A:f(x)∈E}.
+- Product measure [construction]: For σ-finite measure spaces, the product measure on the product σ-algebra assigns a measurable rectangle A×B the value μ(A)ν(B); its completion also includes subsets of product-null sets.
+- Pushforward measure [definition]: For a measurable map f:X→Y and measure μ on X, the pushforward f_*μ on Y satisfies f_*μ(B)=μ(f⁻¹(B)).
+- Radon–Nikodym derivative of a measure [definition]: A nonnegative measurable function f representing ν relative to μ by ν(A)=∫_A f dμ for every measurable A; it is defined up to μ-almost-everywhere equality when such a density exists.
+- Real Hilbert space [definition]: A real inner-product space complete for its induced norm metric.
+- Real exponential function [definition]: The real function exp(x)=∑_{n≥0}xⁿ/n!, whose series converges for every real x.
+- Real inner-product space [definition]: A real vector space with a symmetric bilinear form ⟨x,y⟩ that is positive on ⟨x,x⟩ for x≠0; its induced norm is √⟨x,x⟩.
+- Real number [definition]: A real number is an element of a complete ordered field ℝ; completeness means every nonempty subset bounded above has a least upper bound.
+- Real polynomial in finitely many variables [definition]: A finite real linear combination of monomials x₁^{a₁}⋯x_d^{a_d} with nonnegative integer exponents.
+- Real power of a positive real number [definition]: For x>0 and p∈ℝ, define xᵖ=exp(p log x). For p>0 extend by 0ᵖ=0.
+- Real sequence [definition]: A real sequence is a function a:ℕ₊→ℝ, written (aₙ)ₙ≥1.
+- Sequence in a set [definition]: A function from the natural numbers, or the positive natural numbers, to that set.
+- Set [definition]: A collection of distinct elements, regarded as one object.
+- Sign of a permutation [definition]: The sign of a permutation of {1,…,n} is (−1) to the number of inversions, where an inversion is a pair i<j with σ(i)>σ(j).
+- Smooth function on a Euclidean sphere [definition]: A scalar function onS^{d−1} is smooth if it is the restriction of aC∞ function on a neighborhood of the sphere inℝᵈ.
+- Smooth map between open Euclidean sets [definition]: A map on an open subset of ℝⁿ is smooth if all of its component partial derivatives of every order exist and are continuous.
+- Spherical cosine transform [definition]: For an integrable functionf onS^{d−1}, Cf(u)=∫_{S^{d−1}}|⟨u,v⟩|f(v)dσ(v), using probability-normalized spherical area. The same formula definesCµ for finite signed measuresµ.
+- Spherical polynomial [definition]: The restriction toS^{d−1} of a real polynomial in d variables; its degree is the least possible total degree of an extending polynomial.
+- Subset [definition]: A⊆B means every element of A is an element of B.
+- Sum of a nonnegative series [definition]: For aₙ≥0, define ∑ₙ≥1aₙ as the supremum of its finite partial sums; the value may be infinite.
+- Support of a function [definition]: The closure in its domain of the set on which a function is nonzero.
+- Symmetric group of a finite set [definition]: The group of all bijections of a finite set to itself under composition.
+- Topological space [definition]: A set X with a family τ of subsets, called open sets, containing ∅ and X and closed under arbitrary unions and finite intersections.
+- Total order [definition]: A partial order in which any two elements are comparable.
+- Union of a family of sets [definition]: The set of elements belonging to at least one member of the family.
+- Vector space [definition]: An abelian group with scalar multiplication by a field satisfying a(v+w)=av+aw, (a+b)v=av+bv, (ab)v=a(bv), and 1v=v.
+- Vector subspace [definition]: A subset of a vector space containing zero and closed under addition and scalar multiplication.
+- Weak partial derivative of a locally integrable function [definition]: A locally integrable v is the ith weak derivative of u on an open Ω⊆ℝⁿ if ∫Ω u ∂ᵢφ=−∫Ω vφ for every smooth compactly supported test function φ.
+- σ-algebra [definition]: A σ-algebra on Ω contains Ω and is closed under complements in Ω and countable unions.
+- σ-algebra generated by a family of subsets [definition]: The smallest σ-algebra containing that family, equivalently the intersection of all σ-algebras on the ambient set that contain it.
+- σ-finite measure [definition]: A measure whose whole underlying space is a countable union of measurable sets of finite measure.
+
+CITATIONS
+
+  [FNRZ] A. Fish, F. Nazarov, D. Ryabogin, A. Zvavitch, The behavior of iterations of
+the intersection body operator in a small neighborhood of the unit ball, Adv. Math., 226
+(2011), no 3, 2629-2642.
+    Pedagogically necessary: unknown
+
+  [Ga] R. J. Gardner, Geometric tomography. Second edition, Encyclopedia of Mathematics
+and its Applications 58 Cambridge University Press, Cambridge, 2006.
+    Pedagogically necessary: unknown
+
+  [Gr] H. Groemer, Geometric Applications of Fourier Series and Spherical Harmonics, Cam-
+bridge University Press, New York, 1996.
+    Pedagogically necessary: unknown
+
+  [GP] A. Giannopoulos, M. Papadimitrakis, Isotropic surface area measures, Mathematika
+46 (1999) 1-13.
+    Pedagogically necessary: unknown
+
+  [Ko] A. Koldobsky, Fourier Analysis in Convex Geometry, Math. Surveys and Monographs,
+AMS, Providence RI 2005.
+    Pedagogically necessary: unknown
+
+  [KoY] A. Koldobsky, V. Yaskin, The Interface between Convex Geometry and Harmonic
+Analysis, CBMS Regional Conference Series, 108, American Mathematical Society, Prov-
+idence RI, 2008.
+    Pedagogically necessary: unknown
+
+  [Lu1] E. Lutwak, Intersection bodies and dual mixed volumes, Advances in Math. 71 (1988),
+232–261.
+    Pedagogically necessary: unknown
+
+  [Lu2] E. Lutwak, Centroid bodies and dual mixed volumes, Proc. London Math. Soc. 60 (1990),
+365–391.
+    Pedagogically necessary: unknown
+
+  [Lu3] E. Lutwak, On quermassintegrals of mixed projection bodies, Geom. Dedicata 33 (1990)
+51–58.
+12
+    Pedagogically necessary: unknown
+
+  [Lu4] E. Lutwak, Selected affine isoperimetric inequalities, In a Handbook of Convex Geome-
+try, ed. by P.M. Gruber and J.M. Wills. North-Holland, Amsterdam, 1993, pp. 151-176.
+    Pedagogically necessary: unknown
+
+  [P1] C. M. Petty, Projection bodies. 1967 Proc. Colloquium on Convexity (Copenhagen,
+1965) 234–241 Kobenhavns Univ. Mat. Inst., Copenhagen.
+    Pedagogically necessary: unknown
+
+  [P2] C. M. Petty, Isoperimetric problems. Proceedings of the Conference on Convexity and
+Combinatorial Geometry (Univ. Oklahoma, Norman, Okla., 1971) 26–41. Dept. Math.,
+Univ. Oklahoma, Norman, Okla., 1971.
+    Pedagogically necessary: unknown
+
+  [Sa] C. Saroglou, Volumes of projection bodies of some classes of convex bodies, Mathematika
+57 (2011) 329–353.
+    Pedagogically necessary: unknown
+
+  [Sch1] R. Schneider, Geometric inequalities for Poisson processes of convex bodies and cylin-
+ders, Results Math. 11 (1987) 165-185.
+    Pedagogically necessary: unknown
+
+  [Sc2] R. Schneider, Convex bodies: the Brunn-Minkowski theory. Second expanded edition.
+Encyclopedia of Mathematics and its Applications 151, Cambridge University Press, Cam-
+bridge, 2014.
+    Pedagogically necessary: unknown
+
+  [W1] W. Weil, Über die Projektionenkörper konvexer Polytope, Arch. Math. 22 (1971) 664-672.
+    Pedagogically necessary: unknown
+
+  [W2] W. Weil, Kontinuierliche Linearkombination won Strecken, Math. Z. 148 (1976) 71-84.
+    Pedagogically necessary: unknown
+
+  [W3] W. Weil, Centrally symmetric convex bodies and distributions, Israel J. Math. 24 (1976),
+352–367.
+    Pedagogically necessary: unknown
+
+  [Zh] G. Zhang, The affine Sobolev inequality, J. diff. geom. 53 (1999), 183-202.
+    Pedagogically necessary: unknown
+

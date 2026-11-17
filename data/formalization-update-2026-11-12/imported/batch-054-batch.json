@@ -1,0 +1,798 @@
+{
+  "note": "Whole-catalogue formalization update batch-054: independent source review by analysis_formalization of algebra_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "conditional-expectation",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL2.lean",
+          "declarations": "MeasureTheory.condExpL2:67",
+          "note": "Actual measurable-subspace orthogonal projection supplying the conditional expectation construction."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL1.lean",
+          "declarations": "condExpL1CLM:321; condExpL1:450; setIntegral_condExpL1:501",
+          "note": "Actual extension from conditional indicators to integrable variables with defining set-integral identity."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean",
+          "declarations": "MeasureTheory.condExp:100; stronglyMeasurable_condExp:186; integrable_condExp:221; setIntegral_condExp:230; ae_eq_condExp_of_forall_setIntegral_eq:252",
+          "note": "Function-valued conditional expectation, defining characterization and ordinary linear/uniqueness API."
+        }
+      ],
+      "evidence": "On the intended probability space, sub-sigma-algebra m<=m0 has finite (hence sigma-finite) trimmed measure. Basic.condExp:100 chooses f when already m-strongly-measurable and otherwise the measurable representative of condExpL1; integrable_condExp:221, stronglyMeasurable_condExp:186 and setIntegral_condExp:230 prove the exact defining properties. ae_eq_condExp_of_forall_setIntegral_eq:252 proves AE uniqueness from the same finite-set integrals. Actual construction: CondexpL2.condExpL2:67 is orthogonal projection onto m-measurable L2, CondexpL1.condExpL1CLM:321 extends conditional indicators through L1.setToL1, and condExpL1:450 / setIntegral_condExpL1:501 extend to all integrable functions. Read actual projection/extension definitions and set-integral proofs. Totalized zero branches for non-subalgebras/nonintegrability are excluded by the paragraph hypotheses. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Bounded definition/characterization/projection/natural-map API; pull-out, Jensen and tower are separately catalogued endpoints. Do not claim an arbitrary infinite ambient measure is automatically sigma-finite after trimming.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "conditional-expectation",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Function/ConditionalExpectation/MeasurePreserving.lean",
+          "declarations": "MeasureTheory.MeasurePreserving.condExp_comap:41",
+          "note": "Native natural pullback/change-of-instance characterization and product conditional API."
+        },
+        {
+          "path": "TauCeti/MeasureTheory/Function/ConditionalExpectation/Completion.lean",
+          "declarations": "TauCeti.MeasureTheory.condExp_completion:72; TauCeti.MeasureTheory.condExp_eventuallyMeasurableSpace_completion:91",
+          "note": "Native ordinary ambient/conditioning completion invariance."
+        },
+        {
+          "path": "TauCeti/MeasureTheory/Function/ConditionalExpectation/CondexpLp.lean",
+          "declarations": "MeasureTheory.condExpLpCLM:63; coeFn_condExpLpCLM:92; condExpLpCLM_of_aestronglyMeasurable':107; condExpLpCLM_condExpLpCLM:114",
+          "note": "Native ordinary Lp projection, representative and idempotency API."
+        }
+      ],
+      "evidence": "On the intended probability space, sub-sigma-algebra m<=m0 has finite (hence sigma-finite) trimmed measure. Basic.condExp:100 chooses f when already m-strongly-measurable and otherwise the measurable representative of condExpL1; integrable_condExp:221, stronglyMeasurable_condExp:186 and setIntegral_condExp:230 prove the exact defining properties. ae_eq_condExp_of_forall_setIntegral_eq:252 proves AE uniqueness from the same finite-set integrals. Actual construction: CondexpL2.condExpL2:67 is orthogonal projection onto m-measurable L2, CondexpL1.condExpL1CLM:321 extends conditional indicators through L1.setToL1, and condExpL1:450 / setIntegral_condExpL1:501 extend to all integrable functions. Read actual projection/extension definitions and set-integral proofs. Totalized zero branches for non-subalgebras/nonintegrability are excluded by the paragraph hypotheses. Native MeasurePreserving.condExp_comap:41 proves commutation with an arbitrary measure-preserving pullback (no invertibility); Completion.condExp_completion:72 uses this for the completed ambient measure, preserving the original conditioning algebra. CondexpLp.condExpLpCLM:63 bundles the same operator on Lp for finite measure,1<=p<=infinity; representative equality92, measurable fixed-point107 and idempotence114 have complete AE-class proofs. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development. Native completion theorems are in namespace TauCeti.MeasureTheory: condExp_completion:72 and condExp_eventuallyMeasurableSpace_completion:91; they are not root MeasureTheory declarations.\nSearch and boundary notes: All five native ConditionalExpectation direct siblings enumerated/read. WithDensity is a separate Bayes formula and UniformIntegrable adds a separate compactness/integrability endpoint, excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "conditional-expectation-pullout-property",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/PullOut.lean",
+          "declarations": "condExp_bilin_of_stronglyMeasurable_left:151; condExp_mul_of_aestronglyMeasurable_left:234; condExp_mul_of_stronglyMeasurable_left:244",
+          "note": "Completed general measurable-factor pull-out proof, including unbounded integrable products."
+        }
+      ],
+      "evidence": "PullOut.condExp_mul_of_aestronglyMeasurable_left:234 has EXACT assumptions Y measurable for m, Integrable(Y*X), Integrable X; concludes CE(YX)=Y CE(X). The strongly measurable version:244 applies to real G-measurable Y. Actual bilinear proof154–187 localizes on finite m-measurable sets where Y is bounded; AE version201–211 passes to a strongly measurable representative. No global boundedness or independent Y assumption is imposed; the catalogue additional RHS integrability follows from the equality with an integrable CE. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Finite probability measure guarantees sigma-finite trim when used. The theorem is not restricted to bounded factors or simple functions.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "conditional-expectation-pullout-property",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "PullOut.condExp_mul_of_aestronglyMeasurable_left:234 has EXACT assumptions Y measurable for m, Integrable(Y*X), Integrable X; concludes CE(YX)=Y CE(X). The strongly measurable version:244 applies to real G-measurable Y. Actual bilinear proof154–187 localizes on finite m-measurable sets where Y is bounded; AE version201–211 passes to a strongly measurable representative. No global boundedness or independent Y assumption is imposed; the catalogue additional RHS integrability follows from the equality with an integrable CE. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Enumerated native ConditionalExpectation Completion/CondexpLp/MeasurePreserving/WithDensity/UniformIntegrable and representative condExp-bilinear/mul searches. WithDensity108/122 is the new-measure Bayes density ratio, a separately significant endpoint, not a selected new proof of this same-factor pull-out theorem. Lp idempotency and natural pullback are other ordinary CE APIs, not an own pull-out contribution.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "conditional-expectation-tower-property",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean",
+          "declarations": "condExp_condExp_of_le:341; stronglyMeasurable_condExp:186; condExp_of_stronglyMeasurable:141; integrable_condExp:221",
+          "note": "Both nested-conditioning orders, via the actual set-integral proof and measurable fixed-point identity."
+        }
+      ],
+      "evidence": "Basic.condExp_condExp_of_le:341 proves CE_F(CE_G X)=CE_F X for F<=G<=ambient; actual proof344–353 uses integrability branches and equal set integrals on smaller-algebra events. For the OTHER order CE_G(CE_F X), stronglyMeasurable_condExp:186 is monotone along F<=G, integrable_condExp:221 and condExp_of_stronglyMeasurable:141 fix that G-measurable random variable. These are exact existing generic measurability/identity suppliers, not an assumed tower statement. On probability spaces the trimmed finite-measure hypotheses hold. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: No independence, finite atom partition or countability of the sigma-algebras assumed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "conditional-expectation-tower-property",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Function/ConditionalExpectation/CondexpLp.lean",
+          "declarations": "condExpLpCLM_condExpLpCLM:114; condExpLpCLM_comp_self:126",
+          "note": "Native idempotent conditional-projection form of the same-algebra tower law."
+        }
+      ],
+      "evidence": "Basic.condExp_condExp_of_le:341 proves CE_F(CE_G X)=CE_F X for F<=G<=ambient; actual proof344–353 uses integrability branches and equal set integrals on smaller-algebra events. For the OTHER order CE_G(CE_F X), stronglyMeasurable_condExp:186 is monotone along F<=G, integrable_condExp:221 and condExp_of_stronglyMeasurable:141 fix that G-measurable random variable. These are exact existing generic measurability/identity suppliers, not an assumed tower statement. On probability spaces the trimmed finite-measure hypotheses hold. Native CondexpLp.condExpLpCLM_condExpLpCLM:114 proves EXACT same-algebra idempotence on all Lp classes, with the actual representative-to-measurable-fixed-point proof116–123; take p=1 to cover every integrable variable. It is direct tower API, while the unequal-algebra theorem remains attributed to dependency. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: No false claim native idempotency alone proves every unequal-algebra tower; complete theorem availability is independently supplied by the checked dependency.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "conditional-jensen-inequality",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/CondJensen.lean",
+          "declarations": "ConvexOn.map_condExp_le:167",
+          "note": "Completed conditional Jensen with exact integrability and domain hypotheses."
+        },
+        {
+          "path": "Mathlib/Analysis/Convex/Continuous.lean",
+          "declarations": "ConvexOn.continuousOn:203; ConvexOn.continuousOn_interior:217",
+          "note": "Existing finite-real convex continuity theorem removes the supplier regularity hypothesis on all R."
+        }
+      ],
+      "evidence": "For real X and finite real-valued convex phi on all R, ConvexOn.map_condExp_le:167 gives phi(CE X)<=CE(phi X) under integrability of BOTH variables. Its explicit lower-semicontinuity hypothesis is AUTOMATIC here: Convex/Continuous.ConvexOn.continuousOn:203 (or continuousOn_interior217 with univ) proves continuity of finite convex phi on the open domain R; take closed convex set univ. Actual proof170–181 localizes to finite spanning events and the completed finite-measure Jensen proof. Thus no extra unmentioned regularity assumption is retained for this real whole-domain reading. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Scope phi:R->R, convex on R. Do not silently assert a general arbitrary-domain Banach Jensen without the source closed-domain/lower-semicontinuity hypotheses.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "conditional-jensen-inequality",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "For real X and finite real-valued convex phi on all R, ConvexOn.map_condExp_le:167 gives phi(CE X)<=CE(phi X) under integrability of BOTH variables. Its explicit lower-semicontinuity hypothesis is AUTOMATIC here: Convex/Continuous.ConvexOn.continuousOn:203 (or continuousOn_interior217 with univ) proves continuity of finite convex phi on the open domain R; take closed convex set univ. Actual proof170–181 localizes to finite spanning events and the completed finite-measure Jensen proof. Thus no extra unmentioned regularity assumption is retained for this real whole-domain reading. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Native ConditionalExpectation namespace fully enumerated and Jensen/map_condExp/convex conditional searches performed. CondexpLp norm contraction is a distinct integrated operator bound; WithDensity is Bayes. No own proof of this general pointwise real conditional Jensen or ordinary equality case certified; dependency complete, zero native LOC.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "conditional-probability-event",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/ConditionalProbability.lean",
+          "declarations": "ProbabilityTheory.cond:75; cond_apply:214; cond_apply':218",
+          "note": "Actual normalized event restriction and exact intersection-ratio formula."
+        }
+      ],
+      "evidence": "ProbabilityTheory.cond:75 is the normalized restriction (mu B)^(-1)*mu.restrict B. cond_apply:214 and cond_apply_prime:218 prove EXACT mass mu(A intersect B)/mu(B), with the event measurability explicit and intersection order immaterial. For a probability measure and P(B)>0, B has finite nonzero mass and conditional measure is a probability measure. ENNReal and real mass versions agree by finite-mass coercion; no conditioning on zero-probability event is asserted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Event conditioning differs from conditional expectation on an arbitrary sigma-algebra; do not apply the quotient as a positive-mass law when denominator is0.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "conditional-probability-event",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/ConditionalProbability.lean",
+          "declarations": "ProbabilityTheory.cond_congr_ae:91; cond_real_of_subset:97; MeasureTheory.Measure.toNNReal_smul_integral_cond_eq_setIntegral:104",
+          "note": "Native ordinary event-equivalence, mass ratio and conditional integral normalization API."
+        }
+      ],
+      "evidence": "ProbabilityTheory.cond:75 is the normalized restriction (mu B)^(-1)*mu.restrict B. cond_apply:214 and cond_apply_prime:218 prove EXACT mass mu(A intersect B)/mu(B), with the event measurability explicit and intersection order immaterial. For a probability measure and P(B)>0, B has finite nonzero mass and conditional measure is a probability measure. ENNReal and real mass versions agree by finite-mass coercion; no conditioning on zero-probability event is asserted. Native cond_congr_ae:91 proves equal conditional measures for AE-equal events by equal masses/restrictions. cond_real_of_subset:97 proves the exact real ratio on a measurable subset of B (apply to A intersect B); the source explicitly handles null-event totalizations without changing the positive-mass interpretation. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Enumerated native probability conditioning and measure restriction siblings. Countable disintegration, total-variation convergence and atom-removal endpoint calculations share this file but are not separate allocation reasons.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "conditional-variance",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/CondVar.lean",
+          "declarations": "ProbabilityTheory.condVar:41; stronglyMeasurable_condVar:85; condVar_ae_eq_condExp_sq_sub_sq_condExp:109",
+          "note": "Actual conditional second central moment, expansion and ordinary defining API."
+        }
+      ],
+      "evidence": "ProbabilityTheory.condVar:41 is CE_m((X-CE_m X)^2). condVar_ae_eq_condExp_sq_sub_sq_condExp:109 proves EXACT expansion for MemLp X2 and finite measure. Actual proof112–127 expands the square, proves the three terms integrable by L2 contraction/product integrability, pulls out the m-measurable CE and combines terms. On a probability space square-integrability gives all required integrabilities. No variance kernel or only unconditional variance is substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Law of total variance is available in same direct file136 but not falsely substituted for the conditional expansion.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "conditional-variance",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "ProbabilityTheory.condVar:41 is CE_m((X-CE_m X)^2). condVar_ae_eq_condExp_sq_sub_sq_condExp:109 proves EXACT expansion for MemLp X2 and finite measure. Actual proof112–127 expands the square, proves the three terms integrable by L2 contraction/product integrability, pulls out the m-measurable CE and combines terms. On a probability space square-integrability gives all required integrabilities. No variance kernel or only unconditional variance is substituted. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Enumerated native Probability/Moments/Variance, ConditionalExpectation and Concentration/EfronStein siblings and searched all native probability condVar/conditional-variance declarations. The variance-file API is unconditional; EfronStein is a separately significant product variance upper bound, not a selected own conditional-variance definition/expansion. Complete dependency supplier checked.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "configuration-model-graph",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/UniformOn.lean",
+          "declarations": "ProbabilityTheory.uniformOn:60; isProbabilityMeasure_uniformOn':87",
+          "note": "Exact uniform law on the finite nonempty set of admissible stub pairings."
+        },
+        {
+          "path": "Mathlib/Combinatorics/Graph/Basic.lean",
+          "declarations": "Graph:90",
+          "note": "Existing arbitrary multigraph incidence constructor retaining the original vertex carrier and matched stub-pair edge identities."
+        },
+        {
+          "path": "Mathlib/Combinatorics/Graph/Maps.lean",
+          "declarations": "Graph.map:38; Graph.IsLink.map:54",
+          "note": "Actual vertex-collapse incidence and edge-preservation API; zero-degree vertex carrier convention made explicit."
+        },
+        {
+          "path": "Mathlib/Data/Sym/Sym2.lean",
+          "declarations": "Sym2.eq_swap:188; Sym2.eq_iff:196",
+          "note": "Canonical unordered matched-stub pair representation with exact endpoint uniqueness."
+        }
+      ],
+      "evidence": "For supplied finite vertices V and degrees d(v), take stubs H=Sigma v:V,Fin(d v), and the FINITE set S of permutations f:H~=H with f(f h)=h and f h!=h. Under necessary admissibility S.nonempty, uniformOn S:60 with probability proof87 is exactly uniform perfect matching (one permutation per unordered matching, no orientation multiplicity). Each matching edge is the Sym2 stub pair s(h,f h), identified by Sym2.eq_swap:188/eq_iff:196. The exact collapsed multigraph has original vertex carrier ALL V (including d(v)=0), edge identities these unordered STUB pairs, and endpoints their projections to V; this is the existing Graph:90 incidence constructor with the generic Sym2 uniqueness laws. Graph.map:38 supplies the direct collapse incidence/edge-preservation formula, but its image vertex carrier alone would omit zero-degree vertices: the explicit all-V carrier is essential. Each vertex has precisely its d(v) incident stubs, with loops counting two, and parallel matched pairs remain distinct edges. Typed/bipartite versions restrict S by the supplied compatibility predicate before uniform sampling, assuming that finite restricted set nonempty. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: This is a checked generic CONSTRUCTION/representation of the bare model, not a claim of a dedicated named configurationModel alias or a random graph asymptotic theorem. Matchings require even total stub count and compatible typed capacities; admissible nonempty set is supplied, never use zero measure on an impossible matching space. Stub-to-vertex identification keeps loops/multiplicity and isolated vertices. Generic permutation finiteness139 is a checked supplier, not extra file share.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "configuration-model-graph",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Combinatorics/Enumerative/PerfectMatching.lean",
+          "declarations": "TauCeti.IsPerfectMatching:93; PerfectMatching:125; PerfectMatching.ofInvolutive:144",
+          "note": "Native precise finite perfect-matching type and ordinary pairing representation/transport API."
+        },
+        {
+          "path": "TauCeti/Combinatorics/Graph/Serre/Basic.lean",
+          "declarations": "TauCeti.SerreGraph:42; SerreGraph.tgt:62",
+          "note": "Native exact half-edge graph constructor with reversal involution and retained vertex type."
+        },
+        {
+          "path": "TauCeti/Combinatorics/Graph/Serre/Multigraph.lean",
+          "declarations": "SerreGraph.edgeSetoid:34; edgeEnds:73; toGraph:88",
+          "note": "Native completed passage from matched half-edges to the undirected loop/parallel-edge multigraph."
+        }
+      ],
+      "evidence": "For supplied finite vertices V and degrees d(v), take stubs H=Sigma v:V,Fin(d v), and the FINITE set S of permutations f:H~=H with f(f h)=h and f h!=h. Under necessary admissibility S.nonempty, uniformOn S:60 with probability proof87 is exactly uniform perfect matching (one permutation per unordered matching, no orientation multiplicity). Each matching edge is the Sym2 stub pair s(h,f h), identified by Sym2.eq_swap:188/eq_iff:196. The exact collapsed multigraph has original vertex carrier ALL V (including d(v)=0), edge identities these unordered STUB pairs, and endpoints their projections to V; this is the existing Graph:90 incidence constructor with the generic Sym2 uniqueness laws. Graph.map:38 supplies the direct collapse incidence/edge-preservation formula, but its image vertex carrier alone would omit zero-degree vertices: the explicit all-V carrier is essential. Each vertex has precisely its d(v) incident stubs, with loops counting two, and parallel matched pairs remain distinct edges. Typed/bipartite versions restrict S by the supplied compatibility predicate before uniform sampling, assuming that finite restricted set nonempty. Native PerfectMatching:125 is EXACT subtype of permutations with IsPerfectMatching:93, with an actual finite-type instance128. Form the EXISTING SerreGraph:42 with V=originalV, E=H, src=projection, rev=f; rev_rev and rev_ne are precisely the matching fields. Native Serre/Multigraph.edgeSetoid:34/edgeEnds73/toGraph88 quotients each reverse pair to one edge and proves undirected endpoint uniqueness via Sym2.eq_iff. Actual defining/proof bodies34–110 read; toGraph sets vertexSet=univ, so zero-degree vertices are retained. Uniform law is still dependency uniformOn on admissible pairings. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Boundary is exact uniform matching/graph construction and half-edge representation. Perfect-matching enumeration, alternating cycles, ribbon cyclic orders and configuration asymptotics are extra endpoints; not counted as additional reasons. The typed restriction is the same explicit finite admissibility predicate, not a claimed random typed-graph limit theorem.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-functions-compact-metric-separability",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/ContinuousMap/SecondCountableSpace.lean",
+          "declarations": "ContinuousMap.instSecondCountableTopology:86; instSeparableSpace:110",
+          "note": "Completed separability/second-countability proof for continuous maps on locally compact second-countable domains."
+        },
+        {
+          "path": "Mathlib/Topology/ContinuousMap/Compact.lean",
+          "declarations": "ContinuousMap.isometryEquivBoundedOfCompact:92; norm_eq_iSup_norm:238",
+          "note": "Actual compact-open/uniform/supremum-norm topology identification required for the stated normed space."
+        }
+      ],
+      "evidence": "Compact metric K is proper, locally compact and second countable (actual Metric/ProperSpace.secondCountable_of_proper:65 proof by countable compact-ball cover). ContinuousMap/SecondCountableSpace.instSecondCountableTopology:86 constructs a countable compact-open basis using compact exhaustions of basic opens; actual proof89–108 read. instSeparableSpace:110 follows. It applies to R or C, both second countable. ContinuousMap/Compact.isometryEquivBoundedOfCompact:92 and norm_eq_iSup_norm:238 identify this SAME topology/metric with the supremum norm on C(K); actual uniform inducing proof52–69 checked. Thus separability is in the Banach supremum topology, not merely pointwise convergence. Scalar completeness supplies the usual Banach structure; no finiteness/discreteness of K. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Real or complex C(K) interpretation explicit. Proper-space/scalar completeness are checked parameter suppliers, not extra maps; no Stone-Weierstrass polynomial-density theorem is substituted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-functions-compact-metric-separability",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Compact metric K is proper, locally compact and second countable (actual Metric/ProperSpace.secondCountable_of_proper:65 proof by countable compact-ball cover). ContinuousMap/SecondCountableSpace.instSecondCountableTopology:86 constructs a countable compact-open basis using compact exhaustions of basic opens; actual proof89–108 read. instSeparableSpace:110 follows. It applies to R or C, both second countable. ContinuousMap/Compact.isometryEquivBoundedOfCompact:92 and norm_eq_iSup_norm:238 identify this SAME topology/metric with the supremum norm on C(K); actual uniform inducing proof52–69 checked. Thus separability is in the Banach supremum topology, not merely pointwise convergence. Scalar completeness supplies the usual Banach structure; no finiteness/discreteness of K. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Enumerated native Topology/ContinuousMap Compact/CompactConvergence/CompactlySupported/Separation and bounded continuous map/SimpleFunc siblings. Separation:26 proves a DOMAIN T2 criterion from separating continuous functions; Compact:41/54 gives positivity cone properties. These are not a native proof of countable density in C(K) or ordinary separability API; no such qualifying contribution certified. Dependency exact suppliers checked.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-linear-embedding",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean",
+          "declarations": "ContinuousLinearMap:61",
+          "note": "Exact bundled continuous linear maps in the injective subtype."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/BoundedLinearMaps.lean",
+          "declarations": "IsBoundedLinearMap:82; IsBoundedLinearMap.toContinuousLinearMap:106",
+          "note": "Bounded-linear constructor, proving the bounded-to-continuous dictionary."
+        },
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/Basic.lean",
+          "declarations": "SemilinearMapClass.bound_of_continuous:112; ContinuousLinearMap.bound:130",
+          "note": "Actual converse continuity-to-bound dictionary."
+        }
+      ],
+      "evidence": "Exact constructor is {L:E->L[scalar]F | Function.Injective L}, not topological IsEmbedding. ContinuousLinearMap:61 bundles actual linearity/continuity; over normed fields SemilinearMapClass.bound_of_continuous:112 in Operator/Basic gives a finite positive norm bound, and IsBoundedLinearMap.toContinuousLinearMap:106 constructs the converse from its bound:82. Thus it is precisely an INJECTIVE bounded linear map; no closed range, lower norm bound or isometric inverse is imposed by the bare definition. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Catalogue explicitly uses injective bounded, which need not be an embedding of the ambient subspace topology. Extra bounded-below/closed-image assumptions are not silently inserted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-linear-embedding",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Normed/Operator/Basic.lean",
+          "declarations": "ContinuousLinearMap.injective_of_forall_norm_le:194",
+          "note": "Native ordinary sufficient bound criterion for the exact injective continuous-linear-map notion."
+        }
+      ],
+      "evidence": "Exact constructor is {L:E->L[scalar]F | Function.Injective L}, not topological IsEmbedding. ContinuousLinearMap:61 bundles actual linearity/continuity; over normed fields SemilinearMapClass.bound_of_continuous:112 in Operator/Basic gives a finite positive norm bound, and IsBoundedLinearMap.toContinuousLinearMap:106 constructs the converse from its bound:82. Thus it is precisely an INJECTIVE bounded linear map; no closed range, lower norm bound or isometric inverse is imposed by the bare definition. Native ContinuousLinearMap.injective_of_forall_norm_le:194 proves a conventional SUFFICIENT criterion: a lower norm bound forces trivial kernel; proof196–197 evaluates the bound at f x=0. This is ordinary direct injectivity API under an extra hypothesis, not a claim every such injective map has a lower bound. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Enumerated native operator Basic/Span/Splitting and submodule siblings. Exclude closed-range splitting/isomorphism, compactness and other operator ideals as extra endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-local-martingale",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Process/LocalProperty.lean",
+          "declarations": "ProbabilityTheory.IsPreLocalizingSequence:56; IsLocalizingSequence:64",
+          "note": "Exact increasing stopping-time sequence diverging almost surely."
+        },
+        {
+          "path": "Mathlib/Probability/Process/Stopping.lean",
+          "declarations": "IsStoppingTime:74; MeasureTheory.stoppedProcess:839",
+          "note": "Actual plain stopped-process constructor used in the catalogue predicate."
+        },
+        {
+          "path": "Mathlib/Probability/Martingale/Basic.lean",
+          "declarations": "MeasureTheory.Martingale:52; Martingale.integrable:96",
+          "note": "Exact stopped-stage martingale condition and integrability consequence."
+        }
+      ],
+      "evidence": "Use times R>=0, a real adapted process with continuous sample paths outside one common null set, and the EXACT literal predicate exists tau:Nat->Omega->WithTop(time), IsLocalizingSequence F tau P AND forall n, Martingale(stoppedProcess M (tau n)) F P. M LocalProperty.IsLocalizingSequence:64 contains actual stopping-time, AE increasing and tendsto-top fields56–67; Stopping.stoppedProcess:839 is M(min(t,tau)) with the top case evaluated at t. Martingale:52 is the actual strongly-adapted/conditional-mean predicate. For real targets adaptation and strong adaptation agree by standard Borel/second-countable measurability. This is ordinary PLAIN stopping, so each stopped martingale has integrable M0. Do NOT substitute Mathlib Locally:93 without qualification: it inserts the indicator{0<tau_n}, which permits a different initial-integrability convention. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development. Exact supplying constructor is MeasureTheory.Martingale:52 (not ProbabilityTheory.Martingale); its integrability consequence is MeasureTheory.Martingale.integrable:96.\nSearch and boundary notes: Bare exact generic stopping/sequence predicate plus continuity/adaptation; no dedicated alias required. No usual filtration or uniform integrability imposed. Native Locally indicator convention explicitly differs and is not mistaken for plain stopping.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-local-martingale",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Use times R>=0, a real adapted process with continuous sample paths outside one common null set, and the EXACT literal predicate exists tau:Nat->Omega->WithTop(time), IsLocalizingSequence F tau P AND forall n, Martingale(stoppedProcess M (tau n)) F P. M LocalProperty.IsLocalizingSequence:64 contains actual stopping-time, AE increasing and tendsto-top fields56–67; Stopping.stoppedProcess:839 is M(min(t,tau)) with the top case evaluated at t. Martingale:52 is the actual strongly-adapted/conditional-mean predicate. For real targets adaptation and strong adaptation agree by standard Borel/second-countable measurability. This is ordinary PLAIN stopping, so each stopped martingale has integrable M0. Do NOT substitute Mathlib Locally:93 without qualification: it inserts the indicator{0<tau_n}, which permits a different initial-integrability convention. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Enumerated native Process/LocalProperty, Martingale/Local/{UniformIntegrable,Nonnegative,Dominated,Congruence,Centering}. Read Centering45/63: it expressly allows nonintegrable initial values by indicator localizers; Nonnegative requires integrable M0 separately and states that convention. No exact existing dictionary certifying those indicator-local results for the paragraph PLAIN stopped stages was used. The literal definition is fully supplied by dependency; indicator-local variant APIs are excluded rather than silently changing meaning.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-martingale-quadratic-variation-isometry",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "No completed source theorem certified for arbitrary continuous square-integrable martingales and their constructed quadratic variation at EVERY bounded stopping time, including the stated localization frontier. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Searched general bracket/quadratic variation/continuous martingale isometry and actual Brownian/Martingale/OptionalStopping candidates. Scalar L2 martingale identities and a Gaussian second moment do not by themselves construct [M] or prove stopped-time expectation equality. Tau-only Brownian quadratic-sum source is not attributed to standalone Mathlib. No absence claim or new bracket proof.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-martingale-quadratic-variation-isometry",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Process/QuadraticVariation.lean",
+          "declarations": "TauCeti.Probability.quadraticSum:44",
+          "note": "Actual quadratic-sum constructor used to specify the Brownian quadratic-variation limit."
+        },
+        {
+          "path": "TauCeti/Probability/BrownianMotion/Filtered.lean",
+          "declarations": "ProbabilityTheory.IsPreBrownianReal.integral_sq_sub_of_le:147",
+          "note": "Completed Gaussian-increment second-moment identity supplying the restricted isometry."
+        },
+        {
+          "path": "TauCeti/Probability/BrownianMotion/QuadraticVariation.lean",
+          "declarations": "ProbabilityTheory.IsPreBrownianReal.tendsto_integral_sq_quadraticSum_sub:113; tendstoInMeasure_quadraticSum:129",
+          "note": "Completed Brownian mean-square/probability quadratic-variation limit and exact elapsed-time bracket."
+        }
+      ],
+      "evidence": "Completed restricted implementation: for a Brownian motion and DETERMINISTIC bounded time t, Filtered.integral_sq_sub_of_le:147 proves E(W_t-W_0)^2=t from the exact Gaussian increment law. Process/QuadraticVariation.quadraticSum:44 is the actual squared-increment sum. BrownianMotion/QuadraticVariation:113 proves its mean-square limit is elapsed time, and129 gives convergence in probability, via actual error bound97 and squeeze121–126. Hence Brownian [W]_t=t with the exact fixed-time isometry. Native Brownian/Martingale:97 confirms filtered Brownian motion is a martingale. Arbitrary continuous square-integrable M and arbitrary bounded RANDOM stopping times with [M] are not certified, so retain partial. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Read actual finite-grid expectation54, L2-error limit113 and probability limit129, not just filenames. Native Process finite-variation perturbation preserves an ALREADY supplied limit, and weighted Brownian variation is not general arbitrary-martingale bracket construction. Brownian Martingale/OptionalStopping are checked input suppliers, excluded from extra file allocation.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-random-dynamical-system",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/ContinuousMap/Defs.lean",
+          "declarations": "ContinuousMap:32",
+          "note": "Exact state-continuous fiber-map constructor in the measurable cocycle predicate."
+        },
+        {
+          "path": "Mathlib/Dynamics/Ergodic/MeasurePreserving.lean",
+          "declarations": "MeasureTheory.MeasurePreserving:44",
+          "note": "Exact invariant measurable base-flow condition."
+        }
+      ],
+      "evidence": "For a supplied time monoid (R or R>=0) and measurable base Omega, take theta:T->Omega->Omega with theta0=id, theta(t+s)=theta_t o theta_s, jointly measurable evaluation and forall t,MeasurePreserving(theta_t)P P. MeasurePreserving:44 is EXACT measurability plus map(theta_t)P=P, with NO topological-continuity condition on Omega. Take phi:T->Omega->C(X,X), X Polish with its Borel sigma-algebra, impose joint measurability of(t,omega,x)->phi t omega x, phi0 omega x=x and phi(t+s,omega,x)=phi(t,theta_s omega,phi(s,omega,x)). ContinuousMap:32 supplies exactly state-variable continuity. These literal generic defining data impose joint MEASURABILITY but only x CONTINUITY; they do not silently require joint continuity in time/base/state. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Bare cocycle predicate, no theorem constructing one from a stochastic differential equation. Dynamics/Flow adds topological joint continuity and would strengthen this paragraph if used indiscriminately; supplied base flow/state/measure types are explicit.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-random-dynamical-system",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "For a supplied time monoid (R or R>=0) and measurable base Omega, take theta:T->Omega->Omega with theta0=id, theta(t+s)=theta_t o theta_s, jointly measurable evaluation and forall t,MeasurePreserving(theta_t)P P. MeasurePreserving:44 is EXACT measurability plus map(theta_t)P=P, with NO topological-continuity condition on Omega. Take phi:T->Omega->C(X,X), X Polish with its Borel sigma-algebra, impose joint measurability of(t,omega,x)->phi t omega x, phi0 omega x=x and phi(t+s,omega,x)=phi(t,theta_s omega,phi(s,omega,x)). ContinuousMap:32 supplies exactly state-variable continuity. These literal generic defining data impose joint MEASURABILITY but only x CONTINUITY; they do not silently require joint continuity in time/base/state. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Enumerated native dynamics/flows and cocycle-named topology directories. FiberBundle/GroupCocycle describes transition functions c_ij on chart overlaps and glued principal bundles, not time/base skew-product cocycles. AddCircle/Flow is a particular deterministic topological flow. No own ordinary API on the full measurable-base/state-continuous random cocycle certified; exact dependency generic predicate complete.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-semimartingale",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Process/LocalProperty.lean",
+          "declarations": "ProbabilityTheory.IsPreLocalizingSequence:56; IsLocalizingSequence:64",
+          "note": "Exact increasing stopping-time sequence diverging almost surely."
+        },
+        {
+          "path": "Mathlib/Probability/Process/Stopping.lean",
+          "declarations": "IsStoppingTime:74; MeasureTheory.stoppedProcess:839",
+          "note": "Actual plain stopped-process constructor used in the catalogue predicate."
+        },
+        {
+          "path": "Mathlib/Probability/Martingale/Basic.lean",
+          "declarations": "MeasureTheory.Martingale:52; Martingale.integrable:96",
+          "note": "Exact stopped-stage martingale condition and integrability consequence."
+        },
+        {
+          "path": "Mathlib/Topology/EMetricSpace/BoundedVariation.lean",
+          "declarations": "eVariationOn:61; BoundedVariationOn:66",
+          "note": "Exact bounded-time finite-path-variation component in the continuous semimartingale decomposition."
+        }
+      ],
+      "evidence": "Use times R>=0, a real adapted process with continuous sample paths outside one common null set, and the EXACT literal predicate exists tau:Nat->Omega->WithTop(time), IsLocalizingSequence F tau P AND forall n, Martingale(stoppedProcess M (tau n)) F P. M LocalProperty.IsLocalizingSequence:64 contains actual stopping-time, AE increasing and tendsto-top fields56–67; Stopping.stoppedProcess:839 is M(min(t,tau)) with the top case evaluated at t. Martingale:52 is the actual strongly-adapted/conditional-mean predicate. For real targets adaptation and strong adaptation agree by standard Borel/second-countable measurability. This is ordinary PLAIN stopping, so each stopped martingale has integrable M0. Do NOT substitute Mathlib Locally:93 without qualification: it inserts the indicator{0<tau_n}, which permits a different initial-integrability convention. A continuous semimartingale is then the exact generic existential decomposition X=M+A with this M and A adapted, continuous on the same full-measure path set and forall finite T,BoundedVariationOn(A(.)(omega))(Icc0T). BoundedVariationOn:66 is finite eVariationOn; definition61 takes the supremum over ALL finite monotone partitions, exactly ordinary path variation. No finite variation of M, uniform total-variation bound or integrability of total variation is inserted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development. Exact supplying constructor is MeasureTheory.Martingale:52 (not ProbabilityTheory.Martingale); its integrability consequence is MeasureTheory.Martingale.integrable:96.\nSearch and boundary notes: Primary literal M+A construction uses the exact plain local-martingale convention above. Stochastic integration or a general Ito formula is not asserted by this bare definition.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-semimartingale",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Use times R>=0, a real adapted process with continuous sample paths outside one common null set, and the EXACT literal predicate exists tau:Nat->Omega->WithTop(time), IsLocalizingSequence F tau P AND forall n, Martingale(stoppedProcess M (tau n)) F P. M LocalProperty.IsLocalizingSequence:64 contains actual stopping-time, AE increasing and tendsto-top fields56–67; Stopping.stoppedProcess:839 is M(min(t,tau)) with the top case evaluated at t. Martingale:52 is the actual strongly-adapted/conditional-mean predicate. For real targets adaptation and strong adaptation agree by standard Borel/second-countable measurability. This is ordinary PLAIN stopping, so each stopped martingale has integrable M0. Do NOT substitute Mathlib Locally:93 without qualification: it inserts the indicator{0<tau_n}, which permits a different initial-integrability convention. A continuous semimartingale is then the exact generic existential decomposition X=M+A with this M and A adapted, continuous on the same full-measure path set and forall finite T,BoundedVariationOn(A(.)(omega))(Icc0T). BoundedVariationOn:66 is finite eVariationOn; definition61 takes the supremum over ALL finite monotone partitions, exactly ordinary path variation. No finite variation of M, uniform total-variation bound or integrability of total variation is inserted. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Native Process/QuadraticVariation.tendstoInMeasure_quadraticSum_add:96 was read: it proves a distinct finite-variation perturbation theorem for an already supplied quadratic limit and explicitly does NOT construct a bracket/semimartingale decomposition. Indicator-local Centering/Congruence differs at initial integrability as above. Those extra endpoints are excluded from this bare decomposition mapping; full literal constructor supplied by dependency.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-time-branching-nonexplosion",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "No completed source proof certified of nonexplosion for the WHOLE finite-mean continuous-time Galton-Watson population, simultaneously finite living individuals and branching events on bounded intervals. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Searched branching/Galton-Watson/nonexplosion and actual probability renewal/Poisson/Markov namespaces. Tau Ceti-owned Renewal/Exponential/Basic.ae_tendsto_arrival_atTop_of_expMeasure:69 proves nonexplosion of ONE independent exponential renewal lineage by its strong law (proof72–74 read), not a branching tree with offspring. Discrete generations and finite mean do not by themselves provide the required continuous-time tree/event-count proof. No inferred absence and no new branching proof.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-time-branching-nonexplosion",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "No completed source proof certified of nonexplosion for the WHOLE finite-mean continuous-time Galton-Watson population, simultaneously finite living individuals and branching events on bounded intervals. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Searched branching/Galton-Watson/nonexplosion and actual probability renewal/Poisson/Markov namespaces. Tau Ceti-owned Renewal/Exponential/Basic.ae_tendsto_arrival_atTop_of_expMeasure:69 proves nonexplosion of ONE independent exponential renewal lineage by its strong law (proof72–74 read), not a branching tree with offspring. Discrete generations and finite mean do not by themselves provide the required continuous-time tree/event-count proof. No inferred absence and no new branching proof.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-time-markov-chain-finite",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Process/Filtration.lean",
+          "declarations": "MeasureTheory.Filtration.natural:434",
+          "note": "Actual past-generated sigma-algebra filtration in the continuous-time Markov predicate."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean",
+          "declarations": "MeasureTheory.condExp:100; setIntegral_condExp:230",
+          "note": "Exact conditional future-state probability requirement."
+        },
+        {
+          "path": "Mathlib/Probability/Kernel/Composition/Comp.lean",
+          "declarations": "ProbabilityTheory.Kernel Monoid instance:237; IsMarkovKernel.comp:210",
+          "note": "Existing transition-kernel identity/composition operations in the semigroup condition."
+        },
+        {
+          "path": "Mathlib/Topology/Order/Cadlag.lean",
+          "declarations": "IsRightContinuous:35; isRightContinuous_iff_continuousWithinAt_Ici:284",
+          "note": "Actual right-continuous sample-path condition on the finite discrete state space."
+        }
+      ],
+      "evidence": "For supplied finite state type Fin(N+1) with discrete topology, the exact literal representation is a process X with each X_t measurable, almost-surely right-continuous paths, and Markov kernels kappa_t with kappa0=id,kappa(t+s)=kappa_t compose kappa_s, such that for every s,t and state j, CE[1{X_(s+t)=j}|F_s]=(kappa_t(X_s){j}).toReal, where F=Filtration.natural X. Filtration.natural:434 is literally the supremum of sigma-algebras generated by X_u for u<=s. ConditionalExpectation.Basic supplies these actual finite-state conditional probabilities; Kernel/Composition/Comp:237 supplies the Markov-kernel composition/identity operation, and IsRightContinuous:35 / iff284 gives the exact right-continuity predicate. This states the future-current/elapsed-time law with the transition semigroup, without a discrete-time sampling restriction or a theorem constructing a process from an arbitrary generator. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Bare defining data, not a proof of arbitrary-generator existence, explosion bounds, transition exponential formula, or a semigroup theorem for unrelated process inputs. The catalogue expressly asks right-continuity; no stronger usual-filtration or left-limit condition is silently inserted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "continuous-time-markov-chain-finite",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "For supplied finite state type Fin(N+1) with discrete topology, the exact literal representation is a process X with each X_t measurable, almost-surely right-continuous paths, and Markov kernels kappa_t with kappa0=id,kappa(t+s)=kappa_t compose kappa_s, such that for every s,t and state j, CE[1{X_(s+t)=j}|F_s]=(kappa_t(X_s){j}).toReal, where F=Filtration.natural X. Filtration.natural:434 is literally the supremum of sigma-algebras generated by X_u for u<=s. ConditionalExpectation.Basic supplies these actual finite-state conditional probabilities; Kernel/Composition/Comp:237 supplies the Markov-kernel composition/identity operation, and IsRightContinuous:35 / iff284 gives the exact right-continuity predicate. This states the future-current/elapsed-time law with the transition semigroup, without a discrete-time sampling restriction or a theorem constructing a process from an arbitrary generator. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Enumerated native Process/MarkovChain, MarkovChain/StrongMarkov/Process and examples/Poisson. Process/MarkovChain164 is explicitly NATURAL discrete-time path law. Poisson.hasLaw_markovChainLaw_poissonSkeleton:63 proves a fixed-grid discrete skeleton on UNBOUNDED Nat, not the full finite-state continuous-time object; actual proof63–92 uses independent increments/telescoping only. No qualifying native general continuous-time finite-state core certified. Complete literal conditional/semigroup representation is dependency-supplied.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "convergence-in-probability",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean",
+          "declarations": "MeasureTheory.TendstoInMeasure:57; tendstoInMeasure_iff_norm:124",
+          "note": "Exact metric convergence in probability/measure definition and scalar/metric ordinary equivalences."
+        }
+      ],
+      "evidence": "MeasureTheory.TendstoInMeasure:57 is exactly for every positive epsilon the measure of{epsilon<=edist(Xn,X)} tends to0. For a probability measure and metric target, tendstoInMeasure_iff_dist/norm:124 translate to ordinary distances/absolute values. The catalogue STRICT >epsilon convention is equivalent by the bounds {dist>=epsilon} subset {dist>epsilon/2} and {dist>epsilon} subset {dist>=epsilon}; no uniform-in-epsilon bound is introduced. Generic sequences use filter atTop; definition includes metric-valued random variables. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Probability versus convergence in measure distinguished by the supplied probability measure. Almost-sure convergence is stronger, not substituted as the definition.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "convergence-in-probability",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Function/ConvergenceInMeasure.lean",
+          "declarations": "MeasureTheory.tendstoInMeasure_of_tendsto_measure_rate_lt_edist:58; tendstoInMeasure_of_tendsto_measure_rate_lt_dist:74; tendstoInMeasure_of_tendsto_measure_dist_le_rate:95",
+          "note": "Native ordinary threshold/rate and metric reformulations of the same convergence mode."
+        }
+      ],
+      "evidence": "MeasureTheory.TendstoInMeasure:57 is exactly for every positive epsilon the measure of{epsilon<=edist(Xn,X)} tends to0. For a probability measure and metric target, tendstoInMeasure_iff_dist/norm:124 translate to ordinary distances/absolute values. The catalogue STRICT >epsilon convention is equivalent by the bounds {dist>=epsilon} subset {dist>epsilon/2} and {dist>epsilon} subset {dist>=epsilon}; no uniform-in-epsilon bound is introduced. Generic sequences use filter atTop; definition includes metric-valued random variables. Native tendstoInMeasure_of_tendsto_measure_rate_lt_edist:58 and metric version74 give a direct equivalent threshold-control API with a rate tending0. Proof61–67 uses eventual rate<epsilon and actual measure monotonicity; <=rate version95 handles complementary thresholds. For bad-event rate threshold theorems58/74, no measurability of exceptional sets or rate nonnegativity is needed. The GOOD-event probability-to-one theorem95 DOES require eventual NullMeasurableSet of {dist<=rate}, exactly to pass to complement probabilities; that hypothesis is retained. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Enumerated native ConvergenceInMeasure and probability moments weak-convergence siblings. Distribution weak convergence, Wasserstein and almost-sure subsequence theorems are separate endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "convex-function-real",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Convex/Function.lean",
+          "declarations": "ConvexOn:54",
+          "note": "Exact real interval convex-function definition and ordinary affine/combination API."
+        }
+      ],
+      "evidence": "ConvexOn:54 is Convex R I and the exact two nonnegative weights a,b with a+b=1 inequality. On a real interval take a=t,b=1-t, so0<=t<=1 is EXACTLY the catalogue convention, including endpoints. No strict convexity, differentiability or continuity is imposed in this definition. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Scalar interval/domain convexity is part of the constructor. StrictConvexOn is a different additional condition, not used for completeness.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "convex-function-real",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/Function/Topology.lean",
+          "declarations": "TauCeti.convexOn_of_tendsto:50; ConvexOn.closure_of_continuousOn:136",
+          "note": "Native ordinary pointwise-limit and continuous domain-closure stability of convex functions."
+        }
+      ],
+      "evidence": "ConvexOn:54 is Convex R I and the exact two nonnegative weights a,b with a+b=1 inequality. On a real interval take a=t,b=1-t, so0<=t<=1 is EXACTLY the catalogue convention, including endpoints. No strict convexity, differentiability or continuity is imposed in this definition. Native convexOn_of_tendsto:50 proves ordinary closure under pointwise limits of eventually convex functions by the actual closed-set-of-convex-functions argument56–61. ConvexOn.closure_of_continuousOn:136 proves domain-closure extension under continuity there, via dense products and continuous weighted combinations. These are direct stability/equivalent-domain API, not a strict-convexity substitution. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Native Function/{Basic,Topology} inspected: Basic only proves STRICT convexity under an injective affine pullback, so it is excluded as an extra structure. Derivative/subdifferential/Fenchel endpoints are separately catalogued.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "convex-subdifferential-euclidean",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/EReal/Basic.lean",
+          "declarations": "EReal:36; Real.toEReal:43",
+          "note": "Existing no-bottom extended-real value representation, order and finite-tilt arithmetic in the literal defining set."
+        },
+        {
+          "path": "Mathlib/Data/Matrix/Mul.lean",
+          "declarations": "dotProduct:76",
+          "note": "Actual finite Euclidean dot product in the subgradient inequality."
+        }
+      ],
+      "evidence": "Use EReal=WithBot(WithTop R):36 and supplied f never taking bottom, i.e. exactly R union{infinity}; real coercion:43, actual order/addition structure supports finite linear tilts. For proper f take the exact generic set {v | f(x)!=top and forall y, f(x)+(dotProduct v (y-x):EReal)<=f(y)}. Properness supplies a finite value somewhere, so the displayed all-y inequality itself excludes f(x)=top, consistent with the standard empty subdifferential outside the effective domain. dotProduct:76 is sum_i v_i*(y_i-x_i), exactly Euclidean pairing. This is a bare defining set; no subgradient-existence theorem for boundary points is asserted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Proper/lower-semicontinuous/convex f is supplied as in the paragraph; those properties are not replaced by smoothness or finite-valued everywhere. No dedicated subdifferential alias required for the exact generic predicate.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    },
+    {
+      "concept": "convex-subdifferential-euclidean",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/Subdifferential.lean",
+          "declarations": "TauCeti.subdifferential:89; mem_subdifferential_iff:96; subdifferential_eq_empty_of_eq_top:128; mem_subdifferential_iff_forall_toReal_add_le:167; apply_le_apply_of_mem_subdifferential:191; convex_subdifferential:343; isClosed_subdifferential:399",
+          "note": "Native exact extended-real subgradient set, effective-domain dictionaries and ordinary monotonicity/closed-convex-set API."
+        }
+      ],
+      "evidence": "Use EReal=WithBot(WithTop R):36 and supplied f never taking bottom, i.e. exactly R union{infinity}; real coercion:43, actual order/addition structure supports finite linear tilts. For proper f take the exact generic set {v | f(x)!=top and forall y, f(x)+(dotProduct v (y-x):EReal)<=f(y)}. Properness supplies a finite value somewhere, so the displayed all-y inequality itself excludes f(x)=top, consistent with the standard empty subdifferential outside the effective domain. dotProduct:76 is sum_i v_i*(y_i-x_i), exactly Euclidean pairing. This is a bare defining set; no subgradient-existence theorem for boundary points is asserted. Native subdifferential:89 is EXACTLY this finite-value/all-y inequality with an arbitrary bilinear pairing. Use actual dotProductBilin:144 in Mathlib Matrix/ToLin, whose completed linearity fields145–150 are the finite dot-product laws; over R commutativity swaps the harmless argument order. mem_subdifferential_ite_iff:151 and toReal characterization167 prove exact domain/top-extension dictionaries; empty_at_top:128 and monotonicity191 are ordinary core. convex_subdifferential343 and isClosed_subdifferential399 prove intersection-of-half-spaces geometry. No assumption every point has a subgradient. Source-pin verification: each selected Mathlib supplying file exists at the actual dependency. Conditional Basic/L1/Jensen, CLM Basic, Operator Basic, Stopping/Martingale, Filtration/KernelComposition and Cadlag differ by one header line at the cited defining regions; CondexpL2 has the same projection definition, with two later integrability proofs explicitly using ENNReal.mul_lt_top instead of finiteness (checked at dependency). PullOut, Convex Continuous, CondVar, conditional probability, C(K), localizing sequence, variation, convergence-in-measure, convex-function, EReal and dot-product defining bytes are identical. Sym2 changes only an unrelated later map injectivity proof; Graph.map, permutation-finiteness, proper-space second countability and Brownian law input files have a header +1 only; dotProductBilin in Matrix/ToLin is identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual relevant statements, hypotheses and completed proof/definition bodies inspected; no rebuilding or new Lean proof development.\nSearch and boundary notes: Native Subdifferential/SubgradientImage/Function/Deriv siblings inspected. Fenchel conjugate/biconjugation and subgradient image theorems add separate duality/geometry endpoints and are excluded as extra allocation reasons. The exact arbitrary bilinear constructor is specialized to the supplied Euclidean dot product, not silently to another dual pairing.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-054.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Convex/Continuous.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 346,
+      "sha256": "0d9a59f13d665de251ceebf39507810304938ec890ad21621b04904116c83f0d",
+      "measured_at": "2026-11-13T04:05:16.644407+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Combinatorics/Graph/Maps.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 106,
+      "sha256": "81e3770b7e50cff8cf46a14292b757ce8244ff3cf529d62b32199c0e3013f0cd",
+      "measured_at": "2026-11-13T04:05:16.697188+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/EReal/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 966,
+      "sha256": "bfa0540094e4fec31a43ce4d5f5d2a0d7bb18e920e4097425344339b0cb0c10e",
+      "measured_at": "2026-11-13T04:05:16.708551+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Sym/Sym2.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1064,
+      "sha256": "d7819b24a85c1dffe3452095884ab28e2a7e91963c74161b605bfc3b226ae056",
+      "measured_at": "2026-11-13T04:05:16.725915+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Dynamics/Ergodic/MeasurePreserving.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 252,
+      "sha256": "92188f0b1e2a5b3514c66a8391437ebd1aabbbf5403c3098bfa582b7db990623",
+      "measured_at": "2026-11-13T04:05:16.733010+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 505,
+      "sha256": "1a29886ae77645001381777d7653c5fa8582717330cd662ce0dc83e0f964b7a6",
+      "measured_at": "2026-11-13T04:05:16.741323+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/CondJensen.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 291,
+      "sha256": "2a383de0ae0978096c14b5300409022625a1a0f6d30483274c0ac6e33b8cb8b6",
+      "measured_at": "2026-11-13T04:05:16.749483+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL1.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 541,
+      "sha256": "c6e48760709c51abb302af4716fd558cb39fc1b1c048bb7a66ffef97744cdb52",
+      "measured_at": "2026-11-13T04:05:16.756025+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL2.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 484,
+      "sha256": "5ea34b5df7fc418fd408ef01b2cdaa7b1af2aeb50276861e63395f558953c408",
+      "measured_at": "2026-11-13T04:05:16.760964+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Function/ConditionalExpectation/PullOut.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 269,
+      "sha256": "cce77ea6bd3daaa5d4682f375afc75d7ea3496ad886b7d7ec679d0bce07d14ae",
+      "measured_at": "2026-11-13T04:05:16.765891+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 466,
+      "sha256": "9d8db1062b13e3a2c60d2bb06c2d8b37410ff9d5cec7f2dba9cffb09e9a0ebb6",
+      "measured_at": "2026-11-13T04:05:16.769833+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/CondVar.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 181,
+      "sha256": "7ee1a48cdb1ff1dbe5e4f90c9f973b6b74da19092dcf9556c9f6a9191c51f108",
+      "measured_at": "2026-11-13T04:05:16.774761+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/ConditionalProbability.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 311,
+      "sha256": "aab0b31d490b8b772fb94267a2c23c8a8dd01e2ea981bce57b1b4887e9d4ab9f",
+      "measured_at": "2026-11-13T04:05:16.780239+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/Martingale/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 620,
+      "sha256": "a86dc0eacd5cf3c36712fbd2c69bc7b50766f71fdc865b591940d832b8aee737",
+      "measured_at": "2026-11-13T04:05:16.789604+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/Process/Filtration.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 540,
+      "sha256": "d56bc2303cbff63ec8622e36aa1cdba9274450cfa081a347a9b57a0fb32a44a9",
+      "measured_at": "2026-11-13T04:05:16.797663+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/Process/LocalProperty.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 345,
+      "sha256": "f0ad6f97cd0bc9bad8118e56b8df634d2cd70e29d2b01ff299622759fc10538b",
+      "measured_at": "2026-11-13T04:05:16.802142+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/Process/Stopping.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1457,
+      "sha256": "4e7fd58e424c4c953449b4fa7820ed471f98747bb0aa216aead9cb3d683cf011",
+      "measured_at": "2026-11-13T04:05:16.806355+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/UniformOn.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 232,
+      "sha256": "424ca24510c57fa3985ad605def8512a63f2397b8ba13d198e3c9f4de16c35a3",
+      "measured_at": "2026-11-13T04:05:16.813310+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/ContinuousMap/SecondCountableSpace.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 114,
+      "sha256": "b7a12e97eb216ce0f6d96cf599fc2700ace331549f3c8fc609a56283e5986a39",
+      "measured_at": "2026-11-13T04:05:16.832409+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/EMetricSpace/BoundedVariation.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1214,
+      "sha256": "a38d81730422c6673a0ebd7dd924b32449af1525c291691dc07b2e1cbbb89b8f",
+      "measured_at": "2026-11-13T04:05:16.838456+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Order/Cadlag.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 331,
+      "sha256": "f2c9f40f5b784d3453401376b3d969f89c1b87f8df5ece93fc88cca9991555ec",
+      "measured_at": "2026-11-13T04:05:16.844645+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Convex/Subdifferential.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 559,
+      "sha256": "cd8c54568230866f78c631ab59ed8ad010648b0e8d489a635612341ba5280fb8",
+      "measured_at": "2026-11-13T04:05:16.879278+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Combinatorics/Enumerative/PerfectMatching.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 828,
+      "sha256": "fe7d0acabee3cb769bc1f4f876be912278914d4824c265b492374a2d14b6d755",
+      "measured_at": "2026-11-13T04:05:16.916562+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Combinatorics/Graph/Serre/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 502,
+      "sha256": "a475ae7ba9c8cdf8d7e9bb3f0bc80ece97c4f493f0dcfc26dc12d949e23fa8cc",
+      "measured_at": "2026-11-13T04:05:16.926271+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Combinatorics/Graph/Serre/Multigraph.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 226,
+      "sha256": "7fbed75ec043d8beba759b8a44593c00fd3002f8c08d938dff703c74aa4197e3",
+      "measured_at": "2026-11-13T04:05:16.936482+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Function/ConditionalExpectation/Completion.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 108,
+      "sha256": "29ca5d80a3974f31fd53f45d99f8587a3eee3e0a079e7077104d39bf6920ea86",
+      "measured_at": "2026-11-13T04:05:16.948677+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Function/ConditionalExpectation/CondexpLp.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 164,
+      "sha256": "2d1f9b6992e1aa59d6510bc3ec2d1fcda22c3dcf2e8807d46be746c54e67f225",
+      "measured_at": "2026-11-13T04:05:16.960095+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Function/ConditionalExpectation/MeasurePreserving.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 86,
+      "sha256": "cf5df2b21207790fe835ea33bffb806231135bc39b319abddb0b36d0bca000ca",
+      "measured_at": "2026-11-13T04:05:16.970977+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Function/ConvergenceInMeasure.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 109,
+      "sha256": "3263b0f961bef388358f5a301ffd5af27205852d62a48b2a0ec5df4679530463",
+      "measured_at": "2026-11-13T04:05:16.983092+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/BrownianMotion/Filtered.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 232,
+      "sha256": "6a6f8b85bdc519a2deb9b2ea695455f7a7732ef28226c97616b4ca8cbe2552c4",
+      "measured_at": "2026-11-13T04:05:16.997225+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/BrownianMotion/QuadraticVariation.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 179,
+      "sha256": "3eea2692b170026e73fccb71d16d2ec60007a58f7d427d2789bbd81c86b3cdd2",
+      "measured_at": "2026-11-13T04:05:17.009475+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/ConditionalProbability.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 462,
+      "sha256": "f67393646bc0a777ceb22842195d91d958edc42e63186a68485c298ae853c818",
+      "measured_at": "2026-11-13T04:05:17.018641+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Process/QuadraticVariation.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 128,
+      "sha256": "47cd6705f8e7a515a006336fb6a48bd37e85fcc7db0c779c9c25733e71b80c2b",
+      "measured_at": "2026-11-13T04:05:17.027719+00:00"
+    }
+  ]
+}

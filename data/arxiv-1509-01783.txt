@@ -1,0 +1,636 @@
+Explicit Rates of Exponential Convergence for Reflected Jump-Diffusions on the Half-Line
+
+Coverage: Entire pinned22-page source, all proofs/applications and39references inspected. Actual one-step reading inventory and recursive statement vocabulary complete; all encountered imported and valid source-explained theorem immediate proof accounts reviewed. Refuted exact-prefactor claims are historical; precise original-priority uncertainty remains independent. Direct proof-only supports stay unexpanded.
+Required concepts complete: True
+Introduced concepts complete: False
+All citations captured: True
+Completion refers to immediate concepts only; false means not certified.
+
+REQUIRED CONCEPT FRONTIER (16)
+
+- Compensation formula for Poisson random measures: If N has intensity dt·ν(dz), then for every nonnegative predictable H, E∫H(t,z)N(dt,dz)=E∫H(t,z)dtν(dz). The predictable hypothesis refers to a filtration in which future Poisson increments are independent of the past.
+- C² Itô formula for a càdlàg semimartingale: For a real càdlàg semimartingaleA andf∈C²(ℝ), f(A_t)=f(A_0)+∫_(0,t]f′(A_(s−))dA_s+(1/2)∫_(0,t]f″(A_(s−))d[A]^c_s+Σ_(0<s≤t)[f(A_s)−f(A_(s−))−f′(A_(s−))ΔA_s], where[A]^c is the continuous part of the quadratic variation.
+- Fatou’s lemma: For nonnegative measurable functions f_n on a measure space, ∫liminf_n f_n≤liminf_n∫f_n, allowing∞.
+- Geometric Foster–Lyapunov condition for a continuous-time generator: For a specified extended generator A of a Markov process, a continuous function V≥1 in its declared domain satisfies a geometric drift condition if AV≤−kV+b1_C for constants k>0,b<∞ and a specified compact or small set C; the domain and small-set convention are part of the chosen route.
+- Geometric ergodicity from a half-line Lyapunov drift and positive transitions: Let a nonexplosive càdlàg weak Feller strong Markov family on[0,∞), with usual filtration, have positive transition probabilities to every Lebesgue-positive Borel set at every positive time. Suppose a continuous V≥1, k>0, b<∞ and compact C satisfy that V(X_t)−V(X₀)−∫₀ᵗ[−kV(X_s)+b1_C(X_s)]ds is a local supermartingale from every initial state. Then there is a unique invariant probability pi with pi(V)<∞ and constants D,rho>0 such that ‖P_t(x,·)−pi‖V≤D V(x)e^(−rho t) for every x,t. No equality rho=k or special explicit prefactor is asserted.
+- Lebesgue dominated convergence theorem: If measurable fₙ converge almost everywhere to f and |fₙ|≤g for an integrable g, then f is integrable and ∫|fₙ−f|→0; consequently their integrals converge.
+- Local Doob–Meyer decomposition of a càdlàg supermartingale: On a usual filtration, a real càdlàg supermartingale X has a unique local decomposition X=X₀+N−A, where N is a càdlàg local martingale starting at0 and A is predictable càdlàg nondecreasing starting at0 and locally integrable. This is the local form; a uniformly integrable martingale conclusion requires the corresponding class-D/integrability hypotheses.
+- Mollifier on Euclidean space: A nonnegative smooth compactly supported function j on ℝᵈ with integral one. Its scaled kernels j_ε(x)=ε⁻ᵈj(x/ε) produce smooth approximations by convolution.
+- Optional sampling for a nonnegative càdlàg supermartingale: On a usual filtration, if X is a nonnegative càdlàg supermartingale and sigma≤tau are bounded stopping times, then E[X_tau|F_sigma]≤X_sigma almost surely. No class-D assumption is needed for this bounded-time nonnegative formulation.
+- Ordered coupling of càdlàg half-line Markov paths: Let X,Y be time-homogeneous càdlàg Markov families on[0,∞) with transition semigroups P,Q, such that P_t(x,·)≤stQ_t(y,·) whenever x≤y and t≥0. For every x≤y there is a coupling of their whole path laws started at x,y with X_t≤Y_t for every t≥0 almost surely. In particular this holds for two ordered initial states of one stochastically monotone family, or when P is stochastically dominated by a monotone Q. This path-law assertion alone makes no claim that the coordinates are Markov or martingales in their common enlarged filtration.
+- Poisson point process: A point process with intensity measure λ for which counts in disjoint measurable sets are independent and ξ(A) has Poisson law of mean λ(A) whenever λ(A)<∞.
+- Positive transitions of a Lipschitz reflected half-line diffusion: Let the reflected half-line diffusion have globally Lipschitz drift g and diffusion coefficient sigma with inf sigma>0. For every t>0, initial x≥0 and Borel set B⊆[0,∞) of positive Lebesgue measure, P_x(X_t∈B)>0.
+- Tanaka formula for the absolute value of a continuous semimartingale: For a real continuous semimartingale X, there is a continuous nonnegative nondecreasing process L^0 with L₀^0=0, increasing only when X=0, such that |X_t|=|X₀|+∫₀ᵗsgn(X_s)dX_s+L_t^0, with sgn(0)=0. This L^0 is the symmetric local time of X at0.
+- Tower property of conditional expectation: For sub-σ-algebras F⊆G and integrable X, E[E[X|G]|F]=E[X|F]; also E[E[X|F]|G]=E[X|F].
+- Two rank-based finite-activity Lévy particles: Two real particles are driven by the upper and lower coordinates of a two-dimensional Lévy process with finite jump measure, drift vector (g₊,g₋) and positive definite covariance: the particle currently ranked higher uses the upper driver and the lower-ranked particle uses the lower driver, with a declared rule resolving ties. The ranked gap is the difference of their ordered positions.
+- Well-posedness of bounded-rate reflected jump-diffusions on the half-line: Suppose g and σ are globally Lipschitz on [0,∞), inf σ>0, and ν_x are finite positive Borel destination measures such that x↦∫f dν_x is continuous for every bounded continuous f and sup_xν_x([0,∞))<∞. Piecing out reflected diffusions with jump measure ν_x yields a unique-in-law nonexplosive weak Feller strong Markov family. Its extended generator on bounded C² test functions with f′(0)=0 is Af(x)=g(x)f′(x)+σ(x)²f″(x)/2+∫(f(y)−f(x))dν_x(y).
+
+INHERITED PREREQUISITES (139)
+
+- Abelian group — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Adapted stochastic process — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale
+- Almost-everywhere convergence of measurable functions — via dominated-convergence-theorem
+- Almost-everywhere property on a measure space — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale
+- Almost-sure convergence of real random variables — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, tanaka-absolute-value-continuous-semimartingale
+- Bijection between sets — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Binary operation on a set — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Binary relation on a set — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Borel σ-algebra of a topological space — via bounded-rate-reflected-jump-diffusion-wellposedness, continuous-half-line-lyapunov-geometric-ergodicity, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Borel σ-algebra on the real line — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- C^k map between Euclidean open sets — via cadlag-c2-ito-formula
+- Cartesian product of sets — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Closure of a subset of a topological space — via mollifier, poisson-point-process
+- Commutative ring with identity — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Compact topological space — via mollifier, poisson-point-process
+- Compactly supported smooth test function on an open Euclidean set — via mollifier
+- Compensator of a counting process — via bounded-rate-reflected-jump-diffusion-wellposedness
+- Complement of a subset — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Complete measure — via bounded-rate-reflected-jump-diffusion-wellposedness, continuous-half-line-lyapunov-geometric-ergodicity, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale, poisson-compensation-formula, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Complex number — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Conditional expectation given a σ-algebra — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale
+- Continuous local martingale — via tanaka-absolute-value-continuous-semimartingale
+- Continuous map between topological spaces — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, local-doob-meyer-cadlag-supermartingale, mollifier, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale
+- Continuous semimartingale — via tanaka-absolute-value-continuous-semimartingale
+- Continuous-time martingale — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, tanaka-absolute-value-continuous-semimartingale
+- Continuous-time supermartingale — via continuous-half-line-lyapunov-geometric-ergodicity, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale
+- Convergence in probability — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Convergence of a sequence in a metric space — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Convergent real series — via bounded-rate-reflected-jump-diffusion-wellposedness, continuous-half-line-lyapunov-geometric-ergodicity, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Càdlàg path — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Càdlàg semimartingale — via cadlag-c2-ito-formula, tanaka-absolute-value-continuous-semimartingale
+- Derivative of a real function — via cadlag-c2-ito-formula, mollifier
+- Disjoint sets — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Equivalence class — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Equivalence relation — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Essential supremum of a measurable real function — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Euclidean space ℝᵈ — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, mollifier, positive-transitions-lipschitz-reflected-half-line-diffusion, two-rank-based-levy-particles
+- Expectation of an integrable real random variable — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale, poisson-compensation-formula, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale
+- Exponential distribution — via bounded-rate-reflected-jump-diffusion-wellposedness
+- Extended martingale generator of a Markov process — via bounded-rate-reflected-jump-diffusion-wellposedness, generator-foster-lyapunov-condition
+- Extended nonnegative real numbers — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Extended real line — via fatou-lemma
+- Factorial — via bounded-rate-reflected-jump-diffusion-wellposedness, continuous-half-line-lyapunov-geometric-ergodicity, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Field — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Filtration of σ-algebras — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale, poisson-compensation-formula, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale
+- Finite set — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Finite signed measure — via cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity
+- Finite-activity reflected jump-diffusion on the half-line — via bounded-rate-reflected-jump-diffusion-wellposedness
+- Function between sets — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Function of bounded variation on an interval — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, local-doob-meyer-cadlag-supermartingale, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale
+- Group — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Hausdorff topological space — via poisson-point-process
+- Independent family of random variables — via bounded-rate-reflected-jump-diffusion-wellposedness, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, two-rank-based-levy-particles
+- Independent σ-algebras — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion, two-rank-based-levy-particles
+- Indicator function of a subset — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale
+- Intensity of a counting process — via bounded-rate-reflected-jump-diffusion-wellposedness
+- Intersection of a family of sets — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Invariant probability for a Markov semigroup — via continuous-half-line-lyapunov-geometric-ergodicity
+- Itô integral with respect to Brownian motion — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Least upper bound in a partially ordered set — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Lebesgue Lᵖ space — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Lebesgue integral — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale
+- Lebesgue measure on Euclidean space — via bounded-rate-reflected-jump-diffusion-wellposedness, continuous-half-line-lyapunov-geometric-ergodicity, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Lebesgue positivity of every positive-time half-line transition — via continuous-half-line-lyapunov-geometric-ergodicity, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Lebesgue–Stieltjes integral for a càdlàg path of locally bounded variation — via cadlag-c2-ito-formula
+- Limit inferior of a real or extended-real sequence — via fatou-lemma
+- Limit of a function between metric spaces — via cadlag-c2-ito-formula, mollifier
+- Limit of a real function at a point — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Limit of a real sequence — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Lipschitz map between metric spaces — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Local martingale — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, tanaka-absolute-value-continuous-semimartingale
+- Locally compact Hausdorff space — via poisson-point-process
+- Locally finite point configuration — via poisson-point-process
+- Lévy process — via two-rank-based-levy-particles
+- Markov transition semigroup — via bounded-rate-reflected-jump-diffusion-wellposedness, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, ordered-cadlag-markov-path-coupling, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Matrix over a ring — via two-rank-based-levy-particles
+- Measurable map between measurable spaces — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Measurable simple real function — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale
+- Measurable space — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Measure — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Metric space — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Modulus of a complex number — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Natural logarithm — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Natural number — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Nonnegative real square root — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, mollifier, positive-transitions-lipschitz-reflected-half-line-diffusion, two-rank-based-levy-particles
+- Normal distribution — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Normed vector space — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Open interval in the real line — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Ordered field — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Ordered pair — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Partial derivative in Euclidean coordinates — via cadlag-c2-ito-formula, mollifier
+- Partial order — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Point process — via poisson-point-process
+- Poisson distribution — via poisson-compensation-formula, poisson-point-process
+- Poisson random measure — via poisson-compensation-formula
+- Positive definite real matrix — via two-rank-based-levy-particles
+- Predictable stochastic process — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, local-doob-meyer-cadlag-supermartingale, poisson-compensation-formula, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale
+- Preimage of a subset under a function — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Probability kernel between measurable spaces — via bounded-rate-reflected-jump-diffusion-wellposedness
+- Probability space — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Product measure — via poisson-compensation-formula
+- Quadratic covariation of càdlàg semimartingales — via cadlag-c2-ito-formula
+- Radon measure on a locally compact Hausdorff space — via poisson-point-process
+- Real exponential function — via bounded-rate-reflected-jump-diffusion-wellposedness, continuous-half-line-lyapunov-geometric-ergodicity, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Real number — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Real power of a positive real number — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Real sequence — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Real sine function — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Real-valued random variable — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Reflected Itô diffusion on the positive half-line — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Sequence in a set — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Set — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Smooth map between open Euclidean sets — via mollifier
+- Standard Brownian motion — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Stochastic domination of Markov semigroups on the half-line — via ordered-cadlag-markov-path-coupling
+- Stochastic integral of a predictable process against a semimartingale — via cadlag-c2-ito-formula, tanaka-absolute-value-continuous-semimartingale
+- Stochastic process — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale, poisson-compensation-formula, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Stochastically monotone Markov semigroup on the half-line — via ordered-cadlag-markov-path-coupling
+- Stopping time for a filtration — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale, tanaka-absolute-value-continuous-semimartingale
+- Strong Markov process — via bounded-rate-reflected-jump-diffusion-wellposedness, continuous-half-line-lyapunov-geometric-ergodicity, generator-foster-lyapunov-condition
+- Subset — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Sum of a nonnegative series — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Support of a function — via mollifier
+- Symmetric matrix — via two-rank-based-levy-particles
+- Topological space — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, continuous-half-line-lyapunov-geometric-ergodicity, local-doob-meyer-cadlag-supermartingale, mollifier, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale
+- Total order — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Union of a family of sets — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- Usual conditions for a filtration — via continuous-half-line-lyapunov-geometric-ergodicity, local-doob-meyer-cadlag-supermartingale, optional-sampling-nonnegative-cadlag-supermartingale
+- Usual stochastic order for finite measures on the real line — via ordered-cadlag-markov-path-coupling
+- V-uniform ergodicity of a continuous-time Markov process — via continuous-half-line-lyapunov-geometric-ergodicity
+- Vague convergence of Radon measures — via poisson-point-process
+- Vector space — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- Weak Feller Markov semigroup — via bounded-rate-reflected-jump-diffusion-wellposedness, continuous-half-line-lyapunov-geometric-ergodicity
+- Weak convergence of probability measures on a metric space — via bounded-rate-reflected-jump-diffusion-wellposedness
+- Weighted total variation norm of a signed measure — via continuous-half-line-lyapunov-geometric-ergodicity
+- π — via bounded-rate-reflected-jump-diffusion-wellposedness, positive-transitions-lipschitz-reflected-half-line-diffusion
+- σ-algebra — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- σ-algebra generated by a family of subsets — via bounded-rate-reflected-jump-diffusion-wellposedness, cadlag-c2-ito-formula, conditional-expectation-tower-property, continuous-half-line-lyapunov-geometric-ergodicity, dominated-convergence-theorem, fatou-lemma, generator-foster-lyapunov-condition, local-doob-meyer-cadlag-supermartingale, mollifier, optional-sampling-nonnegative-cadlag-supermartingale, ordered-cadlag-markov-path-coupling, poisson-compensation-formula, poisson-point-process, positive-transitions-lipschitz-reflected-half-line-diffusion, tanaka-absolute-value-continuous-semimartingale, two-rank-based-levy-particles
+- σ-finite measure — via poisson-compensation-formula
+
+INTRODUCED CONCEPTS (0)
+
+No origin claims recorded; introduction review remains incomplete.
+
+LOCATED CONCEPTS (31)
+
+1. Finite-activity reflected jump-diffusion on the half-line
+   A half-line reflected diffusion with coefficients g,σ is pieced together with jumps having a state-dependent finite destination measure ν_x: while at x, jumps occur at rate ν_x([0,∞)) and land with normalized law ν_x/ν_x([0,∞)), when this rate is positive. Bounded jump rates ensure no finite-time accumulation; the zero-rate case has no jumps.
+   Source: relies_on, §2
+   Note: The source works with the standard pieced-out reflected jump process; no origin claim.
+
+2. Extended martingale generator of a Markov process
+   A pair of Borel functions (f,Af) belongs to the extended martingale generator of a Markov process X when ∫₀ᵗ|Af(X_s)|ds is locally finite and f(X_t)−f(X₀)−∫₀ᵗAf(X_s)ds is a local martingale under every initial state, using the declared filtration and localization convention.
+   Source: relies_on, §2–§3
+   Note: Generator domain at the reflecting boundary is essential; e^(λx) is not in the ordinary Neumann domain.
+The allowed reset kernel ν_x=δ₀ refutes C₀ preservation, so source reading occurrence must refer to the extended martingale generator. Preserve the existing C₀ concept and its UUID.
+
+3. Geometric Foster–Lyapunov condition for a continuous-time generator
+   For a specified extended generator A of a Markov process, a continuous function V≥1 in its declared domain satisfies a geometric drift condition if AV≤−kV+b1_C for constants k>0,b<∞ and a specified compact or small set C; the domain and small-set convention are part of the chosen route.
+   Source: relies_on, §3
+   Note: The proof of Theorem 3.2 uses a smoothed exponential Lyapunov function.
+
+4. Usual stochastic order for finite measures on the real line
+   For finite positive Borel measures μ and ν of equal mass on ℝ, μ≤_stν means μ([a,∞))≤ν([a,∞)) for every real a; for probabilities this is equivalently domination of expectations of bounded increasing measurable functions.
+   Source: relies_on, §4–§5
+   Note: Ordered destination measures and semigroup laws control coupling.
+
+5. Stochastic domination of Markov semigroups on the half-line
+   A Markov semigroup P_t on [0,∞) is stochastically dominated by Q_t if P_t(x,·)≤_stQ_t(x,·) for every x≥0 and t≥0.
+   Source: relies_on, §5
+   Note: The nonmonotone process is compared with an ordered upper process.
+
+6. Stochastically monotone Markov semigroup on the half-line
+   A Markov transition semigroup P_t on [0,∞) is stochastically monotone if P_t(x,·)≤_stP_t(y,·) whenever x≤y, for every t≥0.
+   Source: relies_on, §4–§5
+   Note: A pathwise ordered process is used for the convergence bound.
+
+7. Weighted total variation norm of a signed measure
+   For a measurable weight V≥1 and a signed measure μ, its weighted variation norm is ‖μ‖_V=sup{|∫f dμ|:f measurable, |f|≤V}, allowing infinity. The convention V=1 is the full total variation norm, twice the usual supremum-over-events distance for differences of probability measures.
+   Source: relies_on, §1.6; §3–§7
+   Note: Weighted variation is stronger than total variation and controls moments.
+
+8. V-uniform ergodicity of a continuous-time Markov process
+   A Markov semigroup P_t is V-uniformly ergodic with rate κ>0 if it has a unique invariant probability π and a finite constant D such that ‖P_t(x,·)−π‖_V≤DV(x)e^(−κt) for all x and t≥0, for a fixed measurable V≥1.
+   Source: relies_on, §3–§7
+   Note: This is the paper’s convergence criterion.
+
+9. Strong Markov process
+   A Markov process whose conditional future after any finite stopping time, given the past through that time, has the transition law started from its state at that stopping time.
+   Source: relies_on, §2 and proof of Theorem 5.2
+   Note: Post-coupling laws are identified using the strong Markov framework.
+
+10. Fatou’s lemma
+   For nonnegative measurable functions f_n on a measure space, ∫liminf_n f_n≤liminf_n∫f_n, allowing∞.
+   Source: relies_on, Remark 3; proof of Theorems 4.3 and 5.2
+   Note: Used to pass from nonnegative local supermartingales to supermartingales.
+
+11. Two rank-based finite-activity Lévy particles
+   Two real particles are driven by the upper and lower coordinates of a two-dimensional Lévy process with finite jump measure, drift vector (g₊,g₋) and positive definite covariance: the particle currently ranked higher uses the upper driver and the lower-ranked particle uses the lower driver, with a declared rule resolving ties. The ranked gap is the difference of their ordered positions.
+   Source: relies_on, §7
+   Note: Rank-based Lévy systems are inherited model vocabulary; the paper broadens correlations and jump laws.
+
+12. Lebesgue dominated convergence theorem
+   If measurable fₙ converge almost everywhere to f and |fₙ|≤g for an integrable g, then f is integrable and ∫|fₙ−f|→0; consequently their integrals converge.
+   Source: relies_on, Theorem 7.2 proof
+   Note: Exponential jump moments dominate the tails in the negative-drift argument.
+
+13. Poisson point process
+   A point process with intensity measure λ for which counts in disjoint measurable sets are independent and ξ(A) has Poisson law of mean λ(A) whenever λ(A)<∞.
+   Source: relies_on, Lemma 4.2; §6
+   Note: Shared jump times are Poisson when the total rate is constant.
+
+14. Tower property of conditional expectation
+   For sub-σ-algebras F⊆G and integrable X, E[E[X|G]|F]=E[X|F]; also E[E[X|F]|G]=E[X|F].
+   Source: relies_on, §4–§5
+   Note: The coupling proof uses conditional expectations.
+
+15. Continuous-time supermartingale
+   An integrable adapted process M on a filtered probability space is a supermartingale if E[M_t|F_s]≤M_s almost surely for every s≤t; the term refers to a continuous time parameter and does not require continuous sample paths.
+   Source: relies_on, §4–§5
+   Note: Standard supermartingale background is needed for the newly taught boundary-stopped drift definition; the new definition is not assumed as prior knowledge.
+
+16. Stopped modified Lyapunov function at the origin
+   For a half-line Markov process X and τ₀=inf{t≥0:X_t=0}, a function V≥1 is a stopped modified Lyapunov function with constant k>0 when V(X_(t∧τ₀))+k∫₀^(t∧τ₀)V(X_s)ds is a supermartingale for each initial state.
+   Source: explains, Definition 6
+   Note: Definition taught or adjusted here; this link does not assert original priority.
+
+17. Weighted total variation norm of a signed measure
+   For a measurable weight V≥1 and a signed measure μ, its weighted variation norm is ‖μ‖_V=sup{|∫f dμ|:f measurable, |f|≤V}, allowing infinity. The convention V=1 is the full total variation norm, twice the usual supremum-over-events distance for differences of probability measures.
+   Source: explains, §1.6, (2)
+   Note: Definition taught or adjusted here; this link does not assert original priority.
+
+18. Finite-activity reflected jump-diffusion on the half-line
+   A half-line reflected diffusion with coefficients g,σ is pieced together with jumps having a state-dependent finite destination measure ν_x: while at x, jumps occur at rate ν_x([0,∞)) and land with normalized law ν_x/ν_x([0,∞)), when this rate is positive. Bounded jump rates ensure no finite-time accumulation; the zero-rate case has no jumps.
+   Source: explains, §2
+   Note: Definition taught or adjusted here; this link does not assert original priority.
+
+19. Weak Feller Markov semigroup
+   A Markov transition semigroup P_t on a metric state space is weak Feller if P_tf is bounded and continuous for every bounded continuous real function f and every t≥0. This condition does not assert preservation of functions vanishing at infinity.
+   Source: relies_on, §2, Proposition 2.1; §3.1
+   Note: The paper’s Feller-continuity convention must allow bounded-rate reset-to-zero jumps, which preserve bounded continuous functions but need not preserve C₀.
+
+20. Well-posedness of bounded-rate reflected jump-diffusions on the half-line
+   Suppose g and σ are globally Lipschitz on [0,∞), inf σ>0, and ν_x are finite positive Borel destination measures such that x↦∫f dν_x is continuous for every bounded continuous f and sup_xν_x([0,∞))<∞. Piecing out reflected diffusions with jump measure ν_x yields a unique-in-law nonexplosive weak Feller strong Markov family. Its extended generator on bounded C² test functions with f′(0)=0 is Af(x)=g(x)f′(x)+σ(x)²f″(x)/2+∫(f(y)−f(x))dν_x(y).
+   Source: relies_on, §2, Definition 1 and Proposition 2.1
+   Note: Imported reflected-SDE and piecing-out existence/Feller-generator assertions, explicitly credited to Skorohod [36] and Sawyer [34]. Their exact proof routes remain unreviewed.
+
+21. Stopped modified Lyapunov function at the origin
+   For a half-line Markov process X and τ₀=inf{t≥0:X_t=0}, a function V≥1 is a stopped modified Lyapunov function with constant k>0 when V(X_(t∧τ₀))+k∫₀^(t∧τ₀)V(X_s)ds is a supermartingale for each initial state.
+   Source: discusses, Definition6(32), Theorems4.1(a)/(33),5.2(a)/(40); proof(43)–(50)
+   Note: The printed exact-prefactor weighted contraction is refuted even by reflected Brownian motion, despite this stopped Lyapunov condition holding exactly. main-contraction-counterexample.txt records full source-hypothesis and small-time test, independently checked byFA. The false theorem UUID is retired without equivalent replacement; no asymptotic ergodicity refutation follows.
+
+22. Ordered coupling of càdlàg half-line Markov paths
+   Let X,Y be time-homogeneous càdlàg Markov families on[0,∞) with transition semigroups P,Q, such that P_t(x,·)≤stQ_t(y,·) whenever x≤y and t≥0. For every x≤y there is a coupling of their whole path laws started at x,y with X_t≤Y_t for every t≥0 almost surely. In particular this holds for two ordered initial states of one stochastically monotone family, or when P is stochastically dominated by a monotone Q. This path-law assertion alone makes no claim that the coordinates are Markov or martingales in their common enlarged filtration.
+   Source: relies_on, §4.1 Remark2; §5 proof(44), citing Kamae–Krengel–O’Brien[17]
+   Note: Actual stochastic-order/pathwise-coupling background. The qualified cadlag path-law theorem is established separately; it does not justify optional stopping in an arbitrary coupling filtration. The refuted exact-prefactor contraction remains historical.
+
+23. Geometric ergodicity from a half-line Lyapunov drift and positive transitions
+   Let a nonexplosive càdlàg weak Feller strong Markov family on[0,∞), with usual filtration, have positive transition probabilities to every Lebesgue-positive Borel set at every positive time. Suppose a continuous V≥1, k>0, b<∞ and compact C satisfy that V(X_t)−V(X₀)−∫₀ᵗ[−kV(X_s)+b1_C(X_s)]ds is a local supermartingale from every initial state. Then there is a unique invariant probability pi with pi(V)<∞ and constants D,rho>0 such that ‖P_t(x,·)−pi‖V≤D V(x)e^(−rho t) for every x,t. No equality rho=k or special explicit prefactor is asserted.
+   Source: relies_on, §3.1 Proposition3.1; §3.2 proof of Theorem3.2, citing[33]
+   Note: Actual Lyapunov-to-ergodicity input. This theorem promises existence of a positive exponential rate and finite invariant V moment, not the source’s separately refuted exact prefactor/rate assertion.
+
+24. Lebesgue positivity of every positive-time half-line transition
+   A Markov transition semigroup on[0,∞) is positive with respect to Lebesgue measure at every positive time if P_t(x,B)>0 for every t>0, x≥0 and Borel B of positive Lebesgue measure. This is the assigned source’s total irreducibility convention, stronger than irreducibility of an occupation or resolvent kernel.
+   Source: explains, §3.1 Definition4
+   Note: Exact source total irreducibility is positive fixed-time transition mass for every Lebesgue-positive set; not merely averaged-time irreducibility.
+
+25. Positive transitions of a Lipschitz reflected half-line diffusion
+   Let the reflected half-line diffusion have globally Lipschitz drift g and diffusion coefficient sigma with inf sigma>0. For every t>0, initial x≥0 and Borel set B⊆[0,∞) of positive Lebesgue measure, P_x(X_t∈B)>0.
+   Source: relies_on, §3Theorem3.2proof,citingBudhiraja–Lee[7]Lemma5.7
+   Note: Actual borrowed transition positivity input. Existing occupation-time/elliptic-kernel proofs are direct proof-only, not recursively followed.
+
+26. Tanaka formula for the absolute value of a continuous semimartingale
+   For a real continuous semimartingale X, there is a continuous nonnegative nondecreasing process L^0 with L₀^0=0, increasing only when X=0, such that |X_t|=|X₀|+∫₀ᵗsgn(X_s)dX_s+L_t^0, with sgn(0)=0. This L^0 is the symmetric local time of X at0.
+   Source: relies_on, §7Lemma7.1rankedgapargument
+   Note: Actual uncited Tanaka/ranking calculus used to pass from two Brownian rank chambers to reflected gap motion.
+
+27. Mollifier on Euclidean space
+   A nonnegative smooth compactly supported function j on ℝᵈ with integral one. Its scaled kernels j_ε(x)=ε⁻ᵈj(x/ε) produce smooth approximations by convolution.
+   Source: relies_on, §3.2cutoffconstruction(11)–(12)
+   Note: Actual smooth mollifier vocabulary already reviewed; local cutoffphi is a proof device, not a new concept.
+
+28. Exponential ergodicity criterion for a reflected jump-diffusion
+   Let g,sigma be globally Lipschitz on[0,∞), inf sigma>0, and destination measures nu_x be weakly continuous with bounded total mass and sup_x∫exp(lambda0|y−x|)nu_x(dy)<∞ for some lambda0>0. If for some0<lambda<lambda0, limsup_(x→∞)[lambda g(x)+lambda²sigma(x)²/2+∫(exp(lambda(y−x))−1)nu_x(dy)]<0, then the reflected jump-diffusion has a unique invariant probability pi with pi(exp(lambda x))<∞ and is exp(lambda x)-uniformly ergodic at some positive rate.
+   Source: explains, §3Theorem3.2/Lemma3.3
+   Note: Significant valid unspecified-rate exponential ergodicity result; no origin assigned until exact earlier constrained-jump-diffusion comparison is checked.
+
+29. Reflected jump-diffusion representation of a two-rank Lévy gap
+   For two rank-based finite-activity Lévy particles driven in rank order by drift(g_plus,g_minus), positive definite Brownian covariance a and finite joint jump measure Lambda, their ranked gap Z is a reflected jump-diffusion with constant drift g_plus−g_minus, variance a_plusplus+a_minusminus−2a_plusminus, and destination measure nu_z equal to the pushforward of Lambda under (u_plus,u_minus)↦|z+u_plus−u_minus|. The two-particle system is weakly well-posed.
+   Source: explains, §7Lemma7.1
+   Note: Source explains correlated joint-jump rank gap; prior Brownian/independent-jump background is explicit, full priority comparison not certified.
+
+30. Gap ergodicity under negative effective drift for two rank-based Lévy particles
+   For the two-rank finite-activity Lévy system with positive definite Brownian covariance and joint jump measure Lambda, suppose ∫exp(lambda0(|u_plus|+|u_minus|))Lambda(du)<∞ for some lambda0>0 and g_plus−g_minus+∫(u_plus−u_minus)Lambda(du)<0. Then for some lambda>0 the ranked gap is exp(lambda z)-uniformly ergodic and its unique invariant law has finite exp(lambda z) moment.
+   Source: explains, §7Theorem7.2
+   Note: Significant negative-effective-drift gap stability result, with joint-jump dependence retained; no exact prefactor/rate equality inferred.
+
+31. Optional sampling for a nonnegative càdlàg supermartingale
+   On a usual filtration, if X is a nonnegative càdlàg supermartingale and sigma≤tau are bounded stopping times, then E[X_tau|F_sigma]≤X_sigma almost surely. No class-D assumption is needed for this bounded-time nonnegative formulation.
+   Source: relies_on, §4.1Remark3 stopped drift supermartingale
+   Note: Actual bounded-time optional-sampling background. Nonnegative local-supermartingale promotion uses Fatou separately. No optional sampling in arbitrary coupled filtration is inferred.
+
+32. Local Doob–Meyer decomposition of a càdlàg supermartingale
+   On a usual filtration, a real càdlàg supermartingale X has a unique local decomposition X=X₀+N−A, where N is a càdlàg local martingale starting at0 and A is predictable càdlàg nondecreasing starting at0 and locally integrable. This is the local form; a uniformly integrable martingale conclusion requires the corresponding class-D/integrability hypotheses.
+   Source: relies_on, §5Theorem5.2proof(48)–(49)
+   Note: Actual local decomposition used in the inspected exponential-transform argument, distinct from class-D Doob–Meyer. The downstream exact-prefactor claim remains retired; this standard background theorem stays valid.
+
+33. C² Itô formula for a càdlàg semimartingale
+   For a real càdlàg semimartingaleA andf∈C²(ℝ), f(A_t)=f(A_0)+∫_(0,t]f′(A_(s−))dA_s+(1/2)∫_(0,t]f″(A_(s−))d[A]^c_s+Σ_(0<s≤t)[f(A_s)−f(A_(s−))−f′(A_(s−))ΔA_s], where[A]^c is the continuous part of the quadratic variation.
+   Source: relies_on, §2generator; §3exponentialLyapunovproof; §4.3stoppedItoargument
+   Note: Actual Ito/jump compensation background, already used implicitly in generator computations; exact existing identity retained.
+
+34. Compensation formula for Poisson random measures
+   If N has intensity dt·ν(dz), then for every nonnegative predictable H, E∫H(t,z)N(dt,dz)=E∫H(t,z)dtν(dz). The predictable hypothesis refers to a filtration in which future Poisson increments are independent of the past.
+   Source: relies_on, §2generator; §3exponentialLyapunovproof; §4.3stoppedItoargument
+   Note: Actual Ito/jump compensation background, already used implicitly in generator computations; exact existing identity retained.
+
+ADDITIONAL PREREQUISITES (128)
+
+- Abelian group [definition]: A group whose operation is commutative.
+- Adapted stochastic process [definition]: A process X_t is adapted to a filtration(F_t) if each X_t is F_t-measurable.
+- Almost-everywhere convergence of measurable functions [definition]: Measurable functions fₙ converge almost everywhere to f if the pointwise limit fₙ(x)→f(x) holds outside a measurable null set.
+- Almost-everywhere property on a measure space [definition]: A property holds almost everywhere if the set where it fails is contained in a measurable set of measure zero.
+- Almost-sure convergence of real random variables [definition]: Xₙ→X almost surely means P({ω:limₙXₙ(ω)=X(ω)})=1.
+- Bijection between sets [definition]: A function for which each element of the codomain is the image of exactly one element of the domain.
+- Binary operation on a set [definition]: A function S×S→S.
+- Binary relation on a set [definition]: A subset R⊆S×S; writing xRy means (x,y)∈R.
+- Borel σ-algebra of a topological space [definition]: The σ-algebra generated by the open subsets of the space.
+- Borel σ-algebra on the real line [definition]: The σ-algebra on ℝ generated by the open intervals.
+- C^k map between Euclidean open sets [definition]: For a finite integer k≥0, a map between open Euclidean sets is C^k if all component partial derivatives of total order at most k exist and are continuous; order zero is the component itself, so C^0 means continuous. A map is C^∞ when it is C^k for every finite k.
+- Cartesian product of sets [definition]: A×B is the set of ordered pairs (a,b) with a∈A and b∈B.
+- Closure of a subset of a topological space [definition]: The closure of A is the intersection of all closed subsets containing A; a set is closed when its complement is open.
+- Commutative ring with identity [definition]: An abelian group under addition, together with an associative commutative multiplication with identity, distributing over addition. The zero ring is allowed.
+- Compact topological space [definition]: A topological space in which every open cover has a finite subcover.
+- Compactly supported smooth test function on an open Euclidean set [definition]: A smooth function on an open Ω⊂ℝⁿ whose support is a compact subset of Ω; these form C_c^∞(Ω).
+- Compensator of a counting process [definition]: For an adapted càdlàg counting process N with N₀=0, a predictable increasing process A with A₀=0 is a compensator when N−A is a local martingale; the ambient filtration is part of the data.
+- Complement of a subset [definition]: For A⊆Ω, its complement Ω∖A consists of the elements of Ω that do not belong to A.
+- Complete measure [definition]: A measure is complete if every subset of a measurable null set is measurable and has measure zero.
+- Complex number [definition]: A complex number is a pair of real numbers, written a+bi. Addition is componentwise and multiplication is (a+bi)(c+di)=(ac−bd)+(ad+bc)i, so i²=−1.
+- Conditional expectation given a σ-algebra [definition]: For integrable X and a sub-σ-algebra G, E[X|G] is a G-measurable integrable random variable satisfying ∫_AE[X|G]dP=∫_AXdP for every A∈G, defined up to almost-sure equality.
+- Continuous local martingale [definition]: A continuous adapted process M_t for which stopping times T_n↑∞ almost surely exist such that M_{t∧T_n} is a martingale for every n.
+- Continuous map between topological spaces [definition]: A map is continuous if the preimage of every open subset of its target is open in its domain.
+- Continuous semimartingale [definition]: A continuous adapted process expressible as M+A where M is a continuous local martingale and A is an adapted continuous process of finite variation on every bounded time interval.
+- Continuous-time martingale [definition]: An integrable process M_t adapted to a filtration F_t, t≥0, with E[M_t|F_s]=M_s almost surely whenever s≤t. Right-continuity of paths is an additional regularity condition when needed.
+- Convergence in probability [definition]: Random variables X_n converge in probability to X if P(|X_n−X|>ε)→0 for every ε>0; metric-valued variables use their metric in place of absolute difference.
+- Convergence of a sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) converges to x∈X if for every ε>0 there is N such that d(xₙ,x)<ε whenever n≥N.
+- Convergent real series [definition]: The series ∑ₙ≥1aₙ converges to S if its sequence of partial sums converges to S.
+- Càdlàg path [definition]: A path from a real time interval into a metric space that is right-continuous and has a left limit at every positive time.
+- Càdlàg semimartingale [definition]: A real adapted càdlàg process X is a semimartingale if it can locally be written as X=X₀+M+A, where M is a local martingale starting at0 and A is an adapted càdlàg process of locally finite variation starting at0.
+- Derivative of a real function [definition]: The derivative f′(x) is the finite limit of (f(x+h)−f(x))/h as h→0, when it exists. Higher derivatives are defined by iteration.
+- Disjoint sets [definition]: Two sets are disjoint when they have no common element; a family is pairwise disjoint when every two distinct members are disjoint.
+- Equivalence class [definition]: For an equivalence relation ~ on X, [x]={y∈X:y~x}; the quotient set X/~ consists of these classes.
+- Equivalence relation [definition]: A reflexive, symmetric and transitive binary relation.
+- Essential supremum of a measurable real function [definition]: The infimum of real a for which f≤a almost everywhere, allowing infinite values when no finite bound exists.
+- Euclidean space ℝᵈ [definition]: For d≥1, ℝᵈ consists of d-tuples of real numbers with distance dist(x,y)=(∑ᵢ(xᵢ−yᵢ)²)¹ᐟ².
+- Expectation of an integrable real random variable [definition]: If E abs(X)=∫abs(X)dP<∞, the expectation of X is EX=∫X dP.
+- Exponential distribution [definition]: The nonnegative distribution with survival function P(T>t)=exp(−rt), t≥0, for rate r>0; its mean is 1/r.
+- Extended nonnegative real numbers [definition]: The nonnegative real numbers together with a greatest element ∞. Sums involving ∞ equal ∞, and 0·∞ is taken to be 0 when integrating simple functions.
+- Extended real line [definition]: The ordered set ℝ∪{−∞,+∞}, with−∞<r<+∞ for every real r.
+- Factorial [definition]: For n≥1, n!=1·2···n, and 0!=1.
+- Field [definition]: A commutative ring in which 1≠0 and every nonzero element is invertible.
+- Filtration of σ-algebras [definition]: An increasing family (F_t) of sub-σ-algebras on a fixed probability space, indexed by ordered time: F_s⊆F_t for s≤t.
+- Finite set [definition]: A set X is finite if it is bijective with {1,…,n} for some natural number n≥0; its cardinality is n.
+- Finite signed measure [definition]: A differenceµ=µ₁−µ₂ of two finite positive measures on the sameσ-algebra. It is real-valued and countably additive.
+- Function between sets [definition]: An assignment taking each element of a specified domain set to exactly one element of a specified codomain set.
+- Function of bounded variation on an interval [definition]: A real function f has bounded variation on [a,b] if sup∑_i|f(t_i)−f(t_{i−1})| over finite ordered partitions is finite. Vector-valued paths use the corresponding norm.
+- Group [definition]: A set with an associative binary operation, an identity element, and a two-sided inverse for each element.
+- Hausdorff topological space [definition]: A topological space in which any two distinct points have disjoint open neighbourhoods.
+- Independent family of random variables [definition]: For distinct i₁,…,iₖ and Borel A₁,…,Aₖ, independence requires P(⋂ⱼ{Xᵢⱼ∈Aⱼ})=∏ⱼP(Xᵢⱼ∈Aⱼ).
+- Independent σ-algebras [definition]: A family of sub-σ-algebras is independent if the probability of the intersection of events from any finite subfamily equals the product of their probabilities.
+- Indicator function of a subset [definition]: For A⊆Ω, the real function 1_A is 1 on A and 0 on its complement.
+- Intensity of a counting process [definition]: A nonnegative predictable process λ is an intensity for a counting process N when its compensator is A_t=∫₀ᵗλ_s ds, relative to the specified filtration.
+- Intersection of a family of sets [definition]: Inside a specified ambient set, the elements belonging to every member of the family.
+- Invariant probability for a Markov semigroup [definition]: A probability measure μ is invariant for a Markov transition semigroup P_t if ∫P_tf,dμ=∫f,dμ for every bounded measurable f and every t≥0.
+- Itô integral with respect to Brownian motion [definition]: For an adapted process H with E∫₀ᵀ|H_s|²ds<∞, ∫H_s dB_s is the L² limit of left-endpoint adapted step-process sums. Localization extends the definition to locally square-integrable integrands.
+- Least upper bound in a partially ordered set [definition]: For A⊆P, its least upper bound is an upper bound s satisfying s≤b for every upper bound b of A, when such an s exists.
+- Lebesgue Lᵖ space [definition]: For a measure space and 1≤p<∞, Lᵖ consists of measurable scalar functions modulo equality almost everywhere with ∫|f|ᵖ<∞, normed by (∫|f|ᵖ)¹ᐟᵖ. For p=∞ use the essential-supremum norm.
+- Lebesgue integral [definition]: For measurable f≥0, ∫f dμ is the supremum of integrals of nonnegative simple functions below f. For signed f with ∫abs(f)dμ<∞, define ∫f=∫f⁺−∫f⁻.
+- Lebesgue measure on Euclidean space [definition]: The completion of the Borel measure on ℝⁿ assigning each rectangular box the product of its side lengths.
+- Lebesgue–Stieltjes integral for a càdlàg path of locally bounded variation [construction]: A real càdlàg path B of locally bounded variation determines a locally finite signed Stieltjes measure dB by dB((s,t])=B_t−B_s; ∫f dB denotes integration against that signed measure whenever f is integrable with respect to its total variation.
+- Limit inferior of a real or extended-real sequence [definition]: For a sequence (a_n) of real or extended real numbers, liminf a_n=sup_N inf_{n≥N}a_n, a value in the extended real line [−∞,∞].
+- Limit of a function between metric spaces [definition]: For f defined near an accumulation point a of a metric space, lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<d(x,a)<δ implies d(f(x),L)<ε.
+- Limit of a real function at a point [definition]: The relation lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<|x−a|<δ in the domain implies |f(x)−L|<ε.
+- Limit of a real sequence [definition]: A sequence (aₙ) converges to L∈ℝ if for every ε>0 there is N such that n≥N implies abs(aₙ−L)<ε.
+- Lipschitz map between metric spaces [definition]: A map f:(X,d)→(Y,e) is Lipschitz if e(f(x),f(y))≤L d(x,y) for one finite constant L and all x,y∈X.
+- Local martingale [definition]: An adapted càdlàg process M for which stopping times T_n↑∞ almost surely exist such that each stopped process M_{t∧T_n} is a martingale.
+- Locally compact Hausdorff space [definition]: A Hausdorff topological space in which every point has a neighbourhood with compact closure.
+- Locally finite point configuration [definition]: An integer-valued Radon measure ξ=∑_iδ_{x_i} assigning finite mass to every compact set; repeated points may have multiplicity. Configuration space carries the vague topology.
+- Lévy process [definition]: A càdlàg stochastic process starting at zero with stationary independent increments and continuity in probability, taking values in Euclidean space.
+- Markov transition semigroup [definition]: A family of transition kernels P_t(x,A), t≥0, with P₀(x,·)=δ_x and P_{s+t}(x,A)=∫P_t(y,A)P_s(x,dy). Sub-Markov semigroups may lose mass at a cemetery state.
+- Matrix over a ring [definition]: A rectangular array of elements of a ring; addition is entrywise and matrix multiplication uses row-by-column sums.
+- Measurable map between measurable spaces [definition]: A function for which the preimage of each measurable subset of the codomain is measurable in the domain.
+- Measurable simple real function [definition]: A measurable real function with finite range. It can be written as a finite sum ∑ a_i 1_{A_i} with measurable level sets A_i.
+- Measurable space [definition]: A set equipped with a specified σ-algebra of subsets.
+- Measure [definition]: A measure μ maps a σ-algebra to [0,∞], sends ∅ to 0, and satisfies μ(⋃ₙAₙ)=∑ₙμ(Aₙ) for every pairwise disjoint sequence of measurable sets.
+- Metric space [definition]: A set X with a function d:X×X→[0,∞) such that d(x,y)=0 exactly when x=y, d(x,y)=d(y,x), and d(x,z)≤d(x,y)+d(y,z).
+- Modulus of a complex number [definition]: For z=a+bi, its modulus is the nonnegative real number |z|=√(a²+b²).
+- Natural logarithm [definition]: The inverse ln:(0,∞)→ℝ of the real exponential function.
+- Natural number [definition]: One of 0, 1, 2, …; natural numbers count finite collections.
+- Nonnegative real square root [definition]: For t≥0, √t is the unique real number y≥0 satisfying y²=t.
+- Normal distribution [definition]: The real probability distribution N(m,σ²) with density (2πσ²)⁻¹ᐟ²exp(−(x−m)²/(2σ²)) for σ>0; variance zero gives a point mass at m.
+- Normed vector space [definition]: A real or complex vector space X with a function ∥·∥:X→[0,∞) that is positive except at zero, absolutely homogeneous, and subadditive.
+- Open interval in the real line [definition]: For real a<b, the set (a,b)={x∈ℝ:a<x<b}.
+- Ordered field [definition]: A field with a total order preserved by addition, in which the product of two positive elements is positive.
+- Ordered pair [definition]: A pair (x,y) with distinguished first and second entries; (x,y)=(x′,y′) exactly when x=x′ and y=y′.
+- Partial derivative in Euclidean coordinates [definition]: The ith partial derivative of f at x is the derivative at zero of t↦f(x+t e_i), with all other coordinates fixed; vector-valued maps are differentiated componentwise.
+- Partial order [definition]: A reflexive, antisymmetric and transitive binary relation, usually written ≤.
+- Point process [definition]: A random locally finite point configuration, or equivalently a probability measure on configuration space with its measurable structure generated by counting points in bounded Borel sets.
+- Poisson distribution [definition]: The distribution on nonnegative integers with masses P(N=k)=e⁻ˡλᵏ/k! for λ≥0.
+- Poisson random measure [definition]: An integer-valued random measure N with intensity ν such that N(A) is Poisson with meanν(A) for every finite-intensity measurable set A, and counts on disjoint sets are independent.
+- Positive definite real matrix [definition]: A symmetric real matrix A such that xᵀAx>0 for every nonzero real column vector x.
+- Predictable stochastic process [definition]: A process measurable for the σ-algebra on time×sample space generated by adapted left-continuous processes. This formalizes choosing an integrand from information available just before the integration time.
+- Preimage of a subset under a function [definition]: For f:A→B and E⊆B, f⁻¹(E)={x∈A:f(x)∈E}.
+- Probability kernel between measurable spaces [definition]: A probability kernel from(S,Σ) to(E,ℰ) assigns a probability measure K(s,·) onE to each s∈S, with s↦K(s,A) Σ-measurable for every A∈ℰ. A random probability measure is such a kernel with a probability space as its domain.
+- Probability space [definition]: A probability space is (Ω,𝔽,P), where 𝔽 is a σ-algebra on Ω and P is a measure on 𝔽 with P(Ω)=1.
+- Product measure [construction]: For σ-finite measure spaces, the product measure on the product σ-algebra assigns a measurable rectangle A×B the value μ(A)ν(B); its completion also includes subsets of product-null sets.
+- Quadratic covariation of càdlàg semimartingales [construction]: For real càdlàg semimartingales X,Y, their quadratic covariation is [X,Y]_t=X_tY_t−X₀Y₀−∫₀ᵗX_(s−)dY_s−∫₀ᵗY_(s−)dX_s. Its jumps satisfy Δ[X,Y]_t=ΔX_tΔY_t; [X]=[X,X] is quadratic variation.
+- Radon measure on a locally compact Hausdorff space [definition]: A Borel measure on a locally compact Hausdorff space that is finite on compact sets, outer regular on Borel sets (each has measure equal to the infimum over open supersets) and inner regular on open sets (each has measure equal to the supremum over compact subsets). This is the Folland–Cohn convention; on σ-compact spaces it coincides with compact inner regularity on all Borel sets.
+- Real exponential function [definition]: The real function exp(x)=∑_{n≥0}xⁿ/n!, whose series converges for every real x.
+- Real number [definition]: A real number is an element of a complete ordered field ℝ; completeness means every nonempty subset bounded above has a least upper bound.
+- Real power of a positive real number [definition]: For x>0 and p∈ℝ, define xᵖ=exp(p log x). For p>0 extend by 0ᵖ=0.
+- Real sequence [definition]: A real sequence is a function a:ℕ₊→ℝ, written (aₙ)ₙ≥1.
+- Real sine function [definition]: The sine function is defined by the everywhere convergent power series sin(x)=∑ₖ≥0(−1)ᵏx²ᵏ⁺¹/(2k+1)!.
+- Real-valued random variable [definition]: A real-valued random variable is a measurable map from a probability space to ℝ with its Borel σ-algebra.
+- Reflected Itô diffusion on the positive half-line [definition]: A continuous adapted process Y_t≥0 solves a reflected Itô equation if Y_t=Y₀+∫₀ᵗg(Y_s)ds+∫₀ᵗσ(Y_s)dW_s+L_t, where L is continuous, adapted, nondecreasing, starts at zero and can increase only when Y_t=0.
+- Sequence in a set [definition]: A function from the natural numbers, or the positive natural numbers, to that set.
+- Set [definition]: A collection of distinct elements, regarded as one object.
+- Smooth map between open Euclidean sets [definition]: A map on an open subset of ℝⁿ is smooth if all of its component partial derivatives of every order exist and are continuous.
+- Standard Brownian motion [definition]: A continuous process B_t starting at zero with independent increments and B_t−B_s distributed N(0,t−s) for 0≤s<t. A d-dimensional standard Brownian motion has d independent standard components.
+- Stochastic integral of a predictable process against a semimartingale [construction]: For a real semimartingale X and a predictable locally bounded integrand H, H·X is the canonical stochastic-integral extension of elementary predictable sums ∑H_i(X_(t∧t_(i+1))−X_(t∧t_i)), where H_i is measurable at time t_i; convergence is in probability uniformly on compact time intervals.
+- Stochastic process [definition]: A family (X_t) indexed by a specified time set, with each X_t a measurable map from a probability space into a specified measurable state space. Adaptation, joint measurability and path regularity are additional conditions when required.
+- Stopping time for a filtration [definition]: A random time T taking values in the time index together with infinity, such that {T≤t}∈F_t for every t; by time t one can determine whether T has occurred.
+- Subset [definition]: A⊆B means every element of A is an element of B.
+- Sum of a nonnegative series [definition]: For aₙ≥0, define ∑ₙ≥1aₙ as the supremum of its finite partial sums; the value may be infinite.
+- Support of a function [definition]: The closure in its domain of the set on which a function is nonzero.
+- Symmetric matrix [definition]: A square matrix A equal to its transpose, so aᵢⱼ=aⱼᵢ.
+- Topological space [definition]: A set X with a family τ of subsets, called open sets, containing ∅ and X and closed under arbitrary unions and finite intersections.
+- Total order [definition]: A partial order in which any two elements are comparable.
+- Union of a family of sets [definition]: The set of elements belonging to at least one member of the family.
+- Usual conditions for a filtration [definition]: A filtration on a probability space satisfies the usual conditions if it is right-continuous, F_t=⋂_(s>t)F_s, and F₀ contains every subset of every null set of the ambient probability space.
+- Vague convergence of Radon measures [definition]: On a locally compact Hausdorff space, μ_n converge vaguely to μ if ∫f dμ_n→∫f dμ for every continuous compactly supported real function f.
+- Vector space [definition]: An abelian group with scalar multiplication by a field satisfying a(v+w)=av+aw, (a+b)v=av+bv, (ab)v=a(bv), and 1v=v.
+- Weak convergence of probability measures on a metric space [definition]: Measures μ_n converge weakly to μ if ∫f dμ_n→∫f dμ for every bounded continuous real function f on the space.
+- π [definition]: π is the least positive zero of the real sine function and equals the circumference-to-diameter ratio of a Euclidean circle.
+- σ-algebra [definition]: A σ-algebra on Ω contains Ω and is closed under complements in Ω and countable unions.
+- σ-algebra generated by a family of subsets [definition]: The smallest σ-algebra containing that family, equivalently the intersection of all σ-algebras on the ambient set that contain it.
+- σ-finite measure [definition]: A measure whose whole underlying space is a countable union of measurable sets of finite measure.
+
+CITATIONS
+
+  [1] Rami Atar, Amarjit Budhiraja (2002). Stability Properties of Constrained Jump-Diffusion Processes.
+     Elec. J. Probab. 7 (22), 1-31.
+    Pedagogically necessary: unknown
+
+  [2] Rami Atar, Amarjit Budhiraja, Paul Dupuis (2001). On Positive Recurrence of Constrained Diffusion
+     Processes. Ann. Probab. 29 (2), 979-1000.
+    Pedagogically necessary: unknown
+
+  [3] Dominique Bakry, Patrick Cattiaux, Arnaud Guillin (2008). Rate of Convergence of Ergodic Con-
+     tinuous Markov Processes: Lyapunov versus Poincare. J. Funct. Anal. 254 (3), 727-759.
+    Pedagogically necessary: unknown
+
+  [4] Adrian D. Banner, E. Robert Fernholz, Tomoyuki Ichiba, Ioannis Karatzas, Vassilios Pap-
+     athanakos (2011). Hybrid Atlas Models. Ann. Appl. Probab. 21 (2), 609-644.
+    Pedagogically necessary: unknown
+
+  [5] Adrian D. Banner, E. Robert Fernholz, Ioannis Karatzas (2005) Atlas Models of Equity Markets.
+     Ann. Appl. Probab. 15 (4), 2996-2330.
+    Pedagogically necessary: unknown
+
+  [6] Robert M. Blumenthal, Ronald K. Getoor (1968). Markov Processes and Potential Theory. Pure
+     and Applied Mathematics 29, Academic Press.
+    Pedagogically necessary: unknown
+
+  [7] Amarjit Budhiraja, Chihoon Lee (2007). Long Time Asymptotics for Constrained Diffusions in Poly-
+     hedral Domains. Stoch. Proc. Appl. 117 (8), 10141036.
+    Pedagogically necessary: unknown
+
+  [8] Sourav Chatterjee, Soumik Pal (2010). A Phase Transition Behavior for Brownian Motions Interacting
+     Through Their Ranks. Probab. Th. Rel. Fields 147 (1), 123-159.
+    Pedagogically necessary: unknown
+
+  [9] Hong Chen, David D. Yao (2001). Fundamentals of Queueing Networks. Applications of Mathematics
+     46, Springer.
+    Pedagogically necessary: unknown
+
+  [10] P. Laurie Davies (1986). Rates of Convergence to the Stationary Distribution for k-Dimensional Diffusion
+     Processes. J. Appl. Probab. 23 (2), 370-384.
+    Pedagogically necessary: unknown
+
+  [11] Douglas Down, Sean P. Meyn, Richard L. Tweedie (1995). Exponential and Uniform Ergodicity of
+     Markov Processes. Ann. Probab. 23 (4), 1671-1691.
+    Pedagogically necessary: unknown
+
+  [12] Paul Dupuis, Ruth J. Williams (1994). Lyapunov Functions for Semimartingale Reflecting Brownian
+     Motions. Ann. Probab. 22 (2), 680-702.
+    Pedagogically necessary: unknown
+
+  [13] E. Robert Fernholz, Ioannis Karatzas (2009) Stochastic Portfolio Theory: An Overview. Handbook
+     of Numerical Analysis: Mathematical Modeling and Numerical Methods in Finance, 89-168. Elsevier.
+    Pedagogically necessary: unknown
+
+  [14] Tomoyuki Ichiba, Soumik Pal, Mykhaylo Shkolnikov (2013). Convergence Rates for Rank-Based
+     Models with Applications to Portfolio Theory. Probab. Th. Rel. Fields 156, 415-448.
+    Pedagogically necessary: unknown
+
+  [15] Benjamin Jourdain, Florent Malrieu (2008). Propagation of Chaos and Poincare Inequalities for a
+     System of Particles Interacting Through Their cdf. Ann. Appl. Probab. 18 (5), 1706-1736.
+    Pedagogically necessary: unknown
+
+  [16] Benjamin Jourdain, Julien Reygner (2015). Capital Distribution and Portfolio Performance in the
+     Mean-Field Atlas Model. Ann. Finance 11 (2), 151-198.
+    Pedagogically necessary: unknown
+
+  [17] Takahiko Kamae, Ulrich Krengel, George L. O’Brien (1977). Stochastic Inequalities on Partially
+     Ordered Spaces. Ann. Probab. 5 (6), 899-912.
+    Pedagogically necessary: unknown
+
+  [18] Offer Kella, Ward Whitt (1990). Diffusion Approximation for Queues with Server Vacations. Adv.
+     Appl. Probab. 22 (3), 706-729.
+    Pedagogically necessary: unknown
+
+  [19] Offer Kella, Ward Whitt (1996). Stability and Structural Properties of Stochastic Storage Networks.
+     J. Appl. Probab. 33 (4), 1169-1180.
+    Pedagogically necessary: unknown
+
+  [20] Harold J. Kushner (2001). Heavy Traffic Analysis of Controlled Queueing and Communication Networks.
+     Applications of Mathematics 47. Springer.
+    Pedagogically necessary: unknown
+
+  [21] Robert B. Lund, Sean P. Meyn, Richard L. Tweedie (1996). Computable Exponential Convergence
+     Rates for Stochastically Ordered Markov Processes. Ann. Appl. Probab. 6 (1), 218-237.
+    Pedagogically necessary: unknown
+
+  [22] Robert B. Lund, Richard L. Tweedie (1996). Geometric Convergence Rates for Stochastically Ordered
+     Markov Chains. Math. Oper. Res. 21 (1), 182-194.
+    Pedagogically necessary: unknown
+
+  [23] Ravi R. Mazumdar, Francisco J. Piera (2008). Comparison Results for Reflected Jump-Diffusions
+     in the Orthant with Variable Reflection Directions and Stability Applications. Elec. J. Probab. 13 (61),
+     1886-1908.
+    Pedagogically necessary: unknown
+
+  [24] Sean P. Meyn, Richard L. Tweedie (2009). Markov Chains and Stochastic Stability. Cambridge Uni-
+     versity Press.
+    Pedagogically necessary: unknown
+
+  [25] Sean P. Meyn, Richard L. Tweedie (1993). Stability of Markovian Processes II: Continuous-Time
+     Processes and Sampled Chains. Adv. Appl. Probab. 25 (3), 487-517.
+    Pedagogically necessary: unknown
+
+  [26] Sean P. Meyn, Richard L. Tweedie (1993). Stability of Markovian Processes III: Foster-Lyapunov
+     Criteria for Continuous-Time Processes. Adv. Appl. Probab. 25 (3), 518-548.
+    Pedagogically necessary: unknown
+
+  [27] Sean P. Meyn, Richard L. Tweedie (1994). Computable Bounds for Geometric Convergence Rates of
+     Markov Chains. Ann. Appl. Probab. 4 (4), 981-1011.
+    Pedagogically necessary: unknown
+
+  [28] Gareth O. Roberts, Jeffrey S. Rosenthal (1996). Quantitative Bounds for Convergence Rates of
+     Continuous-Time Markov Processes. Elec. J. Probab. 1 (9), 1-21.
+    Pedagogically necessary: unknown
+
+  [29] Gareth O. Roberts, Richard L. Tweedie (1999). Bounds on Regeneration Times and Convergence
+     Rates for Markov Chains. Stoch. Proc. Appl. 80 (2), 211-229.
+    Pedagogically necessary: unknown
+
+  [30] Gareth O. Roberts, Richard L. Tweedie (2000). Rates of Convergence of Stochastically Monotone
+     and Continuous-Time Markov Models. J. Appl. Probab. 37 (2), 359-373.
+    Pedagogically necessary: unknown
+
+  [31] Jeffrey S. Rosenthal (1995). Minorization Conditions and Convergence Rates for Markov Chain Monte
+     Carlo. J. Amer. Stat. Assoc. 90 (430), 558-566.
+    Pedagogically necessary: unknown
+
+  [32] Andrey Sarantsev (2016). Infinite Systems of Competing Brownian Particles. To appear in Ann. Inst.
+     H. Poincare. Available at arXiv:1403.4229.
+    Pedagogically necessary: unknown
+    arxiv: 1403.4229
+
+  [33] Andrey Sarantsev (2016). Reflected Brownian Motion in a Convex Polyhedral Cone: Tail Estimates for
+     the Stationary Distribution. To appear in J. Th. Probab. Available at arXiv:1509.01781.
+    Pedagogically necessary: unknown
+    arxiv: 1509.01781
+
+  [34] Stanley A. Sawyer (1970). A Formula for Semigroups, with an Application to Branching Diffusion
+     Processes. Trans. Amer. Math. Soc. 152 (1), 1-38.
+    Pedagogically necessary: unknown
+
+  [35] Mykhaylo Shkolnikov (2011). Competing Particle Systems Evolving by Interacting Lévy Processes.
+     Ann. Appl. Probab. 21 (5), 1911-1932.
+    Pedagogically necessary: unknown
+
+  [36] Anatoliy V. Skorohod (1961). Stochastic Equations for Diffusion Processes in a Bounded Region. I, II.
+     Th. Probab. Appl. 6 (3), 264-274; 7 (1), 3-23.
+    Pedagogically necessary: unknown
+
+  [37] Ward Whitt (2001). The Reflection Map with Discontinuities. Math. Oper. Res. 26 (3), 447-484.
+    Pedagogically necessary: unknown
+
+  [38] Ward Whitt (2002). Stochastic Process-Limits. Springer.
+    Pedagogically necessary: unknown
+
+  [39] A. I. Zeifman (1991). Some Estimates of the Rate of Convergence for Birth and Death Processes. J. Appl.
+     Probab. 28 (2), 268-277.
+    Pedagogically necessary: unknown
+

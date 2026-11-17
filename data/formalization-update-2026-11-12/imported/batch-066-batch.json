@@ -1,0 +1,613 @@
+{
+  "note": "Whole-catalogue formalization update batch-066: independent source review by analysis_formalization of algebra_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "powell-long-survival-spine-limit",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact killed critical branching-diffusion fixed-window conditional-law limit has not been certified. The theorem needs the model on a bounded C1 domain, its survival asymptotics and additive-martingale spine change of measure, uniformly enough to identify every fixed-horizon event. Generic Brownian laws, PDE first-eigenfunction constructions and martingale density changes do not prove that endpoint. Actual searches for Powell, long-survival, spine/additive branching martingale and killed branching diffusion did not locate a checked complete candidate; this is a bounded unresolved proof frontier, not absence.\nSearch and boundary notes: Inspected native Brownian/Girsanov and PDE Spectrum/DomainMonotonicity comparison candidates: they concern constant-drift Gaussian changes and coercive scalar PDE forms, respectively, not the stated branching genealogy/spine law. Tau-owned candidates are not claimed as standalone Mathlib proofs; no new asymptotic proof developed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "powell-long-survival-spine-limit",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The exact killed critical branching-diffusion fixed-window conditional-law limit has not been certified. The theorem needs the model on a bounded C1 domain, its survival asymptotics and additive-martingale spine change of measure, uniformly enough to identify every fixed-horizon event. Generic Brownian laws, PDE first-eigenfunction constructions and martingale density changes do not prove that endpoint. Actual searches for Powell, long-survival, spine/additive branching martingale and killed branching diffusion did not locate a checked complete candidate; this is a bounded unresolved proof frontier, not absence.\nSearch and boundary notes: Inspected native Brownian/Girsanov and PDE Spectrum/DomainMonotonicity comparison candidates: they concern constant-drift Gaussian changes and coercive scalar PDE forms, respectively, not the stated branching genealogy/spine law. Tau-owned candidates are not claimed as standalone Mathlib proofs; no new asymptotic proof developed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "predictable-process",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/MeasurableSpace/Defs.lean",
+          "declarations": "MeasurableSpace.GenerateMeasurable:320; generateFrom:329; Measurable:492",
+          "note": "Native exact generated-by-processes sigma algebra and measurable-process constructor."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact literal definition can use MeasurableSpace.generateFrom:329 of all sets (uncurry u)⁻¹ B, where u:ℝ≥0→Ω→ℝ is adapted and has left-continuous paths and B is Borel, then Measurable:492 of the target process for this sigma-algebra. GenerateMeasurable:320–326 actually closes exactly this family under complements/countable unions. This generic constructor needs no dedicated alias. The named Filtration.predictable:51 instead uses initial slices and (s,∞)×A; its generators are indicators of adapted LEFT-continuous elementary processes (at s the value is the pre-jump value; the initial slice has vacuous left continuity at0). No right-continuous-process or separate-measurability substitution is made. IsStronglyPredictable:162 uses strong measurability for that named sigma algebra; the exact catalogue measurability predicate above also supports general measurable target spaces without imposing a Banach separability hypothesis.\nSearch and boundary notes: Compared catalogue generated-by-left-continuous definition to exact literal constructor and rectangle indicator convention. Continuous-time index ℝ≥0 includes initial sigma algebra. The standalone named rectangle/strong-predictability file is a checked comparison candidate, but its full left-continuous generator equivalence is not a selected Mathlib proof; primary availability here uses the exact literal generator constructor, so no unproved alias bridge is needed or charged. Strong/ordinary measurability are not identified for arbitrary Banach targets. Exclude stochastic integral, pricing and predictable-measure extra structures.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "predictable-process",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Process/Predictable/Basic.lean",
+          "declarations": "MeasureTheory.Filtration.predictable_eq_generateFrom_elementarySets:158; MeasureTheory.StronglyAdapted.isStronglyPredictable_of_isLeftContinuous:270; MeasureTheory.IsStronglyPredictable.add:54",
+          "note": "Native completed left-continuous adapted generator inclusion, elementary sigma presentation and ordinary predictability closure API."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency literal generateFrom/Measurable constructors are byte-identical; Predictable rectangle/strong definitions D52/163 differ only one header blank. Exact literal definition can use MeasurableSpace.generateFrom:329 of all sets (uncurry u)⁻¹ B, where u:ℝ≥0→Ω→ℝ is adapted and has left-continuous paths and B is Borel, then Measurable:492 of the target process for this sigma-algebra. GenerateMeasurable:320–326 actually closes exactly this family under complements/countable unions. This generic constructor needs no dedicated alias. The named Filtration.predictable:51 instead uses initial slices and (s,∞)×A; its generators are indicators of adapted LEFT-continuous elementary processes (at s the value is the pre-jump value; the initial slice has vacuous left continuity at0). No right-continuous-process or separate-measurability substitution is made. Native Predictable.Basic:158–170 proves bounded elementary rectangles generate the named sigma algebra; :270–282 proves adapted left-continuous processes are strongly predictable by actual left-sampled step approximations and their limits. This verifies the other generator-inclusion direction for real target processes, alongside the elementary indicator dictionary. Ordinary add/const_mul:54/62 and almost-sure left-continuous predictable-version:303 are genuine native API.\nSearch and boundary notes: Read actual leftSample measurability/convergence and stronglyMeasurable_of_tendsto proof, not merely title. Elementary step indicators are left continuous, with initial slice convention explicit. Enumerated Predictable Basic/Measure and Brownian/finance siblings; exclude predictable measure integrals and stochastic integral/finance endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "primitive-polynomial-finite-field",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/AdjoinRoot.lean",
+          "declarations": "AdjoinRoot:55; AdjoinRoot.root:162; AdjoinRoot.instField:615; finrank_quotient_span_eq_natDegree:831",
+          "note": "Native exact residue-field/root constructors and completed power-basis dimension computation in the primitive-polynomial predicate."
+        },
+        {
+          "path": "Mathlib/FieldTheory/Finiteness.lean",
+          "declarations": "Module.card_eq_pow_finrank:92",
+          "note": "Native actual q^s finite-extension cardinality proof."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For finite field K with q elements and supplied monic irreducible p:K[X] of degree s, AdjoinRoot:55 is literally K[X]/(p), root:162 is the residue of X, and instField:615–631 actually supplies its field structure. Use the exact bare predicate AdjoinRoot.root p≠0 AND ∀y:AdjoinRoot p, y≠0→∃n:ℕ,(AdjoinRoot.root p)^n=y (including explicit nonzeroness even over F2, so zero cannot pass merely because zero^0=1; the root really generates the multiplicative group). powerBasisAux:794–810 and finrank_quotient_span_eq_natDegree:831–839, together with Module.card_eq_pow_finrank:92–95, prove the stated q^s cardinality. Irreducibility makes p nonzero and degree positive; no degree-zero or zero-root primitive exception is silently admitted.\nSearch and boundary notes: Inspected actual quotient field and power-basis proofs, not Polynomial.IsPrimitive content. Content primitive explicitly has a different meaning and is excluded. IsPrimitiveRoot/orderOf is an alternative test but the exact all-nonzero-powers predicate avoids an uncertified group/cardinality alias bridge.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "primitive-polynomial-finite-field",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency AdjoinRoot and Finiteness differ only one preceding header blank (quotient55→56,root162→163,field615→616,finrank831→832,card92→93); selected bodies match. For finite field K with q elements and supplied monic irreducible p:K[X] of degree s, AdjoinRoot:55 is literally K[X]/(p), root:162 is the residue of X, and instField:615–631 actually supplies its field structure. Use the exact bare predicate AdjoinRoot.root p≠0 AND ∀y:AdjoinRoot p, y≠0→∃n:ℕ,(AdjoinRoot.root p)^n=y (including explicit nonzeroness even over F2, so zero cannot pass merely because zero^0=1; the root really generates the multiplicative group). powerBasisAux:794–810 and finrank_quotient_span_eq_natDegree:831–839, together with Module.card_eq_pow_finrank:92–95, prove the stated q^s cardinality. Irreducibility makes p nonzero and degree positive; no degree-zero or zero-root primitive exception is silently admitted. Native AdjoinRoot/Finite is an iterated monic-root algebra surjection theorem, not this primitive-polynomial test. RootsOfUnity/PrimitiveRoots.map_eq_pow:82 concerns endomorphisms of already supplied primitive roots; cyclotomic automorphism and ZMod primitive-root search add different structure, so no native polynomial-specific file selected.\nSearch and boundary notes: Enumerated native AdjoinRoot Basic/Finite/Minpoly/Charpoly/Factors, RootsOfUnity/PrimitiveRoots and ZMod/PrimitiveRoot. Read finite-algebra surjection proof and primitive-root power-map statement. Do not allocate parameter-field/automorphism enhancements to the compound polynomial predicate; complete bare definition/cardinality inherited, zero native LOC.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "principal-component-analysis-finite",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Moments/CovarianceBilin.lean",
+          "declarations": "ProbabilityTheory.covarianceBilin:51; covarianceBilin_apply:69; covarianceBilin_self:78",
+          "note": "Native exact covariance and coordinate-variance interface for the construction."
+        },
+        {
+          "path": "Mathlib/Analysis/Matrix/Spectrum.lean",
+          "declarations": "Matrix.IsHermitian.eigenvectorBasis:71; mulVec_eigenvectorBasis:75",
+          "note": "Native actual orthonormal matrix eigenbasis construction."
+        },
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Spectrum.lean",
+          "declarations": "LinearMap.IsSymmetric.eigenvalues_antitone:308",
+          "note": "Native decreasing spectral ordering, required by the principal-coordinate construction."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. CovarianceBilin:51/69/78 is an actual covariance form: its quadratic values are coordinate variances for square-integrable vectors, with the real integral/self identities proved. Matrix.Spectrum.eigenvectorBasis:71/75 constructs an orthonormal eigenbasis of a real symmetric covariance matrix. InnerProductSpace.Spectrum.eigenvalues_antitone:308 proves the eigenvalues are decreasing by actual sortDesc. Thus the ordered principal-coordinate construction is present. The paragraph additionally asserts maximal captured SUM of k coordinate variances among all rank-k orthogonal projections. No completed existing Ky Fan/projection-variance optimization bridge was certified after bounded search, so that endpoint remains explicit rather than inferred from existence of an eigenbasis. Namespace clarification: covarianceBilin and its apply/self lemmas are in ProbabilityTheory (source namespace44), not MeasureTheory.\nSearch and boundary notes: Searched PCA/Ky Fan/largest variance/principal projections/sums of largest eigenvalues. Tau SchurHorn is Tau-owned, not standalone M. Spectral trace or one-vector Rayleigh maximum alone does not certify the all-k projection theorem; no new optimization proof developed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "principal-component-analysis-finite",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Matrix/UnitaryGroup/SchurHorn.lean",
+          "declarations": "Matrix.re_diag_mul_diagonal_mul_star_mem_convexHull:136; Matrix.IsHermitian.range_re_diag_unitary_mul_mul_star:213",
+          "note": "Native completed covariance-matrix diagonal-orbit convexity/permutation description, a substantive optimization component; final rank-k variance frontier explicit."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency gives the checked ordered covariance eigenbasis/variance components (CovarianceBilin/MatrixSpectrum identical; InnerProductSpectrum +1 header). Native SchurHorn.re_diag_mul_diagonal_mul_star_mem_convexHull:136–143 and IsHermitian.range_re_diag_unitary_mul_mul_star:213–230 prove the complete diagonal-orbit convex hull of eigenvalue permutations, via actual squared-entry doubly stochastic calculation:104–133 and an exact spectral conjugation bijection. This is a genuine matrix variance-optimization component. The explicit all-k orthogonal-projection/coordinate-variance dictionary and maximal sum-of-largest-k endpoint remain uncertified; no generic eigenbasis or Schur–Horn title is passed off as that whole conclusion.\nSearch and boundary notes: Enumerated native Spectrum/Eigenvalues/SchurHorn and searched principal component/Ky Fan/largest sum. Exact real case is included in RCLike source; no complex-only hypothesis substitution. Eigenvalue rank stability, interlacing, sample second moments and low-rank approximation are separate endpoints; do not develop a new projection extension/majorization argument in this pass.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "probability-generating-function",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Bochner/SumMeasure.lean",
+          "declarations": "MeasureTheory.integral_countable:179; setIntegral_countable:186",
+          "note": "Native actual expectation/countable singleton-series representation underlying the exact PGF definition and genuine convergence scope."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For measurable A:Ω→ℕ under probability P, use the literal real integral G(s)=∫s^(Aω)dP. On 0≤s≤1 the integrand is measurable and bounded by1, hence integrable. Actual Bochner.SumMeasure.integral_countable:179–185 proves the power series on the law ν=P.map A: ∫s^k dν=Σkν.real{k}s^k, by completed Dirac decomposition and summable-integral transport. The same theorem applies wherever the monomial is integrable (genuine convergent expectation, not totalized integral junk). No named alias is required.\nSearch and boundary notes: Read exact actual countable-integral proof, measured pushforward interpretation and bounded power integrability criterion. Exclude exponential-MGF derivatives/analytic uniqueness as separately enhanced endpoints; no unproved all-complex-domain continuation claimed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "probability-generating-function",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/GeneratingFunction.lean",
+          "declarations": "TauCeti.Probability.pgf:81; pgf_map:114; hasSum_pgf_of_integrable:290; hasSum_pgf:305; pgf_eq_tsum:311; hasFPowerSeriesOnBall_pgf_of_integrable_exp_mul_natCast:317",
+          "note": "Native exact probability generating function, completed expectation/series formulas and actual integrability-controlled extension."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency countable-integral supplier is byte-identical. For measurable A:Ω→ℕ under probability P, use the literal real integral G(s)=∫s^(Aω)dP. On 0≤s≤1 the integrand is measurable and bounded by1, hence integrable. Actual Bochner.SumMeasure.integral_countable:179–185 proves the power series on the law ν=P.map A: ∫s^k dν=Σkν.real{k}s^k, by completed Dirac decomposition and summable-integral transport. The same theorem applies wherever the monomial is integrable (genuine convergent expectation, not totalized integral junk). No named alias is required. Native pgf:81 is exactly that integral; pgf_map:114–117 and hasSum_pgf_of_integrable:290–302/hasSum_pgf:305/pgf_eq_tsum:311 prove the actual law/power-series dictionary. The completed integrability proof:142 bounds norm by1, and hasFPowerSeriesOnBall_pgf_of_integrable_exp_mul_natCast:317–349 extends the series to the genuine exponential-moment radius using summable weighted powers. Native same-file multiplication/derivative API is associated PGF API; no separate application files counted.\nSearch and boundary notes: Enumerated native GeneratingFunction and distribution-specific generating functions. Count generic definition and law/series API only; hypergeometric polynomial and branching applications are separate endpoints. Read actual series proof rather than infer from title or MGF analogy.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "probability-mass-function-finite",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/ProbabilityMassFunction/Basic.lean",
+          "declarations": "PMF:45; PMF.coe_le_one:120; toOuterMeasure_apply_finset:153; toMeasure_apply:225",
+          "note": "Native actual finite probability mass and event-sum law."
+        },
+        {
+          "path": "Mathlib/Probability/ProbabilityMassFunction/Constructions.lean",
+          "declarations": "PMF.ofFintype:203; ofFintype_apply:209",
+          "note": "Native constructor from exactly the finite normalization equation."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. PMF:45 is {p:Ω→ℝ≥0∞ // HasSum p 1}; coe_le_one:120 rules out infinite/out-of-unit-interval values. On finite Ω this is exactly a finite [0,1]-valued mass function. ofFintype:203 constructs it from Σp=1. Basic.toOuterMeasure:137/142/153 and toMeasure_apply:225 prove the event probability is the finite sum over A, with all finite discrete sets measurable. Empty Ω admits no such probability law; no invalid empty-carrier PMF is fabricated.\nSearch and boundary notes: Read subtype normalization, bound, weighted Dirac measure and finite event-sum proof. General PMF supports countable carriers but finite specialization is exact. Exclude other distributions and separately significant coupling algorithms.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "probability-mass-function-finite",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/ProbabilityMassFunction/Finite.lean",
+          "declarations": "PMF.sum_toReal_eq_one:42; PMF.sum_toReal_mul_le:48",
+          "note": "Native finite real-mass normalization and ordinary bounded weighted-sum API."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency PMF Basic bytes match, Constructions +1 header (ofFintype204/210). PMF:45 is {p:Ω→ℝ≥0∞ // HasSum p 1}; coe_le_one:120 rules out infinite/out-of-unit-interval values. On finite Ω this is exactly a finite [0,1]-valued mass function. ofFintype:203 constructs it from Σp=1. Basic.toOuterMeasure:137/142/153 and toMeasure_apply:225 prove the event probability is the finite sum over A, with all finite discrete sets measurable. Empty Ω admits no such probability law; no invalid empty-carrier PMF is fabricated. Native PMF.sum_toReal_eq_one:42–45 explicitly proves the exact real-valued normalization by toReal of the finite ENNReal sum; sum_toReal_mul_le:48–60 proves an ordinary finite weighted-event/expectation bound with the actual M≥0 hypothesis.\nSearch and boundary notes: Enumerated native ProbabilityMassFunction Finite/Marginal. Finite marginal sums are natural adjacent API but not needed for the declared single-carrier mass/event boundary; no sampler, optimal transport or named-distribution endpoint selected.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "prokhorov-theorem-polish",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Prokhorov.lean",
+          "declarations": "MeasureTheory.isCompact_closure_of_isTightMeasureSet:553; isTightMeasureSet_of_isCompact_closure:656",
+          "note": "Native completed tight/relatively weakly compact equivalence, including exact converse hypotheses."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Measure.Prokhorov.isCompact_closure_of_isTightMeasureSet:553–575 proves tight families have weakly compact closure; its actual compact-tail envelope proof was read. isTightMeasureSet_of_isCompact_closure:656–727 proves the converse for second-countable complete metric spaces by finite dense-ball covers and a compact intersection with geometric tail control. A Polish topology supplies a compatible complete metric, so these are exactly both directions here. Probability weak topology is metrizable (LevyProkhorovMetric.instMetrizableSpaceProbabilityMeasure:695–699, actual inducing/homeomorphism proof inspected), and IsCompact.tendsto_subseq:298–301 gives an actual strictly increasing weakly convergent subsequence of a tight sequence in that compact closure.\nSearch and boundary notes: Weak probability topology, rather than vague compact-test topology, is used. Compatible complete metric changes no Borel/weak topology. Sequential compactness and topology metrization are checked prerequisites, not all assigned theorem LOC. No local compactness assumption added.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "prokhorov-theorem-polish",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Measure/Prokhorov.lean",
+          "declarations": "TauCeti.isCompact_closure_of_isTightMeasureSet_of_mass_le:60; isTightMeasureSet_range_of_tendsto:259",
+          "note": "Native direct finite-measure extension and sequential converse of the same tight/weak compactness theorem."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Prokhorov and Topology/Sequences bodies are byte-identical, supplying the complete theorem and subsequence clause. Measure.Prokhorov.isCompact_closure_of_isTightMeasureSet:553–575 proves tight families have weakly compact closure; its actual compact-tail envelope proof was read. isTightMeasureSet_of_isCompact_closure:656–727 proves the converse for second-countable complete metric spaces by finite dense-ball covers and a compact intersection with geometric tail control. A Polish topology supplies a compatible complete metric, so these are exactly both directions here. Probability weak topology is metrizable (LevyProkhorovMetric.instMetrizableSpaceProbabilityMeasure:695–699, actual inducing/homeomorphism proof inspected), and IsCompact.tendsto_subseq:298–301 gives an actual strictly increasing weakly convergent subsequence of a tight sequence in that compact closure. Native Prokhorov.isCompact_closure_of_isTightMeasureSet_of_mass_le:60–80 proves the ordinary bounded-total-mass finite-measure extension by the same tail compactness envelope, and isTightMeasureSet_range_of_tendsto:259–269 directly proves weakly convergent probability sequences on a Polish space are tight, explicitly selecting a compatible complete metric. Both completed proofs were read.\nSearch and boundary notes: Enumerated native Prokhorov, LevyProkhorovMetric and Tight siblings. Include direct same-theorem variant/sequential converse; exclude density domination compactness, optimal transport metrics and isolated compact-test integral applications.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "pure-drift-rewired-cycle-chain",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. A complete existing construction of the RANDOM uniformly cut-cycle arc model and its asserted positive-geometric-length conditional-sum equivalent presentation was not certified. Generic finite stochastic kernels can encode deterministic interior movement/uniform endpoint jumps, but they do not by themselves certify the uniform distinct-cut law, distribution of resulting ordered arc lengths, or the conditioned geometric equivalence. This remains an explicit representation/conditioning frontier, not absence.\nSearch and boundary notes: Searched pure drift, rewired/cut cycles, geometric arcs, conditioned sums and native Markov examples. Actual cycleKernel gives a nearest-neighbor cycle example, not uniform rewiring; native GomoryHu.rewire82 is deterministic cut-tree modification. Geometric law and kernel/matrix definitions were genuinely inspected in059/063; no new combinatorial conditioning proof developed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "pure-drift-rewired-cycle-chain",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. A complete existing construction of the RANDOM uniformly cut-cycle arc model and its asserted positive-geometric-length conditional-sum equivalent presentation was not certified. Generic finite stochastic kernels can encode deterministic interior movement/uniform endpoint jumps, but they do not by themselves certify the uniform distinct-cut law, distribution of resulting ordered arc lengths, or the conditioned geometric equivalence. This remains an explicit representation/conditioning frontier, not absence.\nSearch and boundary notes: Searched pure drift, rewired/cut cycles, geometric arcs, conditioned sums and native Markov examples. Actual cycleKernel gives a nearest-neighbor cycle example, not uniform rewiring; native GomoryHu.rewire82 is deterministic cut-tree modification. Geometric law and kernel/matrix definitions were genuinely inspected in059/063; no new combinatorial conditioning proof developed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "quadratic-covariation",
+      "library": "mathlib",
+      "status": "partial",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean",
+          "declarations": "MeasureTheory.TendstoInMeasure:57; tendstoInMeasure_iff_dist:101",
+          "note": "Native exact in-probability limit relation for partition cross-increment sums."
+        },
+        {
+          "path": "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean",
+          "declarations": "Finset.prod:66, generated Finset.sum",
+          "note": "Native finite mixed-increment sum constructor; no bracket existence inferred."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact partition-limit RELATION is representable: for each t>=0 and EVERY sequence of finite monotone grids with first endpoint0, final endpoint t, all grid values in [0,t], and mesh→0 (no nesting/refinement requirement between successive grids), TendstoInMeasure P (fun n ω=>Σi(X(t_i+1,ω)-X(t_i,ω))*(Y(t_i+1,ω)-Y(t_i,ω))) atTop (V_t). ConvergenceInMeasure:57 is the actual epsilon/event-probability limit predicate and Finset.sum:66 the actual finite-sum constructor. This identifies a supplied covariation candidate without claiming that a limit exists for every continuous semimartingale. The paragraph’s general semimartingale bracket existence/partition-independence implementation remains uncertified after actual search; neither Brownian-only variation nor finite-variation perturbations supplies that general theorem.\nSearch and boundary notes: Checked actual limit epsilon definition and real cross-increment formula. Searched bracket/covariation/continuous semimartingale interfaces; the general existence/uniqueness and arbitrary shrinking deterministic partition comparison remains the scope frontier. This conservative partial includes the exact defining relation, not a theorem assumed as a hypothesis. The defining generic limit quantifies arbitrary shrinking-mesh deterministic partition sequences with endpoints0,t; time-monotonicity within a grid is not nested refinement between grids.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "quadratic-covariation",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/BoundedVariation/QuadraticSums.lean",
+          "declarations": "UniformContinuousOn.tendsto_sum_sub_mul_sub_of_boundedVariationOn:106",
+          "note": "Native completed mixed-increment covariation-zero subcase for continuous/finite-variation paths."
+        },
+        {
+          "path": "TauCeti/Probability/Process/QuadraticVariation.lean",
+          "declarations": "TauCeti.Probability.quadraticSum:44; tendstoInMeasure_quadraticSum_add:96",
+          "note": "Native diagonal mixed-sum constructor and actual in-probability finite-variation perturbation law, with common AE path hypotheses."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency supplies the actual limit/sum relation above (ConvergenceInMeasure unchanged, FinsetDefs+1 header). The exact partition-limit RELATION is representable: for each t>=0 and EVERY sequence of finite monotone grids with first endpoint0, final endpoint t, all grid values in [0,t], and mesh→0 (no nesting/refinement requirement between successive grids), TendstoInMeasure P (fun n ω=>Σi(X(t_i+1,ω)-X(t_i,ω))*(Y(t_i+1,ω)-Y(t_i,ω))) atTop (V_t). ConvergenceInMeasure:57 is the actual epsilon/event-probability limit predicate and Finset.sum:66 the actual finite-sum constructor. This identifies a supplied covariation candidate without claiming that a limit exists for every continuous semimartingale. The paragraph’s general semimartingale bracket existence/partition-independence implementation remains uncertified after actual search; neither Brownian-only variation nor finite-variation perturbations supplies that general theorem. Native BoundedVariation.QuadraticSums.tendsto_sum_sub_mul_sub_of_boundedVariationOn:106–119 genuinely proves the MIXED increment sum tends to0 when one path is uniformly continuous and the other has bounded variation, by actual squeeze from the total-variation bound. Native Process.QuadraticVariation.quadraticSum:44 and tendstoInMeasure_quadraticSum_add:96–125 prove the diagonal-covariation defining sums and invariance of a supplied in-probability quadratic limit under continuous finite-variation perturbation. These are restricted native covariation components, not a constructed general bracket.\nSearch and boundary notes: Read complete mixed-sum squeeze proof and process quadratic perturbation proof. Source explicitly says it does not construct a bracket. Brownian variation, weighted Brownian sums and Ito martingale integration are separately specialized endpoints; do not infer the general semimartingale construction from them. The defining generic limit quantifies arbitrary shrinking-mesh deterministic partition sequences with endpoints0,t; time-monotonicity within a grid is not nested refinement between grids.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "quasi-gibbs-point-process",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The full quasi-Gibbs conditional-inside/outside configuration law interface and increasing-submeasure two-sided density comparison was not certified. The paragraph permits constants depending on region, particle number, approximation level AND outside configuration; finite Gibbs PMFs or a Poisson process alone cannot replace that meaning. Tau-owned native PointProcess/Poisson construction/laws and generic finite Gibbs candidates were compared as external candidates, not standalone Mathlib implementations, but a completed compatible disintegration/energy/reference-measure predicate on the correct configuration restriction was not certified. Representation/file-attribution frontier remains unknown, not mathematical absence.\nSearch and boundary notes: Enumerated native PointProcess Poisson/OccurrenceTime/Marking and searched quasiGibbs/quasi-Gibbs, pair/one-body potentials, inside/outside conditional laws and Dirichlet/PDE candidates. Poisson reference and counting laws are only prerequisites; no automatic promotion from finite hard-core Gibbs or quantum Gibbs states. No new conditional configuration construction developed. Ownership clarification: the enumerated native PointProcess tree belongs to Tau Ceti; no corresponding standalone Mathlib source is claimed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "quasi-gibbs-point-process",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The full quasi-Gibbs conditional-inside/outside configuration law interface and increasing-submeasure two-sided density comparison was not certified. The paragraph permits constants depending on region, particle number, approximation level AND outside configuration; finite Gibbs PMFs or a Poisson process alone cannot replace that meaning. Existing native Poisson point-process construction/laws and finite Gibbs models were searched, but a completed compatible disintegration/energy/reference-measure predicate on the correct configuration restriction was not certified. Representation/file-attribution frontier remains unknown, not mathematical absence.\nSearch and boundary notes: Enumerated native PointProcess Poisson/OccurrenceTime/Marking and searched quasiGibbs/quasi-Gibbs, pair/one-body potentials, inside/outside conditional laws and Dirichlet/PDE candidates. Poisson reference and counting laws are only prerequisites; no automatic promotion from finite hard-core Gibbs or quantum Gibbs states. No new conditional configuration construction developed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "quasi-monte-carlo-integration",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean",
+          "declarations": "Finset.prod:66, generated Finset.sum",
+          "note": "Native actual finite quadrature-average constructor, on the supplied deterministic covering point set."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For N>0, supplied deterministic points z:Fin N→[0,1]^s and a measurable integrand f, the quadrature estimate is exactly (N:ℝ)⁻¹*Σi f(z_i). Finset.sum generated at prod:66 gives the actual finite mean operation. The integral over the cube is the target; low-discrepancy/uniform-coverage point choice is a design condition, not an asserted universal error theorem in this method definition. A supplied measurable transformation g with the desired pushed-forward input law simply replaces f(z_i) by f(g(z_i)); no claim about arbitrary target-law realization or an error rate is inferred.\nSearch and boundary notes: Bare method/estimator definition, not Koksma–Hlawka or existence of low-discrepancy constructions. Quantitative star discrepancy or error bounds are not in this paragraph. Explicit N>0 prevents empty-set mean convention replacing the numerical method.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "quasi-monte-carlo-integration",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Convex/FiniteMean.lean",
+          "declarations": "TauCeti.finiteMean:50; finiteMean_eq_inv_smul_sum:56; finiteMean_sub_const:77",
+          "note": "Native exact finite quadrature average and ordinary constant-shift/normal-form API."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency finite-sum constructor differs only +1 header. For N>0, supplied deterministic points z:Fin N→[0,1]^s and a measurable integrand f, the quadrature estimate is exactly (N:ℝ)⁻¹*Σi f(z_i). Finset.sum generated at prod:66 gives the actual finite mean operation. The integral over the cube is the target; low-discrepancy/uniform-coverage point choice is a design condition, not an asserted universal error theorem in this method definition. A supplied measurable transformation g with the desired pushed-forward input law simply replaces f(z_i) by f(g(z_i)); no claim about arbitrary target-law realization or an error rate is inferred. Native finiteMean:50/finiteMean_eq_inv_smul_sum:56–59 is exactly the estimator on the finite family f(z_i), with real scalar specialization; sum_sub_finiteMean:73 and finiteMean_sub_const:77–84 prove ordinary mean/center/constant-shift API. Actual centerMass definition and inversion proof were read.\nSearch and boundary notes: Enumerated finite averaging and discrepancy sources. Count the actual estimator constructor, not IID SampleMean variance or random-coloring discrepancy applications. Supplied points need not be random; no unproved uniform coverage error bound claimed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "quasi-regular-dirichlet-form",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Defs.lean",
+          "declarations": "InnerProductSpace.Core:155; InnerProductSpace.Core.toNormedAddCommGroup:473",
+          "note": "Native actual E1 graph-inner-product norm/uniformity used for the density clauses."
+        },
+        {
+          "path": "Mathlib/Topology/Defs/Basic.lean",
+          "declarations": "Dense:149",
+          "note": "Native exact density predicate instantiated to the NEW E1 topology."
+        },
+        {
+          "path": "Mathlib/Topology/Defs/Filter.lean",
+          "declarations": "ContinuousOn:194",
+          "note": "Native exact continuity-on-nests predicate for the domain representatives."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a SUPPLIED symmetric Dirichlet form E with domain D⊂L²(X,m), construct on D the NEW inner product E1(u,v)=E(u,v)+inner_L2(u,v). InnerProductSpace.Core:155 and toNormedAddCommGroup:473 give exactly the E1 norm/uniformity, not the inherited ambient L² norm. The catalogue is the literal conjunction: (i) an increasing compact sequence F_n with E1-dense union of D_Fn={u∈D|u=0 m-AE outside F_n}; (ii) an E1-dense S⊂D with each u∈S possessing an m-AE representative continuous on every member of some E-nest; (iii) countably many such domain representatives separating all x≠y outside an exceptional N, where N is contained in the complement of the union of an E-nest. Dense:149 and ContinuousOn:194 are exact checked constructors for these predicates. This supplies the bare quasi-regularity definition with actual E1 topology and AE/nest clauses; it asserts no regular representation or associated-process existence theorem.\nSearch and boundary notes: Compared all three clauses, countability, exceptional set and m-AE representative conditions. E is supplied with symmetric Dirichlet/Markov/closedness data; no arbitrary form is declared quasi-regular. The exact generic literal conjunction needs no alias; changing ambient L2 completeness/density for E1 would be wrong. Prior nest/subtype L2-equivalence gap is not invoked: no pullback identification asserted here.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "quasi-regular-dirichlet-form",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency InnerProductSpace.Defs, Topology.Defs.Basic/Filter have identical selected bodies, supplying the complete literal E1-nest/representative/countable-separation predicate. For a SUPPLIED symmetric Dirichlet form E with domain D⊂L²(X,m), construct on D the NEW inner product E1(u,v)=E(u,v)+inner_L2(u,v). InnerProductSpace.Core:155 and toNormedAddCommGroup:473 give exactly the E1 norm/uniformity, not the inherited ambient L² norm. The catalogue is the literal conjunction: (i) an increasing compact sequence F_n with E1-dense union of D_Fn={u∈D|u=0 m-AE outside F_n}; (ii) an E1-dense S⊂D with each u∈S possessing an m-AE representative continuous on every member of some E-nest; (iii) countably many such domain representatives separating all x≠y outside an exceptional N, where N is contained in the complement of the union of an E-nest. Dense:149 and ContinuousOn:194 are exact checked constructors for these predicates. This supplies the bare quasi-regularity definition with actual E1 topology and AE/nest clauses; it asserts no regular representation or associated-process existence theorem. Native PDE energy forms are coercive Sobolev differential-operator forms; generic bilinear polarization is input form API and does not directly implement this three-clause quasi-regularity property. No qualifying native file selected.\nSearch and boundary notes: Enumerated native PDE EnergyForm/Spectrum/DomainMonotonicity, topology/measure and bilinear-form siblings; searched quasiRegular/Dirichlet form/nest. Coercive PDE Dirichlet forms, generic Borel measures and bilinear form identities remain prerequisites or specialized models. No asserted general representation theorem or quasi-homeomorphic L2-domain bridge borrowed from them.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "quasi-regular-form-regular-representation",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The full quasi-homeomorphic regular representation theorem in BOTH directions was not certified. The bare nest/quasi-continuity/quasi-regular predicates can be represented by checked generic constructors, but they do not prove existence of a locally compact separable metric regular image or the converse preservation theorem. Moreover the inspected generic nest-union pullback leaves a genuine original-domain L² identification frontier (a restriction map on union subtypes alone is not an isomorphism of the original whole-space form domains). No completed source resolves that endpoint in this bounded review.\nSearch and boundary notes: Searched quasi-regular/regular-representation/quasi-homeomorphic, compact nests and Dirichlet forms across actual native PDE/MeasureTheory/Topology plus pinned dependencies. Existing Homeomorph/MeasurePreserving and Lp comp constructors are inputs, not a proof of the theorem. Coercive PDE spectrum and Poisson processes are different endpoints; no new representation construction developed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "quasi-regular-form-regular-representation",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The full quasi-homeomorphic regular representation theorem in BOTH directions was not certified. The bare nest/quasi-continuity/quasi-regular predicates can be represented by checked generic constructors, but they do not prove existence of a locally compact separable metric regular image or the converse preservation theorem. Moreover the inspected generic nest-union pullback leaves a genuine original-domain L² identification frontier (a restriction map on union subtypes alone is not an isomorphism of the original whole-space form domains). No completed source resolves that endpoint in this bounded review.\nSearch and boundary notes: Searched quasi-regular/regular-representation/quasi-homeomorphic, compact nests and Dirichlet forms across actual native PDE/MeasureTheory/Topology plus pinned dependencies. Existing Homeomorph/MeasurePreserving and Lp comp constructors are inputs, not a proof of the theorem. Coercive PDE spectrum and Poisson processes are different endpoints; no new representation construction developed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "radon-measure",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Regular.lean",
+          "declarations": "MeasureTheory.Measure.InnerRegular:329; InnerRegularWRT:211; InnerRegularWRT.measure_eq_iSup:219",
+          "note": "Native exact all-Borel compact inner regularity and supremum equivalence."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Typeclasses/Finite.lean",
+          "declarations": "MeasureTheory.IsFiniteMeasureOnCompacts:343; IsCompact.measure_lt_top:347",
+          "note": "Native exact compact-finiteness predicate and ordinary compact-measure API."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For a Hausdorff Borel space, use the exact conjunction Measure.InnerRegular:329 and IsFiniteMeasureOnCompacts:343 (Finite.lean). InnerRegularWRT:211 quantifies ALL Borel sets, and measure_eq_iSup:219–223 actually proves their measure is the supremum over compact subsets. This is exactly the stated Radon convention. Regular:317 adds outer regularity and has only open-set inner regularity as its field; it is not silently substituted for the paragraph’s all-Borel compact approximation. Local finiteness is not imposed in lieu of finite-on-compacts.\nSearch and boundary notes: Read exact quantifiers, topology hypotheses and supremum proof. Radon–Nikodym derivative and convex Radon theorem are unrelated name matches. No unnecessary locally compact/second-countable assumptions added.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "radon-measure",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Measure/Regular.lean",
+          "declarations": "MeasureTheory.Measure.InnerRegularWRT.add:106; MeasureTheory.Measure.AbsolutelyContinuous.innerRegular:247",
+          "note": "Native ordinary inner-regularity addition and finite absolutely-continuous transfer, with actual Borel/R1/finite hypotheses."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Regular and compact-finiteness selected source bytes are identical. For a Hausdorff Borel space, use the exact conjunction Measure.InnerRegular:329 and IsFiniteMeasureOnCompacts:343 (Finite.lean). InnerRegularWRT:211 quantifies ALL Borel sets, and measure_eq_iSup:219–223 actually proves their measure is the supremum over compact subsets. This is exactly the stated Radon convention. Regular:317 adds outer regularity and has only open-set inner regularity as its field; it is not silently substituted for the paragraph’s all-Borel compact approximation. Local finiteness is not imposed in lieu of finite-on-compacts. Native Regular.InnerRegularWRT.add:106–124 proves compact-union inner regularity for sums by actual ENNReal epsilon splitting; with generic finite-on-compacts addition this is ordinary Radon addition API. AbsolutelyContinuous.innerRegular:247–251 transfers all-Borel compact inner regularity to a finite measure under finite/R1/Borel hypotheses, whose compact-finiteness is automatic. Its stronger finite-measure scope is explicit; no unrestricted AC measure is declared Radon.\nSearch and boundary notes: Enumerated native Regular and Typeclasses/Finite/Tight. Count direct all-Borel compact approximation/addition/transfer API; outer-regularity-only instances and specialized tight-curve measures do not replace the Radon definition. No full arbitrary-density Radon transfer without compact-integrability asserted.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "random-closed-set",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Sets/Closeds.lean",
+          "declarations": "TopologicalSpace.Closeds:37",
+          "note": "Native actual closed-set-valued carrier with closedness data."
+        },
+        {
+          "path": "Mathlib/Topology/MetricSpace/HausdorffDistance.lean",
+          "declarations": "Metric.infDist:464; infDist_eq_iInf:467",
+          "note": "Native exact distance-to-nonempty-set function used in the defining measurability tests."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/MeasurableSpace/Defs.lean",
+          "declarations": "Measurable:492",
+          "note": "Native exact all-fixed-points distance measurability predicate."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact bare definition: A:Ω→Closeds X with ∀ω,(Aω).Nonempty, and ∀x:X, Measurable(fun ω=>Metric.infDist x (Aω)). Closeds:37 is actual carrier+closedness, infDist:464/467 is the real minimum-distance infimum, and Measurable:492 is its exact sigma predicate. Nonemptiness is ESSENTIAL because this real distance totalizes the empty set to0; it is explicitly required. Random compactness adds ∀ᵐω,IsCompact(Aω). On the supplied metric space these are exactly the paragraph’s chosen distance-measurability convention, without an additional Polish assumption; no stronger Hausdorff-measurable or Fell-sigma equivalence is required.\nSearch and boundary notes: Bare set-valued random object with ALL values nonempty/closed; compact values only almost surely. Metric and probability structures are supplied; the literal defining predicate does not require Polishness. Avoid replacing coordinate-distance measurability by random singletons or Hausdorff convergence.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "random-closed-set",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency Closeds/HausdorffDistance/MeasurableSpace.Defs bytes are identical and supply the exact literal definition. Exact bare definition: A:Ω→Closeds X with ∀ω,(Aω).Nonempty, and ∀x:X, Measurable(fun ω=>Metric.infDist x (Aω)). Closeds:37 is actual carrier+closedness, infDist:464/467 is the real minimum-distance infimum, and Measurable:492 is its exact sigma predicate. Nonemptiness is ESSENTIAL because this real distance totalizes the empty set to0; it is explicitly required. Random compactness adds ∀ᵐω,IsCompact(Aω). On the supplied metric space these are exactly the paragraph’s chosen distance-measurability convention, without an additional Polish assumption; no stronger Hausdorff-measurable or Fell-sigma equivalence is required. Native MetricSpace/Closeds:36/54 gives stronger Hausdorff-convergence distance-separation/hit approximations; HausdorffDistance:24 gives a real/extended-distance dictionary. These concern distance/topology input objects, not a random closed-set measurability map or direct random-set API, and are excluded under the compound-property boundary.\nSearch and boundary notes: Enumerated native topology closed/compact/Hausdorff siblings and searched randomClosed/randomSet/distance measurable set-valued maps. Read actual native distance equivalence and convergence statements. Complete definition inherited; no selected native random-set files, zero native LOC.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "random-k-sat",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Finset/Powerset.lean",
+          "declarations": "Finset.powersetCard:197; mem_powersetCard:201; card_powersetCard:211",
+          "note": "Native actual k-distinct-variable selection and binomial clause-set count."
+        },
+        {
+          "path": "Mathlib/Probability/UniformOn.lean",
+          "declarations": "ProbabilityTheory.uniformOn:60; uniformOn_univ:83; instIsProbabilityMeasure_uniformOn_univ:94",
+          "note": "Native actual finite uniform clause law with correct nonempty support."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Constructions/Pi.lean",
+          "declarations": "MeasureTheory.Measure.pi:210; pi_pi:290; pi_singleton:298; pi.instIsProbabilityMeasure:310",
+          "note": "Native actual independent m-clause product law."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Assume k≤n, necessary for a nonempty uniform clause space. A clause is exactly a pair (S,ε) with S∈(Finset.univ:Finset(Fin n)).powersetCard k and ε:S→Bool. Thus k distinct variables and independent sign choices are retained, with 2^k*C(n,k) clauses by card_powersetCard:211 and finite function/sigma cardinality. UniformOn.univ:83–96 gives actual uniform probability on this finite NONEMPTY type and its singleton count/card formula. Measure.pi:210/pi_pi:290/pi_singleton:298/probability-instance310 gives the law of m independent clauses; the CNF is the conjunction over clauses of the disjunction of their signed literals. No separate SAT syntax alias is required to represent this actual random formula. Empty k=0 produces the single empty clause; k>n has no such uniform model and is excluded explicitly.\nSearch and boundary notes: Read uniform counting-conditioned constructor and probability proof, powerset-card constructors and finite product singleton formula. Signs are functions on S, not ordered duplicates; clause ordering is the independent m-array, as stated. Satisfiability thresholds/algorithms and random hypergraph coloring are separate endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "random-k-sat",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency Powerset and UniformOn bodies identical; Measure.pi selected source +1 header (211/291/299/311). Assume k≤n, necessary for a nonempty uniform clause space. A clause is exactly a pair (S,ε) with S∈(Finset.univ:Finset(Fin n)).powersetCard k and ε:S→Bool. Thus k distinct variables and independent sign choices are retained, with 2^k*C(n,k) clauses by card_powersetCard:211 and finite function/sigma cardinality. UniformOn.univ:83–96 gives actual uniform probability on this finite NONEMPTY type and its singleton count/card formula. Measure.pi:210/pi_pi:290/pi_singleton:298/probability-instance310 gives the law of m independent clauses; the CNF is the conjunction over clauses of the disjunction of their signed literals. No separate SAT syntax alias is required to represent this actual random formula. Empty k=0 produces the single empty clause; k>n has no such uniform model and is excluded explicitly. Native Uniform/Finite specializes the uniform-law input and has natural subset-relabeling laws, but no qualifying native k-SAT clause/formula-specific constructor or immediate API was selected. These parameter-law refinements are excluded from this compound random-formula mapping.\nSearch and boundary notes: Enumerated native uniform finite, random coloring/hypergraph colored and Boolean-related candidates and searched random kSAT/clauses. They do not change the exact checked generic product clause law; no threshold, CNF solver or Poissonized/repeated-variable model substituted. Complete bare construction inherited with zero native LOC.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "random-shift-qmc",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Order/Floor/Defs.lean",
+          "declarations": "Int.fract:264",
+          "note": "Native exact real modulo-one shift constructor."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/Floor.lean",
+          "declarations": "measurable_fract:48; Measurable.fract:55",
+          "note": "Native actual measurability of the transformed point/estimator input."
+        },
+        {
+          "path": "Mathlib/Analysis/Real/OfDigits.lean",
+          "declarations": "Real.ofDigitsTerm:38; summable_ofDigitsTerm:56; ofDigits:67; ofDigits_digits:158; ofDigits_SurjOn:189; continuous_ofDigits:199",
+          "note": "Native complete base-b real digit expansion/evaluation and continuity for the literal digital shift."
+        },
+        {
+          "path": "Mathlib/Probability/Independence/Basic.lean",
+          "declarations": "ProbabilityTheory.indepFun_prod:725; IndepFun.comp",
+          "note": "Native actual measurable transformations preserve independence, supplying independent replicate estimates."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For N>0 deterministic z_i∈[0,1]^s and ONE uniform vector U, define z_i^U(j)=Int.fract(z_i(j)+U(j)), using Floor.Defs.fract:264 and measurable_fract:48; the SAME U is shared by all points, not fresh noise per point. Independent replicate shifts give independent estimators by the actual IndepFun.comp/map independence API on independent product-coordinate noises (indepFun_prod:725). Digital variant: choose base b≥2 and supplied fixed digit expansions a_ijk∈Fin b of each deterministic coordinate, choose a shared independent uniform digit vector δ_jk, add each digit modulo b (no carries), then apply Real.ofDigits:67. summable_ofDigitsTerm:56, ofDigits_nonneg/le_one:70/74, reconstruction:158, surjectivity:189 (including the repeating-last-digit convention for1) and continuity:199–216 are actual completed suppliers. The countable independent uniform digit law exists via infinitePi:354/377 and iIndepFun_infinitePi:124–131. Thus both stated constructions are source-backed; no output-uniformity/unbiasedness/discrepancy theorem beyond the stated independent replicate estimates is claimed.\nSearch and boundary notes: Read actual fract, digit reconstruction/surjectivity/continuity and product-noise independence proofs. Fair finite digits and infinite product probability are checked input-law prerequisites, excluded from mapping; finite estimator mean is the QMC parent. Fixed supplied digit expansions make endpoint/dual-expansion convention explicit; no artificial canonical uniqueness asserted. No error bounds or random pointwise-independent cloud substituted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "random-shift-qmc",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Distributions/Uniform/AddCircle.lean",
+          "declarations": "TauCeti.Probability.map_coe_equivIco_haarAddCircle:35; map_coe_uniformMeasure:44; ProbabilityTheory.HasLaw.equivIco_haarAddCircle:73; HasLaw.coe_uniformMeasure:81",
+          "note": "Native actual uniform random torus shift/real modulo-period chart law presentation, with completed pushforward proofs."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency fract/Floor/OfDigits bodies are identical; Independence.Basic has one later blank, cited indepFun_prod D726. For N>0 deterministic z_i∈[0,1]^s and ONE uniform vector U, define z_i^U(j)=Int.fract(z_i(j)+U(j)), using Floor.Defs.fract:264 and measurable_fract:48; the SAME U is shared by all points, not fresh noise per point. Independent replicate shifts give independent estimators by the actual IndepFun.comp/map independence API on independent product-coordinate noises (indepFun_prod:725). Digital variant: choose base b≥2 and supplied fixed digit expansions a_ijk∈Fin b of each deterministic coordinate, choose a shared independent uniform digit vector δ_jk, add each digit modulo b (no carries), then apply Real.ofDigits:67. summable_ofDigitsTerm:56, ofDigits_nonneg/le_one:70/74, reconstruction:158, surjectivity:189 (including the repeating-last-digit convention for1) and continuity:199–216 are actual completed suppliers. The countable independent uniform digit law exists via infinitePi:354/377 and iIndepFun_infinitePi:124–131. Thus both stated constructions are source-backed; no output-uniformity/unbiasedness/discrepancy theorem beyond the stated independent replicate estimates is claimed. Native Uniform/AddCircle.map_coe_equivIco_haarAddCircle:35–42 and map_coe_uniformMeasure:44–51 prove the actual torus-Haar/uniform interval chart dictionary, with HasLaw.equivIco_haarAddCircle:73 and coe_uniformMeasure:81 transporting the random shift itself. Torus translation preserves Haar by checked dependency group-action API, so these are the direct real-chart equivalent presentation of the shared modulo-one random shift. Ico/Ioc endpoint seams have equal measure; a uniform law on [0,1] is the same real measure.\nSearch and boundary notes: Enumerated native AddCircle/Uniform Action/Affine and finite averaging siblings. Count the direct random-shift law/chart dictionary; generic averaging and probability parameter infrastructure are prerequisites. Digital transformation supplied by exact pinned dependency OfDigits; no native digital discrepancy or unbiasedness result inferred.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "randomized-stopping-time",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Probability/Process/Stopping.lean",
+          "declarations": "MeasureTheory.IsStoppingTime:74",
+          "note": "Native exact stopping-time sublevel measurability predicate for the enlarged filtration."
+        },
+        {
+          "path": "Mathlib/Probability/Process/Filtration.lean",
+          "declarations": "MeasureTheory.Filtration:51",
+          "note": "Native monotone subsigma filtration constructor, instantiated to the independent product-space enlargement."
+        },
+        {
+          "path": "Mathlib/Probability/Independence/Basic.lean",
+          "declarations": "ProbabilityTheory.indepFun_prod:725",
+          "note": "Native actual independence of original/auxiliary product coordinates, not an assumed correlation-free enlargement."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. On supplied original probability (Ω,P) and an independent auxiliary probability (U,ν), use product P.prod ν and the enlarged filtration G_t=(F_t.comap fst)⊔(aux sigma.comap snd), on Ω×U. Filtration:51 permits exactly this monotone sequence/subsigma construction; product-coordinate independence is actually proved by indepFun_prod:725–734. IsStoppingTime:74 is ∀t,{τ≤t}∈G_t, with τ:Ω×U→WithTop(time). This is exactly a stopping time after adding independent randomization; it does not require τ to have been a stopping time for the original F or restrict τ to a discrete coin.\nSearch and boundary notes: Read precise extended-time stopping definition and product coordinate law proof. The auxiliary sigma algebra is available at all times; natural history and original initial law are supplied separately. No optional-sampling theorem, randomized-time optimization or existence of an optimal stopping rule asserted.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    },
+    {
+      "concept": "randomized-stopping-time",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Probability/Process/Stopping.lean",
+          "declarations": "MeasureTheory.IsStoppingTime.mono_filtration:32",
+          "note": "Native actual stopping-event transport under the primary filtration enlargement operation."
+        }
+      ],
+      "evidence": "Source inspection only, no rebuild. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Filtration/Stopping constructors have +1 header; Independence product proof D726 differs only one earlier doc blank. On supplied original probability (Ω,P) and an independent auxiliary probability (U,ν), use product P.prod ν and the enlarged filtration G_t=(F_t.comap fst)⊔(aux sigma.comap snd), on Ω×U. Filtration:51 permits exactly this monotone sequence/subsigma construction; product-coordinate independence is actually proved by indepFun_prod:725–734. IsStoppingTime:74 is ∀t,{τ≤t}∈G_t, with τ:Ω×U→WithTop(time). This is exactly a stopping time after adding independent randomization; it does not require τ to have been a stopping time for the original F or restrict τ to a discrete coin. Native IsStoppingTime.mono_filtration:32–36 directly proves preservation under filtration enlargement by applying the subsigma inclusion to each actual measurable stopping event. This is an ordinary natural-map operation for exactly the enlarged-filtration construction; no independence condition is inferred from it alone (that condition is supplied by the checked product coordinate law).\nSearch and boundary notes: Enumerated native Process/Stopping, filtered stopping, approximation and countable/continuous stopping siblings. Count direct filtration-enlargement API; deterministic stopped-process path continuity and optional/localized sampling endpoints are separate. Exact independent auxiliary probability remains explicit.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-066.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/FieldTheory/Finiteness.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 106,
+      "sha256": "ec60ab0c58952a9764aa8d59f5842314845db56048000d2f66ee5260a72ca68c",
+      "measured_at": "2026-11-13T05:12:11.920072+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Function/Floor.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 89,
+      "sha256": "97408f719f0c304f93be65617fffb42d99e0b024a637c21009881716b0216364",
+      "measured_at": "2026-11-13T05:12:11.961452+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Integral/Bochner/SumMeasure.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 219,
+      "sha256": "f86b1db2ee1352d994caeb2a3310e5c69fe49c5d499cd9ee0aa6910c49e491dd",
+      "measured_at": "2026-11-13T05:12:11.974283+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Probability/Moments/CovarianceBilin.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 232,
+      "sha256": "47d02dc6f121a43eb1ae79bf267268e43fde0b59b75f90d8c258cc07aa589b81",
+      "measured_at": "2026-11-13T05:12:12.057745+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/AdjoinRoot.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1194,
+      "sha256": "760a4e01f6f77cb8b4a1bb968eed8d829c910ec41f9ebed2e0ed24d93b11cb86",
+      "measured_at": "2026-11-13T05:12:12.142346+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Sets/Closeds.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 535,
+      "sha256": "6076df98856cd3e39ccd760ce8d3f905cc2ef11f3ffe880dac099b7633d47025",
+      "measured_at": "2026-11-13T05:12:12.204069+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/BoundedVariation/QuadraticSums.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 145,
+      "sha256": "65310f1631347e4cd3c2b3bdd36577caec78b05fd175ffec6314fe9c6709f3f6",
+      "measured_at": "2026-11-13T05:12:12.232972+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Convex/FiniteMean.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 93,
+      "sha256": "a5df15bd1867c9054a045a5e0803d92db8a7c4af0a8f7f2273b8e30f2a9df449",
+      "measured_at": "2026-11-13T05:12:12.259932+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Matrix/UnitaryGroup/SchurHorn.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 305,
+      "sha256": "f6ec29b619f6893be071fc645d47575e4a08f5025ada4f5f49d95abd1dc6b5c1",
+      "measured_at": "2026-11-13T05:12:12.286494+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Measure/Regular.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 291,
+      "sha256": "72e5d58214c23ba267ec41fda3e4e29230b8ba236af0b062bd429c6764abf5b6",
+      "measured_at": "2026-11-13T05:12:12.327739+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Distributions/Uniform/AddCircle.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 87,
+      "sha256": "ce502f43990d379eca048726dd74b10fae310052deb10dd0aec3e18c51df98b8",
+      "measured_at": "2026-11-13T05:12:12.342334+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/GeneratingFunction.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 542,
+      "sha256": "51e1d903cbfcbb08f498441dfda268446eaf9001efc210124436b56bede797f6",
+      "measured_at": "2026-11-13T05:12:12.364674+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/ProbabilityMassFunction/Finite.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 86,
+      "sha256": "efdffd711ec2c52eb0520dd5163289cc706349dc451648e629dbec8dc3c9510f",
+      "measured_at": "2026-11-13T05:12:12.386992+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Process/Predictable/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 343,
+      "sha256": "9e9caedb70e0cfd3dc793f043a40ab9a4c8f7681e805f97cbf221c287bb48d6a",
+      "measured_at": "2026-11-13T05:12:12.408991+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Probability/Process/Stopping.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 122,
+      "sha256": "7e21b1936f1acc61d53f7c909a668093fe49fad172dd3029c5eb2ce66b3c054a",
+      "measured_at": "2026-11-13T05:12:12.449127+00:00"
+    }
+  ]
+}

@@ -1,0 +1,544 @@
+{
+  "batch_id": "batch-000",
+  "author": "algebra_formalization",
+  "reviews": [
+    {
+      "concept": "algebra-module",
+      "concept_id": "a6543e9c-9239-56a7-b40a-cc3a2a785c8a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Module A V (Module/Defs:54), combined with Module k V and IsScalarTower k A V, implements the unital associative algebra action. Algebra/Algebra/Basic:404–426 proves algebra_compatible_smul, algebraMap_smul and commuting scalar actions: a•(c•v)=c•(a•v), exactly k-linearity of the A action. Under k a field V is the required vector space; no finite-dimensional assumption is introduced. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Module/Defs.lean",
+          "declarations": "Module L54; add_smul L74",
+          "note": "Defines unital distributive scalar actions, specialized to the associative algebra A."
+        },
+        {
+          "path": "Mathlib/Algebra/Algebra/Basic.lean",
+          "declarations": "algebra_compatible_smul L404; algebraMap_smul L408; IsScalarTower.to_smulCommClass L419",
+          "note": "Proves compatibility and k-linearity for modules over a k-algebra, completing the concept beyond arbitrary additive modules."
+        }
+      ],
+      "search_notes": "Inspected Module/Defs and Algebra/Algebra/Basic scalar tower section. Exclude module categories, tensor products, and representation-specific applications."
+    },
+    {
+      "concept": "algebra-module",
+      "concept_id": "a6543e9c-9239-56a7-b40a-cc3a2a785c8a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The checked dependency has the identical Module definition and scalar-tower compatibility code. Native Module/Basic:34 proves IsSMulRegular.eq_smul_add_one_sub_smul_iff for arbitrary ring modules; this direct ordinary scalar-action equation law applies to algebra modules, without replacing them with a special representation. Definition and base-field compatibility remain owned by Mathlib. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Module/Basic.lean",
+          "declarations": "IsSMulRegular.eq_smul_add_one_sub_smul_iff L34",
+          "note": "Native ordinary scalar-action equation law; algebra-module definition and k-linearity supplied by dependency. Later braid/quandle application is not itself a new selected endpoint."
+        }
+      ],
+      "search_notes": "Inspected native Module/Basic and Module/Opposite: latter builds right/double-opposite modules, a distinct construction, excluded. Nakayama/Generator modules and graded modules excluded."
+    },
+    {
+      "concept": "algebra-unit",
+      "concept_id": "084646b2-d3ab-5285-a39b-815594ff3551",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Units/Defs:49 bundles val/inv with val_inv and inv_val. IsUnit:364 and isUnit_iff_exists:370 explicitly identify the predicate with a two-sided inverse, matching arbitrary associative algebras without commutativity. The proof constructs the bundle directly from the two equations. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Units/Defs.lean",
+          "declarations": "Units L49; IsUnit L364; isUnit_iff_exists L370",
+          "note": "Defines units and the exact two-sided inverse predicate with elementary unit/inverse API."
+        }
+      ],
+      "search_notes": "Compared bundled/unbundled inverse equations. No determinant or finite-dimensional criterion is required."
+    },
+    {
+      "concept": "algebra-unit",
+      "concept_id": "084646b2-d3ab-5285-a39b-815594ff3551",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency Units/Defs is byte-identical and supplies the definition. Native Units/Basic:57 gives cancellation of a unit conjugation; Ring/Units:41/46 proves the generic equivalences IsUnit(1-ab) iff IsUnit(1-ba), and its plus version. These are direct ordinary unit arithmetic, valid in a ring and hence an associative algebra. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Group/Units/Basic.lean",
+          "declarations": "Units.eq_of_mul_mul_inv_eq_of_commute L57; Units.val_mul_zpow_natCast_mul",
+          "note": "Native unit conjugation and power normal forms; no definition ownership claimed."
+        },
+        {
+          "path": "TauCeti/Algebra/Ring/Units.lean",
+          "declarations": "TauCeti.isUnit_one_sub_mul_comm L41; isUnit_one_add_mul_comm L46",
+          "note": "Native elementary invertibility normal forms in arbitrary rings."
+        }
+      ],
+      "search_notes": "Selected generic unit arithmetic only; exclude localizations, central simple algebras and particular units."
+    },
+    {
+      "concept": "associative-algebra",
+      "concept_id": "d4dc3c45-b79e-5e0b-ac2b-e95de80d4de9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Algebra/Defs:94 defines Algebra k A by a central ring map and compatible scalar multiplication; :217/234 constructs it from bilinear-compatible module actions and :266 recovers Module k A. With Field k and Ring A this is exactly a unital associative bilinear algebra, including the zero algebra. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Algebra/Defs.lean",
+          "declarations": "Algebra L94; Algebra.ofModule L234; Algebra.toModule L266",
+          "note": "Defines unital associative algebras and proves equivalence with the compatible module/bilinear presentation."
+        }
+      ],
+      "search_notes": "Read central-map and module constructors, including scalar multiplication formula; exclude nonassociative or nonunital variants."
+    },
+    {
+      "concept": "associative-algebra",
+      "concept_id": "d4dc3c45-b79e-5e0b-ac2b-e95de80d4de9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "The pinned dependency defines Algebra at Defs:95, ofModule:235 and toModule:267 (checked shifted source, not standalone HEAD). Complete definition is inherited. Native Algebra/Operations concerns powers of submodules and Hom concerns algebra morphisms; these introduce additional objects, so neither is selected as ordinary algebra-definition API. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Inspected Algebra/Operations and nearby Hom/module candidates; excluded submodule-power constructions and homomorphism theory, not treating their imports as native definitions."
+    },
+    {
+      "concept": "commutative-ring",
+      "concept_id": "854d25f3-7800-5dc3-bf1f-67729726c11c",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Ring/Defs:413 CommRing extends Ring and CommMonoid. Ring supplies additive abelian group and distributivity; CommMonoid supplies associative commutative unital multiplication. No Nontrivial assumption occurs, so the zero ring is allowed as required. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Ring/Defs.lean",
+          "declarations": "CommRing L413; CommRing.toCommSemiring L418",
+          "note": "Native commutative ring definition and hierarchy instances; no nontriviality is imposed."
+        }
+      ],
+      "search_notes": "Inspected Ring/Defs class inheritance; nontrivial domain/field conditions deliberately not conflated."
+    },
+    {
+      "concept": "commutative-ring",
+      "concept_id": "854d25f3-7800-5dc3-bf1f-67729726c11c",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "The same CommRing definition and hierarchy are present in the checked dependency. Native Ring/Units adds unit-specific equivalences and Field/Basic assumes division; those concern other concepts or stronger structures. No native generic CommRing definition/core file is selected in this bounded pass. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Searched native Algebra/Ring files; inspected Ring/Units and Field/Basic, excluding extra unit/division structures from generic commutative-ring ownership."
+    },
+    {
+      "concept": "field",
+      "concept_id": "15bf54eb-a8be-57c2-9d55-32ba27176d88",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Field/Defs:180 Field extends CommRing and DivisionRing; DivisionRing inherits the nontrivial group-with-zero inverse structure. Thus 1≠0 and every nonzero element has two-sided inverse. Field/Basic:32–59 gives ordinary fraction arithmetic. Total inversion at zero is a harmless convention, not an extra mathematical restriction. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Field/Defs.lean",
+          "declarations": "Field L180; Field.toSemifield L183",
+          "note": "Defines fields with nontriviality and inverses inherited from division rings."
+        },
+        {
+          "path": "Mathlib/Algebra/Field/Basic.lean",
+          "declarations": "add_div L32; inv_add_inv′ L45; add_div_eq_mul_add_div L53",
+          "note": "Native elementary fraction/inverse identities for division rings, hence fields."
+        }
+      ],
+      "search_notes": "Read Field inheritance and actual fraction proofs. No characteristic restriction introduced."
+    },
+    {
+      "concept": "field",
+      "concept_id": "15bf54eb-a8be-57c2-9d55-32ba27176d88",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency definitions are byte-identical. Native Field/Basic:34 sub_inv_eq_zero_iff proves a-a^-1=0 iff a²=1 for nonzero a; :64 onward proves rational identities under inversion, including zero/one cases. These are direct ordinary field arithmetic; square-root extension and conjugacy endpoints in the same mixed file are not selected as generic field scope. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Field/Basic.lean",
+          "declarations": "TauCeti.sub_inv_eq_zero_iff L34; inv_div_one_sub_inv_sq L64",
+          "note": "Native inverse/fraction normal forms for arbitrary division rings, also valid for every field; definition inherited."
+        }
+      ],
+      "search_notes": "Read explicit nonzero hypotheses and zero/one case splits. Exclude field-extension square roots and algebraic-number applications."
+    },
+    {
+      "concept": "idempotent-element",
+      "concept_id": "77e98456-5af5-5761-b47c-65280b4aac19",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Group/Idempotent:37 defines IsIdempotentElem e as e*e=e; pow_two identifies this with e²=e. Generic multiplication/monoid API proves multiplication of commuting idempotents and power stability. This covers every associative algebra without commutativity. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Idempotent.lean",
+          "declarations": "IsIdempotentElem L37; mul_of_commute L55; pow L83",
+          "note": "Defines idempotent elements and direct product/power identities in their actual weak hypotheses."
+        }
+      ],
+      "search_notes": "No orthogonal-family, primitive-idempotent or categorical splitting theorem is charged here."
+    },
+    {
+      "concept": "idempotent-element",
+      "concept_id": "77e98456-5af5-5761-b47c-65280b4aac19",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency idempotent definition is identical. Native Group/Idempotent:27 proves a*e*b idempotent whenever b*a=1 by a direct associativity calculation; this is generic conjugation/presentation invariance for the same element concept. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Group/Idempotent.lean",
+          "declarations": "IsIdempotentElem.mul_mul_of_mul_eq_one L27",
+          "note": "Native ordinary conjugation identity for an idempotent in a monoid; no ring/field assumption added."
+        }
+      ],
+      "search_notes": "Inspected native Group/Idempotent; excluded corner rings, primitive/projective equivalences and finite orthogonal refinements as separate constructions."
+    },
+    {
+      "concept": "orthogonal-idempotents",
+      "concept_id": "8b00f497-6bea-59db-a5ea-a4d36807e5c5",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "RingTheory/Idempotents:52 OrthogonalIdempotents requires each e_i idempotent and pairwise products zero. Instantiating the index by Bool gives exactly e²=e, f²=f, ef=fe=0 (Pairwise quantifies both ordered distinct pairs). It does not exclude e=f=0. Immediate family sum and map formulas at :58–89 include the two-element case. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Idempotents.lean",
+          "declarations": "OrthogonalIdempotents L52; mul_eq L58; isIdempotentElem_sum L68; map L83",
+          "note": "Defines orthogonal idempotent families and ordinary multiplication/sum/map API; Bool index realizes the exact pair definition."
+        }
+      ],
+      "search_notes": "Read Pairwise field and iff_mul_eq proof; checked both product orders, no hidden distinct-values requirement."
+    },
+    {
+      "concept": "orthogonal-idempotents",
+      "concept_id": "8b00f497-6bea-59db-a5ea-a4d36807e5c5",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "The exact same family definition and pairwise API occur in the pinned dependency. Native Refinement constructs new complete refinements in commutative rings and Hom constructs corner/projective dictionaries; these are separate endpoints, not new generic pair definitions or selected ordinary pair API. Inherited availability is checked and no native files are selected. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Inspected Idempotents/Refinement and Hom; excluded refinement, complete systems, corners and projectivity. Native individual-idempotent conjugation does not by itself reimplement orthogonal pairs."
+    },
+    {
+      "concept": "split-semisimple-algebra",
+      "concept_id": "3149ec91-aaa0-5a6a-8207-b6933df106b6",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Searched RingTheory/SimpleModule/WedderburnArtin and IsAlgClosed. The former decomposes a general semisimple algebra over division algebras; the latter gives matrices over the base only under IsAlgClosed. I have not established an implementation identifying the arbitrary-base-field split condition, rather than semisimplicity or its algebraically closed special case. Leave exact catalogue identity unresolved. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Inspected actual WedderburnArtin division-ring factors and IsAlgClosed special-case proof; no absence claim, unresolved arbitrary-base split predicate/recognition API."
+    },
+    {
+      "concept": "split-semisimple-algebra",
+      "concept_id": "3149ec91-aaa0-5a6a-8207-b6933df106b6",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Native Wedderburn/Presentation:123 packages SplitWedderburnAlgebraPresentation as a finite product of full matrix algebras over k, with AlgEquiv; this is precisely the catalogue definition (positive block sizes lose no zero-size factors, and empty product permits zero algebra). Split:46/113 supplies the equivalent scalar-endomorphism criterion without assuming algebraic closedness. Proof builds coefficient equivalences and composes the actual product-matrix presentation. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Semisimple/Wedderburn/Presentation.lean",
+          "declarations": "TauCeti.SplitWedderburnAlgebraPresentation L123",
+          "note": "Native exact finite-product-of-base-matrix-algebras presentation over arbitrary fields."
+        },
+        {
+          "path": "TauCeti/RingTheory/Semisimple/Wedderburn/Split.lean",
+          "declarations": "IsSemisimpleRing.nonempty_splitWedderburnAlgebraPresentation_of_finrank_end_eq_one L46; nonempty_splitWedderburnAlgebraPresentation_iff_finrank_end_eq_one",
+          "note": "Native equivalent recognition criterion for the same split condition, including nonclosed fields."
+        }
+      ],
+      "search_notes": "Compared chosen presentation to existence predicate and arbitrary-field scalar-endomorphism equivalence. Exclude general division-ring decompositions and individual representation character tables."
+    },
+    {
+      "concept": "splitting-field-algebra",
+      "concept_id": "9d518e0c-579c-593c-bf38-630cafaafebc",
+      "concept_revision": 2,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "The FieldTheory/SplittingField/IsSplittingField candidate defines Polynomial.IsSplittingField for one polynomial via splitting plus root-generated minimality; it is not the semisimple-algebra condition K⊗A ≃ product of matrices. Searched SimpleModule/WedderburnArtin/IsAlgClosed as well, but did not certify the required scalar-extension finite-product condition over arbitrary base extensions. Status is unresolved, not absent. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Explicitly excluded polynomial splitting field as different mathematical meaning. No inferred negative from missing title."
+    },
+    {
+      "concept": "splitting-field-algebra",
+      "concept_id": "9d518e0c-579c-593c-bf38-630cafaafebc",
+      "concept_revision": 2,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Native CentralSimple/Splitting:113 explicitly defines IsSplittingField K A L by L⊗[K]A isomorphic to a single full matrix algebra; :126 unfolds it and :133 derives finite-dimensionality. This implements the central-simple/one-block portion, with direct base-extension and equivalence API. Catalogue permits multiple simple blocks, and no checked general finite-product splitting predicate/comparison was found: mark partial, not complete. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/CentralSimple/Splitting.lean",
+          "declarations": "TauCeti.Algebra.IsSplittingField L113; isSplittingField_iff L126; IsSplittingField.of_isScalarTower L174",
+          "note": "Native one-full-matrix splitting condition and direct extension/equivalence API; general semisimple multi-block condition remains unresolved."
+        }
+      ],
+      "search_notes": "Inspected full-matrix predicate and scalar-tower proof. SplitWedderburn presentation elsewhere supplies products, but I did not certify the required multi-block scalar-extension splitting condition and equivalence."
+    },
+    {
+      "concept": "closed-orbit-existence-algebraic-group-action",
+      "concept_id": "f47f34c2-19dc-5569-921c-2963d29e60c1",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Bounded searches for closed orbits in AlgebraicGeometry and GroupAction did not identify the general finite-type algebraic-group action theorem. Topological orbit-closed results are not automatically this existence statement. Exact mathematical implementation remains unverified, so unknown rather than not_formalized. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Searched closed/orbit combinations in Mathlib AlgebraicGeometry and GroupAction; no broad algebraic-action existence proof certified."
+    },
+    {
+      "concept": "closed-orbit-existence-algebraic-group-action",
+      "concept_id": "f47f34c2-19dc-5569-921c-2963d29e60c1",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "GroupAction/ClosedOrbit:178 proves exists_isClosed_orbit for a nonempty finite-type scheme X acted on by a finite-type group scheme G over an algebraically closed field. LocallyOfFiniteType plus CompactSpace gives finite type; these are quasi-compactness, not topological compact Hausdorff variety assumptions. Proof :150 onward minimizes finite orbit dimension and descends to boundary, then :178 obtains a closed orbit. This covers the stated variety case and requires neither connectedness nor smoothness. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "TauCeti/AlgebraicGeometry/GroupAction/ClosedOrbit.lean",
+          "declarations": "TauCeti.SchemeAction.exists_isClosed_orbit L178; exists_isClosed_orbit_subset_orbitClosure L150",
+          "note": "Native actual closed-orbit existence proof and ordinary orbit-closure strengthening. Locally closed orbits are proof suppliers, not added to selected theorem LOC."
+        }
+      ],
+      "search_notes": "Inspected assumptions and dimension-minimum/boundary proof, not just source header. Exclude special adjoint or projective orbits, which are different/specialized endpoints."
+    },
+    {
+      "concept": "connected-smooth-algebraic-group-irreducible",
+      "concept_id": "ec34cd68-9c8c-5546-b26e-036b05eaae71",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Searches of AlgebraicGeometry and Topology/Algebra/Group found no checked theorem turning a connected smooth algebraic group into an irreducible variety with the proper-closed-dimension consequence. General topological connectedness does not imply irreducibility. The source-specific algebraic-group bridge is unverified, so unknown. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Connected topological group results are insufficient; neither a polynomial/group name match nor affine-only theorem was treated as a full match."
+    },
+    {
+      "concept": "connected-smooth-algebraic-group-irreducible",
+      "concept_id": "ec34cd68-9c8c-5546-b26e-036b05eaae71",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Connected/Irreducible:67 proves irreducibility for connected finite-type affine group schemes over perfect fields using the reduced quotient and domain stalks. Algebraically closed fields are perfect; smoothness in the catalogue is stronger than needed. Topology/KrullDimension/Irreducible:106 gives strict dimension drop for proper closed subsets of finite-dimensional irreducible spaces. This verifies the affine case; catalogue says algebraic groups without an explicit affine restriction, and no checked nonaffine generalization was established. Mark partial to retain that unresolved scope. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Connected/Irreducible.lean",
+          "declarations": "CommHopfAlgCat.irreducibleSpace_primeSpectrum_of_connectedSpace L67",
+          "note": "Native irreducibility proof for connected affine groups over perfect fields; catalogue nonaffine scope not certified."
+        },
+        {
+          "path": "TauCeti/Topology/KrullDimension/Irreducible.lean",
+          "declarations": "IsClosed.topologicalKrullDim_lt L106",
+          "note": "Native ordinary proper-closed-subset dimension consequence; finite dimension explicit."
+        }
+      ],
+      "search_notes": "Inspected Hopf-algebra affine assumptions and actual reduced-quotient proof, plus dimension-chain argument. Need clarification/general proof for nonaffine algebraic groups before full status."
+    },
+    {
+      "concept": "fiber-dimension-theorem-varieties",
+      "concept_id": "b1b4cc1d-e8c1-5b59-ad05-655099f51db6",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Searched Mathlib AlgebraicGeometry for fiber/fibre dimension and Krull-dimension formulas. Found no checked exact statement connecting a dominant irreducible-variety morphism to generic fiber dimension dim X-dim Y and the constant-fiber corollary. General fiber definitions and dimension bounds are insufficient; exact endpoint remains unresolved. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Explicit endpoint searches in AlgebraicGeometry; source matches for fibers were distinguished from the required generic-dimension theorem."
+    },
+    {
+      "concept": "fiber-dimension-theorem-varieties",
+      "concept_id": "b1b4cc1d-e8c1-5b59-ad05-655099f51db6",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Inspected Fibers/Dimension (codimension as quotient-ideal height), Spectrum/Prime/FiberDimension (finite-module fiber ranks under scalar change), and Morphisms/Generalizing/Dimension (local dimension/codimension formula with generalizing/going-down hypotheses). None by itself establishes the catalogue generic-fiber theorem for every dominant irreducible-variety morphism plus its constant-fiber consequence. A bridge from the local/generalizing formulas was not certified; leave unknown, not a misleading full or negative claim. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Read candidate theorem hypotheses: module fiber rank is a different dimension, and generalizing morphism is a genuine additional hypothesis. Further generic-point/open-locus argument remains unchecked."
+    },
+    {
+      "concept": "finite-field-absolute-galois-frobenius",
+      "concept_id": "de8ee1b3-e377-54a8-aea7-163230c40fd4",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Finite/Extension:102 defines arithmetic Frobenius on each finite extension and :121 proves every finite Galois automorphism a Frobenius power. This is finite cyclicity, whereas catalogue requires density in the infinite separable-closure Galois group. Searched finite/Galois/absolute-group sources for dense powers/closure/procyclic statements; no checked infinite-topological passage found. Keep unknown rather than claiming finite cyclicity proves the endpoint without the inverse-limit argument. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Read finite Frobenius definition and exists_frob_pow_eq proof; distinguish finite extension generation from profinite topological generation."
+    },
+    {
+      "concept": "finite-field-absolute-galois-frobenius",
+      "concept_id": "de8ee1b3-e377-54a8-aea7-163230c40fd4",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Finite/SepClosedSubfield:173/190 computes the cardinality/degree of the fixed field of a Frobenius power in a separable closure. This is promising input to density via infinite Galois correspondence, but the actual closure-of-integer-powers statement and its full comparison were not independently verified. Native GaloisCohomology/FiniteField and Frobenius files do not by their names establish it. Leave unknown with this concrete remaining bridge. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Read fixed-field theorem signatures and searched dense/procyclic/closure-powers near finite-field/Galois sources. Need validate actual infinite Galois closure correspondence instantiation before positive claim."
+    },
+    {
+      "concept": "fundamental-lemma-calculus-variations",
+      "concept_id": "69f68165-e974-505b-82e3-9e4d6feebbb9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Distribution/AEEqOfIntegralContDiff:205 proves vanishing almost everywhere on an open finite-dimensional real space from all smooth compactly supported tests, for locally integrable f. Continuous g is locally integrable on the open set. Measure/OpenPos:114 eqOn_open_of_ae_eq promotes the a.e. equality to pointwise equality for continuous g and zero under Lebesgue measure, which has positive mass on nonempty opens. Thus the checked generic source composition gives the exact continuous catalogue endpoint, not only its a.e. weakening. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean",
+          "declarations": "IsOpen.ae_eq_zero_of_integral_contDiff_smul_eq_zero L205; ae_eq_zero_of_integral_contMDiff_smul_eq_zero L44",
+          "note": "Actual distribution-vanishing proof using smooth cutoffs/dominated convergence, specialized to real Euclidean space."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/OpenPos.lean",
+          "declarations": "MeasureTheory.Measure.eqOn_open_of_ae_eq L114",
+          "note": "Provides the direct a.e.-to-continuous-pointwise comparison required by the catalogue formulation."
+        }
+      ],
+      "search_notes": "Read actual smooth-cutoff proof and open-positive-measure continuity upgrade; nonempty-domain and AE/pointwise distinctions preserved."
+    },
+    {
+      "concept": "fundamental-lemma-calculus-variations",
+      "concept_id": "69f68165-e974-505b-82e3-9e4d6feebbb9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Checked dependency has the same test-function vanishing theorem and eqOn_open_of_ae_eq at OpenPos:115. Native TestFunction/Inner:69 proves the equivalent paired/vector-valued test-function version by scalar-testing and inner-self positivity, with complete target V (ℝ qualifies); the continuous scalar pointwise endpoint remains available through the dependency bridge. This is a generic formulation of the same fundamental-lemma testing principle; no Sobolev/PDE application files are counted. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Distribution/TestFunction/Inner.lean",
+          "declarations": "TauCeti.ae_eq_of_forall_integral_inner_eq L69",
+          "note": "Native ordinary paired/vector-valued formulation of the fundamental lemma; scalar pointwise version uses checked Mathlib dependencies."
+        }
+      ],
+      "search_notes": "Inspected scalar test construction ψ•w and final AE result. Exclude DuBoisReymond constants, weak derivative/PDE applications and Schwartz embeddings as distinct endpoints."
+    },
+    {
+      "concept": "cauchy-sequence-metric-space",
+      "concept_id": "579897df-7d66-502b-b191-cf4851aedba1",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "UniformSpace/Cauchy:185 defines CauchySeq via the image of atTop being Cauchy. MetricSpace/Cauchy:59 proves exactly the epsilon/N pairwise-distance characterization for sequences (instantiate β=ℕ), including arbitrary ε>0. Thus the filter definition agrees with the catalogue metric sequence definition. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/UniformSpace/Cauchy.lean",
+          "declarations": "CauchySeq L185; CauchySeq.tendsto_uniformity",
+          "note": "Native general Cauchy-sequence definition and ordinary uniform Cauchy API."
+        },
+        {
+          "path": "Mathlib/Topology/MetricSpace/Cauchy.lean",
+          "declarations": "Metric.cauchySeq_iff L59; Metric.cauchySeq_iff′ L64",
+          "note": "Native proof of exact metric epsilon/N characterization and ordinary sequence criteria."
+        }
+      ],
+      "search_notes": "Read both filter definition and actual metric iff statement; β=ℕ makes its directed-index generality exact."
+    },
+    {
+      "concept": "cauchy-sequence-metric-space",
+      "concept_id": "579897df-7d66-502b-b191-cf4851aedba1",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "The checked dependency files for CauchySeq and Metric.cauchySeq_iff are byte-identical and establish full availability. Native UniformSpace/Complete is a completeness-transfer theorem, with Cauchy sequences as inputs, not another sequence definition/ordinary epsilon criterion. No native Cauchy-sequence core file is selected. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Searched native MetricSpace and UniformSpace/Cauchy candidates; excluded CAT/ultrametric and convergence applications, and assigned completeness-transfer to complete-metric-space instead."
+    },
+    {
+      "concept": "complete-metric-space",
+      "concept_id": "61073779-cd46-580a-a16b-56fd9f925b53",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "UniformSpace/Cauchy:369 defines CompleteSpace by convergence of every Cauchy filter, :430 proves Cauchy sequence convergence, and MetricSpace/Cauchy:49 proves the converse for pseudometric spaces. These give equivalence with the catalogue sequence-completeness definition, not an unsupported identification of filters with sequences in arbitrary uniform spaces. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "Mathlib/Topology/UniformSpace/Cauchy.lean",
+          "declarations": "CompleteSpace L369; cauchySeq_tendsto_of_complete L430",
+          "note": "Native completeness definition and sequence-convergence direction."
+        },
+        {
+          "path": "Mathlib/Topology/MetricSpace/Cauchy.lean",
+          "declarations": "Metric.complete_of_cauchySeq_tendsto L49",
+          "note": "Proves sequence completeness suffices in metric/pseudometric spaces."
+        }
+      ],
+      "search_notes": "Checked both directions; no claim that sequential completeness implies completeness in every uniform space."
+    },
+    {
+      "concept": "complete-metric-space",
+      "concept_id": "61073779-cd46-580a-a16b-56fd9f925b53",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The dependency has the identical completeness definition and metric equivalence. Native UniformSpace/Complete:28 proves completeness transfer between uniformities assuming countably generated target, continuous identity and Cauchy-sequence transfer; metric uniformities meet the countability requirement. This is direct natural completeness API, with its hypotheses explicitly retained. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "TauCeti/Topology/UniformSpace/Complete.lean",
+          "declarations": "UniformSpace.completeSpace_of_continuous_cauchySeq L28",
+          "note": "Native transfer criterion for completeness via Cauchy sequences; definition and metric/filter equivalence inherited."
+        }
+      ],
+      "search_notes": "Read actual convergence transfer proof and countably generated assumption; excludes unrelated metric completion constructions."
+    },
+    {
+      "concept": "complex-conjugation",
+      "concept_id": "99afedf4-a600-5ef6-a440-97261b242e88",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Basic/Complex/Basic:459 defines StarRing ℂ by star z=(z.re,-z.im); conj_re:466 and conj_im:470 prove exactly conjugation a+bi ↦ a-bi, together with involution and ring laws. The generic scoped conj name is the ring-endomorphism spelling of this actual scalar operation. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "Mathlib/Basic/Complex/Basic.lean",
+          "declarations": "StarRing ℂ L459; Complex.conj_re L466; Complex.conj_im L470",
+          "note": "Native scalar complex conjugation definition and ordinary involution/addition/multiplication API."
+        }
+      ],
+      "search_notes": "Checked actual coordinate definition, not a generic star alias alone."
+    },
+    {
+      "concept": "complex-conjugation",
+      "concept_id": "99afedf4-a600-5ef6-a440-97261b242e88",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "The scalar conjugation source is byte-identical in the pinned dependency. Native LinearAlgebra/Complex/Conjugation constructs real forms and conjugate-linear involutions on arbitrary vector spaces, and ConjugateLinearForm constructs forms; these are additional structures, not a native scalar z↦conj z definition or selected elementary scalar API. Keep inherited with zero native files. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [],
+      "search_notes": "Inspected real-points/complexification description and tmulConj scope; do not conflate vector-space conjugations or tensor descent with scalar complex conjugation."
+    },
+    {
+      "concept": "complex-modulus",
+      "concept_id": "943ee6d6-e6d4-55c9-a863-bd034dd72153",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Analysis/Complex/Norm:28 defines the complex norm as sqrt(normSq z); norm_def:31 and norm_eq_sqrt_sq_add_sq:183 prove exactly sqrt(re(z)^2+im(z)^2), with the nonnegative norm and multiplicative/conjugation API. This is the catalogue modulus, distinct from complex norm square. Reviewed committed mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Complex/Norm.lean",
+          "declarations": "Complex.instNorm L28; norm_def L31; norm_eq_sqrt_sq_add_sq L183",
+          "note": "Native modulus definition, coordinate square-root characterization and ordinary norm arithmetic."
+        }
+      ],
+      "search_notes": "Checked nonnegative square root and coordinate expansion; no complex-valued square-root ambiguity."
+    },
+    {
+      "concept": "complex-modulus",
+      "concept_id": "943ee6d6-e6d4-55c9-a863-bd034dd72153",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency complex norm file is byte-identical. Native Analysis/Complex/NormSq:51 proves the elementary normalized pair norm-square formula, and :74 converts squared-distance equality to norm equality with a nonnegative radius. These are ordinary explicit modulus normal forms; the same mixed file also has circle geometry, which is not independently selected as the concept scope. Reviewed committed tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Source statements and representative proofs inspected; no fresh Lean build or transitive axiom audit. Selection is bounded core API, not all applications.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Complex/NormSq.lean",
+          "declarations": "Complex.norm_sq_add_I_mul_div_sqrt_two L51; norm_sub_eq_of_normSq_sub_eq L74",
+          "note": "Native coordinate/normalization and nonnegative-square-root norm identities; underlying complex norm supplied by Mathlib."
+        }
+      ],
+      "search_notes": "Read first elementary formula and squared-to-unsquared proof; exclude radical-axis/circle containment and contour applications elsewhere in the mixed file."
+    }
+  ]
+}

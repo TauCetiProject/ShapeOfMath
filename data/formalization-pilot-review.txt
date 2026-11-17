@@ -1,0 +1,156 @@
+FORMALIZATION PILOT — COORDINATOR REVIEW
+
+Three subagents reviewed six existing concepts independently against immutable upstream source snapshots. The coordinator checked mathematical scope, central declarations and representative proof bodies, ownership, inclusion/exclusion boundaries, and every selected committed file count/hash before applying the audited batch. No concept identities, prerequisite edges, source attribution or vectors were changed by this curation.
+
+Mathlib: 26573066084e6e2aa8526ea358bc43b66d96f970
+Tau Ceti: 3780371ca1bebf9f1c2bb3d753e4bb56c9526023
+Tau Ceti dependency Mathlib: 2ddf59c8f14245864e6c0ed227a2dab76b9efea2
+
+The dependency was checked separately; it is not the standalone Mathlib snapshot. Dirty/local worktree bytes were not used.
+
+RESULTS (allocated physical LOC; fractional shares are not rounded in the database)
+
+group: Mathlib 709 (3 files); Tau Ceti 35.5 (formalized, 1 native files).
+abelian-group: Mathlib 627 (2 files); Tau Ceti 35.5 (formalized, 1 native files).
+convex-hull: Mathlib 1062 (3 files); Tau Ceti 440 (formalized, 2 native files).
+cauchy-schwarz-inner-product: Mathlib 1662 (2 files); Tau Ceti 0 (inherited, 0 native files).
+drinfeld-center: Mathlib 411 (1 files); Tau Ceti 121 (formalized, 1 native files).
+absolute-galois-group: Mathlib 717 (3 files); Tau Ceti 973 (formalized, 3 native files).
+
+There are 12 reviews: 11 with native contributions and one inherited-only; 19 distinct selected files. Mathlib Group and Abelian group share Defs/Basic; their Tau counterparts share the 71-line Pow file, hence 35.5 each.
+
+WHAT THE COORDINATOR CHANGED OR CHECKED
+
+1. Accepted complete generic Group/CommGroup implementations: opposite-side inverse is proved, not an extra missing axiom; additive presentation is supported.
+2. Accepted Tau Pow native law API for Group and Abelian group, sharing only its 71 owned lines; underlying class definitions belong to checked Mathlib dependency.
+3. Accepted generic convex-hull core API and excluded independent Caratheodory/compactness/extreme-point endpoints.
+4. Accepted exact complex Cauchy-Schwarz coverage via real-part/modulus identities; actual core proof is in Defs, public/equality forms in Basic. Excluded weighted Young and operator applications. Tau status inherited, not absent.
+5. Accepted full braided Drinfeld center under only monoidal ambient assumptions. Rejected different categorical centers and extra rigid/pivotal/ribbon center structures.
+6. Accepted separable-closure absolute Galois group with Krull topology. Checked that algebraic-closure and separable-closure groups are equivalent while their ambient fixed fields differ over imperfect fields. Do not credit Tau comparison proof to Mathlib.
+7. Narrowed Tau absolute-Galois selection from seven to three files: Basic/Map/Congr. Excluded fixing-subgroup/finite-index/correspondence/quotient endpoints and their subordinate compatibility files from this bounded core selection.
+
+The Tau absolute-Galois-group proposal originally allocated 2,042 LOC from seven files. The saved selection is Basic (397), Map (264), Congr (312): 973 LOC. Extension, FiniteExtension, Subextension and Quotient were rejected for this bounded core selection. A file used as a supplier in another proof is not automatically charged to the dependent concept. This exclusion does not say those endpoints are unformalized.
+
+Other consequential exclusions: opposite/product/structure-transfer/homomorphism constructions for the generic Group concept; Caratheodory, hull compactness, extreme points and geometric applications for convex hull; weighted Young and operator-specific estimates for Cauchy-Schwarz; categorical endomorphism centers and rigid/pivotal/ribbon enhancements for the generic Drinfeld center. Full candidate reasons are retained in the JSON review companion.
+
+SPECIFICATION AND PROMPT CHANGES
+
+1. Added inherited availability as a distinct status. It requires actual dependency declaration/proof evidence at the pinned dependency commit, no native files, and zero native LOC. Unknown or absent formalization is not inferred from native-file absence.
+2. Native core API may extend a dependency-defined concept. Attribute the definition to the dependency and count only the project-owned API files. Never charge an import-only wrapper or copied dependency paths to the importing library.
+3. Require a declared bounded core API selection and representative declaration anchors. Availability completeness is separate from API-inventory breadth. Equivalent forms, ordinary identities, universal properties, equality cases and natural maps qualify; independently significant endpoints, extra structures and applications do not qualify merely through use or proximity.
+4. Added formalization measure --revision COMMIT; it reads those exact Git blobs, ignoring a different HEAD and local edits. This was exercised against both real repositories in a disposable database and independently verified against every selected snapshot file.
+5. Tightened semantic comparison: generated additive APIs and proved converse inverse axioms count; filename labels do not determine roles; CS real-part/norm formulations match the complex statement; absolute-Galois-group presentation equivalence does not imply equivalence of ambient fixed-field assertions.
+
+FILE SELECTIONS AND DECLARATION EVIDENCE
+
+group / mathlib / formalized
+  Inspected upstream Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. Group at Mathlib/Algebra/Group/Defs.lean:33 extends DivInvMonoid with left inverse cancellation; mul_inv_cancel at :62 proves right inverse cancellation, and toCancelMonoid at :102 proves cancellation, matching the catalogue group definition. AddGroup (:44) is the same mathematical structure in additive notation. Basic.lean supplies immediate group identity API at :607–909. MinimalAxioms.lean:39 and :66 prove equivalent minimal-axiom constructors. Inspected selected proof bodies and found no sorry/admit/axiom declarations in these three files. File selection is the defining group layer and immediate identity/constructor API; no downstream group theory, transport, opposite/product structures, homomorphism theory or parent monoid hierarchy is charged here. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.
+  Mathlib/Algebra/Group/Defs.lean (155 whole-file lines)
+    Group (:33), AddGroup (:44), mul_inv_cancel (:62), Group.toDivisionMonoid (:93), Group.toCancelMonoid (:102)
+    Defines multiplicative/additive groups and derives right inverses and cancellation from the class axioms (lines 25–106). This same file also defines commutative groups, so it is shared with abelian-group; the entire mixed file is counted as requested.
+  Mathlib/Algebra/Group/Basic.lean (1099 whole-file lines)
+    mul_inv_eq_one (:689), div_mul_div_cancel (:739), zpow_induction_left (:882), zpow_induction_right (:899)
+    Develops immediate group arithmetic, equation rearrangement, cancellation and integer-power induction (Group section 607–909). The file also contains monoid and commutative-group material; this rough mapping counts the whole file and shares it with abelian-group.
+  Mathlib/Algebra/Group/MinimalAxioms.lean (82 whole-file lines)
+    Group.ofLeftAxioms (:39), Group.ofRightAxioms (:66); generated AddGroup.ofLeftAxioms/AddGroup.ofRightAxioms
+    Constructs a Group from associativity plus one-sided identity and inverse laws, proving the missing side, with additive counterparts. This is an alternate presentation of the same group concept rather than a product, opposite or downstream theory.
+
+abelian-group / mathlib / formalized
+  Inspected upstream Mathlib commit 26573066084e6e2aa8526ea358bc43b66d96f970. CommGroup at Mathlib/Algebra/Group/Defs.lean:116 extends Group and CommMonoid, exactly a group with commutative multiplication; AddCommGroup at :111 is its additive form. CommGroup.toCancelCommMonoid (:124) and toDivisionCommMonoid (:129) provide the immediate commutative hierarchy. Basic.lean has explicit commutative inverse/division/power identities under DivisionCommMonoid at :516–605 and CommGroup at :912–1016, including mul_inv (:523), mul_zpow (:593), div_div_cancel (:943), and div_eq_div_iff_mul_eq_mul (:996). Proof bodies inspected; no sorry/admit/axiom declarations in these two files. Only defining and immediate law API files are selected, not every general-group file whose facts apply by inheritance. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.
+  Mathlib/Algebra/Group/Defs.lean (155 whole-file lines)
+    AddCommGroup (:111), CommGroup (:116), CommGroup.toCancelCommMonoid (:124), CommGroup.toDivisionCommMonoid (:129)
+    Defines commutative groups in both additive and multiplicative notation and supplies the immediate cancellation/division hierarchy (lines 110–145). Shared with group because this same file independently defines both concepts.
+  Mathlib/Algebra/Group/Basic.lean (1099 whole-file lines)
+    mul_inv (:523), mul_zpow (:593), div_div_cancel (:943), div_eq_div_iff_mul_eq_mul (:996)
+    Proves immediate commutative inverse, product-power and division laws (DivisionCommMonoid section 516–605; CommGroup section 912–1016). Shared with group because the file contains direct API for both concepts; the whole mixed file is counted.
+
+group / tau-ceti / formalized
+  Inspected Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its lake-manifest.json pins Mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; inspected that dependency commit directly and confirmed Group/AddGroup at Mathlib/Algebra/Group/Defs.lean:33/:44 and both inverse laws. Tau Ceti supplies no new generic Group definition, but its own TauCeti/Algebra/Group/Pow.lean:58–60 proves eq_mul_zpow_sub_iff_mul_zpow_eq for an arbitrary Group, an immediate integer-power equation law. The proof is an explicit derivation from zpow_sub, associativity and inverse cancellation, without placeholders or an assumed endpoint. On the agreed pilot interpretation, formalized means the definition is available (including dependencies) and this project owns qualifying direct API; only Tau Ceti-owned API files contribute its LOC. It does not receive Mathlib file LOC. Other uses, specific-group constructions and higher group theory are excluded. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.
+  TauCeti/Algebra/Group/Pow.lean (71 whole-file lines)
+    TauCeti.eq_mul_zpow_sub_iff_mul_zpow_eq (:58–60)
+    Adds the generic Group identity a = b * h^(n-m) iff a*h^m = b*h^n. The underlying Group definition is supplied by the pinned Mathlib dependency, not this file. Count only this native direct-API extension; share the mixed file with abelian-group for its distinct commutative-group law at lines 50–54.
+
+abelian-group / tau-ceti / formalized
+  Inspected Tau Ceti commit 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its lake-manifest.json pins Mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; inspected that dependency commit directly and confirmed CommGroup and AddCommGroup at Mathlib/Algebra/Group/Defs.lean:116/:111. Tau Ceti inherits these definitions. In its own TauCeti/Algebra/Group/Pow.lean:50–54, mul_zpow_mul_mul_zpow proves the immediate exponent-vector arithmetic identity for arbitrary CommGroup elements and integer exponents using mul_zpow, zpow_mul, zpow_add and associativity/commutativity. This is direct elementary API for commutative groups, not an application to a special group or a conditional surrogate. On the agreed pilot interpretation, formalized means the concept is available with qualifying native direct API. Its LOC counts only Tau Ceti-owned files, not Mathlib dependency files. The finite-abelian-primary-decomposition, powers-subgroup and finite-difference results are separate topics and excluded. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.
+  TauCeti/Algebra/Group/Pow.lean (71 whole-file lines)
+    TauCeti.mul_zpow_mul_mul_zpow (:50–54)
+    Adds generic commutative-group monomial arithmetic by adding integer exponent vectors. CommGroup/AddCommGroup definitions are inherited from pinned Mathlib. Count this native immediate API extension and share the whole mixed file with group for its separate arbitrary-Group rearrangement law at lines 58–60.
+
+convex-hull / mathlib / formalized
+  Inspected Mathlib at 26573066084e6e2aa8526ea358bc43b66d96f970. Analysis/Convex/Hull.lean:48 defines convexHull as the minimum convex superset; :52–77 proves containment, convexity, minimality, monotonicity and fixed-point API. The generalized ordered-semiring/module definition includes ordinary real vector spaces. Selected core API includes finite convex-combination membership/characterization and image/union/insertion transport. Separate named Caratheodory, compactness, extreme-point and application endpoints are outside this reviewed core file set. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.
+  Mathlib/Analysis/Convex/Hull.lean (224 whole-file lines)
+    convexHull (L48); subset_convexHull; convex_convexHull; convexHull_min (L66); mem_convexHull_iff; convexHull_mono; LinearMap.image_convexHull; AffineMap.image_convexHull
+    Defines the minimum convex superset and proves its universal property, monotonicity, elementary hulls and generic linear/affine image/translation API (L48–218).
+  Mathlib/Analysis/Convex/Combination.lean (641 whole-file lines)
+    Finset.centerMass_mem_convexHull (L256); convexHull_range_eq_exists_affineCombination (L309); convexHull_eq (L345); mem_convexHull_iff_exists_fintype (L381); Finset.mem_convexHull; convexHull_prod; convexHull_add
+    Finite convex-combination membership and converse descriptions of hull points; finite-hull, product and Minkowski-sum API (L256–503). Whole file also contains the convex-combination object and other material.
+  Mathlib/Analysis/Convex/Join.lean (197 whole-file lines)
+    convexHull_union (L174); convexHull_insert (L179); convexJoin_subset_convexHull (L111)
+    Generic union/insertion descriptions of convex hulls using convex joins, rather than a use of hulls for an unrelated endpoint (L111, L168–196).
+
+convex-hull / tau-ceti / formalized
+  Inspected Tau Ceti at 3780371ca1bebf9f1c2bb3d753e4bb56c9526023 and its manifest-pinned Mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The convexHull definition and minimum-property implementation are supplied by Mathlib (checked Hull.lean:49–76 at that exact dependency commit). Tau Ceti owns generic associated API: Combination.lean:83/96 extends linear bounds and affine image transport to hulls, :161/219–273 develops centroid and injectivity API; Join.lean:35 proves insertion membership without a nonempty assumption. Count only these native files; do not charge the imported Mathlib implementation to Tau Ceti. Exclude distinct Caratheodory/compactness endpoints and particular geometric applications. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.
+  TauCeti/Analysis/Convex/Combination.lean (378 whole-file lines)
+    IsLinearMap.le_of_mem_convexHull (L83); Set.EqOn.image_convexHull (L96); Finset.exists_lineMap_centroid_mem_convexHull (L161); AffineMap.eq_zero_of_injOn_convexHull (L219); AffineMap.injOn_affineSpan_iff_injOn_convexHull (L257); AffineIndependent.map_of_injOn_convexHull (L270)
+    Native generic hull API: linear bounds, affine image interoperability, centroid/ray and affine injectivity properties. The underlying definition is imported from Mathlib; only this native extension file receives Tau Ceti LOC.
+  TauCeti/Analysis/Convex/Join.lean (62 whole-file lines)
+    TauCeti.mem_convexHull_insert (L35)
+    Native generic insertion-membership eliminator for convex hulls, including the empty-set case omitted by the imported nonempty formulation (L35–44).
+
+cauchy-schwarz-inner-product / mathlib / formalized
+  Inspected Mathlib at 26573066084e6e2aa8526ea358bc43b66d96f970. InnerProductSpace/Defs.lean:355–374 contains the completed discriminant proof; Basic.lean:280–282 exposes it for RCLike inner-product spaces, including complex spaces, without finite-dimensionality or completeness assumptions. Its real-valued bound ||inner x y||*||inner y x|| ≤ Re(inner x x)*Re(inner y y) is exactly the catalogue square-modulus inequality by norm_inner_symm (Basic:226) and real nonnegative diagonal identities (Basic:202–221). Basic:454 gives the equivalent norm form and :722–845 the conventional equality/proportionality and normalized variants. Keep the catalogue diagonal factors interpreted as nonnegative real numbers. Exclude new weighted Young/operator defect/energy endpoints. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.
+  Mathlib/Analysis/InnerProductSpace/Defs.lean (620 whole-file lines)
+    InnerProductSpace.Core.cauchy_schwarz_aux'; InnerProductSpace.Core.cauchy_schwarz_aux; InnerProductSpace.Core.inner_mul_inner_self_le (L355); InnerProductSpace.Core.norm_inner_le_norm (L391)
+    Contains the actual general Cauchy–Schwarz proof via nonnegative quadratic discriminant (L317–374), not just prerequisite inner-product definitions. Core norm-form API at L391.
+  Mathlib/Analysis/InnerProductSpace/Basic.lean (1042 whole-file lines)
+    inner_mul_inner_self_le (L280); norm_inner_symm (L226); inner_self_ofReal_re (L207); norm_inner_le_norm (L454); norm_inner_eq_norm_tfae (L722); norm_inner_eq_norm_iff (L749)
+    Public Cauchy–Schwarz theorem, equivalent norm/real forms, conversion identities, conventional equality/proportionality and normalized cases (L280–287, L454–479, L722–845). Whole file also contains other inner-product API.
+
+cauchy-schwarz-inner-product / tau-ceti / inherited
+  Inspected Tau Ceti at 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its lake-manifest.json pins Mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2; checked actual dependency Basic.lean:281–283 (public inequality), :455 (norm variant), :208–227 (real-diagonal/norm symmetry identities), and Defs.lean:355–374 (completed core proof). Thus the complete complex inner-product theorem is available through that dependency. Native Tau Ceti searches of Cauchy/Schwarz/norm_inner_le_norm/inner_mul_inner_self_le/equality variants and inspected inner-product files found applications or different endpoints, not another generic implementation. Excluded Young.lean:39 as a separate weighted Young inequality, Contraction.lean:97 and OpNormDefect.lean:43 as operator-specific endpoints, and QuadraticForm/TwoVector.lean:67 as a packaged application. No native LOC should be allocated to these uses. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.
+
+drinfeld-center / mathlib / formalized
+  At 26573066084e6e2aa8526ea358bc43b66d96f970: Inspected complete Center.lean definition and structural proofs. Its ambient category needs only Category and MonoidalCategory; the BraidedCategory C assumption appears later solely for ofBraided, not for braidedCategoryCenter. Objects are X with half-braidings, morphisms commute with them, and the center is monoidal and braided, matching the database paragraph. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.
+  Mathlib/CategoryTheory/Monoidal/Center.lean (411 whole-file lines)
+    CategoryTheory.HalfBraiding; CategoryTheory.Center; CategoryTheory.Center.Hom; CategoryTheory.Center.braidedCategoryCenter; CategoryTheory.Center.forget; CategoryTheory.Center.ofBraided
+    Lines 44–62: HalfBraiding under Category and MonoidalCategory only. Lines 72–119: objects, compatible morphisms, category and isomorphism API. Lines 124–315: tensor, unit and monoidal structure. Lines 325–362: forgetful monoidal functor and braidedCategoryCenter; only the separate ofBraided construction at 368 onward assumes BraidedCategory C.
+
+drinfeld-center / tau-ceti / formalized
+  At 3780371ca1bebf9f1c2bb3d753e4bb56c9526023: The core center definition and braided structure are inherited from Mathlib pinned by lake-manifest.json at 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native Center/Basic.lean proves genuine general immediate half-braiding and braiding API under the same ambient MonoidalCategory assumptions. Native LOC counts only this file, not its Mathlib import. Classification assumes the coordinator policy allowing inherited definitions with substantive native core API. Independently inspected the actual pinned dependency with git show: Center.lean at 2ddf59c8f14245864e6c0ed227a2dab76b9efea2 defines HalfBraiding at line 53, Center at 72 and braidedCategoryCenter at 362 under MonoidalCategory C; the extra BraidedCategory C assumption begins only at 368. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.
+  TauCeti/CategoryTheory/Monoidal/Center/Basic.lean (121 whole-file lines)
+    CategoryTheory.HalfBraiding.β_tensorUnit_hom; CategoryTheory.HalfBraiding.monoidal_inv; CategoryTheory.HalfBraiding.naturality_inv; CategoryTheory.HalfBraiding.inv_whiskerRight_comp_whiskerLeft; CategoryTheory.Center.braiding_hom_f'; CategoryTheory.Center.braiding_inv_f'
+    Lines 45–97 prove general unit, inverse, naturality and contraction identities for half-braidings under MonoidalCategory C only; lines 103–117 supply simp-facing formulas for the actual braiding on Center C. The definition and braided-category structure are imported from Mathlib, not redefined here; these are genuine native immediate API additions.
+
+absolute-galois-group / mathlib / formalized
+  At 26573066084e6e2aa8526ea358bc43b66d96f970: Mathlib has the named Field.absoluteGaloisGroup based on an algebraic closure with the Krull topology and continuous maps. The exact database carrier Gal(SeparableClosure K/K) is directly expressible using Mathlib SeparableClosure, generic Gal and krullTopology; Galois/Profinite supplies its profinite structure. The named algebraic-closure presentation is mathematically topologically equivalent; an explicit general proof of that comparison is checked in Tau Ceti Basic, not falsely attributed to this Mathlib snapshot. There is no assumption that K is perfect. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.
+  Mathlib/FieldTheory/AbsoluteGaloisGroup.lean (104 whole-file lines)
+    Field.absoluteGaloisGroup; Field.instTopologicalSpaceAbsoluteGaloisGroup; Field.absoluteGaloisGroup.mapOfAlgebra; Field.absoluteGaloisGroup.map
+    Lines 41–45 define the named algebraic-closure model of the absolute Galois group and derive its Krull topology and topological-group structure; lines 58–90 construct continuous restriction maps for field embeddings. The separable-closure model in the database is an equivalent presentation, not literally this named definition; for an imperfect field the ambient fixed-field statements must not be transferred without translation.
+  Mathlib/FieldTheory/KrullTopology.lean (270 whole-file lines)
+    galGroupBasis; krullTopology; krullTopology_mem_nhds_one_iff; IntermediateField.fixingSubgroup_isOpen; krullTopology_t2; stabilizer_isOpen_of_isIntegral
+    Lines 105–151 construct the Krull topology on Gal(L/K) and its neighbourhood basis, including its topological-group structure; lines 173–239 provide open fixing subgroups, Hausdorff and totally-separated API. This is actual topology construction explicitly needed by the concept, not a downstream use. It applies in particular to L = SeparableClosure K.
+  Mathlib/FieldTheory/Galois/Profinite.lean (343 whole-file lines)
+    InfiniteGalois.restrictNormalHom_continuous; InfiniteGalois.continuousMulEquivToLimit; InfiniteGalois.profiniteGalGrp
+    Lines 151–168 prove continuity of restriction; lines 319–340 identify an algebraic Galois group with the inverse limit of finite Galois groups and provide its compact/profinite structure. This is included as the general topological Galois-group API, specialized to the separable closure; no arithmetic application is included.
+
+absolute-galois-group / tau-ceti / formalized
+  Inspected Tau Ceti at 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Basic.lean:327 directly defines Gal(SeparableClosure K/K) with the actual Krull topology; :150 and :340 prove continuous two-sided comparison with the algebraic-closure model, including imperfect fields. Selected native core API: Basic (definition, comparison, evaluation and intrinsic structure), Map (continuous natural maps and composition), Congr (field-isomorphism/presentation invariance). Root review narrowed the proposed seven-file selection to these three. Extension, FiniteExtension, Subextension and Quotient develop separate fixing-subgroup, finite-index, Galois-correspondence or quotient endpoints; they are outside this bounded core selection even where used as proof suppliers. Broader cohomology/arithmetic and auxiliary structure files are excluded. Relevant source proof bodies were reviewed; no fresh Lean rebuild or transitive axiom audit was performed. Bounded file selection and excluded candidates are recorded in data/formalization-pilot-review.txt; availability does not certify an exhaustive API inventory.
+  TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Basic.lean (397 whole-file lines)
+    TauCeti.AbsoluteGaloisGroup; TauCeti.separableClosureRestrictEquiv; TauCeti.absoluteGaloisGroupRestrictEquiv; TauCeti.intermediateFieldEquivClosedSubgroup; TauCeti.mem_perfectClosure_iff_fixed
+    Directly defines Gal(SeparableClosure K/K) with the inherited Krull topology; proves continuity in both directions of the algebraic-to-separable closure restriction equivalence, compactness/profinite structure, separably-closed-field triviality, and the corresponding closed-subgroup API. It explicitly explains the imperfect-field fixed-field distinction. Primary declarations: AbsoluteGaloisGroup at 327; absoluteGaloisGroupRestrictEquiv at 340; separableClosureRestrictEquiv at 150.
+  TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Map.lean (264 whole-file lines)
+    TauCeti.absoluteGaloisGroupMap; TauCeti.absoluteGaloisGroupMap_commutes; TauCeti.absoluteGaloisGroupMap_comp; TauCeti.absoluteGaloisGroupMap_compSeparableClosure; TauCeti.absoluteGaloisGroupMapEquiv
+    Lines 74–168 construct and prove continuity of the restriction homomorphism along arbitrary field extensions and explicit choices of embeddings of separable closures, describe conjugacy dependence, and prove composition formulas; lines 179–261 provide corresponding algebraic-closure-model transport. This is general functorial API of the group.
+  TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Congr.lean (312 whole-file lines)
+    RingEquiv.absoluteGaloisGroupCongr; RingEquiv.absoluteGaloisGroupCongr_apply; RingEquiv.restrictNormalHom_congr; IntermediateField.separableClosureCongr
+    Lines 43–143 construct topological absolute-Galois-group equivalences along field isomorphisms and restriction compatibility; lines 158–307 transport intermediate fields, their automorphism groups, normality and fixing subgroups. This identifies presentations of the same absolute Galois object.
+
+VERIFICATION AND LIMITS
+
+Application unit/API/migration tests cover the new inherited semantics and exact-commit measurement, including preservation of old review/file IDs and atomic rollback. Database verification passes. The batch was first applied to a disposable snapshot, then applied atomically with unchanged fingerprints for all 13 unrelated data tables. All 19 counts and SHA-256 values were independently checked against committed Git blobs. The live API serves the saved values.
+
+Source definitions and relevant proof bodies were inspected and selected files scanned for explicit sorry/admit/axiom declarations. Neither library was rebuilt for this review and no transitive axiom audit was performed. No upstream Lean/Lake modifications were made.
+
+The estimates are allocations of whole files, including comments and blank lines, among current catalogued mappings. A first concept can receive a large mixed file; further reviewed mappings will lower its share. They are not proof-line counts or a census of all mathematical content. The API boundary is a documented curation choice, not an assertion of exhaustive API coverage.
+
+Reproduce the selected judgments/measurements from data/formalization-pilot.json against a database with matching concept meanings. Re-review before replaying over later curation. Detailed original agent proposals, exclusions and coordinator decisions are retained in data/formalization-pilot-review.json.

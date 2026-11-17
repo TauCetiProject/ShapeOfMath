@@ -1,0 +1,258 @@
+ACTIVE TASK — DO NOT END AT A PARTIAL SAMPLE
+
+User asked: write a clear update-formalization-coverage prompt, then execute it.
+After scope clarification user explicitly chose EXPAND ACROSS THE WHOLE CATALOGUE.
+Frozen baseline = 1,413 active concepts / 2,826 Mathlib+Tau pairs. Do not replace
+this with the six-concept refresh or silently stop after a few batches.
+
+Current AGENTS.md mandates ALL mathematical processing and review in subagents.
+Root coordinates, writes software/prompts, validates schema/IDs/revisions/paths/
+counts/hashes and mechanically imports accepted results. Do not read/review Lean
+mathematics yourself or override child mathematical judgments.
+
+Three agents are running full queues using WORKER_PROTOCOL.txt:
+ /root/algebra_formalization
+ /root/analysis_formalization
+ /root/category_galois_formalization
+Each authors its assigned jobs and independently reviews a different author's
+ready jobs. All 79 jobs of <=18 concepts are in jobs/, with fixed author/reviewer.
+All 1,407 nonpilot concepts must be processed. Original six / twelve pairs already
+independently cross-reviewed: two evidence-only corrections, no status/file/LOC
+changes. Decisions preserved in existing-reviews/ and existing-review-results.json.
+
+Public workflow created: prompts/update-formalization-coverage.md, linked from
+prompts/README.md and formalization.md and docs/CURATION.md §5. Older prompt's
+coordinator mathematical-review wording fixed to honor AGENTS. User explicitly
+accepted native Group power-law and centerBasic API mapping; do not demote those
+merely because definitions are imported.
+
+Importer is running automatically in an exec session (currently session 43778):
+ /tmp/shape-coverage-import-watch.py (python -u)
+PID is in watcher.pid. It watches proposal/review changes every 3s and invokes
+import_reviewed.py, importing only digest-matched independently reviewed batches.
+It checks actual committed native-file LOC/hash and fingerprints all 13 unrelated
+math tables inside each transaction. Progress and errors are on disk; no need to
+run a second importer concurrently. If restarting, verify /proc PID cmdline belongs
+to that watcher, terminate gracefully, then restart. STOP file stops it; it also
+exits automatically when all 79 batches are imported.
+
+progress.json is authoritative for imported expansion counts; add 12 refreshed
+pilot pairs for total scoped coverage. Last observed: 7 imported jobs /252 new
+pairs, +12 pilot =264/2,826; 8 authored proposals. Read current progress afresh.
+No import errors as of that observation. Workers continue autonomously; if an agent
+finishes its turn while its queue remains, followup_task it to continue reading the
+filesystem queues. Persist through compactions. Keep user updated at least once
+per minute and wait in <=40-second intervals for agent progress.
+
+Source pins fixed for this pass, upstream default refs confirmed unchanged:
+ Mathlib master 26573066084e6e2aa8526ea358bc43b66d96f970
+ Tau main 3780371ca1bebf9f1c2bb3d753e4bb56c9526023
+ Tau Mathlib dep 2ddf59c8f14245864e6c0ed227a2dab76b9efea2
+Snapshots in /tmp/nix-shell.RiFG0P/shape-formalization-pilot-p55a5fb9/
+ mathlib/, tau-ceti/, mathlib-tau-dependency/
+Git repos /home/kim/mathlib4 and /home/kim/TauCeti, dirty checkouts left untouched.
+Some inherited bare sequence representations use checked stock Lean b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a;
+suppliers can be outside the two output libraries, but scope must stay two libraries.
+All mathematical judgments about generic representations/suppliers are with workers.
+
+Unknown statuses are allowed only with real bounded source search and explicit
+unresolved reasoning, independently reviewed. They are not false negative claims
+or skipped jobs. No bulk automatic formalized/absent conclusions from filenames.
+Reviewer changes can upgrade tentative classifications when exact generic
+constructors cover the concept without a separately named alias. Root never makes
+that math decision. Conjecture statement formalization must be distinguished from
+a proof; update prompt explicitly cautions against claiming a predicate proves it.
+
+If importer errors: inspect only structural diagnostics and route mathematical or
+live concept-revision conflicts back to an author/independent reviewer. Never
+silently recertify changed meanings. Rejected or mismatched digest inputs stay
+unimported. Do not edit imported historical proposals/receipts to hide corrections.
+
+Finish only when every baseline pair has a completed honest reviewed disposition,
+with explicit unknown frontier and any real concurrent-supersession/revision
+handling. Verify receipt roster coverage, live statuses/revisions, global per-file
+LOC conservation, no unrelated math modifications; regenerate export_example.py,
+validate scoped results against JSON/TSV; check live API/pages/native commit links,
+including inherited/partial/unknown. All pilot manifests remain historical.
+Create final run/review summary/frontier and reproducible batch under this run dir.
+Source review is not a fresh Lean build or transitive axiom audit. User wants real
+whole-catalogue update, not merely a plan or partial 'helpful enough' sample.
+
+Importer now supports explicit versioned concept rechecks via
+rechecks/batch-NNN-input.json, without changing the frozen baseline/job. Original
+artifacts archived under history/. Batch014 Hencl–Pratelli changed revision1→2;
+author rechecked both current meanings, unknown statuses retained, waiting for
+updated independent digest review. Request contains actual current paragraph.
+prepare() now returns accepted,digest,contexts and validates reviewed revision
+against the approved recheck context then live DB. Do not bypass this guard.
+
+UPDATE: batch014 revision2 recheck is now independently approved and imported,
+with context_rechecks in its receipt. No outstanding importer errors. Latest
+observed progress:13 imported expansion jobs/468 new pairs +12 pilot=480/2,826.
+Read progress.json for current state; it advances automatically.
+
+LATEST checkpoint:19 imported jobs/684 expansion pairs +12 pilot=696/2,826.
+Agents authoring018(algebra),019(analysis),023(category), source checkpoints on
+disk. Later source discovery may resolve equivalent-basic-sequences (earlier011);
+category agent asked to save rechecks/batch-011-discovery.json, not alter imported
+artifacts. Needs algebra independent review and separate audited correction.
+98 tests pass including new tests/test_coverage_update_import.py (digest, reviewer
+independence, rejected/missing pairs, live revision recheck, exact blob counts).
+Summarizer summarize_run.py writes summary/frontier/allocation checks and only
+allows --final if all79 jobs imported, all2,826 current dispositions and no unhandled
+conflicts/missing measurements. At complete generates reviewed-batch.json.
+Interim exports regenerated several times; final regeneration still required.
+
+LATEST at2026-11-13 00:46UTC:22 imported expansion jobs /792newpairs +12pilot
+=804/2,826. Current watcher exec session72179 (restarted cleanly); watcher.pid
+is authoritative. Prior session43778 stopped. No importer errors.
+Two-pair equivalent-basic-sequences follow-up discovery independently reviewed
+and imported via import_one using special ID batch-011-discovery; receipts and
+proposals preserved, original011 artifacts untouched. This special receipt is
+excluded from fixed3digit job counts, appropriately: it improves already-counted
+pairs, not new distinct coverage. Global status_counts in progress.json are
+original per-job receipt totals; final summarize_run.py reads current DB for
+accurate post-correction statuses and allocations. Four native files/two pairs
+accepted via exact generic Matlib constructor/Tau native Span API; root made no
+mathematical decision.
+Current author queues:021 algebra,022 analysis,026 category (check live agents).
+Still63?57?jobs remain: read plan/progress; DO NOT finish early. Every published
+job imported so far. Agents instructed to persist through queue+compactions.
+Prompt default now whole active catalogue in both libraries, honoring explicit
+user choice; don't re-ask pilot-vs-expansion.
+
+LATEST:24 imported expansion jobs /864newpairs +12pilot=876/2,826.
+Watcher now exec session35808 (was restarted for separate convention correction);
+watcher.pid remains authoritative; no import errors. Two special corrections now
+imported: batch-011-discovery (2 upgrades) and recheck-cstar-module-opposite
+(4 evidence-only convention clarifications, no status/files/count changes).
+Special receipts excluded from fixed3digit job progress count; final summary reads
+current DB. All original artifacts retained. Latest summary audit:1950 unreviewed,
+0 stale,0 retired,296 reviewedunknown/partial; per-library LOC conserved.
+Agents next author024(algebra),022(analysis),029(category). All24 published jobs
+independently reviewed and imported. 55 expansion jobs remain; DO NOT final/stop.
+
+LATEST:31 imported expansion jobs/1116newpairs +12pilot=1128/2,826.
+32authored jobs (028 is nowpublished waiting independent reviewcategory); next
+authors033algebra,031analysis,035category. Watcher stillsession35808/noerrors.
+48 expansion jobs remain; 47unpublished +028review if counts stillsame. Keep
+waiting/processing; DO NOT stop or final at partial. If childturn ends queue
+unfinished, followup_task to continue; all3 currently running.
+
+LATEST:40 imported expansion jobs/1440newpairs +12pilot=1452/2,826 (overhalf).
+Current watcher session35808, PIDinwatcher.pid, noerrors. All40 published jobs
+reviewed/imported. Author queues~042algebra/037analysis/044category (ask agents
+if needed).39jobs remain; DO NOT stop/final until all baseline pairs done.
+Recheck041 eta revision1→2 explicitly approved and imported; context_rechecks
+inreceipt. Originalbaseline/job unchanged. Other scope semantics unchanged.
+Prompt enhanced to require native namespace/sibling enumeration before inherited
+and explicit joint/uniform vs separate regularity conventions. No schema changes.
+Still must final summarize --final, export, browser/API checks and finalreport.
+
+LATEST2026-11-13 02:49UTC:43 imported expansion jobs/1548newpairs +12pilot
+=1560/2,826. All43 published jobs reviewed/imported/noerrors.36jobstoremain.
+Watcher nowexecsession68406 (cleanrestart for accepted EH statementfollowup),
+PIDinwatcher.pid. Thirdspecial followup batch-041-elliott-halberstam-statement
+accepted/imported (1full1inherited, statementonly NOT proof). Original041
+artifacts intact. prepare supports followup_id fallback tobatch_id with same
+reviewdigest/identityguards; twoextra reviewedpairs don't adddistinctscopecount.
+Mainauthors045algebra/040analysis/047category. DO NOT stop/final until all79
+mainjobs and all2826current dispositions handled. Root is coordinator only,
+allmathematics inchildren, importer exactblobs/globalshares/13mathfingerprints.
+
+LATEST2026-11-13 03:03UTC:45 mainjobs imported/1620newpairs +12pilot
+=1632/2,826;46authored jobs. Noimporterrors. Watcher nowexecsession89890,
+cleanrestart after accepted onepair affinefollowup. New durable helper
+import_followup.py validates original+reviewdigests and reuses import_one; must
+stop queuedwatcher first with STOPfile and waitfor watcher.pid removal. Root
+used it for batch-039-affine-discovery (Tauinherited→native, no distinctcount).
+Fourthspecialfollowup imported, alloriginalartifacts intact.
+Recheck047 liveelliptic revision2 explicitly reviewed/imported, unknownstatuses
+retained. Authorqueues048algebra/043analysis/050category (verifylive).
+34mainjobs remain; DO NOT final until allbaseline pairs current disposition.
+
+LATEST:52 mainjobs imported/1872newpairs +12pilot=1884/2,826 (two-thirds).
+53mainproposals; one054reviewpending;049authorrev2contextpending,056category
+research,057algebraresearch. Watcher89890stillrunning/PIDfileauthoritative.
+Recheck053 compactprobREV2 reviewed/imported. Newrecheck049 twistedrelative
+orbitalintegralREV2explicitinputcreated, baseline/jobunchanged; authoranalysis
+andreviewercategorynotified. Recheck047alreadyimported.
+Added computed formalizationreport concept_kind and statement_only=truefor
+conjectures; UIlabel 'Formal statement recorded' +no-proofnote, TSV/catalogue
+and finalsummaryseparatepositiveconjecturestatementrecords. API/docsupdated;
+109testsPASS; liveEHconjecturepage/browser/mobileverified. No conjectureproof
+claims. Source/promptclarificationpersisted. No schema change.
+27mainjobsremain; doNOTfinaluntilall79+2826currentdispositions+finalchecks.
+
+LATEST:60mainjobsimported/2160newpairs+12pilot=2172/2826.61authoredjobs;
+063reviewpending. Noimporterrors. Watcher89890stillactive/PIDfileauthoritative.
+19mainjobsremain; DO NOTfinaluntilall79jobs+2826currentdispositions.
+Newversionedrecheck060 IMDcoexistenceREV2 reviewed/imported; allbaseline/jobs
+keptunchanged. Rechecks049,053alreadyreviewed/imported.
+Currentauthors~066algebra/058analysis/062category. Relevant prompts enhanced
+with every-clause/complexitycheck, normalizationcheck, and totalized-function
+domainhypotheses. Partialdependencywithoutnativefiles staysunknown under
+currentmodel with explicit attributionlimits; no schema change duringpass.
+Allmathematics doneinsubagents. Root coordinates/structuralvalidates/imports.
+Lasttests109PASS; liveconjecturestatementpageverified. Finalaudit/export/browser
+checks remain, including statement-onlyconjecturecounts and unknownfrontier.
+
+LATEST2026-11-13 04:56UTC:62mainjobsimported/2232newpairs+12pilot=2244/2826.
+All62publishedjobsreviewed/imported/noerrors.17jobsremain. Watcher22702now
+(cleanrestartfor5thspecialfollowup), watcher.pid authoritative. DoNOTfinal
+beforeall79and2826 currentdispositions/finalaudit/export/browserchecks.
+Fifthspecialfollowup batch-058-jordan-discovery imported (oneTaurecord adds
+nativeJordanChain API, statusunchanged; original058artifactsuntouched).
+Helperimport_followup.py reused. Allmathematicsinchildren. Rootonlystructural
+validation/mechanicalcounts/import. Currentauthors066algebra/061analysis/062
+category (verifyagents). Lasttest109PASS, liveconjecturestatementlabelbrowser
+verified. Prompt nowalso checks totalizedfunctiondomains and materialcomplexity
+clauses/normalizations. No unresolved structuralimportconflicts.
+
+LATEST:65mainjobsimported/2340expansionpairs+12pilot=2352/2826.
+All65publishedjobsindependentlyreviewed/imported/noerrors;14mainjobsremain.
+Watcherexec22702/PIDfileauthoritative, noSTOP. Currentauthors069algebra/064
+analysis/065category, allrunning. Finalall-pairaudit+exports+browserstillneeded.
+Currentkindflags/UIstatementonly no-proofdistinctionpassed109tests/livebrowser.
+DoNOTfinalatpartial. Userexplicitlyrequestedfullcatalogue; scopefrozen1413.
+Materialclauses+normalization+totalizeddomainpromptchecks now appliedprospectively.
+Severalfull→partialcorrections acceptedbyindependentreview; rootneverjudgesmath.
+Remainingunknownsareactualsource-reviewedfrontiers,notunsearchedplaceholders.
+
+LATEST:69mainjobsimported/2484expansionpairs+12pilot=2496/2826.
+All69publishedjobsindependentlyreviewed/imported/noerrors;10mainjobsremain,
+330baselinepairs. Watcher22702/PIDfileauthoritative. Currentauthors075algebra,
+067analysis,068category. Their remainingassignedjobsinclude070/071/073/074/
+076/077/078; don'tskipqueue. DoNOTfinalatthispartialcount.
+Need finish all79, rechecks, final summarize --final + exports+tests+browser.
+Evidenceincludesconjecturestatementonly; root must not claim proofs.
+Finalsummaryreads liveDB, not receiptstatuscounts (specialfollowups altered
+somepriorstatuses/files). Rootsummarizer emits unknown+partial frontier,
+unreviewed/stale/retiredpairs, concurrentnewconceptsoutofscope, allocations.
+
+LATEST:76mainjobsimported/2706expansionpairs+12pilot=2718/2826.
+All76publishedjobsreviewed/imported/noerrors. ONLY3authorjobsremain:
+074category (revieweralgebra),076algebra(reviewercategory),077analysis
+(revieweralgebra). Each36pairs,108total. Watcher22702/PIDauthoritative.
+Authorreassignments070/076/077 recordedhistory; reviewerindependenceretained.
+DoNOTfinaluntilthese3published/reviewed/imported+finalaudit. Needfinalsource
+review decisions after concurrencyguards; summary--final producesreviewedbatch
+onlyifall79+2826 currentdispositions,nostale/retired/missingcounts/digesterrors.
+Then exports,fulltests,liveAPI/browser(nonconjecture+statementonly+partial+
+unknown),codeURLs and LOCconservation. Allmath stayschildren.
+
+COMPLETE2026-11-13 07:01UTC. ALL79mainjobsreviewed/imported,2826/2826
+scopedcurrentdispositions;no unreviewed/stale/retired/missingmeasurementsor
+reviewdigesterrors. Watcherexitedautomatically/PIDremoved. Finalsummary
+--finalPASS,reviewed-batchgenerated,exports regeneratedandall2826evidence/
+files/status/LOCmatchedcurrentDBandJSON/TSV. All1775mappedfilesactualblobs
+LOC/SHA256verified; everyfileallocationconserved.120testsPASS;liveAPI/
+browserdesktopmobilepositivepartialinheritedunknown+conjecturestatement
+labels+nativecommitlinksPASS. Finalreportreview.txt,summary.json,completion.json
+export-check.json,browser-check.json,final-file-validation.json; unknown935
+=776unknown+159partial. M905full5inh81partial422unknown;T759full222inh
+78partial354unknown.14positiveconjecturepairsSTATEMENTONLY(no proof).
+All1413conceptsinstartr rosterhandled;1642concurrentadditionsatsummarysnapshot
+excludedexplicitly. Rootdidnotchangemathematics;imports fingerprinted13
+unrelatedtables. Promptcreatedandfinalsubagentpolicyreviewclarifications
+applied. Usercanread finalreportandprompt; no remainingauthorizedwork.

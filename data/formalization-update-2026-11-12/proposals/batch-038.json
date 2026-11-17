@@ -1,0 +1,569 @@
+{
+  "batch_id": "batch-038",
+  "author": "category_galois_formalization",
+  "reviews": [
+    {
+      "concept": "unipotent-algebraic-group",
+      "concept_id": "4435cb04-bae8-5365-bdba-0caae1694714",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Bounded affine-unipotent/faithful-algebraic-representation/unitriangular searches did not certify the requested geometric faithful-representation condition. Generic Hopf scalar extension and ordinary abstract group representations are available, but the actual algebraic representation/coordinate-morphism faithfulness bridge needed to realize an affine group inside a unitriangular algebraic group was not certified in standalone Mathlib. A condition that each individual matrix is unipotent would also require the simultaneous upper-triangularization endpoint; a raw matrix predicate is only a prerequisite. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [],
+      "search_notes": "Native Tau Representation/UpperUnitriangular constructs this coordinate morphism; its Unipotent/Embedding298 equivalence uses reduced finite-type algebraically closed hypotheses, and is separately owned. No absence claim or replacement of algebraic representations by arbitrary abstract group actions."
+    },
+    {
+      "concept": "unipotent-algebraic-group",
+      "concept_id": "4435cb04-bae8-5365-bdba-0caae1694714",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "An exact existing generic primary predicate on the algebraic-closure base change Hbar is EXISTS n, finite Hbar-comodule M and basis b:Fin n with (coefficientMatrix b).IsUpperUnitriangular and Comodule.IsFaithful M. IsUpperUnitriangular:98 is literally upper triangular AND each diagonal1. IsFaithful:238 is a closed-immersion coordinate representation; native upperUnitriangularCoordinateGroupSchemeHom:230 is the actual algebraic group morphism, and :282 proves closed immersion iff faithfulness. Its :124/:209 prove the corresponding coordinate map and surjectivity criterion. Read these complete constructors/proofs: no reducedness assumption is needed for this exact existential faithful-representation predicate. Native Unipotent/Embedding:298/312 additionally proves the ordinary equivalence with the geometric-point test under its ACTUAL reduced finite-type algebraically closed hypotheses. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Representation/UpperUnitriangular.lean",
+          "declarations": "TauCeti.Comodule.upperUnitriangularCoordinateBialgHom:124; upperUnitriangularCoordinateBialgHom_surjective_iff_isFaithful:209; upperUnitriangularCoordinateGroupSchemeHom:230; isClosedImmersion_upperUnitriangularCoordinateGroupSchemeHom_iff_isFaithful:282",
+          "note": "Native exact faithful upper-unitriangular algebraic representation/coordinate construction and ordinary recognition API."
+        },
+        {
+          "path": "TauCeti/Algebra/AlgebraicGroup/Unipotent/Embedding.lean",
+          "declarations": "TauCeti.Comodule.exists_coordinateBialgHom_surjective_of_forall_isUnipotentPoint:163; geometricallyUnipotentPointsCommHopfAlgProperty.iff_exists_isClosedImmersion_upperUnitriangularGroupScheme:298; iff_exists_isClosedImmersion_upperUnitriangularCoordinateGroupSchemeHom:312",
+          "note": "Native completed geometric-point/faithful-unitriangular embedding equivalences under the explicitly reduced finite-type algebraically closed hypotheses."
+        }
+      ],
+      "search_notes": "The catalogue primary EXISTS faithful representation is used directly, without inferring nonreduced group-scheme unipotence from geometric points. Basic67 explicitly warns that points miss infinitesimal structure. Matrix/Triangular98 and Faithful/Basic238/281 were checked as exact shape/faithfulness suppliers, not extra helper allocations. Radical/smoothness/solvable classification endpoints excluded."
+    },
+    {
+      "concept": "unitary-operator-hilbert",
+      "concept_id": "81c40587-033a-501d-aaa7-eb364c64c87f",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "LinearIsometryEquiv:437 is a bijective complex linear map preserving norms. LinearMap.norm_map_iff_inner_map_map:151 proves norm preservation iff preservation of the full complex inner product; inner_map_map:116 gives the forward equivalence. Conversely an inner-preserving complex linear map is a LinearIsometry, and ofSurjective:994 gives the exact equivalence from the stated surjectivity. Specialize the space to a complete complex inner-product space; neither finite dimension nor only real linearity is substituted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Normed/Operator/LinearIsometry.lean",
+          "declarations": "LinearIsometryEquiv:437; LinearIsometryEquiv.ofSurjective:994",
+          "note": "Actual bijective complex linear isometry constructor and ordinary inverse/composition operations."
+        },
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/LinearMap.lean",
+          "declarations": "LinearIsometryEquiv.inner_map_map:116; LinearMap.norm_map_iff_inner_map_map:151",
+          "note": "Actual equivalence with the exact complex inner-product-preserving unitary convention."
+        }
+      ],
+      "search_notes": "Completeness is part of the ambient Hilbert-space conjunction, not a finite-rank restriction. Unitary matrices only cover finite dimension; unilateral isometries lacking surjectivity are not unitary."
+    },
+    {
+      "concept": "unitary-operator-hilbert",
+      "concept_id": "81c40587-033a-501d-aaa7-eb364c64c87f",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Exact dependency linear-isometric-equivalence agrees byte-for-byte; InnerProductSpace/LinearMap adds a header blank, so inner_map_map:117 and norm_map_iff_inner_map_map:152 have identical bodies. Native LinearIsometry.map_mem_orthogonal_singleton:81 proves the ordinary defining inner-product consequence that orthogonality to v maps to orthogonality to f(v). orthogonalComplementSingletonMap:89 and evaluation:96 package the actual restriction, with full norm-preservation proof. These weaker-hypothesis isometry laws apply in particular to every surjective complex unitary operator, giving genuine ordinary unitary orthogonality/restriction API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/LinearIsometry.lean",
+          "declarations": "LinearIsometry.map_mem_orthogonal_singleton:81; orthogonalComplementSingletonMap:89; coe_orthogonalComplementSingletonMap_apply:96",
+          "note": "Native ordinary orthogonality and orthogonal-complement restriction API for the same unitary maps, under weaker isometry hypotheses."
+        }
+      ],
+      "search_notes": "The restriction need not be asserted surjective unless using the inverse operator; the core unitary constructor remains dependency-owned. Polar decomposition, finite-dimensional near-isometry estimates and unitary matrix classifications are separate endpoints."
+    },
+    {
+      "concept": "unitary-representation-topological-group",
+      "concept_id": "3cad3b71-5ca6-5a5f-83ce-6b9bf40eabe1",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Use the exact generic subtype of ContRepresentation complex G H satisfying BOTH forall g v w,inner(pi g v,pi g w)=inner(v,w), AND forall v,Continuous(fun g=>pi g v). ContRepresentation:55 is literally a group homomorphism into continuous complex linear ENDOMORPHISMS; it does NOT assume continuity in g. The explicit orbit predicate is precisely the required strong continuity. Inner-product preservation makes each operator an isometry by LinearMap.norm_map_iff_inner_map_map:151, and group homomorphism laws make pi(g inverse) its two-sided inverse. Thus the operator values are exactly the stated complex unitaries, including infinite-dimensional Hilbert spaces. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/RepresentationTheory/Continuous/Basic.lean",
+          "declarations": "ContRepresentation:55; ContRepresentation.toMonoidHom:58",
+          "note": "Actual operator-valued group-homomorphism constructor, with explicitly supplied strong-orbit and unitary predicate refinements."
+        },
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/LinearMap.lean",
+          "declarations": "LinearMap.norm_map_iff_inner_map_map:151; LinearIsometryEquiv.inner_map_map:116",
+          "note": "Actual complex unitary-operator recognition used in the literal representation predicate."
+        }
+      ],
+      "search_notes": "Do not infer strong continuity from the name ContRepresentation: its source docs explicitly say G has no assumed topology. Operator-norm continuity is stronger and not imposed. No averaging/compactness/finite-dimensionality assumption."
+    },
+    {
+      "concept": "unitary-representation-topological-group",
+      "concept_id": "3cad3b71-5ca6-5a5f-83ce-6b9bf40eabe1",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "The inherited operator-valued representation needs the explicit strong-orbit predicate, as above. Native ContRepresentation.IsUnitary:51 is EXACTLY the all-operator inner-product condition; norm/isometry equivalences:55/64 and toLinearIsometryEquiv:201 prove actual unitary values using the inverse group element. Native continuous_subrepresentation_apply:40 and continuous_quotient_apply:47 prove the same forall-vector orbit continuity survives restriction and descent, using the actual subtype/quotient topology. Read the complete norm equivalences, inverse constructor and orbit-map proofs. Add CompleteSpace H and complex scalars for the exact catalogue ambient space. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/RepresentationTheory/Continuous/Unitary/Basic.lean",
+          "declarations": "ContRepresentation.IsUnitary:51; isUnitary_iff_norm_map:55; isUnitary_iff_isometry:64; IsUnitary.toLinearIsometryEquiv:201",
+          "note": "Native exact unitary representation predicate and ordinary unitary operator/norm/adjoint/inverse API."
+        },
+        {
+          "path": "TauCeti/RepresentationTheory/Continuous/StronglyContinuous.lean",
+          "declarations": "ContRepresentation.continuous_subrepresentation_apply:40; continuous_quotient_apply:47",
+          "note": "Native actual strong-orbit continuity restriction and quotient API, with continuity in the group variable explicit."
+        }
+      ],
+      "search_notes": "The first file by itself does not assume continuity in g; strong continuity is the separate explicit predicate retained in the record. Restrictions/quotients retain their stated invariant-subspace hypotheses. Stone/Peter-Weyl/classification endpoints excluded."
+    },
+    {
+      "concept": "universal-enveloping-algebra",
+      "concept_id": "43a405cf-0290-595e-9c82-7ce36f537e25",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "UniversalEnvelopingAlgebra:65 is the quotient of TensorAlgebra by the generated Lie-commutator relation. Its \u03b9:80 proves i([x,y])=i(x)i(y)-i(y)i(x). lift:92 is an actual EQUIVALENCE from Lie maps into arbitrary associative algebras to algebra maps out of U(g), with both inverse proofs checked; lift_unique:139 gives exactly the requested universal property. No injectivity of i is used or asserted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Lie/UniversalEnveloping.lean",
+          "declarations": "UniversalEnvelopingAlgebra:65; UniversalEnvelopingAlgebra.\u03b9:80; lift:92; lift_unique:139",
+          "note": "Actual unital associative enveloping quotient, Lie map and completed universal property/uniqueness API."
+        }
+      ],
+      "search_notes": "A PBW/injective-generator claim is a different theorem and explicitly unnecessary in the paragraph. No finite-dimensionality or characteristic0 assumption is inserted into this universal construction."
+    },
+    {
+      "concept": "universal-enveloping-algebra",
+      "concept_id": "43a405cf-0290-595e-9c82-7ce36f537e25",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency enveloping quotient and universal equivalence agree. Native adjoin_range_\u03b9:70 proves the canonical Lie generators generate U as an algebra by pushing the tensor-algebra statement along the surjective quotient map. induction_\u03b9:85 gives the actual generator induction principle. mul_sub_mul_eq_map_\u03b9_lie:187 and commute_of_lie_eq_zero:198 prove the defining commutator relation survives ordinary ring-hom images, with completed short source proofs. These are direct defining-generator and universal-map API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Lie/UniversalEnveloping/Basic.lean",
+          "declarations": "TauCeti.UniversalEnvelopingAlgebra.adjoin_range_\u03b9:70; induction_\u03b9:85; mul_sub_mul_eq_map_\u03b9_lie:187; commute_of_lie_eq_zero:198",
+          "note": "Native actual generator spanning/induction and ordinary commutator-image API for the same universal algebra."
+        }
+      ],
+      "search_notes": "General Hopf extensions, Kostant forms, Casimir/center classification and highest-weight applications add structures/endpoints. No injectivity is inferred merely from generator notation."
+    },
+    {
+      "concept": "valuation-ring-discrete",
+      "concept_id": "223a4e19-e38a-5ba0-9f1c-948ac82f26a5",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Valuation.integer:32 is the actual subring {x | v x<=1} in the multiplicative decreasing convention, with all ring-closure fields proved. Valuation.valuationSubring:434 bundles its valuation-ring property; mem_valuationSubring_iff:442 is that exact membership, and mem_maximalIdeal_iff:910 proves the maximal ideal is v x<1. Under additive valuation encoding these are exactly additive v(x)>=0 and v(x)>0, including additive infinity at zero. The generic constructor works for any valuation, hence for the stated discrete one. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/RingTheory/Valuation/Integers.lean",
+          "declarations": "Valuation.integer:32; mem_integer_iff:40",
+          "note": "Actual zero/add/mul/neg-closed valuation-integer subring."
+        },
+        {
+          "path": "Mathlib/RingTheory/Valuation/ValuationSubring.lean",
+          "declarations": "Valuation.valuationSubring:434; mem_valuationSubring_iff:442; mem_maximalIdeal_iff:910",
+          "note": "Actual valuation-ring packaging and exact strict-valuation maximal ideal characterization."
+        }
+      ],
+      "search_notes": "The sign reversal between decreasing multiplicative and increasing additive valuations is explicit. Discreteness/normalization is retained on the input, not misidentified with completeness or finite residue field."
+    },
+    {
+      "concept": "valuation-ring-discrete",
+      "concept_id": "223a4e19-e38a-5ba0-9f1c-948ac82f26a5",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency valuation integer criteria agree byte-for-byte; ValuationSubring adds a header blank, so its valuationSubring:435, membership:443 and maximal-ideal criterion:911 have identical bodies. Native ValuationSubring.mem_nonunits_comap:53 proves the maximal/nonunit ideal criterion under pullback along a field hom, and valuation_map_eq_one:59 proves units map to units when one valuation ring lies in the pullback of another. Read the complete inverse/multiplication argument. These are direct ordinary valuation-ring/unit/maximal-ideal map API under weaker general valuation hypotheses, specializing to discrete valuation rings. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Valuation/ValuationSubring.lean",
+          "declarations": "ValuationSubring.mem_nonunits_comap:53; valuation_map_eq_one:59",
+          "note": "Native exact nonunit-ideal pullback and valuation-unit preservation API."
+        }
+      ],
+      "search_notes": "Do not add local-field completeness/finite-residue assumptions from native NumberTheory/LocalField. Ring normalization/completion and ramification structure are separate endpoints."
+    },
+    {
+      "concept": "von-mangoldt-function",
+      "concept_id": "b07d8450-ad7e-5241-8f5f-8503d8602efc",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "ArithmeticFunction.vonMangoldt:65 is exactly if IsPrimePow n then log(minFac n) else0. vonMangoldt_apply_pow:86 proves invariance under a positive exponent, and apply_prime:89 gives log p, so for n=p^k,k>=1 it is the catalogue value; n=0/1 and all non-prime-powers have0 by the actual constructor/77/99. Read these completed formulas and the minimum-prime-factor identities. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/ArithmeticFunction/VonMangoldt.lean",
+          "declarations": "ArithmeticFunction.vonMangoldt:65; vonMangoldt_apply:73; vonMangoldt_apply_one:77; vonMangoldt_apply_pow:86; vonMangoldt_apply_prime:89",
+          "note": "Actual natural-number von Mangoldt function and direct prime-power/support arithmetic API."
+        }
+      ],
+      "search_notes": "Positive exponent is essential; Lambda1=0. Prime-counting asymptotics and logarithmic Dirichlet-series identities are independent endpoints."
+    },
+    {
+      "concept": "von-mangoldt-function",
+      "concept_id": "b07d8450-ad7e-5241-8f5f-8503d8602efc",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "inherited",
+      "evidence": "Actual dependency natural-number vonMangoldt:66 and prime-power formulas:87/90 agree with one header blank. Native ArithmeticFunction/VonMangoldt.summable_nonprime_div:33 proves a separate analytic weighted-series theorem. Enumerated native arithmetic-function and adjacent Dirichlet-series candidates: ArithmeticDirichletSeries/VonMangoldt defines an IDEAL arithmetic function with prime-ideal norm weights, a different domain; no checked rational-field ideal/Nat identification gives new ordinary API for this exact Nat function. Neither candidate is charged to the bare function. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [],
+      "search_notes": "Inherited means zero native files/LOC. Native prime counting, Chebotarev and logarithmic-series applications are uses/separate endpoints. Do not assume an ideal-valued analogue is the classical arithmetic function without a checked comparison."
+    },
+    {
+      "concept": "weak-jacobi-form",
+      "concept_id": "d8ebd897-90d2-5018-8024-ec870e292a24",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Bounded JacobiForm/WeakJacobi/elliptic-translation/Fourier-index searches did not certify the constructor with integer weight/index, the modular AND elliptic transformation laws, and all-cusp n>=0 support while allowing negative discriminants. Actual ordinary ModularForm:80 is one-variable upper-half-plane data with integer weight and cusp boundedness, and native SiegelFunction:95 is an individual one-variable modular unit. Neither supplies the two-variable Jacobi data or the requested weaker Fourier-support condition. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [],
+      "search_notes": "Both holomorphic and weak Jacobi support conditions differ from ordinary cusp holomorphy. Native Tau candidates retain separate ownership in the standalone judgment. Unknown records these checked unresolved interfaces, not absence."
+    },
+    {
+      "concept": "weak-jacobi-form",
+      "concept_id": "d8ebd897-90d2-5018-8024-ec870e292a24",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Bounded JacobiForm/WeakJacobi/elliptic-translation/Fourier-index searches did not certify the constructor with integer weight/index, the modular AND elliptic transformation laws, and all-cusp n>=0 support while allowing negative discriminants. Actual ordinary ModularForm:80 is one-variable upper-half-plane data with integer weight and cusp boundedness, and native SiegelFunction:95 is an individual one-variable modular unit. Neither supplies the two-variable Jacobi data or the requested weaker Fourier-support condition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [],
+      "search_notes": "Both holomorphic and weak Jacobi support conditions differ from ordinary cusp holomorphy. Native Tau candidates retain separate ownership in the standalone judgment. Unknown records these checked unresolved interfaces, not absence."
+    },
+    {
+      "concept": "borel-sigma-algebra-real-line",
+      "concept_id": "e9d6fae8-e565-5467-8973-0f80420762c2",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Real.borel_eq_generateFrom_Ioo_rat:44 proves the real Borel sigma-algebra is generated by all rational-endpoint open intervals, using the actual countable topological interval basis. Every rational interval is an open interval and every open interval is Borel; generateFrom_le:349 therefore identifies the same sigma-algebra generated by ALL open intervals, exactly the paragraph. Generic borel is generated by open sets and no completion by null sets is inserted. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Constructions/BorelSpace/Real.lean",
+          "declarations": "Real.borel_eq_generateFrom_Ioo_rat:44",
+          "note": "Actual real-interval generating characterization and ordinary real Borel measurable-set API."
+        }
+      ],
+      "search_notes": "The real Lebesgue-completed sigma-algebra is larger and is not substituted. Generic Borel/generating-operator definitions were checked as suppliers, not an import-file inventory."
+    },
+    {
+      "concept": "borel-sigma-algebra-real-line",
+      "concept_id": "e9d6fae8-e565-5467-8973-0f80420762c2",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency real open-interval generation characterization agrees. Native Real.measurableSet_gridCell:44 proves half-open real interval cells are Borel measurable by the exact gridCell_eq_Ico rewrite and inherited measurableSet_Ico. This is ordinary direct real-Borel interval recognition API, with no measure/finite-measure assumption. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Constructions/BorelSpace/Real.lean",
+          "declarations": "Real.measurableSet_gridCell:44",
+          "note": "Native direct Borel measurability of real half-open interval cells."
+        }
+      ],
+      "search_notes": "Real intervals are the stated ambient set, not a measurable choice on an arbitrary topological space. Native ENNReal joint distance theorem in the same file is not an additional reason for selecting it."
+    },
+    {
+      "concept": "generated-sigma-algebra",
+      "concept_id": "f77e4690-cde8-50d8-8229-12a227d0a773",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "GenerateMeasurable:320 is the actual inductive closure under containing generators, empty set, complement and countable union; generateFrom:329 bundles it as a sigma-algebra. generateFrom_le:349 proves it is contained in EVERY sigma-algebra containing those generators, and measurableSet_generateFrom:335 gives containment the other way. This is exactly the smallest sigma-algebra, hence the intersection-of-all-containing-ones formulation, not a finite Boolean closure. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/MeasurableSpace/Defs.lean",
+          "declarations": "MeasurableSpace.GenerateMeasurable:320; generateFrom:329; measurableSet_generateFrom:335; generateFrom_le:349",
+          "note": "Actual sigma-algebra generation constructor and completed minimality/induction API."
+        }
+      ],
+      "search_notes": "Generators may be arbitrary/infinite and need not themselves form a pi-system. No probability measure or completeness is chosen."
+    },
+    {
+      "concept": "generated-sigma-algebra",
+      "concept_id": "f77e4690-cde8-50d8-8229-12a227d0a773",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency generating sigma-algebra constructor/minimality agrees. Native MeasurableSpace.sup_eq_generateFrom_inter_measurableSet:39 proves the join of TWO sigma-algebras is generated by pairwise intersections of their measurable sets; its full proof establishes both inequalities using the actual generateFrom minimality. isPiSystem_inter_measurableSet:30 verifies the generator family. This is direct ordinary generator/change-of-generators API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/MeasurableSpace/Sup.lean",
+          "declarations": "MeasurableSpace.isPiSystem_inter_measurableSet:30; sup_eq_generateFrom_inter_measurableSet:39",
+          "note": "Native ordinary sigma-algebra generator comparison and join recognition API."
+        }
+      ],
+      "search_notes": "The two-space statement retains its actual form and does not claim arbitrary intersections of sets are generators without proof. Conditional independence/monotone-class applications elsewhere are separate endpoints."
+    },
+    {
+      "concept": "indicator-function",
+      "concept_id": "19a05d55-9eea-5be4-b598-ed0345af84b9",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Set.indicator is the generated additive declaration at Set.mulIndicator:52: at x it is f(x) if x belongs to A, otherwise0. Specialize f to the constant REAL1 function. Generated indicator_of_mem:67 and indicator_of_notMem:70 give exactly1 on A and0 off it, with no measurability assumption on A. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Notation/Indicator.lean",
+          "declarations": "Set.indicator (generated at mulIndicator:52); indicator_of_mem (generated at mulIndicator_of_mem:67); indicator_of_notMem (generated at mulIndicator_of_notMem:70)",
+          "note": "Actual piecewise real indicator constructor and exact membership value API."
+        }
+      ],
+      "search_notes": "The multiplicative indicator takes value1 outside and is a different generic operation; the additive declaration with constant1 is explicitly used. Measurability/integrability need extra conditions and are not part of this definition."
+    },
+    {
+      "concept": "indicator-function",
+      "concept_id": "19a05d55-9eea-5be4-b598-ed0345af84b9",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency additive indicator constructor agrees. Native Finset.prod_mulIndicator_apply_of_mem:40 has an actual generated additive sum-indicator version: for pairwise disjoint sets and x in the ith set, the finite sum of supported summands equals exactly its ith value. Read the full finite-product single-term proof; additive specialization and constant1 summands are ordinary real indicator partition API. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/BigOperators/Group/Finset/Indicator.lean",
+          "declarations": "Finset.prod_mulIndicator_apply_of_mem:40 / generated sum_indicator_apply_of_mem",
+          "note": "Native direct disjoint-family indicator sum evaluation, including the real constant1 case."
+        }
+      ],
+      "search_notes": "Pairwise disjointness and finite family belong to this ordinary API; arbitrary A retains its inherited definition. Scalar functions commuting pairwise, topology at frontiers and Lp norms are independent added endpoints."
+    },
+    {
+      "concept": "integral-monotonicity",
+      "concept_id": "2ea1d3ce-059f-53fd-a8f2-14d7c85383e3",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "MeasureTheory.lintegral_mono:86 proves pointwise f<=g implies lower integral f<=lower integral g, without finite-integral or measurability restrictions. Its actual sup-over-simple-functions proof:76 was read. For nonnegative measurable REAL functions use ENNReal.ofReal f/g; this preserves their order and represents the nonnegative Lebesgue integral with values in extended nonnegative reals, including infinity. The real-valued totalized Bochner integral is not used to compare infinite integrals. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Lebesgue/Basic.lean",
+          "declarations": "MeasureTheory.lintegral_mono':76; lintegral_mono:86; lintegral_mono_nnreal:89",
+          "note": "Actual completed nonnegative extended Lebesgue integral monotonicity and immediate variants."
+        }
+      ],
+      "search_notes": "No integrability, sigma-finiteness or finite measure condition is added to the general theorem. The positive-function encoding, rather than a junk integral0 for nonintegrable functions, preserves infinity."
+    },
+    {
+      "concept": "integral-monotonicity",
+      "concept_id": "2ea1d3ce-059f-53fd-a8f2-14d7c85383e3",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency extended-integral monotonicity agrees. Native lintegral_enorm_mul_le_setLIntegral_of_support_subset:38 proves the elementary direct consequence that a cutoff with |chi|<=1 and support in s cannot increase the extended integral of |u| on s. The full proof first establishes the pointwise indicator bound and applies lintegral_mono; it allows infinite integrals and needs no measurability or finite measure. This is ordinary native monotonicity/bound API, with complete actual short proof checked. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Integral/Lebesgue/Cutoff.lean",
+          "declarations": "TauCeti.lintegral_enorm_mul_le_setLIntegral_of_support_subset:38",
+          "note": "Native direct nonnegative-integral comparison from the explicit pointwise cutoff bound."
+        }
+      ],
+      "search_notes": "The general f<=g theorem remains dependency-owned. Later cutoff convergence/dominated convergence, subsequence extraction and measurable-hull identities are separate endpoints, not extra mapped files."
+    },
+    {
+      "concept": "linearity-lebesgue-integral",
+      "concept_id": "6455358e-6a85-58c3-93a2-6934ef7671ef",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Integral/Bochner/Basic.integral_add:238 and integral_smul:274 prove the real linear integral formula, by the actual additive/scalar laws of the integrated L1 extension. Function/L1Space/Integrable.add:450 and smul:988 prove af+bg is INTEGRABLE whenever f,g are; specializing scalar/target to Real gives exactly the whole paragraph, including negative scalars. Read these actual constructor and setToFun proofs. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+          "declarations": "MeasureTheory.integral_add:238; integral_smul:274",
+          "note": "Actual completed real integral addition/scalar linearity API."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Function/L1Space/Integrable.lean",
+          "declarations": "MeasureTheory.Integrable.add:450; Integrable.smul:988",
+          "note": "Actual integrability closure for the stated affine linear combinations, an explicit part of the endpoint."
+        }
+      ],
+      "search_notes": "Both integrals are finite because integrability is assumed. Do not apply extended-positive integral subtraction to an infinity-minus-infinity expression; no sigma-finite/finite measure restriction."
+    },
+    {
+      "concept": "linearity-lebesgue-integral",
+      "concept_id": "6455358e-6a85-58c3-93a2-6934ef7671ef",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency real integral addition:239/scalar:275 and integrability closure add:451/smul:995 agree. Integrable.lean has earlier proof/tactic expansions, but these actual relevant theorem statements and completed bodies were compared and agree. Native AddMonoidHom.integral_comp_comm:178 proves integration commutes with an arbitrary continuous additive map between real Banach spaces, by its actual continuous-real-linear realization. Specializing to real scalar/additive combinations gives direct ordinary linear integral/natural-map API; its integrability hypothesis remains explicit. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Integral/Bochner/Basic.lean",
+          "declarations": "AddMonoidHom.integral_comp_comm:178",
+          "note": "Native ordinary additive/linear-map commutation API for the real Lebesgue integral."
+        }
+      ],
+      "search_notes": "This is actual substantive integral commutation, not a superclass installer. Affine changes of variables, Holder/Cauchy-Schwarz and infinite-sum interchange are independently significant endpoints."
+    },
+    {
+      "concept": "measurable-map",
+      "concept_id": "42f2460c-aedd-5b89-b5ad-be144a20efcc",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "Measurable:492 is literally forall measurable t in the codomain, the preimage f inverse(t) is measurable in the domain. The two MeasurableSpace parameters are independent given data; neither continuity nor a measure nor completion is assumed. Actual definition and its basic preimage/identity/composition interpretation checked. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/MeasurableSpace/Defs.lean",
+          "declarations": "Measurable:492",
+          "note": "Actual exact preimage-measurability predicate and ordinary measurable-map API."
+        }
+      ],
+      "search_notes": "Almost-everywhere measurability depends on a measure and is a different predicate. No singleton measurability or countability is needed for this definition."
+    },
+    {
+      "concept": "measurable-map",
+      "concept_id": "42f2460c-aedd-5b89-b5ad-be144a20efcc",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency preimage predicate agrees. Native Measurable.eval_index:35 proves a measurable family evaluated at a measurable COUNTABLE index is measurable, by the actual countable-product evaluation theorem and composition. Read its completed source proof; measurable-singleton/countable-index conditions are kept on this ordinary evaluation/composition API, without imposing them on the general map definition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/MeasurableSpace/Eval.lean",
+          "declarations": "Measurable.eval_index:35",
+          "note": "Native actual measurable variable-index evaluation/composition API."
+        }
+      ],
+      "search_notes": "The source warns that joint evaluation need not be measurable for uncountable indices; no uncountable extension is asserted. Uniformization/selection and graph classification are separate endpoints."
+    },
+    {
+      "concept": "measurable-simple-function",
+      "concept_id": "fadc0851-33d3-5995-80d6-38b0a3b7b4d4",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "MeasureTheory.SimpleFunc:47 is a function with FINITE range and every fiber measurable; measurableSet_preimage:190 and protected measurable:195 prove it is measurable, even into arbitrary target measurable structures. For Real, a measurable finite-range function has measurable singleton fibers, so exactly the catalogue condition. range:116 provides the actual finite set of values; const:149 and restrict:748/coe_restrict:756 identify c on each fiber and0 outside as c times that fiber indicator. The finite sum over these disjoint fibers gives the displayed representation by the existing single-term finite-sum identity. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Function/SimpleFunc.lean",
+          "declarations": "MeasureTheory.SimpleFunc:47; SimpleFunc.range:116; measurableSet_preimage:190; SimpleFunc.measurable:195; restrict:748; coe_restrict:756",
+          "note": "Actual measurable finite-range constructor and elementary finite-fiber/indicator representation API."
+        }
+      ],
+      "search_notes": "Finiteness of the range is essential; countable range alone is not simple. No integrability or finite-measure support is part of this definition."
+    },
+    {
+      "concept": "measurable-simple-function",
+      "concept_id": "fadc0851-33d3-5995-80d6-38b0a3b7b4d4",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency simple-function/fiber constructors agree. Native map_apply_eq_sum_restrict_const:34 and map_eq_sum_restrict_const:44 prove actual finite-fiber expansion pointwise and as a function; eq_sum_restrict_const:53 specializes to the function itself. Read the completed Finset.sum_eq_single proof using finite range and measurable fibers. For Real, each restricted constant is precisely a_i times the level-set indicator, exactly the catalogue explanatory formula. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Function/SimpleFunc/Basic.lean",
+          "declarations": "MeasureTheory.SimpleFunc.map_apply_eq_sum_restrict_const:34; map_eq_sum_restrict_const:44; eq_sum_restrict_const:53",
+          "note": "Native exact finite measurable-level-set expansion and ordinary simple-function map/indicator API."
+        }
+      ],
+      "search_notes": "The finite sum is over the existing actual range, with pairwise disjoint fibers. Lp density, approximation convergence and noncommutative integration are additional endpoints."
+    },
+    {
+      "concept": "measurable-space",
+      "concept_id": "2efe801e-7bc2-57d8-977a-58ae0286d80b",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "formalized",
+      "evidence": "MeasurableSpace:47 stores a specified predicate on subsets, empty-set membership, complement closure and closure under countable Nat-indexed unions. These are exactly sigma-algebra axioms; the underlying type supplies the set. MeasurableSet:63 is membership in that chosen structure. Actual fields read: no probability measure, topology or all-singletons axiom is added. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/MeasurableSpace/Defs.lean",
+          "declarations": "MeasurableSpace:47; MeasurableSet:63",
+          "note": "Actual specified sigma-algebra constructor and ordinary measurable-set closure API."
+        }
+      ],
+      "search_notes": "Different sigma-algebras on the same set are different structures. MeasureSpace and BorelSpace add data/compatibility and are not substituted."
+    },
+    {
+      "concept": "measurable-space",
+      "concept_id": "2efe801e-7bc2-57d8-977a-58ae0286d80b",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "formalized",
+      "evidence": "Dependency specified sigma-algebra fields agree. Native MeasurableSpace.sup_eq_generateFrom_inter_measurableSet:39 actually constructs/recognizes the join of two given sigma-algebras through their intersection generators; read both universal inequalities. This is ordinary native sigma-algebra lattice/closure API on the same underlying set, with no measure or topology. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/MeasurableSpace/Sup.lean",
+          "declarations": "MeasurableSpace.isPiSystem_inter_measurableSet:30; sup_eq_generateFrom_inter_measurableSet:39",
+          "note": "Native direct join/generator recognition API for specified sigma-algebra structures."
+        }
+      ],
+      "search_notes": "The same genuine core file contributes to generated sigma-algebras too; whole-file sharing is intended. Conditional independence and stochastic process constructions merely use these structures and are excluded."
+    },
+    {
+      "concept": "divisor-meromorphic-function-manifold",
+      "concept_id": "b41706bf-8d5e-59ad-9aea-4bbff53dcf9a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "partial",
+      "evidence": "Actual MeromorphicOn.divisor:41 is a locally finite integer-valued point sum on an open subset U of the ONE-dimensional scalar field C, using meromorphicOrderAt and its locally discrete nonzero support. Its complete local-finiteness constructor proof was inspected. For nonzero meromorphic functions in one complex variable this is the exact zero/pole order divisor, a genuine implemented restriction/component. The general construction on irreducible hypersurfaces of arbitrary complex manifolds was not certified; keep partial. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Meromorphic/Divisor.lean",
+          "declarations": "MeromorphicOn.divisor:41; divisor_def:61",
+          "note": "Actual one-complex-variable locally finite zero/pole order divisor and elementary order/divisor API."
+        }
+      ],
+      "search_notes": "Higher-dimensional hypersurface irreducibility/order and chart-independent manifold gluing remain unverified. Mathematical divisor convention needs a nonzero/nonidentically-zero function: the source totalizes infinite order at the zero function to0, which is not claimed as its standard divisor. This scope ambiguity is recorded, without changing the catalogue identity."
+    },
+    {
+      "concept": "divisor-meromorphic-function-manifold",
+      "concept_id": "b41706bf-8d5e-59ad-9aea-4bbff53dcf9a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "partial",
+      "evidence": "Native Analysis/Meromorphic/Divisor:102 proves the one-variable divisor equals analytic zero order at analytic points, and :113 proves nonzero analytic points have coefficient0. Native RiemannSurface.FunctionField.Order.order:83 is the actual order valuation on a connected complex ONE-dimensional manifold, with complete zero/add/mul proofs. orderSystem:148 on a COMPACT connected Riemann surface proves the nonzero function has finite support; the actual generic OrderSystem.principalDivisor:79 sums those integer orders as a Weil point divisor. This extends the checked one-variable component to compact complex curves. The arbitrary-dimensional irreducible-hypersurface construction remains unverified, so partial. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Meromorphic/Divisor.lean",
+          "declarations": "MeromorphicOn.divisor_eq_analyticOrderNatAt:102; AnalyticAt.divisor_apply_eq_zero:113",
+          "note": "Native direct local zero-order/analytic comparison API for the implemented one-variable divisor component."
+        },
+        {
+          "path": "TauCeti/Analysis/Complex/RiemannSurface/FunctionField/Order.lean",
+          "declarations": "TauCeti.RiemannSurface.MeromorphicFunction.order:83; order_apply:99; orderSystem:148",
+          "note": "Native actual charted complex-curve order valuation and finite-support principal-divisor order system on compact curves."
+        }
+      ],
+      "search_notes": "WeilDivisor/Basic is finite sums of POINTS; Principal/Basic79/83 and its support sum were checked as suppliers. Do not relabel these as locally finite sums of hypersurfaces in higher dimension. The native nonzero unit input correctly excludes the zero function; general noncompact manifold gluing is an unresolved frontier."
+    },
+    {
+      "concept": "gritsenko-nikulin-delta-five-product",
+      "concept_id": "f7ec3004-440b-554c-9c71-e9e91aacb377",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Bounded Delta5/Gritsenko/Nikulin/genus-two theta-product/Jacobi-coefficient searches did not certify the normalized ten-even-theta-constant product or its exact (qrs)^(1/2) infinite product with f(4nm-l^2). The actual native SiegelFunction:95 is a one-variable modular unit built from q-Pochhammer factors, not a genus-two weight-five form. Ordinary theta functions and generic products do not prove this product identity. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [],
+      "search_notes": "Need the actual genus-two ten-theta normalization, positivity-index convention and discriminant coefficient function of phi0,1. Native Tau candidates have separate ownership in standalone Mathlib judgments. Unknown is a bounded exact theorem frontier, not absence."
+    },
+    {
+      "concept": "humbert-surface",
+      "concept_id": "1ba9cb42-c723-529d-95cb-941378ee526a",
+      "concept_revision": 1,
+      "library": "mathlib",
+      "status": "unknown",
+      "evidence": "Bounded Humbert/genus-two Siegel-space/symplectic-quotient/quadratic-divisor searches did not certify the required ambient Sp4(Z) quotient and its genus-two Siegel domain. Generic matrix positive-definiteness and the displayed polynomial zero set are expressible, but their exact existing domain/action/quotient construction and image of all primitive positive-discriminant divisors were not checked. Ordinary upper-half-plane ModularForm and the one-variable native SiegelFunction are different ambient objects. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [],
+      "search_notes": "A generic polynomial set alone is not the specified Humbert surface without the Siegel-domain and arithmetic quotient interpretation. All five primitive coefficients and D=b^2-4ac-4de must be retained. Unknown names these unresolved constructor bridges, not an absence claim."
+    },
+    {
+      "concept": "gritsenko-nikulin-delta-five-product",
+      "concept_id": "f7ec3004-440b-554c-9c71-e9e91aacb377",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Bounded Delta5/Gritsenko/Nikulin/genus-two theta-product/Jacobi-coefficient searches did not certify the normalized ten-even-theta-constant product or its exact (qrs)^(1/2) infinite product with f(4nm-l^2). The actual native SiegelFunction:95 is a one-variable modular unit built from q-Pochhammer factors, not a genus-two weight-five form. Ordinary theta functions and generic products do not prove this product identity. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [],
+      "search_notes": "Need the actual genus-two ten-theta normalization, positivity-index convention and discriminant coefficient function of phi0,1. Native Tau candidates have separate ownership in standalone Mathlib judgments. Unknown is a bounded exact theorem frontier, not absence."
+    },
+    {
+      "concept": "humbert-surface",
+      "concept_id": "1ba9cb42-c723-529d-95cb-941378ee526a",
+      "concept_revision": 1,
+      "library": "tau-ceti",
+      "status": "unknown",
+      "evidence": "Bounded Humbert/genus-two Siegel-space/symplectic-quotient/quadratic-divisor searches did not certify the required ambient Sp4(Z) quotient and its genus-two Siegel domain. Generic matrix positive-definiteness and the displayed polynomial zero set are expressible, but their exact existing domain/action/quotient construction and image of all primitive positive-discriminant divisors were not checked. Ordinary upper-half-plane ModularForm and the one-variable native SiegelFunction are different ambient objects. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Relevant actual committed declarations, hypotheses and completed source bodies inspected; source review only, no new proof development or fresh build.",
+      "files": [],
+      "search_notes": "A generic polynomial set alone is not the specified Humbert surface without the Siegel-domain and arithmetic quotient interpretation. All five primitive coefficients and D=b^2-4ac-4de must be retained. Unknown names these unresolved constructor bridges, not an absence claim."
+    }
+  ]
+}

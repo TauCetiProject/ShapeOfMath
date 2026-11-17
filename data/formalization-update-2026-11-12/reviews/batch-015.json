@@ -1,0 +1,275 @@
+{
+  "batch_id": "batch-015",
+  "reviewer": "analysis_formalization",
+  "proposal_sha256": "54f81cf69c75d1f46615d2990970206621d4e0d4646d95ac98c3e4d88e00f9fd",
+  "decisions": [
+    {
+      "concept": "inner-function-unit-disk",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "The prior unknown imposed an extra theorem requirement on a bare definition. Actual bounded-holomorphic, AE and one-sided Tendsto constructors give the exact predicate directly; the radius filter eventually stays in the disk. Full replacement distinguishes Tau-owned H-infinity carrier from Mathlib generic suppliers and does not assert a Fatou theorem.",
+      "replacement": {
+        "concept": "inner-function-unit-disk",
+        "concept_id": "f10f07db-c343-50ae-9ae6-18cc47d6d9fa",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "The exact generic definition is the subtype of bounded holomorphic disk functions f for which, for Haar-almost every zeta:Circle, there exists L:Complex with Tendsto (fun r:Real => g(r • (zeta:Complex))) (nhdsWithin 1 (Iio 1)) (nhds L) and norm L=1; g is any ambient extension agreeing with f on the open disk. Since norm zeta=1 (Analysis/Complex/Circle.norm_coe:72), radii r approaching 1 from below are eventually positive and r*zeta is inside the disk; extension values elsewhere do not affect this filter. MeasureTheory.ae:48 in OuterMeasure/AE is literally the co-null filter, and Metric.tendsto_nhdsWithin_nhds:864 gives the exact one-sided limit relation. Circle has the inherited Borel structure (MeasureTheory/Group/Circle:32/34), and Measure.haarMeasure:520 normalized at the compact whole Circle gives circle Haar measure (haarMeasure_self:540); normalization does not alter the AE predicate. This is precisely the catalogue definition. No theorem that arbitrary bounded holomorphic functions possess radial limits, no selected boundary-function constructor, and no Fatou theorem is needed to form this subtype. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The ambient generic H-infinity carrier checked in batch013 is {f:U→boundedContinuous Complex | DifferentiableOn Complex (Function.extend Subtype.val f 0) U}, U=open unit disk: actual BoundedContinuousFunction:41 and DifferentiableOn:166 give exactly bounded holomorphy, and the injective extension agrees on U. Tau boundedHolomorphicFunctions and Conformal/RadialLimit are not standalone Mathlib ownership. Source statements/bodies inspected; no fresh build or transitive proof audit.",
+        "files": [
+          {
+            "path": "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+            "declarations": "BoundedContinuousFunction (:41)",
+            "note": "Native exact bounded-continuous carrier restricted by complex holomorphy and the radial-limit predicate."
+          },
+          {
+            "path": "Mathlib/Analysis/Calculus/FDeriv/Defs.lean",
+            "declarations": "DifferentiableOn (:166)",
+            "note": "Native actual complex holomorphy predicate in the exact generic inner-function representation."
+          },
+          {
+            "path": "Mathlib/Topology/MetricSpace/Pseudo/Defs.lean",
+            "declarations": "Metric.tendsto_nhdsWithin_nhds (:864)",
+            "note": "Native one-sided epsilon-delta radial-limit relation used in the defining predicate."
+          }
+        ],
+        "search_notes": "Reviewed the exact bare definition separately from the substantive radial-limit existence theorem. Tau Conformal/RadialLimit:114 needs derivative integrability; Hardy DiskFunction supplies L2 radial convergence, neither is substituted for full AE radial convergence. They need not prove that condition for every bounded holomorphic function to define the subtype of functions satisfying it. Factorization and boundary norm theorems remain separate unresolved endpoints. Generic measure/Circle/extension helpers are checked suppliers, not an imported file tree."
+      }
+    },
+    {
+      "concept": "inner-function-unit-disk",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "The prior unknown imposed an extra theorem requirement on a bare definition. Actual bounded-holomorphic, AE and one-sided Tendsto constructors give the exact predicate directly; the radius filter eventually stays in the disk. Full replacement distinguishes Tau-owned H-infinity carrier from Mathlib generic suppliers and does not assert a Fatou theorem.",
+      "replacement": {
+        "concept": "inner-function-unit-disk",
+        "concept_id": "f10f07db-c343-50ae-9ae6-18cc47d6d9fa",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "The exact generic definition is the subtype of bounded holomorphic disk functions f for which, for Haar-almost every zeta:Circle, there exists L:Complex with Tendsto (fun r:Real => g(r • (zeta:Complex))) (nhdsWithin 1 (Iio 1)) (nhds L) and norm L=1; g is any ambient extension agreeing with f on the open disk. Since norm zeta=1 (Analysis/Complex/Circle.norm_coe:72), radii r approaching 1 from below are eventually positive and r*zeta is inside the disk; extension values elsewhere do not affect this filter. MeasureTheory.ae:48 in OuterMeasure/AE is literally the co-null filter, and Metric.tendsto_nhdsWithin_nhds:864 gives the exact one-sided limit relation. Circle has the inherited Borel structure (MeasureTheory/Group/Circle:32/34), and Measure.haarMeasure:520 normalized at the compact whole Circle gives circle Haar measure (haarMeasure_self:540); normalization does not alter the AE predicate. This is precisely the catalogue definition. No theorem that arbitrary bounded holomorphic functions possess radial limits, no selected boundary-function constructor, and no Fatou theorem is needed to form this subtype. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native HolomorphicFunctions/Bounded.boundedHolomorphicFunctions:71 gives the exact bounded holomorphic submodule, iff_extend:96 and extend/extend_apply:140/144 give its actual ambient representative; specialize V=E=Complex, U=open unit disk, and restrict by the displayed predicate. Native of:130 constructs ambient bounded holomorphic functions; the checked defining/membership proofs are complete. The AE/limit/Haar suppliers are dependency-owned; the relevant dependency limit/AE/Haar/Borel files are byte-identical and actual Circle norm_coe agrees. Source statements/bodies inspected; no fresh build or transitive proof audit.",
+        "files": [
+          {
+            "path": "TauCeti/Analysis/Complex/HolomorphicFunctions/Bounded.lean",
+            "declarations": "TauCeti.boundedHolomorphicFunctions (:71); mem_boundedHolomorphicFunctions_iff_extend (:96); BoundedHolomorphicFunctions.of (:130); extend (:140); extend_apply (:144)",
+            "note": "Native exact bounded-holomorphic disk function carrier and ambient extension, restricted by the precise AE-unimodular radial-limit predicate."
+          }
+        ],
+        "search_notes": "Reviewed the exact bare definition separately from the substantive radial-limit existence theorem. Tau Conformal/RadialLimit:114 needs derivative integrability; Hardy DiskFunction supplies L2 radial convergence, neither is substituted for full AE radial convergence. They need not prove that condition for every bounded holomorphic function to define the subtype of functions satisfying it. Factorization and boundary norm theorems remain separate unresolved endpoints. Generic measure/Circle/extension helpers are checked suppliers, not an imported file tree."
+      }
+    },
+    {
+      "concept": "inner-outer-factorization-h2",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Checked the actual radial-limit statement (derivative-integrable holomorphic input), Hardy disk L2 radial realization and multiplier-space meaning against the stated H2 product/existence/uniqueness endpoint. Those ingredients do not certify the inner/outer factors or opposite-unimodular uniqueness; explicit unknown frontier is appropriate.",
+      "replacement": {
+        "concept": "inner-outer-factorization-h2",
+        "concept_id": "f564e394-b1e6-585c-88ce-624f38f70411",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "unknown",
+        "evidence": "Reviewed Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The inspected Tau-owned Hardy multiplier algebra is a subalgebra of L-infinity boundary multipliers preserving H2, and Tau-owned RadialMean:41/59 proves harmonic majorant/radial-average norm estimates for H2 disk functions. Neither inspected statement defines/proves the outer factor for every nonzero H2 function, obtains an AE-unimodular inner factor, or proves uniqueness modulo opposite unimodular constants. The complete factorization endpoint remains unverified. Source inspection only; no fresh Lean build or transitive axiom audit. These Tau proofs are not native Mathlib; the separate Mathlib generic bounded-holomorphic construction does not implement factorization.",
+        "files": [],
+        "search_notes": "Scoped inner-outer/outerFunction/factorization searches in actual complex and Hardy sources; read the actual radial mean and multiplier definitions/proofs. Finite Blaschke factors, generic holomorphic germ factorization and polynomial splitting are different notions. No absence assertion; missing existence of both factors and the stated uniqueness is explicit."
+      }
+    },
+    {
+      "concept": "inner-outer-factorization-h2",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked the actual radial-limit statement (derivative-integrable holomorphic input), Hardy disk L2 radial realization and multiplier-space meaning against the stated H2 product/existence/uniqueness endpoint. Those ingredients do not certify the inner/outer factors or opposite-unimodular uniqueness; explicit unknown frontier is appropriate."
+    },
+    {
+      "concept": "inner-product-cstar-module",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read CStarModule fields73–83 and sesquilinear constructor127: separation and induced norm are present without CompleteSpace. Native ext_inner_left27 reduces equality to inner(x-y,x-y)=0 and ext_inner_right33 uses star symmetry; ordinary separated-inner API qualifies."
+    },
+    {
+      "concept": "inner-product-cstar-module",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read CStarModule fields73–83 and sesquilinear constructor127: separation and induced norm are present without CompleteSpace. Native ext_inner_left27 reduces equality to inner(x-y,x-y)=0 and ext_inner_right33 uses star symmetry; ordinary separated-inner API qualifies."
+    },
+    {
+      "concept": "interior-topological-space",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read interior122 as sUnion of open subsets contained in s. Native Closure51/57/64 proves direct interior/complement coverage normal forms without extra separation; both ownership and associated-API boundaries are sound."
+    },
+    {
+      "concept": "interior-topological-space",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read interior122 as sUnion of open subsets contained in s. Native Closure51/57/64 proves direct interior/complement coverage normal forms without extra separation; both ownership and associated-API boundaries are sound."
+    },
+    {
+      "concept": "intersection-body",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independent scoped intersectionBody/radial/star-body/section searches and checked radial/convex suppliers do not resolve a star body realizing the hyperplane-section volume at every direction. Projection data does not establish section volume or radial-body realization; unknown accurately records this frontier."
+    },
+    {
+      "concept": "intersection-body",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independent scoped intersectionBody/radial/star-body/section searches and checked radial/convex suppliers do not resolve a star body realizing the hyperplane-section volume at every direction. Projection data does not establish section volume or radial-body realization; unknown accurately records this frontier."
+    },
+    {
+      "concept": "inverse-function-theorem-euclidean",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read the actual inverse constructions/proofs: Mathlib FDeriv118/187 and ContDiff31/66 give local homeomorphism plus inverse regularity AT the base image. Tau115 propagates invertibility by an actual norm estimate,128/147 handles every target point,217 restricts inside the specified open domain and proves full-target C^n. The smooth whole-neighborhood gap is substantive; partial Mathlib/full Tau is supported."
+    },
+    {
+      "concept": "inverse-function-theorem-euclidean",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read the actual inverse constructions/proofs: Mathlib FDeriv118/187 and ContDiff31/66 give local homeomorphism plus inverse regularity AT the base image. Tau115 propagates invertibility by an actual norm estimate,128/147 handles every target point,217 restricts inside the specified open domain and proves full-target C^n. The smooth whole-neighborhood gap is substantive; partial Mathlib/full Tau is supported."
+    },
+    {
+      "concept": "jackson-approximation-sphere",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independent Jackson/sphere/degree-rate search found no checked quantitative endpoint; read native one-sided Weierstrass44, which offers arbitrary epsilon on an interval with no degree bound. This cannot yield the catalogue C*lambda*n/k assertion by renaming it; unknown and excluded ownership are justified."
+    },
+    {
+      "concept": "jackson-approximation-sphere",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independent Jackson/sphere/degree-rate search found no checked quantitative endpoint; read native one-sided Weierstrass44, which offers arbitrary epsilon on an interval with no degree bound. This cannot yield the catalogue C*lambda*n/k assertion by renaming it; unknown and excluded ownership are justified."
+    },
+    {
+      "concept": "jacobian-matrix",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read toMatrix365 entries f(single j1)i, fderiv_pi481/apply490, lineDeriv319, and the completed Tau inverse-matrix proof39 via fderiv composition and matrix equivalence. These identify exact coordinate partials under differentiability; inverse-Jacobian identity is ordinary associated API. Dependency files byte-identical."
+    },
+    {
+      "concept": "jacobian-matrix",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read toMatrix365 entries f(single j1)i, fderiv_pi481/apply490, lineDeriv319, and the completed Tau inverse-matrix proof39 via fderiv composition and matrix equivalence. These identify exact coordinate partials under differentiability; inverse-Jacobian identity is ordinary associated API. Dependency files byte-identical."
+    },
+    {
+      "concept": "jordan-curve-theorem",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read native frontier175, inside-component109, inside/outside frontier124/134 and two-component252 proofs. The latter explicitly constructs distinct inside/outside components and exhausts all components. Filled-hull definition/boundedness supplies unbounded outside and bounded inside. Standalone Mathlib search does not certify this separate Tau theorem; two selected core files are appropriate."
+    },
+    {
+      "concept": "jordan-curve-theorem",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read native frontier175, inside-component109, inside/outside frontier124/134 and two-component252 proofs. The latter explicitly constructs distinct inside/outside components and exhausts all components. Filled-hull definition/boundedness supplies unbounded outside and bounded inside. Standalone Mathlib search does not certify this separate Tau theorem; two selected core files are appropriate."
+    },
+    {
+      "concept": "klartag-isomorphic-minkowski-symmetrization",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independent Klartag/mean-width/iteration search and checked Steiner-versus-Minkowski distinction leave the exact 5n, central symmetry and dimension-error ball containment endpoint unresolved. Existing generic symmetrization constructor is not that theorem; unknown is honest."
+    },
+    {
+      "concept": "klartag-isomorphic-minkowski-symmetrization",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independent Klartag/mean-width/iteration search and checked Steiner-versus-Minkowski distinction leave the exact 5n, central symmetry and dimension-error ball containment endpoint unresolved. Existing generic symmetrization constructor is not that theorem; unknown is honest."
+    },
+    {
+      "concept": "klartag-minkowski-symmetrization-rate",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independent quantitative iteration search did not verify cn|log epsilon| iterations and both normalized radius bounds. Generic set averaging and Steiner perimeter do not prove the Minkowski quantitative theorem; scoped unknown is appropriate."
+    },
+    {
+      "concept": "klartag-minkowski-symmetrization-rate",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independent quantitative iteration search did not verify cn|log epsilon| iterations and both normalized radius bounds. Generic set averaging and Steiner perimeter do not prove the Minkowski quantitative theorem; scoped unknown is appropriate."
+    },
+    {
+      "concept": "laplace-beltrami-tangent-fields",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read roughLaplacian84 as negative metric trace, basis formula90 and actual Leibniz188 proof with Levi-Civita tangent connection. That supplies a classical smooth connection Laplacian, but not the selected weak L2 formal-adjoint identification. Partial Tau/unknown Mathlib records this exact remaining bridge without substituting Hodge Laplacian."
+    },
+    {
+      "concept": "laplace-beltrami-tangent-fields",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read roughLaplacian84 as negative metric trace, basis formula90 and actual Leibniz188 proof with Levi-Civita tangent connection. That supplies a classical smooth connection Laplacian, but not the selected weak L2 formal-adjoint identification. Partial Tau/unknown Mathlib records this exact remaining bridge without substituting Hodge Laplacian."
+    },
+    {
+      "concept": "lebesgue-differentiation-theorem",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read locally-integrable localization827, normalized-average conversion849 and moving-closed-ball specialization149. Tau40 makes the constant-center/radius-filter substitution explicitly. Haar doubling and nonzero sphere-null hypotheses specialize to Euclidean Lebesgue, with completed-Lebesgue AE semantics unchanged; theorem and file boundary are sound."
+    },
+    {
+      "concept": "lebesgue-differentiation-theorem",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read locally-integrable localization827, normalized-average conversion849 and moving-closed-ball specialization149. Tau40 makes the constant-center/radius-filter substitution explicitly. Haar doubling and nonzero sphere-null hypotheses specialize to Euclidean Lebesgue, with completed-Lebesgue AE semantics unchanged; theorem and file boundary are sound."
+    },
+    {
+      "concept": "lebesgue-measure",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read normalized basis Haar254/Euclidean instance310, real Stieltjes normalization55/interval87/product-box236, and completion475/483/490 whose outer measure and set values are literally preserved. Native signedPerm79 and disjoint interval lengths91 are direct ordinary measure API. Completion is explicitly accounted for, not inferred from a Borel measure."
+    },
+    {
+      "concept": "lebesgue-measure",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read normalized basis Haar254/Euclidean instance310, real Stieltjes normalization55/interval87/product-box236, and completion475/483/490 whose outer measure and set values are literally preserved. Native signedPerm79 and disjoint interval lengths91 are direct ordinary measure API. Completion is explicitly accounted for, not inferred from a Borel measure."
+    },
+    {
+      "concept": "lebesgue-point",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read average279, reciprocal-measure setAverage402, metric positive-radius filter864. This exact conjunction is the bare individual-point property; no AE theorem required. Tau584/591 compares the average against the specified constant f(x), not against the set-average, with finite-positive measure/integrability hypotheses. Direct criterion API qualifies."
+    },
+    {
+      "concept": "lebesgue-point",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read average279, reciprocal-measure setAverage402, metric positive-radius filter864. This exact conjunction is the bare individual-point property; no AE theorem required. Tau584/591 compares the average against the specified constant f(x), not against the set-average, with finite-positive measure/integrability hypotheses. Direct criterion API qualifies."
+    },
+    {
+      "concept": "limit-inferior-real-sequence",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read complete-lattice limsup tail-sup formula312 and its actual to_dual annotation generating liminf tail-inf; EReal permits both infinite endpoints. Exact dependency identical; the native limsup/sum-saturation candidates are distinct endpoint results, so no unsupported native lower-limit attribution."
+    },
+    {
+      "concept": "limit-inferior-real-sequence",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read complete-lattice limsup tail-sup formula312 and its actual to_dual annotation generating liminf tail-inf; EReal permits both infinite endpoints. Exact dependency identical; the native limsup/sum-saturation candidates are distinct endpoint results, so no unsupported native lower-limit attribution."
+    },
+    {
+      "concept": "limit-real-function",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Metric864 restricted-neighborhood epsilon-delta equivalence; domain minus singleton supplies the puncture and no condition f(a)=L. Native61 proves an epsilon-neighborhood consequence of zero convergence using product-filter addition and tendsto_order; it is direct ordinary limit API under the accepted API policy."
+    },
+    {
+      "concept": "limit-real-function",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Metric864 restricted-neighborhood epsilon-delta equivalence; domain minus singleton supplies the puncture and no condition f(a)=L. Native61 proves an epsilon-neighborhood consequence of zero convergence using product-filter addition and tendsto_order; it is direct ordinary limit API under the accepted API policy."
+    },
+    {
+      "concept": "linear-map",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read LinearMap84 parents AddHom and MulActionHom and identity-ring-hom notation98. Tau EqOn30 proves exact equality-on-a-subspace-plus-generator through eqLocus/span; this specializes to common-field linearity and is genuine ordinary extensionality API."
+    },
+    {
+      "concept": "linear-map",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read LinearMap84 parents AddHom and MulActionHom and identity-ring-hom notation98. Tau EqOn30 proves exact equality-on-a-subspace-plus-generator through eqLocus/span; this specializes to common-field linearity and is genuine ordinary extensionality API."
+    }
+  ]
+}

@@ -1,0 +1,750 @@
+{
+  "note": "Whole-catalogue formalization update batch-019: independent source review by category_galois_formalization of analysis_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "positive-cone-closed-cstar",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Order.lean",
+          "declarations": "CStarAlgebra.isClosed_nonneg (:551); OrderClosedTopology instance (:565)",
+          "note": "Native positive-cone closedness and immediately induced closed order relation."
+        }
+      ],
+      "evidence": "CStarAlgebra.isClosed_nonneg:551 proves the positive cone closed for NONUNITAL Cstar algebras. Its actual proof passes by the isometric unitization inclusion to the unital cone, identified as a closed selfadjoint/spectral-norm condition. Thus any norm-convergent net/sequence of positive elements has positive limit; no unitality restriction is added. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Closed-set membership under convergence is ordinary topology. Unitization/Spectrum/CFC imported proof suppliers are not added as a transitive file tree.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-cone-closed-cstar",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "CStarAlgebra.isClosed_nonneg:551 proves the positive cone closed for NONUNITAL Cstar algebras. Its actual proof passes by the isometric unitization inclusion to the unital cone, identified as a closed selfadjoint/spectral-norm condition. Thus any norm-convergent net/sequence of positive elements has positive limit; no unitality restriction is added. Exact dependency Order file is byte-identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Native CStar/weak-operator/matrix searches found applications and a weak-operator positive cone theorem for operators; those do not implement the general Cstar norm-closed cone theorem. Zero native LOC, dependency availability retained.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-element-cstar",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Order/Star/Basic.lean",
+          "declarations": "StarOrderedRing (:77); StarOrderedRing.le_iff (:79); star_mul_self_nonneg (:213)",
+          "note": "Native star-positive order and elementary algebraic cone API."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/Rpow/Basic.lean",
+          "declarations": "CStarAlgebra.nonneg_tfae (:349); nonneg_iff_eq_star_mul_self (:380)",
+          "note": "Native Cstar-specific identification of cone elements with single algebraic squares."
+        }
+      ],
+      "evidence": "CStarAlgebra.nonneg_iff_eq_star_mul_self:380 in Rpow/Basic proves precisely 0<=a iff exists b,a=star(b)*b, as part of the actual nonnegative-equivalence proof using the positive square root. In the additive ordered ring, a<=b iff 0<=b-a; Algebra/Order/Star/Basic StarOrderedRing:77/le_iff:79 and star_mul_self_nonneg:213 implement the order, with no scalar positivity confusion. Restrict a,b to selfadjoints as in the catalogue. Generic star-order is finite sums of squares, but the Cstar theorem proves the essential SINGLE-square equivalence. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Did not equate arbitrary star-ring sums of squares with single squares without the checked Cstar theorem. Native matrix-order installations and polar decomposition are additional structures/endpoints, not extra core files.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-element-cstar",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "CStarAlgebra.nonneg_iff_eq_star_mul_self:380 in Rpow/Basic proves precisely 0<=a iff exists b,a=star(b)*b, as part of the actual nonnegative-equivalence proof using the positive square root. In the additive ordered ring, a<=b iff 0<=b-a; Algebra/Order/Star/Basic StarOrderedRing:77/le_iff:79 and star_mul_self_nonneg:213 implement the order, with no scalar positivity confusion. Restrict a,b to selfadjoints as in the catalogue. Generic star-order is finite sums of squares, but the Cstar theorem proves the essential SINGLE-square equivalence. Actual dependency relevant star-order and square-root positivity statements/proofs checked. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Native MatrixOrder installs another algebra-specific matrix order and Polar proves polar decomposition, rather than a general positive-element/order definition. Scalar sqrt bounds mapped to the distinct sqrt concept. No qualifying additional native general cone law selected.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-element-order-unit-bound",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Order.lean",
+          "declarations": "Unitization.inr_nonneg_iff (:97); IsSelfAdjoint.le_algebraMap_norm_self (:183)",
+          "note": "Native exact spectral norm/order bound and unitization positivity transport."
+        }
+      ],
+      "evidence": "IsSelfAdjoint.le_algebraMap_norm_self:183 in CFC/Order proves a<=algebraMap Real A norm(a) for a unital Cstar algebra, by spectrum.norm_le_norm_of_mem and the spectral order characterization. Apply to Unitization.inr a in A+1. Unitization.inr_nonneg_iff:97 gives its positivity/selfadjointness and Unitization.isometry_inr preserves norm; algebraMap Real A+1 r is r*1. This is the exact positive a <= norm(a)*1 bound in the unitization, including nonunital A. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: The norm identity/inclusion are checked suppliers; a unitization-specific separately named theorem is unnecessary for this actual generic theorem instantiation. No order-unit Banach-space equivalence or approximate-unit endpoint added.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-element-order-unit-bound",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "IsSelfAdjoint.le_algebraMap_norm_self:183 in CFC/Order proves a<=algebraMap Real A norm(a) for a unital Cstar algebra, by spectrum.norm_le_norm_of_mem and the spectral order characterization. Apply to Unitization.inr a in A+1. Unitization.inr_nonneg_iff:97 gives its positivity/selfadjointness and Unitization.isometry_inr preserves norm; algebraMap Real A+1 r is r*1. This is the exact positive a <= norm(a)*1 bound in the unitization, including nonunital A. Actual dependency Order theorem and unitization inclusion supplier checked. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Native CFC/Sqrt proves sqrt scalar-order comparison; applying this norm bound inside other Cstar constructions is not native ownership of the bound. No qualifying direct native unitization bound verified.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-square-root-cstar",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/Rpow/Basic.lean",
+          "declarations": "CFC.sqrt (:232); sqrt_nonneg (:235); sqrt_mul_sqrt_self (:261); sqrt_unique (:279)",
+          "note": "Native positive square root, existence, uniqueness and ordinary power/equality API."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/Abs.lean",
+          "declarations": "CFC.abs (:45); abs_nonneg (:52); abs_mul_abs (:63)",
+          "note": "Native requested absolute-value construction sqrt(a* a) and direct defining identities."
+        }
+      ],
+      "evidence": "CFC.sqrt:232 in Rpow/Basic is the NONUNITAL continuous functional calculus of NNReal.sqrt. sqrt_nonneg:235 proves positivity, sqrt_mul_sqrt_self:261 proves its square is the input for positive a, and sqrt_unique:279 proves every positive b with b*b=a is this sqrt. Abs.abs:45 defines sqrt(star(a)*a); abs_nonneg:52 and abs_mul_abs:63 prove its ordinary positivity/square identities. The nonunital hypotheses cover the whole catalogue; unital-only power lemmas later are unnecessary. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Exclude operator monotonicity/concavity as separate substantial inequalities, polar decomposition, measurable calculus and transitive CFC imports. Native sqrt scalar-bound API below is direct associated API, not a stronger existence hypothesis.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-square-root-cstar",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/Sqrt.lean",
+          "declarations": "CFC.sqrt_le_algebraMap (:47); CFC.algebraMap_le_sqrt (:58)",
+          "note": "Native direct scalar upper/lower bounds for the same positive square-root operation; constructor/theorem imported."
+        }
+      ],
+      "evidence": "CFC.sqrt:232 in Rpow/Basic is the NONUNITAL continuous functional calculus of NNReal.sqrt. sqrt_nonneg:235 proves positivity, sqrt_mul_sqrt_self:261 proves its square is the input for positive a, and sqrt_unique:279 proves every positive b with b*b=a is this sqrt. Abs.abs:45 defines sqrt(star(a)*a); abs_nonneg:52 and abs_mul_abs:63 prove its ordinary positivity/square identities. The nonunital hypotheses cover the whole catalogue; unital-only power lemmas later are unnecessary. Actual dependency sqrt and abs definitions/theorems inspected. Native CFC.sqrt_le_algebraMap:47 and algebraMap_le_sqrt:58 prove the ordinary upper/lower scalar comparison for sqrt by comparing the scalar function on the spectrum. The native proofs handle nonpositive branches explicitly; unitality is only for these associated scalar bounds, not for full imported existence/uniqueness. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Exclude native Polar as a separate polar-decomposition endpoint. Dependency gives the full nonunital theorem; native associated unital scalar bounds do not narrow that availability.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-functional-star-algebra",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Module/LinearMap/Defs.lean",
+          "declarations": "LinearMap (:84); identity-ring-hom notation (:98)",
+          "note": "Native exact complex-linear carrier restricted by the algebraic square-positive predicate."
+        }
+      ],
+      "evidence": "Use the exact generic subtype {phi:A→linear[Complex]Complex | forall a, 0<=phi(star(a)*a)}. LinearMap:84 (identity field hom notation98) gives precisely complex linearity, and ComplexOrder nonneg means real with nonnegative real part. No norm, order, unit or continuity on A is required. This is a direct defining predicate, not an inference of Cstar continuity on arbitrary star algebras. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Checked actual generic carrier and target complex order; order-positive PositiveLinearMap alone would require an extra order on A and is not substituted. GNS and automatic continuity are separate theorems, not needed for the bare definition.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-functional-star-algebra",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/StarAlgebra/GNS/Basic.lean",
+          "declarations": "TauCeti.StarPositiveFunctional (:58); square_nonneg (:60); comp (:93); star_apply_star_mul (:135)",
+          "note": "Native exact algebraic positive functional and immediate evaluation/pullback/Hermitian API."
+        }
+      ],
+      "evidence": "Native StarPositiveFunctional:58 in StarAlgebra/GNS/Basic extends A→linear[Complex]Complex with square_nonneg:60 for all a. Its actual context requires NonUnitalRing/Module Complex/StarRing, NO norm/order/continuity. comp:93 pulls back along star-algebra maps by map_mul/map_star; star_apply_star_mul:135 derives Hermitian symmetry by algebraic polarization. This exactly matches the requested arbitrary complex star algebra definition. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: The selected mixed file later constructs GNS objects; the definition/ordinary API is the reason for mapping the file, not charging every GNS endpoint. Cstar norm assumptions are absent, unlike bounded dual specialization.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-linear-functional-cstar",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Order/Module/PositiveLinearMap.lean",
+          "declarations": "PositiveLinearMap (:32)",
+          "note": "Native bundled order-positive linear functional carrier, exactly equivalent to square positivity in Cstar case."
+        },
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/PositiveLinearMap.lean",
+          "declarations": "PositiveLinearMap.exists_norm_apply_le (:63); ContinuousLinearMapClass instance (:112)",
+          "note": "Native automatic boundedness/continuity of the algebraically positive map."
+        },
+        {
+          "path": "Mathlib/Analysis/CStarAlgebra/PositiveLinearFunctional.lean",
+          "declarations": "PositiveContinuousLinearMap.norm_map_sq_le_opNorm_mul (:43); ofReal_opNorm_eq_map_one (:80)",
+          "note": "Native ordinary positive-functional norm and unit-value identities."
+        }
+      ],
+      "evidence": "PositiveLinearMap:32 is a complex linear map plus order hom. On a Cstar algebra, the actual CStarAlgebra.nonneg_iff_eq_star_mul_self:380 identifies positive elements with squares, and monotone_iff_map_nonneg identifies linear monotonicity with preserving nonnegative elements. Thus specialize codomain Complex to get exactly all catalogue functionals, with NO continuity input. Analysis/CStarAlgebra/PositiveLinearMap.exists_norm_apply_le:63 proves automatic boundedness by decomposing into four positive terms and an approximate-geometric-series contradiction; the following ContinuousLinearMapClass packages that theorem. PositiveLinearFunctional.norm_map_sq_le_opNorm_mul:43 and ofReal_opNorm_eq_map_one:80 give ordinary positive-functional norm formulas. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: The single-square Cstar equivalence is checked as a supplier, rather than an unnecessary additional allocation here. GNS representation/state-extreme-point endpoints excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-linear-functional-cstar",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/StarAlgebra/GNS/Basic.lean",
+          "declarations": "TauCeti.StarPositiveFunctional (:58); comp (:93)",
+          "note": "Native algebraic square-positive functional definition specialized to Cstar algebras; no continuity input."
+        },
+        {
+          "path": "TauCeti/Analysis/CStarAlgebra/PositiveLinearFunctional.lean",
+          "declarations": "WeakDual.ext_nonneg (:75); monotone_toStrongDual_of_map_nonneg (:81); norm_toStrongDual_eq_map_one_of_map_nonneg (:96)",
+          "note": "Native ordinary positive-functional extensionality, dual monotonicity and norm-at-one API."
+        }
+      ],
+      "evidence": "PositiveLinearMap:32 is a complex linear map plus order hom. On a Cstar algebra, the actual CStarAlgebra.nonneg_iff_eq_star_mul_self:380 identifies positive elements with squares, and monotone_iff_map_nonneg identifies linear monotonicity with preserving nonnegative elements. Thus specialize codomain Complex to get exactly all catalogue functionals, with NO continuity input. Analysis/CStarAlgebra/PositiveLinearMap.exists_norm_apply_le:63 proves automatic boundedness by decomposing into four positive terms and an approximate-geometric-series contradiction; the following ContinuousLinearMapClass packages that theorem. PositiveLinearFunctional.norm_map_sq_le_opNorm_mul:43 and ofReal_opNorm_eq_map_one:80 give ordinary positive-functional norm formulas. Dependency supplier definitions/proofs checked. Native StarPositiveFunctional also directly specializes to this Cstar class. Native CStarAlgebra/PositiveLinearFunctional ext_nonneg:75, monotone_toStrongDual_of_map_nonneg:81, norm_toStrongDual_eq_map_one_of_map_nonneg:96 give direct ordinary dual/positive-functional API; their actual short proofs use positive spanning and imported norm characterization. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Native weak-dual lemmas use the imported automatic-continuity representation; they do not assert continuity as a new requirement in the catalogue. Separate GNS/state-space/representation endpoint files excluded.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-operator",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/InnerProductSpace/Positive.lean",
+          "declarations": "ContinuousLinearMap.IsPositive (:274); isPositive_iff (:314); isPositive_iff' (:321)",
+          "note": "Native bounded positive operator predicate, equivalent selfadjoint/quadratic-form presentation and basic cone/conjugation API."
+        }
+      ],
+      "evidence": "ContinuousLinearMap.IsPositive:274 is the symmetric nonnegative quadratic-form predicate on bounded operators. isPositive_iff:314 identifies it with symmetry and full ordered scalar inner(Tx,x)>=0, and isPositive_iff':321 on a complete Hilbert space identifies symmetry with selfadjointness. For Complex the order means real and nonnegative; the imaginary part is not ignored. This is exactly the bounded positive operator definition and is valid for real or complex Hilbert spaces. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Read actual definition and equivalences, not the unbounded positive symmetric-operator notion. Finite spectral diagonalization, determinant and coercivity theorems are additional endpoints, not added files.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-operator",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/InnerProductSpace/WeakOperatorTopology.lean",
+          "declarations": "ContinuousLinearMapWOT.isClosed_setOf_isPositive (:91); isClosed_image_ofCLM_Ici (:105)",
+          "note": "Native direct weak-operator closedness/order-cone API for the same bounded positive operators."
+        }
+      ],
+      "evidence": "ContinuousLinearMap.IsPositive:274 is the symmetric nonnegative quadratic-form predicate on bounded operators. isPositive_iff:314 identifies it with symmetry and full ordered scalar inner(Tx,x)>=0, and isPositive_iff':321 on a complete Hilbert space identifies symmetry with selfadjointness. For Complex the order means real and nonnegative; the imaginary part is not ignored. This is exactly the bounded positive operator definition and is valid for real or complex Hilbert spaces. Actual dependency definition/equivalence inspected. Native ContinuousLinearMapWOT.isClosed_setOf_isPositive:91 in WeakOperatorTopology proves directly that positivity is a closed intersection of the symmetric coefficient equalities and nonnegative quadratic-form conditions; isClosed_image_ofCLM_Ici:105 and Iic:112 give the ordinary order-cone normal forms. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Weak-operator topology is a checked adjacent representation; finite-dimensional determinant/coercivity and positive inverse-range theorem excluded as stronger endpoints. Full operator definition remains dependency-owned.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "piecewise-affine-homeomorphism",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/OpenPartialHomeomorph/Defs.lean",
+          "declarations": "OpenPartialHomeomorph (:52)",
+          "note": "Native open-domain homeomorphism carrier restricted by the simplexwise affine predicate."
+        },
+        {
+          "path": "Mathlib/Analysis/Convex/SimplicialComplex/Basic.lean",
+          "declarations": "Geometry.SimplicialComplex (:59); space (:77)",
+          "note": "Native geometric triangulation carrier and actual face intersections/union."
+        },
+        {
+          "path": "Mathlib/Topology/LocallyFinite.lean",
+          "declarations": "LocallyFinite (:31)",
+          "note": "Native local finiteness predicate, instantiated on the OPEN DOMAIN subtype."
+        },
+        {
+          "path": "Mathlib/Topology/Algebra/ContinuousAffineMap.lean",
+          "declarations": "ContinuousAffineMap (:34)",
+          "note": "Native affine formula on each simplex; continuity is automatic for affine maps in the finite-dimensional planar setting."
+        }
+      ],
+      "evidence": "Use the exact generic subtype of e:OpenPartialHomeomorph E E, E=Real^2, for which there exists K:SimplicialComplex Real E with K.space=e.source, the simplex family is locally finite RELATIVE TO e.source, and for every face sigma there exists A:ContinuousAffineMap Real E E agreeing with e on convexHull sigma. SimplicialComplex:59 gives affine independence/intersection faces and space:77 their union; OpenPartialHomeomorph:52 supplies the actual open-domain homeomorphism; ContinuousAffineMap:34 is the affine formula. Relative local finiteness is LocallyFinite:31 on the source subtype, equivalently forall x in source exists N in nhds x meeting finitely many simplices. No global finiteness or finiteness at boundary points is imposed; affine independence in Real^2 gives the triangles and their faces. This is the exact bare definition, not a triangulation-existence or smoothing theorem. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: A globally ambient locally finite union of closed simplices would be closed, and would incorrectly exclude proper open domains. The subtype/relative condition is essential. Finite-piece IsPiecewiseAffineOn alone is not substituted; generic constructor representation supplies the complete predicate without a new alias.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "piecewise-affine-homeomorphism",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/PL/Simplicial.lean",
+          "declarations": "Geometry.SimplicialComplex.isPLOn_of_locallyFinite (:58); TauCeti.IsPLOn.exists_isSubdivision_eqOn (:76)",
+          "note": "Native direct link from the exact locally finite simplexwise affine presentation to local PL regularity, and finite-subdivision normal form on compact polyhedra."
+        }
+      ],
+      "evidence": "Use the exact generic subtype of e:OpenPartialHomeomorph E E, E=Real^2, for which there exists K:SimplicialComplex Real E with K.space=e.source, the simplex family is locally finite RELATIVE TO e.source, and for every face sigma there exists A:ContinuousAffineMap Real E E agreeing with e on convexHull sigma. SimplicialComplex:59 gives affine independence/intersection faces and space:77 their union; OpenPartialHomeomorph:52 supplies the actual open-domain homeomorphism; ContinuousAffineMap:34 is the affine formula. Relative local finiteness is LocallyFinite:31 on the source subtype, equivalently forall x in source exists N in nhds x meeting finitely many simplices. No global finiteness or finiteness at boundary points is imposed; affine independence in Real^2 gives the triangles and their faces. This is the exact bare definition, not a triangulation-existence or smoothing theorem. Actual dependency generic constructors inspected. Native Geometry.SimplicialComplex.isPLOn_of_locallyFinite:58 in Topology/PL/Simplicial explicitly takes the relative neighborhood finiteness condition and affine formulas on the traces, and proves the resulting map is PL. This is direct simplexwise-affine presentation API; no finite-triangulation assumption. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Finite subdivision theorem76 is associated compact-presentation API, not a restriction on the definition. Exclude global PL inverse existence and new smoothing/diffeomorphism endpoint files; original homeomorphism input is explicit.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "planar-piecewise-affine-smoothing",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Scoped Mora-Corral/Pratelli/W1,1 and planar PL/smooth approximation searches did not verify smooth DIFFEOMORPHISM approximants with simultaneous uniform and W1,1 control and prescribed boundary values. Actual Tau Topology/PL/Simplicial:58/76 handles local simplexwise affine presentations and finite subdivisions; it does not smooth a homeomorphism or control the Sobolev norm of invertible approximants. Generic smoothing of functions and local inverse theorems do not supply the global injectivity/boundary conclusion. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Compared PL subdivision/locally Lipschitz source and ordinary calculus approximation candidates. Exact global approximation plus boundary and Sobolev control remain unresolved, not declared absent. No new planar smoothing proof developed.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "planar-piecewise-affine-smoothing",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Scoped Mora-Corral/Pratelli/W1,1 and planar PL/smooth approximation searches did not verify smooth DIFFEOMORPHISM approximants with simultaneous uniform and W1,1 control and prescribed boundary values. Actual Tau Topology/PL/Simplicial:58/76 handles local simplexwise affine presentations and finite subdivisions; it does not smooth a homeomorphism or control the Sobolev norm of invertible approximants. Generic smoothing of functions and local inverse theorems do not supply the global injectivity/boundary conclusion. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Compared PL subdivision/locally Lipschitz source and ordinary calculus approximation candidates. Exact global approximation plus boundary and Sobolev control remain unresolved, not declared absent. No new planar smoothing proof developed.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "poisson-kernel-unit-disk",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/Complex/Poisson.lean",
+          "declarations": "Complex.poissonKernel (:54); poissonKernel_eq_re_herglotzRieszKernel (:73); analyticOnNhd_circleAverage_herglotzRieszKernel_smul (:364)",
+          "note": "Native exact kernel, analytic-integral construction and ordinary kernel estimates."
+        },
+        {
+          "path": "Mathlib/Analysis/Complex/Harmonic/Poisson.lean",
+          "declarations": "InnerProductSpace.HarmonicOnNhd.circleAverage_poissonKernel_smul (:92); HarmonicContOnCl.circleAverage_poissonKernel_smul (:103)",
+          "note": "Native direct Poisson reproducing formula for harmonic data on closed disks."
+        }
+      ],
+      "evidence": "Complex.poissonKernel:54 is literally (norm(z-c)^2-norm(w-c)^2)/norm((z-c)-(w-c))^2. Set c=0,w=the interior point,z=zeta with norm zeta=1 to obtain exactly (1-norm w^2)/norm(zeta-w)^2; argument order is made explicit. poissonKernel_eq_re_herglotzRieszKernel:73 identifies its real-kernel integral. analyticOnNhd_circleAverage_herglotzRieszKernel_smul:364 proves the Herglotz boundary-data integral analytic for circle-integrable data by differentiating under the integral with a positive distance bound. Taking its real part gives the harmonic Poisson extension. Harmonic/Poisson.HarmonicContOnCl.circleAverage_poissonKernel_smul supplies the ordinary reproducing formula for harmonic data continuous to the boundary. This definition does not claim representation of every positive harmonic function by an arbitrary measure. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Boundary integral interpreted with normalized circle average/Haar, not an unnormalized missing 2pi factor. The definition and harmonic-extension/reproduction API are checked; an arbitrary continuous boundary convergence theorem is stronger API and is explicitly supplied natively by Tau below. Transitive harmonic/Cauchy proof trees excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "poisson-kernel-unit-disk",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Complex/Poisson/Basic.lean",
+          "declarations": "TauCeti.poissonKernel_inv_mul_sub (:34); poissonKernel_nonneg (:43); continuousOn_poissonKernel (:49)",
+          "note": "Native direct kernel invariance/positivity/continuity and boundary-distance estimate API."
+        },
+        {
+          "path": "TauCeti/Analysis/Complex/Poisson/Integral.lean",
+          "declarations": "TauCeti.planarPoissonIntegral (:34); harmonicOnNhd_planarPoissonIntegral (:81); tendsto_planarPoissonIntegral (:209)",
+          "note": "Native real Poisson extension, harmonicity, constant preservation and actual continuous boundary convergence."
+        }
+      ],
+      "evidence": "Complex.poissonKernel:54 is literally (norm(z-c)^2-norm(w-c)^2)/norm((z-c)-(w-c))^2. Set c=0,w=the interior point,z=zeta with norm zeta=1 to obtain exactly (1-norm w^2)/norm(zeta-w)^2; argument order is made explicit. poissonKernel_eq_re_herglotzRieszKernel:73 identifies its real-kernel integral. analyticOnNhd_circleAverage_herglotzRieszKernel_smul:364 proves the Herglotz boundary-data integral analytic for circle-integrable data by differentiating under the integral with a positive distance bound. Taking its real part gives the harmonic Poisson extension. Harmonic/Poisson.HarmonicContOnCl.circleAverage_poissonKernel_smul supplies the ordinary reproducing formula for harmonic data continuous to the boundary. This definition does not claim representation of every positive harmonic function by an arbitrary measure. Actual dependency Poisson definitions/proofs checked. Native Poisson/Basic:34/43/49 proves translation/dilation invariance, nonnegativity and continuity. Poisson/Integral.planarPoissonIntegral:34 defines the actual real boundary average; harmonicOnNhd_planarPoissonIntegral:81 proves harmonicity by identifying the real part of the analytic integral; tendsto_planarPoissonIntegral:209 proves convergence to every boundary value for continuous circle data with the far-field kernel bound and uniform continuity. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Poisson/Series adds Fourier/angular series development and is not needed for this core formula/extension boundary. Positive-measure representation and uniqueness are separately catalogued.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "poisson-representation-positive-harmonic-disk",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib Harmonic/Analytic.exists_analyticOnNhd_ball_re_eq:74 constructs a holomorphic function with the exact real harmonic part on any open ball; Harmonic/Poisson gives reproducing circle averages when the harmonic input is continuous on the closed disk. Those statements do not supply a finite positive representing Borel measure for arbitrary nonnegative harmonic functions with no boundary-continuity hypothesis, nor its uniqueness. The full Herglotz measure-existence proof inspected in Tau is separate project ownership. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Searched positive harmonic/Herglotz/Poisson measure and measure-extensionality candidates; no checked full existence/unique finite boundary-measure endpoint at the independent Mathlib snapshot. Do not replace the catalogue by closed-disk continuous harmonic data or attribute Tau proofs to Mathlib.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "poisson-representation-positive-harmonic-disk",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/Analysis/Complex/Herglotz.lean",
+          "declarations": "MeasureTheory.Measure.herglotzTransform (:138); TauCeti.exists_isFiniteMeasure_eq_herglotzTransform_add (:260); differentiableOn_and_re_nonneg_iff_exists_eq_herglotzTransform_add (:309)",
+          "note": "Native full finite-positive boundary-measure EXISTENCE representation; uniqueness frontier explicitly retained."
+        }
+      ],
+      "evidence": "Native exists_isFiniteMeasure_eq_herglotzTransform_add:260 in Herglotz proves existence of a FINITE positive Measure Circle for every disk-holomorphic F with nonnegative real part. Its actual proof represents dilations, bounds the total mass by Re F(0), obtains a finite-measure weak cluster point, and passes to the kernel integral. Dependency Harmonic/Analytic.exists_analyticOnNhd_ball_re_eq:74 supplies F for the exact given real harmonic h on ball0 1, with Re F=h, so nonnegativity hypotheses match without boundary regularity. Taking real parts removes the imaginary constant and commutes with the finite integral; dependency Poisson73 identifies the kernel as (1-norm w^2)/norm(zeta-w)^2. Thus the existential representation is genuinely implemented. However the catalogue also requires UNIQUENESS of the representing measure. No injectivity/measure-extensionality theorem for this transform was verified; the checked existence theorem260/iff309 does not assert uniqueness, and tendsto_nhds_unique:301 only identifies function-value limits, not measures. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Actual dependency harmonic-conjugate construction74 inspected, so existence covers ALL nonnegative harmonic disk functions, not only real parts supplied in advance. Scoped transform injectivity/Poisson measure uniqueness search unresolved. No new Fourier-density uniqueness proof assembled; selected files do not falsely certify the full unique representation.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "polar-coordinates-plane",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/Complex/Arg.lean",
+          "declarations": "Complex.norm_mul_cos_add_sin_mul_I (:63); norm_mul_cos_arg (:67); norm_mul_sin_arg (:71); arg_exp_mul_I (:123)",
+          "note": "Native global radius/angle representation and modulo-two-pi angle API."
+        },
+        {
+          "path": "Mathlib/Analysis/SpecialFunctions/PolarCoord.lean",
+          "declarations": "Real.polarCoord (:35); Complex.polarCoord (:183)",
+          "note": "Native direct planar polar coordinate partial chart and inverse formula; branch restriction explicit."
+        }
+      ],
+      "evidence": "Complex.norm_mul_cos_add_sin_mul_I:63 and coordinate formulas norm_mul_cos_arg:67/norm_mul_sin_arg:71 give every complex/real planar point radius norm(z)>=0 and angle arg(z), including z=0. For z nonzero the norm is strictly positive. arg_exp_mul_I:123 reduces arbitrary angles by toIocMod(two*pi), giving the required angle modulo2pi convention rather than globally unique real theta. Real.polarCoord:35 gives the actual (r cos theta,r sin theta) inverse chart on r>0 and the slit angle interval; the global norm/arg formulas cover the branch cut as well. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: The slit chart alone would not cover the negative real axis or origin, so actual global norm/arg formulas were checked. Polar integration/Jacobian theorems later in the selected whole file are not extra prerequisites.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "polar-coordinates-plane",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Integral/PolarCoord.lean",
+          "declarations": "TauCeti.contDiff_add_polarCoord_symm (:47); add_polarCoord_symm_mem_annulus (:53); add_polarCoord_symm_eq_circleMap (:60); hasFDerivAt_add_polarCoord_symm (:66)",
+          "note": "Native direct polar inverse-map smoothness, radius/annulus and circle-map identification API."
+        }
+      ],
+      "evidence": "Complex.norm_mul_cos_add_sin_mul_I:63 and coordinate formulas norm_mul_cos_arg:67/norm_mul_sin_arg:71 give every complex/real planar point radius norm(z)>=0 and angle arg(z), including z=0. For z nonzero the norm is strictly positive. arg_exp_mul_I:123 reduces arbitrary angles by toIocMod(two*pi), giving the required angle modulo2pi convention rather than globally unique real theta. Real.polarCoord:35 gives the actual (r cos theta,r sin theta) inverse chart on r>0 and the slit angle interval; the global norm/arg formulas cover the branch cut as well. Actual dependency norm/arg and polar-chart statements inspected. Native contDiff_add_polarCoord_symm:47 and add_polarCoord_symm_eq_circleMap:60 prove smoothness of the translated inverse coordinate formula and its literal circle parametrization; hasFDerivAt_add_polarCoord_symm:66 gives its ordinary coordinate derivative. Radius zero is explicitly permitted by these inverse-formula theorems. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Annulus change-of-variables at the end is an additional endpoint in the same file, not the mapping reason. Do not infer globally unique real angle from a slit chart.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-distribution-measure",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Scoped distribution positivity/order-zero/regular measure/RMK searches were checked. Native Tau Distribution/OrderZero.forall_exists_abs_le_iff_exists_regular:305 proves that a real linear test-functional has a compact-support supnorm estimate iff it is integration against a DIFFERENCE of two regular locally finite measures. Its actual proof extends to compactly supported continuous functions and invokes order-bounded RealRMK. This does not itself assert positivity implies that estimate, yields ONE positive measure, or proves uniqueness from smooth tests. Mathlib measure-to-tempered-distribution constructors go in the other direction. No full theorem from the exact positive distribution hypothesis to a unique positive Radon measure was verified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Read actual order-zero statement/proof and searched test-function nonnegative approximation/cutoff, positive RMK and measure-extensionality candidates. Positivity-to-order-zero and unique positive representing-measure bridges remain unresolved in this bounded pass; no absence assertion. The Tau signed representation is separate ownership and not automatically a partial positive theorem.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-distribution-measure",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Scoped distribution positivity/order-zero/regular measure/RMK searches were checked. Native Tau Distribution/OrderZero.forall_exists_abs_le_iff_exists_regular:305 proves that a real linear test-functional has a compact-support supnorm estimate iff it is integration against a DIFFERENCE of two regular locally finite measures. Its actual proof extends to compactly supported continuous functions and invokes order-bounded RealRMK. This does not itself assert positivity implies that estimate, yields ONE positive measure, or proves uniqueness from smooth tests. Mathlib measure-to-tempered-distribution constructors go in the other direction. No full theorem from the exact positive distribution hypothesis to a unique positive Radon measure was verified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Read actual order-zero statement/proof and searched test-function nonnegative approximation/cutoff, positive RMK and measure-extensionality candidates. Positivity-to-order-zero and unique positive representing-measure bridges remain unresolved in this bounded pass; no absence assertion. The Tau signed representation is separate ownership and not automatically a partial positive theorem.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "polytope-approximation-convex-body",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked Convex/Body Hausdorff metric and compact-convex constructors, finite convex-hull compactness (Convex/Topology), convexHull_eq_union_convexHull_finite_subsets (Combination:432), finite-net/Hausdorff-distance candidates, and native Tau Convex/Body and HausdorffDistance. The union-of-finite-hulls identity is a pointwise convex-hull representation, not a checked sequence of FINITE hulls converging to an arbitrary compact convex body in Hausdorff distance. Native map/closedBall and infEDist-vs-infDist identities do not establish the approximation theorem. The required finite-net-to-convex-hull Hausdorff convergence endpoint was not verified. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Bounded convex/polytope/finite hull/Hausdorff density searches found infrastructure but no checked exact approximation endpoint; unknown leaves that concrete bridge open, not a mathematical absence claim. No new approximation proof developed from compactness.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "polytope-approximation-convex-body",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Checked Convex/Body Hausdorff metric and compact-convex constructors, finite convex-hull compactness (Convex/Topology), convexHull_eq_union_convexHull_finite_subsets (Combination:432), finite-net/Hausdorff-distance candidates, and native Tau Convex/Body and HausdorffDistance. The union-of-finite-hulls identity is a pointwise convex-hull representation, not a checked sequence of FINITE hulls converging to an arbitrary compact convex body in Hausdorff distance. Native map/closedBall and infEDist-vs-infDist identities do not establish the approximation theorem. The required finite-net-to-convex-hull Hausdorff convergence endpoint was not verified. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Bounded convex/polytope/finite hull/Hausdorff density searches found infrastructure but no checked exact approximation endpoint; unknown leaves that concrete bridge open, not a mathematical absence claim. No new approximation proof developed from compactness.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "polynomial-over-field",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Polynomial/Basic.lean",
+          "declarations": "Polynomial (:69); Polynomial.monomial; Polynomial.C; Polynomial.X",
+          "note": "Native formal polynomial carrier/monomial/constants/variable and ordinary defining operations API."
+        },
+        {
+          "path": "Mathlib/Algebra/MonoidAlgebra/Defs.lean",
+          "declarations": "AddMonoidAlgebra.coeffEquiv (to_additive from :136); coeff_add (:198); coeff_mul (to_additive from :512)",
+          "note": "Native actual finite-coefficient carrier and coefficientwise addition/convolution multiplication."
+        }
+      ],
+      "evidence": "Polynomial:69 in Algebra/Polynomial/Basic is AddMonoidAlgebra R Nat. AddMonoidAlgebra.coeffEquiv:136 identifies the actual carrier with finitely supported coefficient functions Nat→finsupp R, coeff_add:198 is coefficientwise addition, and generated additive coeff_mul from MonoidAlgebra.coeff_mul:512 is the convolution over exponents whose SUM equals the output degree. Thus specialize R to a field to obtain exactly the formal finite sums with usual polynomial operations; this is not a function-valued polynomial-function quotient. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Read actual AddMonoidAlgebra coefficient equivalence and generated additive multiplication; finite support is enforced by Finsupp. Algebraic factorization, root counting and polynomial functions over finite fields are distinct endpoints.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "polynomial-over-field",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Polynomial/BigOperators.lean",
+          "declarations": "Polynomial.coeff_zero_sum_C_mul_X_pow_sub (:48); coeff_prod_sum_eq_of_natDegree_le (:75)",
+          "note": "Native ordinary finite-sum coefficient and finite-product leading-coefficient API for the imported polynomial carrier."
+        }
+      ],
+      "evidence": "Polynomial:69 in Algebra/Polynomial/Basic is AddMonoidAlgebra R Nat. AddMonoidAlgebra.coeffEquiv:136 identifies the actual carrier with finitely supported coefficient functions Nat→finsupp R, coeff_add:198 is coefficientwise addition, and generated additive coeff_mul from MonoidAlgebra.coeff_mul:512 is the convolution over exponents whose SUM equals the output degree. Thus specialize R to a field to obtain exactly the formal finite sums with usual polynomial operations; this is not a function-valued polynomial-function quotient. Actual dependency Polynomial still uses the same AddMonoidAlgebra abbreviation, and relevant coefficient constructor/add/mul declarations agree despite unrelated later changes. Native Polynomial.coeff_zero_sum_C_mul_X_pow_sub:48 in BigOperators proves the elementary coefficient formula for a finite formal sum; coeff_prod_sum_eq_of_natDegree_le:75 proves the ordinary top-coefficient product law by finite-product induction and coefficient multiplication. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Read completed coefficient and product-induction proofs; no new alias required. Alternating-sum telescoping, Sturm/root algorithms and analytic parameter dependence are additional endpoints and not extra selected files.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "polynomial-division-algorithm",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Polynomial/FieldDivision.lean",
+          "declarations": "Polynomial.div (:308); mod (:312); quotient_mul_add_remainder_eq_aux (:315); remainder_lt_aux (:323); degree_mod_lt (:435)",
+          "note": "Native arbitrary nonzero field-divisor normalization and actual quotient/remainder existence/degree proof."
+        },
+        {
+          "path": "Mathlib/Algebra/Polynomial/Div.lean",
+          "declarations": "Polynomial.div_modByMonic_unique (:356)",
+          "note": "Native complete quotient/remainder uniqueness proof; normalized monic statement transfers by invertible leading coefficient."
+        }
+      ],
+      "evidence": "Polynomial.div:308 and mod:312 in FieldDivision normalize nonzero divisor b to the MONIC g=b*C(leadingCoeff b)^-1. quotient_mul_add_remainder_eq_aux:315 and remainder_lt_aux:323 supply the actual division identity/strict degree bound, installed in the polynomial EuclideanDomain:357; degree_mod_lt:435 exposes the bound. Div.div_modByMonic_unique:356 proves uniqueness by subtracting candidate decompositions and contradicting the degree of a nonzero multiple of the monic divisor. For arbitrary b!=0, its normalized g is monic (monic_mul_leadingCoeff_inv), has the same degree, and multiplication of a candidate q by the nonzero C(leadingCoeff b) converts b*q+r=a to g*(C(leadingCoeff b)*q)+r=a; the checked monic uniqueness theorem therefore covers exactly arbitrary-field division. Zero remainder has degree bottom, so it is admitted and the catalogue r=0-or-degree-small clause agrees. No monicity assumption remains on catalogue b. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Read actual monic uniqueness proof and field normalization/equality. The coefficient-ring field provides nonzero leading coefficient inverse; not extending to arbitrary nonmonic divisors over nonfields. Generic EuclideanDomain identity is a checked supplier, not another imported file tree.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "polynomial-division-algorithm",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Polynomial.div:308 and mod:312 in FieldDivision normalize nonzero divisor b to the MONIC g=b*C(leadingCoeff b)^-1. quotient_mul_add_remainder_eq_aux:315 and remainder_lt_aux:323 supply the actual division identity/strict degree bound, installed in the polynomial EuclideanDomain:357; degree_mod_lt:435 exposes the bound. Div.div_modByMonic_unique:356 proves uniqueness by subtracting candidate decompositions and contradicting the degree of a nonzero multiple of the monic divisor. For arbitrary b!=0, its normalized g is monic (monic_mul_leadingCoeff_inv), has the same degree, and multiplication of a candidate q by the nonzero C(leadingCoeff b) converts b*q+r=a to g*(C(leadingCoeff b)*q)+r=a; the checked monic uniqueness theorem therefore covers exactly arbitrary-field division. Zero remainder has degree bottom, so it is admitted and the catalogue r=0-or-degree-small clause agrees. No monicity assumption remains on catalogue b. Actual dependency FieldDivision differs only by a header blank line and Div is byte-identical. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Read native Algebra/Polynomial/FieldDivision:28 gcd-degree syzygy theorem (a distinct endpoint), RingDivision:27 coprimality of translates (another endpoint), and Analysis/Polynomial/Division:69/130 analytic dependence of quotient/remainder coefficients (additional analytic hypotheses and endpoint). None supplies or changes the bare division algorithm/uniqueness or direct elementary quotient law, so zero native LOC.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-definite-kernel",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/LinearAlgebra/Matrix/PosDef.lean",
+          "declarations": "Matrix.PosSemidef (:62); PosSemidef.submatrix (:83); posSemidef_iff_dotProduct_mulVec (:311)",
+          "note": "Native arbitrary-index finite-support positive kernel representation, finite-family restriction and ordinary cone/sesquilinear form API."
+        }
+      ],
+      "evidence": "Matrix.PosSemidef:62 takes an ARBITRARY index type X and requires Hermitian symmetry plus nonnegativity of the finitely supported quadratic form sum_i,j star(x_i)*K(i,j)*x_j. Set x_i=conj(c_i) to obtain the catalogue c_i*conj(c_j)*K(i,j), using commutativity of Complex scalars. Arbitrary repeated sample points are covered by summing coefficients at each point (finite-support pushforward); the two-point forms with coefficients (1,1) and (1,I), together with real diagonal positivity, force Hermitian symmetry, so its explicit Hermitian field is redundant for the catalogue finite-form predicate. This is the standard equivalent positive-SEMIDEFINITE kernel notion: zero kernels allowed, no strict positivity required. Complex.nonneg_iff in Analysis/Complex/Order:63 means imaginary part zero AND real part nonnegative, not merely a nonnegative real part. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Actual arbitrary-index definition and finite dot-product proof checked. The conventional coefficient-conjugation orientation is equivalent via conjugating the universally quantified coefficients; no transpose of K is silently substituted. RKHS/Kolmogorov existence, Bochner representation and translation-invariant positive functions are distinct theorem concepts, excluded.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "positive-definite-kernel",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/LinearAlgebra/Matrix/PosSemidef.lean",
+          "declarations": "posSemidef_iff_finite_sum (:124); posSemidef_rankOne (:98)",
+          "note": "Native arbitrary-index/repeated finite-family characterization and direct elementary kernel closure API."
+        },
+        {
+          "path": "TauCeti/Analysis/PositiveDefinite/Kernel/Finsupp.lean",
+          "declarations": "TauCeti.positiveDefiniteKernelFinsuppForm (:61); positiveDefiniteKernelFinsuppForm_self_nonneg (:91); positiveDefiniteKernelFinsuppForm_conj_symm (:243); positiveDefiniteKernelFinsuppForm_single_single (:279)",
+          "note": "Native direct finite-support Gram form, sesquilinearity and defining basis evaluations."
+        },
+        {
+          "path": "TauCeti/Analysis/Matrix/PosSemidef/Basic.lean",
+          "declarations": "Matrix.PosSemidef.normSq_le (:67); eq_zero_of_apply_self_eq_zero_left (:87)",
+          "note": "Native immediate two-point scalar bound and zero-diagonal vanishing for general positive kernels."
+        }
+      ],
+      "evidence": "Matrix.PosSemidef:62 takes an ARBITRARY index type X and requires Hermitian symmetry plus nonnegativity of the finitely supported quadratic form sum_i,j star(x_i)*K(i,j)*x_j. Set x_i=conj(c_i) to obtain the catalogue c_i*conj(c_j)*K(i,j), using commutativity of Complex scalars. Arbitrary repeated sample points are covered by summing coefficients at each point (finite-support pushforward); the two-point forms with coefficients (1,1) and (1,I), together with real diagonal positivity, force Hermitian symmetry, so its explicit Hermitian field is redundant for the catalogue finite-form predicate. This is the standard equivalent positive-SEMIDEFINITE kernel notion: zero kernels allowed, no strict positivity required. Complex.nonneg_iff in Analysis/Complex/Order:63 means imaginary part zero AND real part nonnegative, not merely a nonnegative real part. Actual dependency PosSemidef definition62 has the SAME arbitrary-index finite-support predicate (later principal-submatrix API differs). Native posSemidef_iff_finite_sum:124 explicitly proves the arbitrary finite-family characterization including repeated indices via submatrices/support. Kernel/Finsupp:61/91/243/279 packages the actual Gram expression, nonnegativity, Hermitian symmetry and basis evaluation. Analysis/Matrix/PosSemidef/Basic.normSq_le:67 proves the elementary two-point Cauchy-Schwarz bound by the 2x2 principal determinant, with zero-diagonal vanishing:87/96. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Read finite-family/support equivalence, Gram definitions and relevant completed proofs, and 2x2 bound proof. Exclude Kernel/Kolmogorov, Radical quotient, Universal/Shift representations and translation-invariant IsPositiveDefinite function Basic as separately significant constructions/endpoints. Repeated-index and complex-order semantics are explicit.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "probability-density-measure",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/MeasureTheory/Measure/WithDensity.lean",
+          "declarations": "MeasureTheory.Measure.withDensity (:38); withDensity_apply (:43)",
+          "note": "Native measure constructed by integrating a nonnegative density and ordinary density API."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+          "declarations": "MeasureTheory.Integrable.of_integral_ne_zero (:207); ofReal_integral_eq_lintegral_ofReal (:748)",
+          "note": "Native actual conversion of the normalized nonnegative real integral to mass of the density measure."
+        },
+        {
+          "path": "Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean",
+          "declarations": "MeasureTheory.IsProbabilityMeasure (:64); isProbabilityMeasure_iff (:71)",
+          "note": "Native actual mass-one probability measure predicate used by the normalized density construction."
+        }
+      ],
+      "evidence": "For nonnegative measurable real P with integral P=1, use Measure.withDensity:38 with ENNReal.ofReal∘P. withDensity_apply:43 evaluates every measurable set by its density integral. Integrable.of_integral_ne_zero:207 proves integrability from the nonzero normalized integral (so totalized Bochner integration causes no false density); ofReal_integral_eq_lintegral_ofReal:748 converts the nonnegative real integral exactly to the extended integral. Taking the measurable set univ gives total mass1, and IsProbabilityMeasure:64/isProbabilityMeasure_iff:71 is exactly that condition. This is the exact generic normalized-density construction, no separate probability-density alias needed. Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Measurability and nonnegativity of P are input conditions, not inferred from integral1. No absolute continuity converse/Radon-Nikodym theorem or special distribution law is added to this bare construction.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    },
+    {
+      "concept": "probability-density-measure",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/MeasureTheory/Measure/WithDensity.lean",
+          "declarations": "MeasurableEquiv.map_withDensity (:92); MeasureTheory.Measure.map_withDensity_comp",
+          "note": "Native ordinary density transport under measurable equivalences/maps; normalized probability density construction imported."
+        }
+      ],
+      "evidence": "For nonnegative measurable real P with integral P=1, use Measure.withDensity:38 with ENNReal.ofReal∘P. withDensity_apply:43 evaluates every measurable set by its density integral. Integrable.of_integral_ne_zero:207 proves integrability from the nonzero normalized integral (so totalized Bochner integration causes no false density); ofReal_integral_eq_lintegral_ofReal:748 converts the nonnegative real integral exactly to the extended integral. Taking the measurable set univ gives total mass1, and IsProbabilityMeasure:64/isProbabilityMeasure_iff:71 is exactly that condition. This is the exact generic normalized-density construction, no separate probability-density alias needed. Actual dependency density and Bochner conversion files differ only by header spacing at the inspected definitions/proofs. Native MeasurableEquiv.map_withDensity:92 proves the direct coordinate-change identity for ANY weight by integrating over preimages; this supplies ordinary transport of the same probability density construction when the normalized measure is pushed forward. No probability assumption is needed for the general identity, so specialization imposes no new restrictions. Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023; actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual source declarations, hypotheses and relevant completed bodies inspected; no fresh build or transitive proof audit.\nSearch and boundary notes: Read actual preimage/restricted-integral proof92. Folded/squared special distributions, affine Jacobian and support-uniqueness endpoints later in the mixed file are not the reason for mapping it; no transitive change-of-variables files added.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-019.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/MonoidAlgebra/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1029,
+      "sha256": "3de95e1b6a2c25ac6c6c03bf4a1b658e510b62662ab8f9cdf95ac1a375624099",
+      "measured_at": "2026-11-13T00:43:29.951397+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Order/Module/PositiveLinearMap.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 216,
+      "sha256": "7a76c0ba2c01417a006e41b1802df0e81317f7419fd68a87dd17e187095b478d",
+      "measured_at": "2026-11-13T00:43:29.957183+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Order/Star/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 540,
+      "sha256": "4c5befc3e739d9a2126eba595a9637b095da60dd7e786f217e3f2fdaf48f21bc",
+      "measured_at": "2026-11-13T00:43:29.960793+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Polynomial/Div.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 858,
+      "sha256": "08125048ffe2a2e8529c03a6491a5a28fb795d890c5c642fbe1b0fdaffdf34a8",
+      "measured_at": "2026-11-13T00:43:29.967437+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/CStarAlgebra/PositiveLinearFunctional.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 142,
+      "sha256": "fda1fa8bfefc28454a7a0f4bb4b210570c041d975d8709ccacb91d33128d96d5",
+      "measured_at": "2026-11-13T00:43:29.979603+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/CStarAlgebra/PositiveLinearMap.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 122,
+      "sha256": "bf339079c96310d6f9c09a7a173bda2c89af9fa1ace5603cc6367645f1f2c7e5",
+      "measured_at": "2026-11-13T00:43:29.985276+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Complex/Harmonic/Poisson.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 110,
+      "sha256": "d3773e8a2befa365375f066e44c563a46d09565361db2f72ae7239ac6e72784d",
+      "measured_at": "2026-11-13T00:43:29.988384+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/Complex/Poisson.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 370,
+      "sha256": "9328473df7f968e5b73b1f80f03f76821c4832d995a6ff66766ab2325406fef7",
+      "measured_at": "2026-11-13T00:43:29.992819+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/InnerProductSpace/Positive.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 596,
+      "sha256": "30edbc1dec9123c52764401480bfaf4a2229bb9728d0346aed1024bf81ecd692",
+      "measured_at": "2026-11-13T00:43:30.000019+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/SpecialFunctions/Complex/Arg.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 679,
+      "sha256": "113102530e0d0e836ff4ea1a161ee6441451d5d2d40fd271bbc15adc2095752b",
+      "measured_at": "2026-11-13T00:43:30.003265+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/Abs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 320,
+      "sha256": "ee9686b8cc1b04970b53789b80a56a7b5e8dd4189eac22a82f9f49b7a7cb27d6",
+      "measured_at": "2026-11-13T00:43:30.006432+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/Rpow/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 864,
+      "sha256": "1a7fc143a411cf8bbdfed456d5d3882cfe95b72b8cc7db596cb64c8a76adc3b8",
+      "measured_at": "2026-11-13T00:43:30.009578+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Analysis/SpecialFunctions/PolarCoord.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 307,
+      "sha256": "3c1df21d790d5c89c6723cacc0a249cfa9619b62746b8c11d788c039247c70ed",
+      "measured_at": "2026-11-13T00:43:30.012623+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/LinearAlgebra/Matrix/PosDef.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 782,
+      "sha256": "b6e2bae4848e90a738db34b4063b7c28452286b20f1de1a958b931223e1e736e",
+      "measured_at": "2026-11-13T00:43:30.016311+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1434,
+      "sha256": "15aee311854e096b8dd0b78085be6211131762abec9c8e4a9c7bee55747a2c12",
+      "measured_at": "2026-11-13T00:43:30.021851+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 247,
+      "sha256": "00591089d5e90ba005ff15c32896429ae8d7ecbcc34e922ec4b914bfd023a3c2",
+      "measured_at": "2026-11-13T00:43:30.025669+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Algebra/ContinuousAffineMap.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 602,
+      "sha256": "5d8720e805d450b212ac67051c59208a12f1db67d7186a02f3918921c59eb1eb",
+      "measured_at": "2026-11-13T00:43:30.032694+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/OpenPartialHomeomorph/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 260,
+      "sha256": "3e708dc8f9d60aa27f328722b90d8eaf1299f23e452fcfded6be6236f0f44e3d",
+      "measured_at": "2026-11-13T00:43:30.039745+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/Polynomial/BigOperators.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 168,
+      "sha256": "3b379a6306ddba09e5d80778153a4eb4ac987391baf9bd974f9d27a9e0f7a96e",
+      "measured_at": "2026-11-13T00:43:30.058433+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/CStarAlgebra/PositiveLinearFunctional.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 102,
+      "sha256": "19288731a83bb19f21c3b5c3dde6f7fa9d679046fab53d1f38f4ac6420a2b2fd",
+      "measured_at": "2026-11-13T00:43:30.066553+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Complex/Herglotz.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 320,
+      "sha256": "fbfef689737480d09a9914b56753d78558d4b63af3f3ab1116b569f4cbc15354",
+      "measured_at": "2026-11-13T00:43:30.071742+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Complex/Poisson/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 70,
+      "sha256": "fe1bb715b115a5f02d4452ca1f5a5543266551f280bf78154f4b96dd3d32760f",
+      "measured_at": "2026-11-13T00:43:30.079064+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Complex/Poisson/Integral.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 256,
+      "sha256": "592bcecd88156161d0cbd05f300bedc5bcfd3ac5f4ede94ae345e561c83b0f0e",
+      "measured_at": "2026-11-13T00:43:30.083967+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/InnerProductSpace/WeakOperatorTopology.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 209,
+      "sha256": "d561891011de530eb942023a7d82c3dc5944e47c16bf922dc7fab7bd2e24e714",
+      "measured_at": "2026-11-13T00:43:30.089348+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/Matrix/PosSemidef/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 180,
+      "sha256": "2d01f58962bf23c95e2357d8284e99c5939cbcb3d2023eb1cb81c825ff35e435",
+      "measured_at": "2026-11-13T00:43:30.095718+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/PositiveDefinite/Kernel/Finsupp.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 298,
+      "sha256": "48237b0cf1b21fd052786d33fd8287bfaf27ad582e9c139052e5e49367e4e520",
+      "measured_at": "2026-11-13T00:43:30.101635+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/Sqrt.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 67,
+      "sha256": "1eb06636de843582a3c614e0f6f8d722b075f7e45be2b0b5ae0c22f7aacc9f1f",
+      "measured_at": "2026-11-13T00:43:30.108139+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Analysis/StarAlgebra/GNS/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 500,
+      "sha256": "f922df519dd67788e48cc6bd6e6856ec54577167d0127bbd289c0eafb9bf66e0",
+      "measured_at": "2026-11-13T00:43:30.114905+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/LinearAlgebra/Matrix/PosSemidef.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 378,
+      "sha256": "4c26b6fd45e43b0d0d6f5d2340b87a1fe1d493e100acd74f2e3c0441167c3efb",
+      "measured_at": "2026-11-13T00:43:30.120616+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Integral/PolarCoord.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 224,
+      "sha256": "3652609c4e9b5f983759805b59ad8f0b5359ed7e8f8c081da5336a8bd1daad5e",
+      "measured_at": "2026-11-13T00:43:30.125385+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/MeasureTheory/Measure/WithDensity.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 420,
+      "sha256": "6edb48fba26feb254c70b6f62dfd5594d319d52abb4da342751f9d90d2627461",
+      "measured_at": "2026-11-13T00:43:30.130573+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/PL/Simplicial.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 156,
+      "sha256": "7db50e5badc73c0f5f4bbfcc3779511bb44a9aca669dd4774b3f32bce8f42ef5",
+      "measured_at": "2026-11-13T00:43:30.135860+00:00"
+    }
+  ]
+}

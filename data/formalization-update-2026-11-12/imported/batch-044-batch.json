@@ -1,0 +1,585 @@
+{
+  "note": "Whole-catalogue formalization update batch-044: independent source review by algebra_formalization of category_galois_formalization proposals.",
+  "formalizations": [
+    {
+      "concept": "intermediate-value-theorem",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Topology/Order/IntermediateValue.lean",
+          "declarations": "intermediate_value_Icc:586; intermediate_value_Icc':592; intermediate_value_uIcc:597",
+          "note": "Actual real-function interval-value theorem and its ordinary endpoint variants."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. intermediate_value_Icc:586 and reversed endpoint version:592 prove Icc(fa,fb)⊆f(Icc(a,b)) and Icc(fb,fa)⊆f(Icc(a,b)) for ContinuousOn f on the interval. intermediate_value_uIcc:597 covers arbitrary endpoint order. Instantiate source/codomain ℝ; restriction to the subinterval between any two points of an interval gives exactly the paragraph. Actual proofs:588/594/598-599 use the proved interval preconnectedness/intermediate-value theorem, not an assumed IVT conclusion. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: No monotonicity, differentiability or compactness beyond the chosen closed subinterval is added.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "intermediate-value-theorem",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Topology/Order/IntermediateValue.lean",
+          "declarations": "IsPreconnected.forall_lt_or_forall_lt:34; .forall_le_or_forall_lt:44; .forall_le_or_forall_ge:61",
+          "note": "Native ordinary intermediate-value sign/order and omitted-interval dichotomies."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency IVT anchors587/593/598 have only a header+1 offset. Native IsPreconnected.forall_lt_or_forall_lt:34 proves two continuous functions with no equal value on a preconnected set have a consistent strict order; the complete contradiction proof:37-40 invokes the actual two-function intermediate-value endpoint. Native forall_le_or_forall_ge:61 proves the ordinary interval-gap dichotomy, with actual closed-set connectedness proof:64-73. These are direct equivalent/immediate IVT order API for real intervals, not a later unrelated application. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Native topology/order siblings inspected; exclude discrete successor/predecessor intermediate value as a different domain and ODE/root-solving applications as independent endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "involution-parity",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/GroupTheory/Perm/Cycle/Type.lean",
+          "declarations": "Equiv.Perm.card_fixedPoints_modEq:369; .card_compl_support_modEq:356",
+          "note": "Proves the exact cardinal congruence as the p=2,n=1 instance of the completed prime-power periodic-map theorem."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Equiv.Perm.card_fixedPoints_modEq:369 proves |X|≡|Fix f| mod p when f^[p^n]=id, p prime. Take p=2,n=1. An involution gives the iteration identity by extensionality and Nat.iterate zero/successor equations; finite X can be equipped classically with Fintype and DecidableEq. Read the complete proof:372-382 constructing the permutation, relating cycle support complement to fixed points, and invoking its prime-power cycle divisibility proof:357-364. No fixed-point-free assumption is made. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: The theorem counts fixed points of arbitrary involutions, including all-fixed and empty finite sets.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "involution-parity",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Cycle/Type:369 and full prime-power congruence proof are byte-identical. p=2,n=1 and f involutive gives exactly parity, without fixed-point-free restriction. Enumerated native Perm/Cycle and Combinatorics/Enumerative siblings; InvolutionTransversal:212 counts 2^(|S|/2) TRANSVERSALS under a fixed-point-free hypothesis, and :112 removes an orbit pair. These are a separate enumerative theorem/proof ingredient, not a new fixed-point cardinal parity statement or its ordinary congruence API. Native PElementary uses the dependency theorem in a representation argument only. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Whole native card_fixedPoints_modEq/card_compl_support_modEq search found only a downstream PElementary use. Empty native files/zero native LOC; inherited exact theorem is checked rather than inferred from the general involution name.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "ip-set-positive-integers",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Combinatorics/Hindman.lean",
+          "declarations": "Hindman.FS:89; Hindman.FP.mul:106 (generated FS.add)",
+          "note": "Exact finite nonempty subsequence-sum constructor and ordinary sufficiently-late-tail sum closure API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Hindman.FS:89 is the exact inductive predicate of sums over NONEMPTY finite subsequences: head, skip into tail, or add head to a tail sum. Stream′:24 in Data/Stream/Defs is literally ℕ→M. Instantiate M=ℕ+ and define the exact primary predicate ∃a:Stream′ ℕ+,∀m,Hindman.FS a m→m∈A. Strictly increasing selected indices follow the head/tail recursion, so repeated numeric values of a are permitted but an index is not reused; 0 from an empty sum is excluded. Read inductive constructors and generated FS.add from FP.mul:106-120. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: No assertion that every infinite subset is IP; no unnecessary injectivity/strict growth of the positive generating sequence. Hindman partition regularity is a separate theorem, not required here.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "ip-set-positive-integers",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency Hindman.FS:90 is identical except a header+1; Stream′ source:24 is the checked function-sequence representation. Thus ∃a:ℕ→ℕ+,FS(a)⊆A gives full availability. Enumerated native Combinatorics root/additive/Ramsey and searched Hindman.FS, IsIP/IPSet/finite-sum sequence formulations: native Expansion concerns finite additive expansion and no checked FS/IP ordinary constructor/API contribution was identified. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Empty native files/zero native LOC. Generic finite-set sums and additive expansion are prerequisite/separate statements, not allocated merely because an IP-set contains sums.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "irreducible-polynomial",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Group/Irreducible/Defs.lean",
+          "declarations": "Irreducible:45; irreducible_iff:51",
+          "note": "Exact factorization/nonunit predicate specialized to polynomials, with explicit nonzero conjunct."
+        },
+        {
+          "path": "Mathlib/Algebra/Polynomial/FieldDivision.lean",
+          "declarations": "Polynomial.not_irreducible_C:619; .degree_pos_of_irreducible:625",
+          "note": "Immediate polynomial/field positive-degree and constant exclusion API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. For any specified commutative coefficient ring use p≠0 ∧ Irreducible p in R[X]. Irreducible:45 explicitly requires nonunit and every factorization p=a*b has a unit factor; the extra p≠0 conjunct retains the catalogue condition even for rings where the generic monoid predicate does not supply it automatically. Read irreducible_iff:51-54. Over a field FieldDivision.degree_pos_of_irreducible:625 proves positive degree and not_irreducible_C:619 excludes constants. No field hypothesis is imposed on the primary definition. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: In an arbitrary ring do not replace nonunit with positive degree, and do not silently assume a domain or monicity.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "irreducible-polynomial",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/GroupWithZero/Irreducible.lean",
+          "declarations": "Irreducible.of_map_of_dvd:33",
+          "note": "Native ordinary factorization/irreducibility reflection under explicit cancellativity and divisibility-reflection hypotheses."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Irreducible:45/iff:51 is byte-identical, FieldDivision:620/626 has header+1, and the exact primary predicate remains p≠0∧Irreducible p. Native Irreducible.of_map_of_dvd:33 reflects irreducibility through a monoid hom that reflects divisibility by x; read actual nonzero argument:36-39, unit-factor cancellation:42-50 and both factor branches:51-54. Applied to polynomial rings over domains this is direct ordinary irreducibility-recognition API, with its cancellative hypotheses explicit; it is not claimed for every coefficient ring. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Native polynomial irreducibility/Monic siblings inspected. Exclude Eisenstein, finite-field counts, low-degree classification and fraction-field/Gauss applications as separately significant additional endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "iteration-self-map",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Logic/Function/Iterate.lean",
+          "declarations": "Nat.iterate:40; Function.iterate_zero:54; .iterate_succ':170; .iterate_succ_apply':173",
+          "note": "Exact natural iteration constructor with both successor composition orientations and ordinary composition laws."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Nat.iterate:40 has f^[0]x=x and f^[n+1]x=f^[n](f x); Function.iterate_succ':170 and iterate_succ_apply':173 prove the catalogue orientation f∘f^[n] using the checked commuting-iterate laws. Read actual zero/successor recursion:40-42, one:81 and additive iteration:71-77; either recursive convention yields the same iterates. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Any self-map X→X, no injectivity, topology or finiteness assumptions.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "iteration-self-map",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Logic/Function/Iterate.lean",
+          "declarations": "Function.iterate_two:55; TauCeti.exists_iterate_of_forall_exists_iterate:40",
+          "note": "Native second-iterate composition and ordinary iterate simulation/composition API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency Nat.iterate:41 and successor′:171/174 have only header+1. Native Function.iterate_two:55 proves f^[2]=f∘f by the actual successor/one equations. Native TauCeti.exists_iterate_of_forall_exists_iterate:40-48 proves the direct transition-simulation law by induction/composition, retaining all assumptions. These are genuine ordinary iterate API of the same arbitrary self-map constructor. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: No claim of a finite attraction time or separate dynamical-system classification theorem.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "jacobi-form-higher-degree",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Checked Mathlib JacobiTheta/TwoVariable.jacobiTheta₂:252 is the ONE-SCALAR z,τ zero-characteristic theta series, while classical ModularForm:80 has a one-variable upper-half-plane domain. Tau-owned SiegelFunction/Basic is a classical one-variable modular UNIT, not a degree-g Jacobi form. Full-source Jacobi-group/Siegel upper-half-space/higher-degree Fourier support searches did not certify the actual ℍ_g×ℂ^g transformation interface and 4mT−RRᵀ positive-semidefinite support condition. These domain/action/Fourier bridges remain unresolved; no absence claim. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: A generic matrix positivity predicate or scalar Jacobi theta series alone is not the specified higher-degree Jacobi constructor. Do not conflate the two meanings of Siegel function/form.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "jacobi-form-higher-degree",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Checked Mathlib JacobiTheta/TwoVariable.jacobiTheta₂:252 is the ONE-SCALAR z,τ zero-characteristic theta series, while classical ModularForm:80 has a one-variable upper-half-plane domain. Tau-owned SiegelFunction/Basic is a classical one-variable modular UNIT, not a degree-g Jacobi form. Full-source Jacobi-group/Siegel upper-half-space/higher-degree Fourier support searches did not certify the actual ℍ_g×ℂ^g transformation interface and 4mT−RRᵀ positive-semidefinite support condition. These domain/action/Fourier bridges remain unresolved; no absence claim. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: A generic matrix positivity predicate or scalar Jacobi theta series alone is not the specified higher-degree Jacobi constructor. Do not conflate the two meanings of Siegel function/form.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "jacobi-theta-function",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/NumberTheory/ModularForms/JacobiTheta/TwoVariable.lean",
+          "declarations": "jacobiTheta₂_term:46; jacobiTheta₂:252; hasSum_jacobiTheta₂_term:262; hasFDerivAt_jacobiTheta₂:293",
+          "note": "Exact zero-characteristic holomorphic theta series, convergence and ordinary derivative/transformation API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. jacobiTheta₂_term:46 is exp(2πinz+πin²τ); jacobiTheta₂:252 sums it over n∈ℤ, exactly the specified zero characteristic convention, with the library arguments ordered (z,τ). hasSum_jacobiTheta₂_term:262 and summable iff:124 certify convergence precisely Imτ>0. Read completed joint Fréchet differentiability proof:293-321 using locally uniform summable derivative bounds; fst/snd derivatives:328/333 give holomorphy in either variable. The subscript₂ denotes TWO VARIABLES, not the classical theta2 half-characteristic function. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Exclude theta-series of arbitrary lattices and theta constants with nonzero characteristics as separate objects; no accidental classical θ₂ convention substitution.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "jacobi-theta-function",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/NumberTheory/ModularForms/JacobiTheta/OneVariable.lean",
+          "declarations": "TauCeti.jacobiTheta_sub_natCast_div_two:43; .norm_jacobiTheta₂_sub_one_le:141; .tendsto_jacobiTheta_comap_im_atTop:181",
+          "note": "Native ordinary zero-characteristic theta shift, real-z norm and cusp API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency TwoVariable is byte-identical, so exact zero-characteristic series and holomorphy are available. Native TauCeti.norm_jacobiTheta₂_sub_one_le:141 proves the direct ordinary bound ‖θ(z,τ)−1‖≤‖θ(0,i Imτ)−1‖ when z is real. Read complete series extraction/common-term-norm proof:144-178. The same file:43 gives elementary half-integral τ-shift decomposition at z=0 and :181 the cusp limit. These genuine theta API contributions retain z/τ conventions and stronger z-real hypothesis explicitly. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Enumerated native JacobiTheta OneVariable/QTheta/GaussSum siblings. QTheta is a multiplicative theta normalization and Gauss sums add arithmetic endpoints; they are not automatically allocated to this exact series.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "jacobi-torsion-specialization",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Inspected exact zero-characteristic theta and native Tau JacobiTheta/QTheta translation/quasi-periodicity candidates. They do not certify a general Jacobi-form slash action with arbitrary rational translation parameters followed by z=0 evaluation, nor prove the resulting N-torsion collection is a vector-valued modular form. The general Jacobi action and associated finite torsion representation/modularity bridge remain unchecked. Scalar function evaluation is a prerequisite only. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: No inference from a theta-special-function torsion value to the general Jacobi-form construction. Native QTheta/Siegel-function transformations are Tau-owned, not standalone Mathlib files.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "jacobi-torsion-specialization",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Inspected exact zero-characteristic theta and native Tau JacobiTheta/QTheta translation/quasi-periodicity candidates. They do not certify a general Jacobi-form slash action with arbitrary rational translation parameters followed by z=0 evaluation, nor prove the resulting N-torsion collection is a vector-valued modular form. The general Jacobi action and associated finite torsion representation/modularity bridge remain unchecked. Scalar function evaluation is a prerequisite only. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: No inference from a theta-special-function torsion value to the general Jacobi-form construction. Native QTheta/Siegel-function transformations are Tau-owned, not standalone Mathlib files.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "kikuta-takemori-genus-two-sturm-bound",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Actual Mathlib LevelOne/DimensionFormula.sturm_bound_levelOne_nat:300 and Tau-owned SturmBound:58/66 are degree-ONE characteristic-zero vanishing/equality results. Reviewed the completed induction/finite-index norm reduction in the preceding041 investigation. They do not supply genus-two matrix-indexed Fourier coefficients, all-prime-ideal powers 𝔭^ν, parity-dependent bounds floor(k/10)/floor((k−5)/10), or optimality. Bounded searches of genus-two/Siegel/Sturm and integral-form modules did not locate this exact completed theorem. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Do not substitute the degree-one bound or drop the odd-weight/prime-power/optimality clauses. Integral coefficient truncation injectivity in characteristic zero is not reduction-mod-𝔭^ν injectivity.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "kikuta-takemori-genus-two-sturm-bound",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual Mathlib LevelOne/DimensionFormula.sturm_bound_levelOne_nat:300 and Tau-owned SturmBound:58/66 are degree-ONE characteristic-zero vanishing/equality results. Reviewed the completed induction/finite-index norm reduction in the preceding041 investigation. They do not supply genus-two matrix-indexed Fourier coefficients, all-prime-ideal powers 𝔭^ν, parity-dependent bounds floor(k/10)/floor((k−5)/10), or optimality. Bounded searches of genus-two/Siegel/Sturm and integral-form modules did not locate this exact completed theorem. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Do not substitute the degree-one bound or drop the odd-weight/prime-power/optimality clauses. Integral coefficient truncation injectivity in characteristic zero is not reduction-mod-𝔭^ν injectivity.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "kovari-sos-turan-theorem",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Mathlib SimpleGraph/Extremal/Zarankiewicz:32 defines the maximal edge count of K_{s,t}-free bipartite graphs; :75 characterizes bounds, and :133 proves comparison with ordinary extremalNumber using the bipartite double cover (read proof:135-151). This is not the quantitative O(n^(2−1/s)) upper bound. Searched Kővári/Sós/Turán/Zarankiewicz, complete bipartite free, common-neighbor and edge-bound formulations; native Tau network/Hall/Turán candidates checked are flow/matching or other extremal endpoints. No checked proof of the stated exponent was identified. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: General Turán clique bounds concern a different forbidden graph. A definition of zarankiewicz or comparison with extremalNumber alone is prerequisite coverage, not a partial proof of the KST exponent; unknown retained.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "kovari-sos-turan-theorem",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Mathlib SimpleGraph/Extremal/Zarankiewicz:32 defines the maximal edge count of K_{s,t}-free bipartite graphs; :75 characterizes bounds, and :133 proves comparison with ordinary extremalNumber using the bipartite double cover (read proof:135-151). This is not the quantitative O(n^(2−1/s)) upper bound. Searched Kővári/Sós/Turán/Zarankiewicz, complete bipartite free, common-neighbor and edge-bound formulations; native Tau network/Hall/Turán candidates checked are flow/matching or other extremal endpoints. No checked proof of the stated exponent was identified. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: General Turán clique bounds concern a different forbidden graph. A definition of zarankiewicz or comparison with extremalNumber alone is prerequisite coverage, not a partial proof of the KST exponent; unknown retained.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "maillet-prime-difference-conjecture",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Prime/Defs.lean",
+          "declarations": "Nat.Prime:41",
+          "note": "Actual natural-primality predicate used in the exact quantified conjectural statement, not a proof of it."
+        },
+        {
+          "path": "Mathlib/Algebra/Group/Even.lean",
+          "declarations": "IsSquare:56 (generated Even)",
+          "note": "Actual Even n ↔ ∃k,n=k+k constructor used in the positive-even quantifier, statement only."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. FORMAL STATEMENT ONLY; no proof or truth of this conjecture is claimed. Exact checked generic quantified representation: ∀n:ℕ,0<n→Even n→∃q:ℕ,Nat.Prime q∧Nat.Prime(q+n). Nat.Prime:41 is ordinary primality, generated Even from IsSquare:56 means n=k+k. Writing larger prime as q+n makes the positive difference exact and avoids totalized natural subtraction. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: No dedicated named conjecture declaration was located; this positive judgment is the exact existing-constructor specialization allowed for statements, explicitly unproved. Exclude unrelated Kronecker algebraic-integer theorems and prime-in-progression theorems as different mathematics.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "maillet-prime-difference-conjecture",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. FORMAL STATEMENT ONLY; no proof or truth of this conjecture is claimed. Exact checked generic quantified representation: ∀n:ℕ,0<n→Even n→∃q:ℕ,Nat.Prime q∧Nat.Prime(q+n). Nat.Prime:41 is ordinary primality, generated Even from IsSquare:56 means n=k+k. Writing larger prime as q+n makes the positive difference exact and avoids totalized natural subtraction. Actual dependency Nat.Prime starts42 due a header blank; Even56 and the unboundedness equivalence933 are unchanged. Native NumberTheory and Data/Nat/Prime sibling searches found arithmetic divisibility/Frobenius/prime-counting results but no checked direct prime-difference statement or core API contribution. Statement-only availability therefore comes from these checked dependency constructors. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Empty native files/zero native LOC. Generic prime facts, prime-power difference divisibility, and Chebotarev progression counts are not native implementations of this prime-pair conjecture. No proof claim and no automatic negative conclusion from a missing name.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "kronecker-prime-difference-conjecture",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Data/Nat/Prime/Defs.lean",
+          "declarations": "Nat.Prime:41",
+          "note": "Actual natural-primality predicate used in the exact quantified conjectural statement, not a proof of it."
+        },
+        {
+          "path": "Mathlib/Algebra/Group/Even.lean",
+          "declarations": "IsSquare:56 (generated Even)",
+          "note": "Actual Even n ↔ ∃k,n=k+k constructor used in the positive-even quantifier, statement only."
+        },
+        {
+          "path": "Mathlib/Order/Interval/Finset/Basic.lean",
+          "declarations": "Set.Infinite.exists_gt:930; Set.infinite_iff_exists_gt:933",
+          "note": "Actual infinitude/unboundedness equivalence certifies the precise infinitely-many interpretation of this formal statement."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. FORMAL STATEMENT ONLY; no proof or truth of this conjecture is claimed. Exact checked generic quantified representation: ∀n:ℕ,0<n→Even n→∀N:ℕ,∃q:ℕ,N<q∧Nat.Prime q∧Nat.Prime(q+n). Nat.Prime:41 is ordinary primality, generated Even from IsSquare:56 means n=k+k. Writing larger prime as q+n makes the positive difference exact and avoids totalized natural subtraction. Set.infinite_iff_exists_gt:933 in Order/Interval/Finset/Basic proves the unbounded-q quantifier is EXACTLY infinitude of {q|Prime q∧Prime(q+n)}; over ℕ LocallyFiniteOrderBot and Nonempty hold. For fixed n, q↦(q+n,q) is injective and identifies these q with ordered prime pairs of difference n, so infinitely often has the intended meaning. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: No dedicated named conjecture declaration was located; this positive judgment is the exact existing-constructor specialization allowed for statements, explicitly unproved. Exclude unrelated Kronecker algebraic-integer theorems and prime-in-progression theorems as different mathematics.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "kronecker-prime-difference-conjecture",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. FORMAL STATEMENT ONLY; no proof or truth of this conjecture is claimed. Exact checked generic quantified representation: ∀n:ℕ,0<n→Even n→∀N:ℕ,∃q:ℕ,N<q∧Nat.Prime q∧Nat.Prime(q+n). Nat.Prime:41 is ordinary primality, generated Even from IsSquare:56 means n=k+k. Writing larger prime as q+n makes the positive difference exact and avoids totalized natural subtraction. Set.infinite_iff_exists_gt:933 in Order/Interval/Finset/Basic proves the unbounded-q quantifier is EXACTLY infinitude of {q|Prime q∧Prime(q+n)}; over ℕ LocallyFiniteOrderBot and Nonempty hold. For fixed n, q↦(q+n,q) is injective and identifies these q with ordered prime pairs of difference n, so infinitely often has the intended meaning. Actual dependency Nat.Prime starts42 due a header blank; Even56 and the unboundedness equivalence933 are unchanged. Native NumberTheory and Data/Nat/Prime sibling searches found arithmetic divisibility/Frobenius/prime-counting results but no checked direct prime-difference statement or core API contribution. Statement-only availability therefore comes from these checked dependency constructors. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Empty native files/zero native LOC. Generic prime facts, prime-power difference divisibility, and Chebotarev progression counts are not native implementations of this prime-pair conjecture. No proof claim and no automatic negative conclusion from a missing name.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "lang-steinberg-surjectivity",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. MonoidHom.commutatorMap:33 in GroupTheory/FixedPointFree is t↦t/F(t), and finite fixed-point-free group arguments do not prove surjectivity for smooth connected algebraic groups over algebraic closures. Searched actual Frobenius/connected affine/Hopf and Lang–Steinberg formulations; the general algebraic-group surjectivity and H¹ comparison were not certified in standalone Mathlib. Unknown is that theorem/proof bridge, not a claim that the abstract Lang expression is unavailable. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: The target convention x^-1F(x) differs by inversion/order from the commutator map. No inference of the general theorem from a map definition or from an assumption that the Lang map is already surjective.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "lang-steinberg-surjectivity",
+      "library": "tau-ceti",
+      "status": "partial",
+      "files": [
+        {
+          "path": "TauCeti/GroupTheory/FixedSubgroup/Lang.lean",
+          "declarations": "MonoidHom.commutatorMap_prod_range:39; .surjective_commutatorMap_of_iterate:47; .surjective_commutatorMap_of_iterate_eq_pow:56",
+          "note": "Native actual Lang telescoping and root-surjectivity proof for commutative groups."
+        },
+        {
+          "path": "TauCeti/GroupTheory/FixedSubgroup/Torus.lean",
+          "declarations": "MonoidHom.surjective_commutatorMap_of_torus_iterate_eq_pow:38; .surjective_commutatorMap_of_torus_twist:47",
+          "note": "Native completed split-torus/Frobenius-twist Lang surjectivity component."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Native GroupTheory/FixedSubgroup/Torus:38 proves surjective Lang map on (ι→Kˣ), K algebraically closed, if an iterate is a Q-th power map with Q>1. :47 proves the Frobenius-power twist case for finite-order θ, by the actual commuting-power iteration proof:51-56; θ=id,m=1 gives the split-torus q-power Frobenius case. Native Lang:39 proves the telescoping product identity, :47 iterate descent and :56 roots criterion; read all complete proofs:39-72. commutatorMap F t=t/Ft is the inverse of t^-1Ft in this COMMUTATIVE point group, so surjectivity agrees. This is an actual restricted torus Lang theorem, not merely assuming the desired surjectivity. The general smooth connected affine noncommutative case and its H¹ comparison are not supplied by these files. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Enumerated native FixedSubgroup siblings and algebraic-group Connected/Representation/Frobenius candidates; do not infer a full Lang–Steinberg proof from fixed-lift lemmas82/102, which explicitly ASSUME a subgroup Lang map is surjective. Torus point presentation is explicit; no general noncommutative inversion identity is asserted.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "large-minimum-happy-height-recurrence",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The actual Nat.digits76/map-powers/List.sum constructor and Nat.find67/iterate machinery (checked041) supply digit-power sums, attraction heights and conditional minima. They do not prove an explicit size threshold M(b,e) or that the predecessor of the next exact-height minimum is the preceding minimum. Native Tau Data/Nat/Digits111 proves a mapped one-step digit recursion, not this recurrence for constrained minima. Happy-height/Mei/Read-McFarland and digit-power minimum searches did not resolve a completed proof of the stated size-threshold theorem. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Retain existence of both exact-height minima and size σ_h>M; do not substitute a uniform threshold on h, and do not mistake minimum-existence primitives for a proof of the recurrence.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "large-minimum-happy-height-recurrence",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. The actual Nat.digits76/map-powers/List.sum constructor and Nat.find67/iterate machinery (checked041) supply digit-power sums, attraction heights and conditional minima. They do not prove an explicit size threshold M(b,e) or that the predecessor of the next exact-height minimum is the preceding minimum. Native Tau Data/Nat/Digits111 proves a mapped one-step digit recursion, not this recurrence for constrained minima. Happy-height/Mei/Read-McFarland and digit-power minimum searches did not resolve a completed proof of the stated size-threshold theorem. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Retain existence of both exact-height minima and size σ_h>M; do not substitute a uniform threshold on h, and do not mistake minimum-existence primitives for a proof of the recurrence.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "larson-rose-level-theorem",
+      "library": "mathlib",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Reviewed Mathlib classical Eisenstein/E2 construction and native Tau JacobiTheta/SiegelFunction/Eisenstein/QExpansion contexts. E2’s transformation defect and its divisor-sum Fourier series are real completed proofs, but they do not identify Rose’s A_{S,n,k} for every symmetric residue set or prove its mixed weight≤2k transformation on Γ₁(n). Searches of Larson/Rose/generalized-divisor-sum and residue-symmetric formulations left that exact source-family/theorem bridge unresolved. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: No promotion of a single E2 example, a twisted Eisenstein series, or scalar theta torsion law to the all-S,n,k level theorem. Native Jacobi/Siegel candidates are explicitly Tau-owned.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "larson-rose-level-theorem",
+      "library": "tau-ceti",
+      "status": "unknown",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Reviewed Mathlib classical Eisenstein/E2 construction and native Tau JacobiTheta/SiegelFunction/Eisenstein/QExpansion contexts. E2’s transformation defect and its divisor-sum Fourier series are real completed proofs, but they do not identify Rose’s A_{S,n,k} for every symmetric residue set or prove its mixed weight≤2k transformation on Γ₁(n). Searches of Larson/Rose/generalized-divisor-sum and residue-symmetric formulations left that exact source-family/theorem bridge unresolved. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: No promotion of a single E2 example, a twisted Eisenstein series, or scalar theta torsion law to the all-S,n,k level theorem. Native Jacobi/Siegel candidates are explicitly Tau-owned.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "lattice-euclidean-space",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/Module/ZLattice/Basic.lean",
+          "declarations": "ZSpan.discreteTopology_pi_basisFun:298; ZSpan basis-span DiscreteTopology instance:317; IsZLattice:433; instIsZLatticeRealSpan:438",
+          "note": "Actual basis-integer-span lattice construction, discrete/full-span verification and ordinary fundamental-domain API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact primary representation: Λ=Submodule.span ℤ (Set.range b) for b:Basis(Fin n)ℝ(ℝ^n), regarded as an additive subgroup. ZLattice/Basic.instIsZLatticeRealSpan:438 proves this span is a full real lattice; its spanning property:441 and the discrete topology construction:298/317-324 are completed source. The paragraph itself defines the integer span of a REAL basis, so this explicit existing constructor already matches without proving a separate classification of every discrete cocompact subgroup. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: No lower-rank discrete subgroup, arbitrary abstract free abelian group or merely dense real span is silently called a full lattice.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "lattice-euclidean-space",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/Algebra/Module/ZLattice/Basic.lean",
+          "declarations": "ZLattice.exists_basis_span_eq:228; IsZLattice.of_le:217; ZSpan.eq_of_sub_mem_fundamentalDomain:80",
+          "note": "Native exact basis-span recognition and ordinary lattice translate/fullness API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Dependency basis-span lattice implementation has only a header+1 offset (IsZLattice434 and real-span instance439). Native ZLattice.exists_basis_span_eq:228 gives the exact converse: every discrete IsZLattice ℝ L in finite-dimensional real E is spanℤ of a finite REAL basis. Read complete proof:231-234 using the lattice integral basis comparison, and native IsZLattice.of_le:217-220 for ordinary discrete-supergroup fullness. These are direct defining lattice/basis API, not an integral quadratic-form classification. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Enumerated native ZLattice Basic/fundamental-domain/linear-map siblings; exclude volume normalization, lattice reduction and integral-form arithmetic as additional independent endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "level-distribution-primes",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean",
+          "declarations": "Finset.sum (generated additive definition of protected prod):66",
+          "note": "Direct finite progression-count and modulus-average sum constructor in the exact explicit predicate."
+        },
+        {
+          "path": "Mathlib/Data/Finset/Lattice/Fold.lean",
+          "declarations": "Finset.sup':529; Finset.sup'_le_iff:555; Finset.le_sup':561",
+          "note": "Direct finite reduced-residue maximum and its actual upper/lower characterization."
+        },
+        {
+          "path": "Mathlib/NumberTheory/ArithmeticFunction/VonMangoldt.lean",
+          "declarations": "ArithmeticFunction.vonMangoldt:65; vonMangoldt_apply_pow:86; vonMangoldt_apply_prime:89",
+          "note": "Actual specified Lambda weights defining this precise permitted convention."
+        },
+        {
+          "path": "Mathlib/Data/Nat/Totient.lean",
+          "declarations": "Nat.totient:38; ZMod.card_units_eq_totient:112",
+          "note": "Actual arithmetic denominator for the progression main term, with reduced-residue count identification."
+        },
+        {
+          "path": "Mathlib/Analysis/Asymptotics/Defs.lean",
+          "declarations": "Asymptotics.IsBigO:86; Asymptotics.isBigO_iff:99",
+          "note": "Direct uniform eventual error-bound predicate; constants may depend on the externally quantified A and epsilon."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Exact checked generic bare definition, choosing explicitly the standard von-Mangoldt-weighted, ALL POSITIVE MODULI, reduced-residue MAXIMUM, FIXED-x convention. For q>=1 and a:(ZMod q)units, define psi(x;q,a)=sum over m in Finset.Ioc 0 floor_nat(x), with (m:ZMod q)=a, of ArithmeticFunction.vonMangoldt m. Put E(x;q)=Finset.univ.sup' (nonempty witness unit1) (fun a => abs(psi(x;q,a)-x/(Nat.totient q:Real))). Then level(theta) is forall real A>0,forall real epsilon>0, (fun x:Real => sum q in Finset.Icc 1 floor_nat(x^(theta-epsilon)), E(x;q)) =O[atTop] (fun x => x/(Real.log x)^A). Real powers are rpow; eventual x>1 avoids all small-x conventions. Actual Finset.sum (generated additive protected prod):66 is finite underlying-multiset sum; Finset.sup':529 and sup'_le_iff:555/le_sup':561 certify an actual finite maximum, with units nonempty via1 even for q=1. VonMangoldt:65 is log(minFac m) for prime powers and0 otherwise, actual pow/prime identities86/89 checked; totient:38 is cardinal reduced residues (units/card comparison112 checked in042). Asymptotics.IsBigO:86/isBigO_iff:99 is precisely an eventually bounded constant multiple, so choosing it AFTER A,epsilon permits constants depending on both. No assertion that any theta satisfies this predicate, no Bombieri–Vinogradov/Elliott–Halberstam proof, and no claimed equivalence to a stronger supremum-in-y normalization. Actual defining bodies/hypotheses checked, no new proof development.\nSearch and boundary notes: Independent reviewer completed the previously unverified finite-sup/composite predicate using actual existing constructors; no named alias required for this bare definition. q ranges over ALL positive q<=x^(theta-epsilon), a ranges over all reduced residues, and the weighted count is evaluated at x itself. These choices are explicit as the catalogue requests for variants. Exclude fixed-modulus Dirichlet infinitude, total Chebyshev psi alone, number-field Frobenius comparisons and any unproved positive-level theorem. Generic floor/rpow/log/ZMod are checked parameter/numeric suppliers, not extra allocated API files.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "level-distribution-primes",
+      "library": "tau-ceti",
+      "status": "inherited",
+      "files": [],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, ACTUAL Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact checked generic bare definition, choosing explicitly the standard von-Mangoldt-weighted, ALL POSITIVE MODULI, reduced-residue MAXIMUM, FIXED-x convention. For q>=1 and a:(ZMod q)units, define psi(x;q,a)=sum over m in Finset.Ioc 0 floor_nat(x), with (m:ZMod q)=a, of ArithmeticFunction.vonMangoldt m. Put E(x;q)=Finset.univ.sup' (nonempty witness unit1) (fun a => abs(psi(x;q,a)-x/(Nat.totient q:Real))). Then level(theta) is forall real A>0,forall real epsilon>0, (fun x:Real => sum q in Finset.Icc 1 floor_nat(x^(theta-epsilon)), E(x;q)) =O[atTop] (fun x => x/(Real.log x)^A). Real powers are rpow; eventual x>1 avoids all small-x conventions. Actual Finset.sum (generated additive protected prod):66 is finite underlying-multiset sum; Finset.sup':529 and sup'_le_iff:555/le_sup':561 certify an actual finite maximum, with units nonempty via1 even for q=1. VonMangoldt:65 is log(minFac m) for prime powers and0 otherwise, actual pow/prime identities86/89 checked; totient:38 is cardinal reduced residues (units/card comparison112 checked in042). Asymptotics.IsBigO:86/isBigO_iff:99 is precisely an eventually bounded constant multiple, so choosing it AFTER A,epsilon permits constants depending on both. No assertion that any theta satisfies this predicate, no Bombieri–Vinogradov/Elliott–Halberstam proof, and no claimed equivalence to a stronger supremum-in-y normalization. Actual defining bodies/hypotheses checked, no new proof development. Actual dependency bytes checked: Finset/Fold and Totient identical, sum definition67, VonMangoldt66/87/90 and BigO87/100 after only header+1. Native PrimeCounting/ArithmeticProgression:93 identifies cyclotomic Frobenius coefficients with the Lambda progression restriction under coprimality, but that is a separate arithmetic comparison, not a native definition or ordinary growing-modulus uniform-error API. Thus complete explicit predicate supplied by checked dependency, zero native LOC.\nSearch and boundary notes: Independent reviewer completed the previously unverified finite-sup/composite predicate using actual existing constructors; no named alias required for this bare definition. q ranges over ALL positive q<=x^(theta-epsilon), a ranges over all reduced residues, and the weighted count is evaluated at x itself. These choices are explicit as the catalogue requests for variants. Exclude fixed-modulus Dirichlet infinitude, total Chebyshev psi alone, number-field Frobenius comparisons and any unproved positive-level theorem. Generic floor/rpow/log/ZMod are checked parameter/numeric suppliers, not extra allocated API files. Enumerated native PrimeCounting, ArithmeticProgression, Nat/Prime and Asymptotics direct siblings; no qualifying native universal-modulus/error predicate API certified. Do not allocate number-field character/Frobenius comparisons or generic sum prerequisites as native implementation of a level of distribution.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "localization-commutative-ring",
+      "library": "mathlib",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "Mathlib/GroupTheory/MonoidLocalization/Basic.lean",
+          "declarations": "Localization.r:145; .r_iff_exists:191; Localization:210; Localization.mk:221; .mk_eq_mk_iff:224; .mk_mul:252",
+          "note": "Actual fraction quotient/equivalence, multiplication and ordinary localization-map API."
+        },
+        {
+          "path": "Mathlib/RingTheory/Localization/Defs.lean",
+          "declarations": "IsLocalization:102; Localization.add_mk:801; .isLocalization:830",
+          "note": "Ring fraction addition and actual ring-localization characteristic/universal-map API."
+        }
+      ],
+      "evidence": "Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Localization:210 in GroupTheory/MonoidLocalization/Basic aliases the actual Ore quotient; mk:221 constructs r/s. r_iff_exists:191 and mk_eq_mk_iff:224 give ∃t∈S,t*(s′r)=t*(sr′), exactly t(rs′−r′s)=0 over a commutative ring, allowing zero divisors. Read actual equivalence with Ore relation:195-202 and quotient equality:224-225. RingTheory/Localization/Defs.add_mk:801 gives cross multiplication addition and isLocalization:830 certifies the ring localization. Submonoid supplies1/multiplicative closure; no cancellation/domain hypothesis is introduced. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: The witness multiplier t is essential for rings with zero divisors; bare rs′=r′s would be too strong. Not just the domain fraction field or an away-from-one-element specialization.\nCoverage update source snapshot: mathlib 26573066084e6e2aa8526ea358bc43b66d96f970.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    },
+    {
+      "concept": "localization-commutative-ring",
+      "library": "tau-ceti",
+      "status": "formalized",
+      "files": [
+        {
+          "path": "TauCeti/RingTheory/Localization/Defs.lean",
+          "declarations": "IsLocalization.lift_injective_of_injective:29",
+          "note": "Native direct universal-localization lift/injectivity API."
+        }
+      ],
+      "evidence": "Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Actual dependency fraction quotient/equivalence and ring Localization/Defs bytes are identical. Native IsLocalization.lift_injective_of_injective:29 proves the universal lift is injective when its original hom is injective and sends every denominator to a unit; read complete proof:31-32 using the exact generic lift-injectivity criterion. This is genuine ordinary universal-property API of the same arbitrary commutative-ring localization, valid under weaker commutative-semiring hypotheses. Relevant exact committed statements, hypotheses and completed source bodies inspected. No fresh compilation or transitive axiom audit.\nSearch and boundary notes: Enumerated native RingTheory/Localization Defs and direct siblings; exclude prime spectra, local rings, fraction-field degree, Ore noncommutative refinements and algebraic-geometric applications as extra endpoints.\nCoverage update source snapshot: tau-ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023. Its pinned Mathlib dependency is 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.\nAuthor/reviewer decisions: data/formalization-update-2026-11-12/reviews/batch-044.json."
+    }
+  ],
+  "formalization_files": [
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 910,
+      "sha256": "06914ce8974f5477feffd51f0114399446d3121887bd32d93eaa6bc9a42e6a6e",
+      "measured_at": "2026-11-13T02:45:41.441484+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Group/Even.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 180,
+      "sha256": "66fb0a9c30f82497d75f0a6cf9f05ea531b2e8fabdc97f5e51693aa67f1936d3",
+      "measured_at": "2026-11-13T02:45:41.447253+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Group/Irreducible/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 74,
+      "sha256": "8b55782839e03bfeb835829457a01ab84260f60f827d2fdc4dc5b38310c1b29f",
+      "measured_at": "2026-11-13T02:45:41.455312+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Algebra/Module/ZLattice/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 804,
+      "sha256": "67bd78bf886be6a090cebc26e81d32f1114131079870e9712a05cd4f65bd8a2b",
+      "measured_at": "2026-11-13T02:45:41.461265+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Combinatorics/Hindman.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 276,
+      "sha256": "4c82dcc3626149329f4cad3caa03f932304b4088020944dc51b8365bd4d387fb",
+      "measured_at": "2026-11-13T02:45:41.475320+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Finset/Lattice/Fold.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 820,
+      "sha256": "78b0459961929f39f811255bd6995beb63ab27a04357e01b920c3b5bce9eeaf3",
+      "measured_at": "2026-11-13T02:45:41.478941+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Nat/Prime/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 477,
+      "sha256": "d9b12ed44b833a11aa33eca0e0fffc5ec2d879cf903039bae0f44b7451934e9e",
+      "measured_at": "2026-11-13T02:45:41.484412+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Data/Nat/Totient.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 465,
+      "sha256": "6e1595b1f63672e0cefae6e6f6668ad1cf552688291e686649f903921a6b9ee4",
+      "measured_at": "2026-11-13T02:45:41.487540+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/GroupTheory/MonoidLocalization/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 926,
+      "sha256": "a28224156f8d73ff6b8c86265c210809085da9faef8462ab5279c33141a33590",
+      "measured_at": "2026-11-13T02:45:41.491179+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/GroupTheory/Perm/Cycle/Type.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 790,
+      "sha256": "432642ee1655422b34eb885f3f7390cd96a9adda7bdc7a7a09f58b680f062b8a",
+      "measured_at": "2026-11-13T02:45:41.495233+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Logic/Function/Iterate.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 253,
+      "sha256": "5daf4df746480c9b8b5b60b8e7fc3e6a789249eb9fd9d660266626429ade6bff",
+      "measured_at": "2026-11-13T02:45:41.498917+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Order/Interval/Finset/Basic.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 1202,
+      "sha256": "b8434a87d5872ea06fdfc047486374af92b2f0bef3719b9cd268b5c6d42de246",
+      "measured_at": "2026-11-13T02:45:41.512323+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/RingTheory/Localization/Defs.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 943,
+      "sha256": "c16483bdb92776bf34ced3c9defbd944e997299de0fc86b3387d1142e40deb38",
+      "measured_at": "2026-11-13T02:45:41.516966+00:00"
+    },
+    {
+      "library": "mathlib",
+      "path": "Mathlib/Topology/Order/IntermediateValue.lean",
+      "revision": "26573066084e6e2aa8526ea358bc43b66d96f970",
+      "loc": 998,
+      "sha256": "7042c45f201becc29b866c58cf44f4c0a5b0dedfe91853f0581019242eb07787",
+      "measured_at": "2026-11-13T02:45:41.521784+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/GroupWithZero/Irreducible.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 54,
+      "sha256": "3146f6b1ecfeb1cd8ed8863203b4689a009f9cbc24ffbf1e9aec0dd68c89cd43",
+      "measured_at": "2026-11-13T02:45:41.538855+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Algebra/Module/ZLattice/Basic.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 246,
+      "sha256": "55cf8db84bfaba86e47a2a00786eaa1be42056b2664cee7a7df8abb43c346d04",
+      "measured_at": "2026-11-13T02:45:41.547060+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/GroupTheory/FixedSubgroup/Lang.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 119,
+      "sha256": "e8f4bac3f22c57657a4482ba4682e7eacb591c2537bc1b6f1376d96683c14fca",
+      "measured_at": "2026-11-13T02:45:41.554797+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/GroupTheory/FixedSubgroup/Torus.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 75,
+      "sha256": "18155c0fb4298de13a8a1561db5d931fa34c7c3c75fc32cd1c4e493d0b714862",
+      "measured_at": "2026-11-13T02:45:41.559955+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Logic/Function/Iterate.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 58,
+      "sha256": "98d5c58f2e59c687a49afbe31436e5f4d78cb8975a3a6ba87569f2cd265efeeb",
+      "measured_at": "2026-11-13T02:45:41.569200+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/RingTheory/Localization/Defs.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 34,
+      "sha256": "973d3a443b85d51970eebf5c8a598a92bcd6a1be435163deee915011326c8ac9",
+      "measured_at": "2026-11-13T02:45:41.584561+00:00"
+    },
+    {
+      "library": "tau-ceti",
+      "path": "TauCeti/Topology/Order/IntermediateValue.lean",
+      "revision": "3780371ca1bebf9f1c2bb3d753e4bb56c9526023",
+      "loc": 73,
+      "sha256": "910865b8e57f99291f91f1a15ad7cc7d1e1efbef3bee8b482622ed4f88c1000f",
+      "measured_at": "2026-11-13T02:45:41.591619+00:00"
+    }
+  ]
+}

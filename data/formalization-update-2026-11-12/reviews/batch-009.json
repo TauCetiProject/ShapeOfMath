@@ -1,0 +1,297 @@
+{
+  "batch_id": "batch-009",
+  "reviewer": "analysis_formalization",
+  "proposal_sha256": "a27331ffa892a2d4d1ba75d0df832e824be267f5d349bbc1535b97b8ca58122d",
+  "decisions": [
+    {
+      "concept": "compact-star-shaped-set-origin",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independently checked StarConvex:69 convex-combination fields and both directions of segment_subset:75, IsCompact:294 and explicit Nonempty. This matches weak star-shaped compact sets, including ones with no interior/radial regularity; native radial-dilate proof is direct ordinary API."
+    },
+    {
+      "concept": "compact-star-shaped-set-origin",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Independently checked StarConvex:69 convex-combination fields and both directions of segment_subset:75, IsCompact:294 and explicit Nonempty. This matches weak star-shaped compact sets, including ones with no interior/radial regularity; native radial-dilate proof is direct ordinary API.",
+      "replacement": {
+        "concept": "compact-star-shaped-set-origin",
+        "concept_id": "e2ad6997-dced-5fff-85ef-c33ad2bd6300",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Exact dependency StarConvex:69/segment iff:75 and IsCompact:294 are byte-identical, so K.Nonempty \u2227 IsCompact K \u2227 StarConvex \u211d 0 K is the full weak catalogue definition. Native StarConvex.smul_mono:67 proves p\u2022K\u2286q\u2022K whenever 0\u2264p\u2264q by expressing p\u2022x=q\u2022((p/q)\u2022x), separately handling q=0. This is direct ordinary radial-dilation API of the same compact star-shaped set, though the valid generic proof needs no compactness assumption. Actual statement/hypothesis and complete short proof inspected; no fresh build or transitive audit.",
+        "files": [
+          {
+            "path": "TauCeti/Analysis/Convex/Star.lean",
+            "declarations": "StarConvex.smul_mono L67; Convex.smul_mono_of_zero_mem L82",
+            "note": "Native direct radial-dilation monotonicity for origin-star-shaped sets, in particular nonempty compact ones; the defining compact/nonempty flags remain dependency-owned."
+          }
+        ],
+        "search_notes": "Retain compactness and nonemptiness from the checked dependency; do not add convexity, interior or positive continuous radial function. Under the user-approved ordinary-core API rule, direct radial-dilate identities qualify for this subclass without requiring compactness to occur in the proof. Exclude superclass instance installation, complement homotopy equivalence and punctured-star topology endpoints."
+      }
+    },
+    {
+      "concept": "compact-topological-space",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Checked filter compactness and finite-subcover iff:385 with no separation assumptions; native inter_of_forall_exists:32 proof really extracts a finite subcover and compact finite union, ordinary local recognition. Connected-component applications do not expand the file boundary."
+    },
+    {
+      "concept": "compact-topological-space",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked filter compactness and finite-subcover iff:385 with no separation assumptions; native inter_of_forall_exists:32 proof really extracts a finite subcover and compact finite union, ordinary local recognition. Connected-component applications do not expand the file boundary."
+    },
+    {
+      "concept": "compactly-supported-smooth-test-function",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Checked TestFunction:67 fields ContDiff top, compact tsupport contained in open \u03a9 and actual native postcomposition/conjugation extensionality proofs:46/55/65. Ambient zero extension is exact because the compact support is inside \u03a9, not merely touching its boundary."
+    },
+    {
+      "concept": "compactly-supported-smooth-test-function",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked TestFunction:67 fields ContDiff top, compact tsupport contained in open \u03a9 and actual native postcomposition/conjugation extensionality proofs:46/55/65. Ambient zero extension is exact because the compact support is inside \u03a9, not merely touching its boundary."
+    },
+    {
+      "concept": "complete-measure",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Checked actual IsComplete:445 requires measurable outer-null sets and measurableSet_of_null:456; monotonicity and measurable null envelopes give exactly all measurable-null subsets. Dependency byte identity verified. Native content completion and conditional-expectation completion are other constructions, appropriately excluded."
+    },
+    {
+      "concept": "complete-measure",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked actual IsComplete:445 requires measurable outer-null sets and measurableSet_of_null:456; monotonicity and measurable null envelopes give exactly all measurable-null subsets. Dependency byte identity verified. Native content completion and conditional-expectation completion are other constructions, appropriately excluded."
+    },
+    {
+      "concept": "complex-exponential",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read factorial-series Cauchy convergence and limit constructor:51/57/62, ExpDeriv:87 derivative proof and Euler identity:537. Native periodic normalization:50 and imaginary-axis norm:56 use exp_add and norm_exp, direct ordinary complex exponential API. Dependency differences preserve all these statements/proofs."
+    },
+    {
+      "concept": "complex-exponential",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read factorial-series Cauchy convergence and limit constructor:51/57/62, ExpDeriv:87 derivative proof and Euler identity:537. Native periodic normalization:50 and imaginary-axis norm:56 use exp_add and norm_exp, direct ordinary complex exponential API. Dependency differences preserve all these statements/proofs."
+    },
+    {
+      "concept": "complex-hilbert-space",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Checked positive-definite induced norm constructor Core.toNormedAddCommGroup:473 and CompleteSpace:369 conjunction. Swapping complex inner slots preserves diagonal norm and metric. Direct ordinary inner/finite-sum norm identities remain Hilbert core even when completeness is unused; generic superclass installers and Riesz/adjoint/spectral endpoints are excluded.",
+      "replacement": {
+        "concept": "complex-hilbert-space",
+        "concept_id": "4faf78e1-5341-5384-ab66-28a9d56be7a2",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. The exact representation is [NormedAddCommGroup H] [InnerProductSpace \u2102 H] [CompleteSpace H], explicitly documented in InnerProductSpace/Defs:19. Inner product norm compatibility is :110\u2013119; CompleteSpace:369\u2013371 requires every Cauchy filter converge, equivalent to Cauchy-sequence metric completeness (Metric.complete_of_cauchySeq_tendsto). The metric is the induced norm metric. No separability or finite-dimensionality is assumed. Actual source/declaration/proof inspection; no fresh Lean build or transitive axiom audit. Independently checked Basic:57/76/106 Hermitian/additive/scalar inner identities, which directly specialize to complex Hilbert spaces and are ordinary inner/norm API; add this native file consistently with the inner-product-space mapping.",
+        "files": [
+          {
+            "path": "Mathlib/Analysis/InnerProductSpace/Defs.lean",
+            "declarations": "InnerProductSpace (:110); InnerProductSpace.Core (:155); Core.toNorm (:379); norm_eq_sqrt_re_inner (:383); Core.toNormedAddCommGroup (:473)",
+            "note": "Defines Hermitian inner product and norm compatibility; positive-definite Core builds the induced norm/metric, while main class with normed group gives separation."
+          },
+          {
+            "path": "Mathlib/Topology/UniformSpace/Cauchy.lean",
+            "declarations": "CompleteSpace (:369); isComplete_univ (:373)",
+            "note": "Actual completeness predicate used with the inner-product norm; defining conjunction has no need for a dedicated Hilbert alias."
+          },
+          {
+            "path": "Mathlib/Analysis/InnerProductSpace/Basic.lean",
+            "declarations": "inner_conj_symm L57; inner_add_right L76; inner_smul_left L106; inner_smul_right",
+            "note": "Native ordinary Hermitian/scalar/finite-sum and induced-norm identities on complex Hilbert spaces; complete structure is defined separately, and completeness need not enter each core identity."
+          }
+        ],
+        "search_notes": "Full defining InnerProductSpace/CompleteSpace conjunction plus direct ordinary Hermitian/scalar/finite-sum/norm identities. Completeness need not be used by every core law, analogous to generic group power identities for Abelian groups. This is not automatic attribution of superclass instance installers/imports. Exclude Riesz, orthonormal basis, adjoints and spectral/variational endpoints. Swapped inner slots retain the catalogue linear-first convention."
+      }
+    },
+    {
+      "concept": "complex-hilbert-space",
+      "library": "tau-ceti",
+      "decision": "change",
+      "reason": "Checked positive-definite induced norm constructor Core.toNormedAddCommGroup:473 and CompleteSpace:369 conjunction. Swapping complex inner slots preserves diagonal norm and metric. Direct ordinary inner/finite-sum norm identities remain Hilbert core even when completeness is unused; generic superclass installers and Riesz/adjoint/spectral endpoints are excluded.",
+      "replacement": {
+        "concept": "complex-hilbert-space",
+        "concept_id": "4faf78e1-5341-5384-ab66-28a9d56be7a2",
+        "concept_revision": 1,
+        "library": "tau-ceti",
+        "status": "formalized",
+        "evidence": "Checked immutable Tau Ceti 3780371ca1bebf9f1c2bb3d753e4bb56c9526023, actual Mathlib dependency 2ddf59c8f14245864e6c0ed227a2dab76b9efea2. Pinned InnerProductSpace/Defs and UniformSpace/Cauchy are byte-identical to the checked full complex Hilbert conjunction. Native Finsupp.inner_linearCombination_eq_of_inner_eq:33 expands finite sums and scalar inner laws from equal Gram kernels; :42 proves equality of induced norms by the sqrt-real-inner formula. These are direct ordinary inner/norm API of complex Hilbert spaces even though the generic proof does not use completeness. Swapping the Mathlib inner slots gives the catalogue linear-first convention and preserves the norm. Complete short source proofs inspected; no fresh build/transitive audit.",
+        "files": [
+          {
+            "path": "TauCeti/Analysis/InnerProductSpace/LinearCombination.lean",
+            "declarations": "Finsupp.inner_linearCombination_eq_of_inner_eq L33; norm_linearCombination_eq_of_inner_eq L42",
+            "note": "Native direct finite-combination inner-product/norm identities for complex Hilbert spaces; completeness is inherited and need not be used by ordinary core laws."
+          }
+        ],
+        "search_notes": "Do not require completeness to appear in each ordinary Hilbert inner/norm identity. This selected native file proves actual direct laws, not a superclass instance installer or a bare import. Definition and completeness remain dependency-owned; Riesz/adjoint/Lax\u2013Milgram/spectral/variational endpoints and generic complete-space transport are excluded."
+      }
+    },
+    {
+      "concept": "complex-inner-product-space",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read InnerProductSpace:110 norm-square, Hermitian and conjugate-first fields; Core:155 adds definiteness and constructs a genuine norm:473. Checked inner_smul_left/right and native finite-combination expansion:33/42. Swapped slots correctly implement linear-first catalogue convention without altering norm or positivity."
+    },
+    {
+      "concept": "complex-inner-product-space",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read InnerProductSpace:110 norm-square, Hermitian and conjugate-first fields; Core:155 adds definiteness and constructs a genuine norm:473. Checked inner_smul_left/right and native finite-combination expansion:33/42. Swapped slots correctly implement linear-first catalogue convention without altering norm or positivity."
+    },
+    {
+      "concept": "complex-number",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Checked actual real-pair structure:35, componentwise Add:166 and multiplication constructor/formula:208/211, with I\u00b2 law. Native imaginary-coordinate division/subtraction identity:24 is an actual simp/ring proof and is ordinary arithmetic API, not an analytic use."
+    },
+    {
+      "concept": "complex-number",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked actual real-pair structure:35, componentwise Add:166 and multiplication constructor/formula:208/211, with I\u00b2 law. Native imaginary-coordinate division/subtraction identity:24 is an actual simp/ring proof and is ordinary arithmetic API, not an analytic use."
+    },
+    {
+      "concept": "complex-power-series",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Checked PowerSeries.mk:111, finite truncation/eval\u2082 formula:88 and explicit conditional \u2115 HasSum filter:217/247. This permits conditional boundary convergence, unlike default unconditional HasSum. Native truncation equivalence proofs:74/81 directly compare initial coefficients; no analytic convergence inferred from formal series alone."
+    },
+    {
+      "concept": "complex-power-series",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked PowerSeries.mk:111, finite truncation/eval\u2082 formula:88 and explicit conditional \u2115 HasSum filter:217/247. This permits conditional boundary convergence, unlike default unconditional HasSum. Native truncation equivalence proofs:74/81 directly compare initial coefficients; no analytic convergence inferred from formal series alone."
+    },
+    {
+      "concept": "complex-star-algebra",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read StarMul involutive reversal:130, StarRing additive star:293, StarModule conjugate scalar compatibility:421 and semilinear equivalence:112. NonUnitalRing supplies missing associativity; scalar tower and commutation ensure bilinearity. Native right scalar law:98 is proved by star-injectivity and exact hypotheses, valid nonunitally."
+    },
+    {
+      "concept": "complex-star-algebra",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read StarMul involutive reversal:130, StarRing additive star:293, StarModule conjugate scalar compatibility:421 and semilinear equivalence:112. NonUnitalRing supplies missing associativity; scalar tower and commutation ensure bilinearity. Native right scalar law:98 is proved by star-injectivity and exact hypotheses, valid nonunitally."
+    },
+    {
+      "concept": "components-locally-path-connected",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read local path-basis openness proof:95 and equality of path/connected components:125 via clopen maximality. They give both conclusions for arbitrary locally path-connected spaces without metric/nonempty/global connectivity assumptions. Exact dependency bytes checked; native compact interpolation has an additional significant endpoint."
+    },
+    {
+      "concept": "components-locally-path-connected",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read local path-basis openness proof:95 and equality of path/connected components:125 via clopen maximality. They give both conclusions for arbitrary locally path-connected spaces without metric/nonempty/global connectivity assumptions. Exact dependency bytes checked; native compact interpolation has an additional significant endpoint."
+    },
+    {
+      "concept": "connected-component",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Checked union of all preconnected sets containing x:495, its connectedness:544 and maximality:552, and relative subtype definition. Native isolated-point component equality:128 uses actual separation by an isolating neighborhood and T1 singleton complement. This is component recognition, not confusion with path components."
+    },
+    {
+      "concept": "connected-component",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked union of all preconnected sets containing x:495, its connectedness:544 and maximality:552, and relative subtype definition. Native isolated-point component equality:128 uses actual separation by an isolating neighborhood and T1 singleton complement. This is component recognition, not confusion with path components."
+    },
+    {
+      "concept": "connected-topological-space",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read IsPreconnected:50 and PreconnectedSpace:697 versus stronger nonempty ConnectedSpace:705. Paragraph permits empty space and is therefore matched by PreconnectedSpace. Native disjoint nonempty open separation iff:112 proves precisely the catalogue criterion at univ in both directions."
+    },
+    {
+      "concept": "connected-topological-space",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read IsPreconnected:50 and PreconnectedSpace:697 versus stronger nonempty ConnectedSpace:705. Paragraph permits empty space and is therefore matched by PreconnectedSpace. Native disjoint nonempty open separation iff:112 proves precisely the catalogue criterion at univ in both directions."
+    },
+    {
+      "concept": "continuous-compact-l1-density",
+      "library": "mathlib",
+      "decision": "change",
+      "reason": "Read actual Integrable approximation proof:227 reducing to p=1 MemLp approximation and native locally compact indicator/dense-induction proof:106, quotient-norm density:121. Euclidean Lebesgue measure meets hypotheses without finite total measure. Corrected one declaration line anchor only.",
+      "replacement": {
+        "concept": "continuous-compact-l1-density",
+        "concept_id": "e3d36af8-46e6-5ed0-8cda-9f97d4f8d411",
+        "concept_revision": 1,
+        "library": "mathlib",
+        "status": "formalized",
+        "evidence": "Checked immutable Mathlib 26573066084e6e2aa8526ea358bc43b66d96f970. Integrable.exists_hasCompactSupport_integral_sub_le proves for every \u03b5>0 a continuous compactly supported g with \u222b\u2016f\u2212g\u2016\u2264\u03b5 and g integrable. Its regular-measure, R1 and weakly locally compact assumptions hold for Euclidean Lebesgue measure; integral norm is the L1 norm after a.e. quotient. Taking \u03b5 tending to0 supplies the requested approximation sequence. Actual source/declaration/proof inspection; no fresh Lean build or transitive axiom audit. Independent source review confirms Integrable.exists_hasCompactSupport_integral_sub_le begins at line227; the file/status and mathematical judgment are unchanged.",
+        "files": [
+          {
+            "path": "Mathlib/MeasureTheory/Function/ContinuousMapDense.lean",
+            "declarations": "Integrable.exists_hasCompactSupport_integral_sub_le (:227); MemLp.exists_hasCompactSupport_integral_rpow_sub_le (:190)",
+            "note": "Actual compactly supported continuous approximation in integral/Lp norm for regular measures on locally compact spaces, specializing to Euclidean L1."
+          }
+        ],
+        "search_notes": "Read actual theorem and its proof reducing to p=1 version of MemLp approximation, retaining continuous and compact support separately. No finite-measure assumption on whole \u211d^n is introduced. Core = L1 compact-continuous density/ordinary norm forms, not smooth density or vector-valued finite-rank coefficient approximations."
+      }
+    },
+    {
+      "concept": "continuous-compact-l1-density",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read actual Integrable approximation proof:227 reducing to p=1 MemLp approximation and native locally compact indicator/dense-induction proof:106, quotient-norm density:121. Euclidean Lebesgue measure meets hypotheses without finite total measure. Corrected one declaration line anchor only."
+    },
+    {
+      "concept": "continuous-function-space-completeness",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read BoundedContinuousFunction complete Cauchy-limit proof:296\u2013325, including uniform convergence, continuity, boundedness and norm convergence. Compact-domain isometric equivalence:92 and normed structure:180 match supnorm Banach maps. Dependency bytes checked; no pointwise-topology substitute used."
+    },
+    {
+      "concept": "continuous-function-space-completeness",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read BoundedContinuousFunction complete Cauchy-limit proof:296\u2013325, including uniform convergence, continuity, boundedness and norm convergence. Compact-domain isometric equivalence:92 and normed structure:180 match supnorm Banach maps. Dependency bytes checked; no pointwise-topology substitute used."
+    },
+    {
+      "concept": "continuous-functional-calculus-selfadjoint",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Independently read Gelfand construction:117 and identity:122, normal/selfadjoint isometry:167/173, Unique:39, cfcHom identity/uniqueness:248/262, nonunital cfc\u2099Hom:134 and unitization f0=0 bridge:471. Native closed-subalgebra construction:113 codrestricts actual calculus and :146 proves ambient agreement. Exact dependency diffs preserve these proofs; six-file core stops before order/perturbation endpoints."
+    },
+    {
+      "concept": "continuous-functional-calculus-selfadjoint",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Independently read Gelfand construction:117 and identity:122, normal/selfadjoint isometry:167/173, Unique:39, cfcHom identity/uniqueness:248/262, nonunital cfc\u2099Hom:134 and unitization f0=0 bridge:471. Native closed-subalgebra construction:113 codrestricts actual calculus and :146 proves ambient agreement. Exact dependency diffs preserve these proofs; six-file core stops before order/perturbation endpoints."
+    },
+    {
+      "concept": "continuous-map",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Read Continuous:158 field literally preimage-open for arbitrary spaces and verified identical dependency. Excluding proper precomposition embedding and closed-piece gluing as further function-space/gluing endpoints is a defensible minimal bare-map boundary; no extra regularity is inserted."
+    },
+    {
+      "concept": "continuous-map",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Read Continuous:158 field literally preimage-open for arbitrary spaces and verified identical dependency. Excluding proper precomposition embedding and closed-piece gluing as further function-space/gluing endpoints is a defensible minimal bare-map boundary; no extra regularity is inserted."
+    },
+    {
+      "concept": "convex-body-euclidean",
+      "library": "mathlib",
+      "decision": "accept",
+      "reason": "Checked ConvexBody:44 alone is compact nonempty convex, so explicit interior.Nonempty is essential and retained. Interior:122 supplies exact flag; native closedBall:88 fields plus positive-radius center-in-interior:107 genuinely construct full-dimensional Euclidean examples. Zero-radius balls and arbitrary dimension-collapsing maps do not establish the stronger class."
+    },
+    {
+      "concept": "convex-body-euclidean",
+      "library": "tau-ceti",
+      "decision": "accept",
+      "reason": "Checked ConvexBody:44 alone is compact nonempty convex, so explicit interior.Nonempty is essential and retained. Interior:122 supplies exact flag; native closedBall:88 fields plus positive-radius center-in-interior:107 genuinely construct full-dimensional Euclidean examples. Zero-radius balls and arbitrary dimension-collapsing maps do not establish the stronger class."
+    }
+  ]
+}

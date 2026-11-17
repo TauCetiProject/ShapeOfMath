@@ -1,0 +1,605 @@
+Regularization in Ambient Space for Recovering Tangential Vector Fields
+
+Coverage: Pinnedv1: all§§1–4, convergence argumentTheorem3.10, Doppler/optical-flow applications,AppendixA geometric identities and full bibliography inspected.
+Required concepts complete: True
+Introduced concepts complete: True
+All citations captured: True
+Completion refers to immediate concepts only; false means not certified.
+
+REQUIRED CONCEPT FRONTIER (12)
+
+- Bochner connection Laplacian on tangent vector fields: The rough or connection Laplacian ∇*∇ on tangent vector fields, defined from covariant differentiation and its formal L² adjoint. In the selected surface problem it is the weak operator associated to the squared norm of the tangential covariant derivative, not the Hodge Laplacian on differential forms.
+- Coercive functional on a normed space: An extended-real functional R is coercive if R(x)→+∞ whenever ∥x∥→∞.
+- Cross product in oriented Euclidean three-space: The vector u×v characterized by ⟨u×v,w⟩=det(u,v,w) for every w∈ℝ³, with the standard orientation.
+- C² embedded surface in ℝ³: A subset of ℝ³ that locally, after a rigid coordinate change, is the graph of a twice continuously differentiable real function of two variables.
+- Horn–Schunck optical-flow model on a surface: For a Riemannian surface M, image derivative data I,J and α>0, minimize ∫_M(|⟨∇_M I,v⟩+J|²+α|∇^M v|²)dS over tangent first-order Sobolev vector fields v. The two terms impose linearized brightness constancy and covariant smoothness.
+- Induced Riemannian metric of an embedded surface: An embedded smooth surface inherits the Euclidean inner product on each tangent plane; in a chart m its metric matrix is g_{ij}=∂ᵢm·∂ⱼm.
+- Moore–Penrose inverse of a real matrix: For a real matrix A, its Moore–Penrose inverse A† is the matrix satisfying AA†A=A, A†AA†=A†, (AA†)ᵀ=AA† and (A†A)ᵀ=A†A. For full column rank, A†=(AᵀA)⁻¹Aᵀ.
+- Pullback of a scalar or ambient-valued function between surfaces: For a diffeomorphism Φ:M→N, the pullback of f:N→V is Φ*f=f∘Φ. This is composition of functions, not the derivative-based pullback of tangent vector fields.
+- Quadratic Tikhonov error rate under operator perturbations: Let A:X→Y andL:X→Z be bounded linear maps between real Hilbert spaces with ∥h∥≤C(∥Ah∥+∥Lh∥). LetAx†=y and⟨Lx†,Lh⟩=⟨w,Ah⟩ for allh. If∥A_ρ−A∥≤ρ,∥yδ−y∥≤δ andα is comparable toη=δ+ρ>0 tending to zero, minimizers of∥A_ρx−yδ∥²+α∥Lx∥² satisfy∥x−x†∥²=O(η) for sufficiently smallρ.
+- Regular C² parametrized surface patch: An injective C² map m from a closed planar rectangle into ℝ³, extending C² to a neighborhood, with Dm of rank two everywhere. It parametrizes its image, including the boundary; its tangent planes are the images of Dm and its metric matrix is (Dm)ᵀDm.
+- Shape operator of an oriented embedded surface: With a chosen unit normal field n, the shape operator is S_x(v)=−dn_x(v) on T_xM. This uses the −dn sign convention.
+- Weak convergence theorem for convex Tikhonov regularization: Let X,Y be Hilbert spaces, F:D(F)⊂X→Y bounded linear with weakly closed domain, and R:X→[0,∞] proper convex and weakly sequentially lower semicontinuous. Suppose the effective domain meetsD(F) and every positive-parameter Tikhonov level set is weakly sequentially compact. Minimizers exist and are weakly subsequentially stable for fixedα. If an exact finite-penalty solution exists, α→0 andδ²/α→0 imply that noisy-data minimizers have subsequences converging weakly toR-minimizing exact solutions.
+
+INHERITED PREREQUISITES (127)
+
+- Abelian group — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Almost-everywhere property on a measure space — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Banach space — via classical-tikhonov-weak-convergence
+- Basis of a vector space — via regular-parametrized-c2-surface-patch
+- Bijection between sets — via c2-embedded-surface-r3, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Bilinear map — via classical-tikhonov-weak-convergence, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, quadratic-tikhonov-operator-perturbation-rate, shape-operator-surface, surface-horn-schunck-model
+- Binary operation on a set — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Binary relation on a set — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Borel σ-algebra of a topological space — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Borel σ-algebra on the real line — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Bounded linear functional — via classical-tikhonov-weak-convergence
+- Bounded linear operator — via classical-tikhonov-weak-convergence, laplace-beltrami-tangent-fields, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- C^k map between Euclidean open sets — via c2-embedded-surface-r3, regular-parametrized-c2-surface-patch
+- Cardinality of a set — via regular-parametrized-c2-surface-patch
+- Cartesian product of sets — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Cauchy sequence in a metric space — via classical-tikhonov-weak-convergence, laplace-beltrami-tangent-fields, quadratic-tikhonov-operator-perturbation-rate, surface-horn-schunck-model
+- Cauchy–Schwarz inequality for complex inner-product spaces — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Closure of a subset of a topological space — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Commutative ring with identity — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Compact topological space — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Compactly supported smooth test function on an open Euclidean set — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Complement of a subset — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Complete measure — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Complete metric space — via classical-tikhonov-weak-convergence, laplace-beltrami-tangent-fields, quadratic-tikhonov-operator-perturbation-rate, surface-horn-schunck-model
+- Complex Hilbert space — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Complex conjugation — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Complex inner-product space — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Complex number — via classical-tikhonov-weak-convergence, coercive-functional-normed-space, laplace-beltrami-tangent-fields, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Composition of functions — via cross-product-real-three-space, pullback-functions-surface
+- Continuous dual of a normed vector space — via quadratic-tikhonov-operator-perturbation-rate
+- Continuous map between topological spaces — via c2-embedded-surface-r3, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Convergence of a sequence in a metric space — via classical-tikhonov-weak-convergence, laplace-beltrami-tangent-fields, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Convergent real series — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Derivative of a real function — via c2-embedded-surface-r3, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Determinant of a square matrix — via cross-product-real-three-space
+- Diffeomorphism between open Euclidean sets — via pullback-functions-surface
+- Dimension of a vector space — via regular-parametrized-c2-surface-patch
+- Disjoint sets — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Embedded smooth surface in ℝ³ — via induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, shape-operator-surface, surface-horn-schunck-model
+- Equivalence class — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Equivalence relation — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Essential supremum of a measurable real function — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Euclidean space ℝᵈ — via c2-embedded-surface-r3, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Extended nonnegative real numbers — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Extended real line — via classical-tikhonov-weak-convergence, coercive-functional-normed-space
+- Factorial — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Field — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Finite set — via c2-embedded-surface-r3, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- First-order Sobolev space W¹,ᵖ — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- First-order Sobolev vector fields on an embedded surface — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Formal L² adjoint of a differential operator on a surface — via laplace-beltrami-tangent-fields
+- Fréchet derivative between normed spaces — via laplace-beltrami-tangent-fields, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Function between sets — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Group — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Hausdorff measure of a metric space — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Homeomorphism — via regular-parametrized-c2-surface-patch
+- Indicator function of a subset — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Integer — via cross-product-real-three-space
+- Intersection of a family of sets — via c2-embedded-surface-r3, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Jacobian matrix of a differentiable Euclidean map — via regular-parametrized-c2-surface-patch
+- Least upper bound in a partially ordered set — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Lebesgue Lᵖ space — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Lebesgue integral — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Lebesgue measure on Euclidean space — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Levi-Civita covariant derivative on an embedded surface — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Limit inferior of a real or extended-real sequence — via classical-tikhonov-weak-convergence
+- Limit of a function between metric spaces — via c2-embedded-surface-r3, coercive-functional-normed-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Limit of a real function at a point — via c2-embedded-surface-r3, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Limit of a real sequence — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Linear combination of vectors — via regular-parametrized-c2-surface-patch
+- Linear map between vector spaces — via classical-tikhonov-weak-convergence, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Linear span of a set of vectors — via regular-parametrized-c2-surface-patch
+- Linearly independent family of vectors — via regular-parametrized-c2-surface-patch
+- Matrix over a ring — via cross-product-real-three-space, moore-penrose-inverse-matrix, regular-parametrized-c2-surface-patch
+- Measurable map between measurable spaces — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Measurable simple real function — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Measurable space — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Measure — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Metric induced by a norm — via classical-tikhonov-weak-convergence, laplace-beltrami-tangent-fields, quadratic-tikhonov-operator-perturbation-rate, surface-horn-schunck-model
+- Metric space — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Modulus of a complex number — via classical-tikhonov-weak-convergence, coercive-functional-normed-space, laplace-beltrami-tangent-fields, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Natural logarithm — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Natural number — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Nonnegative real square root — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Normed vector space — via classical-tikhonov-weak-convergence, coercive-functional-normed-space, laplace-beltrami-tangent-fields, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Open interval in the real line — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Operator norm of a bounded linear operator — via quadratic-tikhonov-operator-perturbation-rate
+- Ordered field — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Ordered pair — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Orthogonal projection onto a closed Hilbert subspace — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Partial derivative in Euclidean coordinates — via c2-embedded-surface-r3, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Partial order — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Penalty-minimizing solution of an inverse problem — via classical-tikhonov-weak-convergence
+- Preimage of a subset under a function — via c2-embedded-surface-r3, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Proper convex extended-real functional — via classical-tikhonov-weak-convergence, quadratic-tikhonov-operator-perturbation-rate
+- Rank of a linear map — via regular-parametrized-c2-surface-patch
+- Real Hilbert space — via classical-tikhonov-weak-convergence, laplace-beltrami-tangent-fields, quadratic-tikhonov-operator-perturbation-rate, surface-horn-schunck-model
+- Real exponential function — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Real inner-product space — via classical-tikhonov-weak-convergence, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, quadratic-tikhonov-operator-perturbation-rate, shape-operator-surface, surface-horn-schunck-model
+- Real number — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Real power of a positive real number — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Real sequence — via classical-tikhonov-weak-convergence, laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Sequence in a set — via classical-tikhonov-weak-convergence, laplace-beltrami-tangent-fields, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Set — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Sign of a permutation — via cross-product-real-three-space
+- Smooth map between open Euclidean sets — via induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, shape-operator-surface, surface-horn-schunck-model
+- Source condition for a differentiable quadratic Tikhonov penalty — via quadratic-tikhonov-operator-perturbation-rate
+- Subset — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Sum of a nonnegative series — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Support of a function — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Surface gradient on an embedded surface — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Symmetric group of a finite set — via cross-product-real-three-space
+- Tangent space of an embedded surface — via induced-metric-embedded-surface, laplace-beltrami-tangent-fields, shape-operator-surface, surface-horn-schunck-model
+- Tangent vector field on an embedded surface — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Topological space — via c2-embedded-surface-r3, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Total order — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, pullback-functions-surface, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Union of a family of sets — via c2-embedded-surface-r3, classical-tikhonov-weak-convergence, coercive-functional-normed-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, pullback-functions-surface, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Unit normal field on an embedded surface — via shape-operator-surface
+- Variational Tikhonov regularization — via classical-tikhonov-weak-convergence, quadratic-tikhonov-operator-perturbation-rate
+- Vector space — via classical-tikhonov-weak-convergence, coercive-functional-normed-space, cross-product-real-three-space, induced-metric-embedded-surface, laplace-beltrami-tangent-fields, moore-penrose-inverse-matrix, quadratic-tikhonov-operator-perturbation-rate, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Vector subspace — via induced-metric-embedded-surface, laplace-beltrami-tangent-fields, regular-parametrized-c2-surface-patch, shape-operator-surface, surface-horn-schunck-model
+- Weak convergence in a Banach space — via classical-tikhonov-weak-convergence
+- Weak partial derivative of a locally integrable function — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- Weak sequential compactness in a Banach space — via classical-tikhonov-weak-convergence
+- Weakly sequentially lower semicontinuous functional — via classical-tikhonov-weak-convergence
+- σ-algebra — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+- σ-algebra generated by a family of subsets — via laplace-beltrami-tangent-fields, surface-horn-schunck-model
+
+INTRODUCED CONCEPTS (2)
+
+- Balanced error rate for surface-perturbed Tikhonov regularization
+- Convergence of Tikhonov regularization under surface perturbation
+
+LOCATED CONCEPTS (28)
+
+1. Variational Tikhonov regularization
+   For an operator equation Fx=y, approximate noisy data yδ by minimizing ∥Fx−yδ∥²+αR(x), where α>0 and R is a chosen penalty functional.
+   Source: relies_on, §§1–3
+   Note: The classical method is recalled; surface and range perturbations are the new setting.
+
+2. Real Hilbert space
+   A real inner-product space complete for its induced norm metric.
+   Source: relies_on, §2.1 Assumption2.1
+   Note: The inverse problems use Hilbert spaces of real vector fields.
+
+3. Weak sequential compactness in a Banach space
+   A subset is weakly sequentially compact if every sequence in it has a weakly convergent subsequence whose limit belongs to that same subset.
+   Source: relies_on, Assumption2.1;Theorem2.2 andproofTheorem3.10
+   Note: Compact level sets provide weakly convergent minimizing subsequences.
+
+4. Proper convex extended-real functional
+   A function R:V→(−∞,∞] on a real vector space is proper if it is finite somewhere and is convex if R((1−t)x+ty)≤(1−t)R(x)+tR(y) for 0≤t≤1.
+   Source: relies_on, Assumption2.1
+   Note: Proper convex weakly lower semicontinuous penalties are assumed.
+
+5. Weakly sequentially lower semicontinuous functional
+   An extended-real functional R satisfies R(x)≤liminfₙR(xₙ) whenever xₙ converges weakly to x.
+   Source: relies_on, Assumption2.1 andproofTheorem3.10
+   Note: Used to pass to weak limits of minimizers.
+
+6. Penalty-minimizing solution of an inverse problem
+   An R-minimizing solution of Fx=y minimizes the penalty R among all exact solutions of that equation.
+   Source: relies_on, Theorem2.2;Assumption3.8
+   Note: Limits minimize the chosen seminorm among exact solutions.
+
+7. First-order Sobolev vector fields on an embedded surface
+   Vector fields with square-integrable components and square-integrable first weak surface derivatives, defined using smooth charts and the surface measure; tangent Sobolev fields additionally lie in each tangent plane almost everywhere.
+   Source: relies_on, §2.2 Definition2.3
+   Note: The paper distinguishes full ambient, tangential and normal H¹ spaces.
+
+8. Pullback of a scalar or ambient-valued function between surfaces
+   For a diffeomorphism Φ:M→N, the pullback of f:N→V is Φ*f=f∘Φ. This is composition of functions, not the derivative-based pullback of tangent vector fields.
+   Source: relies_on, Lemma3.5;Corollary3.6
+   Note: Composition by parametrization transfers compares different surfaces; not confused with a vector-field derivative pullback.
+
+9. Levi-Civita covariant derivative on an embedded surface
+   For tangent vector fields X,Y on a surface in ℝ³ with its induced metric, ∇XY is the tangential projection of the ambient directional derivative DXY.
+   Source: relies_on, AppendixA equationsA.8–A.9
+   Note: Tangential derivative relates surface geometry to the Sobolev penalty.
+
+10. Bochner connection Laplacian on tangent vector fields
+   The rough or connection Laplacian ∇*∇ on tangent vector fields, defined from covariant differentiation and its formal L² adjoint. In the selected surface problem it is the weak operator associated to the squared norm of the tangential covariant derivative, not the Hodge Laplacian on differential forms.
+   Source: relies_on, Theorem3.10 sourcecondition3.18
+   Note: Only required for the stronger convergence-rate assertion, not the basic cluster-point statement. The paper denotes this source-condition operator −Δ_T. Its tangential H¹ penalty inDefinition2.3 uses Pτ∇M, identified with covariant differentiation byAppendixA equationA.9; this selects the rough/connection interpretation.
+
+11. Orthogonal projection onto a closed Hilbert subspace
+   For a closed subspace V of a Hilbert space H, Pᵥx is the unique v∈V for which x−v is orthogonal to V; Pᵥ is a bounded self-adjoint idempotent operator.
+   Source: relies_on, §2.2;AppendixA
+   Note: Tangential and normal orthogonal projections define the ambient penalty and split spaces.
+
+12. Tangent space of an embedded surface
+   At x on a smooth embedded surface M, TₓM is the two-dimensional vector subspace of velocities γ′(0) of smooth surface curves with γ(0)=x.
+   Source: explains, §2.2 orAppendixA
+   Note: Recalled geometric or function-space definition, not an origin claim.
+
+13. Tangent vector field on an embedded surface
+   A map v:M→ℝ³ with v(x)∈TₓM at each x; smoothness or Sobolev regularity is an additional stated condition.
+   Source: explains, §2.2 orAppendixA
+   Note: Recalled geometric or function-space definition, not an origin claim.
+
+14. Surface gradient on an embedded surface
+   For a smooth real f on a surface M⊂ℝ³, ∇Mf is the tangent vector field satisfying ⟨∇Mf,v⟩=df(v) for tangent vectors v; equivalently it is the tangential projection of an ambient smooth extension’s gradient.
+   Source: explains, §2.2 orAppendixA
+   Note: Recalled geometric or function-space definition, not an origin claim.
+
+15. Levi-Civita covariant derivative on an embedded surface
+   For tangent vector fields X,Y on a surface in ℝ³ with its induced metric, ∇XY is the tangential projection of the ambient directional derivative DXY.
+   Source: explains, §2.2 orAppendixA
+   Note: Recalled geometric or function-space definition, not an origin claim.
+
+16. First-order Sobolev vector fields on an embedded surface
+   Vector fields with square-integrable components and square-integrable first weak surface derivatives, defined using smooth charts and the surface measure; tangent Sobolev fields additionally lie in each tangent plane almost everywhere.
+   Source: explains, §2.2 orAppendixA
+   Note: Recalled geometric or function-space definition, not an origin claim.
+
+17. Pullback of a scalar or ambient-valued function between surfaces
+   For a diffeomorphism Φ:M→N, the pullback of f:N→V is Φ*f=f∘Φ. This is composition of functions, not the derivative-based pullback of tangent vector fields.
+   Source: explains, §2.2 orAppendixA
+   Note: Recalled geometric or function-space definition, not an origin claim.
+
+18. Convergence of Tikhonov regularization under surface perturbation
+   For a bounded linear tangent-field inverse operator and its bounded linear ambient approximations on uniformly regular parametrized surfaces with C² surface error γ→0, transported operator error ρ→0 and data error δ→0, minimize squared data discrepancy plus normal-component penalty plus α times the squared first-order surface seminorm. Under weakly lower semicontinuous convex penalties with weakly sequentially compact level sets and existence of a seminorm-minimizing exact tangent solution, α→0 and (ρ²+γ²+δ²)/α→0 imply that weak cluster points of the pulled-back minimizers are seminorm-minimizing solutions.
+   Source: introduces, Theorem3.10;§3.2
+   Note: Convergence with both surface and range perturbations.
+   Origin evidence: The introduction explicitly states that earlier discretization results[25] do not cover changes in the tangent-bundle range. Theorem3.10 supplies the transported-surface convergence statement with the separate γ,ρ,δ errors; Theorem2.2 is explicitly classical and is not claimed as new.
+
+19. Moore–Penrose inverse of a real matrix
+   For a real matrix A, its Moore–Penrose inverse A† is the matrix satisfying AA†A=A, A†AA†=A†, (AA†)ᵀ=AA† and (A†A)ᵀ=A†A. For full column rank, A†=(AᵀA)⁻¹Aᵀ.
+   Source: relies_on, AppendixA,(A.4)
+   Note: The rectangular chart derivative is inverted using its Moore–Penrose inverse.
+
+20. Induced Riemannian metric of an embedded surface
+   An embedded smooth surface inherits the Euclidean inner product on each tangent plane; in a chart m its metric matrix is g_{ij}=∂ᵢm·∂ⱼm.
+   Source: relies_on, AppendixA,(A.1)–(A.5)
+   Note: Metric and inverse metric matrices enter the transport and derivative identities.
+
+21. Unit normal field on an embedded surface
+   A smooth map n:M→S² perpendicular to T_xM at every x. A global choice fixes an orientation; such a choice is an additional assumption when it does not exist globally.
+   Source: relies_on, §2.2 andAppendixA,(A.3)
+   Note: The normal and tangential projectors use a globally chosen normal field.
+
+22. Shape operator of an oriented embedded surface
+   With a chosen unit normal field n, the shape operator is S_x(v)=−dn_x(v) on T_xM. This uses the −dn sign convention.
+   Source: relies_on, AppendixA,(A.10)–(A.11)
+   Note: Tangential/normal derivative identities contain the derivative of the normal; the paper’s dn has the opposite sign to our S.
+
+23. Source condition for a differentiable quadratic Tikhonov penalty
+   Let F:X→Y be bounded linear between real Hilbert spaces and R a differentiable quadratic penalty. The variational source condition at x† is R′(x†)=F′w for some w∈Y*, where F′w=w∘F and R′(x†)∈X*. Under Hilbert-space identifications this is the usual adjoint range condition, with constant factors absorbed in w.
+   Source: relies_on, (3.18),Theorem3.10 andRemark3.11
+   Note: The rate part requires an adjoint range condition, separately from convergence assumptions.
+
+24. C² embedded surface in ℝ³
+   A subset of ℝ³ that locally, after a rigid coordinate change, is the graph of a twice continuously differentiable real function of two variables.
+   Source: relies_on, Assumption3.4 andAppendixA
+   Note: The actual finite regularity hypothesis is C², rather than an implicit C∞ assumption.
+
+25. Weak convergence theorem for convex Tikhonov regularization
+   Let X,Y be Hilbert spaces, F:D(F)⊂X→Y bounded linear with weakly closed domain, and R:X→[0,∞] proper convex and weakly sequentially lower semicontinuous. Suppose the effective domain meetsD(F) and every positive-parameter Tikhonov level set is weakly sequentially compact. Minimizers exist and are weakly subsequentially stable for fixedα. If an exact finite-penalty solution exists, α→0 andδ²/α→0 imply that noisy-data minimizers have subsequences converging weakly toR-minimizing exact solutions.
+   Source: explains, Assumption2.1 andTheorem2.2,pp.3–4; complete direct-method proof supplied in010-proof-notes.txt
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+26. Quadratic Tikhonov error rate under operator perturbations
+   Let A:X→Y andL:X→Z be bounded linear maps between real Hilbert spaces with ∥h∥≤C(∥Ah∥+∥Lh∥). LetAx†=y and⟨Lx†,Lh⟩=⟨w,Ah⟩ for allh. If∥A_ρ−A∥≤ρ,∥yδ−y∥≤δ andα is comparable toη=δ+ρ>0 tending to zero, minimizers of∥A_ρx−yδ∥²+α∥Lx∥² satisfy∥x−x†∥²=O(η) for sufficiently smallρ.
+   Source: explains, Theorem3.10 rate proof,pp.14–15,citing[24,Theorem2.3]; a complete variational proof is supplied here, without claiming to have read[24]
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+27. Regular C² parametrized surface patch
+   An injective C² map m from a closed planar rectangle into ℝ³, extending C² to a neighborhood, with Dm of rank two everywhere. It parametrizes its image, including the boundary; its tangent planes are the images of Dm and its metric matrix is (Dm)ᵀDm.
+   Source: relies_on, Assumption3.4 andAppendixA
+   Note: The true surface has aC∞ patch, while its approximants haveC² patches on[0,1]²; full-rank metric and boundary points matter.
+
+28. Cross product in oriented Euclidean three-space
+   The vector u×v characterized by ⟨u×v,w⟩=det(u,v,w) for every w∈ℝ³, with the standard orientation.
+   Source: relies_on, AppendixA,(A.3)
+   Note: The global normal is obtained from the two coordinate derivatives using the oriented cross product.
+
+29. Coercive functional on a normed space
+   An extended-real functional R is coercive if R(x)→+∞ whenever ∥x∥→∞.
+   Source: relies_on, §4.2 following(4.3)
+   Note: The source explicitly invokes coercivity of the predecessor surface Horn–Schunck functional.
+
+30. Horn–Schunck optical-flow model on a surface
+   For a Riemannian surface M, image derivative data I,J and α>0, minimize ∫_M(|⟨∇_M I,v⟩+J|²+α|∇^M v|²)dS over tangent first-order Sobolev vector fields v. The two terms impose linearized brightness constancy and covariant smoothness.
+   Source: relies_on, §4.2,(4.3)
+   Note: The model is explicitly credited to[18,19]; it is the background model being extended, not an original concept here.
+
+31. Weak convergence theorem for convex Tikhonov regularization
+   Let X,Y be Hilbert spaces, F:D(F)⊂X→Y bounded linear with weakly closed domain, and R:X→[0,∞] proper convex and weakly sequentially lower semicontinuous. Suppose the effective domain meetsD(F) and every positive-parameter Tikhonov level set is weakly sequentially compact. Minimizers exist and are weakly subsequentially stable for fixedα. If an exact finite-penalty solution exists, α→0 andδ²/α→0 imply that noisy-data minimizers have subsequences converging weakly toR-minimizing exact solutions.
+   Source: relies_on, §2.1,Theorem2.2
+   Note: This complete imported regularization theorem is used to interpret existence, stability and convergence.
+
+32. Quadratic Tikhonov error rate under operator perturbations
+   Let A:X→Y andL:X→Z be bounded linear maps between real Hilbert spaces with ∥h∥≤C(∥Ah∥+∥Lh∥). LetAx†=y and⟨Lx†,Lh⟩=⟨w,Ah⟩ for allh. If∥A_ρ−A∥≤ρ,∥yδ−y∥≤δ andα is comparable toη=δ+ρ>0 tending to zero, minimizers of∥A_ρx−yδ∥²+α∥Lx∥² satisfy∥x−x†∥²=O(η) for sufficiently smallρ.
+   Source: relies_on, Theorem3.10,rate proof,pp.14–15
+   Note: After transporting to fixed spaces, the source explicitly invokes the norm-bounded operator/data perturbation estimate.
+
+33. Balanced error rate for surface-perturbed Tikhonov regularization
+   For the transported surface Tikhonov problem with uniformly regular parametrizations, letη=ρ+γ+δ>0 tend to0, whereρ is operator error,γ isC² surface error andδ is data error. Assume uniformly equivalent transported norms, O(γ) errors in the quadratic penalty forms and normal projections, joint coercivity∥h∥²_H¹≤C(∥Fh∥²+∥P_nh∥²+|h|²_H¹), and a variational quadratic source condition at the exact tangent solutionx†. Ifα is comparable toη, the pulled-back minimizers satisfy∥x̂_(σ,α,δ)−x†∥²_H¹=O(η).
+   Source: explains, Theorem3.10 andRemark3.11,pp.12–15; corrected balanced-rate proof recorded here
+   Note: The specified proof is examined here; this is not a claim that the theorem originated in this source.
+
+34. Balanced error rate for surface-perturbed Tikhonov regularization
+   For the transported surface Tikhonov problem with uniformly regular parametrizations, letη=ρ+γ+δ>0 tend to0, whereρ is operator error,γ isC² surface error andδ is data error. Assume uniformly equivalent transported norms, O(γ) errors in the quadratic penalty forms and normal projections, joint coercivity∥h∥²_H¹≤C(∥Fh∥²+∥P_nh∥²+|h|²_H¹), and a variational quadratic source condition at the exact tangent solutionx†. Ifα is comparable toη, the pulled-back minimizers satisfy∥x̂_(σ,α,δ)−x†∥²_H¹=O(η).
+   Source: introduces, Theorem3.10,second conclusion;Remark3.11
+   Note: The lasting balanced surface-error rate, with its necessary parameter balance and variational convention explicit.
+   Origin evidence: The introduction and conclusion distinguish the new disturbed-surface/tangent-bundle approximation from the earlier fixed-space finite-dimensionalTikhonov theory[24,25]. Theorem3.10 andRemark3.11 supply the additional surface-error rate. The printed general-α display omits a regularization-bias term and is not adopted literally; the balanced conclusion is independently verified by the full minimality argument recorded here. This rate is stronger information than the already captured subsequential-convergence conclusion, and has a separate precise concept.
+
+ADDITIONAL PREREQUISITES (113)
+
+- Abelian group [definition]: A group whose operation is commutative.
+- Almost-everywhere property on a measure space [definition]: A property holds almost everywhere if the set where it fails is contained in a measurable set of measure zero.
+- Banach space [definition]: A real or complex normed vector space complete for the metric induced by its norm.
+- Basis of a vector space [definition]: A linearly independent family of vectors whose linear span is the whole vector space.
+- Bijection between sets [definition]: A function for which each element of the codomain is the image of exactly one element of the domain.
+- Bilinear map [definition]: A map of two vector-space variables that is linear in each variable separately.
+- Binary operation on a set [definition]: A function S×S→S.
+- Binary relation on a set [definition]: A subset R⊆S×S; writing xRy means (x,y)∈R.
+- Borel σ-algebra of a topological space [definition]: The σ-algebra generated by the open subsets of the space.
+- Borel σ-algebra on the real line [definition]: The σ-algebra on ℝ generated by the open intervals.
+- Bounded linear functional [definition]: A linear map from a real or complex normed vector space to its scalar field satisfying |ℓ(x)|≤C∥x∥ for one finite C and every x.
+- Bounded linear operator [definition]: A linear map T:X→Y between normed vector spaces is bounded if ∥Tx∥≤C∥x∥ for one finite constant C and every x∈X.
+- C^k map between Euclidean open sets [definition]: For a finite integer k≥0, a map between open Euclidean sets is C^k if all component partial derivatives of total order at most k exist and are continuous; order zero is the component itself, so C^0 means continuous. A map is C^∞ when it is C^k for every finite k.
+- Cardinality of a set [definition]: The size of a set, with two sets having the same cardinality when there is a bijection between them. A set has finite cardinality n when it is in bijection with {1,…,n}; infinite cardinalities are distinguished by the same bijection criterion.
+- Cartesian product of sets [definition]: A×B is the set of ordered pairs (a,b) with a∈A and b∈B.
+- Cauchy sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) is Cauchy if for every ε>0 there is N such that d(xₙ,xₘ)<ε whenever n,m≥N.
+- Cauchy–Schwarz inequality for complex inner-product spaces [theorem]: In a complex inner-product space, |⟨u,v⟩|²≤⟨u,u⟩⟨v,v⟩ for all u,v.
+- Closure of a subset of a topological space [definition]: The closure of A is the intersection of all closed subsets containing A; a set is closed when its complement is open.
+- Commutative ring with identity [definition]: An abelian group under addition, together with an associative commutative multiplication with identity, distributing over addition. The zero ring is allowed.
+- Compact topological space [definition]: A topological space in which every open cover has a finite subcover.
+- Compactly supported smooth test function on an open Euclidean set [definition]: A smooth function on an open Ω⊂ℝⁿ whose support is a compact subset of Ω; these form C_c^∞(Ω).
+- Complement of a subset [definition]: For A⊆Ω, its complement Ω∖A consists of the elements of Ω that do not belong to A.
+- Complete measure [definition]: A measure is complete if every subset of a measurable null set is measurable and has measure zero.
+- Complete metric space [definition]: A metric space is complete if every Cauchy sequence in it converges to a point of that same space.
+- Complex Hilbert space [definition]: A complex inner-product space complete in the metric d(x,y)=∥x−y∥ induced by its inner product.
+- Complex conjugation [definition]: The complex conjugate of z=a+bi is z̄=a−bi.
+- Complex inner-product space [definition]: A complex vector space with a positive definite Hermitian form ⟨x,y⟩, linear in x and conjugate-linear in y. Its induced norm is ∥x∥=√⟨x,x⟩.
+- Complex number [definition]: A complex number is a pair of real numbers, written a+bi. Addition is componentwise and multiplication is (a+bi)(c+di)=(ac−bd)+(ad+bc)i, so i²=−1.
+- Composition of functions [definition]: For f:A→B and g:B→C, the composite g∘f:A→C sends x to g(f(x)).
+- Continuous dual of a normed vector space [definition]: The vector space X* of bounded linear maps X→its scalar field, with norm ‖ℓ‖=sup_{‖x‖≤1}|ℓ(x)|.
+- Continuous map between topological spaces [definition]: A map is continuous if the preimage of every open subset of its target is open in its domain.
+- Convergence of a sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) converges to x∈X if for every ε>0 there is N such that d(xₙ,x)<ε whenever n≥N.
+- Convergent real series [definition]: The series ∑ₙ≥1aₙ converges to S if its sequence of partial sums converges to S.
+- Derivative of a real function [definition]: The derivative f′(x) is the finite limit of (f(x+h)−f(x))/h as h→0, when it exists. Higher derivatives are defined by iteration.
+- Determinant of a square matrix [definition]: For an n×n matrix A over a commutative ring, det A=∑_{σ∈Sₙ}sgn(σ)∏_{i=1}ⁿA_{i,σ(i)}, with the 0×0 determinant equal to one.
+- Diffeomorphism between open Euclidean sets [definition]: A bijection between open subsets of Euclidean spaces that is smooth and has a smooth inverse.
+- Dimension of a vector space [definition]: The cardinality of a basis of the vector space; a finite basis with n vectors gives dimension n.
+- Disjoint sets [definition]: Two sets are disjoint when they have no common element; a family is pairwise disjoint when every two distinct members are disjoint.
+- Embedded smooth surface in ℝ³ [definition]: A subset of ℝ³ that near each point is, after a rigid change of coordinates, the graph of a smooth real function of two variables.
+- Equivalence class [definition]: For an equivalence relation ~ on X, [x]={y∈X:y~x}; the quotient set X/~ consists of these classes.
+- Equivalence relation [definition]: A reflexive, symmetric and transitive binary relation.
+- Essential supremum of a measurable real function [definition]: The infimum of real a for which f≤a almost everywhere, allowing infinite values when no finite bound exists.
+- Euclidean space ℝᵈ [definition]: For d≥1, ℝᵈ consists of d-tuples of real numbers with distance dist(x,y)=(∑ᵢ(xᵢ−yᵢ)²)¹ᐟ².
+- Extended nonnegative real numbers [definition]: The nonnegative real numbers together with a greatest element ∞. Sums involving ∞ equal ∞, and 0·∞ is taken to be 0 when integrating simple functions.
+- Extended real line [definition]: The ordered set ℝ∪{−∞,+∞}, with−∞<r<+∞ for every real r.
+- Factorial [definition]: For n≥1, n!=1·2···n, and 0!=1.
+- Field [definition]: A commutative ring in which 1≠0 and every nonzero element is invertible.
+- Finite set [definition]: A set X is finite if it is bijective with {1,…,n} for some natural number n≥0; its cardinality is n.
+- First-order Sobolev space W¹,ᵖ [definition]: For an open Ω⊆ℝⁿ and 1≤p≤∞, W¹,ᵖ(Ω) consists of Lᵖ functions whose first weak partial derivatives are also in Lᵖ, with norm combining the function and derivative Lᵖ norms; vector-valued versions are componentwise.
+- Formal L² adjoint of a differential operator on a surface [definition]: For a differential operator D between Euclidean vector-valued functions on a smooth surface, its formal adjoint D* is specified by ∫⟨Du,v⟩=∫⟨u,D*v⟩ for smooth compactly supported test fields, using the induced surface measure. This identity does not assert a bounded operator on L².
+- Fréchet derivative between normed spaces [definition]: The Fréchet derivative of f at x is a bounded linear map A with ∥f(x+h)−f(x)−Ah∥/∥h∥→0 as h→0.
+- Function between sets [definition]: An assignment taking each element of a specified domain set to exactly one element of a specified codomain set.
+- Group [definition]: A set with an associative binary operation, an identity element, and a two-sided inverse for each element.
+- Hausdorff measure of a metric space [definition]: For s≥0, the s-dimensional Hausdorff measure is the limit as δ↓0 of the infimum of normalized sums of diameters^s over countable covers by sets of diameter at most δ.
+- Homeomorphism [definition]: A bijection between topological spaces that is continuous and has a continuous inverse.
+- Indicator function of a subset [definition]: For A⊆Ω, the real function 1_A is 1 on A and 0 on its complement.
+- Integer [definition]: An integer is an element of the ordered ring ℤ, obtained by adjoining additive inverses to the natural numbers.
+- Intersection of a family of sets [definition]: Inside a specified ambient set, the elements belonging to every member of the family.
+- Jacobian matrix of a differentiable Euclidean map [definition]: For f:ℝⁿ→ℝᵐ, its Jacobian matrix at a point has entries ∂f_i/∂x_j. For m=n its determinant is the Jacobian determinant.
+- Least upper bound in a partially ordered set [definition]: For A⊆P, its least upper bound is an upper bound s satisfying s≤b for every upper bound b of A, when such an s exists.
+- Lebesgue Lᵖ space [definition]: For a measure space and 1≤p<∞, Lᵖ consists of measurable scalar functions modulo equality almost everywhere with ∫|f|ᵖ<∞, normed by (∫|f|ᵖ)¹ᐟᵖ. For p=∞ use the essential-supremum norm.
+- Lebesgue integral [definition]: For measurable f≥0, ∫f dμ is the supremum of integrals of nonnegative simple functions below f. For signed f with ∫abs(f)dμ<∞, define ∫f=∫f⁺−∫f⁻.
+- Lebesgue measure on Euclidean space [definition]: The completion of the Borel measure on ℝⁿ assigning each rectangular box the product of its side lengths.
+- Limit inferior of a real or extended-real sequence [definition]: For a sequence (a_n) of real or extended real numbers, liminf a_n=sup_N inf_{n≥N}a_n, a value in the extended real line [−∞,∞].
+- Limit of a function between metric spaces [definition]: For f defined near an accumulation point a of a metric space, lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<d(x,a)<δ implies d(f(x),L)<ε.
+- Limit of a real function at a point [definition]: The relation lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<|x−a|<δ in the domain implies |f(x)−L|<ε.
+- Limit of a real sequence [definition]: A sequence (aₙ) converges to L∈ℝ if for every ε>0 there is N such that n≥N implies abs(aₙ−L)<ε.
+- Linear combination of vectors [definition]: A finite sum a₁v₁+⋯+aₙvₙ of vectors multiplied by scalars from their vector space’s ground field; the empty sum is zero.
+- Linear map between vector spaces [definition]: A map between vector spaces over the same field preserving addition and scalar multiplication.
+- Linear span of a set of vectors [definition]: The subspace consisting of all finite linear combinations of a specified set of vectors.
+- Linearly independent family of vectors [definition]: A family of vectors is linearly independent if every finite linear combination equalling zero has all coefficients zero.
+- Matrix over a ring [definition]: A rectangular array of elements of a ring; addition is entrywise and matrix multiplication uses row-by-column sums.
+- Measurable map between measurable spaces [definition]: A function for which the preimage of each measurable subset of the codomain is measurable in the domain.
+- Measurable simple real function [definition]: A measurable real function with finite range. It can be written as a finite sum ∑ a_i 1_{A_i} with measurable level sets A_i.
+- Measurable space [definition]: A set equipped with a specified σ-algebra of subsets.
+- Measure [definition]: A measure μ maps a σ-algebra to [0,∞], sends ∅ to 0, and satisfies μ(⋃ₙAₙ)=∑ₙμ(Aₙ) for every pairwise disjoint sequence of measurable sets.
+- Metric induced by a norm [construction]: The metric induced by a norm on a real or complex vector space is d(x,y)=‖x−y‖.
+- Metric space [definition]: A set X with a function d:X×X→[0,∞) such that d(x,y)=0 exactly when x=y, d(x,y)=d(y,x), and d(x,z)≤d(x,y)+d(y,z).
+- Modulus of a complex number [definition]: For z=a+bi, its modulus is the nonnegative real number |z|=√(a²+b²).
+- Natural logarithm [definition]: The inverse ln:(0,∞)→ℝ of the real exponential function.
+- Natural number [definition]: One of 0, 1, 2, …; natural numbers count finite collections.
+- Nonnegative real square root [definition]: For t≥0, √t is the unique real number y≥0 satisfying y²=t.
+- Normed vector space [definition]: A real or complex vector space X with a function ∥·∥:X→[0,∞) that is positive except at zero, absolutely homogeneous, and subadditive.
+- Open interval in the real line [definition]: For real a<b, the set (a,b)={x∈ℝ:a<x<b}.
+- Operator norm of a bounded linear operator [definition]: For a bounded linear map T:X→Y between normed spaces, ∥T∥=sup{∥Tx∥:∥x∥≤1}.
+- Ordered field [definition]: A field with a total order preserved by addition, in which the product of two positive elements is positive.
+- Ordered pair [definition]: A pair (x,y) with distinguished first and second entries; (x,y)=(x′,y′) exactly when x=x′ and y=y′.
+- Partial derivative in Euclidean coordinates [definition]: The ith partial derivative of f at x is the derivative at zero of t↦f(x+t e_i), with all other coordinates fixed; vector-valued maps are differentiated componentwise.
+- Partial order [definition]: A reflexive, antisymmetric and transitive binary relation, usually written ≤.
+- Preimage of a subset under a function [definition]: For f:A→B and E⊆B, f⁻¹(E)={x∈A:f(x)∈E}.
+- Rank of a linear map [definition]: The dimension of the image of a linear map.
+- Real exponential function [definition]: The real function exp(x)=∑_{n≥0}xⁿ/n!, whose series converges for every real x.
+- Real inner-product space [definition]: A real vector space with a symmetric bilinear form ⟨x,y⟩ that is positive on ⟨x,x⟩ for x≠0; its induced norm is √⟨x,x⟩.
+- Real number [definition]: A real number is an element of a complete ordered field ℝ; completeness means every nonempty subset bounded above has a least upper bound.
+- Real power of a positive real number [definition]: For x>0 and p∈ℝ, define xᵖ=exp(p log x). For p>0 extend by 0ᵖ=0.
+- Real sequence [definition]: A real sequence is a function a:ℕ₊→ℝ, written (aₙ)ₙ≥1.
+- Sequence in a set [definition]: A function from the natural numbers, or the positive natural numbers, to that set.
+- Set [definition]: A collection of distinct elements, regarded as one object.
+- Sign of a permutation [definition]: The sign of a permutation of {1,…,n} is (−1) to the number of inversions, where an inversion is a pair i<j with σ(i)>σ(j).
+- Smooth map between open Euclidean sets [definition]: A map on an open subset of ℝⁿ is smooth if all of its component partial derivatives of every order exist and are continuous.
+- Subset [definition]: A⊆B means every element of A is an element of B.
+- Sum of a nonnegative series [definition]: For aₙ≥0, define ∑ₙ≥1aₙ as the supremum of its finite partial sums; the value may be infinite.
+- Support of a function [definition]: The closure in its domain of the set on which a function is nonzero.
+- Symmetric group of a finite set [definition]: The group of all bijections of a finite set to itself under composition.
+- Topological space [definition]: A set X with a family τ of subsets, called open sets, containing ∅ and X and closed under arbitrary unions and finite intersections.
+- Total order [definition]: A partial order in which any two elements are comparable.
+- Union of a family of sets [definition]: The set of elements belonging to at least one member of the family.
+- Vector space [definition]: An abelian group with scalar multiplication by a field satisfying a(v+w)=av+aw, (a+b)v=av+bv, (ab)v=a(bv), and 1v=v.
+- Vector subspace [definition]: A subset of a vector space containing zero and closed under addition and scalar multiplication.
+- Weak convergence in a Banach space [definition]: A sequence xₙ converges weakly to x if ℓ(xₙ)→ℓ(x) for every bounded linear functional ℓ on the space.
+- Weak partial derivative of a locally integrable function [definition]: A locally integrable v is the ith weak derivative of u on an open Ω⊆ℝⁿ if ∫Ω u ∂ᵢφ=−∫Ω vφ for every smooth compactly supported test function φ.
+- σ-algebra [definition]: A σ-algebra on Ω contains Ω and is closed under complements in Ω and countable unions.
+- σ-algebra generated by a family of subsets [definition]: The smallest σ-algebra containing that family, equivalently the intersection of all σ-algebras on the ambient set that contain it.
+
+CITATIONS
+
+  [1] M. Arigovindan, M. Suhling, C. Jansen, P. Hunziker, and M. Unser. Full motion
+and flow field recovery from echo doppler data. IEEE Trans. Med. Imag., 26:31–
+45, 2007.
+    Pedagogically necessary: unknown
+
+  [2] A.B. Bakushinskii and A.V. Goncharskii. Ill-Posed Problems: Theory and Ap-
+plications. Kluwer Academic Publishers, Dordrecht, Boston, London, 1994.
+    Pedagogically necessary: unknown
+
+  [3] M. Burger and S. Osher. Convergence rates of convex variational regularization.
+Inverse Probl., 20(5):1411–1421, 2004.
+    Pedagogically necessary: unknown
+
+  [4] M. P. do Carmo. Riemannian Geometry. Birkhäuser, 1992.
+    Pedagogically necessary: unknown
+
+  [5] F. Durst, H. Hikura, I. Lekakis, J. Jpvampvoc, and Q. Ye. Wall shear stress
+determination from near-wall mean velocity data in turbulent pipe and channel
+flows. Expe. Fluids, 20(6):417–428, 1996.
+    Pedagogically necessary: unknown
+
+  [6] B. A. Dubrovin, A.T. Fomenko, and S.P. Novikov. Modern Geometry - Methods
+and Applications: Part I: The Geometry of Surfaces, Transformation Groups,
+and Fields. Graduate Texts in Mathematics. Spinger, 2 edition, 1991. Tanslated
+by Burns, R.G.
+    Pedagogically necessary: unknown
+
+  [7] H. W. Engl, M. Hanke, and A. Neubauer. Regularization of inverse problems,
+volume 375 of Mathematics and its Applications. Kluwer Academic Publishers
+Group, Dordrecht, 1996.
+    Pedagogically necessary: unknown
+
+  [8] H.D. Evans and W. N. McDicken. Doppler Ultrasound: Physics, Instrumenta-
+tion and Signal Processing. 2nd Edition. Wiley, 2000.
+    Pedagogically necessary: unknown
+
+  [9] C. W. Groetsch. The Theory of Tikhonov Regularization for Fredholm Equations
+of the First Kind. Pitman, Boston, 1984.
+    Pedagogically necessary: unknown
+
+  [10] L. Galiuto, G. Ignone, and A. Demaria. Contraction and relaxation velocities
+of the normal left ventricle using pulsed-wave tissue doppler echocardiography.
+Amer. J. Cardiol, 81(5):609–614, 1998.
+    Pedagogically necessary: unknown
+
+  [11] B. Hofmann, B. Kaltenbacher, C. Pöschl, and O. Scherzer. A convergence rates
+result for Tikhonov regularization in Banach spaces with non-smooth operators.
+Inverse Probl., 23(3):987–1010, 2007.
+24
+    Pedagogically necessary: unknown
+
+  [12] C.K. Holland, M.J. Clancy, K.J. Taylor, J.L. Alderman, K. Purushothaman,
+and T.R. McCauley. Volumetric flow estimation in vivo and in vitro using
+pulsed-doppler ultrasound. Ultrasound Med. Biol., 22(5):591–603, 1996.
+    Pedagogically necessary: unknown
+
+  [13] C. Kirisits, L. F. Lang, and O. Scherzer. Optical flow on evolving surfaces
+with an application to the analysis of 4D microscopy data. In A. Kuijper,
+K. Bredies, T. Pock, and H. Bischof, editors, SSVM’13: Proceedings of the fourth
+International Conference on Scale Space and Variational Methods in Computer
+Vision, volume 7893 of Lecture Notes in Computer Science, pages 246–257,
+Berlin, Heidelberg, 2013. Springer-Verlag.
+    Pedagogically necessary: unknown
+
+  [14] C. Kirisits, L. F. Lang, and O. Scherzer. Optical flow on evolving surfaces with
+space and time regularisation. J. Math. Imaging Vision, 52(1):55–70, 2015.
+    Pedagogically necessary: unknown
+
+  [15] C. Kirisits, C. Pöschl, E. Resmerita, and O. Scherzer. Finite-dimensional ap-
+proximation of convex regularization via hexagonal pixel grids. Appl. Anal.,
+94(3):612–636, 2015.
+    Pedagogically necessary: unknown
+
+  [16] D. Ku, D. Giddens, C. Zarins, and S. Glagov. Pulsatile flow and artherosclerosis
+in the human carotid bifurcation—positive correlation between plaque location
+and oscillating shear stress. Artherosclerosis, 5(3):293–302, 1985.
+    Pedagogically necessary: unknown
+
+  [17] J. M. Lee. Riemannian surfaces, volume 176 of Graduate Texts in Mathematics.
+Springer-Verlag, New York, 1997. An introduction to curvature.
+    Pedagogically necessary: unknown
+
+  [18] J. Lefèvre and S. Baillet. Optical flow and advection on 2-Riemannian surfaces:
+A common framework. IEEE Trans. Pattern Anal. Mach. Intell., 30(6):1081–
+1092, June 2008.
+    Pedagogically necessary: unknown
+
+  [19] J. Lefèvre and S. Baillet. Estimation of velocity fields and propagation on non-
+euclidian domains: Application to the exploration of cortical spatiotemporal
+dynamics. In H. Ammari, editor, Mathematical Modeling in Biomedical Imaging
+I, Lecture Notes in Mathematics, pages 203–226. Springer, 2009.
+    Pedagogically necessary: unknown
+
+  [20] C. Meierhofer, E. P. Schneider, C. Lyko, A. Hutter, and et al. Wall shear stress
+and flow patterns in the ascending aorta in patients with bicuspid aortic valves
+differ significantly from tricuspid aortic valves: a prospective study. 14:797–804,
+2013.
+    Pedagogically necessary: unknown
+
+  [21] V. A. Morozov. Methods for Solving Incorrectly Posed Problems. Springer, New
+York, Berlin, Heidelberg, 1984.
+    Pedagogically necessary: unknown
+
+  [22] J. L. Mueller and S. Siltanen. Linear and nonlinear inverse problems with prac-
+tical applications, volume 10 of Computational Science & Engineering. Society
+for Industrial and Applied Mathematics (SIAM), Philadelphia, PA, 2012.
+    Pedagogically necessary: unknown
+
+  [23] A. Neubauer. Tikhonov regularization for non-linear ill-posed problems: op-
+timal convergence rates and finite-dimensional approximation. Inverse Probl.,
+5(4):541–557, 1989.
+    Pedagogically necessary: unknown
+
+  [24] A. Neubauer and O. Scherzer. Finite-dimensional approximation of Tikhonov
+regularized solutions of nonlinear ill-posed problems. Numer. Funct. Anal. Op-
+tim., 11(1-2):85–99, 1990.
+    Pedagogically necessary: unknown
+
+  [25] C. Pöschl, E. Resmerita, and O. Scherzer. Discretization of variational regular-
+ization in Banach spaces. Inverse Probl., 26(10):105017, 2010.
+    Pedagogically necessary: unknown
+
+  [26] E. Resmerita and O. Scherzer. Error estimates for non-quadratic regularization
+and the relation to enhancement. Inverse Probl., 22(3):801–814, 2006.
+    Pedagogically necessary: unknown
+
+  [27] O. Scherzer, M. Grasmair, H. Grossauer, M. Haltmeier, and F. Lenzen. Vari-
+ational methods in imaging, volume 167 of Applied Mathematical Sciences.
+Springer, New York, 2009.
+25
+    Pedagogically necessary: unknown
+
+  [28] T. Schuster, B. Kaltenbacher, B. Hofmann, and K. S. Kazimierski. Regulariza-
+tion methods in Banach spaces, volume 10 of Radon Series on Computational
+and Applied Mathematics. Walter de Gruyter GmbH & Co. KG, Berlin, 2012.
+    Pedagogically necessary: unknown
+
+  [29] V. P. Tanana. Methods for solution of nonlinear operator equations. Inverse and
+Ill-posed Problems Series. VSP, Utrecht, 1997.
+    Pedagogically necessary: unknown
+
+  [30] A. N. Tikhonov and V. Y. Arsenin. Solutions of Ill-Posed Problems. John Wiley
+& Sons, Washington, D.C., 1977.
+    Pedagogically necessary: unknown
+
+  [31] A. N. Tikhonov, A. Goncharsky, V. Stepanov, and A. Yagola. Numerical Meth-
+ods for the Solution of Ill-Posed Problems. Kluwer, Dordrecht, 1995.
+    Pedagogically necessary: unknown
+
+  [32] A. N. Tikhonov, A. S. Leonov, and A. G. Yagola. Nonlinear ill-posed problems.
+Vol. 1, 2, volume 14 of Applied Mathematics and Mathematical Computation.
+Chapman & Hall, London, 1998. Translated from the Russian.
+26
+    Pedagogically necessary: unknown
+
