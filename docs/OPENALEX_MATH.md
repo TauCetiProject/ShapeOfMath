@@ -83,3 +83,25 @@ uv run --with pyarrow --with numpy python openalex_math.py release \
 ```
 
 Tests: `uv run --with pyarrow --with numpy python -m unittest tests.test_openalex_math`.
+
+## PostgreSQL
+
+`openalex_pg.py load --release DIR --url-file ~/.config/shapeofmath/neon.env` loads
+key columns of a local release copy into the `openalex` schema of the collection
+database. It uses the owner role, because `curator` cannot create schemas. `curator`
+and `reader` get `SELECT`.
+
+- `openalex.work`: one row per work, keyed by the OpenAlex W number. Columns: DOI
+  (lowercase, bare), the arXiv ids found in the DOI and location identifiers, title,
+  dates, type, language, primary source, primary topic and subfield, authors (`jsonb`:
+  id, name, ORCID), `cited_by_count`, `referenced_works` (`bigint[]`, any field),
+  open-access status and the best OA location's PDF/landing URLs, version and licence,
+  and the release partition `updated_date`.
+- `openalex.citation`: `(cited_work_id, citing_work_id)` W numbers, indexed both ways.
+- `openalex.release`: the upstream date, manifest hash, filter and row counts.
+
+Other columns stay in the Parquet release. The load builds `openalex_load`, checks row
+counts against the manifests and that every citation points into `openalex.work`, then
+replaces `openalex` in one transaction. The tables are not among `pg_sync.py`'s, so
+SQLite exports leave them out. They stay separate from the curated `source` records;
+match through DOI or arXiv id.
