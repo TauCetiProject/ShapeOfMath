@@ -939,16 +939,16 @@ def prerequisite_cone(db, slug, mode='statement'):
     if root["status"] != "active":
         raise ValueError("Cannot explore a superseded concept")
     if mode not in ('statement','proof','all'):raise ValueError('Prerequisite mode must be statement, proof or all')
-    all_edges=[dict(r) for r in db.execute('SELECT * FROM concept_dependency ORDER BY id')]
-    selected=[e for e in all_edges if dependency_in_mode(e,mode)]
-    parents_by_id={}
-    for e in selected:parents_by_id.setdefault(e['dependent_id'],[]).append(e['prerequisite_id'])
-    found={root['id']};queue=deque(found)
-    while queue:
-        for parent in parents_by_id.get(queue.popleft(),[]):
-            if parent not in found:found.add(parent);queue.append(parent)
-    nodes={r['id']:dict(r) for r in db.execute('SELECT * FROM concept') if r['id'] in found}
-    edges=[e for e in selected if e['dependent_id'] in nodes and e['prerequisite_id'] in nodes]
+    # Only the cone is read: a recursive walk up the selected prerequisite edges.
+    purposes={'statement':"('statement','both')",'proof':"('statement','proof','both')"}.get(mode)
+    in_mode=f"d.purpose IN {purposes}" if purposes else "1=1"
+    cone=f"""WITH RECURSIVE cone(id) AS (SELECT ? UNION
+        SELECT d.prerequisite_id FROM concept_dependency d JOIN cone ON d.dependent_id=cone.id WHERE {in_mode})"""
+    # Every edge into a cone node: the selected ones are the cone's edges, and the
+    # rest give the unclassified inputs and the proof frontier.
+    all_edges=[dict(r) for r in db.execute(cone+" SELECT d.* FROM concept_dependency d WHERE d.dependent_id IN (SELECT id FROM cone) ORDER BY d.id", (root['id'],))]
+    nodes={r['id']:dict(r) for r in db.execute(cone+" SELECT c.* FROM concept c WHERE c.id IN (SELECT id FROM cone)", (root['id'],))}
+    edges=[e for e in all_edges if dependency_in_mode(e,mode) and e['prerequisite_id'] in nodes]
     parents = {ident: [] for ident in nodes}
     incoming = {ident: 0 for ident in nodes}
     for edge in edges:
