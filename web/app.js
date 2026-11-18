@@ -5,6 +5,8 @@ const compare = (a,b) => a.title.localeCompare(b.title);
 const state = {data:null,etag:null,kind:'concept',slug:'fusion-category',query:'',moreUp:false,moreDown:false,view:'neighbors',mode:'statement'};
 let graphObserver,toastTimer;
 const api = '/api/v1/';
+// A published build (build_site.py) is a read-only snapshot with no API server.
+const STATIC_SITE = document.documentElement.classList.contains('static-site');
 const shortKind = value => value[0].toUpperCase()+value.slice(1);
 const flag = (done,label) => `<span class="pill dot ${done?'':'pending'}">${esc(label)}: ${done?'complete':'awaiting review'}</span>`;
 const routeButton = (kind,slug,label,cls='',extra='') => `<button class="${cls}" data-action="navigate" data-kind="${kind}" data-slug="${esc(slug)}" ${extra}>${label}</button>`;
@@ -24,7 +26,7 @@ function identifierURL(scheme,value){
 }
 function identifierLink(i){const url=identifierURL(i.scheme,i.value);return url?`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(i.scheme)}: ${esc(i.value)} ↗</a>`:`<span>${esc(i.scheme)}: ${esc(i.value)}</span>`;}
 async function load(){
-  const response=await fetch(api+'state');if(!response.ok)throw new Error('Could not open the database.');
+  const response=await fetch(STATIC_SITE?'state.json':api+'state');if(!response.ok)throw new Error('Could not open the database.');
   const result=await response.json();state.etag=response.headers.get('ETag');state.data=result.data;state.formalizations=result.formalizations;
   $('#stats').textContent=`${result.stats.active_concepts} concepts · ${result.stats.sources} sources`;
   render();
@@ -337,5 +339,6 @@ mobileNavigation.addEventListener('change',()=>{
  if(wasInside&&mobileNavigation.matches)$('#toggle-nav').focus({preventScroll:true});
 });
 window.addEventListener('hashchange',()=>{setNavigation(false,{restoreFocus:false});parseRoute();$('#main').scrollTop=0;});
+if(STATIC_SITE){$('#collection-label').textContent='Published snapshot';$('#export-link').href='state.json';}
 setNavigation(false,{restoreFocus:false});
-parseRoute();load().catch(error=>{$('#main').innerHTML=`<div class="error-page"><h1>Could not open the collection</h1><p>${esc(error.message)}</p><p>Check that the local database server is running.</p></div>`;});
+parseRoute();load().catch(error=>{$('#main').innerHTML=`<div class="error-page"><h1>Could not open the collection</h1><p>${esc(error.message)}</p><p>${STATIC_SITE?'Try reloading the page.':'Check that the local database server is running.'}</p></div>`;});

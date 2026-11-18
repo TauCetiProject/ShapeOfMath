@@ -71,7 +71,7 @@ class APITests(unittest.TestCase):
         status,body,headers=self.request('GET','/',absolute=True)
         self.assertEqual(status,200);self.assertIn('The Shape of Math',body)
         self.assertIn("default-src 'self'",headers['Content-Security-Policy'])
-        self.assertIn('/math-text.js',body)
+        self.assertIn('src="math-text.js"',body)
         status,body,headers=self.request('GET','/math-text.js',absolute=True)
         self.assertEqual(status,200);self.assertIn('window.MathText',body)
         self.assertEqual(headers.get_content_type(),'text/javascript')

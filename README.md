@@ -52,6 +52,11 @@ If the port belongs to another application, it is left running and startup fails
 The equivalent command without Make is
 `python mathdb_server.py restart --reload`; `stop` and `status` are also supported.
 
+A read-only copy is published at https://taucetiproject.github.io/ShapeOfMath/.
+`python build_site.py --out _site` writes the same interface with the database
+snapshot as `state.json` and the editing controls hidden; the `Publish site`
+workflow rebuilds it from `data/math.sqlite` on every push to `main`.
+
 Preview screenshots: [concept view](docs/concept-view.png),
 [source view](docs/source-view.png), and [citations](docs/citations-view.png).
 
