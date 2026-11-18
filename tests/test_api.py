@@ -57,6 +57,30 @@ class APITests(unittest.TestCase):
                 self.etag=response.headers['ETag']
             return response.status,out,response.headers
 
+    def test_public_views_hold_the_rows_their_pages_read(self):
+        status,view,_=self.request('GET','view/concept/b')
+        self.assertEqual(status,200)
+        ids={c['slug'] for c in view['data']['concept']}
+        self.assertEqual(ids,{'a','b'})  # b and its prerequisite cone, nothing else
+        self.assertEqual([(e['prerequisite_id'],e['dependent_id']) for e in view['data']['concept_dependency']],
+                         [(m.stable_id('concept','a'),m.stable_id('concept','b'))])
+        self.assertEqual({l['role'] for l in view['data']['source_concept']},{'introduces'})
+        self.assertEqual([s['slug'] for s in view['data']['source']],['paper'])
+        self.assertEqual({r['library'] for r in view['formalizations']},{'mathlib','tau-ceti'})
+        status,view,_=self.request('GET','view/concept/a')
+        self.assertEqual({c['slug'] for c in view['data']['concept']},{'a','b'})  # a and its dependent b
+        status,view,_=self.request('GET','view/source/paper')
+        self.assertEqual(status,200)
+        self.assertEqual({c['slug'] for c in view['data']['concept']},{'a','b'})
+        self.assertEqual({s['slug'] for s in view['data']['source']},{'paper'})
+        self.assertTrue(view['data']['source_identifier'])
+        self.assertEqual(self.request('GET','view/concept/missing')[0],404)
+        status,found,_=self.request('GET','search?kind=concept&q=&limit=2')
+        self.assertEqual((found['total'],len(found['items'])),(3,2))
+        self.assertEqual(self.request('GET','search?kind=concept&q=%25&limit=5')[1]['total'],0)  # % is literal
+        status,stats,_=self.request('GET','stats')
+        self.assertEqual((stats['active_concepts'],stats['sources']),(3,2))
+
     def test_read_neighborhood_source_and_assets(self):
         status,result,_=self.request('GET','concepts/a')
         self.assertEqual(status,200)

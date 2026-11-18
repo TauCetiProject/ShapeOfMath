@@ -101,9 +101,117 @@ def source_detail(db, slug):
     return out
 
 
+# --- Per-view slices --------------------------------------------------------
+# The public site cannot load the whole collection. Each view instead receives a
+# slice in the /state table format holding exactly the rows its renderer reads,
+# so the browser code is shared. The Cloudflare Worker (worker/src/index.ts)
+# implements the same functions; tests compare the two.
+SLICE_TABLES = ('concept', 'concept_alias', 'concept_dependency', 'concept_related', 'source',
+                'source_identifier', 'source_concept', 'citation', 'citation_identifier', 'formalization_file')
+
+
+def rows_in(db, sql, ids, extra=()):
+    """Rows of `sql` (containing `{ids}`) for many IDs, in bounded IN-list chunks."""
+    ids, out = sorted(set(ids)), []
+    for start in range(0, len(ids), 500):
+        chunk = ids[start:start + 500]
+        out += rows(db, sql.format(ids=','.join('?' * len(chunk))), (*extra, *chunk))
+    return out
+
+
+def cone_ids(db, roots, purposes=None):
+    """Concept IDs in the prerequisite cones of `roots`, following edges with these purposes."""
+    if not roots:
+        return set()
+    where = f"WHERE d.purpose IN ({','.join('?' * len(purposes))})" if purposes else ''
+    sql = f"""WITH RECURSIVE cone(id) AS (SELECT id FROM concept WHERE id IN ({','.join('?' * len(roots))}) UNION
+        SELECT d.prerequisite_id FROM concept_dependency d JOIN cone ON d.dependent_id=cone.id {where}) SELECT id FROM cone"""
+    return {r[0] for r in db.execute(sql, (*roots, *(purposes or ())))}
+
+
+def ordered_slice(tables):
+    """Deduplicate and order each table by primary key, as /state does on PostgreSQL."""
+    keys = {'concept_alias': ('concept_id', 'alias'), 'source_identifier': ('scheme', 'value'),
+            'citation_identifier': ('citation_id', 'scheme', 'value')}
+    out = {}
+    for table in SLICE_TABLES:
+        items = {json.dumps(r, sort_keys=True, default=str): r for r in tables.get(table, [])}.values()
+        # Integer IDs in numeric order: renderers walk edges in table order.
+        out[table] = sorted(items, key=lambda r: tuple(r[k] for k in keys.get(table, ('id',))))
+    return out
+
+
+def concept_slice(db, slug):
+    c = dict(m.lookup(db, 'concept', slug))
+    if c['status'] != 'active':
+        raise APIError(404, 'Unknown concept')
+    cone = cone_ids(db, [c['id']])
+    edges = rows_in(db, 'SELECT * FROM concept_dependency WHERE dependent_id IN ({ids})', cone)
+    edges += rows(db, 'SELECT * FROM concept_dependency WHERE prerequisite_id=?', (c['id'],))
+    related = rows(db, 'SELECT * FROM concept_related WHERE concept_a_id=? OR concept_b_id=?', (c['id'], c['id']))
+    links = rows(db, 'SELECT * FROM source_concept WHERE concept_id=?', (c['id'],))
+    ids = cone | {e['prerequisite_id'] for e in edges} | {e['dependent_id'] for e in edges}
+    ids |= {r['concept_a_id'] for r in related} | {r['concept_b_id'] for r in related}
+    data = {'concept': rows_in(db, 'SELECT * FROM concept WHERE id IN ({ids})', ids),
+            'concept_dependency': edges, 'concept_related': related, 'source_concept': links,
+            'concept_alias': rows(db, 'SELECT * FROM concept_alias WHERE concept_id=?', (c['id'],)),
+            'source': rows_in(db, 'SELECT * FROM source WHERE id IN ({ids})', {l['source_id'] for l in links})}
+    return {'data': ordered_slice(data), 'formalizations': m.formalizations(db, concept=c['slug'])}
+
+
+def source_slice(db, slug):
+    s = dict(m.lookup(db, 'source', slug))
+    links = rows(db, 'SELECT * FROM source_concept WHERE source_id=?', (s['id'],))
+    roots = sorted({l['concept_id'] for l in links if l['role'] == 'relies_on'})
+    cone = cone_ids(db, roots, ('statement', 'both'))
+    edges = rows_in(db, "SELECT * FROM concept_dependency WHERE dependent_id IN ({ids}) AND purpose IN ('statement','both')", cone)
+    citations = rows(db, 'SELECT * FROM citation WHERE source_id=? OR cited_source_id=?', (s['id'], s['id']))
+    sources = {s['id']} | {c['source_id'] for c in citations} | {c['cited_source_id'] for c in citations if c['cited_source_id']}
+    data = {'concept': rows_in(db, 'SELECT * FROM concept WHERE id IN ({ids})', cone | {l['concept_id'] for l in links}),
+            'concept_dependency': edges, 'source_concept': links,
+            'source': rows_in(db, 'SELECT * FROM source WHERE id IN ({ids})', sources),
+            'source_identifier': rows(db, 'SELECT * FROM source_identifier WHERE source_id=?', (s['id'],)),
+            'citation': citations,
+            'citation_identifier': rows_in(db, 'SELECT * FROM citation_identifier WHERE citation_id IN ({ids})',
+                                           {c['id'] for c in citations if c['source_id'] == s['id']})}
+    return {'data': ordered_slice(data), 'formalizations': []}
+
+
+def search(db, kind, q, limit):
+    """Sidebar entries: active concepts (title, description, field, aliases) or sources (title, authors, field)."""
+    if kind not in ('concept', 'source'):
+        raise ValueError('kind must be concept or source')
+    if not 1 <= limit <= 500:
+        raise ValueError('limit must be between 1 and 500')
+    pattern = '%' + q.casefold().replace('\\', '\\\\').replace('%', '\\%').replace('_', '\\_') + '%'
+    if kind == 'concept':
+        where = """status='active' AND (lower(title) LIKE ? ESCAPE '\\' OR lower(description) LIKE ? ESCAPE '\\'
+            OR lower(field) LIKE ? ESCAPE '\\' OR id IN (SELECT concept_id FROM concept_alias WHERE lower(alias) LIKE ? ESCAPE '\\'))"""
+        args, fields = (pattern,) * 4, 'id,slug,title,field'
+    else:
+        where = """(lower(title) LIKE ? ESCAPE '\\' OR lower(summary) LIKE ? ESCAPE '\\' OR lower(field) LIKE ? ESCAPE '\\'
+            OR lower(authors) LIKE ? ESCAPE '\\')"""
+        args, fields = (pattern,) * 4, 'id,slug,title,field,authors,year'
+    total = db.execute(f'SELECT count(*) FROM {kind} WHERE {where}', args).fetchone()[0]
+    items = rows(db, f'SELECT {fields} FROM {kind} WHERE {where} ORDER BY title, id LIMIT ?', (*args, limit))
+    return {'total': total, 'items': items}
+
+
+def stats(db):
+    return {'version': version(db),
+            'active_concepts': db.execute("SELECT count(*) FROM concept WHERE status='active'").fetchone()[0],
+            'sources': db.execute('SELECT count(*) FROM source').fetchone()[0]}
+
+
 def read_api(db, parts, query):
     if parts == ['state']:
         return {'version': version(db), 'stats': m.verify(db), 'data': m.snapshot(db), 'formalizations': m.formalizations(db)}
+    if parts == ['stats']:
+        return stats(db)
+    if parts == ['search']:
+        return search(db, query.get('kind', ['concept'])[0], query.get('q', [''])[0], int(query.get('limit', ['200'])[0]))
+    if len(parts) == 3 and parts[0] == 'view' and parts[1] in ('concept', 'source'):
+        return (concept_slice if parts[1] == 'concept' else source_slice)(db, parts[2])
     if parts == ['formalizations']:
         return m.formalizations(db, **{key: query[key][0] for key in ('concept', 'library', 'status') if key in query})
     if parts == ['formalization-libraries']:

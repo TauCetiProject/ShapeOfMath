@@ -45,7 +45,7 @@ architecture and the order of the migration.
   Cones stay small; the set of dependents of a foundational concept such as
   "Set" grows with the whole collection.
 - **Public read path: a Cloudflare Worker** at
-  `shapeofmath.taucetiproject.org` on the Tau Ceti account, following
+  `pipeline.taucetiproject.org` on the Tau Ceti account, following
   `TauCetiTools/services/github-state`: `@neondatabase/serverless` over HTTP,
   a Neon read replica, and responses cached at the edge by database version. The
   frontend fetches per view: one record, its neighbourhood, one cone, one page of

@@ -1,0 +1,16 @@
+// Public read-only view of The Shape of Math: pipeline.taucetiproject.org.
+// The database URL is the Neon `reader` role, stored as the POSTGRES_URL secret:
+//   wrangler secret put POSTGRES_URL
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tauceti-shapeofmath-pipeline",
+  "account_id": "ec2169bdf033f56b009956d4b64ba8ef",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-11",
+  "observability": {"enabled": true},
+  // Run near Neon (us-east-2): each view is one database round trip.
+  "placement": {"mode": "smart"},
+  "routes": [{"pattern": "pipeline.taucetiproject.org", "custom_domain": true}],
+  "assets": {"directory": "../web", "binding": "ASSETS", "run_worker_first": true},
+  "ratelimits": [{"name": "PUBLIC_QUERY_LIMIT", "namespace_id": "1101", "simple": {"limit": 600, "period": 60}}]
+}
