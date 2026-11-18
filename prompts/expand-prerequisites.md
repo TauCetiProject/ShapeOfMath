@@ -29,10 +29,8 @@ Before starting, you need:
 If you received a directory containing `assignment.json`, read these values there:
 `roots` lists the concepts, `repository` and `catalogue` give the two paths,
 `output_directory` says where to save work, and `baseline` gives the stopping point.
-Relative paths are relative to that directory. If it contains an `instructions/`
-directory, read the reference files copied there; otherwise read them in the
-repository. `policy-manifest.json`, when present, records the input file hashes
-so later reviewers can identify the same instructions and database.
+Relative paths are relative to that directory. Read the policy files in the
+repository (`AGENTS.md`, `CONCEPTS.md`, `docs/CURATION.md`, `API.md`).
 
 Confirm each concept's identifier, slug and meaning before starting. If they
 conflict, report the conflict; do not silently select another concept. If several
@@ -109,18 +107,24 @@ typed witness path rather than introducing redundant direct edges.
    paths. A proof-only path cannot replace a statement edge. Do not create a cycle
    to express a mutual characterization: examine definition/proof choices, retain
    explanatory equivalences in notes, and stage any identity repair explicitly.
-10. Write proposed database changes in the format documented in `API.md`.
-    The coordinator uses `curation_plans.py` to check and import prepared tasks;
-    see `docs/CURATION_TASKS.md`. Do not write shared data/exports. A released plan is immutable;
-    correct it in a later numbered plan. Record clashes with concurrent work and
-    recompute affected cones after imported changes rather than applying stale routes.
+10. Before leaving a proof flag false because a proof is inaccessible, try other
+    legitimate routes: arXiv versions, author and institutional pages, publisher
+    open access, the Wayback Machine, GDZ, or another reliable exposition proving
+    the same statement. If the inspected proof does not cover the recorded
+    statement, an audited revision of the hypotheses is acceptable when every
+    dependent still holds.
+11. Write proposed database changes to `output/result.json` in the format described
+    in `docs/CURATION_TASKS.md`. Work only from the catalogue snapshot; do not
+    write shared data or exports, and do not coordinate with other tasks. A merge
+    review reconciles your result with the live catalogue before import.
 
 ## Required outputs and stopping rule
 
 - `cone-audit.json`: per-root stable identity, node/edge counts, statement frontier,
   theorem proof lists still unknown, and proof-only frontier deliberately unexpanded.
-- Numbered payload/review sidecars, identity resolutions and full audited routes
-  for any revisions/reorganizations; reduction witnesses if edges are removed.
+- `result.json`: the proposed changes, identity mappings, full audited routes for
+  any revisions/reorganizations, and the completeness judgments with reasons.
+  Write it once, when the work is finished; keep checkpoints in `work-log.json`.
 - `proof-accounts.json`: every encountered theorem's proof choice, artifact and
   locators, complete immediate input list or exact missing information. A checked
   textbook statement without its proof does not certify the proof list.
@@ -135,7 +139,7 @@ Check every reachable node's statement flag and every incident dependency's purp
 report the roots separately as well as the union. Check every reached theorem's
 independent proof judgment and evidence. Run private-copy structural/DAG checks.
 Track invalidated shared-node/source reviews and leave them false until rechecked.
-Embeddings/exports are a coordinator step after reviewed import; do not overwrite
+Embeddings/exports are a coordinator step after import; do not overwrite
 them from a private copy or claim mathematical completeness from passing checks.
 
 Finish accessible work without depth/count shortcuts. If access, precise statement

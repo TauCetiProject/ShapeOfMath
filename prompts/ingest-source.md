@@ -24,10 +24,8 @@ If you received a directory containing `assignment.json`, these values are in
 that file: `source_identifiers` identifies the paper, `artifact.path` gives the
 local paper when supplied, `repository` and `catalogue` give the two paths,
 `output_directory` says where to save work, and `coverage` says what to inspect.
-Relative paths are relative to that directory. If it contains an `instructions/`
-directory, read the copies of the reference files there; otherwise read them in
-the repository. `policy-manifest.json`, when present, records the file hashes used
-to prepare this task so later reviewers can identify the same inputs.
+Relative paths are relative to that directory. Read the policy files in the
+repository (`AGENTS.md`, `CONCEPTS.md`, `docs/CURATION.md`, `API.md`).
 
 If a required input is missing, state exactly what is missing. Obtain an accessible
 copy if necessary, and record its URL, version and SHA256 hash before reading it.
@@ -104,19 +102,19 @@ a strict unique-source dependency.
    references not resolved to identifiers. Store checked identifiers; missing ones
    remain unknown. `pedagogically_necessary` is true/false/null, and `needed_material`
    may specify a theorem/section or the exact part used. Do not invent identifiers.
-7. Write proposed database changes in the ingest format documented in `API.md`.
-   The coordinator checks and imports prepared tasks using `curation_plans.py`,
-   as documented in `docs/CURATION_TASKS.md`. A check does not certify mathematical
-   completeness. Do not write the shared database or shared exports. A released plan is immutable; corrections
-   use a new numbered plan. Distinguish self-review from independent peer review.
+7. Write proposed database changes to `output/result.json` in the format described
+   in `docs/CURATION_TASKS.md`. Work only from the catalogue snapshot; do not
+   write the shared database or shared exports, and do not coordinate with other
+   tasks. A merge review reconciles your result with the live catalogue before
+   import. Distinguish self-review from independent peer review.
 
 ## Required outputs and stopping rule
 
 - `candidate-ledger.json`: retained/reused/new/revised/excluded candidates and
   exact evidence, inspected version, and decisions.
-- Numbered `plan-NNN.json` and `plan-NNN-review.json`, plus resolutions or audited
-  reorganization plans where necessary. If the import format uses `reviewed_ready`, that means
-  the proposed changes are ready to import, **not** that all mathematical inventories are complete.
+- `result.json`: the proposed changes, identity mappings, any audited revisions or
+  reorganizations, and the completeness judgments with reasons. Write it once,
+  when the work is finished; keep checkpoints in `work-log.json` until then.
 - `cone-roots.json`: all explicit reading roots by stable ID and current slug,
   source identity, and the point at which later prerequisite expansion should stop.
   Use sets, natural numbers, elementary logic and finite arithmetic unless another

@@ -16,13 +16,14 @@ is required.
 | Modify, split or merge concepts and review every affected relationship | [Reorganize concepts](reorganize-concepts.md) |
 | Identify a paper's required, introduced and explained concepts | [Identify concepts in a paper](ingest-source.md) |
 | Complete prerequisites of one or several concepts | [Expand prerequisites](expand-prerequisites.md) |
+| Reconcile a finished task's result with the live catalogue before import | [Merge a task](merge.md) |
 | Review or update formalization coverage, files and estimated LOC | [Review formalization](formalization.md) |
 | Find journal contents and matching arXiv versions for specified years | [Discover journal papers](discover-journals.md) |
 | Find highly cited papers in specified collections | [Discover highly cited papers](discover-citations.md) |
 
-To supply a worker with fixed copies of the database and instruction files, use
-[preparing curation tasks](../docs/CURATION_TASKS.md). This is a tool for assembling
-the inputs listed in the prompts; it is not a second set of task instructions.
+[Curation tasks](../docs/CURATION_TASKS.md) describes how a task directory is
+prepared, handed to a worker, merged and imported, and the format of the
+`result.json` a worker writes.
 
 Operational detail: [Curation workflows](../docs/CURATION.md).
 Mathematical policy: [CONCEPTS.md](../CONCEPTS.md).

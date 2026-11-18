@@ -11,10 +11,9 @@ reuse the curation operations and endpoint contract, with user authentication,
 permissions and editor attribution added at its HTTP boundary. The current audit
 records what changed and why; it does not identify an authenticated person.
 
-For released plans from prepared source/cone tasks, use `curation_plans.py check`
-then `curation_plans.py import`; see [task preparation and imports](docs/CURATION_TASKS.md).
-The importer provides private preflight, stale-input checks, one-transaction edits
-and task/plan fingerprint auditing for arbitrary sources and roots. Token telemetry
+Source and cone tasks are prepared and imported with `curation_plans.py`; see
+[curation tasks](docs/CURATION_TASKS.md). An import applies a task's merged
+`result.json` in one transaction and records it as one audited event. Token telemetry
 is separate from mathematical edits; [task accounting](docs/TASK_USAGE.md) records
 provider requests or measured session intervals in an independent ledger.
 

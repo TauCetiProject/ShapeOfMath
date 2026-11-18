@@ -28,9 +28,9 @@ lists. [Journal discovery](prompts/discover-journals.md) and
 [citation discovery](prompts/discover-citations.md) have separate agent prompts;
 [the prompt index](prompts/README.md) lists one prompt per task.
 
-Prepared curation tasks use [general reviewed-plan imports](docs/CURATION_TASKS.md)
-with `curation_plans.py`, and [measured task usage](docs/TASK_USAGE.md) with
-`task_usage.py`. These work independently of the fixed2015 sample coordinators.
+Curation tasks are prepared, merged and imported as described in
+[curation tasks](docs/CURATION_TASKS.md), with
+[measured task usage](docs/TASK_USAGE.md) recorded by `task_usage.py`.
 
 ```sh
 python mathdb_server.py
