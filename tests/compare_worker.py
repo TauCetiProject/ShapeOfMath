@@ -14,14 +14,16 @@ import random
 import sys
 from pathlib import Path
 from urllib.parse import quote, urlencode
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import mathdb as m  # noqa: E402
 
 
 def get(base, path):
-    with urlopen(base.rstrip('/') + path, timeout=60) as response:
+    # Cloudflare's bot protection rejects Python's default User-Agent.
+    request = Request(base.rstrip('/') + path, headers={'User-Agent': 'shapeofmath-compare/1.0'})
+    with urlopen(request, timeout=60) as response:
         return json.loads(response.read())
 
 
