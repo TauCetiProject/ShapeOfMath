@@ -76,7 +76,7 @@ aws s3 cp --only-show-errors /work/out/state.json s3://$B/state.json
 aws s3 cp --only-show-errors /work/out/data/parquet/works/manifest.json s3://$B/data/parquet/works/manifest.json
 aws s3 cp --only-show-errors /work/out/data/parquet/citations/manifest.json s3://$B/data/parquet/citations/manifest.json
 aws s3 cp --only-show-errors /work/out/data/parquet/manifest.json s3://$B/data/parquet/manifest.json
-aws s3 cp --only-show-errors s3://openalex/LICENSE.txt s3://$B/UPSTREAM_LICENSE.txt
+aws s3 cp --no-sign-request --only-show-errors s3://openalex/LICENSE.txt - | aws s3 cp --only-show-errors - s3://$B/UPSTREAM_LICENSE.txt
 echo "published"
 EOF
 )
