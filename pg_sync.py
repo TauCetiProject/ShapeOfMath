@@ -1,8 +1,13 @@
-"""Copy an SQLite collection into an empty PostgreSQL database and verify the copy.
+"""Copy a collection between SQLite and PostgreSQL, and verify the copy.
 
-    python pg_import.py data/math.sqlite postgresql://...
+    python pg_sync.py import archive/math.sqlite postgresql://...   # into an empty database
+    python pg_sync.py export postgresql://... snapshot.sqlite       # to a new SQLite file
 
-The SQLite file is first copied with SQLite's backup API, so a collection that
+Export writes a consistent SQLite snapshot (one repeatable-read transaction) for
+tools that still read the collection as a file, such as
+`curation/prepare_task.py --db snapshot.sqlite`.
+
+On import, the SQLite file is first copied with SQLite's backup API, so a collection that
 curation agents are still writing yields one consistent state. Rows keep their
 IDs. User triggers are disabled during the copy: imported review flags and
 revisions are recorded judgments, not consequences of inserting edges now.
@@ -100,16 +105,67 @@ def compare(source, target, sample=200, seed=0) -> list[str]:
     return problems
 
 
+def export(url, out: Path) -> dict[str, int]:
+    """Write the PostgreSQL collection to a new SQLite file with the SQLite schema."""
+    if out.exists():
+        raise ValueError(f'{out} already exists')
+    statements, statement = [], ''
+    for line in (m.ROOT / 'schema.sql').read_text().splitlines(keepends=True):
+        statement += line
+        if sqlite3.complete_statement(statement):
+            statements.append(statement)
+            statement = ''
+    def code(statement):  # without leading comment lines
+        return '\n'.join(line for line in statement.splitlines() if not line.lstrip().startswith('--')).lstrip()
+    triggers = [x for x in statements if code(x).upper().startswith('CREATE TRIGGER')]
+    counts = {}
+    partial = out.with_name(out.name + '.partial')
+    partial.unlink(missing_ok=True)
+    with closing(m.connect(url)) as source, closing(sqlite3.connect(partial)) as target:
+        source._conn.execute('BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY')
+        try:
+            # Create tables first and triggers last, so copied review flags and
+            # revisions are not reset by the triggers that guard later edits.
+            for x in statements:
+                if x not in triggers:
+                    target.execute(x)
+            target.execute('DELETE FROM formalization_library')
+            for table in TABLES:
+                columns = [r[1] for r in target.execute(f'PRAGMA table_info({table})')]
+                names = ','.join(columns)
+                key = ','.join(r[1] for r in sorted(target.execute(f'PRAGMA table_info({table})'), key=lambda r: r[5]) if r[5]) or names
+                rows = source.execute(f'SELECT {names} FROM {table} ORDER BY {key}').fetchall()
+                target.executemany(f'INSERT INTO {table} ({names}) VALUES ({",".join("?" * len(columns))})',
+                                   [tuple(bytes(v) if isinstance(v, memoryview) else v for v in r) for r in rows])
+                counts[table] = len(rows)
+            for x in triggers:
+                target.execute(x)
+            target.commit()
+        finally:
+            source._conn.execute('ROLLBACK')
+    partial.rename(out)
+    return counts
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('sqlite', type=Path)
-    parser.add_argument('url')
+    parser.add_argument('command', choices=('import', 'export'))
+    parser.add_argument('source', help='import: SQLite file; export: PostgreSQL URL')
+    parser.add_argument('target', help='import: PostgreSQL URL; export: new SQLite file')
     parser.add_argument('--sample', type=int, default=200, help='concepts whose cones are compared')
     args = parser.parse_args(argv)
+    started = time.time()
+    if args.command == 'export':
+        out = Path(args.target)
+        counts = export(args.source, out)
+        print(json.dumps({'exported': counts, 'seconds': round(time.time() - started, 1)}))
+        with closing(m.connect(out)) as copy, closing(m.connect(args.source)) as live:
+            problems = compare(copy, live, args.sample)
+        print(json.dumps({'problems': problems}, ensure_ascii=False))
+        return 1 if problems else 0
     with tempfile.TemporaryDirectory() as temp:
-        started = time.time()
-        path = consistent_copy(args.sqlite, Path(temp))
-        with closing(m.connect(path)) as source, closing(m.connect(args.url)) as target:
+        path = consistent_copy(Path(args.source), Path(temp))
+        with closing(m.connect(path)) as source, closing(m.connect(args.target)) as target:
             m.initialize(target)
             counts = copy(source, target)
             print(json.dumps({'copied': counts, 'seconds': round(time.time() - started, 1)}))

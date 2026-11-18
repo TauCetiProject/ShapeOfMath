@@ -52,8 +52,15 @@ python curation/prepare_task.py --kind cone --assignment cone-input.json \
 ```
 
 `--assignment` names the JSON input file just described. `--out` names a new task
-directory. `--db /path/to/catalogue.sqlite` chooses a different input database;
-otherwise the command uses `data/math.sqlite` in this repository.
+directory. `--db /path/to/catalogue.sqlite` names the input catalogue. The
+preparer reads an SQLite file, so first export the PostgreSQL collection:
+
+```sh
+python pg_sync.py export "$(cat ~/.config/shapeofmath/database_url)" /tmp/catalogue.sqlite
+```
+
+Plans are then checked and imported against PostgreSQL directly (the default
+database), not against the export.
 
 The preparer saves a consistent read-only copy of the catalogue, pins root UUIDs,
 copies the instruction files, hashes supplied paper files, and writes
@@ -115,10 +122,8 @@ roles, then refresh vectors/exports and recompute final cones from the live grap
 Use the general importer for any prepared source or cone task:
 
 ```sh
-python curation_plans.py check /path/to/task /path/to/task/output/plan-001.json \
-  --db /path/to/math.sqlite
-python curation_plans.py import /path/to/task /path/to/task/output/plan-001.json \
-  --db /path/to/math.sqlite
+python curation_plans.py check /path/to/task /path/to/task/output/plan-001.json
+python curation_plans.py import /path/to/task /path/to/task/output/plan-001.json
 ```
 
 `check` verifies the pinned task inputs, reads the current target database without
