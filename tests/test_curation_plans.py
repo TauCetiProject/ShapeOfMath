@@ -7,141 +7,121 @@ from unittest.mock import patch
 
 import mathdb as m
 import curation_plans as plans
-from curation.prepare_task import prepare
 from test_mathdb import concept,source,edge
 
 
-class GeneralPlanTests(unittest.TestCase):
+class TaskImportTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.root=Path(self.temp.name);self.db=self.root/'math.sqlite'
         with closing(m.connect(self.db)) as db:
             m.initialize(db);m.ingest(db,{'concepts':[concept('root'),concept('parent')]})
         self.task=self.root/'task'
-        prepare('cone',{'task_id':'new-cone-task','roots':['root']},self.task,self.db)
-        self.path=self.task/'output/plan-001.json'
+        plans.prepare_task('cone',{'task_id':'new-cone-task','roots':['root']},self.task,self.db)
 
-    def plan(self,payload=None,review=None):
-        self.path.write_text(json.dumps(payload or {'dependencies':[{**edge('parent','root'),'purpose':'statement'}]}))
-        self.path.with_name(self.path.stem+'-review.json').write_text(json.dumps(review or {
-            'reviewed_ready':True,'reviews':[{'slug':'root','statement_prerequisites_complete':True,'reason':'Synthetic full immediate-list review.'}]}))
+    def write(self,result=None,task=None):
+        result=result if result is not None else {
+            'changes':{'dependencies':[{**edge('parent','root'),'purpose':'statement'}]},
+            'concept_reviews':[{'slug':'root','statement_prerequisites_complete':True,'reason':'Synthetic full immediate-list review.'}]}
+        ((task or self.task)/'output/result.json').write_text(json.dumps(result))
 
     def snapshot(self):
         with closing(m.connect(self.db)) as db:return m.snapshot(db)
 
-    def test_cone_without_source_and_any_task_id_check_does_not_mutate(self):
-        self.plan();before=self.snapshot();receipt=plans.check(self.task,self.path,self.db)
-        self.assertEqual(before,self.snapshot());self.assertTrue(receipt['preflight_ok'])
-        result=plans.import_plan(self.task,self.path,self.db);self.assertTrue(result['changed'])
+    def test_import_is_idempotent_and_dry_run_does_not_mutate(self):
+        self.write();before=self.snapshot()
+        self.assertTrue(plans.import_result(self.task,self.db,dry_run=True)['changed'])
+        self.assertEqual(before,self.snapshot());self.assertFalse((self.task/'output/import.json').exists())
+        self.assertTrue(plans.import_result(self.task,self.db)['changed'])
         with closing(m.connect(self.db)) as db:
             self.assertTrue(m.lookup(db,'concept','root')['statement_prerequisites_complete'])
             self.assertEqual(db.execute("SELECT count(*) FROM curation_event WHERE operation='curated_task_plan'").fetchone()[0],1)
-            self.assertEqual(db.execute("SELECT count(*) FROM curation_event WHERE operation='paper_2015_stage'").fetchone()[0],0)
-        before=self.snapshot();self.assertFalse(plans.import_plan(self.task,self.path,self.db)['changed']);self.assertEqual(before,self.snapshot())
+        before=self.snapshot();self.assertFalse(plans.import_result(self.task,self.db)['changed']);self.assertEqual(before,self.snapshot())
+        self.assertTrue((self.task/'output/import.json').exists())
 
-    def test_source_outside_2015_and_reused_identifier_not_dropped(self):
-        # Source identity is established by checked external identifiers, not year/sample.
+    def test_changed_result_after_import_rejected(self):
+        self.write();plans.import_result(self.task,self.db)
+        self.write({'changes':{'concepts':[concept('other')]}})
+        with self.assertRaisesRegex(ValueError,'already imported'):plans.import_result(self.task,self.db)
+
+    def test_reused_source_identifier_not_dropped(self):
         with closing(m.connect(self.db)) as db:m.ingest(db,{'sources':[source('canonical')]})
-        other=self.root/'source-task';prepare('source',{'task_id':'source-2027','source_identifiers':[['doi','10.1234/paper']]},other,self.db)
+        other=self.root/'source-task'
+        plans.prepare_task('source',{'task_id':'source-2027','source_identifiers':[['doi','10.1234/paper']]},other,self.db)
         candidate=source('renamed');candidate['identifiers']=source('canonical')['identifiers']+[['doi','10.1234/extra']]
-        path=other/'output/plan-001.json';path.write_text(json.dumps({'sources':[candidate]}))
-        path.with_name('plan-001-review.json').write_text(json.dumps({'reviewed_ready':True,'reviews':[]}))
-        plans.check(other,path,self.db);plans.import_plan(other,path,self.db)
+        self.write({'changes':{'sources':[candidate]}},other);plans.import_result(other,self.db)
         with closing(m.connect(self.db)) as db:
             self.assertEqual(db.execute('SELECT count(*) FROM source').fetchone()[0],1)
             self.assertIsNotNone(db.execute("SELECT 1 FROM source_identifier WHERE value='10.1234/extra'").fetchone())
 
-    def test_unreleased_changed_plan_and_tampered_input_rejected(self):
-        self.plan(review={'reviewed_ready':False,'reviews':[]})
-        with self.assertRaisesRegex(ValueError,'released'):plans.check(self.task,self.path,self.db)
-        self.plan();plans.check(self.task,self.path,self.db);plans.import_plan(self.task,self.path,self.db)
-        self.path.write_text(self.path.read_text()+' ')
-        with self.assertRaisesRegex(ValueError,'changed after import'):plans.import_plan(self.task,self.path,self.db)
-        (self.task/'task.md').write_text('changed')
-        with self.assertRaisesRegex(ValueError,'Pinned task input'):plans.check(self.task,self.path,self.db)
+    def test_same_slug_with_different_text_needs_same_as(self):
+        changed=concept('parent');changed['description']='A different synthetic paragraph.'
+        self.write({'changes':{'concepts':[changed],'dependencies':[{**edge('parent','root'),'purpose':'statement'}]}})
+        with self.assertRaisesRegex(ValueError,'same_as'):plans.import_result(self.task,self.db,dry_run=True)
+        self.write({'changes':{'concepts':[changed],'dependencies':[{**edge('parent','root'),'purpose':'statement'}]},
+                    'same_as':{'parent':{'target':'parent','reason':'Same meaning, live wording kept.'}}})
+        plans.import_result(self.task,self.db)
+        with closing(m.connect(self.db)) as db:
+            self.assertNotEqual(m.lookup(db,'concept','parent')['description'],changed['description'])
 
-    def test_exact_event_guards_race_between_check_and_import(self):
-        self.plan();plans.check(self.task,self.path,self.db)
-        with closing(m.connect(self.db)) as db:m.ingest(db,{'concepts':[concept('concurrent')]})
-        before=self.snapshot()
-        with self.assertRaisesRegex(ValueError,'Database changed'):plans.import_plan(self.task,self.path,self.db)
-        self.assertEqual(before,self.snapshot())
-        plans.check(self.task,self.path,self.db);plans.import_plan(self.task,self.path,self.db)
+    def test_same_as_maps_new_concept_to_existing(self):
+        self.write({'changes':{'concepts':[concept('duplicate')],'dependencies':[{**edge('duplicate','root'),'purpose':'statement'}]},
+                    'same_as':{'duplicate':{'target':'parent','reason':'Same mathematical meaning.'}}})
+        plans.import_result(self.task,self.db)
+        with closing(m.connect(self.db)) as db:
+            self.assertIsNone(db.execute("SELECT 1 FROM concept WHERE slug='duplicate'").fetchone())
+            rows=db.execute("SELECT p.slug FROM concept_dependency e JOIN concept p ON p.id=e.prerequisite_id JOIN concept d ON d.id=e.dependent_id WHERE d.slug='root'").fetchall()
+            self.assertEqual([r[0] for r in rows],['parent'])
 
-    def test_stale_direct_prerequisite_review_rejected(self):
-        self.plan()
-        with closing(m.connect(self.db)) as db:m.ingest(db,{'dependencies':[{**edge('parent','root'),'purpose':'statement'}]})
-        with self.assertRaisesRegex(ValueError,'prerequisite list changed'):plans.check(self.task,self.path,self.db)
+    def test_unknown_sections_and_bad_same_as_rejected(self):
+        self.write({'reviewed_ready':True})
+        with self.assertRaisesRegex(ValueError,'Unknown result sections'):plans.import_result(self.task,self.db)
+        self.write({'operations':{'proposed_revisions':[]}})
+        with self.assertRaisesRegex(ValueError,'Unknown operations'):plans.import_result(self.task,self.db)
+        self.write({'same_as':{'x':{'target':'parent'}}})
+        with self.assertRaisesRegex(ValueError,'reason'):plans.import_result(self.task,self.db)
 
-    def test_failure_after_legacy_helpers_try_to_commit_rolls_back_everything(self):
-        self.plan();plans.check(self.task,self.path,self.db);before=self.snapshot()
+    def test_failure_after_inner_helpers_try_to_commit_rolls_back_everything(self):
+        self.write();before=self.snapshot()
         real=plans.apply_operations
         def fail(*args,**kwargs):
             real(*args,**kwargs)
             raise ValueError('Synthetic late failure')
         with patch.object(plans,'apply_operations',side_effect=fail):
-            with self.assertRaisesRegex(ValueError,'late failure'):plans.import_plan(self.task,self.path,self.db)
+            with self.assertRaisesRegex(ValueError,'late failure'):plans.import_result(self.task,self.db)
         self.assertEqual(before,self.snapshot())
-        plans.import_plan(self.task,self.path,self.db)
+        plans.import_result(self.task,self.db)
 
     def test_late_cycle_and_invalid_completeness_are_atomic(self):
-        self.plan({'concepts':[concept('new')],'dependencies':[{**edge('root','parent'),'purpose':'statement'},{**edge('parent','root'),'purpose':'statement'}]})
+        self.write({'changes':{'concepts':[concept('new')],'dependencies':[{**edge('root','parent'),'purpose':'statement'},{**edge('parent','root'),'purpose':'statement'}]}})
         before=self.snapshot()
-        with self.assertRaises(Exception):plans.check(self.task,self.path,self.db)
+        with self.assertRaises(Exception):plans.import_result(self.task,self.db)
         self.assertEqual(before,self.snapshot())
-        self.plan(review={'reviewed_ready':True,'reviews':[{'slug':'root','statement_prerequisites_complete':1,'reason':'invalid'}]})
-        with self.assertRaisesRegex(ValueError,'boolean'):plans.check(self.task,self.path,self.db)
+        self.write({'concept_reviews':[{'slug':'root','statement_prerequisites_complete':1,'reason':'invalid'}]})
+        with self.assertRaisesRegex(ValueError,'boolean'):plans.import_result(self.task,self.db)
         self.assertEqual(before,self.snapshot())
-
-    def test_task_id_collision_and_outside_path_rejected(self):
-        self.plan();plans.check(self.task,self.path,self.db);plans.import_plan(self.task,self.path,self.db)
-        other=self.root/'other';prepare('cone',{'task_id':'new-cone-task','roots':['root']},other,self.db)
-        path=other/'output/plan-001.json';path.write_bytes(self.path.read_bytes())
-        path.with_name('plan-001-review.json').write_bytes(self.path.with_name('plan-001-review.json').read_bytes())
-        with self.assertRaisesRegex(ValueError,'different pinned package'):plans.check(other,path,self.db)
-        with self.assertRaises(ValueError):plans.check(self.task,path,self.db)
-
-    def test_current_state_rereview_for_followup_and_stale_review_event(self):
-        self.plan()
-        with closing(m.connect(self.db)) as db:
-            m.ingest(db,{'dependencies':[{**edge('parent','root'),'purpose':'statement'}]})
-            event=plans.version(db)
-        review={'reviewed_ready':True,'reviewed_against_event':event,'current_state_review_reason':'Synthetic curator rechecked the changed list.',
-            'reviews':[{'slug':'root','statement_prerequisites_complete':True,'reason':'Current complete direct list reviewed.'}]}
-        self.plan(review=review);plans.check(self.task,self.path,self.db);plans.import_plan(self.task,self.path,self.db)
-        self.path=self.task/'output/plan-002.json';self.plan(review=review)
-        self.path.with_name('plan-002-review.json').write_text(json.dumps(review))
-        with self.assertRaisesRegex(ValueError,'reviewed_against_event is stale'):plans.check(self.task,self.path,self.db)
 
     def test_proof_and_statement_reduction_kept_separate_and_boundary_not_inferred(self):
         theorem=concept('theorem');theorem['kind']='theorem'
-        self.plan({'concepts':[concept('middle'),theorem], 'dependencies':[
+        self.write({'changes':{'concepts':[concept('middle'),theorem],'dependencies':[
             {**edge('parent','middle'),'purpose':'statement'},
             {**edge('middle','theorem'),'purpose':'proof'},
-            {**edge('parent','theorem'),'purpose':'statement'}]},
-            {'reviewed_ready':True,'reviews':[]})
-        plans.check(self.task,self.path,self.db);plans.import_plan(self.task,self.path,self.db)
+            {**edge('parent','theorem'),'purpose':'statement'}]}})
+        plans.import_result(self.task,self.db)
         with closing(m.connect(self.db)) as db:
             pairs={(r['prerequisite'],r['dependent'],r['purpose']) for r in db.execute('SELECT p.slug prerequisite,d.slug dependent,e.purpose FROM concept_dependency e JOIN concept p ON p.id=e.prerequisite_id JOIN concept d ON d.id=e.dependent_id')}
             self.assertIn(('parent','theorem','statement'),pairs)
             self.assertIn(('middle','theorem','proof'),pairs)
             self.assertFalse(m.lookup(db,'concept','root')['boundary'])
 
-    def test_reorganization_uses_full_core_routes_and_reviews_then_imports_atomically(self):
+    def test_reorganization_uses_full_core_routes(self):
         operation={'operation':'merge','from':['root','parent'],'to':[concept('combined')],
             'reason':'Synthetic equivalent identity audit.','edge_routes':{},'link_routes':{},'related_routes':{},'formalization_routes':{}}
-        self.plan({'note':'Synthetic identity merge'}, {'reviewed_ready':True,'reviews':[], 'proposed_reorganizations':[operation]})
-        plans.check(self.task,self.path,self.db);plans.import_plan(self.task,self.path,self.db)
+        self.write({'operations':{'reorganizations':[operation]}})
+        plans.import_result(self.task,self.db)
         with closing(m.connect(self.db)) as db:
             self.assertEqual(m.lookup(db,'concept','root')['status'],'superseded')
             self.assertEqual(m.lookup(db,'concept','combined')['status'],'active')
-
-    def test_unchanged_edge_does_not_hide_changed_parent_meaning(self):
-        with closing(m.connect(self.db)) as db:m.ingest(db,{'dependencies':[{**edge('parent','root'),'purpose':'statement'}]})
-        refreshed=self.root/'with-edge';prepare('cone',{'task_id':'with-edge','roots':['root']},refreshed,self.db)
-        self.task=refreshed;self.path=self.task/'output/plan-001.json';self.plan()
-        with closing(m.connect(self.db)) as db:m.revise(db,'parent',{'description':'Changed synthetic meaning.'},'Synthetic concurrent meaning revision.')
-        with self.assertRaisesRegex(ValueError,'prerequisite changed meaning'):plans.check(self.task,self.path,self.db)
 
     def test_same_identity_revision_requires_formalization_inventory(self):
         with closing(m.connect(self.db)) as db:
@@ -149,11 +129,53 @@ class GeneralPlanTests(unittest.TestCase):
             inventory={'incoming':[],'outgoing':[],'source_occurrences':[],'aliases':[],'related':[],
                        'formalizations':m.formalizations(db,concept='root')}
         operation={'slug':'root','changes':{'title':'Clarified synthetic name'},'reason':'Synthetic editorial correction.',
-                   'disposition':'No links or formalization mappings exist; preserve UUID.', 'incident_inventory':inventory}
-        self.plan({'note':'Synthetic same-identity revision'}, {'reviewed_ready':True,'reviews':[],'proposed_revisions':[operation]})
-        plans.check(self.task,self.path,self.db);plans.import_plan(self.task,self.path,self.db)
+                   'disposition':'No links or formalization mappings exist; preserve UUID.','incident_inventory':inventory}
+        self.write({'operations':{'revisions':[{**operation,'incident_inventory':{**inventory,'aliases':[{'x':1}]}}]}})
+        with self.assertRaisesRegex(ValueError,'incident inventory'):plans.import_result(self.task,self.db)
+        self.write({'operations':{'revisions':[operation]}})
+        plans.import_result(self.task,self.db)
         with closing(m.connect(self.db)) as db:
             after=m.lookup(db,'concept','root');self.assertEqual(after['id'],c['id']);self.assertEqual(after['title'],'Clarified synthetic name')
+
+
+class PrepareTaskTests(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
+        self.root=Path(self.temp.name);self.db=self.root/'input.sqlite'
+        with closing(m.connect(self.db)) as db:
+            m.initialize(db);m.ingest(db,{'concepts':[concept('a'),concept('b')]})
+        self.before=self.db.read_bytes()
+
+    def test_roots_pinned_snapshot_taken_and_no_overwrite(self):
+        out=self.root/'task'
+        plans.prepare_task('cone',{'task_id':'test-cones','roots':['a','b']},out,self.db)
+        data=json.loads((out/'assignment.json').read_text())
+        self.assertEqual([r['slug'] for r in data['roots']],['a','b'])
+        self.assertTrue(all(r['id'] for r in data['roots']))
+        self.assertEqual(data['prompt'],'prompts/expand-prerequisites.md')
+        self.assertTrue((out/data['catalogue']).is_file());self.assertTrue((out/'output').is_dir())
+        self.assertEqual(self.db.read_bytes(),self.before)
+        with self.assertRaisesRegex(ValueError,'overwrite'):
+            plans.prepare_task('cone',{'task_id':'test','roots':['a']},out,self.db)
+
+    def test_source_artifact_hash_mismatch_rolls_back(self):
+        artifact=self.root/'paper.pdf';artifact.write_bytes(b'fixture bytes')
+        assignment={'task_id':'test-source','source_identifiers':[['arxiv','1501.00001']],
+                    'artifact':{'path':str(artifact),'sha256':'wrong','version':'v1'}}
+        with self.assertRaisesRegex(ValueError,'hash mismatch'):
+            plans.prepare_task('source',assignment,self.root/'task',self.db)
+        self.assertFalse((self.root/'task').exists())
+        assignment['artifact'].pop('sha256')
+        plans.prepare_task('source',assignment,self.root/'task',self.db)
+        data=json.loads((self.root/'task/assignment.json').read_text())
+        self.assertEqual((self.root/'task'/data['artifact']['path']).read_bytes(),artifact.read_bytes())
+
+    def test_conflicting_root_identity_rejected(self):
+        with closing(m.connect(self.db)) as db:
+            ident=m.lookup(db,'concept','a')['id']
+        with self.assertRaisesRegex(ValueError,'ambiguous'):
+            plans.prepare_task('cone',{'task_id':'bad','roots':[{'id':ident,'slug':'b'}]},self.root/'bad',self.db)
+        self.assertFalse((self.root/'bad').exists())
 
 
 if __name__=='__main__':unittest.main()

@@ -1,18 +1,22 @@
-"""General reviewed-plan imports for prepared source and cone tasks.
+"""Prepare curation tasks and import their results.
 
-Historical2015 importers are retained unchanged. Shared edit helpers below start
-from their reviewed implementation; this module has no sample allowlist.
+A task directory holds `assignment.json` and a read-only `catalogue.sqlite`
+snapshot. The worker writes `output/result.json`; after a merge review against the
+live catalogue, `import` applies it in a single transaction. See
+docs/CURATION_TASKS.md for the result format.
 """
 from contextlib import closing, contextmanager
+from datetime import datetime, timezone
 import argparse
 import copy
 import hashlib
 import json
 from pathlib import Path
 import re
+import shutil
 import sqlite3
+import subprocess
 import sys
-import sysconfig
 import tempfile
 
 import mathdb as m
@@ -26,18 +30,12 @@ def digest(path):
     with Path(path).open('rb') as file:return hashlib.file_digest(file,'sha256').hexdigest()
 
 
-def engine_hashes():
-    schema=m.ROOT/'schema.sql'
-    if not schema.exists():schema=Path(sysconfig.get_path('data'))/'share/the-shape-of-math/schema.sql'
-    return {'curation_plans':digest(__file__),'mathdb':digest(m.__file__),'schema':digest(schema)}
-
-
 def save(path, value):
     path=Path(path);temp=path.with_name(path.name+'.tmp')
     temp.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n');temp.replace(path)
 
 
-def prepare(db,payload,resolutions):
+def resolve_identities(db,payload,resolutions):
     batch=copy.deepcopy(payload);decisions=[];concept_map={};source_map={}
     existing={r['slug']:r for r in db.execute('select * from concept')}
     for c in batch.get('concepts',[]):
@@ -49,7 +47,7 @@ def prepare(db,payload,resolutions):
         elif c['slug'] in existing:
             old=existing[c['slug']]
             if any(c[k]!=old[k] for k in ['title','kind','description']):
-                raise ValueError('Definition conflict requiring resolutions.json: '+c['slug'])
+                raise ValueError('Same slug, different text: map it in same_as or choose a new slug: '+c['slug'])
             concept_map[c['slug']]=c['slug']
             decisions.append({'candidate':c['slug'],'target':c['slug'],'reason':'Exact same name, kind and mathematical paragraph.'})
     for slug,decision in resolutions.get('concepts',{}).items():
@@ -231,12 +229,14 @@ def correct_dependency_evidence(db,updates):
 
 
 
-def apply_operations(db, payload, review, resolutions, task_id, plan_id, fingerprint):
+def apply_operations(db, result_file, task_id, fingerprint):
+    payload=result_file.get('changes',{});ops=result_file.get('operations',{})
+    resolutions={'concepts':result_file.get('same_as',{})}
     # Full split/merge plans use the core's exact incident routing validation.
     # Do these before append operations and explicit post-change review judgments.
-    for reorganization in review.get('proposed_reorganizations',[]):
+    for reorganization in ops.get('reorganizations',[]):
         m.reorganize(db,reorganization)
-    revisions=review.get('proposed_revisions',[])
+    revisions=ops.get('revisions',[])
     inventories=[]
     for revision in revisions:
         concept=m.lookup(db,'concept',revision['slug']);concept_id=concept['id']
@@ -256,7 +256,7 @@ def apply_operations(db, payload, review, resolutions, task_id, plan_id, fingerp
     for revision,inventory in zip(revisions,inventories):
         with db:m.event(db,'review_revision_incident_links',revision['reason'],inventory,{'slug':revision['slug'],'disposition':revision['disposition']})
         m.revise(db,revision['slug'],revision['changes'],revision['reason'])
-    batch,decisions,concept_map,source_map,purpose_updates=prepare(db,payload,resolutions)
+    batch,decisions,concept_map,source_map,purpose_updates=resolve_identities(db,payload,resolutions)
     before_links=[dict(r) for r in db.execute('select * from source_concept')]
     m.ingest(db,batch)
     # An existing source can acquire additional checked identifiers/artifacts;
@@ -282,7 +282,7 @@ def apply_operations(db, payload, review, resolutions, task_id, plan_id, fingerp
         for update in purpose_updates:
             db.execute('UPDATE concept_dependency SET purpose=? WHERE id=?',(update['purpose'],update['before']['id']))
         if purpose_updates:m.event(db,'merge_dependency_purposes','Keep both explicit uses when a shared input is needed for statement and proof.',{},purpose_updates)
-        for removal in review.get('proposed_edge_removals',[]):
+        for removal in ops.get('edge_removals',[]):
             if not removal.get('reason','').strip() or removal.get('purpose') not in ('statement','proof'):
                 raise ValueError('An input-role correction requires an explicit purpose and mathematical reason')
             prereq=m.lookup(db,'concept',concept_map.get(removal['prerequisite'],removal['prerequisite']))
@@ -300,7 +300,7 @@ def apply_operations(db, payload, review, resolutions, task_id, plan_id, fingerp
                 after={**old,'purpose':remaining}
             else:raise ValueError('Correction does not match the current dependency purpose')
             m.event(db,'correct_dependency_identity',removal['reason'],old,{'replacement_role':after,'review':removal})
-        for route in review.get('proposed_source_occurrence_routings',[]):
+        for route in ops.get('occurrence_routings',[]):
             if route.get('role')!='relies_on' or not route.get('reason','').strip() or not route.get('locator','').strip():
                 raise ValueError('A required-occurrence correction needs its checked location and reason')
             source=m.lookup(db,'source',route['source'])
@@ -314,20 +314,20 @@ def apply_operations(db, payload, review, resolutions, task_id, plan_id, fingerp
                        (new_concept['id'],route['locator'],old['note']+'\n'+route['reason'],old['id']))
             after=dict(db.execute('SELECT * FROM source_concept WHERE id=?',(old['id'],)).fetchone())
             m.event(db,'correct_source_requirement_identity',route['reason'],old,{'occurrence':after,'review':route})
-        correct_source_roles(db,review.get('proposed_source_role_corrections',[]))
-        correct_source_metadata(db,review.get('proposed_source_metadata_updates',[]))
-        correct_locators(db,review.get('proposed_locator_corrections',[]))
-        correct_source_identifiers(db,review.get('proposed_source_identifier_corrections',[]))
-        correct_dependency_evidence(db,review.get('proposed_dependency_evidence_updates',[]))
-    reduction=m.reduce_dependencies(db,'Transitive reduction after reviewed task '+task_id+' '+plan_id+'; preserve typed evidence and witnesses.')
-    for r in review.get('reviews',[]):
+        correct_source_roles(db,ops.get('source_role_corrections',[]))
+        correct_source_metadata(db,ops.get('source_metadata_updates',[]))
+        correct_locators(db,ops.get('locator_corrections',[]))
+        correct_source_identifiers(db,ops.get('source_identifier_corrections',[]))
+        correct_dependency_evidence(db,ops.get('dependency_evidence_updates',[]))
+    reduction=m.reduce_dependencies(db,'Transitive reduction after task '+task_id+'; preserve typed evidence and witnesses.')
+    for r in result_file.get('concept_reviews',[]):
         flags={k:r[k] for k in ('statement_prerequisites_complete','proof_prerequisites_complete') if k in r}
         if not flags or any(type(v) is not bool for v in flags.values()) or not r.get('reason','').strip():
             raise ValueError('Each cone node requires an explicit boolean judgment and mathematical reason')
         slug=concept_map.get(r['slug'],r['slug'])
         m.set_completeness(db,'concept',slug,flags,r['reason'])
-    for r in review.get('source_reviews',[]):
-        flags=r.get('flags',r.get('source_flags',{}))
+    for r in result_file.get('source_reviews',[]):
+        flags=r.get('flags',{})
         reasons=r.get('flag_reasons',{})
         if (not flags or not set(flags)<= {'requirements_complete','introductions_complete','citations_complete'}
                 or any(type(v) is not bool for v in flags.values())
@@ -335,9 +335,10 @@ def apply_operations(db, payload, review, resolutions, task_id, plan_id, fingerp
             raise ValueError('Source review requires explicit independent boolean judgments and a reason')
         for key,value in flags.items():
             m.set_completeness(db,'source',source_map.get(r['source'],r['source']),{key:value},reasons.get(key,r.get('reason')))
-    result={'changed':True,'task_id':task_id,'plan_id':plan_id,'sha256':fingerprint,'source':review.get('source'),
+    result={'changed':True,'task_id':task_id,'sha256':fingerprint,
             'new_concepts':len(batch.get('concepts',[])),'new_sources':len(batch.get('sources',[])),
-            'new_citations':len(batch.get('citations',[])),'resolutions':decisions,'purpose_updates':purpose_updates,'review':review,
+            'new_citations':len(batch.get('citations',[])),'identities':decisions,'purpose_updates':purpose_updates,
+            'concept_reviews':result_file.get('concept_reviews',[]),'source_reviews':result_file.get('source_reviews',[]),
             'reduction':reduction,'verification':m.verify(db)}
     # Capture changes to reused located occurrences as well as the append batch.
     after_links={r['id']:dict(r) for r in db.execute('select * from source_concept')}
@@ -392,9 +393,9 @@ def transaction(db):
 
 
 @contextmanager
-def dry_run(db):
-    """Apply a plan inside one transaction and always roll it back."""
-    if db.in_transaction:raise ValueError('Check requires a connection without an existing transaction')
+def rolled_back(db):
+    """Apply edits inside one transaction and always roll them back."""
+    if db.in_transaction:raise ValueError('Dry run requires a connection without an existing transaction')
     db.execute('BEGIN IMMEDIATE');db.protected=True
     try:
         yield
@@ -423,181 +424,148 @@ def schema_version(db):
     return db.execute('PRAGMA user_version').fetchone()[0]
 
 
-def database_identity(db_path):
-    """Name the database in receipts: a resolved file path, or a URL without credentials."""
-    return m.database_label(db_path)
+SECTIONS={'changes','same_as','operations','concept_reviews','source_reviews','notes'}
+OPERATIONS={'reorganizations','revisions','edge_removals','occurrence_routings','source_role_corrections',
+    'source_metadata_updates','locator_corrections','source_identifier_corrections','dependency_evidence_updates'}
 
 
-def load_task(directory):
-    directory=Path(directory).resolve();assignment=read(directory/'assignment.json')
-    manifest=read(directory/'policy-manifest.json')
-    if not assignment or not manifest:raise ValueError('Use a task directory prepared by curation/prepare_task.py')
-    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,159}',assignment.get('task_id','')):
-        raise ValueError('task_id must be a stable identifier using letters, digits, dots, colons, underscores or hyphens')
-    if assignment.get('kind') not in ('source','cone') or assignment.get('write_mode')!='stage_only':
-        raise ValueError('Expected a prepared, stage-only source or cone task')
-    for relative,sha in manifest['files_sha256'].items():
-        path=(directory/relative).resolve();path.relative_to(directory)
-        if digest(path)!=sha:raise ValueError('Pinned task input changed: '+relative)
-    return assignment,digest(directory/'policy-manifest.json')
+def load_result(directory):
+    """Read a task's assignment and result.json, rejecting unknown sections."""
+    directory=Path(directory).resolve()
+    assignment=read(directory/'assignment.json')
+    if not assignment or not assignment.get('task_id'):raise ValueError('No assignment.json with a task_id in '+str(directory))
+    path=directory/'output/result.json'
+    result=read(path)
+    if not isinstance(result,dict):raise ValueError('Missing or invalid '+str(path))
+    unknown=set(result)-SECTIONS
+    if unknown:raise ValueError('Unknown result sections: '+', '.join(sorted(unknown)))
+    unknown=set(result.get('operations',{}))-OPERATIONS
+    if unknown:raise ValueError('Unknown operations: '+', '.join(sorted(unknown)))
+    for slug,entry in result.get('same_as',{}).items():
+        if not isinstance(entry,dict) or not entry.get('target') or not entry.get('reason','').strip():
+            raise ValueError('same_as entries need a target and a reason: '+slug)
+    return {'directory':directory,'task_id':assignment['task_id'],'result':result,
+        'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
 
 
-def load_plan(directory,path):
-    directory=Path(directory).resolve();assignment,package_sha=load_task(directory)
-    path=Path(path).resolve();path.relative_to(directory/'output')
-    if not re.fullmatch(r'plan-\d{3,}\.json',path.name):raise ValueError('Use a numbered plan-NNN.json inside task/output')
-    review_path=path.with_name(path.stem+'-review.json');resolutions_path=path.with_name(path.stem+'-resolutions.json')
-    payload=read(path);review=read(review_path);resolutions=read(resolutions_path,{})
-    if not isinstance(payload,dict) or not isinstance(review,dict):raise ValueError('Plan payload and review sidecar required')
-    if review.get('reviewed_ready') is not True:raise ValueError('Curator has not released the plan: reviewed_ready must be true')
-    if 'source_flags' in review or 'judgments' in review:
-        raise ValueError('Use explicit source_reviews entries with flags/reasons, not legacy source_flags/judgments')
-    allowed={'proposed_reorganizations','proposed_revisions','proposed_edge_removals',
-        'proposed_source_occurrence_routings','proposed_source_role_corrections','proposed_source_metadata_updates',
-        'proposed_locator_corrections','proposed_source_identifier_corrections','proposed_dependency_evidence_updates'}
-    unsupported={key for key in review if key.startswith('proposed_')}-allowed
-    if unsupported:raise ValueError('Unsupported reviewed operations: '+', '.join(sorted(unsupported)))
-    sha=hashlib.sha256(path.read_bytes()+review_path.read_bytes()+json.dumps(resolutions,sort_keys=True).encode()).hexdigest()
-    return {'directory':directory,'path':path,'assignment':assignment,'package_sha256':package_sha,
-        'task_id':assignment['task_id'],'plan_id':path.name,'sha256':sha,'payload':payload,'review':review,'resolutions':resolutions}
-
-
-def prior_import(db,plan):
+def previous_import(db,task):
     for row in db.execute("SELECT id,after_json FROM curation_event WHERE operation='curated_task_plan' ORDER BY id"):
-        result=json.loads(row['after_json'])
-        if result['task_id']==plan['task_id']:
-            if result['package_sha256']!=plan['package_sha256']:
-                raise ValueError('task_id already belongs to a different pinned package; use a new task_id')
-            if result['plan_id']==plan['plan_id']:
-                if result['sha256']!=plan['sha256']:raise ValueError('Released plan changed after import; submit a new numbered plan')
-                return {**result,'changed':False,'import_event':row['id']}
+        done=json.loads(row['after_json'])
+        if done['task_id']==task['task_id']:
+            if done['sha256']!=task['sha256']:
+                raise ValueError('Task '+task['task_id']+' was already imported with a different result; prepare a new task for further changes')
+            return {**done,'changed':False,'import_event':row['id']}
     return None
 
 
-def assert_review_inputs(db,plan):
-    """Reject completeness reviews based on changed statements or direct inputs.
-
-    A curator may instead give reviewed_against_event after checking the current
-    database, which is then guarded by the same exact-event import receipt.
-    """
-    review=plan['review']
-    explicit=review.get('reviewed_against_event')
-    if explicit is not None:
-        if type(explicit) is not int or explicit!=version(db):raise ValueError('reviewed_against_event is stale')
-        if not review.get('current_state_review_reason','').strip():raise ValueError('Current-state review needs a reason')
-        return
-    path=plan['directory']/plan['assignment']['catalogue']
-    with closing(connect(path,True)) as baseline:
-        def same_concept(ident):
-            old=baseline.execute('SELECT * FROM concept WHERE id=?',(ident,)).fetchone()
-            current=db.execute('SELECT * FROM concept WHERE id=?',(ident,)).fetchone()
-            keys=('id','slug','title','description','kind','field','revision','status')
-            return old is not None and current is not None and all(old[k]==current[k] for k in keys)
-        for row in review.get('reviews',[]):
-            slug=plan['resolutions'].get('concepts',{}).get(row['slug'],{}).get('target',row['slug'])
-            old=baseline.execute('SELECT * FROM concept WHERE slug=?',(slug,)).fetchone()
-            current=db.execute('SELECT * FROM concept WHERE slug=?',(slug,)).fetchone()
-            if old is None:
-                if current is not None:raise ValueError('Reviewed concept was created after task snapshot; refresh task or review current event: '+slug)
-                continue
-            keys=('id','slug','title','description','kind','field','revision','status')
-            if current is None or any(old[k]!=current[k] for k in keys):raise ValueError('Reviewed concept changed since task snapshot: '+slug)
-            for table,where,args in [('concept_dependency','dependent_id=?',(old['id'],))]:
-                a=[dict(r) for r in baseline.execute(f'SELECT * FROM {table} WHERE {where} ORDER BY id',args)]
-                b=[dict(r) for r in db.execute(f'SELECT * FROM {table} WHERE {where} ORDER BY id',args)]
-                if a!=b:raise ValueError('Reviewed prerequisite list changed since task snapshot: '+slug)
-                if any(not same_concept(edge['prerequisite_id']) for edge in a):
-                    raise ValueError('A reviewed prerequisite changed meaning since task snapshot: '+slug)
-        for row in review.get('source_reviews',[]):
-            slug=row['source']
-            for candidate in plan['payload'].get('sources',[]):
-                if candidate['slug']!=slug:continue
-                matches=set()
-                for scheme,value in candidate['identifiers']:
-                    key=m.normalize_identifier(scheme,value)
-                    found=db.execute('SELECT s.slug FROM source s JOIN source_identifier i ON i.source_id=s.id WHERE i.scheme=? AND i.value=?',key).fetchone()
-                    if found:matches.add(found[0])
-                if len(matches)>1:raise ValueError('Conflicting source identities in source review')
-                if matches:slug=next(iter(matches))
-            source=m.lookup(db,'source',slug) if db.execute('SELECT 1 FROM source WHERE slug=?',(slug,)).fetchone() else None
-            old=baseline.execute('SELECT * FROM source WHERE slug=?',(slug,)).fetchone()
-            if old is None:
-                if source is not None:raise ValueError('Reviewed source was created after task snapshot; refresh task or review current event')
-                continue
-            if source is None or dict(old)!=dict(source):raise ValueError('Reviewed source changed since task snapshot: '+row['source'])
-            for table in ('source_concept','citation','source_artifact','source_identifier'):
-                order='scheme,value' if table=='source_identifier' else 'id'
-                a=[dict(r) for r in baseline.execute(f'SELECT * FROM {table} WHERE source_id=? ORDER BY {order}',(old['id'],))]
-                b=[dict(r) for r in db.execute(f'SELECT * FROM {table} WHERE source_id=? ORDER BY {order}',(old['id'],))]
-                if a!=b:raise ValueError('Reviewed source inputs changed since task snapshot: '+row['source'])
-                if table=='source_concept' and any(not same_concept(link['concept_id']) for link in a):
-                    raise ValueError('A concept in the reviewed source changed since task snapshot: '+row['source'])
-
-
-def execute(db,plan):
-    prior=prior_import(db,plan)
-    if prior:return prior
-    assert_review_inputs(db,plan)
-    result=apply_operations(db,plan['payload'],plan['review'],plan['resolutions'],plan['task_id'],plan['plan_id'],plan['sha256'])
-    result.update(package_sha256=plan['package_sha256'],assignment=plan['assignment'],engine_sha256=engine_hashes())
-    m.event(db,'curated_task_plan','Mechanical import of a released source/cone plan; mathematical completeness remains independently reviewed.',{},result)
+def apply(db,task):
+    if schema_version(db)!=10:raise ValueError('Migrate database schema explicitly before importing')
+    done=previous_import(db,task)
+    if done:return done
+    result=apply_operations(db,task['result'],task['task_id'],task['sha256'])
+    m.event(db,'curated_task_plan','Import of a merged task result.',{},result)
     result['import_event']=version(db)
     return result
 
 
-def check(directory,path,db_path):
-    plan=load_plan(directory,path)
-    live=connect(db_path,True)
-    if m.is_postgres(live):
-        # No private copy: apply in the live database's transaction, then roll back.
-        live.close()
+def import_result(directory,db_path,dry_run=False):
+    """Apply output/result.json to the database in one transaction.
+
+    With dry_run, apply it and roll back (PostgreSQL), or apply it to a private
+    in-memory copy (SQLite), leaving everything unchanged.
+    """
+    task=load_result(directory)
+    if dry_run:
         with closing(connect(db_path)) as db:
-            current=version(db)
-            if schema_version(db)!=10:raise ValueError('Migrate database schema explicitly before importing plans')
-            with dry_run(db):result=execute(db,plan)
-    else:
-        with closing(live),closing(sqlite3.connect(':memory:',factory=PlanConnection)) as private:
-            private.row_factory=sqlite3.Row;private.execute('PRAGMA foreign_keys=ON');live.backup(private)
-            current=version(private)
-            if schema_version(private)!=10:raise ValueError('Migrate database schema explicitly before importing plans')
-            with transaction(private):result=execute(private,plan)
-    receipt={'task_id':plan['task_id'],'plan_id':plan['plan_id'],'sha256':plan['sha256'],
-        'package_sha256':plan['package_sha256'],'engine_sha256':engine_hashes(),
-        'expected_event':current,'database_path':database_identity(db_path),'preflight_ok':True,
-        'result':result}
-    save(plan['path'].with_name(plan['path'].stem+'-check.json'),receipt)
-    return receipt
-
-
-def import_plan(directory,path,db_path):
-    plan=load_plan(directory,path);receipt_path=plan['path'].with_name(plan['path'].stem+'-check.json')
+            if m.is_postgres(db):
+                with rolled_back(db):return apply(db,task)
+        with closing(connect(db_path,True)) as live,closing(sqlite3.connect(':memory:',factory=PlanConnection)) as db:
+            db.row_factory=sqlite3.Row;db.execute('PRAGMA foreign_keys=ON');live.backup(db)
+            with transaction(db):return apply(db,task)
     with closing(connect(db_path)) as db:
-        with transaction(db):
-            if schema_version(db)!=10:raise ValueError('Migrate database schema explicitly before importing plans')
-            previous=prior_import(db,plan)
-            if previous:result=previous
-            else:
-                receipt=read(receipt_path)
-                if not receipt or receipt.get('preflight_ok') is not True:raise ValueError('Run check for this plan and database first')
-                for key in ('task_id','plan_id','sha256','package_sha256'):
-                    if receipt.get(key)!=plan[key]:raise ValueError('Plan/package changed after check; check again')
-                if receipt.get('engine_sha256')!=engine_hashes():raise ValueError('Importer, core or schema changed after check; check again')
-                if receipt.get('database_path')!=database_identity(db_path) or receipt.get('expected_event')!=version(db):
-                    raise ValueError('Database changed after check; check again against current state')
-                result=execute(db,plan)
-    # SQL commit is authoritative. A failed receipt write can be recovered by
-    # repeating import; the exact same released plan will not execute twice.
-    save(plan['path'].with_name(plan['path'].stem+'-result.json'),result)
+        with transaction(db):result=apply(db,task)
+    save(task['directory']/'output/import.json',result)
     return result
 
 
-def main():
-    parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command',choices=('check','import'));parser.add_argument('task',type=Path);parser.add_argument('plan',type=Path)
-    parser.add_argument('--db',type=m.database_arg,default=m.DEFAULT_DB);args=parser.parse_args()
+DEFAULT_BASELINE='Sets and natural numbers, elementary logic and finite arithmetic'
+PROMPTS={'source':'prompts/ingest-source.md','cone':'prompts/expand-prerequisites.md'}
+
+
+def prepare_task(kind,assignment,output,db_path):
+    """Create a task directory: assignment.json plus a read-only SQLite catalogue snapshot.
+
+    db_path is an SQLite file or a PostgreSQL URL; either is copied to catalogue.sqlite.
+    """
+    output=Path(output).resolve()
+    postgres=m.is_postgres_url(db_path)
+    if not postgres:
+        db_path=Path(db_path).resolve()
+        if not db_path.is_file():raise ValueError('Catalogue does not exist')
+    if output.exists():raise ValueError('Task directory exists; refusing to overwrite')
+    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,159}',assignment.get('task_id','')):
+        raise ValueError('task_id must use letters, digits, dots, colons, underscores or hyphens')
+    if kind=='source' and not assignment.get('source_identifiers'):raise ValueError('Source identifiers required')
+    if kind=='cone' and not assignment.get('roots'):raise ValueError('At least one concept root required')
+    output.parent.mkdir(parents=True,exist_ok=True)
+    temp=Path(tempfile.mkdtemp(prefix='.curation-task-',dir=output.parent))
     try:
-        result=(check if args.command=='check' else import_plan)(args.task,args.plan,args.db)
-        print(json.dumps(result,ensure_ascii=False,indent=2));return 0
+        if postgres:
+            import pg_sync
+            pg_sync.export(str(db_path),temp/'catalogue.sqlite')
+        else:
+            with closing(sqlite3.connect(db_path.as_uri()+'?mode=ro',uri=True)) as live:
+                with closing(sqlite3.connect(temp/'catalogue.sqlite')) as private:live.backup(private)
+        with closing(sqlite3.connect(temp/'catalogue.sqlite')) as db:
+            db.row_factory=sqlite3.Row
+            event=db.execute('SELECT max(id) FROM curation_event').fetchone()[0]
+            roots=[]
+            for root in assignment.get('roots',[]):
+                if isinstance(root,str):root={'slug':root}
+                rows=db.execute("SELECT id,slug,title FROM concept WHERE (id=? OR slug=?) AND status='active'",(root.get('id'),root.get('slug'))).fetchall()
+                if len(rows)!=1:raise ValueError('Root identity missing or ambiguous: '+str(root))
+                row=dict(rows[0])
+                if any(root.get(k) and root[k]!=row[k] for k in ('id','slug')):raise ValueError('Root UUID and slug disagree')
+                roots.append(row)
+        try:commit=subprocess.run(['git','-C',str(m.ROOT),'rev-parse','HEAD'],capture_output=True,text=True,check=True).stdout.strip()
+        except (OSError,subprocess.CalledProcessError):commit=None
+        result=dict(assignment,kind=kind,prompt=PROMPTS[kind],repository=str(m.ROOT),repository_commit=commit,
+            catalogue='catalogue.sqlite',catalogue_event=event,output_directory='output',
+            prepared_at_utc=datetime.now(timezone.utc).isoformat(),
+            baseline=assignment.get('baseline') or DEFAULT_BASELINE)
+        if roots:result['roots']=roots
+        artifact=result.get('artifact')
+        if artifact and artifact.get('path'):
+            source=Path(artifact['path']).resolve()
+            if artifact.get('sha256') and artifact['sha256']!=digest(source):raise ValueError('Artifact hash mismatch')
+            target=temp/('artifact'+source.suffix);shutil.copyfile(source,target)
+            result['artifact']=dict(artifact,path=target.name,sha256=digest(target))
+        (temp/'output').mkdir()
+        save(temp/'assignment.json',result);temp.rename(output)
+        return result
+    except BaseException:
+        shutil.rmtree(temp,ignore_errors=True);raise
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub=parser.add_subparsers(dest='command',required=True)
+    p=sub.add_parser('prepare',help='create a task directory')
+    p.add_argument('--kind',choices=('source','cone'),required=True)
+    p.add_argument('--assignment',type=Path,required=True,help='JSON file with task_id and source_identifiers or roots')
+    p.add_argument('--out',type=Path,required=True,help='new task directory')
+    p.add_argument('--db',type=m.database_arg,default=m.DEFAULT_DB)
+    i=sub.add_parser('import',help='apply TASK/output/result.json')
+    i.add_argument('task',type=Path);i.add_argument('--db',type=m.database_arg,default=m.DEFAULT_DB)
+    i.add_argument('--dry-run',action='store_true',help='apply to a private copy only')
+    args=parser.parse_args()
+    try:
+        if args.command=='prepare':
+            done=prepare_task(args.kind,json.loads(args.assignment.read_text()),args.out,args.db)
+            print(json.dumps({k:done[k] for k in ('task_id','catalogue_event')},indent=2))
+        else:
+            print(json.dumps(import_result(args.task,args.db,args.dry_run),ensure_ascii=False,indent=2))
+        return 0
     except (ValueError,OSError,KeyError,sqlite3.Error) as error:
         print(str(error),file=sys.stderr);return 1
 

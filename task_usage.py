@@ -80,12 +80,10 @@ def normalized(provider,usage):
 def register(db,task_path=None,task_id=None,kind=None):
     if task_path:
         path=Path(task_path).resolve();assignment=read(path/'assignment.json')
-        task_id=assignment['task_id'];manifest=path/'policy-manifest.json'
-        if not manifest.is_file():raise ValueError('Prepared task manifest missing')
-        expected=read(manifest)['files_sha256'].get('assignment.json')
-        if hashlib.sha256((path/'assignment.json').read_bytes()).hexdigest()!=expected:raise ValueError('Task assignment changed')
-        metadata={'kind':assignment['kind'],'assignment_sha256':expected,
-                  'task_manifest_sha256':hashlib.sha256(manifest.read_bytes()).hexdigest()}
+        if not assignment:raise ValueError('Prepared task assignment missing')
+        task_id=assignment['task_id']
+        metadata={'kind':assignment['kind'],
+                  'assignment_sha256':hashlib.sha256((path/'assignment.json').read_bytes()).hexdigest()}
     else:
         if not task_id or not kind:raise ValueError('Supply a prepared --task directory or --task-id and --kind')
         metadata={'kind':kind}
