@@ -8,6 +8,7 @@ dependencies = []
 [project.optional-dependencies]
 embeddings = ["fastembed==0.9.1"]
 openalex = ["pyarrow==26.0.1", "numpy==2.5.4"]
+postgres = ["psycopg[binary]>=3.2"]
 
 [project.scripts]
 mathdb = "mathdb:main"
@@ -21,11 +22,11 @@ requires = ["setuptools>=75"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-py-modules = ["mathdb", "mathdb_server", "discovery", "curation_plans", "task_usage"]
+py-modules = ["mathdb", "mathdb_server", "discovery", "curation_plans", "task_usage", "pgcompat"]
 
 [tool.setuptools.data-files]
 "share/the-shape-of-math/prompts" = ["prompts/*.md"]
-"share/the-shape-of-math/docs" = ["docs/DISCOVERY.md", "docs/CURATION_TASKS.md", "docs/CURATION.md", "docs/TASK_USAGE.md"]
+"share/the-shape-of-math/docs" = ["docs/DISCOVERY.md", "docs/CURATION_TASKS.md", "docs/CURATION.md", "docs/TASK_USAGE.md", "docs/SCALING.md"]
 "share/the-shape-of-math/discovery_examples" = ["discovery_examples/*.json"]
 "share/the-shape-of-math/experiments/curation-2015-round2/overlap" = ["experiments/curation-2015-round2/overlap/*.html", "experiments/curation-2015-round2/overlap/*.js", "experiments/curation-2015-round2/overlap/*.json", "experiments/curation-2015-round2/overlap/*.csv", "experiments/curation-2015-round2/overlap/*.md", "experiments/curation-2015-round2/overlap/*.png", "experiments/curation-2015-round2/overlap/*.svg", "experiments/curation-2015-round2/overlap/*.pdf"]
 "share/the-shape-of-math/curation/source-tasks/papers/1501.04823" = ["curation/source-tasks/papers/1501.04823/report.txt*", "curation/source-tasks/papers/1501.04823/unresolved.json*"]
@@ -60,7 +61,7 @@ py-modules = ["mathdb", "mathdb_server", "discovery", "curation_plans", "task_us
 "share/the-shape-of-math/curation/source-tasks/papers/1506.00624" = ["curation/source-tasks/papers/1506.00624/report.txt*", "curation/source-tasks/papers/1506.00624/unresolved.json*"]
 "share/the-shape-of-math/experiments/curation-2015-round2" = ["experiments/curation-2015-round2/sample.json", "experiments/curation-2015-round2/progress.json"]
 "share/the-shape-of-math/experiments/curation-2015/overlap" = ["experiments/curation-2015/overlap/*.html", "experiments/curation-2015/overlap/*.css", "experiments/curation-2015/overlap/*.js", "experiments/curation-2015/overlap/*.json", "experiments/curation-2015/overlap/*.csv", "experiments/curation-2015/overlap/*.png", "experiments/curation-2015/overlap/*.svg", "experiments/curation-2015/overlap/*.pdf", "experiments/curation-2015/overlap/*.md"]
-"share/the-shape-of-math" = ["schema.sql", "API.md"]
+"share/the-shape-of-math" = ["schema.sql", "schema_pg.sql", "API.md"]
 "share/the-shape-of-math/web" = ["web/index.html", "web/app.js", "web/cone.js", "web/math-text.js", "web/app.css", "web/experiments-2015.html", "web/experiments-2015-more.html"]
 "share/the-shape-of-math/experiments/curation-2015" = ["experiments/curation-2015/sample.json", "experiments/curation-2015/progress.json", "experiments/curation-2015/unresolved.json", "experiments/curation-2015/sample.tsv", "experiments/curation-2015/report.txt", "experiments/curation-2015/fa-analysis.txt", "experiments/curation-2015/nt-analysis.txt", "experiments/curation-2015/fa-cone.txt", "experiments/curation-2015/nt-cone.txt", "experiments/curation-2015/numerical-range.svg", "experiments/curation-2015/product-vector-subspaces-field.svg"]
 "share/the-shape-of-math/experiments/curation-2015/papers/1502.07253" = ["experiments/curation-2015/papers/1502.07253/*.txt", "experiments/curation-2015/papers/1502.07253/analysis.json", "experiments/curation-2015/papers/1502.07253/*review.json"]

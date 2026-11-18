@@ -1,8 +1,9 @@
 # The Shape of Math API
 
 Run `python mathdb_server.py`, then open <http://127.0.0.1:8000>.
-The browser and API operate on `data/math.sqlite`. `--db PATH` selects another
-database; `--port PORT` changes the port. The server initializes or migrates the
+The browser and API operate on the configured collection (`MATHDB_DATABASE`, or
+the URL in `~/.config/shapeofmath/database_url`). `--db` selects another
+PostgreSQL URL or SQLite file; `--port PORT` changes the port. The server initializes or migrates the
 database before serving. Core functionality uses only the Python standard library.
 
 This is a local development server bound to loopback. A later shared service can

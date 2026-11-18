@@ -210,6 +210,6 @@ def apply(db,plan=None,write_files=True):
     return True
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--db',type=Path,default=m.DEFAULT_DB);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--db',type=m.database_arg,default=m.DEFAULT_DB);args=parser.parse_args()
     with closing(m.connect(args.db)) as db:
         m.initialize(db);print(json.dumps({'changed':apply(db),**m.verify(db)},indent=2))
