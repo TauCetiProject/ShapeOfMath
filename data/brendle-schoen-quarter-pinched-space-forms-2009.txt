@@ -1,0 +1,844 @@
+Manifolds with 1/4-pinched curvature are space forms
+
+Coverage: Read in full: the published version of record (J. Amer. Math. Soc. 22 (2009) 287-307, PDF sha256 1f099f9a...c877, via text extracted with page markers), every section (§1 Introduction with Theorems 1-3; §2 Lemma 4 to Proposition 11 with all proofs; §3 Propositions 12-17 and Theorem 18; §4 Lemmas 19-20, Proposition 21, Corollary 22 with proofs), the front matter (received date, MSC, keywords, grant acknowledgements in the first-page footnote; there is no separate acknowledgements section and no appendix) and all 29 references. The arXiv v3 LaTeX source (sha256 9924...2954) was read alongside for formulas, and a word-level diff of the v3 PDF text against the VOR text (scratch/v3-vs-vor-worddiff.txt) found only layout, hyphenation and ligature differences plus VOR-only MR numbers, received date, MSC and keywords; the v3 source also contains a commented-out abstract and a commented-out proof of Proposition 15 not printed in either version. Final reconciliation additionally used the attribution reviewer's downloads (output/predecessors/): arXiv v1 (2007-05-06) and v2 (2007-05-22) of this paper (checked for earliest appearance of each claimed result and credit), Böhm–Wilking arXiv:math/0606187 (Theorem 2, §3 definition, Prop. 3.2, Lemmas 3.4-3.5, Theorems 4.1 and 5.1 read directly), Nguyen's ANU thesis (title page, abstract, Theorem 4.8), Ni–Wolfson arXiv:0706.0332 (§§1-3, §5 read directly), Yau–Zheng 1991 pp. 529-531 (page images) and the zbMATH record of Chen 1991. Not inspected: Hamilton 1986, Chen 1991 full text, Micallef–Moore, Andrews–Nguyen, Grove–Karcher–Ruh, Im Hof–Ruh, Sampson, the Annals version of Böhm–Wilking. The long component calculations in Propositions 5-9 were followed but not independently re-derived.
+Required concepts complete: True
+Introduced concepts complete: False
+All citations captured: True
+Completion refers to immediate concepts only; false means not certified.
+
+REQUIRED CONCEPT FRONTIER (44)
+
+- Algebraic curvature tensor on a Euclidean vector space: A 4-linear form R on a Euclidean space V≅ℝⁿ with R(x,y,z,w)=−R(y,x,z,w)=−R(x,y,w,z)=R(z,w,x,y) and R(x,y,z,w)+R(y,z,x,w)+R(z,x,y,w)=0. Equivalently a self-adjoint endomorphism of ∧²V satisfying the first Bianchi identity (an algebraic curvature operator); the space of these is written S²_B(so(n)) and carries the natural action of O(n). The curvature tensor of a Riemannian manifold at a point is an algebraic curvature tensor.
+- Berger's curvature inequality: If all sectional curvatures of an algebraic curvature tensor R (for example of a Riemannian manifold at a point) lie in [K_min,K_max], then |R(e₁,e₂,e₃,e₄)|≤(2/3)(K_max−K_min) and |R(e₁,e₂,e₁,e₃)|≤(1/2)(K_max−K_min) for all orthonormal e₁,…,e₄.
+- Böhm–Wilking convergence theorem for pinching families: Böhm–Wilking (Ann. of Math. 2008, Theorem 5.1): let C(s), s∈[0,1), be a pinching family of cones in dimension n≥3. If the curvature tensor of a compact Riemannian manifold (M,g₀) lies in the interior of C(0) at every point, then the normalized Ricci flow from g₀ exists for all time and converges to a metric of constant positive sectional curvature.
+- Böhm–Wilking invariant cones ℓ_{a,b}(nonnegative curvature operators with Ricci pinching): Böhm–Wilking (Ann. of Math. 2008, Lemmas 3.4–3.5): for b∈[0,1/2] with a=((n−2)b²+2b)/(2+2(n−2)b²), p=(n−2)b²/(1+(n−2)b²), and for b=1/2, a=(1+s)/2, p=1−4/(n+2+4s), s≥0, the sets ℓ_{a,b}({R≥0 : Ric≥(p/n) scal}) built from the cone of nonnegative curvature operators are invariant under Hamilton's ODE dR/dt=Q(R), transversally so for b>0; together they join the nonnegative cone to cones shrinking to the ray of the round-sphere curvature tensor.
+- Böhm–Wilking linear transformation ℓ_{a,b} of algebraic curvature tensors: For real a,b, the linear map ℓ_{a,b}(R)=R+b Ric₀⊙id+(a/n) scal id⊙id on algebraic curvature tensors on ℝⁿ, as printed by Brendle–Schoen; Böhm–Wilking display it as R+2(n−1)a R_I+(n−2)b R_{Ric₀}, and the parameter curves used in Brendle–Schoen Propositions 13-14 coincide with those of Böhm–Wilking Lemmas 3.4-3.5. Böhm and Wilking showed that ℓ_{a,b}^{-1}Q(ℓ_{a,b}R)−Q(R) does not depend on the Weyl part of R and is computable from the Ricci tensor, which allows Q-invariant cones to be deformed into new invariant cones.
+- Convex cone in ℝᵈ: A nonempty subset C⊆ℝᵈ is a convex cone if λx+μy∈C for all x,y∈C and real λ,μ≥0; equivalently it is convex, contains0 and is closed under nonnegative scaling, so it contains every nonnegative linear combination of its elements.
+- Curvature operator of an algebraic curvature tensor: The self-adjoint endomorphism ℛ of ∧²T_pM (or of ∧²ℝⁿ for an algebraic curvature tensor R) determined by ⟨ℛ(x∧y),z∧w⟩=R(x,y,z,w), so that R(φ,φ)=⟨ℛφ,φ⟩ is a quadratic form on two-vectors. The curvature operator is nonnegative (positive) if R(φ,φ)≥0 (>0) for all φ≠0; nonnegative curvature operator implies nonnegative sectional curvature.
+- Diffeomorphism between smooth manifolds: A diffeomorphism between smooth manifolds M and N is a smooth bijection F:M→N whose inverse map N→M is also smooth. Open subsets of smooth manifolds are smooth manifolds, so one speaks of a diffeomorphism from an open neighbourhood of a point onto an open subset.
+- Euclidean unit sphere: The unit sphere S^(n−1) is {x∈ℝⁿ:|x|=1}, with the subspace topology and its rotation-invariant surface measure when needed.
+- Exterior power of a module over a commutative ring: The module Λ^n_R M equipped with the universal alternating R-multilinear map M^n→Λ^n_R M; equivalently the corresponding quotient of the tensor power by tensors with repeated entries. This is the alternating quotient convention, not the anti-invariant tensor submodule.
+- Fermat’s interior extremum theorem: If f:(a,b)→ℝ has a relative maximum or relative minimum at an interior point c∈(a,b) and f is differentiable at c, then f′(c)=0.
+- First Bianchi identity for the Riemann curvature tensor: The Riemann curvature tensor of a Riemannian manifold (more generally of any torsion-free connection) satisfies R(X,Y)Z+R(Y,Z)X+R(Z,X)Y=0; in covariant form Rm(x,y,z,w)+Rm(y,z,x,w)+Rm(z,x,y,w)=0.
+- Group action on a set: A map G×X→X, written (g,x)↦gx, satisfying ex=x and (gh)x=g(hx).
+- Group homomorphism: A map f:G→H satisfying f(xy)=f(x)f(y) for all x,y.
+- Hamilton's convergence theorem for Ricci flow with curvature in a pinching set: Hamilton (J. Differential Geom. 1986, §5): if the curvature tensor of a compact Riemannian manifold (M,g₀) lies at every point in a pinching set, a closed convex O(n)-invariant set of algebraic curvature tensors preserved by dR/dt=Q(R) on which the trace-free part of R becomes small relative to the scalar curvature as the curvature grows, then the normalized Ricci flow from g₀ exists for all time and converges to a metric of constant positive sectional curvature. The exact quantitative form of Hamilton's pinching condition is not verified here.
+- Hamilton's evolution equation for the curvature tensor under Ricci flow: Under Ricci flow, the curvature tensor written in an orthonormal frame evolving with the metric (Uhlenbeck's trick) satisfies ∂R/∂t=ΔR+Q(R), where Q(R)_{ijkl}=R_{ijpq}R_{klpq}+2R_{ipkq}R_{jplq}−2R_{iplq}R_{jpkq} is an O(n)-equivariant quadratic map on algebraic curvature tensors. The associated ODE dR/dt=Q(R) on S²_B(so(n)) is Hamilton's curvature ODE.
+- Hamilton's maximum principle for curvature conditions under Ricci flow: Let g(t) be a Ricci flow on a compact manifold and K a closed, convex, O(n)-invariant set of algebraic curvature tensors that is invariant under Hamilton's ODE dR/dt=Q(R). If the curvature tensor of g(0) lies in K at every point (in orthonormal frames), then the curvature tensor of g(t) lies in K at every point for all t in the interval of existence. This is the Ricci-flow case of Hamilton's maximum principle for reaction–diffusion systems on vector bundles (Hamilton 1986, Theorem 4.3).
+- Induced inner product on the exterior square of a Euclidean space: For a Euclidean space V, the inner product on ∧²V with ⟨x∧y,z∧w⟩=⟨x,z⟩⟨y,w⟩−⟨x,w⟩⟨y,z⟩, for which e_i∧e_j (i<j) is an orthonormal basis whenever (e_i) is.
+- Isometry group of a Riemannian manifold: The group Isom(M,g) of diffeomorphisms F:M→M with F*g=g, under composition.
+- Killing–Hopf theorem for constant positive curvature: A complete connected Riemannian n-manifold (n≥2) of constant sectional curvature 1 is isometric to Sⁿ/Γ for a finite subgroup Γ⊂O(n+1) acting freely on Sⁿ; in particular a simply connected one is isometric to the round unit sphere.
+- Kulkarni–Nomizu product of symmetric bilinear forms: For symmetric bilinear forms A,B on ℝⁿ, the 4-tensor (A⊙B)_{ijkl}=A_{ik}B_{jl}−A_{il}B_{jk}−A_{jk}B_{il}+A_{jl}B_{ik}, which is an algebraic curvature tensor; with this normalization I=½ id⊙id is the curvature tensor of the round unit sphere.
+- Nonnegativity of the trace of a product of positive semidefinite matrices: If A and B are real symmetric positive semidefinite n×n matrices, then tr(AB)≥0.
+- Normalized Ricci flow: On a compact n-manifold, the volume-preserving flow ∂g/∂t=−2Ric_{g(t)}+(2/n)r_{g(t)}g(t), where r_{g(t)} is the mean value of the scalar curvature of g(t); its solutions differ from Ricci flows by rescaling the metric and reparametrizing time.
+- Orthogonal normal form of a real skew-symmetric bilinear form: For a skew-symmetric bilinear form ω on a Euclidean space, equivalently a real skew-symmetric matrix or a two-vector, there is an orthonormal basis v₁,…,v_n with ω=a₁v₁∧v₂+a₂v₃∧v₄+⋯; that is, the matrix is block diagonal with 2×2 blocks [[0,a_k],[−a_k,0]] and zeros. On ℝ⁴ the basis may be taken positively oriented.
+- Picard–Lindelöf theorem for a time-dependent Euclidean ODE: A vector field continuous in time and locally Lipschitz in the state has a unique local solution through each initial point, with continuous dependence on initial data and the field on compact sets. If the state stays in a compact set on each finite interval, the solution extends globally; globally Lipschitz fields of linear growth satisfy this condition.
+- Pinching family of cones (Böhm–Wilking): Böhm–Wilking (2008, §3): a continuous family C(s), s∈[0,1), of closed convex O(n)-invariant full-dimensional cones of algebraic curvature tensors such that every nonzero element has positive scalar curvature, Q(R) lies in the interior of the tangent cone of C(s) at every nonzero R∈C(s) for s∈(0,1), and C(s) converges in the pointed Hausdorff topology to the ray ℝ₊I of the round-sphere curvature tensor as s→1.
+- Pointwise 1/4-pinched sectional curvature: A Riemannian manifold has pointwise 1/4-pinched sectional curvatures if its sectional curvatures are positive and at every point p, 0<K(π₁)<4K(π₂) for all two-planes π₁,π₂⊂T_pM; the ratio bound is required at each point separately, so no global curvature bounds are assumed.
+- Positive and nonnegative isotropic curvature: An algebraic curvature tensor R on ℝⁿ, n≥4, has nonnegative isotropic curvature if R₁₃₁₃+R₁₄₁₄+R₂₃₂₃+R₂₄₂₄−2R₁₂₃₄≥0 for every orthonormal four-frame {e₁,e₂,e₃,e₄}, and positive isotropic curvature (PIC) if the inequality is always strict; a Riemannian manifold of dimension at least four has PIC if its curvature tensor does at every point. Equivalently, the complexified curvature is positive on totally isotropic two-planes span{e₁+ie₂,e₃+ie₄} of T_pM⊗ℂ.
+- Real Lie group: A group that is a smooth real manifold, with smooth multiplication and inversion.
+- Real orthogonal group: The group O(n) of real n×n matrices U satisfying UᵀU=I; these are the linear isometries of Euclidean space.
+- Ricci curvature tensor: The symmetric 2-tensor Ric(x,y)=Σᵢ Rm(x,eᵢ,y,eᵢ), the trace of the curvature tensor over an orthonormal basis eᵢ; it is defined for Riemannian manifolds and for algebraic curvature tensors. Its trace-free part is Ric₀=Ric−(scal/n)g. Positive Ricci curvature means Ric(x,x)>0 for x≠0.
+- Ricci flow: A smooth one-parameter family of Riemannian metrics g(t) on a manifold M satisfying ∂g/∂t=−2Ric_{g(t)}, introduced by Hamilton in 1982.
+- Riemann curvature tensor of a Riemannian manifold: For a Riemannian manifold (M,g) with Levi-Civita connection ∇ and R(X,Y)=∇_X∇_Y−∇_Y∇_X−∇_[X,Y], the (0,4)-tensor Rm(X,Y,Z,W)=g(R(X,Y)W,Z), normalized so that Rm(e₁,e₂,e₁,e₂) is the sectional curvature of an orthonormal pair (the convention of Brendle–Schoen, who write R(X,Y,Z,W) and R_ijkl). At each point it is an algebraic curvature tensor: antisymmetric in each pair, symmetric under exchanging the pairs, and satisfying the first Bianchi identity.
+- Riemannian metric on a smooth manifold: A Riemannian metric g on a smooth manifold M is a symmetric C∞(M)-bilinear pairing of smooth vector fields into smooth functions which in every chart has the form g=∑g_ij dxⁱdxʲ with (g_ij(x)) a smooth positive definite symmetric matrix at each point. A Riemannian manifold is a smooth manifold with a Riemannian metric.
+- Scalar curvature: The trace scal=Σᵢ Ric(eᵢ,eᵢ) of the Ricci tensor with respect to the metric; for an algebraic curvature tensor it is Σ_{i,j}R(eᵢ,eⱼ,eᵢ,eⱼ).
+- Second-order necessary condition at an interior minimum: If a C² real function on an open subset of ℝⁿ has a local minimum at x, then its gradient vanishes at x and its Hessian matrix at x is positive semidefinite.
+- Sectional curvature of a two-plane: For a two-plane π⊂T_pM spanned by an orthonormal pair e₁,e₂, the sectional curvature is K(π)=Rm(e₁,e₂,e₁,e₂), independent of the orthonormal basis of π; the same formula defines the sectional curvatures of an algebraic curvature tensor. Positive (nonnegative) sectional curvature means K(π)>0 (≥0) for all two-planes.
+- Self-dual and anti-self-dual two-forms in dimension four: On an oriented four-dimensional Euclidean space V the Hodge star *:∧²V→∧²V satisfies *²=1 and φ∧ψ=⟨*φ,ψ⟩vol; ∧²V splits orthogonally into the three-dimensional eigenspaces ∧²₊ (self-dual, *φ=φ) and ∧²₋ (anti-self-dual, *φ=−φ), and φ∧φ=(|φ₊|²−|φ₋|²)vol.
+- Short-time existence and uniqueness of Ricci flow on compact manifolds: For every smooth Riemannian metric g₀ on a compact manifold there is T>0 and a smooth Ricci flow g(t), t∈[0,T), with g(0)=g₀, and any two such flows agree on their common interval (Hamilton 1982; simplified proof via DeTurck's trick). By uniqueness and diffeomorphism invariance of the equation, isometries of g₀ remain isometries of every g(t).
+- Simply connected topological space: A path-connected space X is simply connected if every continuous loop γ:[0,1]→X with γ(0)=γ(1) is homotopic relative to its endpoints to the constant loop at γ(0).
+- Singular value decomposition of a real matrix: Every real m×n matrix is UΣVᵀ with U,V orthogonal and Σ rectangular diagonal with nonnegative entries, its singular values.
+- Spherical space form: A Riemannian manifold Sⁿ/Γ obtained as the quotient of the round unit sphere by a finite subgroup Γ⊂O(n+1) acting freely, with the induced metric of constant sectional curvature 1; up to scaling these are exactly the compact connected Riemannian manifolds of constant positive sectional curvature.
+- Tangent cone of a closed convex set: For a closed convex set C in a finite-dimensional real vector space and x∈C, the tangent cone T_xC is the closure of ⋃_{t>0} t(C−x); a vector in the interior of T_xC points strictly into C.
+- Trace of a square matrix: The sum of the diagonal entries of a square matrix.
+
+INHERITED PREREQUISITES (96)
+
+- Abelian group — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, exterior-power-module, fermat-interior-extremum-theorem, matrix-trace, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Associative algebra over a field — via riemannian-metric-manifold
+- Bijection between sets — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Bilinear map — via riemannian-metric-manifold
+- Binary operation on a set — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, exterior-power-module, fermat-interior-extremum-theorem, group-action, group-homomorphism, matrix-trace, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Binary relation on a set — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, fermat-interior-extremum-theorem, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Bounded linear operator — via second-order-necessary-condition-interior-minimum
+- C^k map between Euclidean open sets — via second-order-necessary-condition-interior-minimum
+- Cartesian product of sets — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, exterior-power-module, fermat-interior-extremum-theorem, group-action, group-homomorphism, matrix-trace, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Commutative ring with identity — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, exterior-power-module, fermat-interior-extremum-theorem, matrix-trace, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Compact topological space — via picard-lindelof-time-dependent-ode
+- Complement of a subset — via euclidean-unit-sphere
+- Complex conjugation — via singular-value-decomposition-real
+- Complex number — via second-order-necessary-condition-interior-minimum, singular-value-decomposition-real
+- Continuous map between topological spaces — via diffeomorphism-smooth-manifolds, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space
+- Continuously differentiable Euclidean map — via second-order-necessary-condition-interior-minimum
+- Convergence of a sequence in a metric space — via second-order-necessary-condition-interior-minimum
+- Convergent real series — via euclidean-unit-sphere, singular-value-decomposition-real
+- Convex subset of ℝᵈ — via convex-cone-euclidean
+- Derivation of an algebra — via riemannian-metric-manifold
+- Derivative of a real function — via diffeomorphism-smooth-manifolds, fermat-interior-extremum-theorem, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum
+- Disjoint sets — via diffeomorphism-smooth-manifolds, euclidean-unit-sphere, real-lie-group, riemannian-metric-manifold
+- Eigenvalue of a linear endomorphism — via singular-value-decomposition-real
+- Euclidean space ℝᵈ — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum
+- Extended nonnegative real numbers — via euclidean-unit-sphere
+- Factorial — via euclidean-unit-sphere, singular-value-decomposition-real
+- Field — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, fermat-interior-extremum-theorem, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Finite set — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space
+- Fréchet derivative between normed spaces — via second-order-necessary-condition-interior-minimum
+- Function between sets — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, exterior-power-module, fermat-interior-extremum-theorem, group-action, group-homomorphism, matrix-trace, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Gradient of a scalar function on Euclidean space — via second-order-necessary-condition-interior-minimum
+- Group — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, exterior-power-module, fermat-interior-extremum-theorem, group-action, group-homomorphism, matrix-trace, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Hausdorff measure of a metric space — via euclidean-unit-sphere
+- Hausdorff topological space — via diffeomorphism-smooth-manifolds, real-lie-group, riemannian-metric-manifold
+- Hermitian complex matrix — via singular-value-decomposition-real
+- Hessian matrix of a C² function on Euclidean space — via second-order-necessary-condition-interior-minimum
+- Homeomorphism — via diffeomorphism-smooth-manifolds, real-lie-group, riemannian-metric-manifold
+- Homomorphism of modules over a commutative ring — via exterior-power-module
+- Homotopy of continuous maps — via simply-connected-topological-space
+- Intersection of a family of sets — via diffeomorphism-smooth-manifolds, euclidean-unit-sphere, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space
+- Jacobian matrix of a differentiable Euclidean map — via second-order-necessary-condition-interior-minimum
+- Least upper bound in a partially ordered set — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, fermat-interior-extremum-theorem, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Limit of a function between metric spaces — via diffeomorphism-smooth-manifolds, fermat-interior-extremum-theorem, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum
+- Limit of a real function at a point — via diffeomorphism-smooth-manifolds, euclidean-unit-sphere, fermat-interior-extremum-theorem, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum
+- Limit of a real sequence — via euclidean-unit-sphere, singular-value-decomposition-real
+- Linear combination of vectors — via convex-cone-euclidean
+- Linear map between vector spaces — via riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, singular-value-decomposition-real
+- Lipschitz map between metric spaces — via picard-lindelof-time-dependent-ode
+- Local extremum of a real-valued function on a metric space — via fermat-interior-extremum-theorem, second-order-necessary-condition-interior-minimum
+- Matrix over a ring — via matrix-trace, orthogonal-group-real, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, singular-value-decomposition-real
+- Measure — via euclidean-unit-sphere
+- Metric space — via diffeomorphism-smooth-manifolds, euclidean-unit-sphere, fermat-interior-extremum-theorem, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum
+- Module over a commutative ring — via exterior-power-module
+- Modulus of a complex number — via second-order-necessary-condition-interior-minimum
+- Natural logarithm — via euclidean-unit-sphere, singular-value-decomposition-real
+- Natural number — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, exterior-power-module, matrix-trace, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Nonnegative real square root — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum
+- Normed vector space — via second-order-necessary-condition-interior-minimum
+- Open interval in the real line — via fermat-interior-extremum-theorem, picard-lindelof-time-dependent-ode
+- Ordered field — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, fermat-interior-extremum-theorem, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Ordered pair — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, exterior-power-module, fermat-interior-extremum-theorem, group-action, group-homomorphism, matrix-trace, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Partial derivative in Euclidean coordinates — via diffeomorphism-smooth-manifolds, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum
+- Partial order — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, fermat-interior-extremum-theorem, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Path-connected topological space — via simply-connected-topological-space
+- Positive definite real matrix — via riemannian-metric-manifold
+- Positive semidefinite complex matrix — via singular-value-decomposition-real
+- Positive semidefinite real matrix — via second-order-necessary-condition-interior-minimum
+- Preimage of a subset under a function — via diffeomorphism-smooth-manifolds, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space
+- Product topology — via real-lie-group, simply-connected-topological-space
+- Quotient module — via exterior-power-module
+- Quotient of an abelian group by a subgroup — via exterior-power-module
+- Real exponential function — via euclidean-unit-sphere, singular-value-decomposition-real
+- Real number — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, fermat-interior-extremum-theorem, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Real orthogonal matrix — via singular-value-decomposition-real
+- Real power of a positive real number — via euclidean-unit-sphere, singular-value-decomposition-real
+- Real sequence — via euclidean-unit-sphere, singular-value-decomposition-real
+- Sequence in a set — via euclidean-unit-sphere, second-order-necessary-condition-interior-minimum, singular-value-decomposition-real
+- Set — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, exterior-power-module, fermat-interior-extremum-theorem, group-action, group-homomorphism, matrix-trace, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Singular values of a complex matrix — via singular-value-decomposition-real
+- Smooth map between open Euclidean sets — via diffeomorphism-smooth-manifolds, real-lie-group, riemannian-metric-manifold
+- Smooth real manifold — via diffeomorphism-smooth-manifolds, real-lie-group, riemannian-metric-manifold
+- Smooth vector field on a manifold — via riemannian-metric-manifold
+- Subgroup — via exterior-power-module
+- Submodule of a module over a commutative ring — via exterior-power-module
+- Subset — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, exterior-power-module, fermat-interior-extremum-theorem, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Subspace topology — via euclidean-unit-sphere
+- Sum of a nonnegative series — via euclidean-unit-sphere
+- Symmetric matrix — via riemannian-metric-manifold, second-order-necessary-condition-interior-minimum
+- Tensor product of modules over a commutative ring — via exterior-power-module
+- Topological space — via diffeomorphism-smooth-manifolds, euclidean-unit-sphere, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space
+- Total order — via convex-cone-euclidean, diffeomorphism-smooth-manifolds, euclidean-unit-sphere, fermat-interior-extremum-theorem, orthogonal-group-real, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space, singular-value-decomposition-real
+- Transpose of a matrix — via orthogonal-group-real, singular-value-decomposition-real
+- Twice continuously differentiable Euclidean map — via second-order-necessary-condition-interior-minimum
+- Union of a family of sets — via diffeomorphism-smooth-manifolds, euclidean-unit-sphere, picard-lindelof-time-dependent-ode, real-lie-group, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, simply-connected-topological-space
+- Vector space — via convex-cone-euclidean, riemannian-metric-manifold, second-order-necessary-condition-interior-minimum, singular-value-decomposition-real
+- σ-algebra — via euclidean-unit-sphere
+
+INTRODUCED CONCEPTS (7)
+
+- Brendle–Schoen characterization of the PIC2 condition
+- Brendle–Schoen convergence theorem for Ricci flow under positive complex sectional curvature (strict PIC2)
+- Brendle–Schoen differentiable sphere theorem for pointwise 1/4-pinched manifolds
+- Equivariant differentiable sphere theorem for pointwise 1/4-pinched manifolds
+- PIC1 condition: positive isotropic curvature of M×ℝ
+- Preservation of positive isotropic curvature under Ricci flow in all dimensions
+- Ricci flow preserves nonnegative complex sectional curvature (PIC2)
+
+LOCATED CONCEPTS (72)
+
+1. Riemannian metric on a smooth manifold
+   A Riemannian metric g on a smooth manifold M is a symmetric C∞(M)-bilinear pairing of smooth vector fields into smooth functions which in every chart has the form g=∑g_ij dxⁱdxʲ with (g_ij(x)) a smooth positive definite symmetric matrix at each point. A Riemannian manifold is a smooth manifold with a Riemannian metric.
+   Source: relies_on, p. 287, Theorem 1; p. 288 (Ricci flow definition); p. 290, Theorem 3; p. 303, Theorem 18
+   Note: Every main statement is about a compact Riemannian manifold and a family of metrics.
+
+2. Smooth real manifold
+   A Hausdorff second-countable topological space with charts to open subsets of R^n whose transition maps are smooth. Smooth functions and maps are those whose expressions in these charts are smooth.
+   Source: relies_on, p. 287, Theorem 1; p. 288, Theorem 2
+   Note: Underlying object of all statements; expected to be inherited through riemannian-metric-manifold once prerequisite edges exist.
+
+3. Compact topological space
+   A topological space in which every open cover has a finite subcover.
+   Source: relies_on, p. 287, Theorem 1; p. 288, Theorem 2 (compact Lie group G); p. 301, proof of Proposition 16 (compact set argument); p. 302, Proposition 17 (compact K)
+   Note: Compactness hypotheses and compactness arguments.
+
+4. Diffeomorphism between smooth manifolds
+   A diffeomorphism between smooth manifolds M and N is a smooth bijection F:M→N whose inverse map N→M is also smooth. Open subsets of smooth manifolds are smooth manifolds, so one speaks of a diffeomorphism from an open neighbourhood of a point onto an open subset.
+   Source: relies_on, p. 287, Theorem 1; p. 288, Theorem 2
+   Note: The conclusion 'diffeomorphic to a spherical space form' and the equivariant diffeomorphism F:M->S^n.
+
+5. Simply connected topological space
+   A path-connected space X is simply connected if every continuous loop γ:[0,1]→X with γ(0)=γ(1) is homotopic relative to its endpoints to the constant loop at γ(0).
+   Source: relies_on, p. 287-288, Theorem 2
+   Note: Hypothesis of the equivariant sphere theorem (ensures the limit space form is the round sphere).
+
+6. Real Lie group
+   A group that is a smooth real manifold, with smooth multiplication and inversion.
+   Source: relies_on, p. 287-288, Theorem 2
+   Note: G is a compact Lie group acting by isometries.
+
+7. Real orthogonal group
+   The group O(n) of real n×n matrices U satisfying UᵀU=I; these are the linear isometries of Euclidean space.
+   Source: relies_on, p. 288, Theorem 2 (sigma: G -> O(n+1)); p. 299, §3 (O(n)-invariant cone C-hat); p. 302, Proposition 17
+   Note: Target of the linear action in Theorem 2 and the invariance group of the cones and pinching sets.
+
+8. Group action on a set
+   A map G×X→X, written (g,x)↦gx, satisfying ex=x and (gh)x=g(hx).
+   Source: relies_on, p. 288, Theorem 2 (F∘rho(g)=sigma(g)∘F)
+   Note: Equivariance is a statement about two actions of G.
+
+9. Convex cone in ℝᵈ
+   A nonempty subset C⊆ℝᵈ is a convex cone if λx+μy∈C for all x,y∈C and real λ,μ≥0; equivalently it is convex, contains0 and is closed under nonnegative scaling, so it contains every nonnegative linear combination of its elements.
+   Source: relies_on, p. 290, §1 (convex cone invariant under the Hamilton ODE); p. 299, §3 (definition of C-hat); pp. 300-302, Propositions 13-17
+   Note: The pinching-family method is formulated with closed convex O(n)-invariant cones.
+
+10. Picard–Lindelöf theorem for a time-dependent Euclidean ODE
+   A vector field continuous in time and locally Lipschitz in the state has a unique local solution through each initial point, with continuous dependence on initial data and the field on compact sets. If the state stays in a compact set on each finite interval, the solution extends globally; globally Lipschitz fields of linear growth satisfy this condition.
+   Source: relies_on, p. 298-299, proof of Proposition 11 ('Standard ODE theory implies ...'); pp. 301-302, proofs of Propositions 16-17 (solutions of dR/dt=Q(R))
+   Note: ODE solutions for the polynomial vector field Q and its perturbation.
+
+11. Positive semidefinite real matrix
+   A symmetric real matrix A such that xᵀAx≥0 for every real column vector x.
+   Source: relies_on, pp. 297-298, proof of Proposition 9
+   Note: L is positive semidefinite by Proposition 8, hence tr(LULU^T) >= 0.
+
+12. Trace of a square matrix
+   The sum of the diagonal entries of a square matrix.
+   Source: relies_on, p. 298, proof of Proposition 9; pp. 301-302, Propositions 16-17 (tr(R) <= h)
+   Note: Trace identities and trace bounds.
+
+13. Singular value decomposition of a real matrix
+   Every real m×n matrix is UΣVᵀ with U,V orthogonal and Σ rectangular diagonal with nonnegative entries, its singular values.
+   Source: relies_on, p. 303, proof of Lemma 19
+   Note: Used to choose oriented orthonormal bases with sigma(e1,e2)=sigma(e3,e4)=0.
+
+14. Exterior power of a module over a commutative ring
+   The module Λ^n_R M equipped with the universal alternating R-multilinear map M^n→Λ^n_R M; equivalently the corresponding quotient of the tensor power by tensors with repeated entries. This is the alternating quotient convention, not the anti-invariant tensor submodule.
+   Source: relies_on, p. 300, proof of Proposition 12(iii); pp. 303-305, Lemmas 19-20 and proof of Proposition 21
+   Note: Two-vectors phi, psi in ∧²R⁴ and their wedge products.
+
+15. Fermat’s interior extremum theorem
+   If f:(a,b)→ℝ has a relative maximum or relative minimum at an interior point c∈(a,b) and f is differentiable at c, then f′(c)=0.
+   Source: relies_on, p. 291, proof of Lemma 4; p. 292, proof of Lemma 6
+   Note: First-order conditions at a minimizing orthonormal four-frame.
+
+16. Second-order necessary condition at an interior minimum
+   If a C² real function on an open subset of ℝⁿ has a local minimum at x, then its gradient vanishes at x and its Hessian matrix at x is positive semidefinite.
+   Source: relies_on, pp. 294-297, proof of Proposition 8
+   Note: Second-variation inequality at a minimizing four-frame.
+
+17. Riemann curvature tensor of a Riemannian manifold
+   For a Riemannian manifold (M,g) with Levi-Civita connection ∇ and R(X,Y)=∇_X∇_Y−∇_Y∇_X−∇_[X,Y], the (0,4)-tensor Rm(X,Y,Z,W)=g(R(X,Y)W,Z), normalized so that Rm(e₁,e₂,e₁,e₂) is the sectional curvature of an orthonormal pair (the convention of Brendle–Schoen, who write R(X,Y,Z,W) and R_ijkl). At each point it is an algebraic curvature tensor: antisymmetric in each pair, symmetric under exchanging the pairs, and satisfying the first Bianchi identity.
+   Source: relies_on, p. 289 (curvature tensor R of the manifold); p. 303, Theorem 18 ('curvature tensor of (M,g0)')
+   Note: All curvature conditions are conditions on this tensor at each point; the paper uses components R_ijkl in orthonormal frames without defining them.
+
+18. Algebraic curvature tensor on a Euclidean vector space
+   A 4-linear form R on a Euclidean space V≅ℝⁿ with R(x,y,z,w)=−R(y,x,z,w)=−R(x,y,w,z)=R(z,w,x,y) and R(x,y,z,w)+R(y,z,x,w)+R(z,x,y,w)=0. Equivalently a self-adjoint endomorphism of ∧²V satisfying the first Bianchi identity (an algebraic curvature operator); the space of these is written S²_B(so(n)) and carries the natural action of O(n). The curvature tensor of a Riemannian manifold at a point is an algebraic curvature tensor.
+   Source: relies_on, p. 290, §2 (curvature tensor R on Rⁿ); p. 299, §3 ('Given any algebraic curvature operator R on Rⁿ ...', S²_B(so(n))); pp. 304-305, Proposition 21
+   Note: The ODE, the cones and Proposition 21 all live on this space; extensions R-tilde, R-hat are algebraic curvature tensors on larger spaces.
+
+19. First Bianchi identity for the Riemann curvature tensor
+   The Riemann curvature tensor of a Riemannian manifold (more generally of any torsion-free connection) satisfies R(X,Y)Z+R(Y,Z)X+R(Z,X)Y=0; in covariant form Rm(x,y,z,w)+Rm(y,z,x,w)+Rm(z,x,y,w)=0.
+   Source: relies_on, p. 290, §2 (computation of Q(R)_1234); p. 297, end of proof of Proposition 8; p. 305, proof of Proposition 21
+   Note: Invoked by name in three computations.
+
+20. Sectional curvature of a two-plane
+   For a two-plane π⊂T_pM spanned by an orthonormal pair e₁,e₂, the sectional curvature is K(π)=Rm(e₁,e₂,e₁,e₂), independent of the orthonormal basis of π; the same formula defines the sectional curvatures of an algebraic curvature tensor. Positive (nonnegative) sectional curvature means K(π)>0 (≥0) for all two-planes.
+   Source: relies_on, p. 287, §1 (pinching definitions); p. 299, Proposition 12(ii); p. 305, Corollary 22
+   Note: Pinching hypotheses, the comparison of C-hat with nonnegative sectional curvature and Corollary 22 are phrased in sectional curvatures.
+
+21. Ricci curvature tensor
+   The symmetric 2-tensor Ric(x,y)=Σᵢ Rm(x,eᵢ,y,eᵢ), the trace of the curvature tensor over an orthonormal basis eᵢ; it is defined for Riemannian manifolds and for algebraic curvature tensors. Its trace-free part is Ric₀=Ric−(scal/n)g. Positive Ricci curvature means Ric(x,x)>0 for x≠0.
+   Source: relies_on, p. 288 (Ricci flow equation); p. 289 (R-tilde PIC implies positive Ricci curvature); p. 300, definition of ℓ_{a,b} (Ric₀); Propositions 13-14 (Ric ≥ (p/n) scal)
+   Note: Ricci flow and the Böhm–Wilking cones are defined using Ric and Ric₀.
+
+22. Scalar curvature
+   The trace scal=Σᵢ Ric(eᵢ,eᵢ) of the Ricci tensor with respect to the metric; for an algebraic curvature tensor it is Σ_{i,j}R(eᵢ,eⱼ,eᵢ,eⱼ).
+   Source: relies_on, p. 288 (mean scalar curvature r in the normalized Ricci flow); p. 300, ℓ_{a,b}; Propositions 13-14
+   Note: Appears in the normalized flow and in the Böhm–Wilking deformation.
+
+23. Curvature operator of an algebraic curvature tensor
+   The self-adjoint endomorphism ℛ of ∧²T_pM (or of ∧²ℝⁿ for an algebraic curvature tensor R) determined by ⟨ℛ(x∧y),z∧w⟩=R(x,y,z,w), so that R(φ,φ)=⟨ℛφ,φ⟩ is a quadratic form on two-vectors. The curvature operator is nonnegative (positive) if R(φ,φ)≥0 (>0) for all φ≠0; nonnegative curvature operator implies nonnegative sectional curvature.
+   Source: relies_on, pp. 299-300, Proposition 12(iii) and its proof (R(φ,φ)+R(ψ,ψ)≥0)
+   Note: Nonnegative curvature operators lie in Ĉ; also a hypothesis of the Böhm–Wilking deformation lemmas.
+
+24. Curvature operator of an algebraic curvature tensor
+   The self-adjoint endomorphism ℛ of ∧²T_pM (or of ∧²ℝⁿ for an algebraic curvature tensor R) determined by ⟨ℛ(x∧y),z∧w⟩=R(x,y,z,w), so that R(φ,φ)=⟨ℛφ,φ⟩ is a quadratic form on two-vectors. The curvature operator is nonnegative (positive) if R(φ,φ)≥0 (>0) for all φ≠0; nonnegative curvature operator implies nonnegative sectional curvature.
+   Source: discusses, p. 288, §1 (Hamilton's positive curvature operator theorem)
+   Note: Context.
+
+25. Spherical space form
+   A Riemannian manifold Sⁿ/Γ obtained as the quotient of the round unit sphere by a finite subgroup Γ⊂O(n+1) acting freely, with the induced metric of constant sectional curvature 1; up to scaling these are exactly the compact connected Riemannian manifolds of constant positive sectional curvature.
+   Source: relies_on, p. 287, Theorem 1 (conclusion); title
+   Note: Conclusion of the main theorem.
+
+26. Killing–Hopf theorem for constant positive curvature
+   A complete connected Riemannian n-manifold (n≥2) of constant sectional curvature 1 is isometric to Sⁿ/Γ for a finite subgroup Γ⊂O(n+1) acting freely on Sⁿ; in particular a simply connected one is isometric to the round unit sphere.
+   Source: relies_on, p. 287, Theorem 1 ('admits a metric of constant curvature and therefore is diffeomorphic to a spherical space form'); p. 288, Theorem 2 (simply connected limit is Sⁿ)
+   Note: Uncited background converting the constant-curvature limit into the stated diffeomorphism conclusions.
+
+27. Isometry group of a Riemannian manifold
+   The group Isom(M,g) of diffeomorphisms F:M→M with F*g=g, under composition.
+   Source: relies_on, p. 287-288, Theorem 2 (rho: G -> isometry group of M)
+   Note: Hypothesis of the equivariant theorem.
+
+28. Pointwise 1/4-pinched sectional curvature
+   A Riemannian manifold has pointwise 1/4-pinched sectional curvatures if its sectional curvatures are positive and at every point p, 0<K(π₁)<4K(π₂) for all two-planes π₁,π₂⊂T_pM; the ratio bound is required at each point separately, so no global curvature bounds are assumed.
+   Source: explains, p. 287, §1 (definition before Theorem 1)
+   Note: The paper states the definition (pointwise pinching goes back at least to Ruh [28] and Micallef–Moore [20]; not claimed as new).
+
+29. Pointwise 1/4-pinched sectional curvature
+   A Riemannian manifold has pointwise 1/4-pinched sectional curvatures if its sectional curvatures are positive and at every point p, 0<K(π₁)<4K(π₂) for all two-planes π₁,π₂⊂T_pM; the ratio bound is required at each point separately, so no global curvature bounds are assumed.
+   Source: relies_on, p. 287, Theorem 1; p. 288, Theorem 2; p. 290 (Berger's inequality remark)
+   Note: Hypothesis of the main theorems.
+
+30. Positive and nonnegative isotropic curvature
+   An algebraic curvature tensor R on ℝⁿ, n≥4, has nonnegative isotropic curvature if R₁₃₁₃+R₁₄₁₄+R₂₃₂₃+R₂₄₂₄−2R₁₂₃₄≥0 for every orthonormal four-frame {e₁,e₂,e₃,e₄}, and positive isotropic curvature (PIC) if the inequality is always strict; a Riemannian manifold of dimension at least four has PIC if its curvature tensor does at every point. Equivalently, the complexified curvature is positive on totally isotropic two-planes span{e₁+ie₂,e₃+ie₄} of T_pM⊗ℂ.
+   Source: explains, p. 288-289, §1 (definition, credited to Micallef–Moore [20])
+   Note: Recalled definition with explicit credit to Micallef and Moore.
+
+31. Positive and nonnegative isotropic curvature
+   An algebraic curvature tensor R on ℝⁿ, n≥4, has nonnegative isotropic curvature if R₁₃₁₃+R₁₄₁₄+R₂₃₂₃+R₂₄₂₄−2R₁₂₃₄≥0 for every orthonormal four-frame {e₁,e₂,e₃,e₄}, and positive isotropic curvature (PIC) if the inequality is always strict; a Riemannian manifold of dimension at least four has PIC if its curvature tensor does at every point. Equivalently, the complexified curvature is positive on totally isotropic two-planes span{e₁+ie₂,e₃+ie₄} of T_pM⊗ℂ.
+   Source: relies_on, pp. 290-299, §2 (all of Lemma 4 to Proposition 11); p. 299, definition of C-hat
+   Note: The central curvature condition of the argument.
+
+32. Ricci flow
+   A smooth one-parameter family of Riemannian metrics g(t) on a manifold M satisfying ∂g/∂t=−2Ric_{g(t)}, introduced by Hamilton in 1982.
+   Source: explains, p. 288, §1 (equation and credit to Hamilton [11])
+   Note: Recalled definition.
+
+33. Ricci flow
+   A smooth one-parameter family of Riemannian metrics g(t) on a manifold M satisfying ∂g/∂t=−2Ric_{g(t)}, introduced by Hamilton in 1982.
+   Source: relies_on, p. 289, §1; §2 title; p. 290, §2 first paragraph
+   Note: Section 2's main assertion concerns the Ricci flow.
+
+34. Normalized Ricci flow
+   On a compact n-manifold, the volume-preserving flow ∂g/∂t=−2Ric_{g(t)}+(2/n)r_{g(t)}g(t), where r_{g(t)} is the mean value of the scalar curvature of g(t); its solutions differ from Ricci flows by rescaling the metric and reparametrizing time.
+   Source: explains, p. 288, §1 (equation, credited to Hamilton)
+   Note: Recalled definition.
+
+35. Normalized Ricci flow
+   On a compact n-manifold, the volume-preserving flow ∂g/∂t=−2Ric_{g(t)}+(2/n)r_{g(t)}g(t), where r_{g(t)} is the mean value of the scalar curvature of g(t); its solutions differ from Ricci flows by rescaling the metric and reparametrizing time.
+   Source: relies_on, p. 290, Theorem 3; p. 303, Theorem 18
+   Note: Convergence statements are for the normalized flow.
+
+36. Hamilton's evolution equation for the curvature tensor under Ricci flow
+   Under Ricci flow, the curvature tensor written in an orthonormal frame evolving with the metric (Uhlenbeck's trick) satisfies ∂R/∂t=ΔR+Q(R), where Q(R)_{ijkl}=R_{ijpq}R_{klpq}+2R_{ipkq}R_{jplq}−2R_{iplq}R_{jpkq} is an O(n)-equivariant quadratic map on algebraic curvature tensors. The associated ODE dR/dt=Q(R) on S²_B(so(n)) is Hamilton's curvature ODE.
+   Source: explains, p. 290, §2 (formula for Q(R)); p. 288 (curvature ODE credited to Hamilton [12])
+   Note: Recalls Q(R) explicitly.
+
+37. Hamilton's evolution equation for the curvature tensor under Ricci flow
+   Under Ricci flow, the curvature tensor written in an orthonormal frame evolving with the metric (Uhlenbeck's trick) satisfies ∂R/∂t=ΔR+Q(R), where Q(R)_{ijkl}=R_{ijpq}R_{klpq}+2R_{ipkq}R_{jplq}−2R_{iplq}R_{jpkq} is an O(n)-equivariant quadratic map on algebraic curvature tensors. The associated ODE dR/dt=Q(R) on S²_B(so(n)) is Hamilton's curvature ODE.
+   Source: relies_on, pp. 290-302, §§2-3 (every invariance statement is for dR/dt=Q(R))
+   Note: The ODE whose invariant sets are studied; the reduction from the PDE to the ODE uses Hamilton's maximum principle.
+
+38. Hamilton's maximum principle for curvature conditions under Ricci flow
+   Let g(t) be a Ricci flow on a compact manifold and K a closed, convex, O(n)-invariant set of algebraic curvature tensors that is invariant under Hamilton's ODE dR/dt=Q(R). If the curvature tensor of g(0) lies in K at every point (in orthonormal frames), then the curvature tensor of g(t) lies in K at every point for all t in the interval of existence. This is the Ricci-flow case of Hamilton's maximum principle for reaction–diffusion systems on vector bundles (Hamilton 1986, Theorem 4.3).
+   Source: relies_on, p. 289, §1 ('By the maximum principle (cf. [12], Theorem 4.3), it suffices ...'); p. 290, §2 first paragraph
+   Note: Reduces preservation under the Ricci flow to invariance under the ODE; also implicit in Theorem 18.
+
+39. Short-time existence and uniqueness of Ricci flow on compact manifolds
+   For every smooth Riemannian metric g₀ on a compact manifold there is T>0 and a smooth Ricci flow g(t), t∈[0,T), with g(0)=g₀, and any two such flows agree on their common interval (Hamilton 1982; simplified proof via DeTurck's trick). By uniqueness and diffeomorphism invariance of the equation, isometries of g₀ remain isometries of every g(t).
+   Source: relies_on, p. 288, Theorem 2 ('canonical deformation' gives equivariance); p. 290, Theorem 3 and p. 303, Theorem 18 ('exists for all time')
+   Note: Uncited standard background: the flow exists, and uniqueness makes the deformation canonical so that the G-action stays isometric.
+
+40. Kulkarni–Nomizu product of symmetric bilinear forms
+   For symmetric bilinear forms A,B on ℝⁿ, the 4-tensor (A⊙B)_{ijkl}=A_{ik}B_{jl}−A_{il}B_{jk}−A_{jk}B_{il}+A_{jl}B_{ik}, which is an algebraic curvature tensor; with this normalization I=½ id⊙id is the curvature tensor of the round unit sphere.
+   Source: explains, p. 300, §3 (formula for ⊙)
+   Note: Recalled with explicit formula.
+
+41. Kulkarni–Nomizu product of symmetric bilinear forms
+   For symmetric bilinear forms A,B on ℝⁿ, the 4-tensor (A⊙B)_{ijkl}=A_{ik}B_{jl}−A_{il}B_{jk}−A_{jk}B_{il}+A_{jl}B_{ik}, which is an algebraic curvature tensor; with this normalization I=½ id⊙id is the curvature tensor of the round unit sphere.
+   Source: relies_on, p. 300, definition of ℓ_{a,b} and of I; pp. 300-302, Propositions 13-17
+   Note: Used to define the Böhm–Wilking deformation and the reference tensor I.
+
+42. Böhm–Wilking linear transformation ℓ_{a,b} of algebraic curvature tensors
+   For real a,b, the linear map ℓ_{a,b}(R)=R+b Ric₀⊙id+(a/n) scal id⊙id on algebraic curvature tensors on ℝⁿ, as printed by Brendle–Schoen; Böhm–Wilking display it as R+2(n−1)a R_I+(n−2)b R_{Ric₀}, and the parameter curves used in Brendle–Schoen Propositions 13-14 coincide with those of Böhm–Wilking Lemmas 3.4-3.5. Böhm and Wilking showed that ℓ_{a,b}^{-1}Q(ℓ_{a,b}R)−Q(R) does not depend on the Weyl part of R and is computable from the Ricci tensor, which allows Q-invariant cones to be deformed into new invariant cones.
+   Source: explains, p. 300, §3 (definition, credited to Böhm–Wilking [3])
+   Note: Recalled definition.
+
+43. Böhm–Wilking linear transformation ℓ_{a,b} of algebraic curvature tensors
+   For real a,b, the linear map ℓ_{a,b}(R)=R+b Ric₀⊙id+(a/n) scal id⊙id on algebraic curvature tensors on ℝⁿ, as printed by Brendle–Schoen; Böhm–Wilking display it as R+2(n−1)a R_I+(n−2)b R_{Ric₀}, and the parameter curves used in Brendle–Schoen Propositions 13-14 coincide with those of Böhm–Wilking Lemmas 3.4-3.5. Böhm and Wilking showed that ℓ_{a,b}^{-1}Q(ℓ_{a,b}R)−Q(R) does not depend on the Weyl part of R and is computable from the Ricci tensor, which allows Q-invariant cones to be deformed into new invariant cones.
+   Source: relies_on, p. 300, Propositions 13-14
+   Note: Defines the cones C-hat(b) and C-hat(a).
+
+44. Böhm–Wilking invariant cones ℓ_{a,b}(nonnegative curvature operators with Ricci pinching)
+   Böhm–Wilking (Ann. of Math. 2008, Lemmas 3.4–3.5): for b∈[0,1/2] with a=((n−2)b²+2b)/(2+2(n−2)b²), p=(n−2)b²/(1+(n−2)b²), and for b=1/2, a=(1+s)/2, p=1−4/(n+2+4s), s≥0, the sets ℓ_{a,b}({R≥0 : Ric≥(p/n) scal}) built from the cone of nonnegative curvature operators are invariant under Hamilton's ODE dR/dt=Q(R), transversally so for b>0; together they join the nonnegative cone to cones shrinking to the ray of the round-sphere curvature tensor.
+   Source: relies_on, pp. 300-301, Propositions 13-14 ('The proofs ... are analogous to Lemma 3.4 and Lemma 3.5 in [3]'); p. 290
+   Note: Method imported: Brendle–Schoen apply the same argument to Ĉ in place of the nonnegative cone without writing the proofs.
+
+45. Pinching family of cones (Böhm–Wilking)
+   Böhm–Wilking (2008, §3): a continuous family C(s), s∈[0,1), of closed convex O(n)-invariant full-dimensional cones of algebraic curvature tensors such that every nonzero element has positive scalar curvature, Q(R) lies in the interior of the tangent cone of C(s) at every nonzero R∈C(s) for s∈(0,1), and C(s) converges in the pointed Hausdorff topology to the ray ℝ₊I of the round-sphere curvature tensor as s→1.
+   Source: relies_on, p. 301, Proposition 15 ('a pinching family in the sense of Böhm and Wilking [3]')
+   Note: Named notion imported from [3]; the paper lists its properties but cites [3] for the notion.
+
+46. Böhm–Wilking convergence theorem for pinching families
+   Böhm–Wilking (Ann. of Math. 2008, Theorem 5.1): let C(s), s∈[0,1), be a pinching family of cones in dimension n≥3. If the curvature tensor of a compact Riemannian manifold (M,g₀) lies in the interior of C(0) at every point, then the normalized Ricci flow from g₀ exists for all time and converges to a metric of constant positive sectional curvature.
+   Source: relies_on, p. 301, after Proposition 15 ('The convergence ... follows now from a result of Böhm and Wilking (cf. [3], Theorem 5.1)'); p. 303, Theorem 18
+   Note: Imported convergence result; Theorem 18 is stated as following from it.
+
+47. Hamilton's convergence theorem for Ricci flow with curvature in a pinching set
+   Hamilton (J. Differential Geom. 1986, §5): if the curvature tensor of a compact Riemannian manifold (M,g₀) lies at every point in a pinching set, a closed convex O(n)-invariant set of algebraic curvature tensors preserved by dR/dt=Q(R) on which the trace-free part of R becomes small relative to the scalar curvature as the curvature grows, then the normalized Ricci flow from g₀ exists for all time and converges to a metric of constant positive sectional curvature. The exact quantitative form of Hamilton's pinching condition is not verified here.
+   Source: relies_on, p. 301 ('which in turn relies on work of Hamilton (cf. [12], Section 5)'); p. 302, sentence before Theorem 18 ('the convergence of the flow follows from the same arguments as in [3], [12]')
+   Note: The paper constructs a pinching set (Proposition 17) and then cites this argument for Theorem 18.
+
+48. Tangent cone of a closed convex set
+   For a closed convex set C in a finite-dimensional real vector space and x∈C, the tangent cone T_xC is the closure of ⋃_{t>0} t(C−x); a vector in the interior of T_xC points strictly into C.
+   Source: relies_on, pp. 300-302, Propositions 13-16 ('Q(R) lies in the interior of the tangent cone to C-hat(b) at R')
+   Note: Transversal invariance is formulated with tangent cones.
+
+49. Berger's curvature inequality
+   If all sectional curvatures of an algebraic curvature tensor R (for example of a Riemannian manifold at a point) lie in [K_min,K_max], then |R(e₁,e₂,e₃,e₄)|≤(2/3)(K_max−K_min) and |R(e₁,e₂,e₁,e₃)|≤(1/2)(K_max−K_min) for all orthonormal e₁,…,e₄.
+   Source: relies_on, p. 290, §1 ('It follows from Berger's inequality ...'); p. 306, proof of Corollary 22 ('|R(e1,e2,e3,e4)| ≤ 2 by Berger's inequality (see e.g. [17])')
+   Note: Key input of Corollary 22 (only the four-index bound is used).
+
+50. Orthogonal normal form of a real skew-symmetric bilinear form
+   For a skew-symmetric bilinear form ω on a Euclidean space, equivalently a real skew-symmetric matrix or a two-vector, there is an orthonormal basis v₁,…,v_n with ω=a₁v₁∧v₂+a₂v₃∧v₄+⋯; that is, the matrix is block diagonal with 2×2 blocks [[0,a_k],[−a_k,0]] and zeros. On ℝ⁴ the basis may be taken positively oriented.
+   Source: relies_on, p. 303, proof of Lemma 19 ('A standard result in linear algebra implies ...')
+   Note: Puts phi into the form a₁v₁∧v₃+a₂v₄∧v₂.
+
+51. Self-dual and anti-self-dual two-forms in dimension four
+   On an oriented four-dimensional Euclidean space V the Hodge star *:∧²V→∧²V satisfies *²=1 and φ∧ψ=⟨*φ,ψ⟩vol; ∧²V splits orthogonally into the three-dimensional eigenspaces ∧²₊ (self-dual, *φ=φ) and ∧²₋ (anti-self-dual, *φ=−φ), and φ∧φ=(|φ₊|²−|φ₋|²)vol.
+   Source: relies_on, pp. 303-304, proof of Lemma 19 (case analysis on self-dual/anti-self-dual phi, psi)
+   Note: Used to split the proof of Lemma 19 into cases.
+
+52. Brendle–Schoen differentiable sphere theorem for pointwise 1/4-pinched manifolds
+   A compact Riemannian manifold of dimension n≥4 with pointwise 1/4-pinched sectional curvatures (at each point 0<K(π₁)<4K(π₂) for all two-planes) admits a metric of constant positive sectional curvature, and is therefore diffeomorphic to a spherical space form. In particular a compact simply connected manifold whose sectional curvatures lie in (1,4] is diffeomorphic to Sⁿ, settling the differentiable version of the Rauch–Berger–Klingenberg sphere theorem. The proof deforms the metric by the normalized Ricci flow.
+   Source: introduces, p. 287, Theorem 1; deduced p. 290 from Theorem 3 and Corollary 22; earliest appearance arXiv v1 (2007-05-06), Theorem 1
+   Note: Original for n≥5; the n=4 case is prior (H. Chen 1991).
+   Origin evidence: VOR p.287: 'This conjecture is known as the Differentiable Sphere Theorem, and the purpose of this paper is to prove this'. Present from arXiv v1 (2007-05-06), Theorem 1. Earlier differentiable sphere theorems credited (p.288) need global pinching δ ≥ 0.76 or pointwise pinching tending to 1 (Ruh). n=4: VOR p.288 credits H. Chen [6] ('which implies Theorem 1 for n = 4'); zbMATH review of Chen (Zbl 0752.53021, W. Ballmann): 'a compact pointwise 1/4-pinched 4-manifold is either diffeomorphic to the sphere or real projective space or isometric to the complex projective plane'. v1 instead attributed n=4 to Hamilton's PIC surgery work [10] with Chen-Zhu; v2 (2007-05-22) added 'Theorem 1 was proven in the case n = 4 by H. Chen [4]'. Nguyen's thesis (Jan 2008) proves only PIC preservation (Theorem 4.8) and contains no sphere theorem. Ni-Wolfson (arXiv 0706.0332, June 2007) give 'a different proof of the result of Brendle-Schoen' and call it 'Brendle-Schoen's recent differential sphere theorem'. Andrews-Nguyen is four-dimensional (not accessed).
+
+53. Equivariant differentiable sphere theorem for pointwise 1/4-pinched manifolds
+   Let M be a compact simply connected Riemannian manifold of dimension n≥4 with pointwise 1/4-pinched sectional curvatures, G a compact Lie group and ρ:G→Isom(M) a homomorphism. Then there are a homomorphism σ:G→O(n+1) and a diffeomorphism F:M→Sⁿ with F∘ρ(g)=σ(g)∘F for all g∈G. It follows because the normalized Ricci flow deforms the metric canonically, hence G-equivariantly, to a round metric.
+   Source: introduces, pp. 287-288, Theorem 2; first appears in arXiv v2 (2007-05-22)
+   Note: Absent from v1.
+   Origin evidence: VOR p.288: 'Since our method of proof gives a canonical deformation from the 1/4-pinched metric to a constant curvature metric, we can also prove the following equivariant version.' Earlier equivariant results credited only under global δ-pinching: 'first proven for globally δ-pinched manifolds by K. Grove, H. Karcher, and E. Ruh [9], [10] ... (δ = 0.98). The pinching constant was later improved by H. Im Hof and E. Ruh [16].' v1 has no equivariant statement; v2 Theorem 2 introduces it. No earlier pointwise-1/4 equivariant result found in the inspected predecessors (BW, Nguyen thesis, Ni-Wolfson).
+
+54. Brendle–Schoen convergence theorem for Ricci flow under positive complex sectional curvature (strict PIC2)
+   Let (M,g₀) be a compact Riemannian manifold of dimension n≥4 such that R₁₃₁₃+λ²R₁₄₁₄+μ²R₂₃₂₃+λ²μ²R₂₄₂₄−2λμR₁₂₃₄>0 for all orthonormal four-frames and all λ,μ∈[−1,1]; equivalently, at every point the curvature tensor lies in the interior of the cone of tensors whose zero extension to ℝⁿ×ℝ² has nonnegative isotropic curvature, i.e. g₀ has positive complex sectional curvature. Then the normalized Ricci flow from g₀ exists for all time and converges to a metric of constant positive sectional curvature.
+   Source: introduces, p. 290, Theorem 3; p. 303, Theorem 18; earliest appearance arXiv v1 (2007-05-06), Theorem 17 (cone form)
+   Note: Cone form from v1; λ,μ form from v3.
+   Origin evidence: VOR p.289: 'we establish a convergence result for the Ricci flow in dimension n ≥ 4 under a curvature condition which is substantially stronger than positive isotropic curvature, but includes the pointwise 1/4-pinched manifolds.' v1 Theorem 17 (2007-05-06): curvature in the interior of C-hat ⇒ normalized Ricci flow converges to constant curvature (proof via Cor. 16 and BW Thm 5.1). Mechanism credited to BW [3] and Hamilton [12]; the theorem for C-hat is not credited elsewhere. Ni-Wolfson (June 2007) attribute it to BS ('The consequence is the recent important result of Brendle and Schoen', Cor. 3.3) and reprove it via complex sectional curvature. Nguyen's thesis has no product cones or convergence theorem for them.
+
+55. Preservation of positive isotropic curvature under Ricci flow in all dimensions
+   For n≥4, the set of algebraic curvature tensors on ℝⁿ with nonnegative isotropic curvature is invariant under Hamilton's ODE dR/dt=Q(R); consequently, on a compact manifold of dimension n≥4, nonnegative isotropic curvature and positive isotropic curvature of g(0) are preserved along the Ricci flow g(t).
+   Source: introduces, p. 289; §2, pp. 290-299, Proposition 11 (p. 298); earliest appearance arXiv v1 (2007-05-06), §2
+   Note: Independent co-origin with H. Nguyen; n=4 due to Hamilton (1997). Relative priority not established.
+   Origin evidence: VOR p.289: 'In Section 2 we prove that positive isotropic curvature is preserved by the Ricci flow in all dimensions'; 'In dimension 4, it was shown by R. Hamilton [14]'; 'After this paper was written, we learned that H. Nguyen [22] has independently proved that positive isotropic curvature is preserved under the Ricci flow.' v1 (2007-05-06) p.2 already says: 'We have learned that H. Nguyen has independently proved that PIC is preserved under the Ricci flow in his PhD dissertation.' Nguyen thesis (title page January 2008, ANU hdl 1885/150367) abstract: 'We illustrate these ideas by showing that non-negative isotropic curvature is preserved by the Ricci flow in all dimensions'; Theorem 4.8; its body reproves Hamilton's n=4 case and cites [BS] only in the bibliography (OCR). Ni-Wolfson (June 2007): 'Brendle and Schoen [BS] ... added ... positive isotropic curvature. See also [Ng].'
+
+56. Nonnegative complex sectional curvature (PIC2 cone Ĉ)
+   An algebraic curvature tensor R on ℝⁿ has nonnegative complex sectional curvature if R(Z,W,Z̄,W̄)≥0 for all Z,W∈ℂⁿ, with R extended complex-multilinearly. Equivalently, its zero extension R̂ to ℝⁿ×ℝ², the curvature tensor of M×ℝ², has nonnegative isotropic curvature (Ni–Wolfson 2007, Prop. 5.1, after N. Wallach and a communication from Brendle–Schoen). These tensors form a closed convex O(n)-invariant cone Ĉ that contains every nonnegative curvature operator and lies in the cone of nonnegative sectional curvature; its interior is positive complex sectional curvature (strict PIC2).
+   Source: explains, pp. 289-290 (R̂ and M×ℝ²); p. 299 (definition of Ĉ), Proposition 12(ii)-(iii); pp. 304-305, Proposition 21
+   Note: Defined in the M×ℝ² form and basic properties proved. Origin of the cone unresolved; introduces not certified. The M×ℝ² formulation itself first appears here (v1 p. 3) and is credited to Brendle–Schoen by Ni–Wolfson §5.
+
+57. PIC1 condition: positive isotropic curvature of M×ℝ
+   For an algebraic curvature tensor R on ℝⁿ let R̃ be its extension to ℝⁿ×ℝ by zero in the added direction, i.e. the curvature tensor of M×ℝ. R satisfies PIC1 if R̃ has positive isotropic curvature (nonnegative PIC1 if R̃ has nonnegative isotropic curvature). PIC1 implies R₁₂₁₂+R₁₃₁₃>0 for all orthonormal three-frames (2-positive flag curvature) and hence positive Ricci curvature.
+   Source: discusses, p. 289
+   Note: Defined in passing; not used in §§2-4.
+
+58. PIC1 condition: positive isotropic curvature of M×ℝ
+   For an algebraic curvature tensor R on ℝⁿ let R̃ be its extension to ℝⁿ×ℝ by zero in the added direction, i.e. the curvature tensor of M×ℝ. R satisfies PIC1 if R̃ has positive isotropic curvature (nonnegative PIC1 if R̃ has nonnegative isotropic curvature). PIC1 implies R₁₂₁₂+R₁₃₁₃>0 for all orthonormal three-frames (2-positive flag curvature) and hence positive Ricci curvature.
+   Source: introduces, p. 289 (definition of R̃); earliest appearance arXiv v1 (2007-05-06) p. 3
+   Note: Definition only.
+   Origin evidence: VOR p.289: 'we define R̃ to be the extension of R as a curvature tensor on Rⁿ × R which is zero in the additional direction. Thus R̃ is the curvature tensor one obtains for the manifold M × R. The condition that R̃ has positive isotropic curvature ... is a much stronger condition than positive isotropic curvature itself.' Present in v1 p.3. Ni-Wolfson §5: 'In [BS], the authors introduced two invariant curvature cones C̃ and Ĉ', and their Prop. 5.2 characterizes C̃ as nonnegativity on isotropic 2-vectors Z∧W (a later result). Not found in Nguyen's thesis, BW, or Yau-Zheng. No earlier equivalent named condition known to this reviewer; the opposite-sign analogue was not searched.
+
+59. Ricci flow preserves nonnegative complex sectional curvature (PIC2)
+   For n≥4, the cone Ĉ of algebraic curvature tensors whose zero extension to ℝⁿ×ℝ² has nonnegative isotropic curvature (equivalently, nonnegative complex sectional curvature) is invariant under Hamilton's ODE dR/dt=Q(R), because zero extension commutes with Q; hence the condition is preserved by Ricci flow on compact manifolds. The same argument on ℝⁿ×ℝ shows that PIC1 is preserved.
+   Source: introduces, pp. 289-290; p. 299, Proposition 12(i); earliest appearance arXiv v1 (2007-05-06) §3
+   Note: Only the PIC2 case is proved; PIC1 asserted on p. 289.
+   Origin evidence: VOR p.289-290: 'The condition that R̃ has positive isotropic curvature is preserved by the Ricci flow'; 'The condition that R̂ has nonnegative isotropic curvature is, again, preserved by the Ricci flow.' v1 §3 (2007-05-06): 'Consequently, the cone Ĉ is invariant under the same ODE.' No predecessor credit. Nguyen thesis treats only PIC (no products). Ni-Wolfson (June 2007) prove invariance of nonnegative complex sectional curvature directly (= C-hat by their Prop. 5.1) and attribute the cones to BS. No earlier result on invariance of (nonnegative) complex sectional curvature under Ricci flow was found.
+
+60. Brendle–Schoen characterization of the PIC2 condition
+   For an algebraic curvature tensor R on ℝⁿ (n≥4), the zero extension R̂ to ℝⁿ×ℝ² has nonnegative isotropic curvature if and only if R(e₁,e₃,e₁,e₃)+λ²R(e₁,e₄,e₁,e₄)+μ²R(e₂,e₃,e₂,e₃)+λ²μ²R(e₂,e₄,e₂,e₄)−2λμR(e₁,e₂,e₃,e₄)≥0 for all orthonormal four-frames {e₁,…,e₄} of ℝⁿ and all λ,μ∈[−1,1].
+   Source: introduces, pp. 304-305, Proposition 21 (with Lemmas 19-20); first appears in arXiv v2 (2007-05-22), Prop. 20
+   Note: Not in v1.
+   Origin evidence: VOR p.290: 'in Section 4 we give a necessary and sufficient condition for R̂ to have nonnegative isotropic curvature.' v2 §4 'Characterization of the cone Ĉ', Prop. 20. The only credit is for the linear-algebra Lemma 19 ('cf. [6], Lemma 3.1'); Nguyen's thesis restates Chen's Lemma 3.1 (Lemma 3.10) as a normal form for orthonormal bases of Λ+ and Λ− in dimension 4, not a criterion for R̂. Ni-Wolfson's later characterization (Prop. 5.1) is in complex terms. Precursor (not co-origin): Yau–Zheng 1991 p. 531 (page image checked) reduce a maximizing complex pair to Z=X+iY, W=U+iV with X,Y,U,V pairwise orthogonal, |X|=1≥|Y|, |U|=1≥|V|, inside the proof of their Lemma 2 for the sign-reversed condition; this is not stated as a characterization and concerns a cone identified with Ĉ only in June 2007.
+
+61. Pointwise 1/4-pinched curvature implies nonnegative complex sectional curvature
+   If all sectional curvatures of an algebraic curvature tensor R on ℝⁿ lie in [κ,4κ] with κ≥0, then R has nonnegative complex sectional curvature; equivalently, its zero extension to ℝⁿ×ℝ² has nonnegative isotropic curvature. If the sectional curvatures are strictly pointwise 1/4-pinched, R has positive complex sectional curvature. Yau–Zheng (1991) state the sign-reversed form for negatively 1/4-pinched curvature.
+   Source: explains, pp. 305-306, Corollary 22
+   Note: Another proof, in M×ℝ² language, via Proposition 21 and Berger's inequality (v1 Prop. 22 had a different proof). Uncited prior result: Yau–Zheng, Invent. Math. 103 (1991), Lemma 2, p. 530.
+
+62. Böhm–Wilking pinching set theorem
+   Böhm–Wilking (Ann. of Math. 2008, Theorem 4.1): given a continuous family C(s), s∈[0,1), of closed convex O(n)-invariant full-dimensional cones whose nonzero elements have positive scalar curvature and on whose nonzero elements Q points into the interior of the tangent cone for s∈(0,1), and given ε,h₀>0, there is a closed convex O(n)-invariant set F, invariant under dR/dt=Q(R), with C(ε)∩{tr R≤h₀}⊂F and F∖C(s) bounded for every s∈[ε,1) (a generalized pinching set).
+   Source: explains, p. 302, Proposition 17 (credited 'Böhm and Wilking [3], Theorem 4.1') with a new proof via Proposition 16, pp. 301-302
+   Note: The paper gives 'a slightly different construction of such a set ... for the convenience of the reader' (p. 301): another proof of a credited theorem, specialized to C-hat.
+
+63. Rauch–Berger–Klingenberg topological sphere theorem
+   A compact simply connected Riemannian n-manifold whose sectional curvatures lie in (1,4] is homeomorphic to Sⁿ. Rauch posed the problem and proved a version with a stronger pinching constant; Berger and Klingenberg proved the 1/4-pinched statement around 1960 by comparison geometry.
+   Source: discusses, p. 287, §1 (refs [26],[2],[18])
+   Note: Historical motivation.
+
+64. Globally δ-pinched Riemannian manifold
+   For 0<δ≤1, a Riemannian manifold is globally δ-pinched if, after scaling, all its sectional curvatures at all points lie in (1,1/δ]; for δ=1/4 this is the hypothesis of the topological sphere theorem.
+   Source: discusses, p. 288, §1 (definition for comparison with pointwise pinching)
+   Note: Context: contrasts the global pinching of earlier work with pointwise pinching.
+
+65. Gromoll–Calabi differentiable sphere theorem
+   For each n there is δ(n)∈(0,1), with δ(n)→1 as n→∞, such that every compact simply connected globally δ(n)-pinched Riemannian n-manifold is diffeomorphic to Sⁿ (Gromoll 1966, and independently Calabi). Later work (Sugimoto–Shiohama–Karcher, Ruh, Grove–Karcher–Ruh) obtained pinching constants independent of n.
+   Source: discusses, p. 288, §1 (refs [8],[29],[27],[10],[28])
+   Note: Earlier differentiable sphere theorems with stronger pinching.
+
+66. Grove–Karcher–Ruh equivariant sphere theorem
+   There is a universal constant δ<1 (δ=0.98 in the original, later improved by Im Hof–Ruh) such that if a compact Lie group G acts by isometries on a compact simply connected globally δ-pinched Riemannian n-manifold M, then M is G-equivariantly diffeomorphic to Sⁿ with a linear orthogonal G-action.
+   Source: discusses, p. 288, §1 (refs [9],[10],[16])
+   Note: Predecessor of Theorem 2.
+
+67. Hamilton's theorem on three-manifolds with positive Ricci curvature
+   A compact three-manifold with a Riemannian metric of positive Ricci curvature admits a metric of constant positive sectional curvature: the normalized Ricci flow exists for all time and converges to such a metric (Hamilton 1982).
+   Source: discusses, p. 288, §1 (ref [11])
+   Note: Origin of the Ricci-flow method.
+
+68. Hamilton's theorem on four-manifolds with positive curvature operator
+   A compact four-manifold with a metric of positive curvature operator is diffeomorphic to a spherical space form (S⁴ or ℝP⁴): the normalized Ricci flow converges to a constant curvature metric (Hamilton 1986).
+   Source: discusses, p. 288, §1 (ref [12])
+   Note: Context; the same paper supplies the maximum principle and pinching-set argument recorded separately.
+
+69. H. Chen's theorem on four-manifolds with 2-positive curvature operator
+   H. Chen (Ann. Global Anal. Geom. 1991): a compact four-manifold with 2-positive curvature operator is diffeomorphic to S⁴ or ℝP⁴ (via Ricci flow), and a compact pointwise 1/4-pinched four-manifold is diffeomorphic to S⁴ or ℝP⁴ or, in the weakly pinched case, isometric to ℂP² up to scaling.
+   Source: discusses, p. 288, §1 (ref [6], 'which implies Theorem 1 for n = 4')
+   Note: Prior four-dimensional case of Theorem 1.
+
+70. Andrews–Nguyen theorem on four-manifolds with 1/4-pinched flag curvature
+   Compact four-manifolds with pointwise 1/4-pinched flag curvature (in the sense of Andrews–Nguyen) are diffeomorphic to spherical space forms; proved with the Ricci flow.
+   Source: discusses, p. 288, §1 (ref [1], preprint 2007)
+   Note: Concurrent four-dimensional result.
+
+71. Huisken's theorem: sufficiently pinched manifolds are space forms
+   For each n≥4 there is ε(n)>0 such that a compact n-manifold of positive scalar curvature whose curvature tensor is pointwise ε(n)-close to constant curvature, in the sense that the Weyl and trace-free Ricci parts are small relative to the scalar curvature, is deformed by the normalized Ricci flow to a metric of constant curvature (Huisken 1985; also Margerin, Nishikawa).
+   Source: discusses, p. 288, §1 (refs [15],[19],[23])
+   Note: Higher-dimensional Ricci-flow precursor.
+
+72. Böhm–Wilking theorem: manifolds with 2-positive curvature operator are space forms
+   On a compact Riemannian manifold with 2-positive curvature operator (in particular positive curvature operator), the normalized Ricci flow converges to a metric of constant positive sectional curvature, so the manifold is diffeomorphic to a spherical space form (Böhm–Wilking, Ann. of Math. 2008). The theorem was previously known in dimensions at most four (Hamilton, Chen).
+   Source: discusses, p. 288, §1 (ref [3])
+   Note: Context; the specific lemmas and theorems of [3] that are imported are recorded separately.
+
+73. Micallef–Moore sphere theorem for positive isotropic curvature
+   A compact simply connected Riemannian manifold of dimension n≥4 with positive isotropic curvature is a homotopy sphere, hence homeomorphic to Sⁿ by the generalized Poincaré conjecture; the proof uses minimal two-spheres from the variational theory of the energy of maps S²→M and an index estimate from the second variation (Micallef–Moore 1988).
+   Source: discusses, p. 288-289, §1 (ref [20])
+   Note: Origin of positive isotropic curvature; topological predecessor.
+
+74. Ricci flow with surgery
+   A procedure that runs the Ricci flow until high-curvature regions form, cuts along nearly round necks, caps the pieces with standard caps and restarts the flow, with controlled surgery parameters. Introduced by Hamilton for four-manifolds with positive isotropic curvature and developed by Perelman in dimension three; Chen–Zhu completed the four-dimensional positive isotropic curvature case.
+   Source: discusses, p. 289, §1 (refs [13],[14],[5],[24],[25])
+   Note: Context: the paper explicitly does not treat the PIC flow with surgery.
+
+75. Brendle–Schoen classification of manifolds with weakly 1/4-pinched curvature
+   A compact Riemannian manifold of dimension n≥4 with pointwise weakly 1/4-pinched sectional curvatures (0≤K(π₁)≤4K(π₂) at each point) is either diffeomorphic to a spherical space form or isometric to a locally symmetric space (Brendle–Schoen, Acta Math. 2008).
+   Source: discusses, p. 287, §1 (ref [4], 'We refer to [4] for details')
+   Note: Extension of the present techniques, treated in a separate paper.
+
+76. Compact rank one symmetric space
+   A compact Riemannian symmetric space of rank one: a round sphere, real, complex or quaternionic projective space, or the Cayley projective plane. With suitably normalized canonical metrics the complex, quaternionic and Cayley projective spaces have sectional curvatures ranging over [1,4] at every point.
+   Source: discusses, p. 287, §1 (first paragraph)
+   Note: Known examples of positive curvature showing 1/4 is sharp.
+
+77. 2-positive curvature operator
+   An algebraic curvature tensor (or a Riemannian manifold, at every point) has 2-positive curvature operator if the sum of the two smallest eigenvalues of its curvature operator on ∧² is positive, and 2-nonnegative curvature operator if this sum is nonnegative.
+   Source: discusses, p. 288, §1 (Chen [6]; Böhm–Wilking [3])
+   Note: Context for earlier Ricci-flow sphere theorems.
+
+78. Nonnegativity of the trace of a product of positive semidefinite matrices
+   If A and B are real symmetric positive semidefinite n×n matrices, then tr(AB)≥0.
+   Source: relies_on, p. 298, proof of Proposition 9 ('Since L is positive semi-definite, we have 0 ≤ ¼ tr(LULUᵀ)')
+   Note: Uncited elementary fact giving the key inequality of §2.
+
+79. Euclidean unit sphere
+   The unit sphere S^(n−1) is {x∈ℝⁿ:|x|=1}, with the subspace topology and its rotation-invariant surface measure when needed.
+   Source: relies_on, p. 288, Theorem 2 (F: M → Sⁿ with σ(g)∈O(n+1))
+   Note: Target of the equivariant diffeomorphism with its linear O(n+1)-action.
+
+80. Group homomorphism
+   A map f:G→H satisfying f(xy)=f(x)f(y) for all x,y.
+   Source: relies_on, p. 288, Theorem 2 (ρ: G → Isom(M), σ: G → O(n+1))
+   Note: Statement of Theorem 2 is phrased with homomorphisms.
+
+81. Induced inner product on the exterior square of a Euclidean space
+   For a Euclidean space V, the inner product on ∧²V with ⟨x∧y,z∧w⟩=⟨x,z⟩⟨y,w⟩−⟨x,w⟩⟨y,z⟩, for which e_i∧e_j (i<j) is an orthonormal basis whenever (e_i) is.
+   Source: relies_on, pp. 303-305, Lemmas 19-20 and Proposition 21; p. 300, proof of Proposition 12(iii)
+   Note: Inner products of two-vectors throughout §4.
+
+ADDITIONAL PREREQUISITES (93)
+
+- Abelian group [definition]: A group whose operation is commutative.
+- Associative algebra over a field [definition]: A vector space with an associative bilinear multiplication and a multiplicative identity.
+- Bijection between sets [definition]: A function for which each element of the codomain is the image of exactly one element of the domain.
+- Bilinear map [definition]: A map of two vector-space variables that is linear in each variable separately.
+- Binary operation on a set [definition]: A function S×S→S.
+- Binary relation on a set [definition]: A subset R⊆S×S; writing xRy means (x,y)∈R.
+- Bounded linear operator [definition]: A linear map T:X→Y between normed vector spaces is bounded if ∥Tx∥≤C∥x∥ for one finite constant C and every x∈X.
+- C^k map between Euclidean open sets [definition]: For a finite integer k≥0, a map between open Euclidean sets is C^k if all component partial derivatives of total order at most k exist and are continuous; order zero is the component itself, so C^0 means continuous. A map is C^∞ when it is C^k for every finite k.
+- Cartesian product of sets [definition]: A×B is the set of ordered pairs (a,b) with a∈A and b∈B.
+- Commutative ring with identity [definition]: An abelian group under addition, together with an associative commutative multiplication with identity, distributing over addition. The zero ring is allowed.
+- Complement of a subset [definition]: For A⊆Ω, its complement Ω∖A consists of the elements of Ω that do not belong to A.
+- Complex conjugation [definition]: The complex conjugate of z=a+bi is z̄=a−bi.
+- Complex number [definition]: A complex number is a pair of real numbers, written a+bi. Addition is componentwise and multiplication is (a+bi)(c+di)=(ac−bd)+(ad+bc)i, so i²=−1.
+- Continuous map between topological spaces [definition]: A map is continuous if the preimage of every open subset of its target is open in its domain.
+- Continuously differentiable Euclidean map [definition]: A map on an open Euclidean set whose first coordinate partial derivatives exist and are continuous.
+- Convergence of a sequence in a metric space [definition]: A sequence (xₙ) in a metric space (X,d) converges to x∈X if for every ε>0 there is N such that d(xₙ,x)<ε whenever n≥N.
+- Convergent real series [definition]: The series ∑ₙ≥1aₙ converges to S if its sequence of partial sums converges to S.
+- Convex subset of ℝᵈ [definition]: C⊆ℝᵈ is convex if (1−t)x+ty∈C whenever x,y∈C and 0≤t≤1.
+- Derivation of an algebra [definition]: A linear map D:A→A on an associative algebra over a field satisfying D(ab)=D(a)b+aD(b).
+- Derivative of a real function [definition]: The derivative f′(x) is the finite limit of (f(x+h)−f(x))/h as h→0, when it exists. Higher derivatives are defined by iteration.
+- Disjoint sets [definition]: Two sets are disjoint when they have no common element; a family is pairwise disjoint when every two distinct members are disjoint.
+- Eigenvalue of a linear endomorphism [definition]: A scalar λ for which a linear endomorphism T has a nonzero vector v with Tv=λv.
+- Euclidean space ℝᵈ [definition]: For d≥1, ℝᵈ consists of d-tuples of real numbers with distance dist(x,y)=(∑ᵢ(xᵢ−yᵢ)²)¹ᐟ².
+- Extended nonnegative real numbers [definition]: The nonnegative real numbers together with a greatest element ∞. Sums involving ∞ equal ∞, and 0·∞ is taken to be 0 when integrating simple functions.
+- Factorial [definition]: For n≥1, n!=1·2···n, and 0!=1.
+- Field [definition]: A commutative ring in which 1≠0 and every nonzero element is invertible.
+- Finite set [definition]: A set X is finite if it is bijective with {1,…,n} for some natural number n≥0; its cardinality is n.
+- Fréchet derivative between normed spaces [definition]: The Fréchet derivative of f at x is a bounded linear map A with ∥f(x+h)−f(x)−Ah∥/∥h∥→0 as h→0.
+- Function between sets [definition]: An assignment taking each element of a specified domain set to exactly one element of a specified codomain set.
+- Gradient of a scalar function on Euclidean space [definition]: For differentiable f on an open subset of R^n, the vector ∇f=(∂₁f,…,∂ₙf), defined by its coordinate partial derivatives.
+- Group [definition]: A set with an associative binary operation, an identity element, and a two-sided inverse for each element.
+- Hausdorff measure of a metric space [definition]: For s≥0, the s-dimensional Hausdorff measure is the limit as δ↓0 of the infimum of normalized sums of diameters^s over countable covers by sets of diameter at most δ.
+- Hausdorff topological space [definition]: A topological space in which any two distinct points have disjoint open neighbourhoods.
+- Hermitian complex matrix [definition]: A square complex matrix A is Hermitian if its conjugate transpose A* equals A; equivalently A_(ij)=overline(A_(ji)) for every i,j.
+- Hessian matrix of a C² function on Euclidean space [definition]: For a C² real function f on an open subset of ℝⁿ, the n×n matrix ∇²f(x)=(∂_i∂_jf(x)) of second partial derivatives at x; it is the Jacobian matrix of the gradient ∇f and defines the quadratic form v↦vᵀ∇²f(x)v.
+- Homeomorphism [definition]: A bijection between topological spaces that is continuous and has a continuous inverse.
+- Homomorphism of modules over a commutative ring [definition]: An additive map f:M→N of modules over the same commutative ring satisfying f(rm)=rf(m).
+- Homotopy of continuous maps [definition]: A homotopy from continuous f₀:X→Y to f₁:X→Y is a continuous map F:X×[0,1]→Y with F(x,0)=f₀(x) and F(x,1)=f₁(x). A homotopy relative to A⊆X additionally keeps F(a,t) constant in t for each a∈A.
+- Intersection of a family of sets [definition]: Inside a specified ambient set, the elements belonging to every member of the family.
+- Jacobian matrix of a differentiable Euclidean map [definition]: For f:ℝⁿ→ℝᵐ, its Jacobian matrix at a point has entries ∂f_i/∂x_j. For m=n its determinant is the Jacobian determinant.
+- Least upper bound in a partially ordered set [definition]: For A⊆P, its least upper bound is an upper bound s satisfying s≤b for every upper bound b of A, when such an s exists.
+- Limit of a function between metric spaces [definition]: For f defined near an accumulation point a of a metric space, lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<d(x,a)<δ implies d(f(x),L)<ε.
+- Limit of a real function at a point [definition]: The relation lim_{x→a}f(x)=L means that for every ε>0 there is δ>0 such that 0<|x−a|<δ in the domain implies |f(x)−L|<ε.
+- Limit of a real sequence [definition]: A sequence (aₙ) converges to L∈ℝ if for every ε>0 there is N such that n≥N implies abs(aₙ−L)<ε.
+- Linear combination of vectors [definition]: A finite sum a₁v₁+⋯+aₙvₙ of vectors multiplied by scalars from their vector space’s ground field; the empty sum is zero.
+- Linear map between vector spaces [definition]: A map between vector spaces over the same field preserving addition and scalar multiplication.
+- Lipschitz map between metric spaces [definition]: A map f:(X,d)→(Y,e) is Lipschitz if e(f(x),f(y))≤L d(x,y) for one finite constant L and all x,y∈X.
+- Local extremum of a real-valued function on a metric space [definition]: A function f:X→ℝ on a metric space has a local (relative) maximum at c∈X if for some δ>0, f(x)≤f(c) for every x∈X with d(x,c)<δ; a local minimum reverses the inequality, and a local extremum is either. Subsets of ℝ and ℝⁿ carry the Euclidean metric.
+- Matrix over a ring [definition]: A rectangular array of elements of a ring; addition is entrywise and matrix multiplication uses row-by-column sums.
+- Measure [definition]: A measure μ maps a σ-algebra to [0,∞], sends ∅ to 0, and satisfies μ(⋃ₙAₙ)=∑ₙμ(Aₙ) for every pairwise disjoint sequence of measurable sets.
+- Metric space [definition]: A set X with a function d:X×X→[0,∞) such that d(x,y)=0 exactly when x=y, d(x,y)=d(y,x), and d(x,z)≤d(x,y)+d(y,z).
+- Module over a commutative ring [definition]: An abelian group M with an action of a commutative ring R satisfying r(m+n)=rm+rn, (r+s)m=rm+sm, (rs)m=r(sm), and 1m=m. Unlike a vector space, its scalar ring need not be a field.
+- Modulus of a complex number [definition]: For z=a+bi, its modulus is the nonnegative real number |z|=√(a²+b²).
+- Natural logarithm [definition]: The inverse ln:(0,∞)→ℝ of the real exponential function.
+- Natural number [definition]: One of 0, 1, 2, …; natural numbers count finite collections.
+- Nonnegative real square root [definition]: For t≥0, √t is the unique real number y≥0 satisfying y²=t.
+- Normed vector space [definition]: A real or complex vector space X with a function ∥·∥:X→[0,∞) that is positive except at zero, absolutely homogeneous, and subadditive.
+- Open interval in the real line [definition]: For real a<b, the set (a,b)={x∈ℝ:a<x<b}.
+- Ordered field [definition]: A field with a total order preserved by addition, in which the product of two positive elements is positive.
+- Ordered pair [definition]: A pair (x,y) with distinguished first and second entries; (x,y)=(x′,y′) exactly when x=x′ and y=y′.
+- Partial derivative in Euclidean coordinates [definition]: The ith partial derivative of f at x is the derivative at zero of t↦f(x+t e_i), with all other coordinates fixed; vector-valued maps are differentiated componentwise.
+- Partial order [definition]: A reflexive, antisymmetric and transitive binary relation, usually written ≤.
+- Path-connected topological space [definition]: A topological space in which every pair of points is joined by a continuous map from [0,1] with those endpoints.
+- Positive definite real matrix [definition]: A symmetric real matrix A such that xᵀAx>0 for every nonzero real column vector x.
+- Positive semidefinite complex matrix [definition]: A Hermitian n×n complex matrix A is positive semidefinite if z*Az≥0 for every z∈ℂⁿ.
+- Preimage of a subset under a function [definition]: For f:A→B and E⊆B, f⁻¹(E)={x∈A:f(x)∈E}.
+- Product topology [definition]: On a Cartesian product of topological spaces, the topology with basic open sets restricting finitely many coordinates to open subsets and leaving all other coordinates unrestricted.
+- Quotient module [definition]: For a submodule N of an R-module M, the cosets M/N carry addition and scalar multiplication induced from M.
+- Quotient of an abelian group by a subgroup [definition]: For an abelian group G and subgroup H,the cosets G/H form an abelian group under (g+H)+(g′+H)=g+g′+H.
+- Real exponential function [definition]: The real function exp(x)=∑_{n≥0}xⁿ/n!, whose series converges for every real x.
+- Real number [definition]: A real number is an element of a complete ordered field ℝ; completeness means every nonempty subset bounded above has a least upper bound.
+- Real orthogonal matrix [definition]: A real square matrix U with UᵀU=I, equivalently a linear map preserving the Euclidean inner product.
+- Real power of a positive real number [definition]: For x>0 and p∈ℝ, define xᵖ=exp(p log x). For p>0 extend by 0ᵖ=0.
+- Real sequence [definition]: A real sequence is a function a:ℕ₊→ℝ, written (aₙ)ₙ≥1.
+- Sequence in a set [definition]: A function from the natural numbers, or the positive natural numbers, to that set.
+- Set [definition]: A collection of distinct elements, regarded as one object.
+- Singular values of a complex matrix [construction]: For a complex m×n matrix M, its singular values σ₁≥⋯≥σ_q≥0, q=min(m,n), are the nonnegative square roots of the eigenvalues of M*M, with the additional forced zero eigenvalues omitted when n>m.
+- Smooth map between open Euclidean sets [definition]: A map on an open subset of ℝⁿ is smooth if all of its component partial derivatives of every order exist and are continuous.
+- Smooth vector field on a manifold [definition]: An R-linear derivation of the algebra C∞(M) of smooth real functions on a smooth manifold M. In local coordinates it acts as ∑_i X^i(x)∂_i with smooth coefficient functions.
+- Subgroup [definition]: A subset of a group containing the identity and closed under multiplication and inverses.
+- Submodule of a module over a commutative ring [definition]: An additive subgroup of a module stable under multiplication by every scalar of its coefficient ring.
+- Subset [definition]: A⊆B means every element of A is an element of B.
+- Subspace topology [definition]: For A⊆X, the topology whose open sets are A∩U for U open in X.
+- Sum of a nonnegative series [definition]: For aₙ≥0, define ∑ₙ≥1aₙ as the supremum of its finite partial sums; the value may be infinite.
+- Symmetric matrix [definition]: A square matrix A equal to its transpose, so aᵢⱼ=aⱼᵢ.
+- Tensor product of modules over a commutative ring [definition]: For R-modules M,N, the R-module M⊗_R N with a bilinear map (m,n)↦m⊗n through which every R-bilinear map M×N→P factors uniquely by an R-linear map.
+- Topological space [definition]: A set X with a family τ of subsets, called open sets, containing ∅ and X and closed under arbitrary unions and finite intersections.
+- Total order [definition]: A partial order in which any two elements are comparable.
+- Transpose of a matrix [definition]: For anm×n matrixA=(a_ij), the transposedn×m matrixAᵀ has entries(Aᵀ)_ij=a_ji.
+- Twice continuously differentiable Euclidean map [definition]: A map on an open subset of ℝⁿ is C² if all its component partial derivatives of first and second order exist and are continuous.
+- Union of a family of sets [definition]: The set of elements belonging to at least one member of the family.
+- Vector space [definition]: An abelian group with scalar multiplication by a field satisfying a(v+w)=av+aw, (a+b)v=av+bv, (ab)v=a(bv), and 1v=v.
+- σ-algebra [definition]: A σ-algebra on Ω contains Ω and is closed under complements in Ω and countable unions.
+
+CITATIONS
+
+  [[1]] B. Andrews and H. Nguyen, Four-manifolds with 1/4-pinched flag curvatures, preprint
+(2007).
+    Pedagogically necessary: no
+    Needed material: Context/credit only: concurrent four-dimensional flag-curvature result (p. 288). Possible later publication (Asian J. Math. 13 (2009) 251–270, doi 10.4310/ajm.2009.v13.n2.a5) is an unverified lead from the reviewers; not attached.
+
+  [[2]] M. Berger, Les variétés Riemanniennes 1/4-pincées, Ann. Scuola Norm. Sup. Pisa 14, 161–
+170 (1960). MR0140054 (25:3478)
+    Pedagogically necessary: no
+    Needed material: Context/credit only: topological 1/4-pinched sphere theorem (p. 287).
+
+  [[3]] C. Böhm and B. Wilking, Manifolds with positive curvature operator are space forms, Ann.
+of Math. 167, 1079–1097 (2008).
+    Pedagogically necessary: yes
+    doi: 10.4007/annals.2008.167.1079
+    Needed material: Theorem 2 (ℓ_{a,b} and the Weyl-independence of D_{a,b}); Lemmas 3.4 and 3.5 (stated for the nonnegative cone; BS Propositions 13-14 are asserted 'analogous'); §3 definition of pinching family (Proposition 15); Theorem 4.1 (restated as Proposition 17 and reproved); Theorem 5.1 and its proof (Theorem 18). Checked against arXiv:math/0606187; Annals numbering assumed to agree.
+
+  [[4]] S. Brendle and R. Schoen, Classification of manifolds with weakly 1/4-pinched curvatures,
+Acta Math. 200, 1–13 (2008). MR2386107
+    Pedagogically necessary: no
+    doi: 10.1007/s11511-008-0022-7
+    Needed material: Context only: extension to weakly 1/4-pinched curvature (p. 287).
+
+  [[5]] B. Chen and X. Zhu, Ricci flow with surgery on four-manifolds with positive isotropic cur-
+vature, J. Diff. Geom. 74, 177–264 (2006). MR2258799 (2007f:53077)
+    Pedagogically necessary: no
+    Needed material: Context only: Ricci flow with surgery on PIC four-manifolds (p. 289).
+
+  [[6]] H. Chen, Pointwise 1/4-pinched 4-manifolds, Ann. Global Anal. Geom. 9, 161–176 (1991).
+MR1136125 (93b:53028)
+    Pedagogically necessary: no
+    doi: 10.1007/bf00776854
+    Needed material: Credit for Lemma 19 (Lemma 3.1 of [6]), which the paper reproves in full; context: four-dimensional case of Theorem 1 (p. 288). Full text not inspected; zbMATH review confirms the n=4 pointwise 1/4-pinched classification.
+
+  [[7]] A. Fraser, Fundamental groups of manifolds with positive isotropic curvature, Ann. of Math.
+158, no. 1, 345–354 (2003). MR1999925 (2004j:53050)
+    Pedagogically necessary: no
+    doi: 10.4007/annals.2003.158.345
+    Needed material: Context only (p. 289).
+
+  [[8]] D. Gromoll, Differenzierbare Strukturen und Metriken positiver Krümmung auf Sphären,
+Math. Ann. 164, 353–371 (1966). MR0196754 (33:4940)
+    Pedagogically necessary: no
+    doi: 10.1007/bf01350046
+    Needed material: Context/credit only: Gromoll's differentiable sphere theorem (p. 288).
+
+  [[9]] K. Grove, H. Karcher, and E. Ruh, Group actions and curvature, Invent. Math. 23, 31–48
+(1974). MR0385750 (52:6609)
+    Pedagogically necessary: no
+    doi: 10.1007/bf01405201
+    Needed material: Context/credit only: equivariant sphere theorem under global pinching (p. 288).
+
+  [[10]] K. Grove, H. Karcher, and E. Ruh, Jacobi fields and Finsler metrics on compact Lie
+groups with an application to differentiable pinching problems, Math. Ann. 211, 7–21 (1974).
+MR0355917 (50:8391)
+    Pedagogically necessary: no
+    doi: 10.1007/bf01344138
+    Needed material: Context/credit only: pinching constants 0.76 and equivariant result (p. 288).
+
+  [[11]] R. Hamilton, Three-manifolds with positive Ricci curvature, J. Diff. Geom. 17, 255–306
+(1982). MR664497 (84a:53050)
+    Pedagogically necessary: no
+    Needed material: Credit for the Ricci flow and normalized Ricci flow, whose definitions are restated (p. 288); short-time existence theory (implicit) is standard textbook material.
+
+  [[12]] R. Hamilton, Four-manifolds with positive curvature operator, J. Diff. Geom. 24, 153–179
+(1986). MR862046 (87m:53055)
+    Pedagogically necessary: yes
+    Needed material: Theorem 4.3 (maximum principle reducing preservation to the ODE, p. 289-290); the curvature evolution / ODE dR/dt=Q(R) (p. 288, p. 290); Section 5 (pinching-set convergence argument, pp. 301-302, Theorem 18).
+
+  [[13]] R. Hamilton, The formation of singularities in the Ricci flow, Surveys in Differential Geom-
+etry 2, 7–136 (1995). MR1375255 (97e:53075)
+    Pedagogically necessary: no
+    Needed material: Context only: singularity analysis (p. 289).
+
+  [[14]] R. Hamilton, Four-manifolds with positive isotropic curvature, Comm. Anal. Geom. 5, 1–92
+(1997). MR1456308 (99e:53049)
+    Pedagogically necessary: no
+    doi: 10.4310/cag.1997.v5.n1.a1
+    Needed material: Context/credit: Hamilton's four-dimensional PIC preservation and surgery (p. 289).
+
+  [[15]] G. Huisken, Ricci deformation of the metric on a Riemannian manifold, J. Diff. Geom. 21,
+47–62 (1985). MR806701 (86k:53059)
+    Pedagogically necessary: no
+    Needed material: Context only (p. 288).
+
+  [[16]] H. Im Hof and E. Ruh, An equivariant pinching theorem, Comment. Math. Helv. 50, no. 3,
+389–401 (1975). MR0385751 (52:6610)
+    Pedagogically necessary: no
+    doi: 10.1007/bf02565758
+    Needed material: Context/credit only: improved equivariant pinching constant (p. 288).
+
+  [[17]] H. Karcher, A short proof of Berger’s curvature tensor estimates, Proc. Amer. Math. Soc.
+26, 642–644 (1970). MR0270304 (42:5194)
+    Pedagogically necessary: yes
+    doi: 10.2307/2037127
+    Needed material: Berger's inequality |R(e1,e2,e3,e4)| ≤ (2/3)(K_max−K_min) only (proof of Corollary 22, p. 306, cited 'see e.g.'); any standard source would serve.
+
+  [[18]] W. Klingenberg, Über Riemannsche Mannigfaltigkeiten mit positiver Krümmung, Comment.
+Math. Helv. 35, 47–54 (1961). MR0139120 (25:2559)
+    Pedagogically necessary: no
+    doi: 10.1007/bf02567004
+    Needed material: Context/credit only: topological sphere theorem (p. 287).
+
+  [[19]] C. Margerin, Pointwise pinched manifolds are space forms, Geometric measure theory and
+the calculus of variations (Arcata 1984), 343–352, Proc. Sympos. Pure Math. 44, Amer. Math.
+Soc., Providence RI (1986). MR840282 (87g:53063)
+    Pedagogically necessary: no
+    doi: 10.1090/pspum/044/840282
+    Needed material: Context only (p. 288). Bibliography concern: the printed range 343–352 is identical to that printed for [23] in the same volume (Proc. Sympos. Pure Math. 44); at least one is likely a misprint. Not checked against the volume; printed text unchanged.
+
+  [[20]] M. Micallef and J.D. Moore, Minimal two-spheres and the topology of manifolds with positive
+curvature on totally isotropic two-planes, Ann. of Math. 127, 199-227 (1988). MR924677
+(89e:53088)
+    Pedagogically necessary: no
+    doi: 10.2307/1971420
+    Needed material: Credit for positive isotropic curvature, whose definition is restated in full (p. 289), and the topological PIC sphere theorem.
+
+  [[21]] M. Micallef and M. Wang, Metrics with nonnegative isotropic curvature, Duke Math. J. 72,
+no. 3, 649–672 (1993). MR1253619 (94k:53052)
+    Pedagogically necessary: no
+    doi: 10.1215/s0012-7094-93-07224-9
+    Needed material: Context only (p. 289).
+
+  [[22]] H. Nguyen, Invariant curvature cones and the Ricci flow, PhD thesis, Australian National
+University (2007).
+    Pedagogically necessary: no
+    Needed material: Credit only: independent proof of PIC preservation (p. 289). The printed title 'Invariant curvature cones and the Ricci flow' (2007) does not match the deposited ANU thesis 'Positive Isotropic Curvature and Ricci Flow' (January 2008; hdl 1885/150367); no identifier attached because the match is uncertain.
+
+  [[23]] S. Nishikawa, Deformation of Riemannian metrics and manifolds with bounded curvature
+ratios, Geometric measure theory and the calculus of variations (Arcata 1984), 343–352, Proc.
+Sympos. Pure Math. 44, Amer. Math. Soc., Providence RI (1986). MR840284 (87i:58032)
+    Pedagogically necessary: no
+    doi: 10.1090/pspum/044/840284
+    Needed material: Context only (p. 288). Bibliography concern: printed range 343–352 duplicates [19]; see the [19] note. Not checked; printed text unchanged.
+
+  [[24]] G. Perelman, The entropy formula for the Ricci flow and its geometric applications,
+arxiv:0211159.
+    Pedagogically necessary: no
+    arxiv: math/0211159
+    Needed material: Context only: Ricci flow with surgery (p. 289).
+
+  [[25]] G. Perelman, Ricci flow with surgery on three-manifolds, arxiv:0303109.
+    Pedagogically necessary: no
+    arxiv: math/0303109
+    Needed material: Context only: Ricci flow with surgery (p. 289).
+
+  [[26]] H.E. Rauch, A contribution to differential geometry in the large, Ann. of Math. 54, 38–55
+(1951). MR0042765 (13:159b)
+    Pedagogically necessary: no
+    doi: 10.2307/1969309
+    Needed material: Context/credit only: Rauch's pinching problem (p. 287).
+
+  [[27]] E. Ruh, Krümmung und differenzierbare Struktur auf Sphären II, Math. Ann. 205, 113–129
+(1973). MR0370429 (51:6656)
+    Pedagogically necessary: no
+    doi: 10.1007/bf01350841
+    Needed material: Context only: pinching constant 0.80 (p. 288).
+
+  [[28]] E. Ruh, Riemannian manifolds with bounded curvature ratios, J. Diff. Geom. 17, 643–653
+(1982). MR683169 (84d:53043)
+    Pedagogically necessary: no
+    Needed material: Context only: pointwise differentiable sphere theorem with constant tending to 1 (p. 288).
+
+  [[29]] M. Sugimoto, K. Shiohama, and H. Karcher, On the differentiable pinching problem, Math.
+Ann. 195, 1–16 (1971). MR0290291 (44:7475)
+    Pedagogically necessary: no
+    doi: 10.1007/bf02059412
+    Needed material: Context only: pinching constant 0.87 (p. 288).
+
