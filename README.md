@@ -110,12 +110,8 @@ from a later proof merely through their shared theorem record.
 The authoritative store is PostgreSQL on Neon (project `tauceti-shape-of-math`).
 Tools read its URL from `MATHDB_DATABASE` or `~/.config/shapeofmath/database_url`;
 see [the scaling plan](docs/SCALING.md). Until 2026-11-18 the store was
-`data/math.sqlite`, which is no longer tracked. Current counts
-and per-paper expansion frontiers are recorded in
-[the sample progress file](experiments/curation-2015/progress.json); readable
-exports are regenerated from the live store. The browser's
-[2015 sample page](http://localhost:8000/experiments/2015) links each sampled paper
-to its concepts and analysis notes.
+`data/math.sqlite`, which is no longer tracked. Readable exports are regenerated
+from the live store.
 
 The [collection-wide review](data/full-review.json) accounts individually for the
 267 active concepts, all 465 original prerequisite edges, all 279 original active
@@ -132,29 +128,16 @@ origin and source-coverage questions remain recorded and uncertified.
 Reproduce the reviewed content with `python build_full_review.py` and
 `python build_example.py`; apply the explicit judgments with
 `python curate_full_review.py`. The pre-review database and exact link inventory
-are preserved in [archive/before-full-data-review](archive/before-full-data-review/).
+were kept locally in `archive/before-full-data-review/`, which is not in git.
 
-The [cone overlap explorer](http://localhost:8000/experiments/2015/overlap) graphs
-the marginal and cumulative number of concepts covered as papers are added, within
-each sampled category and across all thirty. Means over orderings are exact;
-pointwise ranges show order variation. It distinguishes reviewed reading cones
-from provisional cones of all linked concepts. Export figures, CSVs, frozen sets,
-and a [methods and scaling assessment](experiments/curation-2015/overlap/report.md)
-are in `experiments/curation-2015/overlap/`. Reproduce statistics with its
-`analyse.py`; render PNG/SVG/PDF figures with its optional `plot.py`.
+Concept overlap within a group of sources (a *cohort*: a chosen arXiv sample,
+the papers of some journals, and so on) is measured by `cohorts.py`; see
+[cohort analysis](docs/COHORTS.md). The 2015 arXiv sample described below is
+recorded as [cohorts/arxiv-2015-sample.json](cohorts/arxiv-2015-sample.json).
 
-The [additional source assignments](http://localhost:8000/experiments/2015/more)
-track another ten papers per category. The fixed selection and pre-ingestion
-snapshot are in `experiments/curation-2015-round2/`. Curators receive fresh contexts
-containing the neutral assignments under `curation/source-tasks/`, the catalogue
-and the curation policy. Their prompts omit the overlap/modeling objectives and
-forecasts. Reviewed plans are imported mechanically with that directory's
-`coordinate.py`; reading, introduction, bibliography and cone reviews remain
-independent. Original analysis snapshots and forecasts stay frozen.
-
-The [2015 experiment report](experiments/curation-2015/report.txt) records a
-reproducible sample of ten papers each from math.FA, math.NT and math.PR
-([titles and identifiers](experiments/curation-2015/sample.tsv)). Two delegated
+An early experiment drew a reproducible sample of ten 2015 arXiv papers each
+from math.FA, math.NT and math.PR, and a second round added ten more per
+category. Two delegated
 initial source analyses cover *On mapping theorems for numerical range* and *Revisiting
 Kneser's Theorem for Field Extensions*, pinned to their 2015 arXiv v1 artifacts.
 Separate recursive investigations completely review the numerical-range cone
@@ -176,19 +159,6 @@ corrections and completeness judgments retain audit history. Since schema versio
 records each edge's statement/proof purpose separately from its pedagogical or
 logical basis, and reduction preserves both reachability relations.
 
-Each staged paper has `analysis.json`, `analysis-review.json` and `report.txt`
-under `experiments/curation-2015/papers/ARXIV_ID/`. After reviewing identities and
-mathematical claims, use `python experiments/curation-2015/apply_paper.py ARXIV_ID
---dry-run`, then the same command without `--dry-run`. A `--stage cone` batch
-applies independently reviewed recursive coverage. The ingester preflights an
-isolated copy, preserves stage hashes and refuses changed already-applied stages.
-
-After building, ingesting and reviewing the base seed, reproduce the additional
-curation with `python experiments/curation-2015/ingest.py --dry-run` and then
-`python experiments/curation-2015/ingest.py`; use `--db PATH` for an isolated copy.
-`python experiments/curation-2015/sample.py` reproduces the sample from the local
-inventory and recorded seed. Its date filter uses the arXiv identifier because
-the supplied `created` field does not consistently give the first-submission year.
 Internal metadata records whether an entry is a definition, theorem, construction,
 or conjecture; this is not an additional mathematical description.
 

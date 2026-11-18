@@ -28,29 +28,6 @@ DOCS = m.ROOT / 'API.md'
 if not DOCS.exists():
     DOCS = WEB.parent / 'API.md'
 
-EXPERIMENT_REPORTS = m.ROOT / 'experiments/curation-2015'
-if not EXPERIMENT_REPORTS.is_dir():
-    EXPERIMENT_REPORTS = WEB.parent / 'experiments/curation-2015'
-PUBLIC_REPORTS = ('sample.tsv', 'report.txt', 'fa-analysis.txt', 'nt-analysis.txt',
-                  'fa-cone.txt', 'nt-cone.txt', 'numerical-range.svg',
-                  'product-vector-subspaces-field.svg', 'unresolved.json')
-OVERLAP_REPORTS = ('index.html', 'explorer.js', 'explorer.css', 'snapshot.json',
-                   'results.json', 'curves.csv', 'papers.csv', 'report.md',
-                   'model-report.md', 'model-results.json', 'prospective-predictions.json',
-                   'model-pilot.png', 'model-pilot.svg', 'model-pilot.pdf') + tuple(
-    name + '.' + extension
-    for name in ('reading-marginal', 'reading-cumulative', 'reading_introduced-marginal',
-                 'reading_introduced-cumulative', 'all_linked-marginal', 'all_linked-cumulative',
-                 'reading-diagnostics', 'reading-pairwise')
-    for extension in ('svg', 'png', 'pdf'))
-EXPANDED_OVERLAP_REPORTS = ('index.html', 'explorer.js', 'snapshot.json', 'results.json',
-    'curves.csv', 'report.md', 'model-results.json', 'verification.json',
-    'models.png', 'models.svg', 'models.pdf') + tuple(
-        dataset+'-'+metric+'.'+extension
-        for dataset in ('all60', 'reviewed58', 'first30', 'next30')
-        for metric in ('known', 'marginal', 'cumulative')
-        for extension in ('svg', 'png', 'pdf'))
-
 
 class APIError(Exception):
     def __init__(self, status, message):
@@ -330,40 +307,6 @@ class Handler(BaseHTTPRequestHandler):
                         '/math-text.js':(WEB/'math-text.js','text/javascript; charset=utf-8'),
                         '/app.css':(WEB/'app.css','text/css; charset=utf-8'),
                         '/api/docs':(DOCS,'text/plain; charset=utf-8')}
-                assets['/experiments/2015']=(WEB/'experiments-2015.html','text/html; charset=utf-8')
-                assets['/experiments/2015/more']=(WEB/'experiments-2015-more.html','text/html; charset=utf-8')
-                for name in ('sample.json','progress.json'):
-                    assets['/experiments/curation-2015-round2/'+name]=(
-                        EXPERIMENT_REPORTS.parent/'curation-2015-round2'/name,'application/json; charset=utf-8')
-                if len(parts)==5 and parts[:3]==['curation','source-tasks','papers']:
-                    sample_path=EXPERIMENT_REPORTS.parent/'curation-2015-round2/sample.json'
-                    assigned={p['id'] for group in json.loads(sample_path.read_text())['papers'].values() for p in group} if sample_path.is_file() else set()
-                    if parts[3] in assigned and parts[4] in ('report.txt','unresolved.json'):
-                        kind='application/json; charset=utf-8' if parts[4].endswith('.json') else 'text/plain; charset=utf-8'
-                        assets[parsed.path]=(WEB.parent/'curation/source-tasks/papers'/parts[3]/parts[4],kind)
-                overlap=EXPERIMENT_REPORTS/'overlap'
-                assets['/experiments/2015/overlap']=(overlap/'index.html','text/html; charset=utf-8')
-                overlap_types={'.html':'text/html; charset=utf-8', '.js':'text/javascript; charset=utf-8',
-                               '.css':'text/css; charset=utf-8', '.json':'application/json; charset=utf-8',
-                               '.csv':'text/csv; charset=utf-8', '.svg':'image/svg+xml', '.png':'image/png',
-                               '.pdf':'application/pdf', '.md':'text/plain; charset=utf-8'}
-                for name in OVERLAP_REPORTS:
-                    assets['/experiments/curation-2015/overlap/'+name]=(overlap/name,overlap_types[Path(name).suffix])
-                expanded=EXPERIMENT_REPORTS.parent/'curation-2015-round2/overlap'
-                assets['/experiments/2015/overlap/expanded']=(expanded/'index.html','text/html; charset=utf-8')
-                for name in EXPANDED_OVERLAP_REPORTS:
-                    assets['/experiments/curation-2015-round2/overlap/'+name]=(expanded/name,overlap_types[Path(name).suffix])
-                for name in PUBLIC_REPORTS:
-                    kind=('image/svg+xml' if name.endswith('.svg') else
-                          'application/json; charset=utf-8' if name.endswith('.json') else
-                          'text/plain; charset=utf-8')
-                    assets['/experiments/curation-2015/'+name]=(EXPERIMENT_REPORTS/name,kind)
-                if len(parts)==5 and parts[:3]==['experiments','curation-2015','papers']:
-                    sample=EXPERIMENT_REPORTS/'sample.json'
-                    allowed={r['id'] for group in json.loads(sample.read_text())['papers'].values() for r in group} if sample.is_file() else set()
-                    if parts[3] in allowed and parts[4] in ('report.txt','analysis.json','analysis-review.json','cone-review.json'):
-                        assets[parsed.path]=(EXPERIMENT_REPORTS/'papers'/parts[3]/parts[4],
-                                             'text/plain; charset=utf-8' if parts[4].endswith('.txt') else 'application/json; charset=utf-8')
                 if self.command!='GET' or parsed.path not in assets:
                     raise APIError(404,'Not found')
                 path,kind=assets[parsed.path]

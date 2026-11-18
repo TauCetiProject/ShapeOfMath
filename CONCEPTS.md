@@ -146,9 +146,9 @@ Legacy `uses` maps to `relies_on`; former exposition/definition/proof labels map
 introduction claims to explanations, retains their history, and resets source
 introduction-completeness judgments pending evidence-based review. Reviewed original
 contributions are restored explicitly. The source-attribution manifest records the
-first checked claims. The [collection review](data/full-review.json) and
-[2015 experiments](experiments/curation-2015/report.txt) record subsequent origin
-decisions and the remaining unresolved cases.
+first checked claims. The [collection review](data/full-review.json) and later
+curation history in the database record subsequent origin decisions and the
+remaining unresolved cases.
 
 A source’s required frontier consists of its maximal explicitly required concepts;
 their ancestors are inherited background. Located occurrences remain stored even

@@ -84,15 +84,6 @@ async function graphGeometry(page) {
         }
         views++;
       }
-      await page.goto(base + '/experiments/2015', { waitUntil: 'networkidle' });
-      assert.equal(await page.locator('tbody tr').count(), 30);
-      if (width <= 720) {
-        assert.equal(await page.locator('tbody td').evaluateAll(cells => cells.every(el => {
-          const r = el.getBoundingClientRect();
-          return r.left >= 0 && r.right <= innerWidth && el.scrollWidth <= el.clientWidth + 1;
-        })), true, 'Every mobile table cell must fit without horizontal scrolling');
-      }
-      views++;
     }
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(base + '/#concept/group', { waitUntil: 'networkidle' });
@@ -205,8 +196,6 @@ async function graphGeometry(page) {
       root.remove();return result;
     });
     assert.deepEqual(formatting, { stable: true, supers: 3, nested: true, html: 0, kept: true, svg: 'super' });
-    await page.goto(base + '/experiments/2015', { waitUntil: 'networkidle' });
-    assert.ok(await page.locator('td sup.math-script').count(), 'Sample titles must typeset braced exponents');
     assert.deepEqual(errors, []);
     console.log(`${views} responsive views passed, plus visible definitions, formulas, cone routing and outline, zoom, resize, pan and SVG export.`);
   } finally {
