@@ -62,10 +62,10 @@ architecture and the order of the migration.
 
 1. Postgres schema (`schema_pg.sql`) equivalent to `schema.sql` version 10, and
    a connection adapter that lets the existing code run on either backend.
-2. Run the full test suite against Postgres.
+2. Run the full test suite against Postgres. (Done.)
 3. Import `data/math.sqlite` into a Neon branch with triggers disabled, verify
-   row counts, `verify()` output and cone results against SQLite.
-4. Benchmark cone queries and cycle checks on a synthetic graph at 100x.
+   row counts, `verify()` output and cone results against SQLite. (Done.)
+4. Benchmark cone queries and cycle checks on a synthetic graph at 100x. (Done.)
 5. Cut over: point curation at Neon, freeze the SQLite file, stop committing it.
 6. Worker read API and the per-view frontend.
 7. R2 dumps, history archival, submission intake.
@@ -99,10 +99,27 @@ live database and rolls it back, instead of copying the database.
   reorganization, and the per-source identifier check. Each needs an indexed
   query or a scoped variant before 100x.
 
-## Open questions
+## Benchmarks (2026-11-18)
 
-- Whether cone traversal in a recursive query stays fast enough at the largest
-  cones, or needs a materialized closure for the foundations baseline. Step 4
-  answers this.
+`pg_import.py` copied the live collection into a Neon branch in 7 seconds; every
+table, `verify()` and 100 sampled cones match the SQLite source.
+
+`bench_scale.py` replicated the collection 100 times (581,196 concepts, 2,144,880
+edges, 20% of copied edges crossing fields) on a Neon branch (0.25 to 8 compute
+units, us-east-2), queried from a machine 24 ms away:
+
+| | Time |
+|---|---|
+| Cone, median of 100 (statement and full, 67 nodes) | 64 ms |
+| Largest full cone (4,286 nodes, 9,949 edges) | 0.31 s |
+| Insert an edge, including the cycle check | 85 ms |
+| Reject an edge that closes a cycle in the largest cone | 97 ms |
+
+Each cone is two queries, so round trips dominate small cones. Replication grows
+cones only slightly, even when every copied edge crosses fields: a cone's size
+is bounded by the shape of the prerequisite paths, not by the size of the
+collection. A materialized closure is not needed at this scale.
+
+## Open questions
 - Embeddings: `concept_embedding` moves to `pgvector` when similarity search is
   served publicly.
