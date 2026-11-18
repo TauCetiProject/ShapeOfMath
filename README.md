@@ -107,7 +107,10 @@ from a later proof merely through their shared theorem record.
 
 ## Current data
 
-The authoritative store is [data/math.sqlite](data/math.sqlite). Current counts
+The authoritative store is PostgreSQL on Neon (project `tauceti-shape-of-math`).
+Tools read its URL from `MATHDB_DATABASE` or `~/.config/shapeofmath/database_url`;
+see [the scaling plan](docs/SCALING.md). Until 2026-11-18 the store was
+`data/math.sqlite`, which is no longer tracked. Current counts
 and per-paper expansion frontiers are recorded in
 [the sample progress file](experiments/curation-2015/progress.json); readable
 exports are regenerated from the live store. The browser's

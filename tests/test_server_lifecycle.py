@@ -38,7 +38,7 @@ class ServerLifecycleTests(unittest.TestCase):
         # Stop supervisors before cleaning up any remaining workers.
         for process, cwd, port in self.processes:
             subprocess.run([sys.executable, 'mathdb_server.py', 'stop', '--port', str(port)],
-                           cwd=cwd, stdout=self.log, stderr=self.log, timeout=15)
+                           cwd=cwd, stdout=self.log, stderr=self.log, timeout=15, env=self.env(cwd))
         for process, _, _ in self.processes:
             if process.poll() is None:
                 process.terminate()
@@ -51,16 +51,21 @@ class ServerLifecycleTests(unittest.TestCase):
             sock.bind(('127.0.0.1', 0))
             return sock.getsockname()[1]
 
+    def env(self, cwd):
+        # Each copied checkout uses its own SQLite file, never the configured collection.
+        return {**os.environ, 'MATHDB_DATABASE': str(Path(cwd) / 'data' / 'math.sqlite')}
+
     def launch(self, port, *args, cwd=None):
         cwd = cwd or self.checkout
         process = subprocess.Popen([sys.executable, 'mathdb_server.py', *args, '--port', str(port)],
-                                   cwd=cwd, stdout=self.log, stderr=self.log)
+                                   cwd=cwd, stdout=self.log, stderr=self.log, env=self.env(cwd))
         self.processes.append((process, cwd, port))
         return process
 
     def command(self, port, action, cwd=None):
         return subprocess.run([sys.executable, 'mathdb_server.py', action, '--port', str(port)],
-                              cwd=cwd or self.checkout, capture_output=True, text=True, timeout=15)
+                              cwd=cwd or self.checkout, capture_output=True, text=True, timeout=15,
+                              env=self.env(cwd or self.checkout))
 
     def wait_for(self, predicate):
         deadline = time.monotonic() + 10

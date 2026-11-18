@@ -29,9 +29,13 @@ def default_database():
         return os.environ["MATHDB_DATABASE"]
     if DATABASE_URL_FILE.is_file() and DATABASE_URL_FILE.read_text().strip():
         return DATABASE_URL_FILE.read_text().strip()
-    return ROOT / "data" / "math.sqlite"
+    return LEGACY_DB
 
 
+# The SQLite store before the move to PostgreSQL (2026-11-18). If nothing is
+# configured and it is absent, connecting to it fails with instructions instead
+# of silently creating an empty collection.
+LEGACY_DB = ROOT / "data" / "math.sqlite"
 DEFAULT_DB = default_database()
 NAMESPACE = uuid.UUID("b139d4a4-ce25-4141-b43b-3714b8ac2fcf")
 MODEL = "BAAI/bge-small-en-v1.5"
@@ -112,6 +116,9 @@ def connect(path=DEFAULT_DB):
         import pgcompat
         return pgcompat.connect(str(path))
     path = Path(path)
+    if path == LEGACY_DB and DEFAULT_DB == LEGACY_DB and not path.exists():
+        raise ValueError("No database configured. The collection lives in PostgreSQL: set MATHDB_DATABASE "
+                         f"or put its URL in {DATABASE_URL_FILE}, or pass --db PATH for a local SQLite file.")
     path.parent.mkdir(parents=True, exist_ok=True)
     db = sqlite3.connect(path)
     db.row_factory = sqlite3.Row

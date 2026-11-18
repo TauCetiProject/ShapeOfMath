@@ -67,6 +67,8 @@ architecture and the order of the migration.
    row counts, `verify()` output and cone results against SQLite. (Done.)
 4. Benchmark cone queries and cycle checks on a synthetic graph at 100x. (Done.)
 5. Cut over: point curation at Neon, freeze the SQLite file, stop committing it.
+   (Done 2026-11-18: the frozen file is in `archive/`; tools use the `curator`
+   role and the Worker will use `reader`.)
 6. Worker read API and the per-view frontend.
 7. R2 dumps, history archival, submission intake.
 
@@ -101,7 +103,7 @@ live database and rolls it back, instead of copying the database.
 
 ## Benchmarks (2026-11-18)
 
-`pg_import.py` copied the live collection into a Neon branch in 7 seconds; every
+`pg_sync.py import` copied the live collection into a Neon branch in 7 seconds; every
 table, `verify()` and 100 sampled cones match the SQLite source.
 
 `bench_scale.py` replicated the collection 100 times (581,196 concepts, 2,144,880

@@ -547,14 +547,16 @@ def execute(db,plan):
 
 def check(directory,path,db_path):
     plan=load_plan(directory,path)
-    if m.is_postgres_url(db_path):
+    live=connect(db_path,True)
+    if m.is_postgres(live):
         # No private copy: apply in the live database's transaction, then roll back.
+        live.close()
         with closing(connect(db_path)) as db:
             current=version(db)
             if schema_version(db)!=10:raise ValueError('Migrate database schema explicitly before importing plans')
             with dry_run(db):result=execute(db,plan)
     else:
-        with closing(connect(db_path,True)) as live,closing(sqlite3.connect(':memory:',factory=PlanConnection)) as private:
+        with closing(live),closing(sqlite3.connect(':memory:',factory=PlanConnection)) as private:
             private.row_factory=sqlite3.Row;private.execute('PRAGMA foreign_keys=ON');live.backup(private)
             current=version(private)
             if schema_version(private)!=10:raise ValueError('Migrate database schema explicitly before importing plans')

@@ -48,9 +48,16 @@ def prepare_template() -> None:
     db.close()
 
 
+mapped: dict[str, str] = {}  # resolved file path -> PostgreSQL URL
+
+
 def connect(path=mathdb.DEFAULT_DB):
     if str(path).startswith(('postgres://', 'postgresql://')):
         return original_connect(path)
+    return original_connect(postgres_for(path))
+
+
+def postgres_for(path) -> str:
     memory = str(path) == ':memory:'
     key = f':memory:{len(created)}' if memory else str(Path(path).resolve())
     name = 'mathdb_test_' + hashlib.sha1(key.encode()).hexdigest()[:20]
@@ -61,7 +68,44 @@ def connect(path=mathdb.DEFAULT_DB):
         if not memory:
             Path(path).parent.mkdir(parents=True, exist_ok=True)
             Path(path).touch()
-    return original_connect(database_url(name))
+            mapped[key] = database_url(name)
+    return database_url(name)
+
+
+def patch_plan_tooling() -> None:
+    """Live databases are PostgreSQL; task baselines stay SQLite snapshots.
+
+    curation_plans opens the live database through the mapping and baselines as
+    files. prepare_task reads the live database as a file, so it is given a
+    pg_sync export, as curators do after the cutover.
+    """
+    import tempfile
+    import curation_plans
+    import pg_sync
+    try:
+        import curation.prepare_task as prepare_task
+    except ImportError:
+        return
+    plan_connect = curation_plans.connect
+
+    def live_connect(path, readonly=False):
+        key = str(Path(path).resolve()) if not mathdb.is_postgres_url(path) else None
+        return plan_connect(mapped.get(key, path), readonly)
+    curation_plans.connect = live_connect
+    original_prepare = prepare_task.prepare
+
+    def prepare(kind, assignment, out, db_path=None, *args, **kwargs):
+        key = str(Path(db_path).resolve()) if db_path is not None else None
+        if key not in mapped:
+            return original_prepare(kind, assignment, out, db_path, *args, **kwargs)
+        with tempfile.TemporaryDirectory() as temp:
+            snapshot = Path(temp) / 'catalogue.sqlite'
+            pg_sync.export(mapped[key], snapshot)
+            return original_prepare(kind, assignment, out, snapshot, *args, **kwargs)
+    prepare_task.prepare = prepare
+    for module in list(sys.modules.values()):
+        if getattr(module, 'prepare', None) is original_prepare:
+            module.prepare = prepare
 
 
 SQLITE_ONLY = (
@@ -73,7 +117,7 @@ SQLITE_ONLY = (
 # task snapshots need a subgraph format before they can work at scale; see
 # docs/SCALING.md.
 SQLITE_FILE_TOOLING = (
-    'test_curation_plans.', 'test_curation_task_package.', 'test_curation_freeze.',
+    'test_curation_task_package.', 'test_curation_freeze.',
     'test_sample_corrections.', 'test_coverage_update_import.',
 )
 
@@ -92,6 +136,7 @@ def skip_sqlite_only(suite):
 def main() -> int:
     prepare_template()
     mathdb.connect = connect
+    patch_plan_tooling()
     try:
         loader = unittest.TestLoader()
         names = sys.argv[1:]
