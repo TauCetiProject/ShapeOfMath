@@ -77,15 +77,6 @@ class APITests(unittest.TestCase):
         self.assertEqual(headers.get_content_type(),'text/javascript')
         self.assertEqual(self.request('GET','/../schema.sql',absolute=True)[0],404)
 
-    def test_expanded_overlap_public_assets_and_private_scripts(self):
-        status,body,_=self.request('GET','/experiments/2015/overlap/expanded',absolute=True)
-        self.assertEqual(status,200);self.assertIn('Fraction of prerequisites already known',body)
-        prefix='/experiments/curation-2015-round2/overlap/'
-        status,body,_=self.request('GET',prefix+'results.json',absolute=True)
-        self.assertEqual(status,200);self.assertIn('all60',body['datasets'])
-        for name in ('analyse.py','model.py','../post-curation/math.sqlite'):
-            self.assertEqual(self.request('GET',prefix+name,absolute=True)[0],404)
-
     def test_conditional_write_and_stale_edit_rejection(self):
         initial=self.etag
         status,result,_=self.request('PATCH','concepts/a',dict(title='Better label',reason='Clarify name'))

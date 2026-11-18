@@ -2,8 +2,7 @@
 
 Use `discovery.py` to collect journal contents and citation-ranked paper lists.
 It writes bibliographic candidates and evidence; it does not ingest mathematical
-concepts or modify the mathematics database. The old `experiments/discovery-2015/`
-directory is a preserved result, not the code to edit for each new request.
+concepts or modify the mathematics database.
 
 ## Choose a scope and run it
 
