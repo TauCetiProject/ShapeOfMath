@@ -138,7 +138,7 @@ def write_reports(db,plan,result):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--db',type=Path,default=m.DEFAULT_DB)
+    parser.add_argument('--db',type=m.database_arg,default=m.DEFAULT_DB)
     parser.add_argument('--dry-run',action='store_true')
     args=parser.parse_args()
     plan=json.loads(PLAN.read_text())
@@ -149,7 +149,7 @@ def main():
                 original.backup(preview);result=apply(preview,plan)
         else:
             result=apply(original,plan)
-            if args.db.resolve()==m.DEFAULT_DB.resolve():write_reports(original,plan,result)
+            if m.resolve_database(args.db)==m.resolve_database(m.DEFAULT_DB):write_reports(original,plan,result)
     print(json.dumps(dict(already_applied=result['already_applied'],dry_run=args.dry_run,
         cones={r:dict(concepts=len(c['nodes']),edges=len(c['edges']),depth=c['max_depth'],leaves=c['leaves'],all_reviewed=c['all_reviewed']) for r,c in result['cones'].items()}),indent=2))
 

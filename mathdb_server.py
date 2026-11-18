@@ -112,7 +112,7 @@ def read_api(db, parts, query):
         library = query.get('library', [None])[0]
         if library:
             m.library_record(db, library)
-        return rows(db, 'SELECT * FROM formalization_file WHERE (? IS NULL OR library_slug=?) ORDER BY library_slug,path', (library,library))
+        return rows(db, 'SELECT * FROM formalization_file WHERE (CAST(? AS TEXT) IS NULL OR library_slug=?) ORDER BY library_slug,path', (library,library))
     if parts == ['history']:
         limit = int(query.get('limit', ['20'])[0])
         if not 1 <= limit <= 100:
@@ -208,7 +208,8 @@ def write_api(db, method, parts, payload):
     if method=='POST' and parts==['dependencies']:
         fields(item,('prerequisite','dependent','basis','rationale','source','locator','purpose'),('prerequisite','dependent','basis','rationale'))
         m.add_edge(db,item)
-        out=row_by_id(db,'concept_dependency',db.execute('SELECT last_insert_rowid()').fetchone()[0])
+        ids=[m.lookup(db,'concept',item[k])['id'] for k in ('prerequisite','dependent')]
+        out=row_by_id(db,'concept_dependency',db.execute('SELECT id FROM concept_dependency WHERE prerequisite_id=? AND dependent_id=?',ids).fetchone()[0])
         m.event(db,'add_dependency',reason,{},out)
         return out
     if method=='PATCH' and len(parts)==2 and parts[0]=='dependencies':
@@ -227,7 +228,8 @@ def write_api(db, method, parts, payload):
     if method=='POST' and parts==['related']:
         fields(item,('concept_a','concept_b','rationale','source','locator'),('concept_a','concept_b','rationale'))
         m.add_related(db,item)
-        out=row_by_id(db,'concept_related',db.execute('SELECT last_insert_rowid()').fetchone()[0])
+        a,b=sorted(m.lookup(db,'concept',item[k])['id'] for k in ('concept_a','concept_b'))
+        out=row_by_id(db,'concept_related',db.execute('SELECT id FROM concept_related WHERE concept_a_id=? AND concept_b_id=?',(a,b)).fetchone()[0])
         m.event(db,'relate',reason,{},out)
         return out
     if method=='POST' and parts==['source-concepts']:
@@ -398,9 +400,9 @@ class Handler(BaseHTTPRequestHandler):
                     if expected!='"'+current+'"':
                         raise APIError(412,'The database changed. Reload and review your edit before saving again.')
                     out=write_api(db,self.command,parts[2:],payload)
-                    # Every operation ends in an audit event; this is this edit's
-                    # version even if another client commits immediately after it.
-                    own_version=str(db.execute('SELECT last_insert_rowid()').fetchone()[0])
+                    # Every operation ends in an audit event. Writers hold the write
+                    # lock until commit, so the newest event is this edit's version.
+                    own_version=version(db)
                 self.respond(200,{'version':own_version,'result':out},etag=own_version)
         except APIError as ex:
             self.respond(ex.status,{'error':ex.message})
@@ -424,7 +426,7 @@ class Handler(BaseHTTPRequestHandler):
 def make_server(db_path=m.DEFAULT_DB, port=8000):
     server=ThreadingHTTPServer(('127.0.0.1',port),Handler)
     server.daemon_threads=True
-    server.db_path=Path(db_path).resolve()
+    server.db_path=m.resolve_database(db_path)
     return server
 
 
@@ -524,8 +526,11 @@ def run_reloading(args):
     try:
         while True:
             before = snapshot()
-            worker = subprocess.Popen([sys.executable, str(Path(__file__).resolve()),
-                                       '--db', str(args.db.resolve()), '--port', str(args.port)], env=env)
+            # A database URL carries a password: pass it in the environment, not argv.
+            database = m.resolve_database(args.db)
+            target = (['--db', str(database)] if not m.is_postgres_url(database) else [])
+            worker = subprocess.Popen([sys.executable, str(Path(__file__).resolve()), *target, '--port', str(args.port)],
+                                      env={**env, 'MATHDB_DATABASE': str(database)} if not target else env)
             reported = False
             while snapshot() == before:
                 code = worker.poll()
@@ -545,7 +550,7 @@ def run_reloading(args):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command',nargs='?',default='run',choices=('run','restart','stop','status'))
-    parser.add_argument('--db',type=Path,default=m.DEFAULT_DB)
+    parser.add_argument('--db',type=m.database_arg,default=m.DEFAULT_DB)
     parser.add_argument('--port',type=int,default=8000)
     parser.add_argument('--reload',action='store_true',help='Restart automatically when Python code or schema.sql changes')
     args=parser.parse_args()
@@ -574,7 +579,7 @@ def main():
         run_server(args)
     except (OSError,ValueError) as ex:
         if isinstance(ex,OSError) and ex.errno == errno.EADDRINUSE:
-            command=shlex.join(['python','mathdb_server.py','restart','--port',str(args.port),'--db',str(args.db)]
+            command=shlex.join(['python','mathdb_server.py','restart','--port',str(args.port),'--db',m.database_label(args.db)]
                                + (['--reload'] if args.reload else []))
             parser.exit(1,f'Port {args.port} is already in use. To replace this project\'s server, run:\n'
                         f'  {command}\n')
