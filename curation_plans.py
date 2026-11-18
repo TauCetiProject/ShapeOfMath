@@ -345,7 +345,7 @@ def apply_operations(db, payload, review, resolutions, task_id, plan_id, fingerp
     return result
 
 
-class PlanConnection(sqlite3.Connection):
+class ProtectedTransaction:
     """Keep legacy helper context managers inside one real outer transaction."""
     protected=False
 
@@ -363,6 +363,20 @@ class PlanConnection(sqlite3.Connection):
         if self.protected:raise RuntimeError('Inner rollback forbidden during reviewed-plan import')
         return super().rollback()
 
+    def outer_commit(self):return super().commit()
+
+    def outer_rollback(self):return super().rollback()
+
+
+class PlanConnection(ProtectedTransaction,sqlite3.Connection):pass
+
+
+def postgres_plan_connection(url):
+    import pgcompat
+
+    class PostgresPlanConnection(ProtectedTransaction,pgcompat.Connection):pass
+    return PostgresPlanConnection(url)
+
 
 @contextmanager
 def transaction(db):
@@ -371,13 +385,29 @@ def transaction(db):
     try:
         yield
         if not db.in_transaction:raise RuntimeError('Plan operation escaped its transaction')
-        sqlite3.Connection.commit(db)
+        db.outer_commit()
     except BaseException:
-        sqlite3.Connection.rollback(db);raise
+        db.outer_rollback();raise
     finally:db.protected=False
 
 
+@contextmanager
+def dry_run(db):
+    """Apply a plan inside one transaction and always roll it back."""
+    if db.in_transaction:raise ValueError('Check requires a connection without an existing transaction')
+    db.execute('BEGIN IMMEDIATE');db.protected=True
+    try:
+        yield
+        if not db.in_transaction:raise RuntimeError('Plan operation escaped its transaction')
+    finally:
+        db.protected=False;db.outer_rollback()
+
+
 def connect(path,readonly=False):
+    if m.is_postgres_url(path):
+        db=postgres_plan_connection(str(path))
+        if readonly:db.execute('SET default_transaction_read_only = on')
+        return db
     path=Path(path).resolve()
     if not path.is_file():raise ValueError('Database does not exist: '+str(path))
     db=sqlite3.connect(path.as_uri()+('?mode=ro' if readonly else '?mode=rw'),uri=True,factory=PlanConnection)
@@ -386,6 +416,20 @@ def connect(path,readonly=False):
 
 
 def version(db):return db.execute('SELECT coalesce(max(id),0) FROM curation_event').fetchone()[0]
+
+
+def schema_version(db):
+    if m.is_postgres(db):return db.execute('SELECT version FROM schema_version').fetchone()[0]
+    return db.execute('PRAGMA user_version').fetchone()[0]
+
+
+def database_identity(db_path):
+    """Name the database in receipts: a resolved file path, or a URL without credentials."""
+    if m.is_postgres_url(db_path):
+        from urllib.parse import urlsplit
+        parts=urlsplit(str(db_path))
+        return f'{parts.scheme}://{parts.hostname or ""}{":"+str(parts.port) if parts.port else ""}{parts.path}'
+    return str(Path(db_path).resolve())
 
 
 def load_task(directory):
@@ -507,14 +551,21 @@ def execute(db,plan):
 
 def check(directory,path,db_path):
     plan=load_plan(directory,path)
-    with closing(connect(db_path,True)) as live,closing(sqlite3.connect(':memory:',factory=PlanConnection)) as private:
-        private.row_factory=sqlite3.Row;private.execute('PRAGMA foreign_keys=ON');live.backup(private)
-        current=version(private)
-        if private.execute('PRAGMA user_version').fetchone()[0]!=10:raise ValueError('Migrate database schema explicitly before importing plans')
-        with transaction(private):result=execute(private,plan)
+    if m.is_postgres_url(db_path):
+        # No private copy: apply in the live database's transaction, then roll back.
+        with closing(connect(db_path)) as db:
+            current=version(db)
+            if schema_version(db)!=10:raise ValueError('Migrate database schema explicitly before importing plans')
+            with dry_run(db):result=execute(db,plan)
+    else:
+        with closing(connect(db_path,True)) as live,closing(sqlite3.connect(':memory:',factory=PlanConnection)) as private:
+            private.row_factory=sqlite3.Row;private.execute('PRAGMA foreign_keys=ON');live.backup(private)
+            current=version(private)
+            if schema_version(private)!=10:raise ValueError('Migrate database schema explicitly before importing plans')
+            with transaction(private):result=execute(private,plan)
     receipt={'task_id':plan['task_id'],'plan_id':plan['plan_id'],'sha256':plan['sha256'],
         'package_sha256':plan['package_sha256'],'engine_sha256':engine_hashes(),
-        'expected_event':current,'database_path':str(Path(db_path).resolve()),'preflight_ok':True,
+        'expected_event':current,'database_path':database_identity(db_path),'preflight_ok':True,
         'result':result}
     save(plan['path'].with_name(plan['path'].stem+'-check.json'),receipt)
     return receipt
@@ -524,7 +575,7 @@ def import_plan(directory,path,db_path):
     plan=load_plan(directory,path);receipt_path=plan['path'].with_name(plan['path'].stem+'-check.json')
     with closing(connect(db_path)) as db:
         with transaction(db):
-            if db.execute('PRAGMA user_version').fetchone()[0]!=10:raise ValueError('Migrate database schema explicitly before importing plans')
+            if schema_version(db)!=10:raise ValueError('Migrate database schema explicitly before importing plans')
             previous=prior_import(db,plan)
             if previous:result=previous
             else:
@@ -533,7 +584,7 @@ def import_plan(directory,path,db_path):
                 for key in ('task_id','plan_id','sha256','package_sha256'):
                     if receipt.get(key)!=plan[key]:raise ValueError('Plan/package changed after check; check again')
                 if receipt.get('engine_sha256')!=engine_hashes():raise ValueError('Importer, core or schema changed after check; check again')
-                if receipt.get('database_path')!=str(Path(db_path).resolve()) or receipt.get('expected_event')!=version(db):
+                if receipt.get('database_path')!=database_identity(db_path) or receipt.get('expected_event')!=version(db):
                     raise ValueError('Database changed after check; check again against current state')
                 result=execute(db,plan)
     # SQL commit is authoritative. A failed receipt write can be recovered by

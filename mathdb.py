@@ -8,6 +8,7 @@ from contextlib import contextmanager
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 import re
 import sqlite3
@@ -18,7 +19,8 @@ from urllib.parse import quote, urlsplit, urlunsplit
 import uuid
 
 ROOT = Path(__file__).resolve().parent
-DEFAULT_DB = ROOT / "data" / "math.sqlite"
+# A filesystem path selects SQLite; a postgresql:// URL selects PostgreSQL.
+DEFAULT_DB = os.environ.get("MATHDB_DATABASE") or ROOT / "data" / "math.sqlite"
 NAMESPACE = uuid.UUID("b139d4a4-ce25-4141-b43b-3714b8ac2fcf")
 MODEL = "BAAI/bge-small-en-v1.5"
 
@@ -67,7 +69,18 @@ def normalize_identifier(scheme, value):
     return scheme, value
 
 
+def is_postgres(db):
+    return getattr(db, "backend", None) == "postgres"
+
+
+def is_postgres_url(path):
+    return str(path).startswith(("postgres://", "postgresql://"))
+
+
 def connect(path=DEFAULT_DB):
+    if is_postgres_url(path):
+        import pgcompat
+        return pgcompat.connect(str(path))
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     db = sqlite3.connect(path)
@@ -83,6 +96,9 @@ def canonical_role(role):
 
 def execute_schema(db, script):
     """Execute SQL including trigger bodies without executescript's implicit commit."""
+    if is_postgres(db):
+        db.executescript(script)
+        return
     statement = ""
     for line in script.splitlines(keepends=True):
         statement += line
@@ -93,7 +109,24 @@ def execute_schema(db, script):
         db.execute(statement)
 
 
+def initialize_postgres(db):
+    """Create or update the PostgreSQL schema. It starts at SQLite schema version 10."""
+    schema = ROOT / "schema_pg.sql"
+    if not schema.exists():
+        schema = Path(sysconfig.get_path("data")) / "share/the-shape-of-math/schema_pg.sql"
+    with db:
+        db.execute("BEGIN IMMEDIATE")
+        exists = db.execute("SELECT to_regclass('schema_version') IS NOT NULL").fetchone()[0]
+        if exists:
+            version = db.execute("SELECT version FROM schema_version").fetchone()[0]
+            if version != 10:
+                raise ValueError(f"Unsupported database schema version: {version}")
+        execute_schema(db, schema.read_text())
+
+
 def initialize(db):
+    if is_postgres(db):
+        return initialize_postgres(db)
     if db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='idea'").fetchone():
         raise ValueError("This is a v1 ideas database. Use a fresh path for the concept model; v1 has been archived.")
     columns = {row[1] for row in db.execute("PRAGMA table_info(concept)")}
@@ -205,7 +238,7 @@ def add_identifier(db, source_id, scheme, value):
     existing = db.execute("SELECT source_id FROM source_identifier WHERE scheme=? AND value=?", (scheme, value)).fetchone()
     if existing and existing[0] != source_id:
         raise ValueError(f"Identifier already belongs to another source: {scheme}:{value}; review identity explicitly")
-    db.execute("INSERT OR IGNORE INTO source_identifier VALUES (?, ?, ?)", (scheme, value, source_id))
+    db.execute("INSERT INTO source_identifier VALUES (?, ?, ?) ON CONFLICT DO NOTHING", (scheme, value, source_id))
 
 
 def add_concept(db, item):
@@ -310,10 +343,9 @@ def add_citation(db, item):
     if necessary is not None and type(necessary) is not bool:
         raise ValueError("pedagogically_necessary must be true, false or null")
     target = lookup(db, "source", item["cited_source"])["id"] if item.get("cited_source") else None
-    cursor = db.execute("""INSERT INTO citation(source_id,label,text,cited_source_id,pedagogically_necessary,needed_material)
-        VALUES (?,?,?,?,?,?)""", (lookup(db, "source", item["source"])["id"], item.get("label"), item["text"],
-                                 target, necessary, item.get("needed_material")))
-    ident = cursor.lastrowid
+    ident = db.execute("""INSERT INTO citation(source_id,label,text,cited_source_id,pedagogically_necessary,needed_material)
+        VALUES (?,?,?,?,?,?) RETURNING id""", (lookup(db, "source", item["source"])["id"], item.get("label"), item["text"],
+                                 target, necessary, item.get("needed_material"))).fetchone()[0]
     identifiers = set(extract_identifiers(item["text"]))
     identifiers.update(normalize_identifier(*pair) for pair in item.get("identifiers", []))
     db.executemany("INSERT INTO citation_identifier VALUES (?,?,?)", [(ident, *pair) for pair in sorted(identifiers)])
@@ -352,7 +384,7 @@ def resolve_citations(db, source, reason):
         sid = lookup(db, "source", source)["id"]
         before = [citation_record(db, r[0]) for r in db.execute("SELECT id FROM citation WHERE source_id=? ORDER BY id", (sid,))]
         for row in before:
-            db.executemany("INSERT OR IGNORE INTO citation_identifier VALUES (?,?,?)",
+            db.executemany("INSERT INTO citation_identifier VALUES (?,?,?) ON CONFLICT DO NOTHING",
                            [(row["id"], *pair) for pair in extract_identifiers(row["text"])])
             resolve_citation(db, row["id"])
         after = [citation_record(db, row["id"]) for row in before]
@@ -475,7 +507,7 @@ def revise(db, slug, changes, reason):
         if before["status"] != "active":
             raise ValueError("Cannot revise a superseded concept")
         if "title" in changes and changes["title"] != before["title"]:
-            db.execute("INSERT OR IGNORE INTO concept_alias VALUES (?,?)", (before["id"], before["title"]))
+            db.execute("INSERT INTO concept_alias VALUES (?,?) ON CONFLICT DO NOTHING", (before["id"], before["title"]))
         db.execute(f"UPDATE concept SET {','.join(k + '=?' for k in changes)} WHERE id=?",
                    (*changes.values(), before["id"]))
         affected = [r[0] for r in db.execute("SELECT DISTINCT source_id FROM source_concept WHERE concept_id=?", (before["id"],))]
@@ -738,12 +770,13 @@ def save_formalization(db, concept, library, item, reason):
         db.execute('''INSERT INTO concept_formalization(concept_id,library_slug,status,evidence,concept_revision)
             VALUES (?,?,?,?,?) ON CONFLICT(concept_id,library_slug) DO UPDATE SET status=excluded.status,
             evidence=excluded.evidence,concept_revision=excluded.concept_revision,
-            reviewed_at=strftime('%Y-%m-%dT%H:%M:%SZ','now')''',
-            (c['id'], library, item['status'], item['evidence'], c['revision']))
+            reviewed_at=?''',
+            (c['id'], library, item['status'], item['evidence'], c['revision'],
+             datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')))
         ident = db.execute('SELECT id FROM concept_formalization WHERE concept_id=? AND library_slug=?', (c['id'], library)).fetchone()[0]
         db.execute('DELETE FROM concept_formalization_file WHERE formalization_id=?', (ident,))
         for f in files:
-            db.execute('INSERT OR IGNORE INTO formalization_file(library_slug,path) VALUES (?,?)', (library, f['path']))
+            db.execute('INSERT INTO formalization_file(library_slug,path) VALUES (?,?) ON CONFLICT DO NOTHING', (library, f['path']))
             file_id = db.execute('SELECT id FROM formalization_file WHERE library_slug=? AND path=?', (library, f['path'])).fetchone()[0]
             db.execute('INSERT INTO concept_formalization_file(formalization_id,file_id,declarations,note) VALUES (?,?,?,?)',
                        (ident, file_id, f.get('declarations', ''), f['note']))
@@ -1014,14 +1047,25 @@ def reduce_dependencies(db, reason, root=None):
 
 def snapshot(db):
     tables = ("concept", "concept_alias", "concept_dependency", "concept_related", "source", "source_identifier", "source_artifact", "source_concept", "source_relation", "citation", "citation_identifier", "formalization_library", "formalization_file", "concept_formalization", "concept_formalization_file")
+    if is_postgres(db):
+        # PostgreSQL has no rowid; order by primary key.
+        keys = {r[0]: r[1] for r in db.execute("""SELECT c.relname, string_agg(a.attname, ',' ORDER BY k.ord)
+            FROM pg_index i JOIN pg_class c ON c.oid=i.indrelid
+            CROSS JOIN LATERAL unnest(i.indkey) WITH ORDINALITY k(attnum, ord)
+            JOIN pg_attribute a ON a.attrelid=i.indrelid AND a.attnum=k.attnum
+            WHERE i.indisprimary AND c.relnamespace=to_regnamespace(current_schema()) GROUP BY c.relname""")}
+        return {table: [dict(r) for r in db.execute(f"SELECT * FROM {table} ORDER BY {keys[table]}")] for table in tables}
     return {table: [dict(r) for r in db.execute(f"SELECT * FROM {table} ORDER BY rowid")] for table in tables}
 
 
 def verify(db):
-    errors = [f"Foreign key: {tuple(r)}" for r in db.execute("PRAGMA foreign_key_check")]
-    integrity = db.execute("PRAGMA integrity_check").fetchone()[0]
-    if integrity != "ok":
-        errors.append(integrity)
+    errors = []
+    if not is_postgres(db):
+        # PostgreSQL enforces foreign keys and page integrity itself.
+        errors += [f"Foreign key: {tuple(r)}" for r in db.execute("PRAGMA foreign_key_check")]
+        integrity = db.execute("PRAGMA integrity_check").fetchone()[0]
+        if integrity != "ok":
+            errors.append(integrity)
     active = {r["id"] for r in db.execute("SELECT id FROM concept WHERE status='active'")}
     indegree = {i: 0 for i in active}
     children = {i: [] for i in active}
@@ -1134,7 +1178,7 @@ def embed(db):
         "SELECT 1 FROM concept_embedding WHERE concept_id=? AND model_id=? AND content_sha256=?",
         (r["id"], mid, content_hash(r))).fetchone()]
     with db:
-        db.execute("INSERT OR IGNORE INTO embedding_model VALUES (?,?,?,?,?)", (mid, MODEL, fingerprint, 384, json.dumps(config)))
+        db.execute("INSERT INTO embedding_model VALUES (?,?,?,?,?) ON CONFLICT DO NOTHING", (mid, MODEL, fingerprint, 384, json.dumps(config)))
         texts = [embedding_text(r) for r in pending]
         if texts:
             encoded = model.model.tokenizer.encode_batch(texts)
@@ -1145,7 +1189,8 @@ def embed(db):
             v = normalized(vector)
             if len(v) != 384:
                 raise ValueError("Unexpected embedding dimension")
-            db.execute("INSERT OR REPLACE INTO concept_embedding VALUES (?,?,?,?)",
+            db.execute("""INSERT INTO concept_embedding VALUES (?,?,?,?) ON CONFLICT(concept_id,model_id)
+                DO UPDATE SET content_sha256=excluded.content_sha256,vector=excluded.vector""",
                        (row["id"], mid, content_hash(row), struct.pack("<384f", *v)))
     return {"model": MODEL, "model_id": mid, "artifact_sha256": fingerprint, "embedded": len(pending), "dimensions": 384}
 
