@@ -426,7 +426,7 @@ class Handler(BaseHTTPRequestHandler):
 def make_server(db_path=m.DEFAULT_DB, port=8000):
     server=ThreadingHTTPServer(('127.0.0.1',port),Handler)
     server.daemon_threads=True
-    server.db_path=Path(db_path).resolve()
+    server.db_path=m.resolve_database(db_path)
     return server
 
 
@@ -526,8 +526,11 @@ def run_reloading(args):
     try:
         while True:
             before = snapshot()
-            worker = subprocess.Popen([sys.executable, str(Path(__file__).resolve()),
-                                       '--db', str(args.db.resolve()), '--port', str(args.port)], env=env)
+            # A database URL carries a password: pass it in the environment, not argv.
+            database = m.resolve_database(args.db)
+            target = (['--db', str(database)] if not m.is_postgres_url(database) else [])
+            worker = subprocess.Popen([sys.executable, str(Path(__file__).resolve()), *target, '--port', str(args.port)],
+                                      env={**env, 'MATHDB_DATABASE': str(database)} if not target else env)
             reported = False
             while snapshot() == before:
                 code = worker.poll()
@@ -547,7 +550,7 @@ def run_reloading(args):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command',nargs='?',default='run',choices=('run','restart','stop','status'))
-    parser.add_argument('--db',type=Path,default=m.DEFAULT_DB)
+    parser.add_argument('--db',type=m.database_arg,default=m.DEFAULT_DB)
     parser.add_argument('--port',type=int,default=8000)
     parser.add_argument('--reload',action='store_true',help='Restart automatically when Python code or schema.sql changes')
     args=parser.parse_args()
@@ -576,7 +579,7 @@ def main():
         run_server(args)
     except (OSError,ValueError) as ex:
         if isinstance(ex,OSError) and ex.errno == errno.EADDRINUSE:
-            command=shlex.join(['python','mathdb_server.py','restart','--port',str(args.port),'--db',str(args.db)]
+            command=shlex.join(['python','mathdb_server.py','restart','--port',str(args.port),'--db',m.database_label(args.db)]
                                + (['--reload'] if args.reload else []))
             parser.exit(1,f'Port {args.port} is already in use. To replace this project\'s server, run:\n'
                         f'  {command}\n')

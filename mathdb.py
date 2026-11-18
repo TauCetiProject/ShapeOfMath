@@ -20,7 +20,19 @@ import uuid
 
 ROOT = Path(__file__).resolve().parent
 # A filesystem path selects SQLite; a postgresql:// URL selects PostgreSQL.
-DEFAULT_DB = os.environ.get("MATHDB_DATABASE") or ROOT / "data" / "math.sqlite"
+DATABASE_URL_FILE = Path.home() / ".config" / "shapeofmath" / "database_url"
+
+
+def default_database():
+    """MATHDB_DATABASE, else the URL in ~/.config/shapeofmath/database_url, else the SQLite file."""
+    if os.environ.get("MATHDB_DATABASE"):
+        return os.environ["MATHDB_DATABASE"]
+    if DATABASE_URL_FILE.is_file() and DATABASE_URL_FILE.read_text().strip():
+        return DATABASE_URL_FILE.read_text().strip()
+    return ROOT / "data" / "math.sqlite"
+
+
+DEFAULT_DB = default_database()
 NAMESPACE = uuid.UUID("b139d4a4-ce25-4141-b43b-3714b8ac2fcf")
 MODEL = "BAAI/bge-small-en-v1.5"
 
@@ -77,6 +89,24 @@ def is_postgres_url(path):
     return str(path).startswith(("postgres://", "postgresql://"))
 
 
+def database_arg(value):
+    """argparse type for --db: a PostgreSQL URL stays a string, anything else is a path."""
+    return str(value) if is_postgres_url(value) else Path(value)
+
+
+def resolve_database(value):
+    return str(value) if is_postgres_url(value) else Path(value).resolve()
+
+
+def database_label(value):
+    """Name a database for output and receipts: a resolved path, or a URL without credentials."""
+    if not is_postgres_url(value):
+        return str(Path(value).resolve())
+    parts = urlsplit(str(value))
+    port = f":{parts.port}" if parts.port else ""
+    return f"{parts.scheme}://{parts.hostname or ''}{port}{parts.path}"
+
+
 def connect(path=DEFAULT_DB):
     if is_postgres_url(path):
         import pgcompat
@@ -110,17 +140,22 @@ def execute_schema(db, script):
 
 
 def initialize_postgres(db):
-    """Create or update the PostgreSQL schema. It starts at SQLite schema version 10."""
+    """Create the PostgreSQL schema (equivalent to SQLite schema version 10) if absent.
+
+    An existing database is only checked, never altered: running DDL on every
+    connection would take table locks and need the owner role. Schema changes
+    to an existing database are explicit migrations that raise the version.
+    """
+    if db.execute("SELECT to_regclass('schema_version') IS NOT NULL").fetchone()[0]:
+        version = db.execute("SELECT version FROM schema_version").fetchone()[0]
+        if version != 10:
+            raise ValueError(f"Unsupported database schema version: {version}")
+        return
     schema = ROOT / "schema_pg.sql"
     if not schema.exists():
         schema = Path(sysconfig.get_path("data")) / "share/the-shape-of-math/schema_pg.sql"
     with db:
         db.execute("BEGIN IMMEDIATE")
-        exists = db.execute("SELECT to_regclass('schema_version') IS NOT NULL").fetchone()[0]
-        if exists:
-            version = db.execute("SELECT version FROM schema_version").fetchone()[0]
-            if version != 10:
-                raise ValueError(f"Unsupported database schema version: {version}")
         execute_schema(db, schema.read_text())
 
 
@@ -1214,7 +1249,7 @@ def search(db, query, limit=5):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--db", type=Path, default=DEFAULT_DB)
+    parser.add_argument("--db", type=database_arg, default=DEFAULT_DB)
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("init")
     ingest_p = commands.add_parser("ingest")
@@ -1313,7 +1348,7 @@ def main():
         with connect(args.db) as db:
             if args.command == "init":
                 initialize(db)
-                out = {"database": str(args.db), "initialized": True}
+                out = {"database": database_label(args.db), "initialized": True}
             elif args.command == "ingest":
                 ingest(db, json.loads(args.file.read_text()))
                 out = verify(db)

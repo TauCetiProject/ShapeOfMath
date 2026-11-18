@@ -425,11 +425,7 @@ def schema_version(db):
 
 def database_identity(db_path):
     """Name the database in receipts: a resolved file path, or a URL without credentials."""
-    if m.is_postgres_url(db_path):
-        from urllib.parse import urlsplit
-        parts=urlsplit(str(db_path))
-        return f'{parts.scheme}://{parts.hostname or ""}{":"+str(parts.port) if parts.port else ""}{parts.path}'
-    return str(Path(db_path).resolve())
+    return m.database_label(db_path)
 
 
 def load_task(directory):
@@ -596,7 +592,7 @@ def import_plan(directory,path,db_path):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command',choices=('check','import'));parser.add_argument('task',type=Path);parser.add_argument('plan',type=Path)
-    parser.add_argument('--db',type=Path,default=m.DEFAULT_DB);args=parser.parse_args()
+    parser.add_argument('--db',type=m.database_arg,default=m.DEFAULT_DB);args=parser.parse_args()
     try:
         result=(check if args.command=='check' else import_plan)(args.task,args.plan,args.db)
         print(json.dumps(result,ensure_ascii=False,indent=2));return 0
