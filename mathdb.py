@@ -860,12 +860,21 @@ def _formalizations(db, concept, library, status):
         LEFT JOIN concept_formalization_loc estimate ON estimate.formalization_id=cf.id
         WHERE ''' + ' AND '.join(where) + ' ORDER BY c.title,lib.name', args)]
     files = {}
-    for r in db.execute('''SELECT link.formalization_id,f.*,link.declarations,link.note,
+    query = '''SELECT link.formalization_id,f.*,link.declarations,link.note,
         a.mapped_concepts,a.allocated_loc FROM concept_formalization_file link
         JOIN formalization_file f ON f.id=link.file_id
-        LEFT JOIN formalization_file_allocation a ON a.id=f.id ORDER BY f.path'''):
-        f = dict(r)
-        files.setdefault(f.pop('formalization_id'), []).append(f)
+        LEFT JOIN formalization_file_allocation a ON a.id=f.id'''
+    reviews = sorted({r['review_id'] for r in result if r['review_id'] is not None})
+    if concept is None and library is None:
+        batches = [(query + ' ORDER BY f.path', ())]
+    else:
+        # Only the reviews being reported, so one concept's page stays small.
+        batches = [(query + f" WHERE link.formalization_id IN ({','.join('?' * len(chunk))}) ORDER BY f.path", tuple(chunk))
+                   for chunk in (reviews[i:i + 500] for i in range(0, len(reviews), 500))]
+    for sql, sql_args in batches:
+        for r in db.execute(sql, sql_args):
+            f = dict(r)
+            files.setdefault(f.pop('formalization_id'), []).append(f)
     out = []
     for r in result:
         if status is not None and r['status'] != status:

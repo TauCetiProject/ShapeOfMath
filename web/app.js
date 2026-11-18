@@ -5,6 +5,13 @@ const compare = (a,b) => a.title.localeCompare(b.title);
 const state = {data:null,etag:null,kind:'concept',slug:'fusion-category',query:'',moreUp:false,moreDown:false,view:'neighbors',mode:'statement'};
 let graphObserver,toastTimer;
 const api = '/api/v1/';
+// The public site (Cloudflare Worker) serves one slice of the collection per view
+// and searches the sidebar on the server; it is read-only. Locally, ?public
+// exercises the same mode against mathdb_server.py.
+const PUBLIC_SITE = document.documentElement.classList.contains('public-site') || new URLSearchParams(location.search).has('public');
+if(PUBLIC_SITE)document.documentElement.classList.add('public-site');
+const viewCache = new Map();
+let viewRequest = 0, searchTimer;
 const shortKind = value => value[0].toUpperCase()+value.slice(1);
 const flag = (done,label) => `<span class="pill dot ${done?'':'pending'}">${esc(label)}: ${done?'complete':'awaiting review'}</span>`;
 const routeButton = (kind,slug,label,cls='',extra='') => `<button class="${cls}" data-action="navigate" data-kind="${kind}" data-slug="${esc(slug)}" ${extra}>${label}</button>`;
@@ -23,7 +30,40 @@ function identifierURL(scheme,value){
   return null;
 }
 function identifierLink(i){const url=identifierURL(i.scheme,i.value);return url?`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(i.scheme)}: ${esc(i.value)} ↗</a>`:`<span>${esc(i.scheme)}: ${esc(i.value)}</span>`;}
+async function getJSON(path){
+  const response=await fetch(api+path);
+  if(!response.ok){const error=new Error(response.status===404?'Record not found':'Could not load the collection.');error.status=response.status;throw error;}
+  return response.json();
+}
+async function loadView(){
+  const key=state.kind+'/'+state.slug,request=++viewRequest;
+  let result=viewCache.get(key);
+  if(!result){
+    try{result=await getJSON('view/'+state.kind+'/'+encodeURIComponent(state.slug));}
+    catch(error){if(error.status!==404)throw error;result={data:{concept:[],source:[]},formalizations:[]};}
+    if(viewCache.size>50)viewCache.delete(viewCache.keys().next().value);
+    viewCache.set(key,result);
+  }
+  if(request!==viewRequest)return false;
+  state.data=result.data;state.formalizations=result.formalizations;return true;
+}
+async function loadList(){
+  const result=await getJSON('search?'+new URLSearchParams({kind:state.kind,q:state.query,limit:'200'}));
+  state.list=result.items;state.listTotal=result.total;state.listKind=state.kind;
+}
+async function refreshPublic(){
+  const tasks=[loadView()];
+  if(state.listKind!==state.kind)tasks.push(loadList());
+  const [current]=await Promise.all(tasks);
+  if(current)render();
+}
 async function load(){
+  if(PUBLIC_SITE){
+    const stats=await getJSON('stats');
+    $('#stats').textContent=`${stats.active_concepts} concepts · ${stats.sources} sources`;
+    $('#collection-label').textContent='Public collection';
+    await refreshPublic();return;
+  }
   const response=await fetch(api+'state');if(!response.ok)throw new Error('Could not open the database.');
   const result=await response.json();state.etag=response.headers.get('ETag');state.data=result.data;state.formalizations=result.formalizations;
   $('#stats').textContent=`${result.stats.active_concepts} concepts · ${result.stats.sources} sources`;
@@ -39,15 +79,17 @@ function navigate(kind,slug,view=state.view){
 function parseRoute(){
   const [path,query='']=location.hash.split('?'),match=path.match(/^#(concept|source)\/([^?]+)$/),params=new URLSearchParams(query);
   if(match){try{state.kind=match[1];state.slug=decodeURIComponent(match[2]);state.view=params.get('view')==='cone'?'cone':'neighbors';state.mode=params.get('mode')==='proof'?'proof':'statement';}catch{state.slug='';}}
-  state.moreUp=false;state.moreDown=false;state.query='';$('#search').value='';
+  state.moreUp=false;state.moreDown=false;
+  if(PUBLIC_SITE){if(state.listKind&&state.listKind!==state.kind){state.query='';$('#search').value='';}if(state.listKind!==undefined)refreshPublic().catch(showError);return;}
+  state.query='';$('#search').value='';
   if(state.data)render();
 }
 function renderNavigation(){
   for(const kind of ['concept','source'])$(`#${kind}-tab`).setAttribute('aria-selected',String(state.kind===kind));
   $('#search').placeholder=state.kind==='concept'?'Find a concept…':'Find a source…';$('#search').setAttribute('aria-label',`Search ${state.kind}s`);
   $('#add-record').textContent=`+ Add ${state.kind}`;
-  const list=entities().filter(c=>[c.title,c.description,c.field,...(state.kind==='source'?authorNames(c):state.data.concept_alias.filter(a=>a.concept_id===c.id).map(a=>a.alias))].join(' ').toLocaleLowerCase().includes(state.query.toLocaleLowerCase()));
-  $('#list-count').textContent=`${list.length} ${state.kind}s`;
+  const list=PUBLIC_SITE?(state.list||[]):entities().filter(c=>[c.title,c.description,c.field,...(state.kind==='source'?authorNames(c):state.data.concept_alias.filter(a=>a.concept_id===c.id).map(a=>a.alias))].join(' ').toLocaleLowerCase().includes(state.query.toLocaleLowerCase()));
+  $('#list-count').textContent=PUBLIC_SITE&&state.listTotal>list.length?`${list.length} of ${state.listTotal} ${state.kind}s`:`${PUBLIC_SITE?state.listTotal??0:list.length} ${state.kind}s`;
   $('#record-list').innerHTML=list.map(c=>routeButton(state.kind,c.slug,`<strong>${esc(c.title)}</strong><small>${state.kind==='concept'?esc(c.field):esc([authorNames(c).join(', '),c.year].filter(Boolean).join(' · '))}</small>`,`record-item${c.slug===state.slug?' selected':''}`,c.slug===state.slug?'aria-current="true"':'')).join('')||'<p class="empty-search">No matching records.<br>Try another name or field.</p>';
   MathText.render($('#record-list'));
 }
@@ -290,8 +332,10 @@ document.addEventListener('click',async event=>{const button=event.target.closes
  else if(action==='older-history')await showHistory(id);
  else if(action==='resolve-citations'){await mutate('citations/resolve','POST',{source:current().slug,reason:'Match explicit citation identifiers to the current source catalogue'});await load();toast('Citation identifiers matched against the collection.');}
  }catch(error){showError(error);}});
-$('#search').addEventListener('input',event=>{state.query=event.target.value;renderNavigation();});
-for(const kind of ['concept','source'])$(`#${kind}-tab`).addEventListener('click',()=>{state.query='';$('#search').value='';const slug=kind===state.kind?state.slug:kind==='concept'?'fusion-category':'morrison-g2-2011';navigate(kind,entities(kind).some(r=>r.slug===slug)?slug:entities(kind)[0]?.slug||'');});
+$('#search').addEventListener('input',event=>{state.query=event.target.value;
+ if(!PUBLIC_SITE){renderNavigation();return;}
+ clearTimeout(searchTimer);searchTimer=setTimeout(()=>loadList().then(renderNavigation).catch(showError),200);});
+for(const kind of ['concept','source'])$(`#${kind}-tab`).addEventListener('click',()=>{state.query='';$('#search').value='';const slug=kind===state.kind?state.slug:kind==='concept'?'fusion-category':'morrison-g2-2011';navigate(kind,PUBLIC_SITE||entities(kind).some(r=>r.slug===slug)?slug:entities(kind)[0]?.slug||'');});
 $('#add-record').addEventListener('click',()=>state.kind==='concept'?editConcept(true):editSource(true));
 $('#refresh-button').addEventListener('click',()=>load().then(()=>toast('Collection refreshed.')).catch(showError));
 $('#history-button').addEventListener('click',()=>showHistory().catch(showError));
